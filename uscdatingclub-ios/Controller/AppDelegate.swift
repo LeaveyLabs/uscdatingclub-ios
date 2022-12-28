@@ -15,6 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        // Bring bar button items closer together
+        let stackViewAppearance = UIStackView.appearance(whenContainedInInstancesOf: [UINavigationBar.self])
+        stackViewAppearance.spacing = -10
+        
         FirebaseApp.configure()
 //        Constants.fetchRemoteConfig()
         Constants.fetchRemoteConfigDebug()
@@ -55,8 +59,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let tokenParts = deviceToken.map { data -> String in
             return String(format: "%02.2hhx", data)
         }
-
         let token = tokenParts.joined()
+//        setGlobalDeviceToken(token: token)
+//        Task {
+//            try await DeviceAPI.registerCurrentDeviceWithUser(user: UserService.singleton.getId())
+//        }
         
     }
     
@@ -108,16 +115,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 //            let json = userInfo[Notification.extra.data.rawValue]
 //            _ = try JSONSerialization.data(withJSONObject: json as Any, options: .prettyPrinted)
             switch notificationType {
-            case .tag:
-                break //handled in PostService background task
-            case .message:
-                 break //do nothing: this case should be handled within the socket
-//                let message = try JSONDecoder().decode(Message.self, from: data)
-//                if (ConversationService.singleton.getConversationWith(userId: message.sender) == nil) {
-//                    try await ConversationService.singleton.loadConversationsAndRefreshVC()
-//                } else {
-//                    //if we do have a converation open, this code is handled in Conversation
-//                }
             case .match:
                 break //do nothing, this is handled within ConversationService every 15 seconds
 //                let matchRequest = try JSONDecoder().decode(MatchRequest.self, from: data)
@@ -126,8 +123,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 //                } else {
 //                    //if we do have a converation open, this code is handled in Conversation
 //                }
-            case .comment:
-                break
             }
         }
 //        catch {

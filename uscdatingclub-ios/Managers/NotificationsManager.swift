@@ -5,29 +5,8 @@
 //  Created by Adam Monterey on 8/29/22.
 //
 
-import Foundation
 import UserNotifications
 import UIKit
-
-enum NotificationTypes: String {
-    case tag = "tag"
-    case message = "message"
-    case match = "match"
-    case comment = "comment"
-}
-
-//extension Notification.Name {
-//    static let newMistboxMist = Notification.Name("newMistboxMist")
-//    static let newDM = Notification.Name("newDM")
-//    static let newMentionedMist = Notification.Name("tag")
-//}
-
-extension Notification {
-    enum extra: String {
-        case type = "type"
-        case data = "data"
-    }
-}
 
 class NotificationsManager: NSObject {
     
