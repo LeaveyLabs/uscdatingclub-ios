@@ -1,0 +1,629 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		47C40EE7295CB930007C27F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40EE6295CB930007C27F0 /* AppDelegate.swift */; };
+		47C40EE9295CB930007C27F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40EE8295CB930007C27F0 /* SceneDelegate.swift */; };
+		47C40EEB295CB930007C27F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40EEA295CB930007C27F0 /* ViewController.swift */; };
+		47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEC295CB930007C27F0 /* Main.storyboard */; };
+		47C40EF0295CB931007C27F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEF295CB931007C27F0 /* Assets.xcassets */; };
+		47C40EF3295CB931007C27F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EF1295CB931007C27F0 /* LaunchScreen.storyboard */; };
+		47C40EFE295CB931007C27F0 /* uscdatingclub_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40EFD295CB931007C27F0 /* uscdatingclub_iosTests.swift */; };
+		47C40F08295CB931007C27F0 /* uscdatingclub_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40F07295CB931007C27F0 /* uscdatingclub_iosUITests.swift */; };
+		47C40F0A295CB931007C27F0 /* uscdatingclub_iosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40F09295CB931007C27F0 /* uscdatingclub_iosUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		47C40EFA295CB931007C27F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47C40EDB295CB930007C27F0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 47C40EE2295CB930007C27F0;
+			remoteInfo = "uscdatingclub-ios";
+		};
+		47C40F04295CB931007C27F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47C40EDB295CB930007C27F0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 47C40EE2295CB930007C27F0;
+			remoteInfo = "uscdatingclub-ios";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		47C40EE3295CB930007C27F0 /* uscdatingclub-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "uscdatingclub-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		47C40EE6295CB930007C27F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		47C40EE8295CB930007C27F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		47C40EEA295CB930007C27F0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		47C40EED295CB930007C27F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		47C40EEF295CB931007C27F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		47C40EF2295CB931007C27F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		47C40EF4295CB931007C27F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		47C40EF9295CB931007C27F0 /* uscdatingclub-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "uscdatingclub-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		47C40EFD295CB931007C27F0 /* uscdatingclub_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = uscdatingclub_iosTests.swift; sourceTree = "<group>"; };
+		47C40F03295CB931007C27F0 /* uscdatingclub-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "uscdatingclub-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		47C40F07295CB931007C27F0 /* uscdatingclub_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = uscdatingclub_iosUITests.swift; sourceTree = "<group>"; };
+		47C40F09295CB931007C27F0 /* uscdatingclub_iosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = uscdatingclub_iosUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		47C40EE0295CB930007C27F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47C40EF6295CB931007C27F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47C40F00295CB931007C27F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		47C40EDA295CB930007C27F0 = {
+			isa = PBXGroup;
+			children = (
+				47C40EE5295CB930007C27F0 /* uscdatingclub-ios */,
+				47C40EFC295CB931007C27F0 /* uscdatingclub-iosTests */,
+				47C40F06295CB931007C27F0 /* uscdatingclub-iosUITests */,
+				47C40EE4295CB930007C27F0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		47C40EE4295CB930007C27F0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				47C40EE3295CB930007C27F0 /* uscdatingclub-ios.app */,
+				47C40EF9295CB931007C27F0 /* uscdatingclub-iosTests.xctest */,
+				47C40F03295CB931007C27F0 /* uscdatingclub-iosUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		47C40EE5295CB930007C27F0 /* uscdatingclub-ios */ = {
+			isa = PBXGroup;
+			children = (
+				47C40EE6295CB930007C27F0 /* AppDelegate.swift */,
+				47C40EE8295CB930007C27F0 /* SceneDelegate.swift */,
+				47C40EEA295CB930007C27F0 /* ViewController.swift */,
+				47C40EEC295CB930007C27F0 /* Main.storyboard */,
+				47C40EEF295CB931007C27F0 /* Assets.xcassets */,
+				47C40EF1295CB931007C27F0 /* LaunchScreen.storyboard */,
+				47C40EF4295CB931007C27F0 /* Info.plist */,
+			);
+			path = "uscdatingclub-ios";
+			sourceTree = "<group>";
+		};
+		47C40EFC295CB931007C27F0 /* uscdatingclub-iosTests */ = {
+			isa = PBXGroup;
+			children = (
+				47C40EFD295CB931007C27F0 /* uscdatingclub_iosTests.swift */,
+			);
+			path = "uscdatingclub-iosTests";
+			sourceTree = "<group>";
+		};
+		47C40F06295CB931007C27F0 /* uscdatingclub-iosUITests */ = {
+			isa = PBXGroup;
+			children = (
+				47C40F07295CB931007C27F0 /* uscdatingclub_iosUITests.swift */,
+				47C40F09295CB931007C27F0 /* uscdatingclub_iosUITestsLaunchTests.swift */,
+			);
+			path = "uscdatingclub-iosUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		47C40EE2295CB930007C27F0 /* uscdatingclub-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47C40F0D295CB931007C27F0 /* Build configuration list for PBXNativeTarget "uscdatingclub-ios" */;
+			buildPhases = (
+				47C40EDF295CB930007C27F0 /* Sources */,
+				47C40EE0295CB930007C27F0 /* Frameworks */,
+				47C40EE1295CB930007C27F0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "uscdatingclub-ios";
+			productName = "uscdatingclub-ios";
+			productReference = 47C40EE3295CB930007C27F0 /* uscdatingclub-ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+		47C40EF8295CB931007C27F0 /* uscdatingclub-iosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47C40F10295CB931007C27F0 /* Build configuration list for PBXNativeTarget "uscdatingclub-iosTests" */;
+			buildPhases = (
+				47C40EF5295CB931007C27F0 /* Sources */,
+				47C40EF6295CB931007C27F0 /* Frameworks */,
+				47C40EF7295CB931007C27F0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				47C40EFB295CB931007C27F0 /* PBXTargetDependency */,
+			);
+			name = "uscdatingclub-iosTests";
+			productName = "uscdatingclub-iosTests";
+			productReference = 47C40EF9295CB931007C27F0 /* uscdatingclub-iosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		47C40F02295CB931007C27F0 /* uscdatingclub-iosUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47C40F13295CB931007C27F0 /* Build configuration list for PBXNativeTarget "uscdatingclub-iosUITests" */;
+			buildPhases = (
+				47C40EFF295CB931007C27F0 /* Sources */,
+				47C40F00295CB931007C27F0 /* Frameworks */,
+				47C40F01295CB931007C27F0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				47C40F05295CB931007C27F0 /* PBXTargetDependency */,
+			);
+			name = "uscdatingclub-iosUITests";
+			productName = "uscdatingclub-iosUITests";
+			productReference = 47C40F03295CB931007C27F0 /* uscdatingclub-iosUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		47C40EDB295CB930007C27F0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					47C40EE2295CB930007C27F0 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					47C40EF8295CB931007C27F0 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 47C40EE2295CB930007C27F0;
+					};
+					47C40F02295CB931007C27F0 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 47C40EE2295CB930007C27F0;
+					};
+				};
+			};
+			buildConfigurationList = 47C40EDE295CB930007C27F0 /* Build configuration list for PBXProject "uscdatingclub-ios" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 47C40EDA295CB930007C27F0;
+			productRefGroup = 47C40EE4295CB930007C27F0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				47C40EE2295CB930007C27F0 /* uscdatingclub-ios */,
+				47C40EF8295CB931007C27F0 /* uscdatingclub-iosTests */,
+				47C40F02295CB931007C27F0 /* uscdatingclub-iosUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		47C40EE1295CB930007C27F0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47C40EF3295CB931007C27F0 /* LaunchScreen.storyboard in Resources */,
+				47C40EF0295CB931007C27F0 /* Assets.xcassets in Resources */,
+				47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47C40EF7295CB931007C27F0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47C40F01295CB931007C27F0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		47C40EDF295CB930007C27F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47C40EEB295CB930007C27F0 /* ViewController.swift in Sources */,
+				47C40EE7295CB930007C27F0 /* AppDelegate.swift in Sources */,
+				47C40EE9295CB930007C27F0 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47C40EF5295CB931007C27F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47C40EFE295CB931007C27F0 /* uscdatingclub_iosTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47C40EFF295CB931007C27F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47C40F08295CB931007C27F0 /* uscdatingclub_iosUITests.swift in Sources */,
+				47C40F0A295CB931007C27F0 /* uscdatingclub_iosUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		47C40EFB295CB931007C27F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 47C40EE2295CB930007C27F0 /* uscdatingclub-ios */;
+			targetProxy = 47C40EFA295CB931007C27F0 /* PBXContainerItemProxy */;
+		};
+		47C40F05295CB931007C27F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 47C40EE2295CB930007C27F0 /* uscdatingclub-ios */;
+			targetProxy = 47C40F04295CB931007C27F0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		47C40EEC295CB930007C27F0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				47C40EED295CB930007C27F0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		47C40EF1295CB931007C27F0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				47C40EF2295CB931007C27F0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		47C40F0B295CB931007C27F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		47C40F0C295CB931007C27F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		47C40F0E295CB931007C27F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SHD3A2G97F;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "uscdatingclub-ios/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "usc dating club";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "leaveylabs.uscdatingclub-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		47C40F0F295CB931007C27F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SHD3A2G97F;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "uscdatingclub-ios/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "usc dating club";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "leaveylabs.uscdatingclub-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		47C40F11295CB931007C27F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SHD3A2G97F;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "leaveylabs.uscdatingclub-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/uscdatingclub-ios.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/uscdatingclub-ios";
+			};
+			name = Debug;
+		};
+		47C40F12295CB931007C27F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SHD3A2G97F;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "leaveylabs.uscdatingclub-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/uscdatingclub-ios.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/uscdatingclub-ios";
+			};
+			name = Release;
+		};
+		47C40F14295CB931007C27F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SHD3A2G97F;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "leaveylabs.uscdatingclub-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = "uscdatingclub-ios";
+			};
+			name = Debug;
+		};
+		47C40F15295CB931007C27F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SHD3A2G97F;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "leaveylabs.uscdatingclub-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = "uscdatingclub-ios";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		47C40EDE295CB930007C27F0 /* Build configuration list for PBXProject "uscdatingclub-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47C40F0B295CB931007C27F0 /* Debug */,
+				47C40F0C295CB931007C27F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		47C40F0D295CB931007C27F0 /* Build configuration list for PBXNativeTarget "uscdatingclub-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47C40F0E295CB931007C27F0 /* Debug */,
+				47C40F0F295CB931007C27F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		47C40F10295CB931007C27F0 /* Build configuration list for PBXNativeTarget "uscdatingclub-iosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47C40F11295CB931007C27F0 /* Debug */,
+				47C40F12295CB931007C27F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		47C40F13295CB931007C27F0 /* Build configuration list for PBXNativeTarget "uscdatingclub-iosUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47C40F14295CB931007C27F0 /* Debug */,
+				47C40F15295CB931007C27F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 47C40EDB295CB930007C27F0 /* Project object */;
+}
