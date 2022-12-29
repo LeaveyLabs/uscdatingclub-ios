@@ -15,21 +15,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        // Bring bar button items closer together
-        let stackViewAppearance = UIStackView.appearance(whenContainedInInstancesOf: [UINavigationBar.self])
-        stackViewAppearance.spacing = -10
+        UIStackView.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).spacing = -10
+        UIFont.overrideInitialize()
+        UNUserNotificationCenter.current().delegate = self
+        NotificationsManager.shared.registerForNotificationsOnStartupIfAccessExists()
+        
         
         FirebaseApp.configure()
 //        Constants.fetchRemoteConfig()
         Constants.fetchRemoteConfigDebug()
         
-        UIFont.overrideInitialize()
-
-        //MUST COME in didfinishlaunchingwithOptions
-        UNUserNotificationCenter.current().delegate = self
-        NotificationsManager.shared.registerForNotificationsOnStartupIfAccessExists()
+        NotificationCenter.default.addObserver(self, selector: #selector(requestPermissionsIfNecessary), name: UIApplication.willEnterForegroundNotification, object: nil)
         
         return true
+    }
+    
+    @objc func requestPermissionsIfNecessary() {
+        //slight delay just in case settings aren't persisted right away
+//        let isLoggedIn = false
+//        guard isLoggedIn else { return }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            NotificationsManager.shared.isNotificationsEnabled(closure: { isEnabled in
+                if !isEnabled || !LocationManager.shared.isLocationServicesProperlyAuthorized() {
+                    DispatchQueue.main.async {
+                        guard
+                            let visibleVC = SceneDelegate.visibleViewController,
+                            !visibleVC .isKind(of: PermissionsVC.self)
+                        else { return }
+                        let permissionsVC = PermissionsVC.create()
+                        permissionsVC.modalPresentationStyle = .fullScreen
+                        visibleVC.present(permissionsVC, animated: true)
+                    }
+                }
+            })
+        }
     }
 
     // MARK: UISceneSession Lifecycle

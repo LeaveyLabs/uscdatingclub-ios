@@ -362,7 +362,6 @@
 				4731F529295CE0980013F626 /* RadarVC.swift */,
 				4731F52B295CE0B40013F626 /* AboutVC.swift */,
 				4731F52D295CE0C10013F626 /* AccountVC.swift */,
-				476FD866295E16290014DD42 /* PermissionsVC.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -488,6 +487,7 @@
 			children = (
 				47C40F8B295CBBBD007C27F0 /* AppDelegate.swift */,
 				47C40EE8295CB930007C27F0 /* SceneDelegate.swift */,
+				476FD866295E16290014DD42 /* PermissionsVC.swift */,
 				4731F526295CDCE80013F626 /* Home */,
 				4731F516295CD5750013F626 /* App */,
 				47DE31D3295CC4B40063C55A /* Auth */,

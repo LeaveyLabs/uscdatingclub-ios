@@ -13,11 +13,12 @@ class RadarVC: UIViewController, PageVCChild {
     
     //Flags
     var isCurrentlyVisible = false
+    var isLocationServicesEnabled: Bool = false
     
     let PULSE_DURATION: Double = 4.0
     let CIRCLE_WIDTH_RATIO: Double = 0.2
     
-    var centerCircleView = UIView()
+    var centerCircleButton = UIButton()
     var firstCircleView = UIView()
     var secondCircleView = UIView()
     var circleViews: [UIView] {
@@ -45,6 +46,7 @@ class RadarVC: UIViewController, PageVCChild {
         setupCircleViews()
         startPulsing()
         setupButtons()
+        renderIsActive()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -62,7 +64,7 @@ class RadarVC: UIViewController, PageVCChild {
         circleViews.forEach { circleView in
             circleView.becomeRound()
         }
-        centerCircleView.becomeRound()
+        centerCircleButton.becomeRound()
     }
     
     //MARK: - Setup
@@ -75,8 +77,24 @@ class RadarVC: UIViewController, PageVCChild {
             pageVCDelegate.didPressForwardButton()
         }), for: .touchUpInside)
         
-        activeButton.configure(title: "active", systemImage: "")
         activeButton.internalButton.addTarget(self, action: #selector(didTapActiveButton), for: .touchUpInside)
+    }
+    
+    func renderIsActive() {
+        if isLocationServicesEnabled {
+            activeButton.configure(title: "active", systemImage: "")
+            activeButton.internalButton.backgroundColor = .customGreen
+            activeButton.internalButton.setTitleColor(.black, for: .normal)
+            
+            startPulsing()
+            LocationManager.shared.startLocationServices()
+        } else {
+            activeButton.configure(title: "inactive", systemImage: "")
+            activeButton.internalButton.backgroundColor = .customRed
+            activeButton.internalButton.setTitleColor(.white, for: .normal)
+            
+            LocationManager.shared.stopLocationServices()
+        }
     }
 
     func startPulsing() {
@@ -87,6 +105,7 @@ class RadarVC: UIViewController, PageVCChild {
     }
     
     func pulse(pulseView: UIView, repeating: Bool) {
+        guard isLocationServicesEnabled else { return }
         if isCurrentlyVisible {
             UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
         }
@@ -94,12 +113,12 @@ class RadarVC: UIViewController, PageVCChild {
             pulseView.transform = CGAffineTransform(scaleX: 1 / self.CIRCLE_WIDTH_RATIO, y: 1 / self.CIRCLE_WIDTH_RATIO)
             pulseView.alpha = 0
             pulseView.layer.borderWidth = 0
-        } completion: { _ in
+        } completion: { [self] _ in
             pulseView.transform = .identity
             pulseView.alpha = 1
             pulseView.layer.borderWidth = 2
             if repeating {
-                self.pulse(pulseView: pulseView, repeating: true)
+                pulse(pulseView: pulseView, repeating: true)
             }
         }
     }
@@ -110,7 +129,7 @@ class RadarVC: UIViewController, PageVCChild {
             circleView.translatesAutoresizingMaskIntoConstraints = false
             circleView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
             circleView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            circleView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: CIRCLE_WIDTH_RATIO).isActive = true
+            circleView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: CIRCLE_WIDTH_RATIO, constant: -10).isActive = true
             circleView.widthAnchor.constraint(equalTo: circleView.heightAnchor, multiplier: 1).isActive = true
             
             circleView.backgroundColor = .clear
@@ -118,32 +137,49 @@ class RadarVC: UIViewController, PageVCChild {
             circleView.layer.borderColor = UIColor.white.cgColor
         }
         
-        view.addSubview(centerCircleView)
-        centerCircleView.translatesAutoresizingMaskIntoConstraints = false
-        centerCircleView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        centerCircleView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        centerCircleView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: CIRCLE_WIDTH_RATIO).isActive = true
-        centerCircleView.widthAnchor.constraint(equalTo: centerCircleView.heightAnchor, multiplier: 1).isActive = true
+        view.addSubview(centerCircleButton)
+        centerCircleButton.translatesAutoresizingMaskIntoConstraints = false
+        centerCircleButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        centerCircleButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        centerCircleButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: CIRCLE_WIDTH_RATIO).isActive = true
+        centerCircleButton.widthAnchor.constraint(equalTo: centerCircleButton.heightAnchor, multiplier: 1).isActive = true
         
-        centerCircleView.backgroundColor = .white
-        centerCircleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapCenterCircle)))
+        centerCircleButton.backgroundColor = .white
+        centerCircleButton.addTarget(self, action: #selector(didTapCenterCircle), for: .touchUpInside)
+        centerCircleButton.addTarget(self, action: #selector(centerCircleTouchUpOutside), for: .touchUpOutside)
+        centerCircleButton.addTarget(self, action: #selector(centerCircleTouchDown), for: .touchDown)
     }
     
     //MARK: - Interaction
     
     @objc func didTapActiveButton() {
-        let vc = PermissionsVC.create()
-        present(vc, animated: true)
+        isLocationServicesEnabled.toggle()
+        renderIsActive()
+    }
+    
+    @objc func centerCircleTouchDown() {
+        UIView.animate(withDuration: 0.2, delay: 0) {
+            self.centerCircleButton.transform = CGAffineTransformMakeScale(0.9, 0.9)
+        }
+    }
+    
+    @objc func centerCircleTouchUpOutside() {
+        UIView.animate(withDuration: 0.2, delay: 0) {
+            self.centerCircleButton.transform = .identity
+        }
     }
     
     @objc func didTapCenterCircle() {
-        print("DID TAP CENTER")
+        UIView.animate(withDuration: 0.2, delay: 0) {
+            self.centerCircleButton.transform = .identity
+        }
+        guard isLocationServicesEnabled else { return }
         let newCircleView = UIView()
         view.addSubview(newCircleView)
         newCircleView.translatesAutoresizingMaskIntoConstraints = false
         newCircleView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         newCircleView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        newCircleView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: CIRCLE_WIDTH_RATIO).isActive = true
+        newCircleView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: CIRCLE_WIDTH_RATIO, constant: -10).isActive = true
         newCircleView.widthAnchor.constraint(equalTo: newCircleView.heightAnchor, multiplier: 1).isActive = true
         newCircleView.backgroundColor = .clear
         newCircleView.layer.borderWidth = 2

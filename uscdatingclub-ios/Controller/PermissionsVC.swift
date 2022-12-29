@@ -11,6 +11,10 @@ class PermissionsVC: UIViewController {
     
     @IBOutlet var notificationsButton: SimpleButton!
     @IBOutlet var locationButton: SimpleButton!
+    
+    var goodToGo: Bool {
+        locationButton.internalButton.backgroundColor == .customGreen && notificationsButton.internalButton.backgroundColor == .customGreen
+    }
 
     //MARK: - Initialization
     
@@ -24,9 +28,8 @@ class PermissionsVC: UIViewController {
         setupButtons()
         rerender()
         
-        //IDEALLY: a notification is broadcasted when status of location/notifications permissions changes
-        //subscribe to the Notifications / Location Manager notifications here
         NotificationCenter.default.addObserver(self, selector: #selector(delayedRerender), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(delayedRerender), name: .locationStatusDidUpdate, object: nil)
     }
     
     deinit {
@@ -41,8 +44,14 @@ class PermissionsVC: UIViewController {
     }
     
     @objc func delayedRerender() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.rerender()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
+            rerender()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) { [self] in
+                if goodToGo {
+                    LocationManager.shared.startLocationServices()
+                    dismiss(animated: true)
+                }
+            }
         }
     }
     
@@ -86,10 +95,12 @@ class PermissionsVC: UIViewController {
     
     @objc func notificationsButtonDidTapped() {
         NotificationsManager.shared.askForNewNotificationPermissionsIfNecessary { granted in
-            if !granted {
-                AlertManager.showSettingsAlertController(title: "open settings to turn on notifications", message: "", on: self)
-            } else {
-                self.rerender()
+            DispatchQueue.main.async { [self] in
+                if !granted {
+                    AlertManager.showSettingsAlertController(title: "open settings to turn on notifications", message: "", on: self)
+                } else {
+                    rerender()
+                }
             }
         }
     }

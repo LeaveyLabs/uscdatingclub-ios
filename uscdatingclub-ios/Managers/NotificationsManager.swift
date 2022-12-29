@@ -8,6 +8,10 @@
 import UserNotifications
 import UIKit
 
+extension Notification.Name {
+    static let locationStatusDidUpdate = Notification.Name("locationStatusDidUpdate")
+}
+
 class NotificationsManager: NSObject {
     
     private var center: UNUserNotificationCenter = UNUserNotificationCenter.current()
