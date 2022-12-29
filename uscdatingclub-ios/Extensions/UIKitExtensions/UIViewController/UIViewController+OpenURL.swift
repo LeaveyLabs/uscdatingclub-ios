@@ -16,4 +16,8 @@ extension UIViewController {
         present(webViewController, animated: true)
     }
     
+    func openMailtoURL(_ url: URL) {
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
 }
