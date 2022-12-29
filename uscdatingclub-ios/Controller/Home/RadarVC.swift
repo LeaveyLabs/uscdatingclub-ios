@@ -11,6 +11,9 @@ class RadarVC: UIViewController, PageVCChild {
 
     //MARK: - Properties
     
+    //Flags
+    var isCurrentlyVisible = false
+    
     let PULSE_DURATION: Double = 4.0
     let CIRCLE_WIDTH_RATIO: Double = 0.2
     
@@ -23,6 +26,8 @@ class RadarVC: UIViewController, PageVCChild {
     
     @IBOutlet var aboutButton: UIButton!
     @IBOutlet var accountButton: UIButton!
+    @IBOutlet var activeButton: SimpleButton!
+    
     var pageVCDelegate: PageVCDelegate!
 
     //MARK: - Initialization
@@ -46,6 +51,12 @@ class RadarVC: UIViewController, PageVCChild {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print(#function)
+        isCurrentlyVisible = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        isCurrentlyVisible = false
     }
     
     override func viewDidLayoutSubviews() {
@@ -66,12 +77,35 @@ class RadarVC: UIViewController, PageVCChild {
         accountButton.addAction(.init(handler: { [self] _ in
             pageVCDelegate.didPressForwardButton()
         }), for: .touchUpInside)
+        
+        activeButton.configure(title: "active", systemImage: "")
+        activeButton.internalButton.addTarget(self, action: #selector(didTapActiveButton), for: .touchUpInside)
+    }
+    
+    @objc func didTapActiveButton() {
+        print("TAP")
     }
 
     func startPulsing() {
-        firstCircleView.pulse(duration: PULSE_DURATION)
+        pulse(pulseView: firstCircleView)
         DispatchQueue.main.asyncAfter(deadline: .now() + PULSE_DURATION / 2) {
-            self.secondCircleView.pulse(duration: self.PULSE_DURATION)
+            self.pulse(pulseView: self.secondCircleView)
+        }
+    }
+    
+    func pulse(pulseView: UIView) {
+        if isCurrentlyVisible {
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        }
+        UIView.animate(withDuration: PULSE_DURATION, delay: 0, options: [.curveLinear, .allowUserInteraction]) {
+            pulseView.transform = CGAffineTransform(scaleX: 1 / self.CIRCLE_WIDTH_RATIO, y: 1 / self.CIRCLE_WIDTH_RATIO)
+            pulseView.alpha = 0
+            pulseView.layer.borderWidth = 0
+        } completion: { _ in
+            pulseView.transform = .identity
+            pulseView.alpha = 1
+            pulseView.layer.borderWidth = 2
+            self.pulse(pulseView: pulseView)
         }
     }
     
@@ -97,21 +131,5 @@ class RadarVC: UIViewController, PageVCChild {
         centerCircleView.widthAnchor.constraint(equalTo: centerCircleView.heightAnchor, multiplier: 1).isActive = true
         
         centerCircleView.backgroundColor = .white
-    }
-}
-
-extension UIView {
-    
-    func pulse(duration: Double) {
-        UIView.animate(withDuration: duration, delay: 0, options: [.curveLinear, .allowUserInteraction]) {
-            self.transform = CGAffineTransform(scaleX: 5, y: 5)
-            self.alpha = 0
-            self.layer.borderWidth = 0
-        } completion: { _ in
-            self.transform = .identity
-            self.alpha = 1
-            self.layer.borderWidth = 2
-            self.pulse(duration: duration)
-        }
     }
 }

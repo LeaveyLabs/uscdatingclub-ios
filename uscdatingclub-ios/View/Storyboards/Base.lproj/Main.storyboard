@@ -18,7 +18,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pns-gI-knS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="882" y="-2"/>
+            <point key="canvasLocation" x="914" y="-2"/>
         </scene>
         <!--RadarVC-->
         <scene sceneID="Wfy-fi-DS7">
@@ -28,18 +28,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qtO-Df-u1s">
-                                <rect key="frame" x="20" y="748" width="353" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="bae-Xq-fDE"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="active">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8kL-2b-au4">
                                 <rect key="frame" x="0.0" y="59" width="393" height="55"/>
                                 <subviews>
@@ -95,14 +83,21 @@
                                     <constraint firstItem="0LT-XO-rMe" firstAttribute="leading" secondItem="8kL-2b-au4" secondAttribute="leading" id="yVd-6a-QXc"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="imS-AG-fa5" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                <rect key="frame" x="20" y="738" width="353" height="60"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="jx8-9X-3F0"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aIA-T6-l7E"/>
                         <color key="backgroundColor" name="AccentColor"/>
                         <constraints>
-                            <constraint firstItem="qtO-Df-u1s" firstAttribute="leading" secondItem="aIA-T6-l7E" secondAttribute="leading" constant="20" id="GyR-TE-tfX"/>
+                            <constraint firstItem="aIA-T6-l7E" firstAttribute="trailing" secondItem="imS-AG-fa5" secondAttribute="trailing" constant="20" id="PMd-gB-RJQ"/>
                             <constraint firstItem="8kL-2b-au4" firstAttribute="trailing" secondItem="aIA-T6-l7E" secondAttribute="trailing" id="SRj-Le-0ai"/>
-                            <constraint firstItem="aIA-T6-l7E" firstAttribute="trailing" secondItem="qtO-Df-u1s" secondAttribute="trailing" constant="20" id="T9V-4c-ocP"/>
-                            <constraint firstItem="aIA-T6-l7E" firstAttribute="bottom" secondItem="qtO-Df-u1s" secondAttribute="bottom" constant="20" id="b5g-EA-5iq"/>
+                            <constraint firstItem="imS-AG-fa5" firstAttribute="leading" secondItem="aIA-T6-l7E" secondAttribute="leading" constant="20" id="hce-Z6-4sd"/>
+                            <constraint firstItem="aIA-T6-l7E" firstAttribute="bottom" secondItem="imS-AG-fa5" secondAttribute="bottom" constant="20" id="iTW-34-U5z"/>
                             <constraint firstItem="8kL-2b-au4" firstAttribute="top" secondItem="aIA-T6-l7E" secondAttribute="top" id="iX4-7H-eDC"/>
                             <constraint firstItem="8kL-2b-au4" firstAttribute="leading" secondItem="aIA-T6-l7E" secondAttribute="leading" id="xlE-K1-0Ko"/>
                         </constraints>
@@ -110,6 +105,7 @@
                     <connections>
                         <outlet property="aboutButton" destination="nEh-2P-7Eh" id="yrg-mu-GqJ"/>
                         <outlet property="accountButton" destination="PUp-hs-wx8" id="IFY-k1-SxN"/>
+                        <outlet property="activeButton" destination="imS-AG-fa5" id="9mu-A5-9mD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ic7-4q-HYF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

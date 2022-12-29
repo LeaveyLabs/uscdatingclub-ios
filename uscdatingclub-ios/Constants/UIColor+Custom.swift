@@ -9,5 +9,5 @@ import UIKit
 
 extension UIColor {
     static let primaryColor = UIColor(named: "primaryColor")!
-    static let customBlack = UIColor(hex: "111111")
+    static let customBlack = UIColor(hex: "customBlack")
 }

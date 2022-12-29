@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+            <connections>
+                <outlet property="internalButton" destination="OBV-qT-bwj" id="nL7-ZG-oXU"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OBV-qT-bwj">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                    <color key="tintColor" name="customBlack"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="15" maxY="0.0"/>
+                    <state key="normal" title="how it works">
+                        <color key="titleColor" name="customBlack"/>
+                        <imageReference key="image" image="questionmark.bubble" catalog="system" symbolScale="large"/>
+                    </state>
+                    <connections>
+                        <action selector="internalButtonTouchDown:" destination="-1" eventType="touchDown" id="XhD-Xu-G87"/>
+                        <action selector="internalButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="9l3-ob-qQk"/>
+                        <action selector="internalButtonTouchUpOutside:" destination="-1" eventType="touchUpOutside" id="MuR-QF-JjG"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="tintColor" name="mist-lilac"/>
+            <constraints>
+                <constraint firstItem="OBV-qT-bwj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="BGD-Ee-bQc"/>
+                <constraint firstAttribute="trailing" secondItem="OBV-qT-bwj" secondAttribute="trailing" id="UFO-mO-fjt"/>
+                <constraint firstAttribute="bottom" secondItem="OBV-qT-bwj" secondAttribute="bottom" id="acy-x9-bfR"/>
+                <constraint firstItem="OBV-qT-bwj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sM6-Ic-u48"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="82.608695652173921" y="-85.044642857142847"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="questionmark.bubble" catalog="system" width="128" height="110"/>
+        <namedColor name="customBlack">
+            <color red="0.066666666666666666" green="0.066666666666666666" blue="0.066666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mist-lilac">
+            <color red="0.78431372549019607" green="0.62352941176470589" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

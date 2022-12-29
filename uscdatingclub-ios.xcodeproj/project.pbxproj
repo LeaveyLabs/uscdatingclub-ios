@@ -42,6 +42,8 @@
 		4731F52E295CE0C10013F626 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4731F52D295CE0C10013F626 /* AccountVC.swift */; };
 		4731F530295CF7DB0013F626 /* UIPageViewController+GoTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4731F52F295CF7DB0013F626 /* UIPageViewController+GoTo.swift */; };
 		476FD861295DEDCF0014DD42 /* UIFont+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD860295DEDCF0014DD42 /* UIFont+Custom.swift */; };
+		476FD864295DF89A0014DD42 /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD862295DF89A0014DD42 /* SimpleButton.swift */; };
+		476FD865295DF89A0014DD42 /* SimpleButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 476FD863295DF89A0014DD42 /* SimpleButton.xib */; };
 		47C40EE9295CB930007C27F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40EE8295CB930007C27F0 /* SceneDelegate.swift */; };
 		47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEC295CB930007C27F0 /* Main.storyboard */; };
 		47C40EF0295CB931007C27F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEF295CB931007C27F0 /* Assets.xcassets */; };
@@ -174,6 +176,8 @@
 		4731F52D295CE0C10013F626 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
 		4731F52F295CF7DB0013F626 /* UIPageViewController+GoTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPageViewController+GoTo.swift"; sourceTree = "<group>"; };
 		476FD860295DEDCF0014DD42 /* UIFont+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Custom.swift"; sourceTree = "<group>"; };
+		476FD862295DF89A0014DD42 /* SimpleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleButton.swift; sourceTree = "<group>"; };
+		476FD863295DF89A0014DD42 /* SimpleButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleButton.xib; sourceTree = "<group>"; };
 		47C40EE3295CB930007C27F0 /* uscdatingclub-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "uscdatingclub-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47C40EE8295CB930007C27F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		47C40EED295CB930007C27F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -740,6 +744,8 @@
 		47DE3228295CC5AD0063C55A /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				476FD862295DF89A0014DD42 /* SimpleButton.swift */,
+				476FD863295DF89A0014DD42 /* SimpleButton.xib */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -780,8 +786,8 @@
 		47DE3238295CC7C40063C55A /* UIViewController */ = {
 			isa = PBXGroup;
 			children = (
-				47DE3239295CC7C40063C55A /* UIViewController+Child.swift */,
 				47DE323A295CC7C40063C55A /* UIViewController+OpenURL.swift */,
+				47DE3239295CC7C40063C55A /* UIViewController+Child.swift */,
 				47DE323B295CC7C40063C55A /* UIVC+InteractivePop.swift */,
 				47DE323C295CC7C40063C55A /* UIViewController+DismissFlag.swift */,
 				47DE323D295CC7C40063C55A /* UIViewController+SBTransition.swift */,
@@ -933,6 +939,7 @@
 				47DE3225295CC57C0063C55A /* Auth.storyboard in Resources */,
 				47C40EF0295CB931007C27F0 /* Assets.xcassets in Resources */,
 				47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */,
+				476FD865295DF89A0014DD42 /* SimpleButton.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1041,6 +1048,7 @@
 				47DE3248295CC7C40063C55A /* UIImageView+Inspectable.swift in Sources */,
 				4731F52E295CE0C10013F626 /* AccountVC.swift in Sources */,
 				47DE3209295CC4B40063C55A /* LoginViewController.swift in Sources */,
+				476FD864295DF89A0014DD42 /* SimpleButton.swift in Sources */,
 				47C41068295CC095007C27F0 /* String+Capitalization.swift in Sources */,
 				4731F50D295CD4770013F626 /* UIView+TopBorder.swift in Sources */,
 				47C40F8E295CBBBD007C27F0 /* Constants.swift in Sources */,
