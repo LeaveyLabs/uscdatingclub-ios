@@ -46,6 +46,9 @@
 		476FD865295DF89A0014DD42 /* SimpleButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 476FD863295DF89A0014DD42 /* SimpleButton.xib */; };
 		476FD867295E16290014DD42 /* PermissionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD866295E16290014DD42 /* PermissionsVC.swift */; };
 		476FD869295E1BCA0014DD42 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD868295E1BCA0014DD42 /* AlertManager.swift */; };
+		476FD86B295E46E30014DD42 /* HowItWorksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD86A295E46E30014DD42 /* HowItWorksVC.swift */; };
+		476FD86E295E4A1F0014DD42 /* HowItWorksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD86C295E4A1F0014DD42 /* HowItWorksCell.swift */; };
+		476FD86F295E4A1F0014DD42 /* HowItWorksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */; };
 		47C40EE9295CB930007C27F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40EE8295CB930007C27F0 /* SceneDelegate.swift */; };
 		47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEC295CB930007C27F0 /* Main.storyboard */; };
 		47C40EF0295CB931007C27F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEF295CB931007C27F0 /* Assets.xcassets */; };
@@ -182,6 +185,9 @@
 		476FD863295DF89A0014DD42 /* SimpleButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleButton.xib; sourceTree = "<group>"; };
 		476FD866295E16290014DD42 /* PermissionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsVC.swift; sourceTree = "<group>"; };
 		476FD868295E1BCA0014DD42 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
+		476FD86A295E46E30014DD42 /* HowItWorksVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorksVC.swift; sourceTree = "<group>"; };
+		476FD86C295E4A1F0014DD42 /* HowItWorksCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowItWorksCell.swift; sourceTree = "<group>"; };
+		476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HowItWorksCell.xib; sourceTree = "<group>"; };
 		47C40EE3295CB930007C27F0 /* uscdatingclub-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "uscdatingclub-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47C40EE8295CB930007C27F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		47C40EED295CB930007C27F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -493,6 +499,7 @@
 				47DE31D3295CC4B40063C55A /* Auth */,
 				47C40F9F295CBF7C007C27F0 /* Demos */,
 				47C40F98295CBF61007C27F0 /* AbstractControllers */,
+				476FD86A295E46E30014DD42 /* HowItWorksVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -500,9 +507,9 @@
 		47C40F97295CBD49007C27F0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				47DE3226295CC5A00063C55A /* TableCells */,
 				47DE3228295CC5AD0063C55A /* CustomViews */,
 				47DE3227295CC5A80063C55A /* Storyboards */,
-				47DE3226295CC5A00063C55A /* TableCells */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -733,6 +740,8 @@
 		47DE3226295CC5A00063C55A /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
+				476FD86C295E4A1F0014DD42 /* HowItWorksCell.swift */,
+				476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */,
 			);
 			path = TableCells;
 			sourceTree = "<group>";
@@ -946,6 +955,7 @@
 				47C40EF0295CB931007C27F0 /* Assets.xcassets in Resources */,
 				47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */,
 				476FD865295DF89A0014DD42 /* SimpleButton.xib in Resources */,
+				476FD86F295E4A1F0014DD42 /* HowItWorksCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -979,6 +989,7 @@
 				4731F510295CD4820013F626 /* UITableView+DeselectAll.swift in Sources */,
 				47C4105D295CC065007C27F0 /* CNContact+Number.swift in Sources */,
 				47C4107A295CC0AB007C27F0 /* MKPointOfInterestCategory+Extension.swift in Sources */,
+				476FD86B295E46E30014DD42 /* HowItWorksVC.swift in Sources */,
 				47C4106A295CC095007C27F0 /* String+Ranges.swift in Sources */,
 				47C41058295CBFFC007C27F0 /* CustomSwiftMessages.swift in Sources */,
 				47DE324B295CC7C40063C55A /* UITextView+MaxLength.swift in Sources */,
@@ -1080,6 +1091,7 @@
 				4731F506295CD4770013F626 /* UIView+AddBorders.swift in Sources */,
 				47C4106B295CC095007C27F0 /* StringChat+Emoji.swift in Sources */,
 				47C4105F295CC079007C27F0 /* Array+FirstWhere.swift in Sources */,
+				476FD86E295E4A1F0014DD42 /* HowItWorksCell.swift in Sources */,
 				47C41069295CC095007C27F0 /* String+Indexing.swift in Sources */,
 				47DE3268295CCA5C0063C55A /* UIView+BecomeRound.swift in Sources */,
 				4731F523295CD86D0013F626 /* NavigationController+Prev.swift in Sources */,

@@ -59,7 +59,8 @@ class AboutVC: UIViewController, PageVCChild {
     //MARK: - Interaction
     
     @objc func howItWorksButtonPressed() {
-        
+        let howItWorksVC = HowItWorksVC.create()
+        present(howItWorksVC, animated: true)
     }
     
     @objc func faqButtonPressed() {

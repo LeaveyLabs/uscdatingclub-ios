@@ -22,10 +22,10 @@ extension Constants {
     static let updateAvailableVersion = remoteConfig.configValue(forKey: RemoteConfigKeys.updateAvailableVersion.rawValue).stringValue ?? "0.0.0"
     static let updateAvailableFeatures: Features = Features(json: remoteConfig.configValue(forKey: RemoteConfigKeys.updateAvailableFeatures.rawValue).jsonValue as? [String:Any] ?? [:]) ?? Features()
     
-    //why is this giving me errors?
+    //why is the below approach giving me errors?
 //    static let faqLink = URL(string: remoteConfig.configValue(forKey: RemoteConfigKeys.appStoreLink.rawValue).stringValue ?? "https://uscdatingclub.com/faq")!
     static let faqLink = URL(string: "https://uscdatingclub.com/faq")!
-    static let appStoreLink = URL(string: "https://apple.com")!
+    static let appStoreLink = URL(string: "https://apps.apple.com/app/apple-store/id1661018857")!
     static let landingPageLink = URL(string: "https://uscdatingclub.com")!
     static let privacyPageLink = URL(string: "https://uscdatingclub.com/privacy")!
     static let termsLink = URL(string: "https://uscdatingclub.com/terms")!

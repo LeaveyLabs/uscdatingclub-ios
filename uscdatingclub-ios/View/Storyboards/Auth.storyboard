@@ -1216,30 +1216,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to join the club" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I2G-qw-87w">
-                                <rect key="frame" x="122" y="69" width="170" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to join the club..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I2G-qw-87w">
+                                <rect key="frame" x="112.33333333333333" y="69" width="189.33333333333337" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="z85-LX-PyV"/>
+                                    <constraint firstAttribute="height" constant="60" id="z85-LX-PyV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="gl0-cX-jYj">
-                                <rect key="frame" x="20" y="109" width="374" height="753"/>
+                                <rect key="frame" x="20" y="129" width="374" height="733"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2vA-1u-ntb">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="376.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="366.66666666666669"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kvh-4m-SuL" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="158.33333333333331" width="374" height="60"/>
+                                                <rect key="frame" x="0.0" y="143.33333333333331" width="374" height="60"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="Ua4-hD-Mqg"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="when you're matched, you'll both have 3 minutes to respond" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Re1-ie-3yh">
-                                                <rect key="frame" x="10" y="228.33333333333331" width="354" height="40.666666666666686"/>
+                                                <rect key="frame" x="10" y="213.33333333333331" width="354" height="40.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -1247,7 +1247,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="kvh-4m-SuL" firstAttribute="centerY" secondItem="2vA-1u-ntb" secondAttribute="centerY" id="Mps-lf-9p1"/>
+                                            <constraint firstItem="kvh-4m-SuL" firstAttribute="centerY" secondItem="2vA-1u-ntb" secondAttribute="centerY" constant="-10" id="Mps-lf-9p1"/>
                                             <constraint firstAttribute="trailing" secondItem="Re1-ie-3yh" secondAttribute="trailing" constant="10" id="Y9r-1h-kXi"/>
                                             <constraint firstItem="Re1-ie-3yh" firstAttribute="top" secondItem="kvh-4m-SuL" secondAttribute="bottom" constant="10" id="h6C-IK-lRh"/>
                                             <constraint firstItem="kvh-4m-SuL" firstAttribute="leading" secondItem="2vA-1u-ntb" secondAttribute="leading" id="nGJ-lJ-FP0"/>
@@ -1256,17 +1256,17 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ohV-3s-oi3">
-                                        <rect key="frame" x="0.0" y="376.66666666666674" width="374" height="376.33333333333326"/>
+                                        <rect key="frame" x="0.0" y="366.66666666666674" width="374" height="366.33333333333326"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OZM-6Y-ugH" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="57.999999999999943" width="374" height="60"/>
+                                                <rect key="frame" x="0.0" y="52.999999999999943" width="374" height="60"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="Mrh-Qn-1wz"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CV2-Kx-qdW">
-                                                <rect key="frame" x="10" y="127.99999999999994" width="354" height="101.66666666666669"/>
+                                                <rect key="frame" x="10" y="122.99999999999994" width="354" height="101.66666666666669"/>
                                                 <string key="text">get matched even when you don’t have the app open
 
 we don’t save any location data. read more here</string>
@@ -1306,7 +1306,59 @@ we don’t save any location data. read more here</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EBK-wL-QHO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3322" y="740"/>
+            <point key="canvasLocation" x="-3372" y="740"/>
+        </scene>
+        <!--PermissionsViewController-->
+        <scene sceneID="Yti-mE-G9E">
+            <objects>
+                <viewController storyboardIdentifier="HowItWorksVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hO4-Gb-5OM" userLabel="PermissionsViewController" customClass="HowItWorksVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f0d-39-HlL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="how it works" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BoR-Fb-Mgu">
+                                <rect key="frame" x="134" y="69" width="146.33333333333337" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="JgB-vw-IhR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="i4y-ok-xsU">
+                                <rect key="frame" x="0.0" y="137" width="414" height="655"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aap-Mf-mrf" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                <rect key="frame" x="29" y="792" width="365" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="nkp-WN-guk"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="qUc-3b-vty"/>
+                        <color key="backgroundColor" name="AccentColor"/>
+                        <constraints>
+                            <constraint firstItem="aap-Mf-mrf" firstAttribute="top" secondItem="i4y-ok-xsU" secondAttribute="bottom" id="GHf-IN-61k"/>
+                            <constraint firstItem="qUc-3b-vty" firstAttribute="trailing" secondItem="i4y-ok-xsU" secondAttribute="trailing" id="K1q-wQ-lEn"/>
+                            <constraint firstItem="BoR-Fb-Mgu" firstAttribute="centerX" secondItem="f0d-39-HlL" secondAttribute="centerX" id="LHk-MP-FDH"/>
+                            <constraint firstItem="i4y-ok-xsU" firstAttribute="top" secondItem="BoR-Fb-Mgu" secondAttribute="bottom" constant="8" symbolic="YES" id="dva-Gt-Ex6"/>
+                            <constraint firstItem="i4y-ok-xsU" firstAttribute="leading" secondItem="qUc-3b-vty" secondAttribute="leading" id="huR-eg-SfN"/>
+                            <constraint firstItem="BoR-Fb-Mgu" firstAttribute="top" secondItem="qUc-3b-vty" secondAttribute="top" constant="25" id="mHY-aH-kWf"/>
+                            <constraint firstItem="qUc-3b-vty" firstAttribute="bottom" secondItem="aap-Mf-mrf" secondAttribute="bottom" constant="20" id="rwH-BR-NnE"/>
+                            <constraint firstAttribute="trailing" secondItem="aap-Mf-mrf" secondAttribute="trailing" constant="20" id="sfR-h8-wki"/>
+                            <constraint firstItem="aap-Mf-mrf" firstAttribute="leading" secondItem="qUc-3b-vty" secondAttribute="leading" constant="29" id="waJ-VQ-Gbq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="gotItButton" destination="aap-Mf-mrf" id="mpn-0q-5Vv"/>
+                        <outlet property="tableView" destination="i4y-ok-xsU" id="LdH-n2-T4T"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="24a-Zg-t5Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2710" y="740"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

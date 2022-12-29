@@ -44,7 +44,6 @@ class RadarVC: UIViewController, PageVCChild {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCircleViews()
-        startPulsing()
         setupButtons()
         renderIsActive()
     }
@@ -94,6 +93,15 @@ class RadarVC: UIViewController, PageVCChild {
             activeButton.internalButton.setTitleColor(.white, for: .normal)
             
             LocationManager.shared.stopLocationServices()
+        }
+    }
+    
+    //MARK: - Helpers
+    
+    func makeNavButtonsVisible(_ visible: Bool) {
+        UIView.animate(withDuration: 0.2, delay: 0, options: []) { [self] in
+            accountButton.alpha = visible ? 1 : 0
+            aboutButton.alpha = visible ? 1 : 0
         }
     }
 
