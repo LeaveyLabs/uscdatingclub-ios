@@ -236,7 +236,7 @@ class CreateProfileViewController: KUIViewController, UITextFieldDelegate {
     //TODO: make sure these error messages are descriptive
     func handleFailure(_ error: Error) {
         isSubmitting = false
-        CustomSwiftMessages.displayError(error)
+        AlertManager.displayError(error)
         //        DispatchQueue.main.async { [self] in
         //            transitionToStoryboard(storyboardID: Constants.SBID.SB.Auth,
         //                                        viewControllerID: Constants.SBID.VC.AuthNavigation,

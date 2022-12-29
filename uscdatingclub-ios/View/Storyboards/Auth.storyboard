@@ -14,7 +14,7 @@
         <!--Auth Start View Controller-->
         <scene sceneID="O0K-jo-Zkd">
             <objects>
-                <viewController storyboardIdentifier="AuthStart" id="HpL-iT-8ZP" customClass="AuthStartViewController" customModule="mist_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthStart" id="HpL-iT-8ZP" customClass="AuthStartViewController" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g07-uP-5a9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -96,7 +96,7 @@
         <!--EnterEmailViewController-->
         <scene sceneID="vf0-ZZ-RoJ">
             <objects>
-                <viewController storyboardIdentifier="EnterEmailViewController" title="EnterEmailViewController" id="2yy-YR-CED" customClass="EnterEmailViewController" customModule="mist_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnterEmailViewController" title="EnterEmailViewController" id="2yy-YR-CED" customClass="EnterEmailViewController" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fKd-2M-HSw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -219,7 +219,7 @@
         <!--LoginViewController-->
         <scene sceneID="YbK-HY-ZTj">
             <objects>
-                <viewController id="578-PS-30b" userLabel="LoginViewController" customClass="LoginViewController" customModule="mist_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="578-PS-30b" userLabel="LoginViewController" customClass="LoginViewController" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fAX-DF-vtD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -356,7 +356,7 @@
         <!--ConfirmEmailViewController-->
         <scene sceneID="hmB-I6-6oq">
             <objects>
-                <viewController storyboardIdentifier="ConfirmCodeViewController" title="EnterEmailViewController" id="UyC-fl-2SL" userLabel="ConfirmEmailViewController" customClass="ConfirmCodeViewController" customModule="mist_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConfirmCodeViewController" title="EnterEmailViewController" id="UyC-fl-2SL" userLabel="ConfirmEmailViewController" customClass="ConfirmCodeViewController" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Lt-5I-lsT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -471,7 +471,7 @@
         <!--ChooseUsernameViewController-->
         <scene sceneID="4dW-t4-rG8">
             <objects>
-                <viewController storyboardIdentifier="RequestResetNumberViewController" title="ResetPasswordViewController" id="eTa-hF-UwB" userLabel="ChooseUsernameViewController" customClass="RequestResetNumberViewController" customModule="mist_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RequestResetNumberViewController" title="ResetPasswordViewController" id="eTa-hF-UwB" userLabel="ChooseUsernameViewController" customClass="RequestResetNumberViewController" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L9Z-9K-Y5c">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -561,7 +561,7 @@
         <!--CreatePasswordViewController-->
         <scene sceneID="IvI-m3-3xq">
             <objects>
-                <viewController storyboardIdentifier="ResetNumberViewController" title="EnterEmailViewController" id="A2t-w6-2pC" userLabel="CreatePasswordViewController" customClass="ResetNumberViewController" customModule="mist_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResetNumberViewController" title="EnterEmailViewController" id="A2t-w6-2pC" userLabel="CreatePasswordViewController" customClass="ResetNumberViewController" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JgE-lR-ysF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -679,7 +679,7 @@
         <!--EnterNameViewController-->
         <scene sceneID="ewe-qY-maZ">
             <objects>
-                <viewController storyboardIdentifier="EnterBiosViewController" title="EnterEmailViewController" id="PnK-4K-Dtd" userLabel="EnterNameViewController" customClass="EnterBiosViewController" customModule="mist_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnterBiosViewController" title="EnterEmailViewController" id="PnK-4K-Dtd" userLabel="EnterNameViewController" customClass="EnterBiosViewController" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="O9E-pP-BQy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -795,7 +795,7 @@
         <!--CreatePasswordViewController-->
         <scene sceneID="ZgP-jo-7DU">
             <objects>
-                <viewController storyboardIdentifier="EnterNumberViewController" title="EnterEmailViewController" id="gJj-BM-Q35" userLabel="CreatePasswordViewController" customClass="EnterNumberViewController" customModule="mist_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnterNumberViewController" title="EnterEmailViewController" id="gJj-BM-Q35" userLabel="CreatePasswordViewController" customClass="EnterNumberViewController" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NJS-BK-ZPf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -913,7 +913,7 @@
         <!--Welcome Tutorial View Controller-->
         <scene sceneID="7UF-nl-cIa">
             <objects>
-                <viewController storyboardIdentifier="WelcomeTutorialViewController" id="pXo-RR-OUG" customClass="WelcomeTutorialViewController" customModule="mist_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WelcomeTutorialViewController" id="pXo-RR-OUG" customClass="WelcomeTutorialViewController" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4X8-tb-CNn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -929,7 +929,7 @@
         <!--CreateProfileViewController-->
         <scene sceneID="cgm-Pz-lOI">
             <objects>
-                <viewController storyboardIdentifier="CreateProfileViewController" title="CreateProfileViewController" id="AOZ-sr-0WT" customClass="CreateProfileViewController" customModule="mist_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateProfileViewController" title="CreateProfileViewController" id="AOZ-sr-0WT" customClass="CreateProfileViewController" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hsh-G4-onJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -1196,7 +1196,7 @@
         <!--Explain Profile View Controller-->
         <scene sceneID="5Zc-hc-vnB">
             <objects>
-                <viewController storyboardIdentifier="ExplainProfileViewController" id="ueb-qD-YaW" customClass="ExplainProfileViewController" customModule="mist_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExplainProfileViewController" id="ueb-qD-YaW" customClass="ExplainProfileViewController" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vWv-JS-8Us">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1208,18 +1208,121 @@
             </objects>
             <point key="canvasLocation" x="3632" y="2210"/>
         </scene>
+        <!--PermissionsViewController-->
+        <scene sceneID="LtJ-IW-FAy">
+            <objects>
+                <viewController storyboardIdentifier="PermissionsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4rI-pa-rZf" userLabel="PermissionsViewController" customClass="PermissionsVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qtw-hp-e3D">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to use the app" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I2G-qw-87w">
+                                <rect key="frame" x="125.00000000000001" y="69" width="164.33333333333337" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="z85-LX-PyV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="gl0-cX-jYj">
+                                <rect key="frame" x="20" y="109" width="374" height="753"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2vA-1u-ntb">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="376.66666666666669"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kvh-4m-SuL" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="158.33333333333331" width="374" height="60"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="Ua4-hD-Mqg"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="when you're matched, you'll both have 3 minutes to respond" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Re1-ie-3yh">
+                                                <rect key="frame" x="10" y="228.33333333333331" width="354" height="40.666666666666686"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="kvh-4m-SuL" firstAttribute="centerY" secondItem="2vA-1u-ntb" secondAttribute="centerY" id="Mps-lf-9p1"/>
+                                            <constraint firstAttribute="trailing" secondItem="Re1-ie-3yh" secondAttribute="trailing" constant="10" id="Y9r-1h-kXi"/>
+                                            <constraint firstItem="Re1-ie-3yh" firstAttribute="top" secondItem="kvh-4m-SuL" secondAttribute="bottom" constant="10" id="h6C-IK-lRh"/>
+                                            <constraint firstItem="kvh-4m-SuL" firstAttribute="leading" secondItem="2vA-1u-ntb" secondAttribute="leading" id="nGJ-lJ-FP0"/>
+                                            <constraint firstAttribute="trailing" secondItem="kvh-4m-SuL" secondAttribute="trailing" id="oDL-DF-omL"/>
+                                            <constraint firstItem="Re1-ie-3yh" firstAttribute="leading" secondItem="2vA-1u-ntb" secondAttribute="leading" constant="10" id="xna-gP-4yD"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ohV-3s-oi3">
+                                        <rect key="frame" x="0.0" y="376.66666666666674" width="374" height="376.33333333333326"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OZM-6Y-ugH" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="57.999999999999943" width="374" height="60"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="Mrh-Qn-1wz"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CV2-Kx-qdW">
+                                                <rect key="frame" x="10" y="127.99999999999994" width="354" height="101.66666666666669"/>
+                                                <string key="text">get matched even when you don’t have the app open
+
+we don’t save any location data. read more here</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="OZM-6Y-ugH" secondAttribute="trailing" id="E98-Hx-KOk"/>
+                                            <constraint firstItem="OZM-6Y-ugH" firstAttribute="leading" secondItem="ohV-3s-oi3" secondAttribute="leading" id="OVv-JB-tFy"/>
+                                            <constraint firstItem="OZM-6Y-ugH" firstAttribute="centerY" secondItem="ohV-3s-oi3" secondAttribute="centerY" constant="-100" id="SR6-Wn-LQL"/>
+                                            <constraint firstAttribute="trailing" secondItem="CV2-Kx-qdW" secondAttribute="trailing" constant="10" id="bOJ-KO-6z2"/>
+                                            <constraint firstItem="CV2-Kx-qdW" firstAttribute="top" secondItem="OZM-6Y-ugH" secondAttribute="bottom" constant="10" id="dt2-pu-cWc"/>
+                                            <constraint firstItem="CV2-Kx-qdW" firstAttribute="leading" secondItem="ohV-3s-oi3" secondAttribute="leading" constant="10" id="mel-gh-K1p"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="A1K-mL-j7f"/>
+                        <color key="backgroundColor" name="AccentColor"/>
+                        <constraints>
+                            <constraint firstItem="gl0-cX-jYj" firstAttribute="leading" secondItem="A1K-mL-j7f" secondAttribute="leading" constant="20" id="4s3-lT-aIy"/>
+                            <constraint firstItem="A1K-mL-j7f" firstAttribute="bottom" secondItem="gl0-cX-jYj" secondAttribute="bottom" id="L4a-tc-Crf"/>
+                            <constraint firstItem="A1K-mL-j7f" firstAttribute="trailing" secondItem="gl0-cX-jYj" secondAttribute="trailing" constant="20" id="OqS-G2-rKM"/>
+                            <constraint firstItem="gl0-cX-jYj" firstAttribute="top" secondItem="I2G-qw-87w" secondAttribute="bottom" id="X47-Oz-YvN"/>
+                            <constraint firstItem="I2G-qw-87w" firstAttribute="top" secondItem="A1K-mL-j7f" secondAttribute="top" constant="25" id="YBw-N1-eGS"/>
+                            <constraint firstItem="I2G-qw-87w" firstAttribute="centerX" secondItem="qtw-hp-e3D" secondAttribute="centerX" id="r5d-la-d86"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="locationButton" destination="OZM-6Y-ugH" id="WA0-xe-ZhH"/>
+                        <outlet property="notificationsButton" destination="kvh-4m-SuL" id="oR4-Vm-Le8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EBK-wL-QHO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3322" y="740"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Tsf-zN-gbx"/>
         <segue reference="Jjd-n9-Hbr"/>
     </inferredMetricsTieBreakers>
-    <color key="tintColor" name="mist-lilac"/>
+    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="camera.circle.fill" catalog="system" width="128" height="123"/>
         <image name="chevron.left" catalog="system" width="97" height="128"/>
         <image name="circle.fill" catalog="system" width="128" height="123"/>
         <image name="mistwidelilac" width="3277" height="896"/>
         <image name="questionmark.circle" catalog="system" width="128" height="123"/>
+        <namedColor name="AccentColor">
+            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="mist-black">
             <color red="0.066666666666666666" green="0.066666666666666666" blue="0.066666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

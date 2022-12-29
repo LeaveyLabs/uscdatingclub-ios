@@ -176,7 +176,7 @@ class LoadingViewController: UIViewController {
             return
         }
         if failCount >= 2 {
-            CustomSwiftMessages.displayError(error)
+            AlertManager.displayError(error)
         }
         try await Task.sleep(nanoseconds: NSEC_PER_SEC * 3)
         switch reloadType {

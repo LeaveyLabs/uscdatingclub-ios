@@ -65,7 +65,7 @@ extension SimpleButton {
     
     // Note: the constraints for the PostView should already be set-up when this is called.
     // Otherwise you'll get loads of constraint errors in the console
-    func configure(title: String, systemImage: String) {
+    func configure(title: String, subtitle: String? = nil, systemImage: String) {
         internalButton.setTitle(title, for: .normal)
         internalButton.setImage(UIImage(systemName: systemImage), for: .normal)
     }

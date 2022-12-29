@@ -44,6 +44,8 @@
 		476FD861295DEDCF0014DD42 /* UIFont+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD860295DEDCF0014DD42 /* UIFont+Custom.swift */; };
 		476FD864295DF89A0014DD42 /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD862295DF89A0014DD42 /* SimpleButton.swift */; };
 		476FD865295DF89A0014DD42 /* SimpleButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 476FD863295DF89A0014DD42 /* SimpleButton.xib */; };
+		476FD867295E16290014DD42 /* PermissionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD866295E16290014DD42 /* PermissionsVC.swift */; };
+		476FD869295E1BCA0014DD42 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD868295E1BCA0014DD42 /* AlertManager.swift */; };
 		47C40EE9295CB930007C27F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40EE8295CB930007C27F0 /* SceneDelegate.swift */; };
 		47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEC295CB930007C27F0 /* Main.storyboard */; };
 		47C40EF0295CB931007C27F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEF295CB931007C27F0 /* Assets.xcassets */; };
@@ -178,6 +180,8 @@
 		476FD860295DEDCF0014DD42 /* UIFont+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Custom.swift"; sourceTree = "<group>"; };
 		476FD862295DF89A0014DD42 /* SimpleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleButton.swift; sourceTree = "<group>"; };
 		476FD863295DF89A0014DD42 /* SimpleButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleButton.xib; sourceTree = "<group>"; };
+		476FD866295E16290014DD42 /* PermissionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsVC.swift; sourceTree = "<group>"; };
+		476FD868295E1BCA0014DD42 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		47C40EE3295CB930007C27F0 /* uscdatingclub-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "uscdatingclub-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47C40EE8295CB930007C27F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		47C40EED295CB930007C27F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -358,6 +362,7 @@
 				4731F529295CE0980013F626 /* RadarVC.swift */,
 				4731F52B295CE0B40013F626 /* AboutVC.swift */,
 				4731F52D295CE0C10013F626 /* AccountVC.swift */,
+				476FD866295E16290014DD42 /* PermissionsVC.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -437,6 +442,8 @@
 				47C40F63295CBAFE007C27F0 /* AppStoreReviewManager.swift */,
 				47C40F64295CBAFE007C27F0 /* NotificationsManager.swift */,
 				47C40F65295CBAFE007C27F0 /* LocationManager.swift */,
+				476FD868295E1BCA0014DD42 /* AlertManager.swift */,
+				47C41050295CBFFC007C27F0 /* CustomSwiftMessages.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -444,7 +451,6 @@
 		47C40F7F295CBBBD007C27F0 /* AdditionalFiles */ = {
 			isa = PBXGroup;
 			children = (
-				47C41050295CBFFC007C27F0 /* CustomSwiftMessages.swift */,
 				47C40F80295CBBBD007C27F0 /* NotificationResponseHandler.swift */,
 				47C4103D295CBFDF007C27F0 /* Enums */,
 				47C41038295CBFCE007C27F0 /* Context */,
@@ -1008,6 +1014,7 @@
 				4731F508295CD4770013F626 /* UIView+PostBubble.swift in Sources */,
 				4731F503295CD45F0013F626 /* UIScrollView+ToTop.swift in Sources */,
 				47DE3264295CC94F0063C55A /* UIButton+LoadingIndicator.swift in Sources */,
+				476FD869295E1BCA0014DD42 /* AlertManager.swift in Sources */,
 				47DE3207295CC4B40063C55A /* CreateProfileViewController.swift in Sources */,
 				47C40FA5295CBF7C007C27F0 /* HowMistWorksViewController.swift in Sources */,
 				4731F50F295CD4820013F626 /* UITableView+SectionShadow.swift in Sources */,
@@ -1063,6 +1070,7 @@
 				47C40F9E295CBF61007C27F0 /* CustomSheetViewController.swift in Sources */,
 				47DE325D295CC7C40063C55A /* UIViewController+ShareImage.swift in Sources */,
 				4731F505295CD4770013F626 /* UIView+LoadFromNib.swift in Sources */,
+				476FD867295E16290014DD42 /* PermissionsVC.swift in Sources */,
 				4731F51D295CD5750013F626 /* SpecialTabBarController.swift in Sources */,
 				4731F52A295CE0980013F626 /* RadarVC.swift in Sources */,
 				47DE324A295CC7C40063C55A /* UITextView+Newline.swift in Sources */,

@@ -10,11 +10,9 @@ import CoreLocation
 import FirebaseFirestore
 import FirebaseCore
 
-class PermissionsError: NSError {
-    
-}
-
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    
+    static let shared = LocationManager()
     
     private let locationManager = CLLocationManager()
     @Published var locationStatus: CLAuthorizationStatus?
@@ -41,7 +39,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
 
-    override init() {
+    private override init() {
         super.init()
         locationManager.pausesLocationUpdatesAutomatically = false
         locationManager.delegate = self

@@ -42,7 +42,6 @@ class RadarVC: UIViewController, PageVCChild {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(#function)
         setupCircleViews()
         startPulsing()
         setupButtons()
@@ -50,7 +49,6 @@ class RadarVC: UIViewController, PageVCChild {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print(#function)
         isCurrentlyVisible = true
     }
     
@@ -61,7 +59,6 @@ class RadarVC: UIViewController, PageVCChild {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print(#function)
         circleViews.forEach { circleView in
             circleView.becomeRound()
         }
@@ -81,21 +78,17 @@ class RadarVC: UIViewController, PageVCChild {
         activeButton.configure(title: "active", systemImage: "")
         activeButton.internalButton.addTarget(self, action: #selector(didTapActiveButton), for: .touchUpInside)
     }
-    
-    @objc func didTapActiveButton() {
-        print("TAP")
-    }
 
     func startPulsing() {
-        pulse(pulseView: firstCircleView)
+        pulse(pulseView: firstCircleView, repeating: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + PULSE_DURATION / 2) {
-            self.pulse(pulseView: self.secondCircleView)
+            self.pulse(pulseView: self.secondCircleView, repeating: true)
         }
     }
     
-    func pulse(pulseView: UIView) {
+    func pulse(pulseView: UIView, repeating: Bool) {
         if isCurrentlyVisible {
-            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
         }
         UIView.animate(withDuration: PULSE_DURATION, delay: 0, options: [.curveLinear, .allowUserInteraction]) {
             pulseView.transform = CGAffineTransform(scaleX: 1 / self.CIRCLE_WIDTH_RATIO, y: 1 / self.CIRCLE_WIDTH_RATIO)
@@ -105,7 +98,9 @@ class RadarVC: UIViewController, PageVCChild {
             pulseView.transform = .identity
             pulseView.alpha = 1
             pulseView.layer.borderWidth = 2
-            self.pulse(pulseView: pulseView)
+            if repeating {
+                self.pulse(pulseView: pulseView, repeating: true)
+            }
         }
     }
     
@@ -131,5 +126,34 @@ class RadarVC: UIViewController, PageVCChild {
         centerCircleView.widthAnchor.constraint(equalTo: centerCircleView.heightAnchor, multiplier: 1).isActive = true
         
         centerCircleView.backgroundColor = .white
+        centerCircleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapCenterCircle)))
     }
+    
+    //MARK: - Interaction
+    
+    @objc func didTapActiveButton() {
+        let vc = PermissionsVC.create()
+        present(vc, animated: true)
+    }
+    
+    @objc func didTapCenterCircle() {
+        print("DID TAP CENTER")
+        let newCircleView = UIView()
+        view.addSubview(newCircleView)
+        newCircleView.translatesAutoresizingMaskIntoConstraints = false
+        newCircleView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        newCircleView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        newCircleView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: CIRCLE_WIDTH_RATIO).isActive = true
+        newCircleView.widthAnchor.constraint(equalTo: newCircleView.heightAnchor, multiplier: 1).isActive = true
+        newCircleView.backgroundColor = .clear
+        newCircleView.layer.borderWidth = 2
+        newCircleView.layer.borderColor = UIColor.white.cgColor
+        newCircleView.roundCornersViaCornerRadius(radius: firstCircleView.bounds.width / 2)
+        pulse(pulseView: newCircleView, repeating: false)
+        DispatchQueue.main.asyncAfter(deadline: .now() + PULSE_DURATION) {
+            newCircleView.removeFromSuperview()
+        }
+    }
+    
 }
+

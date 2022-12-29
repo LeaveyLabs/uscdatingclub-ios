@@ -33,6 +33,12 @@ class NotificationsManager: NSObject {
         }
     }
     
+    func isNotificationsEnabled(closure: @escaping (Bool) -> Void) {
+        center.getNotificationSettings { setting in
+            closure(setting.authorizationStatus == .authorized)
+        }
+    }
+    
     func registerForNotificationsOnStartupIfAccessExists() {
         center.getNotificationSettings(completionHandler: { (settings) in
             if settings.authorizationStatus == .authorized {
@@ -48,13 +54,7 @@ class NotificationsManager: NSObject {
         center.getNotificationSettings(completionHandler: { [self] (settings) in
             switch settings.authorizationStatus {
             case .denied:
-                DispatchQueue.main.async {
-                    //swift messages?
-                    
-//                    AlertManager.showSettingsAlertController(title: "share notifications in settings", message: "", on: controller) { approved in
-//                        closure(approved)
-//                    }
-                }
+                closure(false)
             case .notDetermined:
                 self.center.requestAuthorization(options: [.sound, .alert, .badge]) { (granted, error) in
                     if granted {
