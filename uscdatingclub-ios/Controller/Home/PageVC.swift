@@ -14,7 +14,8 @@ class PageVC: UIPageViewController {
     var aboutXConstraint: NSLayoutConstraint!
     var radarXConstraint: NSLayoutConstraint!
     var accountXConstraint: NSLayoutConstraint!
-
+    
+    var pageVCContentOffsetX = 0.0
     var currentIndex: Int = 1
     let vcs: [UIViewController] = [UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.About),
                                    UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Radar),
@@ -25,7 +26,10 @@ class PageVC: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPageVC()
-        
+//        setupHeader()
+    }
+    
+    func setupHeader() {
         let asdf = UIView()
         asdf.backgroundColor = .black
         view.addSubview(asdf)
@@ -89,10 +93,16 @@ extension PageVC: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        scrollView.bounces = currentIndex != 0 && currentIndex != vcs.count-1 //disabling bounce can sometimes entirely disable page scrolling. not appropriate solution
-        print(scrollView.contentOffset.x, scrollView.panGestureRecognizer.translation(in: view).x)
-        
-        radarXConstraint.constant = scrollView.panGestureRecognizer.translation(in: view).x / 3
-        
+//        if pageVCContentOffsetX == 0 {
+//            pageVCContentOffsetX = scrollView.contentOffset.x * 2.0 //2.0 is the middle page multiplier
+//        }
+//        let offset = (scrollView.contentOffset.x * CGFloat(currentIndex) - pageVCContentOffsetX) / 2
+//        print(scrollView.contentOffset.x * CGFloat(currentIndex), pageVCContentOffsetX, offset)
+
+//        radarXConstraint.constant = offset
+        //scrollView.panGestureRecognizer.translation(in: view).x / 3
+//        aboutXConstraint.constant = scrollView.contentOffset.x - defaultContentOffset
+//        accountXConstraint.constant =
         
         if (currentIndex == 0 && scrollView.contentOffset.x < scrollView.bounds.size.width) || (currentIndex == vcs.count - 1 && scrollView.contentOffset.x > scrollView.bounds.size.width) {
               scrollView.contentOffset = CGPoint(x: scrollView.bounds.size.width, y: 0)
