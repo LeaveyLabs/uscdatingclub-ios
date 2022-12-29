@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		470221E7295CCE3E00119FA8 /* UIColor+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4107D295CC0BE007C27F0 /* UIColor+Theme.swift */; };
+		470221E7295CCE3E00119FA8 /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4107D295CC0BE007C27F0 /* UIColor+Custom.swift */; };
 		470221E9295CCFA200119FA8 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470221E8295CCFA200119FA8 /* Version.swift */; };
 		4731F501295CD4350013F626 /* UINavigationController+Completion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41097295CC0C0007C27F0 /* UINavigationController+Completion.swift */; };
 		4731F502295CD43A0013F626 /* UINavigationItem+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41096295CC0BF007C27F0 /* UINavigationItem+UIButton.swift */; };
@@ -41,6 +41,7 @@
 		4731F52C295CE0B40013F626 /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4731F52B295CE0B40013F626 /* AboutVC.swift */; };
 		4731F52E295CE0C10013F626 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4731F52D295CE0C10013F626 /* AccountVC.swift */; };
 		4731F530295CF7DB0013F626 /* UIPageViewController+GoTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4731F52F295CF7DB0013F626 /* UIPageViewController+GoTo.swift */; };
+		476FD861295DEDCF0014DD42 /* UIFont+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD860295DEDCF0014DD42 /* UIFont+Custom.swift */; };
 		47C40EE9295CB930007C27F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40EE8295CB930007C27F0 /* SceneDelegate.swift */; };
 		47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEC295CB930007C27F0 /* Main.storyboard */; };
 		47C40EF0295CB931007C27F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEF295CB931007C27F0 /* Assets.xcassets */; };
@@ -172,6 +173,7 @@
 		4731F52B295CE0B40013F626 /* AboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
 		4731F52D295CE0C10013F626 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
 		4731F52F295CF7DB0013F626 /* UIPageViewController+GoTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPageViewController+GoTo.swift"; sourceTree = "<group>"; };
+		476FD860295DEDCF0014DD42 /* UIFont+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Custom.swift"; sourceTree = "<group>"; };
 		47C40EE3295CB930007C27F0 /* uscdatingclub-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "uscdatingclub-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47C40EE8295CB930007C27F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		47C40EED295CB930007C27F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -225,7 +227,7 @@
 		47C41074295CC0AB007C27F0 /* CLLocationCoordiante+Midpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordiante+Midpoint.swift"; sourceTree = "<group>"; };
 		47C41075295CC0AB007C27F0 /* CLLocationCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationCoordinate.swift; sourceTree = "<group>"; };
 		47C4107C295CC0BE007C27F0 /* UISegmentedControl+Twitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+Twitter.swift"; sourceTree = "<group>"; };
-		47C4107D295CC0BE007C27F0 /* UIColor+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Theme.swift"; sourceTree = "<group>"; };
+		47C4107D295CC0BE007C27F0 /* UIColor+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Custom.swift"; sourceTree = "<group>"; };
 		47C4107E295CC0BE007C27F0 /* UISearchBar+CenterText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+CenterText.swift"; sourceTree = "<group>"; };
 		47C41080295CC0BE007C27F0 /* UIView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
 		47C41081295CC0BE007C27F0 /* UIView+PostBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+PostBubble.swift"; sourceTree = "<group>"; };
@@ -449,7 +451,8 @@
 		47C40F82295CBBBD007C27F0 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				47C4107D295CC0BE007C27F0 /* UIColor+Theme.swift */,
+				476FD860295DEDCF0014DD42 /* UIFont+Custom.swift */,
+				47C4107D295CC0BE007C27F0 /* UIColor+Custom.swift */,
 				47C40F83295CBBBD007C27F0 /* Constants.swift */,
 				47C40F84295CBBBD007C27F0 /* RemoteConfig.swift */,
 			);
@@ -473,9 +476,9 @@
 		47C40F96295CBD36007C27F0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				4731F526295CDCE80013F626 /* Home */,
 				47C40F8B295CBBBD007C27F0 /* AppDelegate.swift */,
 				47C40EE8295CB930007C27F0 /* SceneDelegate.swift */,
+				4731F526295CDCE80013F626 /* Home */,
 				4731F516295CD5750013F626 /* App */,
 				47DE31D3295CC4B40063C55A /* Auth */,
 				47C40F9F295CBF7C007C27F0 /* Demos */,
@@ -989,6 +992,7 @@
 				47C4106E295CC095007C27F0 /* String+Random.swift in Sources */,
 				4731F51B295CD5750013F626 /* SpecialTabBar.swift in Sources */,
 				4731F530295CF7DB0013F626 /* UIPageViewController+GoTo.swift in Sources */,
+				476FD861295DEDCF0014DD42 /* UIFont+Custom.swift in Sources */,
 				47C41076295CC0AB007C27F0 /* CLLocationCoordinate+Distance.swift in Sources */,
 				4731F52C295CE0B40013F626 /* AboutVC.swift in Sources */,
 				47DE321A295CC52F0063C55A /* UserService.swift in Sources */,
@@ -1033,7 +1037,7 @@
 				47DE3251295CC7C40063C55A /* UIImage+Blur.swift in Sources */,
 				4731F507295CD4770013F626 /* UIView+ParentVC.swift in Sources */,
 				4731F50B295CD4770013F626 /* UIView+RoundedIndividualCorners.swift in Sources */,
-				470221E7295CCE3E00119FA8 /* UIColor+Theme.swift in Sources */,
+				470221E7295CCE3E00119FA8 /* UIColor+Custom.swift in Sources */,
 				47DE3248295CC7C40063C55A /* UIImageView+Inspectable.swift in Sources */,
 				4731F52E295CE0C10013F626 /* AccountVC.swift in Sources */,
 				47DE3209295CC4B40063C55A /* LoginViewController.swift in Sources */,

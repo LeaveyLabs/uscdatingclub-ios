@@ -7,23 +7,30 @@
 
 import UIKit
 
-class AccountVC: UIViewController {
+class AccountVC: UIViewController, PageVCChild {
+    
+    @IBOutlet var radarButton: UIButton!
+    var pageVCDelegate: PageVCDelegate!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    //MARK: - Initialization
+    
+    class func create(delegate: PageVCDelegate) -> AccountVC {
+        let accountVC = UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Account) as! AccountVC
+        accountVC.pageVCDelegate = delegate
+        return accountVC
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupButtons()
     }
-    */
+    
+    //MARK: - Setup
+    
+    func setupButtons() {
+        radarButton.addAction(.init(handler: { [self] _ in
+            pageVCDelegate.didPressBackwardButton()
+        }), for: .touchUpInside)
+    }
 
 }

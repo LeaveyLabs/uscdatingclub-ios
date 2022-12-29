@@ -7,6 +7,15 @@
 
 import UIKit
 
+protocol PageVCDelegate {
+    func didPressForwardButton()
+    func didPressBackwardButton()
+}
+
+protocol PageVCChild {
+    var pageVCDelegate: PageVCDelegate! { get set }
+}
+
 class PageVC: UIPageViewController {
     
     //MARK: - Properties
@@ -17,9 +26,7 @@ class PageVC: UIPageViewController {
     
     var pageVCContentOffsetX = 0.0
     var currentIndex: Int = 1
-    let vcs: [UIViewController] = [UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.About),
-                                   UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Radar),
-                                   UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Account)]
+    var vcs: [UIViewController]!
 
     //MARK: - Lifecycle
     
@@ -71,6 +78,9 @@ class PageVC: UIPageViewController {
     }
     
     func setupPageVC() {
+        vcs = [AboutVC.create(delegate: self),
+               RadarVC.create(delegate: self),
+               AccountVC.create(delegate: self)]
         self.dataSource = self
         self.delegate = self
         for view in view.subviews {
@@ -83,6 +93,24 @@ class PageVC: UIPageViewController {
     
     func recalculateCurrentIndex() {
         currentIndex = vcs.firstIndex(of: viewControllers!.first!)!
+    }
+    
+}
+
+//MARK: - PageVCDelegate
+
+extension PageVC: PageVCDelegate {
+    
+    func didPressForwardButton() {
+        goToNextPage(animated: true) { completed in
+            self.recalculateCurrentIndex()
+        }
+    }
+    
+    func didPressBackwardButton() {
+        goToPrevPage(animated: true) { completed in
+            self.recalculateCurrentIndex()
+        }
     }
     
 }

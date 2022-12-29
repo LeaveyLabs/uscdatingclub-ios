@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RadarVC: UIViewController {
+class RadarVC: UIViewController, PageVCChild {
 
     //MARK: - Properties
     
@@ -20,22 +20,37 @@ class RadarVC: UIViewController {
     var circleViews: [UIView] {
         [firstCircleView, secondCircleView]
     }
+    
+    @IBOutlet var aboutButton: UIButton!
+    @IBOutlet var accountButton: UIButton!
+    var pageVCDelegate: PageVCDelegate!
+
+    //MARK: - Initialization
+    
+    class func create(delegate: PageVCDelegate) -> RadarVC {
+        let radarVC = UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Radar) as! RadarVC
+        radarVC.pageVCDelegate = delegate
+        return radarVC
+    }
 
     //MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(#function)
         setupCircleViews()
         startPulsing()
+        setupButtons()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        print(#function)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print("DID LAYOUT SUBVIEWS")
+        print(#function)
         circleViews.forEach { circleView in
             circleView.becomeRound()
         }
@@ -43,6 +58,15 @@ class RadarVC: UIViewController {
     }
     
     //MARK: - Setup
+    
+    func setupButtons() {
+        aboutButton.addAction(.init(handler: { [self] _ in
+            pageVCDelegate.didPressBackwardButton()
+        }), for: .touchUpInside)
+        accountButton.addAction(.init(handler: { [self] _ in
+            pageVCDelegate.didPressForwardButton()
+        }), for: .touchUpInside)
+    }
 
     func startPulsing() {
         firstCircleView.pulse(duration: PULSE_DURATION)

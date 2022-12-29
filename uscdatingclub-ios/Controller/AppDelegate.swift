@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
 //        Constants.fetchRemoteConfig()
         Constants.fetchRemoteConfigDebug()
+        
+        UIFont.overrideInitialize()
 
         //MUST COME in didfinishlaunchingwithOptions
         UNUserNotificationCenter.current().delegate = self
