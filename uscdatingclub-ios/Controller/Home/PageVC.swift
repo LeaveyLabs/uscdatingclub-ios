@@ -86,6 +86,7 @@ class PageVC: UIPageViewController {
         for view in view.subviews {
             if let scrollView = view as? UIScrollView {
                 scrollView.delegate = self
+                scrollView.delaysContentTouches = false
             }
         }
         setViewControllers([vcs[currentIndex]], direction: .forward, animated: false)

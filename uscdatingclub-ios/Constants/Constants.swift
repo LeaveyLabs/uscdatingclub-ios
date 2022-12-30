@@ -33,8 +33,8 @@ enum Constants {
             static let Auth = "Auth"
         }
         struct Cell {
-            static let Post = "PostCell"
-            static let Comment = "CommentCell"
+            static let HowItWorksCell = "HowItWorksCell"
+            static let SurveyCell = "SurveyCell"
         }
         struct VC {
             //Home
@@ -53,26 +53,25 @@ enum Constants {
             //TabBar
             static let TabBarController = "TabBarController"
             //Demo
-            static let HowMistWorks = "HowMistWorksViewController"
-            static let MistableMoments = "MistableMomentsViewController"
-            static let WhatIsPrompts = "WhatIsPromptsViewController"
+            static let HowItWorks = "HowItWorksVC"
             //Auth
+            static let Permissions = "PermissionsVC"
             static let ConfirmEmail = "ConfirmEmailViewController"
-            static let WelcomeTutorial = "WelcomeTutorialViewController"
-            static let UploadProfilePicture = "UploadProfilePictureViewController"
-            static let CreatePassword = "CreatePasswordViewController"
-            static let EnterName = "EnterNameViewController"
-            static let ChooseUsername = "ChooseUsernameViewController"
-            static let SetupTime = "SetupTimeViewController"
+//            static let WelcomeTutorial = "WelcomeTutorialViewController"
+//            static let UploadProfilePicture = "UploadProfilePictureViewController"
+//            static let CreatePassword = "CreatePasswordViewController"
+//            static let EnterName = "EnterNameViewController"
+//            static let ChooseUsername = "ChooseUsernameViewController"
+//            static let SetupTime = "SetupTimeViewController"
             static let EnterBios = "EnterBiosViewController"
-            static let FinishProfile = "FinishProfileViewController"
+//            static let FinishProfile = "FinishProfileViewController"
             static let EnterNumber = "EnterNumberViewController"
             static let ConfirmNumber = "ConfirmNumberViewController"
             static let CreateProfile = "CreateProfileViewController"
             static let ConfirmCode = "ConfirmCodeViewController"
             static let RequestReset = "RequestResetNumberViewController"
-            static let ResetNumber = "ResetNumberViewController"
-            static let ExplainProfile = "ExplainProfileViewController"
+//            static let ResetNumber = "ResetNumberViewController"
+//            static let ExplainProfile = "ExplainProfileViewController"
             static let EnterEmail = "EnterEmailViewController"
             //Reset password
     //            static let RequestResetPassword = "RequestResetPasswordViewController"

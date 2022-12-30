@@ -166,7 +166,7 @@ class LoginViewController: KUIViewController, UITextFieldDelegate {
         isSubmitting = false
         enterNumberTextField.text = ""
         validateInput()
-        CustomSwiftMessages.displayError(error)
+        AlertManager.displayError(error)
     }
     
     func validateInput() {

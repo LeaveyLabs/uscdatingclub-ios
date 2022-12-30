@@ -130,7 +130,7 @@ class EnterEmailViewController: KUIViewController, UITextFieldDelegate {
         isSubmitting = false
         enterEmailTextField.text = ""
         validateInput()
-        CustomSwiftMessages.displayError(error)
+        AlertManager.displayError(error)
     }
     
     func validateInput() {

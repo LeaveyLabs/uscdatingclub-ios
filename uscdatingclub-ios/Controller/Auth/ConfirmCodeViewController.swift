@@ -219,7 +219,7 @@ class ConfirmCodeViewController: KUIViewController, UITextFieldDelegate {
     func handleError(_ error: Error) {
         isSubmitting = false
         confirmTextField.text = ""
-        CustomSwiftMessages.displayError(error)
+        AlertManager.displayError(error)
     }
     
     //MARK: - ConfirmMethod Functions

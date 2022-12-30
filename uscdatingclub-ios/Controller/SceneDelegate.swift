@@ -9,6 +9,8 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+    //MARK: - Properties
+    
     var window: UIWindow?
     
     static var visibleViewController: UIViewController? {
@@ -38,6 +40,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         return rootViewController
     }
+    
+    //MARK: - Helpers
+    
+    //MARK: - SceneDelegate
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -46,7 +52,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        guard let windowScene = (scene as? UIWindowScene) else { return }
 //        let window = UIWindow(windowScene: windowScene)
 //        self.window = window
-//        
+
 //        let loadingVC = UIStoryboard(name: "Loading", bundle: nil).instantiateViewController(withIdentifier: "LoadingViewController") as! LoadingViewController
 //        if let notificationResponse = connectionOptions.notificationResponse,
 //           let notificationResponseHandler = generateNotificationResponseHandler(notificationResponse) {

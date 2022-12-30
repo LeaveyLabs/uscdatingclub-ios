@@ -51,6 +51,11 @@
 		476FD861295DEDCF0014DD42 /* UIFont+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD860295DEDCF0014DD42 /* UIFont+Custom.swift */; };
 		476FD864295DF89A0014DD42 /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD862295DF89A0014DD42 /* SimpleButton.swift */; };
 		476FD865295DF89A0014DD42 /* SimpleButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 476FD863295DF89A0014DD42 /* SimpleButton.xib */; };
+		476FD867295E16290014DD42 /* PermissionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD866295E16290014DD42 /* PermissionsVC.swift */; };
+		476FD869295E1BCA0014DD42 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD868295E1BCA0014DD42 /* AlertManager.swift */; };
+		476FD86B295E46E30014DD42 /* HowItWorksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD86A295E46E30014DD42 /* HowItWorksVC.swift */; };
+		476FD86E295E4A1F0014DD42 /* HowItWorksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD86C295E4A1F0014DD42 /* HowItWorksCell.swift */; };
+		476FD86F295E4A1F0014DD42 /* HowItWorksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */; };
 		47C40EE9295CB930007C27F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40EE8295CB930007C27F0 /* SceneDelegate.swift */; };
 		47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEC295CB930007C27F0 /* Main.storyboard */; };
 		47C40EF0295CB931007C27F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEF295CB931007C27F0 /* Assets.xcassets */; };
@@ -191,6 +196,11 @@
 		476FD860295DEDCF0014DD42 /* UIFont+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Custom.swift"; sourceTree = "<group>"; };
 		476FD862295DF89A0014DD42 /* SimpleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleButton.swift; sourceTree = "<group>"; };
 		476FD863295DF89A0014DD42 /* SimpleButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleButton.xib; sourceTree = "<group>"; };
+		476FD866295E16290014DD42 /* PermissionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsVC.swift; sourceTree = "<group>"; };
+		476FD868295E1BCA0014DD42 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
+		476FD86A295E46E30014DD42 /* HowItWorksVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorksVC.swift; sourceTree = "<group>"; };
+		476FD86C295E4A1F0014DD42 /* HowItWorksCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowItWorksCell.swift; sourceTree = "<group>"; };
+		476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HowItWorksCell.xib; sourceTree = "<group>"; };
 		47C40EE3295CB930007C27F0 /* uscdatingclub-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "uscdatingclub-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47C40EE8295CB930007C27F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		47C40EED295CB930007C27F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -478,7 +488,6 @@
 		47C40F7F295CBBBD007C27F0 /* AdditionalFiles */ = {
 			isa = PBXGroup;
 			children = (
-				47C41050295CBFFC007C27F0 /* CustomSwiftMessages.swift */,
 				47C40F80295CBBBD007C27F0 /* NotificationResponseHandler.swift */,
 				47C4103D295CBFDF007C27F0 /* Enums */,
 				47C41038295CBFCE007C27F0 /* Context */,
@@ -516,11 +525,13 @@
 			children = (
 				47C40F8B295CBBBD007C27F0 /* AppDelegate.swift */,
 				47C40EE8295CB930007C27F0 /* SceneDelegate.swift */,
+				476FD866295E16290014DD42 /* PermissionsVC.swift */,
 				4731F526295CDCE80013F626 /* Home */,
 				4731F516295CD5750013F626 /* App */,
 				47DE31D3295CC4B40063C55A /* Auth */,
 				47C40F9F295CBF7C007C27F0 /* Demos */,
 				47C40F98295CBF61007C27F0 /* AbstractControllers */,
+				476FD86A295E46E30014DD42 /* HowItWorksVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -528,9 +539,9 @@
 		47C40F97295CBD49007C27F0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				47DE3226295CC5A00063C55A /* TableCells */,
 				47DE3228295CC5AD0063C55A /* CustomViews */,
 				47DE3227295CC5A80063C55A /* Storyboards */,
-				47DE3226295CC5A00063C55A /* TableCells */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -754,6 +765,8 @@
 		47DE3226295CC5A00063C55A /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
+				476FD86C295E4A1F0014DD42 /* HowItWorksCell.swift */,
+				476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */,
 			);
 			path = TableCells;
 			sourceTree = "<group>";
@@ -967,6 +980,7 @@
 				47C40EF0295CB931007C27F0 /* Assets.xcassets in Resources */,
 				47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */,
 				476FD865295DF89A0014DD42 /* SimpleButton.xib in Resources */,
+				476FD86F295E4A1F0014DD42 /* HowItWorksCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1000,6 +1014,7 @@
 				4731F510295CD4820013F626 /* UITableView+DeselectAll.swift in Sources */,
 				47C4105D295CC065007C27F0 /* CNContact+Number.swift in Sources */,
 				47C4107A295CC0AB007C27F0 /* MKPointOfInterestCategory+Extension.swift in Sources */,
+				476FD86B295E46E30014DD42 /* HowItWorksVC.swift in Sources */,
 				47C4106A295CC095007C27F0 /* String+Ranges.swift in Sources */,
 				47C41058295CBFFC007C27F0 /* CustomSwiftMessages.swift in Sources */,
 				47DE324B295CC7C40063C55A /* UITextView+MaxLength.swift in Sources */,
@@ -1037,6 +1052,7 @@
 				4731F508295CD4770013F626 /* UIView+PostBubble.swift in Sources */,
 				4731F503295CD45F0013F626 /* UIScrollView+ToTop.swift in Sources */,
 				47DE3264295CC94F0063C55A /* UIButton+LoadingIndicator.swift in Sources */,
+				476FD869295E1BCA0014DD42 /* AlertManager.swift in Sources */,
 				47DE3207295CC4B40063C55A /* CreateProfileViewController.swift in Sources */,
 				47C40FA5295CBF7C007C27F0 /* HowMistWorksViewController.swift in Sources */,
 				4731F50F295CD4820013F626 /* UITableView+SectionShadow.swift in Sources */,
@@ -1094,6 +1110,7 @@
 				47C40F9E295CBF61007C27F0 /* CustomSheetViewController.swift in Sources */,
 				47DE325D295CC7C40063C55A /* UIViewController+ShareImage.swift in Sources */,
 				4731F505295CD4770013F626 /* UIView+LoadFromNib.swift in Sources */,
+				476FD867295E16290014DD42 /* PermissionsVC.swift in Sources */,
 				4731F51D295CD5750013F626 /* SpecialTabBarController.swift in Sources */,
 				4731F52A295CE0980013F626 /* RadarVC.swift in Sources */,
 				47DE324A295CC7C40063C55A /* UITextView+Newline.swift in Sources */,
@@ -1103,7 +1120,7 @@
 				4731F506295CD4770013F626 /* UIView+AddBorders.swift in Sources */,
 				47C4106B295CC095007C27F0 /* StringChat+Emoji.swift in Sources */,
 				47C4105F295CC079007C27F0 /* Array+FirstWhere.swift in Sources */,
-				434A0530295E1EDB00C15945 /* EmailAPI.swift in Sources */,
+				476FD86E295E4A1F0014DD42 /* HowItWorksCell.swift in Sources */,
 				47C41069295CC095007C27F0 /* String+Indexing.swift in Sources */,
 				434A0532295E1F1300C15945 /* UserAPI.swift in Sources */,
 				47DE3268295CCA5C0063C55A /* UIView+BecomeRound.swift in Sources */,

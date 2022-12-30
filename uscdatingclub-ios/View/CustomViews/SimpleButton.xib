@@ -22,12 +22,13 @@
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OBV-qT-bwj">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                     <color key="tintColor" name="customBlack"/>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="15" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
                     <state key="normal" title="how it works">
                         <color key="titleColor" name="customBlack"/>
-                        <imageReference key="image" image="questionmark.bubble" catalog="system" symbolScale="large"/>
+                        <imageReference key="image" image="questionmark.circle" catalog="system" symbolScale="large"/>
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="16" weight="bold"/>
                     </state>
                     <connections>
                         <action selector="internalButtonTouchDown:" destination="-1" eventType="touchDown" id="XhD-Xu-G87"/>
@@ -49,7 +50,7 @@
         </view>
     </objects>
     <resources>
-        <image name="questionmark.bubble" catalog="system" width="128" height="110"/>
+        <image name="questionmark.circle" catalog="system" width="128" height="123"/>
         <namedColor name="customBlack">
             <color red="0.066666666666666666" green="0.066666666666666666" blue="0.066666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

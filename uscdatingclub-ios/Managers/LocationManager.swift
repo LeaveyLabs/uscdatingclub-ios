@@ -10,11 +10,9 @@ import CoreLocation
 import FirebaseFirestore
 import FirebaseCore
 
-class PermissionsError: NSError {
-    
-}
-
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    
+    static let shared = LocationManager()
     
     private let locationManager = CLLocationManager()
     @Published var locationStatus: CLAuthorizationStatus?
@@ -41,7 +39,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
 
-    override init() {
+    private override init() {
         super.init()
         locationManager.pausesLocationUpdatesAutomatically = false
         locationManager.delegate = self
@@ -52,19 +50,22 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func requestPermissionServices() throws {
+        print("RIP")
+
         if locationStatus == .authorizedWhenInUse ||
             locationStatus == .denied ||
             locationAccuracy == .reducedAccuracy {
             throw PermissionsError()
         }
         
+//        locationStatus == .
+                
         locationManager.requestWhenInUseAuthorization()
     }
     
     func startLocationServices() {
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
-//        let region = CLBeaconRegion
         let region = CLCircularRegion(center: .init(latitude: 0, longitude: 0), radius: 10, identifier: "me")
         locationManager.startMonitoring(for: region)
         
@@ -102,6 +103,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         } else {
             locationManager.stopUpdatingLocation()
         }
+        
+        NotificationCenter.default.post(name: .locationStatusDidUpdate, object: "myObject", userInfo: ["key": "Value"])
     }
     
     //double check that
