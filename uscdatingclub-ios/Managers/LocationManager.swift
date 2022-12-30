@@ -43,15 +43,13 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         locationManager.pausesLocationUpdatesAutomatically = false
         locationManager.delegate = self
-        locationManager.distanceFilter = 10 //update after moving x meters
+        locationManager.distanceFilter = 0 //update after moving x meters
         locationManager.desiredAccuracy = kCLLocationAccuracyBest //within a few meters
         locationManager.allowsBackgroundLocationUpdates = true
-//        locationManager.showsBackgroundLocationIndicator //what does this do?
+        locationManager.showsBackgroundLocationIndicator = false
     }
     
     func requestPermissionServices() throws {
-        print("RIP")
-
         if locationStatus == .authorizedWhenInUse ||
             locationStatus == .denied ||
             locationAccuracy == .reducedAccuracy {

@@ -11,11 +11,11 @@ import UIKit
     // Reference: https://stackoverflow.com/questions/41144523/swap-rootviewcontroller-with-animation
 @MainActor
 func transitionToStoryboard(storyboardID: String,
-                            viewControllerID: String,
+                            viewControllerID: String? = nil,
                             duration: Double,
                             completion: @escaping (Bool) -> Void = { _ in } ) {
     let sb = UIStoryboard(name: storyboardID, bundle: nil)
-    let homeVC = sb.instantiateViewController(withIdentifier: viewControllerID)
+    let homeVC = (viewControllerID != nil) ? sb.instantiateViewController(withIdentifier: viewControllerID!) : sb.instantiateInitialViewController()
     
     guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
     let delegate = windowScene.delegate as? SceneDelegate, let window = delegate.window else { return }

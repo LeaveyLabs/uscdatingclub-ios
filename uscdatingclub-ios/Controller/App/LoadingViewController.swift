@@ -22,6 +22,8 @@ func loadEverything() async throws {
 
 class LoadingViewController: UIViewController {
     
+    //MARK: - Properties
+    
     //UI
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -29,6 +31,15 @@ class LoadingViewController: UIViewController {
     var didLoadEverything = false
     var wasUpdateFoundAvailable = false
     var notificationResponseHandler: NotificationResponseHandler?
+    
+    //MARK: - Initialization
+    
+    class func create() -> LoadingViewController {
+        let vc = UIStoryboard(name: Constants.SBID.SB.Misc, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Loading) as! LoadingViewController
+        return vc
+    }
+    
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,41 +49,25 @@ class LoadingViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        checkForNewUpdate()
-        if !UserService.singleton.isLoggedIntoAnAccount {
-            goToAuth()
-        } else if notificationResponseHandler != nil {
+        if notificationResponseHandler != nil {
             goToNotification()
         } else {
             goToHome()
         }
     }
     
-    func checkForNewUpdate() {
-        _ = try? Version.isUpdateAvailable { (isUpdateAvailable, error) in
-            if let error = error {
-                print(error)
-            } else if let isUpdateAvailable = isUpdateAvailable {
-                guard isUpdateAvailable else { return }
-                self.wasUpdateFoundAvailable = true
-//                CustomSwiftMessages.showUpdateAvailableCard()
-            }
-        }
-    }
-    
-    func goToAuth() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + Env.TRANSITION_TO_AUTH_DURATION) {
-            guard !self.wasUpdateFoundAvailable else { return }
-            transitionToStoryboard(storyboardID: Constants.SBID.SB.Auth,
-                                   viewControllerID: Constants.SBID.VC.AuthNavigation,
-                                    duration: Env.TRANSITION_TO_HOME_DURATION) { _ in}
-        }
-    }
+//    func goToAuth() {
+//        DispatchQueue.main.asyncAfter(deadline: .now()) {
+//            guard !self.wasUpdateFoundAvailable else { return }
+//            transitionToStoryboard(storyboardID: Constants.SBID.SB.Auth,
+//                                   duration: 0) { _ in}
+//        }
+//    }
     
     func goToHome() {
-        setupDelayedActivityIndicator()
-        Task {
-            try await loadAndGoHome(failCount: 0)
+        DispatchQueue.main.async {
+            transitionToStoryboard(storyboardID: Constants.SBID.SB.Main,
+                                    duration: 0) { _ in }
         }
     }
     
@@ -80,21 +75,6 @@ class LoadingViewController: UIViewController {
         setupDelayedActivityIndicator()
         Task {
             try await loadAndGoToNotification(failCount: 0)
-        }
-    }
-    
-    func loadAndGoHome(failCount: Int) async throws {
-        do {
-            try await loadEverything()
-            didLoadEverything = true
-            guard !wasUpdateFoundAvailable else { return }
-            DispatchQueue.main.async {
-                transitionToStoryboard(storyboardID: Constants.SBID.SB.Main,
-                                        viewControllerID: Constants.SBID.VC.TabBarController,
-                                        duration: Env.TRANSITION_TO_HOME_DURATION) { _ in }
-            }
-        } catch {
-            try await handleInitialLoadError(error, reloadType: .home, failCount: failCount)
         }
     }
     
@@ -167,7 +147,7 @@ class LoadingViewController: UIViewController {
     }
     
     enum InitialReloadType {
-        case notification, home
+        case notification
     }
     
     func handleInitialLoadError(_ error: Error, reloadType: InitialReloadType, failCount: Int) async throws {
@@ -182,8 +162,6 @@ class LoadingViewController: UIViewController {
         switch reloadType {
         case .notification:
             try await self.loadAndGoToNotification(failCount: failCount + 1)
-        case .home:
-            try await self.loadAndGoHome(failCount: failCount + 1)
         }
     }
     

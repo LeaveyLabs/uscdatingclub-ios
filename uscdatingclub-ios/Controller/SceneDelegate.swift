@@ -49,18 +49,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-//        guard let windowScene = (scene as? UIWindowScene) else { return }
-//        let window = UIWindow(windowScene: windowScene)
-//        self.window = window
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        let window = UIWindow(windowScene: windowScene)
+        self.window = window
+        
+        if !UserService.singleton.isLoggedIntoAnAccount {
+            window.rootViewController = LoadingViewController.create()
+        } else {
+            let loadingVC = LoadingViewController.create()
+            window.rootViewController = loadingVC
+            
+            if let notificationResponse = connectionOptions.notificationResponse,
+               let notificationResponseHandler = generateNotificationResponseHandler(notificationResponse) {
+                loadingVC.notificationResponseHandler = notificationResponseHandler
+                loadingVC.goToNotification()
+            }
+        }
 
-//        let loadingVC = UIStoryboard(name: "Loading", bundle: nil).instantiateViewController(withIdentifier: "LoadingViewController") as! LoadingViewController
-//        if let notificationResponse = connectionOptions.notificationResponse,
-//           let notificationResponseHandler = generateNotificationResponseHandler(notificationResponse) {
-//            loadingVC.notificationResponseHandler = notificationResponseHandler
-//        }
-//
-//        window.rootViewController = loadingVC
-//        window.makeKeyAndVisible()
+        window.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

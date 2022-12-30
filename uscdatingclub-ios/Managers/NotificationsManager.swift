@@ -10,6 +10,7 @@ import UIKit
 
 extension Notification.Name {
     static let locationStatusDidUpdate = Notification.Name("locationStatusDidUpdate")
+    static let remoteConfigDidActivate = Notification.Name("remoteConfigDidActivate")
 }
 
 class NotificationsManager: NSObject {

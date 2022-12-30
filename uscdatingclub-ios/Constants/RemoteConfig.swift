@@ -48,6 +48,7 @@ extension Constants {
             }
             remoteConfig.activate()
             print("Retrieved remote config")
+            NotificationCenter.default.post(name: .remoteConfigDidActivate, object: nil)
         }
     }
     
@@ -63,6 +64,7 @@ extension Constants {
             }
             remoteConfig.activate()
             print("Retrieved remote config debug")
+            NotificationCenter.default.post(name: .remoteConfigDidActivate, object: nil)
         }
     }
     

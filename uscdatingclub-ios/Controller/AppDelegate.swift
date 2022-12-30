@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().delegate = self
         NotificationsManager.shared.registerForNotificationsOnStartupIfAccessExists()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(checkForNewUpdate), name: .remoteConfigDidActivate, object: nil)
         
         FirebaseApp.configure()
 //        Constants.fetchRemoteConfig()
@@ -28,6 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(requestPermissionsIfNecessary), name: UIApplication.willEnterForegroundNotification, object: nil)
         
         return true
+    }
+    
+    @objc func checkForNewUpdate() {
+        Version.checkForNewUpdate()
     }
     
     @objc func requestPermissionsIfNecessary() {

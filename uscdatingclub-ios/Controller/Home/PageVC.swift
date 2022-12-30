@@ -27,6 +27,13 @@ class PageVC: UIPageViewController {
     var pageVCContentOffsetX = 0.0
     var currentIndex: Int = 1
     var vcs: [UIViewController]!
+    
+    //MARK: - Initialization
+    
+//    class func create() -> PageVC {
+//        let vc = UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Loading) as! LoadingViewController
+//        return vc
+//    }
 
     //MARK: - Lifecycle
     

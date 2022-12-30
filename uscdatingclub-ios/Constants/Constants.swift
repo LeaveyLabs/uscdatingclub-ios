@@ -31,6 +31,7 @@ enum Constants {
             static let Main = "Main"
             static let Launch = "Launch"
             static let Auth = "Auth"
+            static let Misc = "Misc"
         }
         struct Cell {
             static let HowItWorksCell = "HowItWorksCell"
@@ -52,8 +53,10 @@ enum Constants {
             static let AuthNavigation = "AuthNavigationController"
             //TabBar
             static let TabBarController = "TabBarController"
-            //Demo
+            //Misc
             static let HowItWorks = "HowItWorksVC"
+            static let UpdateAvailable = "UpdateAvailableVC"
+            static let Loading = "LoadingVC"
             //Auth
             static let Permissions = "PermissionsVC"
             static let ConfirmEmail = "ConfirmEmailViewController"
