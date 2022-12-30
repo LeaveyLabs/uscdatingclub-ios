@@ -12,6 +12,7 @@
 		434A052E295E1EB600C15945 /* PhoneNumberAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A052D295E1EB600C15945 /* PhoneNumberAPI.swift */; };
 		434A0532295E1F1300C15945 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A0531295E1F1300C15945 /* UserAPI.swift */; };
 		434A0535295E329D00C15945 /* EmailAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A0534295E329D00C15945 /* EmailAPITest.swift */; };
+		434A0536295E32BB00C15945 /* EmailAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A0534295E329D00C15945 /* EmailAPITest.swift */; };
 		434A0539295E99FE00C15945 /* EmailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A052F295E1EDB00C15945 /* EmailAPI.swift */; };
 		434A053A295E99FF00C15945 /* EmailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A052F295E1EDB00C15945 /* EmailAPI.swift */; };
 		470221E7295CCE3E00119FA8 /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4107D295CC0BE007C27F0 /* UIColor+Custom.swift */; };
@@ -485,6 +486,16 @@
 				47C40F5E295CBAF0007C27F0 /* Device.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		47C40F62295CBAFE007C27F0 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				47C40F63295CBAFE007C27F0 /* AppStoreReviewManager.swift */,
+				47C40F64295CBAFE007C27F0 /* NotificationsManager.swift */,
+				47C40F65295CBAFE007C27F0 /* LocationManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		47C40F7F295CBBBD007C27F0 /* AdditionalFiles */ = {
@@ -1096,6 +1107,7 @@
 				4731F507295CD4770013F626 /* UIView+ParentVC.swift in Sources */,
 				4731F50B295CD4770013F626 /* UIView+RoundedIndividualCorners.swift in Sources */,
 				470221E7295CCE3E00119FA8 /* UIColor+Custom.swift in Sources */,
+				434A0536295E32BB00C15945 /* EmailAPITest.swift in Sources */,
 				47DE3248295CC7C40063C55A /* UIImageView+Inspectable.swift in Sources */,
 				4731F52E295CE0C10013F626 /* AccountVC.swift in Sources */,
 				47DE3209295CC4B40063C55A /* LoginViewController.swift in Sources */,
