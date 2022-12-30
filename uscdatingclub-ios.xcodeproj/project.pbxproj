@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		434A052A295E1E6700C15945 /* BasicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A0529295E1E6700C15945 /* BasicAPI.swift */; };
+		434A052C295E1E9700C15945 /* DeviceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A052B295E1E9700C15945 /* DeviceAPI.swift */; };
+		434A052E295E1EB600C15945 /* PhoneNumberAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A052D295E1EB600C15945 /* PhoneNumberAPI.swift */; };
+		434A0532295E1F1300C15945 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A0531295E1F1300C15945 /* UserAPI.swift */; };
+		434A0535295E329D00C15945 /* EmailAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A0534295E329D00C15945 /* EmailAPITest.swift */; };
+		434A0536295E32BB00C15945 /* EmailAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A0534295E329D00C15945 /* EmailAPITest.swift */; };
+		434A0539295E99FE00C15945 /* EmailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A052F295E1EDB00C15945 /* EmailAPI.swift */; };
+		434A053A295E99FF00C15945 /* EmailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A052F295E1EDB00C15945 /* EmailAPI.swift */; };
 		470221E7295CCE3E00119FA8 /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4107D295CC0BE007C27F0 /* UIColor+Custom.swift */; };
 		470221E9295CCFA200119FA8 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470221E8295CCFA200119FA8 /* Version.swift */; };
 		4731F501295CD4350013F626 /* UINavigationController+Completion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41097295CC0C0007C27F0 /* UINavigationController+Completion.swift */; };
@@ -168,6 +176,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		434A0529295E1E6700C15945 /* BasicAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAPI.swift; sourceTree = "<group>"; };
+		434A052B295E1E9700C15945 /* DeviceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAPI.swift; sourceTree = "<group>"; };
+		434A052D295E1EB600C15945 /* PhoneNumberAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberAPI.swift; sourceTree = "<group>"; };
+		434A052F295E1EDB00C15945 /* EmailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAPI.swift; sourceTree = "<group>"; };
+		434A0531295E1F1300C15945 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+		434A0534295E329D00C15945 /* EmailAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAPITest.swift; sourceTree = "<group>"; };
 		470221E8295CCFA200119FA8 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		4731F517295CD5750013F626 /* SpecialTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialTabBar.swift; sourceTree = "<group>"; };
 		4731F519295CD5750013F626 /* SpecialTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialTabBarController.swift; sourceTree = "<group>"; };
@@ -341,6 +355,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		434A0528295E1E3A00C15945 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				434A0529295E1E6700C15945 /* BasicAPI.swift */,
+				434A052B295E1E9700C15945 /* DeviceAPI.swift */,
+				434A052F295E1EDB00C15945 /* EmailAPI.swift */,
+				434A052D295E1EB600C15945 /* PhoneNumberAPI.swift */,
+				434A0531295E1F1300C15945 /* UserAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		434A0533295E327C00C15945 /* APITests */ = {
+			isa = PBXGroup;
+			children = (
+				434A0534295E329D00C15945 /* EmailAPITest.swift */,
+			);
+			path = APITests;
+			sourceTree = "<group>";
+		};
+		434A0538295E99FB00C15945 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				47C41050295CBFFC007C27F0 /* CustomSwiftMessages.swift */,
+				476FD868295E1BCA0014DD42 /* AlertManager.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		4731F516295CD5750013F626 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,6 +422,7 @@
 				47C40EFC295CB931007C27F0 /* uscdatingclub-iosTests */,
 				47C40F06295CB931007C27F0 /* uscdatingclub-iosUITests */,
 				47C40EE4295CB930007C27F0 /* Products */,
+				434A0538295E99FB00C15945 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -400,10 +444,10 @@
 				47C40F7E295CBB6A007C27F0 /* uscdatingclub-ios.entitlements */,
 				47DE320A295CC4F90063C55A /* Env.swift */,
 				47C40EEF295CB931007C27F0 /* Assets.xcassets */,
+				434A0528295E1E3A00C15945 /* API */,
 				47C40F5B295CBAF0007C27F0 /* Model */,
 				47C40F97295CBD49007C27F0 /* View */,
 				47C40F96295CBD36007C27F0 /* Controller */,
-				47C4105B295CC004007C27F0 /* APIs */,
 				47C40F62295CBAFE007C27F0 /* Managers */,
 				47C40F85295CBBBD007C27F0 /* Extensions */,
 				47C4104A295CBFFC007C27F0 /* Utils */,
@@ -416,6 +460,7 @@
 		47C40EFC295CB931007C27F0 /* uscdatingclub-iosTests */ = {
 			isa = PBXGroup;
 			children = (
+				434A0533295E327C00C15945 /* APITests */,
 				47C40EFD295CB931007C27F0 /* uscdatingclub_iosTests.swift */,
 			);
 			path = "uscdatingclub-iosTests";
@@ -447,8 +492,6 @@
 				47C40F63295CBAFE007C27F0 /* AppStoreReviewManager.swift */,
 				47C40F64295CBAFE007C27F0 /* NotificationsManager.swift */,
 				47C40F65295CBAFE007C27F0 /* LocationManager.swift */,
-				476FD868295E1BCA0014DD42 /* AlertManager.swift */,
-				47C41050295CBFFC007C27F0 /* CustomSwiftMessages.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -560,13 +603,6 @@
 				47C4104F295CBFFC007C27F0 /* CustomAttributedString.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		47C4105B295CC004007C27F0 /* APIs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = APIs;
 			sourceTree = "<group>";
 		};
 		47C41060295CC095007C27F0 /* String */ = {
@@ -993,6 +1029,7 @@
 				47C4106A295CC095007C27F0 /* String+Ranges.swift in Sources */,
 				47C41058295CBFFC007C27F0 /* CustomSwiftMessages.swift in Sources */,
 				47DE324B295CC7C40063C55A /* UITextView+MaxLength.swift in Sources */,
+				434A052E295E1EB600C15945 /* PhoneNumberAPI.swift in Sources */,
 				47C4105A295CBFFC007C27F0 /* Numbers.swift in Sources */,
 				47C41059295CBFFC007C27F0 /* Distance.swift in Sources */,
 				47DE3206295CC4B40063C55A /* EnterEmailViewController.swift in Sources */,
@@ -1022,6 +1059,7 @@
 				47DE321A295CC52F0063C55A /* UserService.swift in Sources */,
 				47C40F66295CBAFE007C27F0 /* AppStoreReviewManager.swift in Sources */,
 				4731F511295CD4870013F626 /* UITextField+Padding.swift in Sources */,
+				434A052C295E1E9700C15945 /* DeviceAPI.swift in Sources */,
 				4731F508295CD4770013F626 /* UIView+PostBubble.swift in Sources */,
 				4731F503295CD45F0013F626 /* UIScrollView+ToTop.swift in Sources */,
 				47DE3264295CC94F0063C55A /* UIButton+LoadingIndicator.swift in Sources */,
@@ -1051,6 +1089,7 @@
 				47DE3266295CC94F0063C55A /* UIBarButtonItem+Image.swift in Sources */,
 				47DE3253295CC7C40063C55A /* UIViewController+Child.swift in Sources */,
 				47C41055295CBFFC007C27F0 /* Validate.swift in Sources */,
+				434A052A295E1E6700C15945 /* BasicAPI.swift in Sources */,
 				47DE320B295CC4F90063C55A /* Env.swift in Sources */,
 				470221E9295CCFA200119FA8 /* Version.swift in Sources */,
 				4731F50C295CD4770013F626 /* UIView+Animations.swift in Sources */,
@@ -1063,6 +1102,7 @@
 				4731F507295CD4770013F626 /* UIView+ParentVC.swift in Sources */,
 				4731F50B295CD4770013F626 /* UIView+RoundedIndividualCorners.swift in Sources */,
 				470221E7295CCE3E00119FA8 /* UIColor+Custom.swift in Sources */,
+				434A0536295E32BB00C15945 /* EmailAPITest.swift in Sources */,
 				47DE3248295CC7C40063C55A /* UIImageView+Inspectable.swift in Sources */,
 				4731F52E295CE0C10013F626 /* AccountVC.swift in Sources */,
 				47DE3209295CC4B40063C55A /* LoginViewController.swift in Sources */,
@@ -1070,6 +1110,7 @@
 				47C41068295CC095007C27F0 /* String+Capitalization.swift in Sources */,
 				4731F50D295CD4770013F626 /* UIView+TopBorder.swift in Sources */,
 				47C40F8E295CBBBD007C27F0 /* Constants.swift in Sources */,
+				434A0539295E99FE00C15945 /* EmailAPI.swift in Sources */,
 				4731F509295CD4770013F626 /* UIView+Shadow.swift in Sources */,
 				47DE325C295CC7C40063C55A /* UIViewController+Loading.swift in Sources */,
 				47DE324D295CC7C40063C55A /* UITextView+PreventPeriod.swift in Sources */,
@@ -1093,6 +1134,7 @@
 				47C4105F295CC079007C27F0 /* Array+FirstWhere.swift in Sources */,
 				476FD86E295E4A1F0014DD42 /* HowItWorksCell.swift in Sources */,
 				47C41069295CC095007C27F0 /* String+Indexing.swift in Sources */,
+				434A0532295E1F1300C15945 /* UserAPI.swift in Sources */,
 				47DE3268295CCA5C0063C55A /* UIView+BecomeRound.swift in Sources */,
 				4731F523295CD86D0013F626 /* NavigationController+Prev.swift in Sources */,
 				47DE3250295CC7C40063C55A /* UIImage+FromColor.swift in Sources */,
@@ -1107,6 +1149,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				47C40EFE295CB931007C27F0 /* uscdatingclub_iosTests.swift in Sources */,
+				434A0535295E329D00C15945 /* EmailAPITest.swift in Sources */,
+				434A053A295E99FF00C15945 /* EmailAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
