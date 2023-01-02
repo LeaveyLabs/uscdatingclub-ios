@@ -61,7 +61,7 @@ func transitionToViewController(_ viewController: UIViewController,
 @MainActor
 func transitionToAuth() {
     let sb = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil)
-    let homeVC = sb.instantiateViewController(withIdentifier: Constants.SBID.VC.AuthNavigation)
+    let homeVC = sb.instantiateViewController(withIdentifier: Constants.SBID.VC.AuthNav)
     guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
     let delegate = windowScene.delegate as? SceneDelegate, let window = delegate.window else { return }
     window.rootViewController = homeVC

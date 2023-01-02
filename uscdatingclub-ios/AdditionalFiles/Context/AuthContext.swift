@@ -5,7 +5,7 @@
 //  Created by Adam Novak on 2022/05/25.
 //
 
-import Foundation
+import UIKit
 
 struct AuthContext {
     static let APPLE_PHONE_NUMBER: String = "13103103101"
@@ -15,8 +15,9 @@ struct AuthContext {
     static var phoneNumber: String = ""
     static var firstName: String = ""
     static var lastName: String = ""
-    static var sexualIdentity: String = ""
-    static var sexualPreference: String = ""
+    static var profilePic: UIImage? = UIImage(systemName: "")
+//    static var sexualIdentity: String = ""
+//    static var sexualPreference: String = ""
 //    static var dob: String = ""
 //    static var resetToken: ResetToken = ""
     
@@ -25,8 +26,9 @@ struct AuthContext {
         phoneNumber = ""
         firstName = ""
         lastName = ""
-        sexualIdentity = ""
-        sexualPreference = ""
+        profilePic = UIImage(systemName: "")
+//        sexualIdentity = ""
+//        sexualPreference = ""
 //        dob = ""
 //        resetToken = ""
     }

@@ -5,22 +5,23 @@
 //  Created by Adam Monterey on 8/25/22.
 //
 
-import Foundation
 import UIKit
 
-class CreateProfileViewController: KUIViewController, UITextFieldDelegate {
+class CreateProfileVC: KUIViewController, UITextFieldDelegate {
+    
+    //MARK: - Lifecycle
     
     @IBOutlet weak var profilePictureButton: UIButton!
     @IBOutlet weak var miniCameraButton: UIButton!
     @IBOutlet weak var profilePicTextLabel: UILabel!
-    @IBOutlet weak var continueButton: UIButton!
-    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var continueButton: SimpleButton!
+//    @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     
     @IBOutlet weak var firstNameIndicatorView: UIView!
     @IBOutlet weak var lastNameIndicatorView: UIView!
-    @IBOutlet weak var usernameIndicatorView: UIView!
+//    @IBOutlet weak var usernameIndicatorView: UIView!
     @IBOutlet weak var profilePicIndicatorView: UIView!
 
     @IBOutlet weak var headerTitleView: UIView!
@@ -31,7 +32,8 @@ class CreateProfileViewController: KUIViewController, UITextFieldDelegate {
     
     var isValidInput: Bool! {
         didSet {
-            continueButton.isEnabled = isValidInput
+            continueButton.internalButton.isEnabled = isValidInput
+            continueButton.alpha = isValidInput ? 1 : 0.5
             profilePictureButton.imageView?.becomeProfilePicImageView(with: profilePic)
             profilePicTextLabel.isHidden = profilePic != defaultPic
             miniCameraButton.isHidden = profilePic == defaultPic
@@ -39,8 +41,8 @@ class CreateProfileViewController: KUIViewController, UITextFieldDelegate {
     }
     var isSubmitting: Bool = false {
         didSet {
-            continueButton.setTitle(isSubmitting ? "" : "continue", for: .normal)
-            continueButton.loadingIndicator(isSubmitting)
+            continueButton.internalButton.setTitle(isSubmitting ? "" : "continue", for: .normal)
+            continueButton.internalButton.loadingIndicator(isSubmitting)
         }
     }
     
@@ -50,7 +52,16 @@ class CreateProfileViewController: KUIViewController, UITextFieldDelegate {
         }
     }
     let defaultPic = UIImage(systemName: "circle.fill")!.withRenderingMode(.alwaysTemplate)
+    
+    //MARK: - Initialization
+    
+    class func create() -> CreateProfileVC {
+        let vc = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.CreateProfile) as! CreateProfileVC
+        return vc
+    }
 
+    //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         shouldNotAnimateKUIAccessoryInputView = true
@@ -91,18 +102,17 @@ class CreateProfileViewController: KUIViewController, UITextFieldDelegate {
         profilePicIndicatorView.roundCornersViaCornerRadius(radius: 4)
         firstNameIndicatorView.roundCornersViaCornerRadius(radius: 4)
         lastNameIndicatorView.roundCornersViaCornerRadius(radius: 4)
-        usernameIndicatorView.roundCornersViaCornerRadius(radius: 4)
+//        usernameIndicatorView.roundCornersViaCornerRadius(radius: 4)
     }
     
     func setupButtons() {
-        continueButton.roundCornersViaCornerRadius(radius: 10)
-        continueButton.clipsToBounds = true
-        continueButton.isEnabled = false
-        continueButton.setBackgroundImage(UIImage.imageFromColor(color: .primaryColor), for: .normal)
-        continueButton.setBackgroundImage(UIImage.imageFromColor(color: .primaryColor.withAlphaComponent(0.2)), for: .disabled)
-        continueButton.setTitleColor(.white, for: .normal)
-        continueButton.setTitleColor(.primaryColor, for: .disabled)
-        continueButton.setTitle("start", for: .normal)
+        continueButton.internalButton.isEnabled = false
+        continueButton.internalButton.setBackgroundImage(UIImage.imageFromColor(color: .customWhite), for: .normal)
+        continueButton.internalButton.setBackgroundImage(UIImage.imageFromColor(color: .customWhite.withAlphaComponent(0.2)), for: .disabled)
+        continueButton.internalButton.setTitleColor(.black, for: .normal)
+        continueButton.internalButton.setTitleColor(.black, for: .disabled)
+        continueButton.configure(title: "continue", systemImage: "")
+        continueButton.internalButton.addTarget(self, action: #selector(didPressedContinueButton), for: .touchUpInside)
         // Setup miniCameraButton
         miniCameraButton.isHidden = true
         miniCameraButton.becomeRound()
@@ -112,10 +122,10 @@ class CreateProfileViewController: KUIViewController, UITextFieldDelegate {
     }
     
     func setupTextFields() {
-        usernameTextField.delegate = self
-        usernameTextField.smartInsertDeleteType = UITextSmartInsertDeleteType.no
-        usernameTextField.layer.cornerRadius = 5
-        usernameTextField.setLeftAndRightPadding(10)
+//        usernameTextField.delegate = self
+//        usernameTextField.smartInsertDeleteType = UITextSmartInsertDeleteType.no
+//        usernameTextField.layer.cornerRadius = 5
+//        usernameTextField.setLeftAndRightPadding(10)
         
         firstNameTextField.delegate = self
         firstNameTextField.smartInsertDeleteType = UITextSmartInsertDeleteType.no
@@ -159,11 +169,11 @@ class CreateProfileViewController: KUIViewController, UITextFieldDelegate {
             lastNameTextField.becomeFirstResponder()
         }
         if textField == lastNameTextField {
-            usernameTextField.becomeFirstResponder()
-        }
-        if textField == usernameTextField {
             tryToContinue()
         }
+//        if textField == usernameTextField {
+//            tryToContinue()
+//        }
         return false
     }
     
@@ -178,16 +188,16 @@ class CreateProfileViewController: KUIViewController, UITextFieldDelegate {
             return textField.shouldChangeCharactersGivenMaxLengthOf(20, range, string)
         }
         if textField == lastNameTextField {
-            if didAutofillTextfield {
-                DispatchQueue.main.async {
-                    self.usernameTextField.becomeFirstResponder()
-                }
-            }
+//            if didAutofillTextfield {
+//                DispatchQueue.main.async {
+//                    self.usernameTextField.becomeFirstResponder()
+//                }
+//            }
             return textField.shouldChangeCharactersGivenMaxLengthOf(20, range, string)
         }
-        if textField == usernameTextField {
-            return textField.shouldChangeCharactersGivenMaxLengthOf(30, range, string)
-        }
+//        if textField == usernameTextField {
+//            return textField.shouldChangeCharactersGivenMaxLengthOf(30, range, string)
+//        }
         return true
     }
     
@@ -197,7 +207,7 @@ class CreateProfileViewController: KUIViewController, UITextFieldDelegate {
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func didPressedContinueButton(_ sender: UIButton) {
+    @objc func didPressedContinueButton(_ sender: UIButton) {
         tryToContinue()
     }
     
@@ -215,50 +225,35 @@ class CreateProfileViewController: KUIViewController, UITextFieldDelegate {
             let lastName = lastNameTextField.text
         else { return }
         isSubmitting = true
-        Task {
-            do {
-                try await UserService.singleton.createUser(
-                    firstName: firstName,
-                    lastName: lastName,
-                    profilePic: uploadedProfilePic,
-                    phoneNumber: AuthContext.phoneNumber,
-                    email: AuthContext.email)
-                try await loadEverything()
-                AuthContext.reset()
-                isSubmitting = false
-                transitionToHomeAndRequestPermissions() { }
-            } catch {
-                handleFailure(error)
-            }
-        }
+        AuthContext.firstName = firstName
+        AuthContext.lastName = lastName
+        AuthContext.profilePic = uploadedProfilePic
+        navigationController?.pushViewController(EnterBiosVC.create(), animated: true, completion: { [weak self] in
+            self?.isSubmitting = false
+        })
     }
     
     //TODO: make sure these error messages are descriptive
     func handleFailure(_ error: Error) {
         isSubmitting = false
         AlertManager.displayError(error)
-        //        DispatchQueue.main.async { [self] in
-        //            transitionToStoryboard(storyboardID: Constants.SBID.SB.Auth,
-        //                                        viewControllerID: Constants.SBID.VC.AuthNavigation,
-        //                                        duration: Env.LAUNCH_ANIMATION_DURATION) { _ in}
-        //        }
     }
     
     func validateInput() {
         let validPic = profilePic != defaultPic && profilePic != nil
-        let validUsername = Validate.validateUsername(usernameTextField.text ?? "")
+//        let validUsername = Validate.validateUsername(usernameTextField.text ?? "")
         let validName = firstNameTextField.text!.count > 0 && lastNameTextField.text!.count > 0
-        isValidInput = validPic && validUsername && validName
+        isValidInput = validPic && validName
         
         firstNameIndicatorView.isHidden = firstNameTextField.text!.count > 0
         lastNameIndicatorView.isHidden = lastNameTextField.text!.count > 0
-        usernameIndicatorView.isHidden = usernameTextField.text!.count > 0
+//        usernameIndicatorView.isHidden = usernameTextField.text!.count > 0
         profilePicIndicatorView.isHidden = validPic
     }
 
 }
 
-extension CreateProfileViewController: ImagePickerDelegate {
+extension CreateProfileVC: ImagePickerDelegate {
 
     func didSelect(image: UIImage?) {
         guard let newImage = image else { return }

@@ -7,22 +7,34 @@
 
 import UIKit
 
-class EnterEmailViewController: KUIViewController, UITextFieldDelegate {
+class EnterEmailVC: KUIViewController, UITextFieldDelegate {
 
+    //MARK: - Properties
+    
     @IBOutlet weak var enterEmailTextField: UITextField!
-    @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var continueButton: SimpleButton!
      
     var isValidInput: Bool! {
         didSet {
-            continueButton.isEnabled = isValidInput
+            continueButton.internalButton.isEnabled = isValidInput
+            continueButton.alpha = isValidInput ? 1 : 0.5
         }
     }
     var isSubmitting: Bool = false {
         didSet {
-            continueButton.setTitle(isSubmitting ? "" : "continue", for: .normal)
-            continueButton.loadingIndicator(isSubmitting)
+            continueButton.internalButton.setTitle(isSubmitting ? "" : "continue", for: .normal)
+            continueButton.internalButton.loadingIndicator(isSubmitting)
         }
     }
+    
+    //MARK: - Initialization
+    
+    class func create() -> EnterEmailVC {
+        let vc = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.EnterEmail) as! EnterEmailVC
+        return vc
+    }
+    
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,14 +71,13 @@ class EnterEmailViewController: KUIViewController, UITextFieldDelegate {
     }
     
     func setupContinueButton() {
-        continueButton.roundCornersViaCornerRadius(radius: 10)
-        continueButton.clipsToBounds = true
-        continueButton.isEnabled = false
-        continueButton.setBackgroundImage(UIImage.imageFromColor(color: .primaryColor), for: .normal)
-        continueButton.setBackgroundImage(UIImage.imageFromColor(color: .primaryColor.withAlphaComponent(0.2)), for: .disabled)
-        continueButton.setTitleColor(.white, for: .normal)
-        continueButton.setTitleColor(.primaryColor, for: .disabled)
-        continueButton.setTitle("continue", for: .normal)
+        continueButton.internalButton.isEnabled = false
+        continueButton.internalButton.setBackgroundImage(UIImage.imageFromColor(color: .white), for: .normal)
+        continueButton.internalButton.setBackgroundImage(UIImage.imageFromColor(color: .white.withAlphaComponent(0.2)), for: .disabled)
+        continueButton.internalButton.setTitleColor(.black, for: .normal)
+        continueButton.internalButton.setTitleColor(.black, for: .disabled)
+        continueButton.configure(title: "continue", systemImage: "")
+        continueButton.internalButton.addTarget(self, action: #selector(tryToContinue), for: .touchUpInside)
     }
     
     func setupBackButton() {
@@ -77,10 +88,6 @@ class EnterEmailViewController: KUIViewController, UITextFieldDelegate {
     
     @objc func goBack() {
         navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func didPressedContinueButton(_ sender: Any) {
-        tryToContinue()
     }
     
     //MARK: - TextField Delegate
@@ -108,14 +115,14 @@ class EnterEmailViewController: KUIViewController, UITextFieldDelegate {
     
     //MARK: - Helpers
     
-    func tryToContinue() {
+    @objc func tryToContinue() {
         if let email = enterEmailTextField.text?.lowercased() {
             isSubmitting = true
             Task {
                 do {
-//                    try await AuthAPI.registerEmail(email: email)
+                    try await EmailAPI.requestCode(email: email, uuid: UUID().uuidString)
                     AuthContext.email = email
-                    let vc = ConfirmCodeViewController.create(confirmMethod: .email)
+                    let vc = ConfirmCodeVC.create(confirmMethod: .email)
                     self.navigationController?.pushViewController(vc, animated: true, completion: { [weak self] in
                         self?.isSubmitting = false
                     })
@@ -164,7 +171,7 @@ class EnterEmailViewController: KUIViewController, UITextFieldDelegate {
 
 // UIGestureRecognizerDelegate (already inherited in an extension)
 
-extension EnterEmailViewController {
+extension EnterEmailVC {
     
     // Note: Must be called in viewDidLoad
     //(1 of 2) Enable swipe left to go back with a bar button item

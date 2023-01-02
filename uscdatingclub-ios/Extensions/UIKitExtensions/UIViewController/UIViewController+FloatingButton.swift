@@ -12,8 +12,8 @@ extension UIViewController {
     func addFloatingButton() {
         let floatingButton = UIButton()
         view.addSubview(floatingButton)
-        floatingButton.adjustsImageWhenHighlighted = false
-        floatingButton.adjustsImageWhenDisabled = false
+//        floatingButton.adjustsImageWhenHighlighted = false
+//        floatingButton.adjustsImageWhenDisabled = false
         floatingButton.setImage(UIImage(named: "submitbutton")!, for: .normal)
         floatingButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -31,9 +31,9 @@ extension UIViewController {
     }
 
     @objc func floatingButtonPressed() {
-        let newPostNav = storyboard!.instantiateViewController(withIdentifier: Constants.SBID.VC.NewPostNavigation)
-        newPostNav.modalPresentationStyle = .fullScreen
-        present(newPostNav, animated: true, completion: nil)
+//        let newPostNav = storyboard!.instantiateViewController(withIdentifier: Constants.SBID.VC.)
+//        newPostNav.modalPresentationStyle = .fullScreen
+//        present(newPostNav, animated: true, completion: nil)
     }
     
 }

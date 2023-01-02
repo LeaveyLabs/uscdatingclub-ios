@@ -20,7 +20,7 @@ func loadEverything() async throws {
     }
 }
 
-class LoadingViewController: UIViewController {
+class LoadingVC: UIViewController {
     
     //MARK: - Properties
     
@@ -34,8 +34,8 @@ class LoadingViewController: UIViewController {
     
     //MARK: - Initialization
     
-    class func create() -> LoadingViewController {
-        let vc = UIStoryboard(name: Constants.SBID.SB.Misc, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Loading) as! LoadingViewController
+    class func create() -> LoadingVC {
+        let vc = UIStoryboard(name: Constants.SBID.SB.Misc, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Loading) as! LoadingVC
         return vc
     }
     

@@ -5,11 +5,9 @@
 //  Created by Adam Monterey on 8/25/22.
 //
 
-import Foundation
-
 import UIKit
 
-class ConfirmCodeViewController: KUIViewController, UITextFieldDelegate {
+class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
     
     enum ConfirmMethod: CaseIterable {
         case text, email// resetPhoneNumberEmail, resetPhoneNumberText, accessCode, appleLogin
@@ -26,18 +24,19 @@ class ConfirmCodeViewController: KUIViewController, UITextFieldDelegate {
     @IBOutlet weak var titleTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var sentToLabel: UILabel!
     @IBOutlet weak var confirmTextField: UITextField!
-    @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var resendButton: UIButton!
+    @IBOutlet weak var continueButton: SimpleButton!
 
     var isValidInput: Bool! {
         didSet {
-            continueButton.isEnabled = isValidInput
+            continueButton.internalButton.isEnabled = isValidInput
+            continueButton.alpha = isValidInput ? 1 : 0.5
         }
     }
     var isSubmitting: Bool = false {
         didSet {
-            continueButton.setTitle(isSubmitting ? "" : "continue", for: .normal)
-            continueButton.loadingIndicator(isSubmitting)
+            continueButton.internalButton.setTitle(isSubmitting ? "" : "continue", for: .normal)
+            continueButton.internalButton.loadingIndicator(isSubmitting)
             resendButton.isEnabled = !isSubmitting && resendState == .notsent
         }
     }
@@ -64,8 +63,8 @@ class ConfirmCodeViewController: KUIViewController, UITextFieldDelegate {
     
     //MARK: - Initialization
     
-    class func create(confirmMethod: ConfirmMethod) -> ConfirmCodeViewController {
-        let vc = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.ConfirmCode) as! ConfirmCodeViewController
+    class func create(confirmMethod: ConfirmMethod) -> ConfirmCodeVC {
+        let vc = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.ConfirmCode) as! ConfirmCodeVC
         switch confirmMethod {
         case .text:
             vc.recipient = AuthContext.phoneNumber.asNationalPhoneNumber ?? AuthContext.phoneNumber
@@ -75,6 +74,8 @@ class ConfirmCodeViewController: KUIViewController, UITextFieldDelegate {
         vc.confirmMethod = confirmMethod
         return vc
     }
+    
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,14 +113,13 @@ class ConfirmCodeViewController: KUIViewController, UITextFieldDelegate {
     }
     
     func setupContinueButton() {
-        continueButton.roundCornersViaCornerRadius(radius: 10)
-        continueButton.clipsToBounds = true
-        continueButton.isEnabled = false
-        continueButton.setBackgroundImage(UIImage.imageFromColor(color: .primaryColor), for: .normal)
-        continueButton.setBackgroundImage(UIImage.imageFromColor(color: .primaryColor.withAlphaComponent(0.2)), for: .disabled)
-        continueButton.setTitleColor(.white, for: .normal)
-        continueButton.setTitleColor(.primaryColor, for: .disabled)
-        continueButton.setTitle("continue", for: .normal)
+        continueButton.internalButton.isEnabled = false
+        continueButton.internalButton.setBackgroundImage(UIImage.imageFromColor(color: .primaryColor), for: .normal)
+        continueButton.internalButton.setBackgroundImage(UIImage.imageFromColor(color: .primaryColor.withAlphaComponent(0.2)), for: .disabled)
+        continueButton.internalButton.setTitleColor(.white, for: .normal)
+        continueButton.internalButton.setTitleColor(.primaryColor, for: .disabled)
+        continueButton.configure(title: "continue", systemImage: "")
+        continueButton.internalButton.addTarget(self, action: #selector(tryToContinue), for: .touchUpInside)
     }
     
     func setupLabel() {
@@ -130,10 +130,6 @@ class ConfirmCodeViewController: KUIViewController, UITextFieldDelegate {
     
     @IBAction func backButtonDidPressed(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func didPressedContinueButton(_ sender: Any) {
-        tryToContinue()
     }
     
     @IBAction func didPressedResendButton(_ sender: UIButton) {
@@ -197,7 +193,7 @@ class ConfirmCodeViewController: KUIViewController, UITextFieldDelegate {
     
     //MARK: - Helpers
     
-    func tryToContinue() {
+    @objc func tryToContinue() {
         guard let code = confirmTextField.text else { return }
         isSubmitting = true
         Task {
@@ -225,50 +221,36 @@ class ConfirmCodeViewController: KUIViewController, UITextFieldDelegate {
     //MARK: - ConfirmMethod Functions
     
     func resend() async throws {
-//        switch confirmMethod {
-//        case .signupText:
-//            try await PhoneNumberAPI.registerNewPhoneNumber(phoneNumber: AuthContext.phoneNumber)
-//        case .loginText:
-//            try await PhoneNumberAPI.requestLoginCode(phoneNumber: AuthContext.phoneNumber)
-//        case .signupEmail:
-//            try await AuthAPI.registerEmail(email: AuthContext.email)
-//        case .none, .accessCode, .appleLogin:
-//            break
-//        }
+        switch confirmMethod {
+        case .text:
+            try await PhoneNumberAPI.requestCode(phoneNumber: AuthContext.phoneNumber, uuid: UUID().uuidString)
+        case .email:
+            try await EmailAPI.requestCode(email: AuthContext.email, uuid: UUID().uuidString)
+        case .none:
+            break
+        }
     }
     
     func validate(validationCode: String) async throws {
-//        switch confirmMethod {
-//        case .signupText:
-//            try await PhoneNumberAPI.validateNewPhoneNumber(phoneNumber: AuthContext.phoneNumber, code: validationCode)
-//        case .loginText, .appleLogin:
-//            let authToken = try await PhoneNumberAPI.validateLoginCode(phoneNumber: AuthContext.phoneNumber, code: validationCode)
-//            try await UserService.singleton.logInWith(authToken: authToken)
-//            try await loadEverything()
-//        case .accessCode:
-//            let isAvailable = try await UserAPI.isAccessCodeAvailable(code: validationCode)
-//            if !isAvailable {
-//                throw APIError.ClientError("invalid code", "please try again")
-//            }
-//            AuthContext.accessCode = validationCode
-//        case .signupEmail:
-//            try await AuthAPI.validateEmail(email: AuthContext.email, code: validationCode)
-//        case .none:
-//            break
-//        }
+        switch confirmMethod {
+        case .text:
+            try await PhoneNumberAPI.verifyCode(phoneNumber: AuthContext.phoneNumber, code: validationCode, uuid: UUID().uuidString)
+        case .email:
+            try await EmailAPI.verifyCode(email: AuthContext.email, code: validationCode, uuid: UUID().uuidString)
+        case .none:
+            break
+        }
     }
     
     @MainActor
     func continueToNextScreen() {
         switch confirmMethod {
         case .text:
-            let vc = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.EnterEmail)
-            self.navigationController?.pushViewController(vc, animated: true, completion: { [weak self] in
+            self.navigationController?.pushViewController(EnterEmailVC.create(), animated: true, completion: { [weak self] in
                 self?.isSubmitting = false
             })
         case .email:
-            let vc = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.CreateProfile)
-            self.navigationController?.pushViewController(vc, animated: true, completion: { [weak self] in
+            self.navigationController?.pushViewController(CreateProfileVC.create(), animated: true, completion: { [weak self] in
                 self?.isSubmitting = false
             })
         case .none:

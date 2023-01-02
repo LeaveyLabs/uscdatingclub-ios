@@ -13,6 +13,7 @@ class AboutVC: UIViewController, PageVCChild {
     var pageVCDelegate: PageVCDelegate!
     
     @IBOutlet weak var versionLabel: UILabel!
+    
     @IBOutlet weak var simpleButtonOne: SimpleButton!
     @IBOutlet weak var simpleButtonTwo: SimpleButton!
     @IBOutlet weak var simpleButtonThree: SimpleButton!
@@ -81,6 +82,14 @@ class AboutVC: UIViewController, PageVCChild {
     
     @objc func contactButtonPressed() {
         openMailtoURL(Constants.contactLink)
+    }
+    
+    @IBAction func termsButtonDidPressed() {
+        openURL(Constants.termsLink)
+    }
+    
+    @IBAction func privacyButtonDidPressed() {
+        openURL(Constants.privacyPageLink)
     }
 
 }

@@ -1,47 +1,57 @@
+
 //
-//  LoginViewController.swift
+//  EnterEmailViewController.swift
 //  mist-ios
 //
-//  Created by Adam Monterey on 8/25/22.
+//  Created by Kevin Sun on 3/29/22.
 //
 
-import Foundation
 import UIKit
 import PhoneNumberKit
 
-class LoginViewController: KUIViewController, UITextFieldDelegate {
+class EnterNumberVC: KUIViewController, UITextFieldDelegate {
 
+    //MARK: - Properties
+    
     @IBOutlet weak var enterNumberTextField: PhoneNumberTextField!
-    @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var continueButton: SimpleButton!
     @IBOutlet weak var enterNumberTextFieldWrapperView: UIView!
     
     var isValidInput: Bool! {
         didSet {
-            continueButton.isEnabled = isValidInput
+            continueButton.internalButton.isEnabled = isValidInput
+            continueButton.alpha = isValidInput ? 1 : 0.5
         }
     }
     var isSubmitting: Bool = false {
         didSet {
-            continueButton.setTitle(isSubmitting ? "" : "continue", for: .normal)
-            continueButton.loadingIndicator(isSubmitting)
+            continueButton.internalButton.setTitle(isSubmitting ? "" : "continue", for: .normal)
+            continueButton.internalButton.loadingIndicator(isSubmitting)
         }
     }
+    
+    //MARK: - Initialization
+    
+    class func create() -> EnterNumberVC {
+        let vc = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.EnterNumber) as! EnterNumberVC
+        return vc
+    }
+    
+    //MARK: - Lifecycle
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        isValidInput = false
         validateInput()
         shouldNotAnimateKUIAccessoryInputView = true
         setupPopGesture()
         setupEnterNumberTextField()
-        setupContinueButton() //uncomment this button for standard button behavior, where !isEnabled greys it out
+        setupContinueButton()
         setupBackButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         enableInteractivePopGesture()
-        print(isSubmitting)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,46 +67,28 @@ class LoginViewController: KUIViewController, UITextFieldDelegate {
     //MARK: - Setup
     
     func setupEnterNumberTextField() {
-        enterNumberTextFieldWrapperView.layer.cornerRadius = 5
-        enterNumberTextFieldWrapperView.layer.cornerCurve = .continuous
+//        enterNumberTextFieldWrapperView.layer.cornerRadius = 5
+//        enterNumberTextFieldWrapperView.layer.cornerCurve = .continuous
         enterNumberTextField.delegate = self
         enterNumberTextField.countryCodePlaceholderColor = .red
         enterNumberTextField.withFlag = true
         enterNumberTextField.withPrefix = true
-//        enterNumberTextField.withExamplePlaceholder = true //turning this on disables auto fill
+//        enterNumberTextField.withExamplePlaceholder = true
     }
     
     func setupContinueButton() {
-        continueButton.roundCornersViaCornerRadius(radius: 10)
-        continueButton.clipsToBounds = true
-        continueButton.isEnabled = false
-        continueButton.setBackgroundImage(UIImage.imageFromColor(color: .primaryColor), for: .normal)
-        continueButton.setBackgroundImage(UIImage.imageFromColor(color: .primaryColor.withAlphaComponent(0.2)), for: .disabled)
-        continueButton.setTitleColor(.white, for: .normal)
-        continueButton.setTitleColor(.primaryColor, for: .disabled)
-        continueButton.setTitle("continue", for: .normal)
+        continueButton.internalButton.isEnabled = false
+        continueButton.internalButton.setBackgroundImage(UIImage.imageFromColor(color: .customWhite), for: .normal)
+        continueButton.internalButton.setBackgroundImage(UIImage.imageFromColor(color: .customWhite.withAlphaComponent(0.5)), for: .disabled)
+        continueButton.internalButton.setTitleColor(.black, for: .normal)
+        continueButton.internalButton.setTitleColor(.black, for: .disabled)
+        continueButton.configure(title: "continue", systemImage: "")
+        continueButton.internalButton.addTarget(self, action: #selector(didPressedContinueButton), for: .touchUpInside)
     }
-    
-//    func setupContinueButton() {
-        //Three states:
-        // 1. enabled
-        // 2. disabled (faded white text)
-        // 3. disabled and submitting (dark grey foreground) bc i dont think you can change the activityIndicator color
-//        continueButton.configurationUpdateHandler = { [weak self] button in
-//            if button.isEnabled {
-//                button.configuration = ButtonConfigs.enabledConfig(title: "continue")
-//            }
-//            else {
-//                if !(self?.isSubmitting ?? false) {
-//                    button.configuration = ButtonConfigs.disabledConfig(title: "continue")
-//                }
-//            }
-//            button.configuration?.showsActivityIndicator = self?.isSubmitting ?? false
-//        }
-//    }
     
     func setupBackButton() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(goBack))
+        navigationItem.leftBarButtonItem?.tintColor = .customWhite
     }
     
     //MARK: - User Interaction
@@ -105,14 +97,13 @@ class LoginViewController: KUIViewController, UITextFieldDelegate {
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func didPressedContinueButton(_ sender: Any) {
+    @objc func didPressedContinueButton(_ sender: Any) {
         tryToContinue()
     }
     
-    @IBAction func resetButtonDidPressed(_ sender: UIButton) {
-        let resetVC = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.RequestReset)
-        let navigationController = UINavigationController(rootViewController: resetVC)
-        present(navigationController, animated: true)
+    @IBAction func gotAnAccessCodeButton(_ sender: Any) {
+//        let vc = ConfirmCodeViewController.create(confirmMethod: .accessCode)
+//        present(vc, animated: true)
     }
     
     //MARK: - TextField Delegate
@@ -145,14 +136,13 @@ class LoginViewController: KUIViewController, UITextFieldDelegate {
     //MARK: - Helpers
     
     func tryToContinue() {
-        guard let number = enterNumberTextField.text else { return }
+        guard let number = enterNumberTextField.text?.asE164PhoneNumber else { return }
         isSubmitting = true
         Task {
             do {
-                guard let number = number.asE164PhoneNumber else { throw APIError.ClientError("that phone number won't work", "please enter another one") }
-//                try await PhoneNumberAPI.requestLoginCode(phoneNumber: number)
+                try await PhoneNumberAPI.requestCode(phoneNumber: number, uuid: UUID().uuidString)
                 AuthContext.phoneNumber = number
-                let vc = ConfirmCodeViewController.create(confirmMethod: .text)
+                let vc = ConfirmCodeVC.create(confirmMethod: .text)
                 self.navigationController?.pushViewController(vc, animated: true, completion: { [weak self] in
                     self?.isSubmitting = false
                 })
@@ -177,7 +167,7 @@ class LoginViewController: KUIViewController, UITextFieldDelegate {
 
 // UIGestureRecognizerDelegate (already inherited in an extension)
 
-extension LoginViewController {
+extension EnterNumberVC {
     
     // Note: Must be called in viewDidLoad
     //(1 of 2) Enable swipe left to go back with a bar button item

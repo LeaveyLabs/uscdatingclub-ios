@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_7" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -10,20 +8,20 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Loading View Controller-->
+        <!--LoadingVC-->
         <scene sceneID="EHf-IW-A2E">
             <objects>
-                <viewController storyboardIdentifier="LoadingVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="01J-lp-oVM" customClass="LoadingViewController" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoadingVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="01J-lp-oVM" customClass="LoadingVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="DXr-HJ-PIo">
-                                <rect key="frame" x="204" y="520.66666666666663" width="20" height="20"/>
+                                <rect key="frame" x="290" y="357.66666666666669" width="20" height="20"/>
                                 <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2K-H0-amf">
-                                <rect key="frame" x="174" y="420.66666666666669" width="90.333333333333314" height="85"/>
+                                <rect key="frame" x="260" y="257.66666666666669" width="90.333333333333314" height="85"/>
                                 <string key="text">usc
 dating
 club</string>
@@ -55,11 +53,11 @@ club</string>
             <objects>
                 <viewController storyboardIdentifier="UpdateAvailableVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Odb-AZ-97F" userLabel="UpdateAvailableViewController" customClass="UpdateAvailableVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Fh-ha-xgD">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="a new update is available!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1Ao-t2-2Zq">
-                                <rect key="frame" x="20" y="72" width="388" height="60"/>
+                                <rect key="frame" x="20" y="25" width="560" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="50O-iT-Gnl"/>
                                 </constraints>
@@ -68,31 +66,31 @@ club</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="76g-kd-uqR">
-                                <rect key="frame" x="20" y="132" width="388" height="690"/>
+                                <rect key="frame" x="20" y="85" width="560" height="445"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3vx-gv-vbj" customClass="FeatureView" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="388" height="230"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="148.33333333333334"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="POs-kf-NCu" customClass="FeatureView" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="230" width="388" height="230"/>
+                                        <rect key="frame" x="0.0" y="148.33333333333331" width="560" height="148.33333333333331"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FNZ-z4-4ae" customClass="FeatureView" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="460" width="388" height="230"/>
+                                        <rect key="frame" x="0.0" y="296.66666666666669" width="560" height="148.33333333333331"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="nzm-F8-nhh">
-                                <rect key="frame" x="20" y="822" width="388" height="50"/>
+                                <rect key="frame" x="20" y="530" width="560" height="50"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2X2-ER-YBT" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="184" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="270" height="50"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NcV-g1-LA0" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                        <rect key="frame" x="204" y="0.0" width="184" height="50"/>
+                                        <rect key="frame" x="290" y="0.0" width="270" height="50"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                 </subviews>

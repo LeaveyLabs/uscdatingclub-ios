@@ -85,25 +85,19 @@ class UserService: NSObject {
                     lastName: String,
                     profilePic: UIImage,
                     phoneNumber: String,
-                    email: String) async throws {
+                    email: String,
+                    sexIdentity: Int,
+                    sexPreference: Int) async throws {
         let newProfilePicWrapper = ProfilePicWrapper(image: profilePic, withCompresssion: true)
         let compressedProfilePic = newProfilePicWrapper.image
-//        let token = try await AuthAPI.createUser(username: username,
-//                                            first_name: firstName,
-//                                            last_name: lastName,
-//                                            picture: compressedProfilePic,
-//                                            phone_number: phoneNumber,
-//                                            email: email)
+        try await UserAPI.registerUser(email: email, phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, sexIdentity: sexIdentity, sexPreference: sexPreference)
 //        setGlobalAuthToken(token: token)
-//        if let accessCode = AuthContext.accessCode {
-//            await UserService.singleton.tryToEnterAccessCode(accessCode)
-//        }
 //        let completeUser = try await UserAPI.fetchAuthedUserByToken(token: token)
 //        frontendCompleteUser = FrontendCompleteUser(completeUser: completeUser,
 //                                                    profilePicWrapper: newProfilePicWrapper,
 //                                                    token: token)
 //        authedUser = frontendCompleteUser!
-//        await self.saveUserToFilesystem()
+        await self.saveUserToFilesystem()
 //        Task { await waitAndRegisterDeviceToken(id: completeUser.id) }
         Task {
             setupFirebaseAnalyticsProperties() //must come later at the end of this process so that we dont access authedUser while it's null and kick the user to the home screen
@@ -165,6 +159,16 @@ class UserService: NSObject {
 //            await UsersService.singleton.updateCachedUser(updatedUser: self.getUserAsFrontendReadOnlyUser())
 //        }
 //    }
+    
+    func updateTestResults() async throws {
+        try await UserAPI.postSurveyAnswers(email: authedUser.email, responses: [203])
+    }
+    
+    func updateLocation(lat: Double, long: Double) async throws {
+        //TODO: save the last location here
+        try await UserAPI.updateLocation(latitude: lat, longitude: long, email: authedUser.email)
+    }
+    
 //
 //    //MARK: - Logout and delete user
 //
@@ -194,7 +198,7 @@ class UserService: NSObject {
 
     func deleteMyAccount() async throws {
         do {
-//            try await UserAPI.deleteUser(user_id: authedUser.id)
+            try await UserAPI.deleteUser(email: authedUser.email)
             logOutFromDevice()
         } catch {
             print(error)

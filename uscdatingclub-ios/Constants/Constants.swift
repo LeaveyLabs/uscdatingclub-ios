@@ -43,47 +43,34 @@ enum Constants {
             static let Radar = "RadarVC"
             static let Account = "AccountVC"
             //Settings
-            static let Settings = "SettingsViewController"
-            static let PasswordSetting = "PasswordSettingViewController"
-            static let UpdateProfile = "UpdateProfileSettingViewController"
-            static let DefaultSettings = "DefaultsSettingsViewController"
+            static let Settings = "SettingsVC"
+            static let UpdateProfile = "UpdateProfileSettingVC"
+            static let DefaultSettings = "DefaultsSettingsVC"
             //Navigation Controllers
-            static let NewPostNavigation = "NewPostNavigationController"
-            static let MyActivityNavigation = "MyActivityNavigationController"
-            static let AuthNavigation = "AuthNavigationController"
+            
             //TabBar
             static let TabBarController = "TabBarController"
             //Misc
+            static let Permissions = "PermissionsVC"
             static let HowItWorks = "HowItWorksVC"
             static let UpdateAvailable = "UpdateAvailableVC"
             static let Loading = "LoadingVC"
             //Auth
-            static let Permissions = "PermissionsVC"
-            static let ConfirmEmail = "ConfirmEmailViewController"
-//            static let WelcomeTutorial = "WelcomeTutorialViewController"
-//            static let UploadProfilePicture = "UploadProfilePictureViewController"
-//            static let CreatePassword = "CreatePasswordViewController"
-//            static let EnterName = "EnterNameViewController"
-//            static let ChooseUsername = "ChooseUsernameViewController"
-//            static let SetupTime = "SetupTimeViewController"
-            static let EnterBios = "EnterBiosViewController"
-//            static let FinishProfile = "FinishProfileViewController"
-            static let EnterNumber = "EnterNumberViewController"
-            static let ConfirmNumber = "ConfirmNumberViewController"
-            static let CreateProfile = "CreateProfileViewController"
-            static let ConfirmCode = "ConfirmCodeViewController"
-            static let RequestReset = "RequestResetNumberViewController"
-//            static let ResetNumber = "ResetNumberViewController"
-//            static let ExplainProfile = "ExplainProfileViewController"
-            static let EnterEmail = "EnterEmailViewController"
+            static let AuthNav = "AuthNavVC"
+            static let EnterNumber = "EnterNumberVC"
+            static let ConfirmCode = "ConfirmCodeVC"
+            static let EnterEmail = "EnterEmailVC"
+            static let CreateProfile = "CreateProfileVC"
+            static let EnterBios = "EnterBiosVC"
+            
             //Reset password
+    //            static let RequestReset = "RequestResetNumberViewController"
     //            static let RequestResetPassword = "RequestResetPasswordViewController"
     //            static let ValidateResetPassword = "ValidateResetPasswordViewController"
     //            static let FinalizeResetPassword = "FinalizeResetPasswordViewController"
+            
         }
         struct Segue {
-            static let ToNotificationsSetting = "ToNotificationsSetting"
-            static let ToListView = "ToListView"
             static let ToExplain = "ToExplain"
         }
     }

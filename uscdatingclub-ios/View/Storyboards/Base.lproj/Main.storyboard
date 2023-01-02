@@ -231,54 +231,54 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="evV-gx-7ZW">
-                                <rect key="frame" x="20" y="134" width="353" height="435"/>
+                                <rect key="frame" x="20" y="134" width="353" height="405"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3HL-5e-PnU" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="353" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="353" height="55"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="8ww-QR-jEd"/>
+                                            <constraint firstAttribute="height" constant="55" id="8ww-QR-jEd"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fv2-QJ-car" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="75" width="353" height="60"/>
+                                        <rect key="frame" x="0.0" y="70" width="353" height="55"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="Cc9-0Q-jXo"/>
+                                            <constraint firstAttribute="height" constant="55" id="Cc9-0Q-jXo"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ll9-HO-3Ja" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="150" width="353" height="60"/>
+                                        <rect key="frame" x="0.0" y="140" width="353" height="55"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="fTz-fZ-c7L"/>
+                                            <constraint firstAttribute="height" constant="55" id="fTz-fZ-c7L"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Mh-wc-6fQ" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="225" width="353" height="60"/>
+                                        <rect key="frame" x="0.0" y="210" width="353" height="55"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="4fs-1i-ccQ"/>
+                                            <constraint firstAttribute="height" constant="55" id="4fs-1i-ccQ"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YWJ-Rj-3zA" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="300" width="353" height="60"/>
+                                        <rect key="frame" x="0.0" y="280" width="353" height="55"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="kcJ-Za-vYY"/>
+                                            <constraint firstAttribute="height" constant="55" id="kcJ-Za-vYY"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SGH-jT-2PN" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="375" width="353" height="60"/>
+                                        <rect key="frame" x="0.0" y="350" width="353" height="55"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="PvN-1L-yiE"/>
+                                            <constraint firstAttribute="height" constant="55" id="PvN-1L-yiE"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="BYf-cL-l92">
-                                <rect key="frame" x="131" y="754" width="131" height="64"/>
+                                <rect key="frame" x="131" y="751" width="131" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="usc dating club" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GTN-Kw-EXF">
                                         <rect key="frame" x="0.0" y="0.0" width="131" height="21.666666666666668"/>
@@ -303,6 +303,9 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="terms"/>
+                                                <connections>
+                                                    <action selector="termsButtonDidPressed" destination="9xj-AQ-6MK" eventType="touchUpInside" id="rUd-c1-yye"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uVc-K9-86p">
                                                 <rect key="frame" x="48" y="0.0" width="41" height="20"/>
@@ -312,6 +315,9 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="privacy"/>
+                                                <connections>
+                                                    <action selector="privacyButtonDidPressed" destination="9xj-AQ-6MK" eventType="touchUpInside" id="y3M-dY-FCf"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -325,7 +331,7 @@
                             <constraint firstItem="evV-gx-7ZW" firstAttribute="top" secondItem="Gzs-S8-LNX" secondAttribute="bottom" constant="20" id="FHf-rx-IWo"/>
                             <constraint firstItem="evV-gx-7ZW" firstAttribute="leading" secondItem="gfS-c4-Yca" secondAttribute="leading" constant="20" id="Ptm-YH-FFU"/>
                             <constraint firstItem="Gzs-S8-LNX" firstAttribute="leading" secondItem="gfS-c4-Yca" secondAttribute="leading" id="TLt-l0-OUr"/>
-                            <constraint firstItem="BYf-cL-l92" firstAttribute="bottom" secondItem="gfS-c4-Yca" secondAttribute="bottom" id="abq-ZF-7Yf"/>
+                            <constraint firstItem="BYf-cL-l92" firstAttribute="bottom" secondItem="gfS-c4-Yca" secondAttribute="bottom" constant="-3" id="abq-ZF-7Yf"/>
                             <constraint firstItem="Gzs-S8-LNX" firstAttribute="top" secondItem="gfS-c4-Yca" secondAttribute="top" id="brr-QU-mOR"/>
                             <constraint firstItem="BYf-cL-l92" firstAttribute="centerX" secondItem="8al-Cf-bwc" secondAttribute="centerX" id="sTs-Ba-VMV"/>
                             <constraint firstItem="gfS-c4-Yca" firstAttribute="trailing" secondItem="evV-gx-7ZW" secondAttribute="trailing" constant="20" id="viS-1i-VIz"/>
@@ -370,7 +376,7 @@
         <image name="person.crop.circle" catalog="system" width="128" height="123"/>
         <image name="safari" catalog="system" width="128" height="123"/>
         <namedColor name="AccentColor">
-            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89399999380111694" green="0.3059999942779541" blue="0.3059999942779541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="customWhite">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

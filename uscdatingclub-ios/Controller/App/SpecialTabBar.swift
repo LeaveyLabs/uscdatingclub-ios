@@ -11,8 +11,8 @@ class SpecialTabBar: UITabBar {
     
     public lazy var middleButton: UIButton! = {
         let middleButton = UIButton() //SpringButton()
-        middleButton.adjustsImageWhenDisabled = false
-        middleButton.adjustsImageWhenHighlighted = false
+//        middleButton.adjustsImageWhenDisabled = false
+//        middleButton.adjustsImageWhenHighlighted = false
         middleButton.setImage(UIImage(named: "submitbutton")!, for: .normal)
         middleButton.translatesAutoresizingMaskIntoConstraints = false
         middleButton.isUserInteractionEnabled = true

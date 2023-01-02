@@ -74,4 +74,14 @@ enum AlertManager {
         alertController.addAction(settingsAction)
         controller.present(alertController, animated: true)
     }
+    
+    static func showInfoCentered(_ title: String, _ message: String,  on controller: UIViewController) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default) { (UIAlertAction) in
+            
+        }
+        alertController.addAction(okAction)
+        controller.present(alertController, animated: true)
+    }
+    
 }
