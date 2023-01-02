@@ -85,11 +85,16 @@ class UserService: NSObject {
                     profilePic: UIImage,
                     phoneNumber: String,
                     email: String,
-                    sexIdentity: Int,
-                    sexPreference: Int) async throws {
-        let newProfilePicWrapper = ProfilePicWrapper(image: profilePic, withCompresssion: true)
+                    sexIdentity: String,
+                    sexPreference: String) async throws {
+//        let newProfilePicWrapper = ProfilePicWrapper(image: profilePic, withCompresssion: true)
 //        let compressedProfilePic = newProfilePicWrapper.image
-        try await UserAPI.registerUser(email: email, phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, sexIdentity: sexIdentity, sexPreference: sexPreference)
+        try await UserAPI.registerUser(email: email,
+                                       phoneNumber: phoneNumber,
+                                       firstName: firstName,
+                                       lastName: lastName,
+                                       sexIdentity: sexIdentity,
+                                       sexPreference: sexPreference)
 //        setGlobalAuthToken(token: token)
 //        let completeUser = try await UserAPI.fetchAuthedUserByToken(token: token)
 //        frontendCompleteUser = FrontendCompleteUser(completeUser: completeUser,

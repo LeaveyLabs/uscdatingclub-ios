@@ -211,8 +211,8 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
                     profilePic: AuthContext.profilePic!,
                     phoneNumber: AuthContext.phoneNumber,
                     email: AuthContext.email,
-                    sexIdentity: 1,
-                    sexPreference: 1)
+                    sexIdentity: sexIdentity,
+                    sexPreference: sexPreference)
                 AuthContext.reset()
                 navigationController?.pushViewController(HowItWorksVC.create(), animated: true, completion: { [weak self] in
                     self?.isSubmitting = false

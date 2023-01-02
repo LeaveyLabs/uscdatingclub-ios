@@ -106,8 +106,8 @@ class UserAPI {
                              phoneNumber:String,
                              firstName: String,
                              lastName: String,
-                             sexIdentity: Int,
-                             sexPreference: Int) async throws {
+                             sexIdentity: String,
+                             sexPreference: String) async throws {
         let url =  "\(Env.BASE_URL)\(Endpoints.registerUser.rawValue)"
         let params:[String:String] = [
             ParameterKeys.email.rawValue: email,
