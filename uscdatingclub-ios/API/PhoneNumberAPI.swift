@@ -75,7 +75,7 @@ class PhoneNumberAPI {
             ParameterKeys.proxyUuid.rawValue: uuid,
         ]
         let json = try JSONEncoder().encode(params)
-        let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
+        let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.PATCH.rawValue)
         try filterPhoneNumberErrors(data: data, response: response)
         return try JSONDecoder().decode(CompleteUser?.self, from: data)
     }

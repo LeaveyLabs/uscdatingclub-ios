@@ -74,7 +74,7 @@ class EmailAPI {
             ParameterKeys.proxyUuid.rawValue: uuid,
         ]
         let json = try JSONEncoder().encode(params)
-        let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
+        let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.PATCH.rawValue)
         try filterEmailErrors(data: data, response: response)
     }
 }
