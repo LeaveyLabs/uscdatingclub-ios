@@ -56,19 +56,7 @@ class PhoneNumberAPI {
     }
     
     
-    static func requestRegistrationCode(phoneNumber:String, uuid:String) async throws {
-        let url = "\(Env.BASE_URL)\(Endpoints.sendCode.rawValue)"
-        let params:[String:String] = [
-            ParameterKeys.phone.rawValue: phoneNumber,
-            ParameterKeys.proxyUuid.rawValue: uuid,
-            ParameterKeys.isRegistration.rawValue: "1",
-        ]
-        let json = try JSONEncoder().encode(params)
-        let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
-        try filterPhoneNumberErrors(data: data, response: response)
-    }
-    
-    static func requestLoginCode(phoneNumber:String, uuid:String) async throws {
+    static func requestCode(phoneNumber:String, uuid:String) async throws {
         let url = "\(Env.BASE_URL)\(Endpoints.sendCode.rawValue)"
         let params:[String:String] = [
             ParameterKeys.phone.rawValue: phoneNumber,
@@ -79,7 +67,7 @@ class PhoneNumberAPI {
         try filterPhoneNumberErrors(data: data, response: response)
     }
     
-    static func verifyRegistrationCode(phoneNumber:String, code:String, uuid:String) async throws {
+    static func verifyCode(phoneNumber:String, code:String, uuid:String) async throws -> CompleteUser? {
         let url = "\(Env.BASE_URL)\(Endpoints.verifyCode.rawValue)"
         let params:[String:String] = [
             ParameterKeys.phone.rawValue: phoneNumber,
@@ -89,18 +77,6 @@ class PhoneNumberAPI {
         let json = try JSONEncoder().encode(params)
         let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
         try filterPhoneNumberErrors(data: data, response: response)
-    }
-    
-    static func verifyLoginCode(phoneNumber:String, code:String, uuid:String) async throws -> CompleteUser {
-        let url = "\(Env.BASE_URL)\(Endpoints.verifyCode.rawValue)"
-        let params:[String:String] = [
-            ParameterKeys.phone.rawValue: phoneNumber,
-            ParameterKeys.code.rawValue: code,
-            ParameterKeys.proxyUuid.rawValue: uuid,
-        ]
-        let json = try JSONEncoder().encode(params)
-        let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
-        try filterPhoneNumberErrors(data: data, response: response)
-        return try JSONDecoder().decode(CompleteUser.self, from: data)
+        return try JSONDecoder().decode(CompleteUser?.self, from: data)
     }
 }
