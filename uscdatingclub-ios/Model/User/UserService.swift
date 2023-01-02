@@ -82,7 +82,6 @@ class UserService: NSObject {
     // No need to return new user from createAccount() bc new user is globally updated within this function
     func createUser(firstName: String,
                     lastName: String,
-                    profilePic: UIImage,
                     phoneNumber: String,
                     email: String,
                     sexIdentity: String,

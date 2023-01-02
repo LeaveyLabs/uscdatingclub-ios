@@ -208,7 +208,7 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
                 try await UserService.singleton.createUser(
                     firstName: AuthContext.firstName,
                     lastName: AuthContext.lastName,
-                    profilePic: AuthContext.profilePic!,
+//                    profilePic: AuthContext.profilePic!,
                     phoneNumber: AuthContext.phoneNumber,
                     email: AuthContext.email,
                     sexIdentity: sexIdentity,

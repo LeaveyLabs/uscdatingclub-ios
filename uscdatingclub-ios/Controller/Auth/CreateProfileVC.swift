@@ -34,9 +34,9 @@ class CreateProfileVC: KUIViewController, UITextFieldDelegate {
         didSet {
             continueButton.internalButton.isEnabled = isValidInput
             continueButton.alpha = isValidInput ? 1 : 0.5
-            profilePictureButton.imageView?.becomeProfilePicImageView(with: profilePic)
-            profilePicTextLabel.isHidden = profilePic != defaultPic
-            miniCameraButton.isHidden = profilePic == defaultPic
+//            profilePictureButton.imageView?.becomeProfilePicImageView(with: profilePic)
+//            profilePicTextLabel.isHidden = profilePic != defaultPic
+//            miniCameraButton.isHidden = profilePic == defaultPic
         }
     }
     var isSubmitting: Bool = false {
@@ -114,11 +114,11 @@ class CreateProfileVC: KUIViewController, UITextFieldDelegate {
         continueButton.configure(title: "continue", systemImage: "")
         continueButton.internalButton.addTarget(self, action: #selector(didPressedContinueButton), for: .touchUpInside)
         // Setup miniCameraButton
-        miniCameraButton.isHidden = true
-        miniCameraButton.becomeRound()
-        profilePictureButton.imageView?.becomeProfilePicImageView(with: defaultPic)
-        profilePictureButton.contentHorizontalAlignment = .fill //so that the systemimage expands
-        profilePictureButton.contentVerticalAlignment = .fill
+//        miniCameraButton.isHidden = true
+//        miniCameraButton.becomeRound()
+//        profilePictureButton.imageView?.becomeProfilePicImageView(with: defaultPic)
+//        profilePictureButton.contentHorizontalAlignment = .fill //so that the systemimage expands
+//        profilePictureButton.contentVerticalAlignment = .fill
     }
     
     func setupTextFields() {
@@ -218,14 +218,14 @@ class CreateProfileVC: KUIViewController, UITextFieldDelegate {
     func tryToContinue() {
         guard
             isValidInput,
-            let uploadedProfilePic = profilePictureButton.imageView?.image,
+//            let uploadedProfilePic = profilePictureButton.imageView?.image,
             let firstName = firstNameTextField.text,
             let lastName = lastNameTextField.text
         else { return }
         isSubmitting = true
         AuthContext.firstName = firstName
         AuthContext.lastName = lastName
-        AuthContext.profilePic = uploadedProfilePic
+//        AuthContext.profilePic = uploadedProfilePic
         navigationController?.pushViewController(EnterBiosVC.create(), animated: true, completion: { [weak self] in
             self?.isSubmitting = false
         })
@@ -238,15 +238,15 @@ class CreateProfileVC: KUIViewController, UITextFieldDelegate {
     }
     
     func validateInput() {
-        let validPic = profilePic != defaultPic && profilePic != nil
+//        let validPic = profilePic != defaultPic && profilePic != nil
 //        let validUsername = Validate.validateUsername(usernameTextField.text ?? "")
         let validName = firstNameTextField.text!.count > 0 && lastNameTextField.text!.count > 0
-        isValidInput = validPic && validName
+        isValidInput = validName
         
         firstNameIndicatorView.isHidden = firstNameTextField.text!.count > 0
         lastNameIndicatorView.isHidden = lastNameTextField.text!.count > 0
 //        usernameIndicatorView.isHidden = usernameTextField.text!.count > 0
-        profilePicIndicatorView.isHidden = validPic
+//        profilePicIndicatorView.isHidden = validPic
     }
 
 }
