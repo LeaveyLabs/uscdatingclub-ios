@@ -140,7 +140,7 @@ class EnterNumberVC: KUIViewController, UITextFieldDelegate {
         isSubmitting = true
         Task {
             do {
-                try await PhoneNumberAPI.requestCode(phoneNumber: number, uuid: UUID().uuidString)
+                try await PhoneNumberAPI.requestCode(phoneNumber: number, uuid: AuthContext.uuid)
                 AuthContext.phoneNumber = number
                 let vc = ConfirmCodeVC.create(confirmMethod: .text)
                 self.navigationController?.pushViewController(vc, animated: true, completion: { [weak self] in

@@ -222,9 +222,9 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
     func resend() async throws {
         switch confirmMethod {
         case .text:
-            try await PhoneNumberAPI.requestCode(phoneNumber: AuthContext.phoneNumber, uuid: UUID().uuidString)
+            try await PhoneNumberAPI.requestCode(phoneNumber: AuthContext.phoneNumber, uuid: AuthContext.uuid)
         case .email:
-            try await EmailAPI.requestCode(email: AuthContext.email, uuid: UUID().uuidString)
+            try await EmailAPI.requestCode(email: AuthContext.email, uuid: AuthContext.uuid)
         case .none:
             break
         }
@@ -233,8 +233,9 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
     func validate(validationCode: String) async throws {
         switch confirmMethod {
         case .text:
-            print("TRYING")
-            try await PhoneNumberAPI.verifyCode(phoneNumber: AuthContext.phoneNumber, code: validationCode, uuid: AuthContext.uuid)
+            if let user = try await PhoneNumberAPI.verifyCode(phoneNumber: AuthContext.phoneNumber, code: validationCode, uuid: AuthContext.uuid) {
+                try await UserService.singleton.logInWith(completeUser: user)
+            }
         case .email:
             try await EmailAPI.verifyCode(email: AuthContext.email, code: validationCode, uuid: AuthContext.uuid)
         case .none:
@@ -246,9 +247,13 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
     func continueToNextScreen() {
         switch confirmMethod {
         case .text:
-            self.navigationController?.pushViewController(EnterEmailVC.create(), animated: true, completion: { [weak self] in
-                self?.isSubmitting = false
-            })
+            if UserService.singleton.isLoggedIntoAnAccount {
+                transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
+            } else {
+                navigationController?.pushViewController(EnterEmailVC.create(), animated: true, completion: { [weak self] in
+                    self?.isSubmitting = false
+                })
+            }
         case .email:
             self.navigationController?.pushViewController(CreateProfileVC.create(), animated: true, completion: { [weak self] in
                 self?.isSubmitting = false

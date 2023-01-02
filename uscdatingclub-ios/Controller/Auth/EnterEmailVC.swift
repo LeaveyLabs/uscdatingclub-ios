@@ -119,7 +119,7 @@ class EnterEmailVC: KUIViewController, UITextFieldDelegate {
             isSubmitting = true
             Task {
                 do {
-                    try await EmailAPI.requestCode(email: email, uuid: UUID().uuidString)
+                    try await EmailAPI.requestCode(email: email, uuid: AuthContext.uuid)
                     AuthContext.email = email
                     let vc = ConfirmCodeVC.create(confirmMethod: .email)
                     self.navigationController?.pushViewController(vc, animated: true, completion: { [weak self] in

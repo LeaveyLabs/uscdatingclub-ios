@@ -14,13 +14,12 @@ protocol ReadOnlyUserType {
     var id: Int { get }
     var first_name: String { get }
     var last_name: String { get }
-    var picture: String { get }
+//    var picture: String { get }
 }
 
 protocol CompleteUserType: ReadOnlyUserType {
     var phone_number: String { get }
     var email: String { get }
-//    var date_of_birth: String { get }
     var sexualIdentity: String { get }
     var sexualPreference: String { get }
 }
@@ -32,7 +31,7 @@ struct ReadOnlyUser: Codable, ReadOnlyUserType, Hashable {
     let id: Int
     let first_name: String
     let last_name: String
-    let picture: String
+//    let picture: String
     
     //Equatable
     static func == (lhs: ReadOnlyUser, rhs: ReadOnlyUser) -> Bool { return lhs.id == rhs.id }
@@ -46,7 +45,7 @@ struct CompleteUser: Codable, CompleteUserType {
     let id: Int
     let first_name: String
     let last_name: String
-    let picture: String
+//    let picture: String
     let email: String
     let sexualIdentity: String
     let sexualPreference: String
@@ -64,29 +63,27 @@ struct FrontendCompleteUser: Codable, CompleteUserType, ReadOnlyUserType {
     var email: String
     var first_name: String
     var last_name: String
-    var picture: String
+    //    var picture: String
     var sexualIdentity: String
     var sexualPreference: String
     
     // Complete-only properties
-    var profilePicWrapper: ProfilePicWrapper
-    var token: String
+    //    var profilePicWrapper: ProfilePicWrapper
     
-    init(completeUser: CompleteUser, profilePicWrapper: ProfilePicWrapper, token: String) {
+    init(completeUser: CompleteUser) { //}, profilePicWrapper: ProfilePicWrapper) {
         self.id = completeUser.id
         self.phone_number = completeUser.phone_number
         self.email = completeUser.email
         self.first_name = completeUser.first_name
         self.last_name = completeUser.last_name
-        self.picture = completeUser.picture
+//        self.picture = completeUser.picture
         self.sexualIdentity = completeUser.sexualIdentity
         self.sexualPreference = completeUser.sexualPreference
-        self.profilePicWrapper = profilePicWrapper
-        self.token = token
+//        self.profilePicWrapper = profilePicWrapper
     }
     
     //Equatable
     static func == (lhs: FrontendCompleteUser, rhs: FrontendCompleteUser) -> Bool { return lhs.id == rhs.id }
     
-    static let nilUser = FrontendCompleteUser(completeUser: CompleteUser(id: -1, first_name: "", last_name: "", picture: "", email: "", sexualIdentity: "", sexualPreference: "", phone_number: ""), profilePicWrapper: ProfilePicWrapper(image: UIImage(systemName: "person")!, withCompresssion: false), token: "")
+    static let nilUser = FrontendCompleteUser(completeUser: CompleteUser(id: -1, first_name: "", last_name: "", email: "", sexualIdentity: "", sexualPreference: "", phone_number: ""))
 }

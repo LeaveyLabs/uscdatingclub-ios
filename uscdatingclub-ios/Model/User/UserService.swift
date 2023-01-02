@@ -65,8 +65,7 @@ class UserService: NSObject {
     func getUserAsReadOnlyUser() -> ReadOnlyUser {
         return ReadOnlyUser(id: authedUser.id,
                             first_name: authedUser.first_name,
-                            last_name: authedUser.last_name,
-                            picture: authedUser.picture)
+                            last_name: authedUser.last_name)
     }
     
     //Properties
@@ -76,7 +75,7 @@ class UserService: NSObject {
     func getFirstLastName() -> String { return authedUser.first_name + " " + authedUser.last_name }
     func getPhoneNumber() -> String? { return authedUser.phone_number }
     func getPhoneNumberPretty() -> String? { return authedUser.phone_number.asNationalPhoneNumber }
-    func getProfilePic() -> UIImage { return authedUser.profilePicWrapper.image }
+//    func getProfilePic() -> UIImage { return authedUser.profilePicWrapper.image }
     
     //MARK: - Login and create user
     
@@ -89,7 +88,7 @@ class UserService: NSObject {
                     sexIdentity: Int,
                     sexPreference: Int) async throws {
         let newProfilePicWrapper = ProfilePicWrapper(image: profilePic, withCompresssion: true)
-        let compressedProfilePic = newProfilePicWrapper.image
+//        let compressedProfilePic = newProfilePicWrapper.image
         try await UserAPI.registerUser(email: email, phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, sexIdentity: sexIdentity, sexPreference: sexPreference)
 //        setGlobalAuthToken(token: token)
 //        let completeUser = try await UserAPI.fetchAuthedUserByToken(token: token)
@@ -105,18 +104,18 @@ class UserService: NSObject {
         isLoggedIntoApp = true
     }
 
-//    func logInWith(authToken token: String) async throws {
-//        setGlobalAuthToken(token: token)
-//        let completeUser = try await UserAPI.fetchAuthedUserByToken(token: getGlobalAuthToken())
-//        Task { await waitAndRegisterDeviceToken(id: completeUser.id) }
-//        let profilePicUIImage = try await UserAPI.UIImageFromURLString(url: completeUser.picture)
-//        frontendCompleteUser = FrontendCompleteUser(completeUser: completeUser,
-//                                                    profilePicWrapper: ProfilePicWrapper(image: profilePicUIImage,withCompresssion: false),
-//                                                    token: token)
-//        setupFirebaseAnalyticsProperties()
-//        await self.saveUserToFilesystem()
-//        isLoggedIntoApp = true
-//    }
+    func logInWith(completeUser: CompleteUser) async throws {
+        Task { await waitAndRegisterDeviceToken(id: completeUser.id) }
+        
+//        guard let profilePicUIImage = try await GenericAPI.UIImageFromURLString(url: completeUser.picture) else {
+//            throw NSError()
+//        }
+        
+        frontendCompleteUser = FrontendCompleteUser(completeUser: completeUser)
+        setupFirebaseAnalyticsProperties()
+        await self.saveUserToFilesystem()
+        isLoggedIntoApp = true
+    }
 //
 //    //MARK: - Update user
 //
@@ -233,8 +232,7 @@ class UserService: NSObject {
 
     func saveUserToFilesystem() async {
         do {
-            guard var frontendCompleteUser = frontendCompleteUser else { return }
-//            frontendCompleteUser.token = getGlobalAuthToken() //this shouldn't be necessary, but to be safe
+            guard let frontendCompleteUser = frontendCompleteUser else { return }
             let encoder = JSONEncoder()
             let data: Data = try encoder.encode(frontendCompleteUser)
             let jsonString = String(data: data, encoding: .utf8)!

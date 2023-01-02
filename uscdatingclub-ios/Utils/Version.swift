@@ -46,6 +46,7 @@ enum Version {
     }
     
     static func checkForNewUpdate() {
+        print("checking for new update")
         print("is ", Constants.updateAvailableVersion, " newer than ", Version.currentVersion, isVersion(Constants.updateAvailableVersion, newerThan: Version.currentVersion) ?? false)
         let isUpdateDetailsAvailable =
         isVersion(Constants.updateAvailableVersion, newerThan: Version.currentVersion) ?? false

@@ -53,8 +53,7 @@
 		476FD86B295E46E30014DD42 /* HowItWorksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD86A295E46E30014DD42 /* HowItWorksVC.swift */; };
 		476FD86E295E4A1F0014DD42 /* HowItWorksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD86C295E4A1F0014DD42 /* HowItWorksCell.swift */; };
 		476FD86F295E4A1F0014DD42 /* HowItWorksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */; };
-		478BECB729633F4900930DAF /* UINavigationController+Completion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECB529633F4900930DAF /* UINavigationController+Completion.swift */; };
-		478BECB829633F4900930DAF /* UINavigationItem+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECB629633F4900930DAF /* UINavigationItem+UIButton.swift */; };
+		478BECBB2963463300930DAF /* GenericAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECBA2963463300930DAF /* GenericAPI.swift */; };
 		47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A80614295F8D23001DEE64 /* EnterBiosVC.swift */; };
 		47C40EE9295CB930007C27F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40EE8295CB930007C27F0 /* SceneDelegate.swift */; };
 		47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEC295CB930007C27F0 /* Main.storyboard */; };
@@ -199,8 +198,7 @@
 		476FD86A295E46E30014DD42 /* HowItWorksVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorksVC.swift; sourceTree = "<group>"; };
 		476FD86C295E4A1F0014DD42 /* HowItWorksCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowItWorksCell.swift; sourceTree = "<group>"; };
 		476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HowItWorksCell.xib; sourceTree = "<group>"; };
-		478BECB529633F4900930DAF /* UINavigationController+Completion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Completion.swift"; sourceTree = "<group>"; };
-		478BECB629633F4900930DAF /* UINavigationItem+UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+UIButton.swift"; sourceTree = "<group>"; };
+		478BECBA2963463300930DAF /* GenericAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAPI.swift; sourceTree = "<group>"; };
 		47A80614295F8D23001DEE64 /* EnterBiosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterBiosVC.swift; sourceTree = "<group>"; };
 		47C40EE3295CB930007C27F0 /* uscdatingclub-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "uscdatingclub-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47C40EE8295CB930007C27F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -364,6 +362,7 @@
 				434A052F295E1EDB00C15945 /* EmailAPI.swift */,
 				434A052D295E1EB600C15945 /* PhoneNumberAPI.swift */,
 				434A0531295E1F1300C15945 /* UserAPI.swift */,
+				478BECBA2963463300930DAF /* GenericAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -404,16 +403,6 @@
 				4731F52D295CE0C10013F626 /* AccountVC.swift */,
 			);
 			path = Home;
-			sourceTree = "<group>";
-		};
-		478BECB429633F4900930DAF /* UINavigation */ = {
-			isa = PBXGroup;
-			children = (
-				478BECB529633F4900930DAF /* UINavigationController+Completion.swift */,
-				478BECB629633F4900930DAF /* UINavigationItem+UIButton.swift */,
-			);
-			name = UINavigation;
-			path = "../../../../../mist/mist-ios/Supporting Files/Extensions/UINavigation";
 			sourceTree = "<group>";
 		};
 		47A80613295F8CBD001DEE64 /* Misc */ = {
@@ -632,7 +621,6 @@
 		47C4107B295CC0BE007C27F0 /* UIKitExtensions */ = {
 			isa = PBXGroup;
 			children = (
-				478BECB429633F4900930DAF /* UINavigation */,
 				47DE3232295CC7C40063C55A /* UIImage */,
 				47DE3229295CC7C30063C55A /* UIImageView */,
 				47DE322D295CC7C30063C55A /* UITextView */,
@@ -1012,7 +1000,6 @@
 				47DE324B295CC7C40063C55A /* UITextView+MaxLength.swift in Sources */,
 				434A052E295E1EB600C15945 /* PhoneNumberAPI.swift in Sources */,
 				47C4105A295CBFFC007C27F0 /* Numbers.swift in Sources */,
-				478BECB729633F4900930DAF /* UINavigationController+Completion.swift in Sources */,
 				47C41059295CBFFC007C27F0 /* Distance.swift in Sources */,
 				47DE3206295CC4B40063C55A /* EnterEmailVC.swift in Sources */,
 				47DE325B295CC7C40063C55A /* UIViewController+Logout.swift in Sources */,
@@ -1029,7 +1016,6 @@
 				47C40F91295CBBBD007C27F0 /* Color+Hex.swift in Sources */,
 				47C40F61295CBAF0007C27F0 /* Device.swift in Sources */,
 				47DE324F295CC7C40063C55A /* UIImage+Resize.swift in Sources */,
-				478BECB829633F4900930DAF /* UINavigationItem+UIButton.swift in Sources */,
 				47DE3259295CC7C40063C55A /* UIViewController+MistShareActivity.swift in Sources */,
 				47C41077295CC0AB007C27F0 /* CLLocationCoordiante+Midpoint.swift in Sources */,
 				47C4106E295CC095007C27F0 /* String+Random.swift in Sources */,
@@ -1054,6 +1040,7 @@
 				47C40F8C295CBBBD007C27F0 /* NotificationResponseHandler.swift in Sources */,
 				4731F504295CD4610013F626 /* UIScrollView+IsAt.swift in Sources */,
 				47C40EE9295CB930007C27F0 /* SceneDelegate.swift in Sources */,
+				478BECBB2963463300930DAF /* GenericAPI.swift in Sources */,
 				47E38FEB295F69DC007CB77F /* AlertManager.swift in Sources */,
 				47C4106C295CC095007C27F0 /* String+Condensed.swift in Sources */,
 				47DE3205295CC4B40063C55A /* AuthStartVC.swift in Sources */,
