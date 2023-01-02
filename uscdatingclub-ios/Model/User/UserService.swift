@@ -64,17 +64,17 @@ class UserService: NSObject {
     func getUser() -> FrontendCompleteUser { return authedUser }
     func getUserAsReadOnlyUser() -> ReadOnlyUser {
         return ReadOnlyUser(id: authedUser.id,
-                            first_name: authedUser.first_name,
-                            last_name: authedUser.last_name)
+                            firstName: authedUser.firstName,
+                            lastName: authedUser.lastName)
     }
     
     //Properties
     func getId() -> Int { return authedUser.id }
-    func getFirstName() -> String { return authedUser.first_name }
-    func getLastName() -> String { return authedUser.last_name }
-    func getFirstLastName() -> String { return authedUser.first_name + " " + authedUser.last_name }
-    func getPhoneNumber() -> String? { return authedUser.phone_number }
-    func getPhoneNumberPretty() -> String? { return authedUser.phone_number.asNationalPhoneNumber }
+    func getFirstName() -> String { return authedUser.firstName }
+    func getLastName() -> String { return authedUser.lastName }
+    func getFirstLastName() -> String { return authedUser.firstName + " " + authedUser.lastName }
+    func getPhoneNumber() -> String? { return authedUser.phoneNumber }
+    func getPhoneNumberPretty() -> String? { return authedUser.phoneNumber.asNationalPhoneNumber }
 //    func getProfilePic() -> UIImage { return authedUser.profilePicWrapper.image }
     
     //MARK: - Login and create user

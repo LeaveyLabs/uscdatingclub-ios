@@ -11,8 +11,8 @@ typealias ResetToken = String
 
 struct PhoneNumberError: Codable {
     let phone_number: [String]?
-    let code: String?
-    let token: String?
+    let code: [String]?
+    let token: [String]?
     // Error
     let non_field_errors: [String]?
     let detail: String?
@@ -46,9 +46,11 @@ class PhoneNumberAPI {
                let phoneNumberError = phoneNumberErrors.first {
                 throw APIError.ClientError(phoneNumberError, PHONE_NUMBER_RECOVERY_MESSAGE)
             }
-            if let codeError = error.code {
+            if let codeErrors = error.code,
+               let codeError = codeErrors.first {
                 throw APIError.ClientError(codeError, PHONE_NUMBER_RECOVERY_MESSAGE)
             }
+            
         }
         throw APIError.Unknown
     }
@@ -75,6 +77,8 @@ class PhoneNumberAPI {
         let json = try JSONEncoder().encode(params)
         let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.PATCH.rawValue)
         try filterPhoneNumberErrors(data: data, response: response)
-        return try JSONDecoder().decode(CompleteUser?.self, from: data)
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return try decoder.decode(CompleteUser?.self, from: data)
     }
 }
