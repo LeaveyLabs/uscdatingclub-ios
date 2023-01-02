@@ -49,9 +49,17 @@ class PermissionsVC: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) { [self] in
                 if goodToGo {
                     LocationManager.shared.startLocationServices()
-                    dismiss(animated: true)
+                    finish()
                 }
             }
+        }
+    }
+    
+    func finish() {
+        if let _ = parent as? UINavigationController {
+            transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
+        } else {
+            dismiss(animated: true)
         }
     }
     

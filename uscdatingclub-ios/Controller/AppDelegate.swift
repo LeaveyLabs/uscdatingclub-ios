@@ -87,10 +87,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             return String(format: "%02.2hhx", data)
         }
         let token = tokenParts.joined()
-//        setGlobalDeviceToken(token: token)
-//        Task {
-//            try await DeviceAPI.registerCurrentDeviceWithUser(user: UserService.singleton.getId())
-//        }
+        setGlobalDeviceToken(token: token)
+        Task {
+            try await DeviceAPI.registerCurrentDeviceWithUser(user: UserService.singleton.getId())
+        }
         
     }
     
@@ -103,9 +103,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     //user was not in app
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
-        guard var _ = UIApplication.shared.windows.first?.rootViewController else {
+        guard var _ = SceneDelegate.visibleViewController else {
             return //the app wasn't running in the background. scene delegate will handle
         }
+        //delete the below if the above works
+//        guard var _ = UIApplication.shared.windows.first?.rootViewController else {
+//            return
+//        }
                 
 //        let loadingVC = UIStoryboard(name: "Loading", bundle: nil).instantiateViewController(withIdentifier: "LoadingViewController") as! LoadingViewController
 //        if let notificationResponseHandler = generateNotificationResponseHandler(response) {
