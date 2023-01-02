@@ -233,9 +233,10 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
     func validate(validationCode: String) async throws {
         switch confirmMethod {
         case .text:
-            try await PhoneNumberAPI.verifyCode(phoneNumber: AuthContext.phoneNumber, code: validationCode, uuid: UUID().uuidString)
+            print("TRYING")
+            try await PhoneNumberAPI.verifyCode(phoneNumber: AuthContext.phoneNumber, code: validationCode, uuid: AuthContext.uuid)
         case .email:
-            try await EmailAPI.verifyCode(email: AuthContext.email, code: validationCode, uuid: UUID().uuidString)
+            try await EmailAPI.verifyCode(email: AuthContext.email, code: validationCode, uuid: AuthContext.uuid)
         case .none:
             break
         }

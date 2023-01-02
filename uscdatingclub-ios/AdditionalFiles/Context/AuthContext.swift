@@ -11,6 +11,8 @@ struct AuthContext {
     static let APPLE_PHONE_NUMBER: String = "13103103101"
     static let APPLE_CODE: String = "123456"
     
+    static let uuid: String = UUID().uuidString
+    
     static var email: String = ""
     static var phoneNumber: String = ""
     static var firstName: String = ""
