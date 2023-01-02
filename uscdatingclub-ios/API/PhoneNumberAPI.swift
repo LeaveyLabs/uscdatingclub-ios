@@ -10,10 +10,9 @@ import Foundation
 typealias ResetToken = String
 
 struct PhoneNumberError: Codable {
-    let email: [String]?
     let phone_number: [String]?
-    let code: [String]?
-    let token: [String]?
+    let code: String?
+    let token: String?
     // Error
     let non_field_errors: [String]?
     let detail: String?
@@ -47,8 +46,7 @@ class PhoneNumberAPI {
                let phoneNumberError = phoneNumberErrors.first {
                 throw APIError.ClientError(phoneNumberError, PHONE_NUMBER_RECOVERY_MESSAGE)
             }
-            if let codeErrors = error.code,
-               let codeError = codeErrors.first {
+            if let codeError = error.code {
                 throw APIError.ClientError(codeError, PHONE_NUMBER_RECOVERY_MESSAGE)
             }
         }
