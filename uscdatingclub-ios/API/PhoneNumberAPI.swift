@@ -79,6 +79,11 @@ class PhoneNumberAPI {
         try filterPhoneNumberErrors(data: data, response: response)
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return try decoder.decode(CompleteUser?.self, from: data)
+        do {
+            return try decoder.decode(CompleteUser.self, from: data)
+        }
+        catch is DecodingError {
+            return nil
+        }
     }
 }

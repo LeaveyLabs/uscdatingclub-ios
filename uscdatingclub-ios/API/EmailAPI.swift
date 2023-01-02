@@ -56,7 +56,7 @@ class EmailAPI {
     }
     
     static func requestCode(email:String, uuid:String) async throws {
-        let url = "\(Env.BASE_URL)\(Endpoints.sendCode)"
+        let url = "\(Env.BASE_URL)\(Endpoints.sendCode.rawValue)"
         let params = [
             ParameterKeys.email.rawValue: email,
             ParameterKeys.proxyUuid.rawValue: uuid,
@@ -67,7 +67,7 @@ class EmailAPI {
     }
     
     static func verifyCode(email:String, code:String, uuid:String) async throws {
-        let url = "\(Env.BASE_URL)\(Endpoints.verifyCode)"
+        let url = "\(Env.BASE_URL)\(Endpoints.verifyCode.rawValue)"
         let params = [
             ParameterKeys.email.rawValue: email,
             ParameterKeys.code.rawValue: code,
