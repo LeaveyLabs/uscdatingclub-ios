@@ -129,12 +129,10 @@ class CreateProfileVC: KUIViewController, UITextFieldDelegate {
         
         firstNameTextField.delegate = self
         firstNameTextField.smartInsertDeleteType = UITextSmartInsertDeleteType.no
-        firstNameTextField.layer.cornerRadius = 5
         firstNameTextField.setLeftAndRightPadding(10)
         
         lastNameTextField.delegate = self
         lastNameTextField.smartInsertDeleteType = UITextSmartInsertDeleteType.no
-        lastNameTextField.layer.cornerRadius = 5
         lastNameTextField.setLeftAndRightPadding(10)
     }
     

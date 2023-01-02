@@ -66,7 +66,6 @@ class EnterEmailVC: KUIViewController, UITextFieldDelegate {
     
     func setupEnterEmailTextField() {
         enterEmailTextField.delegate = self
-        enterEmailTextField.layer.cornerRadius = 5
         enterEmailTextField.setLeftAndRightPadding(10)
     }
     

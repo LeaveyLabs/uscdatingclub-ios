@@ -103,7 +103,6 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
     func setupConfirmEmailTextField() {
         confirmTextField.delegate = self
         confirmTextField.smartInsertDeleteType = UITextSmartInsertDeleteType.no
-        confirmTextField.layer.cornerRadius = 5
         let xconstraints: CGFloat = 50
         let textFieldWidth = view.frame.size.width - xconstraints
         let numberWidth: CGFloat = 14
@@ -114,10 +113,10 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
     
     func setupContinueButton() {
         continueButton.internalButton.isEnabled = false
-        continueButton.internalButton.setBackgroundImage(UIImage.imageFromColor(color: .primaryColor), for: .normal)
-        continueButton.internalButton.setBackgroundImage(UIImage.imageFromColor(color: .primaryColor.withAlphaComponent(0.2)), for: .disabled)
-        continueButton.internalButton.setTitleColor(.white, for: .normal)
-        continueButton.internalButton.setTitleColor(.primaryColor, for: .disabled)
+        continueButton.internalButton.setBackgroundImage(UIImage.imageFromColor(color: .customWhite), for: .normal)
+        continueButton.internalButton.setBackgroundImage(UIImage.imageFromColor(color: .customWhite.withAlphaComponent(0.2)), for: .disabled)
+        continueButton.internalButton.setTitleColor(.customBlack, for: .normal)
+        continueButton.internalButton.setTitleColor(.customBlack, for: .disabled)
         continueButton.configure(title: "continue", systemImage: "")
         continueButton.internalButton.addTarget(self, action: #selector(tryToContinue), for: .touchUpInside)
     }

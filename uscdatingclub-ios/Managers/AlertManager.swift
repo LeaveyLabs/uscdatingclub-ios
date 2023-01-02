@@ -42,7 +42,7 @@ enum AlertManager {
         DispatchQueue.main.async { //ensures that these ui actions occur on the main thread
 //            let errorMessageView: CustomCardView = try! SwiftMessages.viewFromNib()
             let errorMessageView = MessageView.viewFromNib(layout: .cardView)
-            errorMessageView.configureTheme(.error)
+            errorMessageView.configureTheme(Theme.info)
 //            errorMessageView.applyMediumShadow()
             errorMessageView.configureContent(title: title,
                                          body: body,
