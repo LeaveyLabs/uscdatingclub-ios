@@ -31,6 +31,7 @@ class PhoneNumberAPI {
         case phone = "phone_number"
         case proxyUuid = "proxy_uuid"
         case code = "code"
+        case isRegistration = "is_registration"
     }
     
     static let PHONE_NUMBER_RECOVERY_MESSAGE = "Please try again"
@@ -55,7 +56,19 @@ class PhoneNumberAPI {
     }
     
     
-    static func requestCode(phoneNumber:String, uuid:String) async throws {
+    static func requestRegistrationCode(phoneNumber:String, uuid:String) async throws {
+        let url = "\(Env.BASE_URL)\(Endpoints.sendCode.rawValue)"
+        let params:[String:String] = [
+            ParameterKeys.phone.rawValue: phoneNumber,
+            ParameterKeys.proxyUuid.rawValue: uuid,
+            ParameterKeys.isRegistration.rawValue: "1",
+        ]
+        let json = try JSONEncoder().encode(params)
+        let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
+        try filterPhoneNumberErrors(data: data, response: response)
+    }
+    
+    static func requestLoginCode(phoneNumber:String, uuid:String) async throws {
         let url = "\(Env.BASE_URL)\(Endpoints.sendCode.rawValue)"
         let params:[String:String] = [
             ParameterKeys.phone.rawValue: phoneNumber,
@@ -66,7 +79,7 @@ class PhoneNumberAPI {
         try filterPhoneNumberErrors(data: data, response: response)
     }
     
-    static func verifyCode(phoneNumber:String, code:String, uuid:String) async throws -> CompleteUser? {
+    static func verifyRegistrationCode(phoneNumber:String, code:String, uuid:String) async throws {
         let url = "\(Env.BASE_URL)\(Endpoints.verifyCode.rawValue)"
         let params:[String:String] = [
             ParameterKeys.phone.rawValue: phoneNumber,
@@ -76,7 +89,18 @@ class PhoneNumberAPI {
         let json = try JSONEncoder().encode(params)
         let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
         try filterPhoneNumberErrors(data: data, response: response)
-        // If there's a complete user, then return it
-        return try JSONDecoder().decode(CompleteUser?.self, from: data)
+    }
+    
+    static func verifyLoginCode(phoneNumber:String, code:String, uuid:String) async throws -> CompleteUser {
+        let url = "\(Env.BASE_URL)\(Endpoints.verifyCode.rawValue)"
+        let params:[String:String] = [
+            ParameterKeys.phone.rawValue: phoneNumber,
+            ParameterKeys.code.rawValue: code,
+            ParameterKeys.proxyUuid.rawValue: uuid,
+        ]
+        let json = try JSONEncoder().encode(params)
+        let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
+        try filterPhoneNumberErrors(data: data, response: response)
+        return try JSONDecoder().decode(CompleteUser.self, from: data)
     }
 }
