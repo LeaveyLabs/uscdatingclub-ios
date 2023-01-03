@@ -32,6 +32,16 @@ struct UserError: Codable {
     let detail: String?
 }
 
+struct SurveyResponse: Codable {
+    let category: Int
+    let answer: Int
+}
+
+struct PostSurveyAnswers: Codable {
+    let email: String
+    let responses: [SurveyResponse]
+}
+
 class UserAPI {
     // Paths to API endpoints
     enum Endpoints: String {
@@ -123,14 +133,13 @@ class UserAPI {
     }
     
     static func postSurveyAnswers(email:String,
-                                  responses:[Int]) async throws {
+                                  responses:[Int:Int]) async throws {
         let url = "\(Env.BASE_URL)\(Endpoints.postSurveyAnswers.rawValue)"
-        var params:[String:String] = [
-            ParameterKeys.email.rawValue: email,
-        ]
-        for response in responses {
-            params[ParameterKeys.responses.rawValue] = String(response)
+        var surveyResponses:[SurveyResponse] = []
+        for (category, answer) in responses {
+            surveyResponses.append(SurveyResponse(category: category, answer: answer))
         }
+        let params = PostSurveyAnswers(email: email, responses: surveyResponses)
         let json = try JSONEncoder().encode(params)
         let (data, response) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
         try filterUserErrors(data: data, response: response)
