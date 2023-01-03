@@ -54,6 +54,9 @@
 		476FD86E295E4A1F0014DD42 /* HowItWorksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD86C295E4A1F0014DD42 /* HowItWorksCell.swift */; };
 		476FD86F295E4A1F0014DD42 /* HowItWorksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */; };
 		478BECBB2963463300930DAF /* GenericAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECBA2963463300930DAF /* GenericAPI.swift */; };
+		478BECBE2963755000930DAF /* CompatibilityTestSpectrumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECBC2963755000930DAF /* CompatibilityTestSpectrumCell.swift */; };
+		478BECBF2963755000930DAF /* CompatibilityTestSpectrumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 478BECBD2963755000930DAF /* CompatibilityTestSpectrumCell.xib */; };
+		478BECC129647FC000930DAF /* matchsound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 478BECC029647FC000930DAF /* matchsound.wav */; };
 		47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A80614295F8D23001DEE64 /* EnterBiosVC.swift */; };
 		47C40EE9295CB930007C27F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40EE8295CB930007C27F0 /* SceneDelegate.swift */; };
 		47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEC295CB930007C27F0 /* Main.storyboard */; };
@@ -199,6 +202,9 @@
 		476FD86C295E4A1F0014DD42 /* HowItWorksCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowItWorksCell.swift; sourceTree = "<group>"; };
 		476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HowItWorksCell.xib; sourceTree = "<group>"; };
 		478BECBA2963463300930DAF /* GenericAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAPI.swift; sourceTree = "<group>"; };
+		478BECBC2963755000930DAF /* CompatibilityTestSpectrumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibilityTestSpectrumCell.swift; sourceTree = "<group>"; };
+		478BECBD2963755000930DAF /* CompatibilityTestSpectrumCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompatibilityTestSpectrumCell.xib; sourceTree = "<group>"; };
+		478BECC029647FC000930DAF /* matchsound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = matchsound.wav; sourceTree = "<group>"; };
 		47A80614295F8D23001DEE64 /* EnterBiosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterBiosVC.swift; sourceTree = "<group>"; };
 		47C40EE3295CB930007C27F0 /* uscdatingclub-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "uscdatingclub-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47C40EE8295CB930007C27F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -418,6 +424,7 @@
 		47C40EDA295CB930007C27F0 = {
 			isa = PBXGroup;
 			children = (
+				478BECC029647FC000930DAF /* matchsound.wav */,
 				47C40EE5295CB930007C27F0 /* uscdatingclub-ios */,
 				47C40EFC295CB931007C27F0 /* uscdatingclub-iosTests */,
 				47C40F06295CB931007C27F0 /* uscdatingclub-iosUITests */,
@@ -730,6 +737,8 @@
 			children = (
 				476FD86C295E4A1F0014DD42 /* HowItWorksCell.swift */,
 				476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */,
+				478BECBC2963755000930DAF /* CompatibilityTestSpectrumCell.swift */,
+				478BECBD2963755000930DAF /* CompatibilityTestSpectrumCell.xib */,
 			);
 			path = TableCells;
 			sourceTree = "<group>";
@@ -953,8 +962,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				47E38FF7295F75AD007CB77F /* Misc.storyboard in Resources */,
+				478BECC129647FC000930DAF /* matchsound.wav in Resources */,
 				47C40EF3295CB931007C27F0 /* LaunchScreen.storyboard in Resources */,
 				47C40F17295CBAB7007C27F0 /* GoogleService-Info.plist in Resources */,
+				478BECBF2963755000930DAF /* CompatibilityTestSpectrumCell.xib in Resources */,
 				47DE3225295CC57C0063C55A /* Auth.storyboard in Resources */,
 				47C40EF0295CB931007C27F0 /* Assets.xcassets in Resources */,
 				47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */,
@@ -1080,6 +1091,7 @@
 				4731F509295CD4770013F626 /* UIView+Shadow.swift in Sources */,
 				47DE325C295CC7C40063C55A /* UIViewController+Loading.swift in Sources */,
 				47DE324D295CC7C40063C55A /* UITextView+PreventPeriod.swift in Sources */,
+				478BECBE2963755000930DAF /* CompatibilityTestSpectrumCell.swift in Sources */,
 				47DE3255295CC7C40063C55A /* UIVC+InteractivePop.swift in Sources */,
 				47C4106D295CC095007C27F0 /* String+Pattern.swift in Sources */,
 				47DE325A295CC7C40063C55A /* UIViewController+FloatingButton.swift in Sources */,

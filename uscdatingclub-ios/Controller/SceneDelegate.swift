@@ -54,7 +54,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         
         if !UserService.singleton.isLoggedIntoAnAccount {
-            window.rootViewController = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateInitialViewController()
+            window.rootViewController = LoadingVC.create()
+//            window.rootViewController = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateInitialViewController()
         } else {
             let loadingVC = LoadingVC.create()
             window.rootViewController = loadingVC
