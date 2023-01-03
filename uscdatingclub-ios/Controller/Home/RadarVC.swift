@@ -7,13 +7,24 @@
 
 import UIKit
 
+var temphasAnsweredQuestions = false
+
 class RadarVC: UIViewController, PageVCChild {
+    
+    enum HomeState {
+        case radar, arrow
+    }
 
     //MARK: - Properties
     
     //Flags
     var isCurrentlyVisible = false
     var isLocationServicesEnabled: Bool = false
+    
+    var uiState: HomeState {
+        return temphasAnsweredQuestions ? .radar : .arrow
+//        UserService.singleton.hasAnsweredQuestions
+    }
     
     let PULSE_DURATION: Double = 4.0
     let CIRCLE_WIDTH_RATIO: Double = 0.2
@@ -25,9 +36,11 @@ class RadarVC: UIViewController, PageVCChild {
         [firstCircleView, secondCircleView]
     }
     
+    @IBOutlet var arrowView: UIImageView!
     @IBOutlet var aboutButton: UIButton!
     @IBOutlet var accountButton: UIButton!
-    @IBOutlet var activeButton: SimpleButton!
+    @IBOutlet var primaryButton: SimpleButton!
+    @IBOutlet var primaryButtonHeightConstraint: NSLayoutConstraint!
     
     var pageVCDelegate: PageVCDelegate!
 
@@ -46,6 +59,12 @@ class RadarVC: UIViewController, PageVCChild {
         setupCircleViews()
         setupButtons()
         renderIsActive()
+        pulseArrow()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        renderUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -68,6 +87,28 @@ class RadarVC: UIViewController, PageVCChild {
     
     //MARK: - Setup
     
+    func renderUI() {
+        switch uiState {
+        case .arrow:
+            arrowView.isHidden = false
+            centerCircleButton.isHidden = true
+            circleViews.forEach { $0.isHidden = true }
+            centerCircleButton.isHidden = true
+            primaryButton.configure(title: "take the\ncompatibility test", systemImage: "testtube.2")
+            primaryButton.internalButton.backgroundColor = .customWhite
+            primaryButton.internalButton.setTitleColor(.customBlack, for: .normal)
+            primaryButtonHeightConstraint.constant = 90
+        case .radar:
+            arrowView.isHidden = true
+            centerCircleButton.isHidden = false
+            circleViews.forEach { $0.isHidden = false }
+            centerCircleButton.isHidden = false
+            primaryButton.internalButton.setTitleColor(.customWhite, for: .normal)
+            primaryButtonHeightConstraint.constant = 60
+            renderIsActive()
+        }
+    }
+    
     func setupButtons() {
         aboutButton.addAction(.init(handler: { [self] _ in
             pageVCDelegate.didPressBackwardButton()
@@ -76,21 +117,21 @@ class RadarVC: UIViewController, PageVCChild {
             pageVCDelegate.didPressForwardButton()
         }), for: .touchUpInside)
         
-        activeButton.internalButton.addTarget(self, action: #selector(didTapActiveButton), for: .touchUpInside)
+        primaryButton.internalButton.addTarget(self, action: #selector(didTapActiveButton), for: .touchUpInside)
     }
     
     func renderIsActive() {
         if isLocationServicesEnabled {
-            activeButton.configure(title: "active", systemImage: "")
-            activeButton.internalButton.backgroundColor = .customGreen
-            activeButton.internalButton.setTitleColor(.black, for: .normal)
+            primaryButton.configure(title: "active", systemImage: "")
+            primaryButton.internalButton.backgroundColor = .customGreen
+            primaryButton.internalButton.setTitleColor(.black, for: .normal)
             
             startPulsing()
             LocationManager.shared.startLocationServices()
         } else {
-            activeButton.configure(title: "inactive", systemImage: "")
-            activeButton.internalButton.backgroundColor = .customRed
-            activeButton.internalButton.setTitleColor(.white, for: .normal)
+            primaryButton.configure(title: "inactive", systemImage: "")
+            primaryButton.internalButton.backgroundColor = .customRed
+            primaryButton.internalButton.setTitleColor(.white, for: .normal)
             
             LocationManager.shared.stopLocationServices()
         }
@@ -131,6 +172,12 @@ class RadarVC: UIViewController, PageVCChild {
         }
     }
     
+    func pulseArrow() {
+        UIView.animate(withDuration: 2, delay: 0, options: [.curveLinear, .allowUserInteraction, .autoreverse, .repeat]) {
+            self.arrowView.transform = CGAffineTransform(translationX: 0, y: 100)
+        }
+    }
+    
     func setupCircleViews() {
         for circleView in circleViews {
             view.addSubview(circleView)
@@ -161,8 +208,13 @@ class RadarVC: UIViewController, PageVCChild {
     //MARK: - Interaction
     
     @objc func didTapActiveButton() {
-        isLocationServicesEnabled.toggle()
-        renderIsActive()
+        switch uiState {
+        case .radar:
+            isLocationServicesEnabled.toggle()
+            renderIsActive()
+        case .arrow:
+            presentTest()
+        }
     }
     
     @objc func centerCircleTouchDown() {
@@ -197,6 +249,14 @@ class RadarVC: UIViewController, PageVCChild {
         DispatchQueue.main.asyncAfter(deadline: .now() + PULSE_DURATION) {
             newCircleView.removeFromSuperview()
         }
+    }
+    
+    //MARK: - Helpers
+    
+    func presentTest() {
+        let nav = UINavigationController(rootViewController: TestTextVC.create())
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
     }
     
 }

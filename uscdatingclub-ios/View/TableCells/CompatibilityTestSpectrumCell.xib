@@ -35,6 +35,9 @@
                                     <constraint firstAttribute="width" constant="24" id="SBU-0v-7lk"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="circleButtonDidTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="r4C-z7-iRd"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uo1-aa-EyC">
                                 <rect key="frame" x="68" y="0.0" width="24" height="24"/>
@@ -44,6 +47,9 @@
                                     <constraint firstAttribute="width" secondItem="uo1-aa-EyC" secondAttribute="height" id="dup-yM-yTD"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="circleButtonDidTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="PnM-lo-cnZ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Wc-tI-l3d">
                                 <rect key="frame" x="136" y="0.0" width="24" height="24"/>
@@ -53,6 +59,9 @@
                                     <constraint firstAttribute="width" secondItem="4Wc-tI-l3d" secondAttribute="height" id="dfr-cJ-acg"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="circleButtonDidTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="FYb-fb-ShO"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6oy-Yf-Qaq">
                                 <rect key="frame" x="204" y="0.0" width="24" height="24"/>
@@ -62,6 +71,9 @@
                                     <constraint firstAttribute="width" constant="24" id="gtf-IJ-K3V"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="circleButtonDidTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hTO-ba-cN8"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yku-hd-GGc">
                                 <rect key="frame" x="272" y="0.0" width="24" height="24"/>
@@ -71,6 +83,9 @@
                                     <constraint firstAttribute="width" secondItem="yku-hd-GGc" secondAttribute="height" id="eww-xS-S9N"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="circleButtonDidTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="tMs-gb-nPt"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
@@ -97,6 +112,12 @@
                         <color key="textColor" name="customWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="very open" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVB-jG-dfo">
+                        <rect key="frame" x="260" y="93.333333333333329" width="56" height="14.333333333333329"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" name="customWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" name="primaryColor"/>
                 <constraints>
@@ -105,6 +126,7 @@
                     <constraint firstItem="6YV-Ds-tJY" firstAttribute="top" secondItem="Dd6-PW-s6i" secondAttribute="bottom" constant="25" id="Euf-ee-xS3"/>
                     <constraint firstItem="jJD-m2-nuv" firstAttribute="centerY" secondItem="6YV-Ds-tJY" secondAttribute="centerY" id="MCK-iG-F5L"/>
                     <constraint firstAttribute="trailing" secondItem="Dd6-PW-s6i" secondAttribute="trailing" constant="20" id="PSW-ZY-bc9"/>
+                    <constraint firstItem="BVB-jG-dfo" firstAttribute="top" secondItem="jJD-m2-nuv" secondAttribute="bottom" constant="15" id="RHy-8M-gcK"/>
                     <constraint firstItem="NGm-WF-on8" firstAttribute="top" secondItem="jJD-m2-nuv" secondAttribute="bottom" constant="15" id="UWi-7q-Zf6"/>
                     <constraint firstAttribute="trailing" secondItem="6YV-Ds-tJY" secondAttribute="trailing" constant="25" id="YDA-Vt-SJR"/>
                     <constraint firstItem="Dd6-PW-s6i" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="YQK-ns-pzQ"/>
@@ -112,9 +134,20 @@
                     <constraint firstItem="jJD-m2-nuv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="hOE-6k-hee"/>
                     <constraint firstItem="6YV-Ds-tJY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="iEI-mZ-HOl"/>
                     <constraint firstItem="6YV-Ds-tJY" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="kYa-hm-sDb"/>
+                    <constraint firstAttribute="trailing" secondItem="BVB-jG-dfo" secondAttribute="trailing" constant="10" id="zBX-dk-gSI"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="circle1Button" destination="Q99-On-I7l" id="Sde-ID-grR"/>
+                <outlet property="circle2Button" destination="uo1-aa-EyC" id="UY5-Hz-M4P"/>
+                <outlet property="circle3Button" destination="4Wc-tI-l3d" id="mWX-Wz-XVl"/>
+                <outlet property="circle4Button" destination="6oy-Yf-Qaq" id="hhy-Tj-hUN"/>
+                <outlet property="circle5Button" destination="yku-hd-GGc" id="qmh-WE-FsB"/>
+                <outlet property="leftLabel" destination="NGm-WF-on8" id="UB2-9h-LSC"/>
+                <outlet property="rightLabel" destination="BVB-jG-dfo" id="8vP-lR-AE5"/>
+                <outlet property="titleLabel" destination="Dd6-PW-s6i" id="v45-l2-x1w"/>
+            </connections>
             <point key="canvasLocation" x="107.63358778625954" y="51.408450704225352"/>
         </tableViewCell>
     </objects>

@@ -59,6 +59,10 @@
 		478BECBE2963755000930DAF /* CompatibilityTestSpectrumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECBC2963755000930DAF /* CompatibilityTestSpectrumCell.swift */; };
 		478BECBF2963755000930DAF /* CompatibilityTestSpectrumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 478BECBD2963755000930DAF /* CompatibilityTestSpectrumCell.xib */; };
 		478BECC129647FC000930DAF /* matchsound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 478BECC029647FC000930DAF /* matchsound.wav */; };
+		478BECC229647FFB00930DAF /* PhoneNumberKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 434A057C2963D3AB00C15945 /* PhoneNumberKit-Dynamic */; };
+		478BECC42964C2FD00930DAF /* TakeTheTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECC32964C2FD00930DAF /* TakeTheTestVC.swift */; };
+		478BECC62964C4D000930DAF /* TestQuestionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECC52964C4D000930DAF /* TestQuestionsVC.swift */; };
+		478BECC92964C60900930DAF /* TestTextVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECC82964C60900930DAF /* TestTextVC.swift */; };
 		47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A80614295F8D23001DEE64 /* EnterBiosVC.swift */; };
 		47C40EE9295CB930007C27F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40EE8295CB930007C27F0 /* SceneDelegate.swift */; };
 		47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEC295CB930007C27F0 /* Main.storyboard */; };
@@ -221,6 +225,9 @@
 		478BECBC2963755000930DAF /* CompatibilityTestSpectrumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibilityTestSpectrumCell.swift; sourceTree = "<group>"; };
 		478BECBD2963755000930DAF /* CompatibilityTestSpectrumCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompatibilityTestSpectrumCell.xib; sourceTree = "<group>"; };
 		478BECC029647FC000930DAF /* matchsound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = matchsound.wav; sourceTree = "<group>"; };
+		478BECC32964C2FD00930DAF /* TakeTheTestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTheTestVC.swift; sourceTree = "<group>"; };
+		478BECC52964C4D000930DAF /* TestQuestionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestQuestionsVC.swift; sourceTree = "<group>"; };
+		478BECC82964C60900930DAF /* TestTextVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTextVC.swift; sourceTree = "<group>"; };
 		47A80614295F8D23001DEE64 /* EnterBiosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterBiosVC.swift; sourceTree = "<group>"; };
 		47C40EE3295CB930007C27F0 /* uscdatingclub-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "uscdatingclub-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47C40EE8295CB930007C27F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -364,6 +371,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				478BECC229647FFB00930DAF /* PhoneNumberKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,8 +439,18 @@
 				4731F529295CE0980013F626 /* RadarVC.swift */,
 				4731F52B295CE0B40013F626 /* AboutVC.swift */,
 				4731F52D295CE0C10013F626 /* AccountVC.swift */,
+				478BECC32964C2FD00930DAF /* TakeTheTestVC.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		478BECC72964C5E300930DAF /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				478BECC82964C60900930DAF /* TestTextVC.swift */,
+				478BECC52964C4D000930DAF /* TestQuestionsVC.swift */,
+			);
+			path = Test;
 			sourceTree = "<group>";
 		};
 		47A80613295F8CBD001DEE64 /* Misc */ = {
@@ -559,6 +577,7 @@
 			children = (
 				47C40F8B295CBBBD007C27F0 /* AppDelegate.swift */,
 				47C40EE8295CB930007C27F0 /* SceneDelegate.swift */,
+				478BECC72964C5E300930DAF /* Test */,
 				47A80613295F8CBD001DEE64 /* Misc */,
 				4731F526295CDCE80013F626 /* Home */,
 				4731F516295CD5750013F626 /* App */,
@@ -1042,6 +1061,7 @@
 				47DE324B295CC7C40063C55A /* UITextView+MaxLength.swift in Sources */,
 				434A052E295E1EB600C15945 /* PhoneNumberAPI.swift in Sources */,
 				47C4105A295CBFFC007C27F0 /* Numbers.swift in Sources */,
+				478BECC62964C4D000930DAF /* TestQuestionsVC.swift in Sources */,
 				47C41059295CBFFC007C27F0 /* Distance.swift in Sources */,
 				47DE3206295CC4B40063C55A /* EnterEmailVC.swift in Sources */,
 				47DE325B295CC7C40063C55A /* UIViewController+Logout.swift in Sources */,
@@ -1055,6 +1075,7 @@
 				434A053D2963A77200C15945 /* LocationSocket.swift in Sources */,
 				4731F512295CD4870013F626 /* UITextField+MaxLength.swift in Sources */,
 				4731F515295CD48F0013F626 /* UISegmentedControl+Twitter.swift in Sources */,
+				478BECC92964C60900930DAF /* TestTextVC.swift in Sources */,
 				47DE3254295CC7C40063C55A /* UIViewController+OpenURL.swift in Sources */,
 				47C40F91295CBBBD007C27F0 /* Color+Hex.swift in Sources */,
 				47C40F61295CBAF0007C27F0 /* Device.swift in Sources */,
@@ -1104,6 +1125,7 @@
 				47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */,
 				470221E9295CCFA200119FA8 /* Version.swift in Sources */,
 				4731F50C295CD4770013F626 /* UIView+Animations.swift in Sources */,
+				478BECC42964C2FD00930DAF /* TakeTheTestVC.swift in Sources */,
 				47DE31F2295CC4B40063C55A /* ImagePicker.swift in Sources */,
 				47C41054295CBFFC007C27F0 /* Time.swift in Sources */,
 				4731F50A295CD4770013F626 /* UIView+SafeAreaConstraints.swift in Sources */,

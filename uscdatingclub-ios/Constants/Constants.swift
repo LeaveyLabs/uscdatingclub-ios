@@ -42,6 +42,10 @@ enum Constants {
             static let About = "AboutVC"
             static let Radar = "RadarVC"
             static let Account = "AccountVC"
+            static let TakeTheTest = "TakeTheTestVC"
+            //Test
+            static let TestText = "TestTextVC"
+            static let TestQuestions = "TestQuestionsVC"
             //Settings
             static let Settings = "SettingsVC"
             static let UpdateProfile = "UpdateProfileSettingVC"

@@ -35,7 +35,8 @@ class SimpleButton: UIView {
     }
     
     func setupButtons() {
-        
+        internalButton.titleLabel?.numberOfLines = 0
+        internalButton.titleLabel?.textAlignment = .center
     }
         
     //MARK: - User Interaction
