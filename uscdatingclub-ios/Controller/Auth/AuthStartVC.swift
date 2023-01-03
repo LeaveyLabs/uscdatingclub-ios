@@ -34,7 +34,7 @@ class AuthStartVC: UIViewController, UITextViewDelegate {
 //            loginButton.alpha = 1
 //            registerButton.alpha = 1
 //            agreementTextView.alpha = 1
-//        }
+//        }        
     }
     
     override func viewDidAppear(_ animated: Bool) {

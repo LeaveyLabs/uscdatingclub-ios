@@ -11,9 +11,11 @@
 		434A052C295E1E9700C15945 /* DeviceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A052B295E1E9700C15945 /* DeviceAPI.swift */; };
 		434A052E295E1EB600C15945 /* PhoneNumberAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A052D295E1EB600C15945 /* PhoneNumberAPI.swift */; };
 		434A0532295E1F1300C15945 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A0531295E1F1300C15945 /* UserAPI.swift */; };
-		434A0535295E329D00C15945 /* EmailAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A0534295E329D00C15945 /* EmailAPITest.swift */; };
 		434A0539295E99FE00C15945 /* EmailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A052F295E1EDB00C15945 /* EmailAPI.swift */; };
 		434A053A295E99FF00C15945 /* EmailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A052F295E1EDB00C15945 /* EmailAPI.swift */; };
+		434A053D2963A77200C15945 /* LocationSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A053C2963A77200C15945 /* LocationSocket.swift */; };
+		434A05402963C92B00C15945 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 434A053F2963C92B00C15945 /* Starscream */; };
+		434A057F2963D3AB00C15945 /* PhoneNumberKit-Dynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 434A057C2963D3AB00C15945 /* PhoneNumberKit-Dynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		470221E7295CCE3E00119FA8 /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4107D295CC0BE007C27F0 /* UIColor+Custom.swift */; };
 		470221E9295CCFA200119FA8 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470221E8295CCFA200119FA8 /* Version.swift */; };
 		4731F501295CD4350013F626 /* UINavigationController+Completion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41097295CC0C0007C27F0 /* UINavigationController+Completion.swift */; };
@@ -173,13 +175,27 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		434A057E2963D3AB00C15945 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				434A057F2963D3AB00C15945 /* PhoneNumberKit-Dynamic in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		434A0529295E1E6700C15945 /* BasicAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAPI.swift; sourceTree = "<group>"; };
 		434A052B295E1E9700C15945 /* DeviceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAPI.swift; sourceTree = "<group>"; };
 		434A052D295E1EB600C15945 /* PhoneNumberAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberAPI.swift; sourceTree = "<group>"; };
 		434A052F295E1EDB00C15945 /* EmailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAPI.swift; sourceTree = "<group>"; };
 		434A0531295E1F1300C15945 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
-		434A0534295E329D00C15945 /* EmailAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAPITest.swift; sourceTree = "<group>"; };
+		434A053C2963A77200C15945 /* LocationSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSocket.swift; sourceTree = "<group>"; };
 		470221E8295CCFA200119FA8 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		4731F517295CD5750013F626 /* SpecialTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialTabBar.swift; sourceTree = "<group>"; };
 		4731F519295CD5750013F626 /* SpecialTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialTabBarController.swift; sourceTree = "<group>"; };
@@ -333,6 +349,7 @@
 				47C40F79295CBB42007C27F0 /* FirebasePerformance in Frameworks */,
 				47C40F75295CBB42007C27F0 /* FirebaseFirestore in Frameworks */,
 				47DE31D0295CC2790063C55A /* SwiftMessages in Frameworks */,
+				434A05402963C92B00C15945 /* Starscream in Frameworks */,
 				47DE31CD295CC2350063C55A /* PhoneNumberKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,14 +384,6 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		434A0533295E327C00C15945 /* APITests */ = {
-			isa = PBXGroup;
-			children = (
-				434A0534295E329D00C15945 /* EmailAPITest.swift */,
-			);
-			path = APITests;
-			sourceTree = "<group>";
-		};
 		434A0538295E99FB00C15945 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,6 +391,21 @@
 				476FD868295E1BCA0014DD42 /* AlertManager.swift */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		434A053B2963A77200C15945 /* Socket */ = {
+			isa = PBXGroup;
+			children = (
+				434A053C2963A77200C15945 /* LocationSocket.swift */,
+			);
+			path = Socket;
+			sourceTree = "<group>";
+		};
+		434A05432963D3AA00C15945 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		4731F516295CD5750013F626 /* App */ = {
@@ -423,6 +447,7 @@
 				47C40F06295CB931007C27F0 /* uscdatingclub-iosUITests */,
 				47C40EE4295CB930007C27F0 /* Products */,
 				434A0538295E99FB00C15945 /* Recovered References */,
+				434A05432963D3AA00C15945 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -445,6 +470,7 @@
 				47DE320A295CC4F90063C55A /* Env.swift */,
 				47C40EEF295CB931007C27F0 /* Assets.xcassets */,
 				434A0528295E1E3A00C15945 /* API */,
+				434A053B2963A77200C15945 /* Socket */,
 				47C40F5B295CBAF0007C27F0 /* Model */,
 				47C40F97295CBD49007C27F0 /* View */,
 				47C40F96295CBD36007C27F0 /* Controller */,
@@ -460,7 +486,6 @@
 		47C40EFC295CB931007C27F0 /* uscdatingclub-iosTests */ = {
 			isa = PBXGroup;
 			children = (
-				434A0533295E327C00C15945 /* APITests */,
 				47C40EFD295CB931007C27F0 /* uscdatingclub_iosTests.swift */,
 			);
 			path = "uscdatingclub-iosTests";
@@ -858,6 +883,7 @@
 				47C40F7C295CBB42007C27F0 /* FirebaseRemoteConfigSwift */,
 				47DE31CC295CC2350063C55A /* PhoneNumberKit */,
 				47DE31CF295CC2790063C55A /* SwiftMessages */,
+				434A053F2963C92B00C15945 /* Starscream */,
 			);
 			productName = "uscdatingclub-ios";
 			productReference = 47C40EE3295CB930007C27F0 /* uscdatingclub-ios.app */;
@@ -870,6 +896,7 @@
 				47C40EF5295CB931007C27F0 /* Sources */,
 				47C40EF6295CB931007C27F0 /* Frameworks */,
 				47C40EF7295CB931007C27F0 /* Resources */,
+				434A057E2963D3AB00C15945 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -877,6 +904,9 @@
 				47C40EFB295CB931007C27F0 /* PBXTargetDependency */,
 			);
 			name = "uscdatingclub-iosTests";
+			packageProductDependencies = (
+				434A057C2963D3AB00C15945 /* PhoneNumberKit-Dynamic */,
+			);
 			productName = "uscdatingclub-iosTests";
 			productReference = 47C40EF9295CB931007C27F0 /* uscdatingclub-iosTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -935,6 +965,7 @@
 				47C40F69295CBB41007C27F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				47DE31CB295CC2340063C55A /* XCRemoteSwiftPackageReference "PhoneNumberKit" */,
 				47DE31CE295CC2790063C55A /* XCRemoteSwiftPackageReference "SwiftMessages" */,
+				434A053E2963C92B00C15945 /* XCRemoteSwiftPackageReference "Starscream" */,
 			);
 			productRefGroup = 47C40EE4295CB930007C27F0 /* Products */;
 			projectDirPath = "";
@@ -1010,6 +1041,7 @@
 				47DE3265295CC94F0063C55A /* UIButton+RightSideImage.swift in Sources */,
 				47DE3258295CC7C40063C55A /* UIViewController+Window.swift in Sources */,
 				4731F51E295CD5750013F626 /* LoadingVC.swift in Sources */,
+				434A053D2963A77200C15945 /* LocationSocket.swift in Sources */,
 				4731F512295CD4870013F626 /* UITextField+MaxLength.swift in Sources */,
 				4731F515295CD48F0013F626 /* UISegmentedControl+Twitter.swift in Sources */,
 				47DE3254295CC7C40063C55A /* UIViewController+OpenURL.swift in Sources */,
@@ -1114,7 +1146,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				47C40EFE295CB931007C27F0 /* uscdatingclub_iosTests.swift in Sources */,
-				434A0535295E329D00C15945 /* EmailAPITest.swift in Sources */,
 				434A053A295E99FF00C15945 /* EmailAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1487,6 +1518,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		434A053E2963C92B00C15945 /* XCRemoteSwiftPackageReference "Starscream" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daltoniam/Starscream.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		47C40F69295CBB41007C27F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -1514,6 +1553,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		434A053F2963C92B00C15945 /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 434A053E2963C92B00C15945 /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
+		};
+		434A057C2963D3AB00C15945 /* PhoneNumberKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47DE31CB295CC2340063C55A /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
+			productName = "PhoneNumberKit-Dynamic";
+		};
 		47C40F6A295CBB41007C27F0 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 47C40F69295CBB41007C27F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

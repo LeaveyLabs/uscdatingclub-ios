@@ -18,12 +18,14 @@ class Env {
     static let TRANSITION_TO_AUTH_DURATION: Double = 1
     static let TRANSITION_TO_HOME_DURATION: Double = 0.8
     static let BASE_URL: String = "https://usc-dating-club-test.herokuapp.com/"
+    static let CHAT_URL: String = "wss://usc-dating-club-socket-test.herokuapp.com/"
     static let Timeout_Duration: Double = 50
     #elseif DEBUG
     static let environment: EnvType = .dev
     static let TRANSITION_TO_AUTH_DURATION: Double = 1
     static let TRANSITION_TO_HOME_DURATION: Double = 0.8
     static let BASE_URL: String = "https://usc-dating-club-test.herokuapp.com/"
+    static let CHAT_URL: String = "wss://usc-dating-club-socket-test.herokuapp.com/"
     static let Timeout_Duration: Double = 50
 //    #if DEBUG
     //^there's also the option for debug/release flags for more specificity within each environment
@@ -32,6 +34,7 @@ class Env {
     static let TRANSITION_TO_AUTH_DURATION: Double = 1
     static let TRANSITION_TO_HOME_DURATION: Double = 0.8
     static let BASE_URL: String = "https://usc-dating-club-test.herokuapp.com/"
+    static let CHAT_URL: String = "wss://usc-dating-club-socket-test.herokuapp.com/"
     static let Timeout_Duration: Double = 15
     #endif
 }
