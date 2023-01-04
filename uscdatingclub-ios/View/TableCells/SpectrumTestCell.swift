@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol CompatibilityTestSpectrumCellDelegate {
-    func buttonDidTapped(selection: Int)
+protocol SpectrumTestCellDelegate {
+    func buttonDidTapped(questionId: Int, selection: Int)
 }
 
-class CompatibilityTestSpectrumCell: UITableViewCell {
+class SpectrumTestCell: UITableViewCell {
 
     //MARK: - Properties
 
@@ -30,15 +30,16 @@ class CompatibilityTestSpectrumCell: UITableViewCell {
         [circle1Button, circle2Button, circle3Button, circle4Button, circle5Button]
     }
     
-    var cellDelegate: CompatibilityTestSpectrumCellDelegate!
+    var testQuestion: TestQuestion!
+    var cellDelegate: SpectrumTestCellDelegate!
 
     
     //MARK: - Initializer
     
-    func configure(title: String, leftText: String, rightText: String, delegate: CompatibilityTestSpectrumCellDelegate) {
-        titleLabel.text = title
-        leftLabel.text = leftText
-        rightLabel.text = rightText
+    func configure(testQuestion: TestQuestion, delegate: SpectrumTestCellDelegate) {
+        titleLabel.text = testQuestion.title
+        leftLabel.text = testQuestion.lowPhrase
+        rightLabel.text = testQuestion.highPhrase
         selectionStyle = .none
         backgroundColor = .clear
         
@@ -62,7 +63,7 @@ class CompatibilityTestSpectrumCell: UITableViewCell {
             button.backgroundColor = .primaryColor
         }
         circleButtons[sender.tag-1].backgroundColor = .white
-        cellDelegate.buttonDidTapped(selection: sender.tag)
+        cellDelegate.buttonDidTapped(questionId: testQuestion.id, selection: sender.tag)
     }
     
 }

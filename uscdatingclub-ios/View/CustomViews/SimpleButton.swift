@@ -68,6 +68,21 @@ extension SimpleButton {
     // Otherwise you'll get loads of constraint errors in the console
     func configure(title: String, subtitle: String? = nil, systemImage: String) {
         internalButton.setTitle(title, for: .normal)
+        
+        if let subtitle {
+            let fullText = title + "\n" + subtitle
+            let attributedText = NSMutableAttributedString(string: fullText)
+            if let titleRange = fullText.range(of: title) {
+                attributedText.setAttributes([.font: UIFont(name: AppFontName.bold, size: 20)!], range: NSRange(titleRange, in: fullText))
+            }
+            
+            if let subtitleRange = fullText.range(of: subtitle) {
+                attributedText.setAttributes([.font: UIFont(name: AppFontName.regular, size: 16)!], range: NSRange(subtitleRange, in: fullText))
+            }
+
+            internalButton.setAttributedTitle(attributedText, for: .normal)
+        }
+        
         internalButton.setImage(UIImage(systemName: systemImage), for: .normal)
     }
     

@@ -56,13 +56,15 @@
 		476FD86E295E4A1F0014DD42 /* HowItWorksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD86C295E4A1F0014DD42 /* HowItWorksCell.swift */; };
 		476FD86F295E4A1F0014DD42 /* HowItWorksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */; };
 		478BECBB2963463300930DAF /* GenericAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECBA2963463300930DAF /* GenericAPI.swift */; };
-		478BECBE2963755000930DAF /* CompatibilityTestSpectrumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECBC2963755000930DAF /* CompatibilityTestSpectrumCell.swift */; };
-		478BECBF2963755000930DAF /* CompatibilityTestSpectrumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 478BECBD2963755000930DAF /* CompatibilityTestSpectrumCell.xib */; };
+		478BECBE2963755000930DAF /* SpectrumTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECBC2963755000930DAF /* SpectrumTestCell.swift */; };
+		478BECBF2963755000930DAF /* SpectrumTestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 478BECBD2963755000930DAF /* SpectrumTestCell.xib */; };
 		478BECC129647FC000930DAF /* matchsound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 478BECC029647FC000930DAF /* matchsound.wav */; };
 		478BECC229647FFB00930DAF /* PhoneNumberKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 434A057C2963D3AB00C15945 /* PhoneNumberKit-Dynamic */; };
 		478BECC42964C2FD00930DAF /* TakeTheTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECC32964C2FD00930DAF /* TakeTheTestVC.swift */; };
 		478BECC62964C4D000930DAF /* TestQuestionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECC52964C4D000930DAF /* TestQuestionsVC.swift */; };
 		478BECC92964C60900930DAF /* TestTextVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECC82964C60900930DAF /* TestTextVC.swift */; };
+		478BECD52966249300930DAF /* TestQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECD42966249300930DAF /* TestQuestion.swift */; };
+		478BECD729662C8100930DAF /* TestContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECD629662C8100930DAF /* TestContext.swift */; };
 		47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A80614295F8D23001DEE64 /* EnterBiosVC.swift */; };
 		47C40EE9295CB930007C27F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40EE8295CB930007C27F0 /* SceneDelegate.swift */; };
 		47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEC295CB930007C27F0 /* Main.storyboard */; };
@@ -222,12 +224,14 @@
 		476FD86C295E4A1F0014DD42 /* HowItWorksCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowItWorksCell.swift; sourceTree = "<group>"; };
 		476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HowItWorksCell.xib; sourceTree = "<group>"; };
 		478BECBA2963463300930DAF /* GenericAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAPI.swift; sourceTree = "<group>"; };
-		478BECBC2963755000930DAF /* CompatibilityTestSpectrumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibilityTestSpectrumCell.swift; sourceTree = "<group>"; };
-		478BECBD2963755000930DAF /* CompatibilityTestSpectrumCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompatibilityTestSpectrumCell.xib; sourceTree = "<group>"; };
+		478BECBC2963755000930DAF /* SpectrumTestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumTestCell.swift; sourceTree = "<group>"; };
+		478BECBD2963755000930DAF /* SpectrumTestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpectrumTestCell.xib; sourceTree = "<group>"; };
 		478BECC029647FC000930DAF /* matchsound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = matchsound.wav; sourceTree = "<group>"; };
 		478BECC32964C2FD00930DAF /* TakeTheTestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTheTestVC.swift; sourceTree = "<group>"; };
 		478BECC52964C4D000930DAF /* TestQuestionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestQuestionsVC.swift; sourceTree = "<group>"; };
 		478BECC82964C60900930DAF /* TestTextVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTextVC.swift; sourceTree = "<group>"; };
+		478BECD42966249300930DAF /* TestQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestQuestion.swift; sourceTree = "<group>"; };
+		478BECD629662C8100930DAF /* TestContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestContext.swift; sourceTree = "<group>"; };
 		47A80614295F8D23001DEE64 /* EnterBiosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterBiosVC.swift; sourceTree = "<group>"; };
 		47C40EE3295CB930007C27F0 /* uscdatingclub-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "uscdatingclub-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47C40EE8295CB930007C27F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -453,6 +457,15 @@
 			path = Test;
 			sourceTree = "<group>";
 		};
+		478BECD929662CFB00930DAF /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				47C40F5D295CBAF0007C27F0 /* DeviceService.swift */,
+				47C40F5E295CBAF0007C27F0 /* Device.swift */,
+			);
+			path = Device;
+			sourceTree = "<group>";
+		};
 		47A80613295F8CBD001DEE64 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
@@ -529,9 +542,11 @@
 			isa = PBXGroup;
 			children = (
 				47DE320C295CC52F0063C55A /* User */,
+				47C41038295CBFCE007C27F0 /* Context */,
+				478BECD929662CFB00930DAF /* Device */,
+				47C41041295CBFDF007C27F0 /* Error.swift */,
 				47C40F5C295CBAF0007C27F0 /* Feature.swift */,
-				47C40F5D295CBAF0007C27F0 /* DeviceService.swift */,
-				47C40F5E295CBAF0007C27F0 /* Device.swift */,
+				478BECD42966249300930DAF /* TestQuestion.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -541,8 +556,6 @@
 			children = (
 				47DE31D5295CC4B40063C55A /* ImagePicker.swift */,
 				47C40F80295CBBBD007C27F0 /* NotificationResponseHandler.swift */,
-				47C4103D295CBFDF007C27F0 /* Enums */,
-				47C41038295CBFCE007C27F0 /* Context */,
 			);
 			path = AdditionalFiles;
 			sourceTree = "<group>";
@@ -610,16 +623,9 @@
 			isa = PBXGroup;
 			children = (
 				47C41039295CBFCE007C27F0 /* AuthContext.swift */,
+				478BECD629662C8100930DAF /* TestContext.swift */,
 			);
 			path = Context;
-			sourceTree = "<group>";
-		};
-		47C4103D295CBFDF007C27F0 /* Enums */ = {
-			isa = PBXGroup;
-			children = (
-				47C41041295CBFDF007C27F0 /* Error.swift */,
-			);
-			path = Enums;
 			sourceTree = "<group>";
 		};
 		47C4104A295CBFFC007C27F0 /* Utils */ = {
@@ -781,8 +787,8 @@
 			children = (
 				476FD86C295E4A1F0014DD42 /* HowItWorksCell.swift */,
 				476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */,
-				478BECBC2963755000930DAF /* CompatibilityTestSpectrumCell.swift */,
-				478BECBD2963755000930DAF /* CompatibilityTestSpectrumCell.xib */,
+				478BECBC2963755000930DAF /* SpectrumTestCell.swift */,
+				478BECBD2963755000930DAF /* SpectrumTestCell.xib */,
 			);
 			path = TableCells;
 			sourceTree = "<group>";
@@ -1015,7 +1021,7 @@
 				478BECC129647FC000930DAF /* matchsound.wav in Resources */,
 				47C40EF3295CB931007C27F0 /* LaunchScreen.storyboard in Resources */,
 				47C40F17295CBAB7007C27F0 /* GoogleService-Info.plist in Resources */,
-				478BECBF2963755000930DAF /* CompatibilityTestSpectrumCell.xib in Resources */,
+				478BECBF2963755000930DAF /* SpectrumTestCell.xib in Resources */,
 				47DE3225295CC57C0063C55A /* Auth.storyboard in Resources */,
 				47C40EF0295CB931007C27F0 /* Assets.xcassets in Resources */,
 				47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */,
@@ -1094,6 +1100,7 @@
 				434A052C295E1E9700C15945 /* DeviceAPI.swift in Sources */,
 				47E38FF3295F72B9007CB77F /* FeatureView.swift in Sources */,
 				4731F508295CD4770013F626 /* UIView+PostBubble.swift in Sources */,
+				478BECD52966249300930DAF /* TestQuestion.swift in Sources */,
 				4731F503295CD45F0013F626 /* UIScrollView+ToTop.swift in Sources */,
 				47DE3264295CC94F0063C55A /* UIButton+LoadingIndicator.swift in Sources */,
 				47DE3207295CC4B40063C55A /* CreateProfileVC.swift in Sources */,
@@ -1145,7 +1152,7 @@
 				4731F509295CD4770013F626 /* UIView+Shadow.swift in Sources */,
 				47DE325C295CC7C40063C55A /* UIViewController+Loading.swift in Sources */,
 				47DE324D295CC7C40063C55A /* UITextView+PreventPeriod.swift in Sources */,
-				478BECBE2963755000930DAF /* CompatibilityTestSpectrumCell.swift in Sources */,
+				478BECBE2963755000930DAF /* SpectrumTestCell.swift in Sources */,
 				47DE3255295CC7C40063C55A /* UIVC+InteractivePop.swift in Sources */,
 				47C4106D295CC095007C27F0 /* String+Pattern.swift in Sources */,
 				47DE325A295CC7C40063C55A /* UIViewController+FloatingButton.swift in Sources */,
@@ -1158,6 +1165,7 @@
 				4731F51D295CD5750013F626 /* SpecialTabBarController.swift in Sources */,
 				4731F52A295CE0980013F626 /* RadarVC.swift in Sources */,
 				47DE324A295CC7C40063C55A /* UITextView+Newline.swift in Sources */,
+				478BECD729662C8100930DAF /* TestContext.swift in Sources */,
 				4731F528295CDF4A0013F626 /* PageVC.swift in Sources */,
 				47DE324E295CC7C40063C55A /* UIImage+Compress.swift in Sources */,
 				47C41057295CBFFC007C27F0 /* CustomAttributedString.swift in Sources */,

@@ -214,7 +214,7 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
                     sexIdentity: sexIdentity,
                     sexPreference: sexPreference)
                 AuthContext.reset()
-                navigationController?.pushViewController(HowItWorksVC.create(), animated: true, completion: { [weak self] in
+                navigationController?.pushViewController(CreateProfileVC.create(), animated: true, completion: { [weak self] in
                     self?.isSubmitting = false
                 })
             } catch {

@@ -91,7 +91,7 @@ class TakeTheTestVC: UIViewController, PageVCChild {
     //MARK: - Interaction
     
     @objc func didTapTestButton() {
-        let nav = UINavigationController(rootViewController: TestTextVC.create())
+        let nav = UINavigationController(rootViewController: TestTextVC.create(type: .welcome))
         present(nav, animated: true)
     }
     

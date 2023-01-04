@@ -72,7 +72,7 @@ class PermissionsVC: UIViewController {
         } else {
             DispatchQueue.main.async { [self] in
                 locationButton.internalButton.backgroundColor = .customWhite
-                locationButton.configure(title: "share location\nprecise, always", subtitle: "precise, always",  systemImage: "location")
+                locationButton.configure(title: "share location", subtitle: "precise, always",  systemImage: "location")
             }
         }
         
@@ -97,7 +97,7 @@ class PermissionsVC: UIViewController {
         do {
             try LocationManager.shared.requestPermissionServices()
         } catch {
-            AlertManager.showSettingsAlertController(title: "open settings to share location (preicse, always)", message: "", on: self)
+            AlertManager.showSettingsAlertController(title: "open settings to share location", message: "precise, always", on: self)
         }
     }
     

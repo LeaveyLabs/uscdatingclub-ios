@@ -8,6 +8,10 @@
 import UIKit
 
 class TestTextVC: UIViewController {
+    
+    enum TestTextType: CaseIterable {
+        case welcome, finished
+    }
 
     //MARK: - Properties
     
@@ -15,18 +19,49 @@ class TestTextVC: UIViewController {
     @IBOutlet var primaryButton: SimpleButton!
     @IBOutlet var primaryLabel: UILabel!
     @IBOutlet var secondaryLabel: UILabel!
+    
+    var testTextType: TestTextType = .welcome
+    
+    //MARK: - Initialization
+    
+    class func create(type: TestTextType) -> TestTextVC {
+        let vc = UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.TestText) as! TestTextVC
+        vc.testTextType = type
+        return vc
+    }
 
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+        primaryButton.internalButton.addTarget(self, action: #selector(didTapPrimaryButton), for: .touchUpInside)
     }
     
-    //MARK: - Initialization
+    //MARK: - Setup
     
-    class func create() -> TestTextVC {
-        let vc = UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.TestText) as! TestTextVC
-        return vc
+    func setupUI() {
+        switch testTextType {
+        case .welcome:
+            primaryLabel.text = "the compatibility test"
+            secondaryLabel.text = "describe yourself in each question. answer it to the best of your ability"
+            primaryButton.configure(title: "begin", systemImage: "")
+        case .finished:
+            primaryLabel.text = "well done!"
+            secondaryLabel.text = "you finished woooo"
+            primaryButton.configure(title: "finish", systemImage: "")
+        }
+    }
+    
+    //MARK: - Interaction
+    
+    @objc func didTapPrimaryButton() {
+        switch testTextType {
+        case .welcome:
+            navigationController?.pushViewController(TestQuestionsVC.create(), animated: true)
+        case .finished:
+            dismiss(animated: true)
+        }
     }
 
 }
