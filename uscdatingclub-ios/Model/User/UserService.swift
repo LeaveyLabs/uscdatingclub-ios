@@ -51,11 +51,11 @@ class UserService: NSObject {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         localFileLocation = documentsDirectory.appendingPathComponent(LOCAL_FILE_APPENDING_PATH)
         
-//        if FileManager.default.fileExists(atPath: localFileLocation.path) {
-//            self.loadUserFromFilesystem()
-//            setupFirebaseAnalyticsProperties()
-//            isLoggedIntoApp = true
-//        }
+        if FileManager.default.fileExists(atPath: localFileLocation.path) {
+            self.loadUserFromFilesystem()
+            setupFirebaseAnalyticsProperties()
+            isLoggedIntoApp = true
+        }
     }
     
     //MARK: - Getters
@@ -74,6 +74,7 @@ class UserService: NSObject {
     func getLastName() -> String { return authedUser.lastName }
     func getFirstLastName() -> String { return authedUser.firstName + " " + authedUser.lastName }
     func getPhoneNumber() -> String? { return authedUser.phoneNumber }
+    func getEmail() -> String { return authedUser.email }
     func getPhoneNumberPretty() -> String? { return authedUser.phoneNumber.asNationalPhoneNumber }
 //    func getProfilePic() -> UIImage { return authedUser.profilePicWrapper.image }
     

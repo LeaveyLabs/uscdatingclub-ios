@@ -94,7 +94,7 @@ class RadarVC: UIViewController, PageVCChild {
             centerCircleButton.isHidden = true
             circleViews.forEach { $0.isHidden = true }
             centerCircleButton.isHidden = true
-            primaryButton.configure(title: "take the\ncompatibility test", systemImage: "testtube.2")
+            primaryButton.configure(title: "take the\ncompatibility test", systemImage: "testtube.2", imageSize: 22)
             primaryButton.internalButton.backgroundColor = .customWhite
             primaryButton.internalButton.setTitleColor(.customBlack, for: .normal)
             primaryButtonHeightConstraint.constant = 90
@@ -104,6 +104,7 @@ class RadarVC: UIViewController, PageVCChild {
             circleViews.forEach { $0.isHidden = false }
             centerCircleButton.isHidden = false
             primaryButton.internalButton.setTitleColor(.customWhite, for: .normal)
+            primaryButton.internalButton.imageView?.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 16)
             primaryButtonHeightConstraint.constant = 60
             renderIsActive()
         }

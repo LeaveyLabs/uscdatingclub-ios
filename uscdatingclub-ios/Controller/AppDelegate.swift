@@ -35,25 +35,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Version.checkForNewUpdate()
     }
     
-    @objc func requestPermissionsIfNecessary() {
-        //slight delay just in case settings aren't persisted right away
-//        let isLoggedIn = false
-//        guard isLoggedIn else { return }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            NotificationsManager.shared.isNotificationsEnabled(closure: { isEnabled in
-                if !isEnabled || !LocationManager.shared.isLocationServicesProperlyAuthorized() {
-                    DispatchQueue.main.async {
-                        guard
-                            let visibleVC = SceneDelegate.visibleViewController,
-                            !visibleVC .isKind(of: PermissionsVC.self)
-                        else { return }
-                        let permissionsVC = PermissionsVC.create()
-                        permissionsVC.modalPresentationStyle = .fullScreen
-                        visibleVC.present(permissionsVC, animated: true)
-                    }
-                }
+    @MainActor
+    func areAllPermissionsGranted(closure: @escaping (Bool) -> Void) {
+        DispatchQueue.main.async {
+            NotificationsManager.shared.isNotificationsEnabled(closure: { isNotificationsEnabled in
+                let areGranted = isNotificationsEnabled && LocationManager.shared.isLocationServicesProperlyAuthorized() && (UIApplication.shared.backgroundRefreshStatus == .available || ProcessInfo.processInfo.isLowPowerModeEnabled)
+                closure(areGranted)
             })
+        }
+    }
+    
+    @objc func requestPermissionsIfNecessary() {
+        guard UserService.singleton.isLoggedIntoAnAccount else { return }
+
+        //slight delay just in case settings aren't persisted right away
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
+            areAllPermissionsGranted { areAllGranted in
+                guard !areAllGranted else { return }
+                DispatchQueue.main.async {
+                    guard
+                        let visibleVC = SceneDelegate.visibleViewController,
+                        !visibleVC .isKind(of: PermissionsVC.self)
+                    else { return }
+                    let permissionsVC = PermissionsVC.create()
+                    permissionsVC.modalPresentationStyle = .fullScreen
+                    visibleVC.present(permissionsVC, animated: true)
+                }
+            }
         }
     }
 

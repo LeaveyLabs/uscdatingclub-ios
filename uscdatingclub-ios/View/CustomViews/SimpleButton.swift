@@ -66,7 +66,7 @@ extension SimpleButton {
     
     // Note: the constraints for the PostView should already be set-up when this is called.
     // Otherwise you'll get loads of constraint errors in the console
-    func configure(title: String, subtitle: String? = nil, systemImage: String) {
+    func configure(title: String, subtitle: String? = nil, systemImage: String, imageSize: CGFloat? = nil) {
         internalButton.setTitle(title, for: .normal)
         
         if let subtitle {
@@ -83,7 +83,7 @@ extension SimpleButton {
             internalButton.setAttributedTitle(attributedText, for: .normal)
         }
         
-        internalButton.setImage(UIImage(systemName: systemImage), for: .normal)
+        internalButton.setImage(UIImage(systemName: systemImage)?.withConfiguration(UIImage.SymbolConfiguration(pointSize: imageSize ?? 16, weight: .bold)), for: .normal)
     }
     
 }

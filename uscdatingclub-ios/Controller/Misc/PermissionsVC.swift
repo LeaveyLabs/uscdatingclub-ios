@@ -11,7 +11,8 @@ class PermissionsVC: UIViewController {
     
     @IBOutlet var notificationsButton: SimpleButton!
     @IBOutlet var locationButton: SimpleButton!
-    
+    @IBOutlet var backgroundRefreshButton: SimpleButton!
+
     var goodToGo: Bool {
         locationButton.internalButton.backgroundColor == .customGreen && notificationsButton.internalButton.backgroundColor == .customGreen
     }
@@ -30,6 +31,7 @@ class PermissionsVC: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(delayedRerender), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(delayedRerender), name: .locationStatusDidUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(delayedRerender), name: UIApplication.backgroundRefreshStatusDidChangeNotification, object: nil)
     }
     
     deinit {
@@ -41,6 +43,7 @@ class PermissionsVC: UIViewController {
     func setupButtons() {
         locationButton.internalButton.addTarget(self, action: #selector(locationButtonDidTapped), for: .touchUpInside)
         notificationsButton.internalButton.addTarget(self, action: #selector(notificationsButtonDidTapped), for: .touchUpInside)
+        backgroundRefreshButton.internalButton.addTarget(self, action: #selector(backgroundRefreshButtonDidTapped), for: .touchUpInside)
     }
     
     @objc func delayedRerender() {
@@ -89,6 +92,14 @@ class PermissionsVC: UIViewController {
                 }
             }
         })
+        
+        if UIApplication.shared.backgroundRefreshStatus == .available || ProcessInfo.processInfo.isLowPowerModeEnabled {
+            backgroundRefreshButton.internalButton.backgroundColor = .customGreen
+            backgroundRefreshButton.configure(title: "background app refresh enabled",  systemImage: "arrow.clockwise.circle")
+        } else {
+            backgroundRefreshButton.internalButton.backgroundColor = .customWhite
+            backgroundRefreshButton.configure(title: "turn on background app refresh",  systemImage: "arrow.clockwise.circle")
+        }
     }
     
     //MARK: - Interaction
@@ -110,6 +121,12 @@ class PermissionsVC: UIViewController {
                     rerender()
                 }
             }
+        }
+    }
+    
+    @objc func backgroundRefreshButtonDidTapped() {
+        if UIApplication.shared.backgroundRefreshStatus != .available && !ProcessInfo.processInfo.isLowPowerModeEnabled {
+            AlertManager.showSettingsAlertController(title: "turn on background app refresh in settings", message: "", on: SceneDelegate.visibleViewController!)
         }
     }
 

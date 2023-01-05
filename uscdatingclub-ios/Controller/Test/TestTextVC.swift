@@ -36,6 +36,14 @@ class TestTextVC: UIViewController {
         super.viewDidLoad()
         setupUI()
         primaryButton.internalButton.addTarget(self, action: #selector(didTapPrimaryButton), for: .touchUpInside)
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        switch testTextType {
+        case .welcome:
+            TestContext.reset()
+        case .finished:
+            break //submit test context to database
+        }
     }
     
     //MARK: - Setup

@@ -443,21 +443,65 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="d68-Kh-bBo">
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="N1M-cs-NQg" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="9ME-2P-8Jc">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="102"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="part 1: personality" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="G6I-tF-W0w">
+                                            <rect key="frame" x="50" y="5" width="328" height="82"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="szL-dc-vxr"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                            <color key="textColor" name="customWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="842-IB-3Zr">
+                                            <rect key="frame" x="15.000000000000002" y="28.666666666666671" width="20.666666666666671" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="35" id="g73-kO-gq4"/>
+                                                <constraint firstAttribute="width" secondItem="842-IB-3Zr" secondAttribute="height" multiplier="13:22" id="i1k-Bu-Axc"/>
+                                            </constraints>
+                                            <color key="tintColor" name="customWhite"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" image="chevron.left" catalog="system">
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="didTapBack" destination="Jag-G4-TPf" eventType="touchUpInside" id="rr1-T2-meS"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="60" id="WsU-fM-dUD"/>
+                                        <constraint firstItem="842-IB-3Zr" firstAttribute="leading" secondItem="9ME-2P-8Jc" secondAttribute="leading" constant="15" id="Aet-0J-xVU"/>
+                                        <constraint firstAttribute="trailing" secondItem="G6I-tF-W0w" secondAttribute="trailing" constant="15" id="Gan-Ii-dWj"/>
+                                        <constraint firstAttribute="bottom" secondItem="G6I-tF-W0w" secondAttribute="bottom" constant="15" id="OhS-b6-jag"/>
+                                        <constraint firstItem="G6I-tF-W0w" firstAttribute="leading" secondItem="842-IB-3Zr" secondAttribute="trailing" constant="14.333333333333364" id="YmW-iU-V7a"/>
+                                        <constraint firstItem="G6I-tF-W0w" firstAttribute="top" secondItem="9ME-2P-8Jc" secondAttribute="top" constant="5" id="hWF-Ol-Kei"/>
+                                        <constraint firstItem="842-IB-3Zr" firstAttribute="centerY" secondItem="G6I-tF-W0w" secondAttribute="centerY" id="xYb-7y-Un6"/>
                                     </constraints>
                                 </view>
-                                <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="part 1: personality" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5YD-Ge-UGD">
-                                    <rect key="frame" x="0.0" y="60" width="393" height="30"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="XWG-4T-4kU">
+                                    <rect key="frame" x="0.0" y="102" width="393" height="101"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                    <color key="textColor" name="customWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a23-Zy-cSB" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                            <rect key="frame" x="20" y="10" width="353" height="56"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="60" id="txd-n6-R4T"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="a23-Zy-cSB" firstAttribute="top" secondItem="XWG-4T-4kU" secondAttribute="top" constant="10" id="FeW-Gn-2St"/>
+                                        <constraint firstAttribute="bottom" secondItem="a23-Zy-cSB" secondAttribute="bottom" constant="35" id="fE5-Zd-o2t"/>
+                                        <constraint firstAttribute="trailing" secondItem="a23-Zy-cSB" secondAttribute="trailing" constant="20" id="oCr-XN-Q3J"/>
+                                        <constraint firstItem="a23-Zy-cSB" firstAttribute="leading" secondItem="XWG-4T-4kU" secondAttribute="leading" constant="20" id="vqa-QW-ryP"/>
+                                    </constraints>
+                                </view>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eLG-Rc-aEb"/>
@@ -470,17 +514,20 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="nextButton" destination="a23-Zy-cSB" id="Dvn-69-pge"/>
                         <outlet property="tableView" destination="d68-Kh-bBo" id="CmC-f8-GIU"/>
+                        <outlet property="titleLabel" destination="G6I-tF-W0w" id="XGw-wo-Y11"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mpI-Ni-21m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3556" y="-2"/>
+            <point key="canvasLocation" x="3554.9618320610684" y="-2.1126760563380285"/>
         </scene>
     </scenes>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="arrow.down" catalog="system" width="118" height="128"/>
+        <image name="chevron.left" catalog="system" width="97" height="128"/>
         <image name="info.circle" catalog="system" width="128" height="123"/>
         <image name="person.crop.circle" catalog="system" width="128" height="123"/>
         <image name="safari" catalog="system" width="128" height="123"/>

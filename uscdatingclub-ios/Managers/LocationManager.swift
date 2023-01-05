@@ -43,7 +43,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         locationManager.pausesLocationUpdatesAutomatically = false
         locationManager.delegate = self
-        locationManager.distanceFilter = 0 //update after moving x meters
+        locationManager.distanceFilter = 5 //update after moving x meters
         locationManager.desiredAccuracy = kCLLocationAccuracyBest //within a few meters
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.showsBackgroundLocationIndicator = false
@@ -107,14 +107,13 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     //double check that
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-//        UIApplication.shared.backgroundTimeRemaining
-        
         guard let location = locations.last else { return }
         lastLocation = location
         print(#function, location)
         
-        postToDatabase()
+        if let lastLocation {
+            postToDatabase(lat: lastLocation.coordinate.latitude, long: lastLocation.coordinate.longitude)
+        }
         
         if properAuthorizations {
             locationManager.startUpdatingLocation() //does calling "start updating location" again right now do anything? we're already updating location... could it prolong the duration, though?
@@ -123,17 +122,14 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        
-    }
-    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(#function, error.localizedDescription)
     }
     
-    func postToDatabase() {
+    func postToDatabase(lat: Double, long: Double) {
         updates += 1
         Task {
+//            try await UserAPI.updateLocation(latitude: lat, longitude: long, email: UserService.singleton.getEmail())
             let db = Firestore.firestore()
             db.collection("location").document("hi").setData([
                 "latestTime":Date(),

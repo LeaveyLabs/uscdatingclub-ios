@@ -847,8 +847,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to join the club..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I2G-qw-87w">
-                                <rect key="frame" x="74.333333333333329" y="72" width="226.66666666666669" height="60"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to join the club" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I2G-qw-87w">
+                                <rect key="frame" x="85.333333333333329" y="72" width="204.33333333333337" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="z85-LX-PyV"/>
                                 </constraints>
@@ -859,48 +859,21 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="gl0-cX-jYj">
                                 <rect key="frame" x="20" y="132" width="335" height="646"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2vA-1u-ntb">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="323"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kvh-4m-SuL" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="121.66666666666666" width="335" height="60"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="Ua4-hD-Mqg"/>
-                                                </constraints>
-                                            </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="when you're matched, you'll both get a notification and have just 3 minutes to respond." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Re1-ie-3yh">
-                                                <rect key="frame" x="10" y="191.66666666666669" width="315" height="59.666666666666657"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="kvh-4m-SuL" firstAttribute="centerY" secondItem="2vA-1u-ntb" secondAttribute="centerY" constant="-10" id="Mps-lf-9p1"/>
-                                            <constraint firstAttribute="trailing" secondItem="Re1-ie-3yh" secondAttribute="trailing" constant="10" id="Y9r-1h-kXi"/>
-                                            <constraint firstItem="Re1-ie-3yh" firstAttribute="top" secondItem="kvh-4m-SuL" secondAttribute="bottom" constant="10" id="h6C-IK-lRh"/>
-                                            <constraint firstItem="kvh-4m-SuL" firstAttribute="leading" secondItem="2vA-1u-ntb" secondAttribute="leading" id="nGJ-lJ-FP0"/>
-                                            <constraint firstAttribute="trailing" secondItem="kvh-4m-SuL" secondAttribute="trailing" id="oDL-DF-omL"/>
-                                            <constraint firstItem="Re1-ie-3yh" firstAttribute="leading" secondItem="2vA-1u-ntb" secondAttribute="leading" constant="10" id="xna-gP-4yD"/>
-                                        </constraints>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ohV-3s-oi3">
-                                        <rect key="frame" x="0.0" y="323" width="335" height="323"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="215.33333333333334"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OZM-6Y-ugH" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="26.666666666666686" width="335" height="70"/>
+                                                <rect key="frame" x="0.0" y="52.666666666666657" width="335" height="70"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="70" id="Mrh-Qn-1wz"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CV2-Kx-qdW">
-                                                <rect key="frame" x="10" y="106.66666666666663" width="315" height="119"/>
-                                                <string key="text">your phone will look for nearby students in the background.
+                                                <rect key="frame" x="10" y="132.66666666666669" width="315" height="119"/>
+                                                <string key="text">you'll be matched with compatible students near you
 
-we use new Apple APIs for minimal effect on battery and we don’t save any location data. </string>
+we use new Apple APIs for minimal battery usage and don’t save any location data. </string>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -910,10 +883,64 @@ we use new Apple APIs for minimal effect on battery and we don’t save any loca
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="OZM-6Y-ugH" secondAttribute="trailing" id="E98-Hx-KOk"/>
                                             <constraint firstItem="OZM-6Y-ugH" firstAttribute="leading" secondItem="ohV-3s-oi3" secondAttribute="leading" id="OVv-JB-tFy"/>
-                                            <constraint firstItem="OZM-6Y-ugH" firstAttribute="centerY" secondItem="ohV-3s-oi3" secondAttribute="centerY" constant="-100" id="SR6-Wn-LQL"/>
+                                            <constraint firstItem="OZM-6Y-ugH" firstAttribute="centerY" secondItem="ohV-3s-oi3" secondAttribute="centerY" constant="-20" id="SR6-Wn-LQL"/>
                                             <constraint firstAttribute="trailing" secondItem="CV2-Kx-qdW" secondAttribute="trailing" constant="10" id="bOJ-KO-6z2"/>
                                             <constraint firstItem="CV2-Kx-qdW" firstAttribute="top" secondItem="OZM-6Y-ugH" secondAttribute="bottom" constant="10" id="dt2-pu-cWc"/>
                                             <constraint firstItem="CV2-Kx-qdW" firstAttribute="leading" secondItem="ohV-3s-oi3" secondAttribute="leading" constant="10" id="mel-gh-K1p"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g56-Og-e27">
+                                        <rect key="frame" x="0.0" y="215.33333333333331" width="335" height="215.33333333333331"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fXA-os-1Om" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="72.666666666666686" width="335" height="70"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="70" id="y6x-9x-cwL"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="your phone will look around in the background (without you needing to open the app)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gux-cA-fU3">
+                                                <rect key="frame" x="10" y="152.66666666666669" width="315" height="59.666666666666657"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Gux-cA-fU3" secondAttribute="trailing" constant="10" id="1Oz-Qq-8Xj"/>
+                                            <constraint firstItem="Gux-cA-fU3" firstAttribute="leading" secondItem="g56-Og-e27" secondAttribute="leading" constant="10" id="Tfi-1O-jr0"/>
+                                            <constraint firstItem="fXA-os-1Om" firstAttribute="centerY" secondItem="g56-Og-e27" secondAttribute="centerY" id="bub-xM-Zwy"/>
+                                            <constraint firstAttribute="trailing" secondItem="fXA-os-1Om" secondAttribute="trailing" id="plE-PY-ysr"/>
+                                            <constraint firstItem="Gux-cA-fU3" firstAttribute="top" secondItem="fXA-os-1Om" secondAttribute="bottom" constant="10" id="te0-aC-vsO"/>
+                                            <constraint firstItem="fXA-os-1Om" firstAttribute="leading" secondItem="g56-Og-e27" secondAttribute="leading" id="teV-zV-eQX"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2vA-1u-ntb">
+                                        <rect key="frame" x="0.0" y="430.66666666666657" width="335" height="215.33333333333331"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kvh-4m-SuL" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="37.666666666666742" width="335" height="60"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="Ua4-hD-Mqg"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="when you're matched, you'll both get a notification and have 3 minutes to respond" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Re1-ie-3yh">
+                                                <rect key="frame" x="10" y="107.66666666666676" width="315" height="59.666666666666671"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="kvh-4m-SuL" firstAttribute="centerY" secondItem="2vA-1u-ntb" secondAttribute="centerY" constant="-40" id="Mps-lf-9p1"/>
+                                            <constraint firstAttribute="trailing" secondItem="Re1-ie-3yh" secondAttribute="trailing" constant="10" id="Y9r-1h-kXi"/>
+                                            <constraint firstItem="Re1-ie-3yh" firstAttribute="top" secondItem="kvh-4m-SuL" secondAttribute="bottom" constant="10" id="h6C-IK-lRh"/>
+                                            <constraint firstItem="kvh-4m-SuL" firstAttribute="leading" secondItem="2vA-1u-ntb" secondAttribute="leading" id="nGJ-lJ-FP0"/>
+                                            <constraint firstAttribute="trailing" secondItem="kvh-4m-SuL" secondAttribute="trailing" id="oDL-DF-omL"/>
+                                            <constraint firstItem="Re1-ie-3yh" firstAttribute="leading" secondItem="2vA-1u-ntb" secondAttribute="leading" constant="10" id="xna-gP-4yD"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -931,6 +958,7 @@ we use new Apple APIs for minimal effect on battery and we don’t save any loca
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backgroundRefreshButton" destination="fXA-os-1Om" id="R2f-Kl-1hZ"/>
                         <outlet property="locationButton" destination="OZM-6Y-ugH" id="WA0-xe-ZhH"/>
                         <outlet property="notificationsButton" destination="kvh-4m-SuL" id="oR4-Vm-Le8"/>
                     </connections>
