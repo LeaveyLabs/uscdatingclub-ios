@@ -20,6 +20,15 @@ class TestQuestionsVC: UIViewController {
         return TestQuestions[testPage]!
     }
     
+    var didAnswerAllQuestionsOnPage: Bool {
+        for question in questions {
+            if TestContext.testResponses[question.id] == nil {
+                return false
+            }
+        }
+        return true
+    }
+    
     //MARK: - Initialization
     
     class func create(page: TestPage) -> TestQuestionsVC {
@@ -34,6 +43,7 @@ class TestQuestionsVC: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupHeaderFooter()
+        rerenderNextButton()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -65,9 +75,18 @@ class TestQuestionsVC: UIViewController {
         tableView.register(UINib(nibName: Constants.SBID.Cell.SpectrumTestCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SpectrumTestCell)
     }
     
+    func rerenderNextButton() {
+        nextButton.alpha = didAnswerAllQuestionsOnPage ? 1 : 0.5
+//        nextButton.isUserInteractionEnabled = didAnswerAllQuestionsOnPage
+    }
+    
     //MARK: - Interaciton
     
     @objc func didTapNextButton() {
+        guard didAnswerAllQuestionsOnPage else {
+            AlertManager.displayError("respond to all questions to move on", "")
+            return
+        }
         if testPage == TestPages-1 {
             navigationController?.pushViewController(TestTextVC.create(type: .submitting), animated: true)
         } else {
@@ -109,29 +128,35 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
     func buttonDidTapped(questionId: Int, selection: Int) {
         TestContext.testResponses[questionId] = selection
         scrollDownIfNecessary(prevQuestionId: questionId)
+        rerenderNextButton()
     }
-    
     
     //if there are no more selected testResponses after this one,
     //ensure the contentOffset
     func scrollDownIfNecessary(prevQuestionId: Int) {
+        guard
+            let prevQuestionIndex = questions.firstIndex(where: { $0.id == prevQuestionId }),
+            prevQuestionIndex+2 < questions.count,
+            TestContext.testResponses[prevQuestionId+1] == nil
+        else { return }
         
-//        guard
-            let prevQuestionIndex = questions.firstIndex(where: { $0.id == prevQuestionId })!
-            print(prevQuestionIndex+1 < questions.count)
-            print(TestContext.testResponses[prevQuestionId+1] == nil) //TODO: this might not work properly
-//        else { return }
         let questionIndex = prevQuestionIndex + 1
-        
         let questionBottomYWithinFeed = tableView.rectForRow(at: IndexPath(row: questionIndex, section: 0))
         let questionBottomY = tableView.convert(questionBottomYWithinFeed, to: view).maxY
 
-        let desiredOffset = tableView.bounds.height - questionBottomY
-        print(tableView.bounds.height, questionBottomY)
+        let totalHeight = view.bounds.height + view.safeAreaInsets.top + view.safeAreaInsets.bottom
+        var desiredOffset = questionBottomY - totalHeight/2
+        print(totalHeight/2, questionBottomY, desiredOffset)
 
-        if desiredOffset < 0 { return }  //dont scroll up for the very first post
+        if desiredOffset < 50 { return } //don't go in wrong direction, and don't scroll if a small amount
         
-        tableView.setContentOffset(tableView.contentOffset.applying(.init(translationX: 0, y: desiredOffset)), animated: true)
+        let willWeBeAtBottom = desiredOffset + tableView.contentOffset.y > tableView.verticalOffsetForBottom
+        if willWeBeAtBottom {
+            tableView.setContentOffset(CGPoint(x: tableView.contentOffset.x, y: tableView.verticalOffsetForBottom), animated: true)
+        } else {
+            tableView.setContentOffset(tableView.contentOffset.applying(.init(translationX: 0, y: desiredOffset)), animated: true)
+
+        }
     }
     
 }

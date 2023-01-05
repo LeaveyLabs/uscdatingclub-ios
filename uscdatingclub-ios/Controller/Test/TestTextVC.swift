@@ -20,8 +20,12 @@ class TestTextVC: UIViewController {
     @IBOutlet var primaryLabel: UILabel!
     @IBOutlet var secondaryLabel: UILabel!
     @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet var cancelButton: UIButton!
     
     var testTextType: TestTextType = .welcome
+    var isFirstTest: Bool {
+        TestContext.isFirstTest
+    }
     
     //MARK: - Initialization
     
@@ -41,7 +45,7 @@ class TestTextVC: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         switch testTextType {
         case .welcome:
-            TestContext.reset()
+            break //MAKE SURE TO reset test context before presenting this VC
         case .submitting:
             Task {
                 do {
@@ -66,11 +70,13 @@ class TestTextVC: UIViewController {
     func setupUI() {
         switch testTextType {
         case .welcome:
+            cancelButton.isHidden = isFirstTest
             activityIndicatorView.stopAnimating()
             primaryLabel.text = "the compatibility test"
             secondaryLabel.text = "(no cheating allowed)"
             primaryButton.configure(title: "begin", systemImage: "")
         case .submitting:
+            cancelButton.isHidden = true
             activityIndicatorView.startAnimating()
             primaryLabel.text = "submitting responses"
             secondaryLabel.alpha = 0
@@ -78,18 +84,27 @@ class TestTextVC: UIViewController {
             primaryButton.internalButton.isEnabled = false
             primaryButton.alpha = 0
         case .finished:
-            secondaryLabel.text = "welcome to the usc dating club."
-            UIView.animate(withDuration: 2) { [self] in
+            if isFirstTest {
+                secondaryLabel.text = "welcome to the usc dating club."
+                UIView.animate(withDuration: 2) { [self] in
+                    activityIndicatorView.stopAnimating()
+                    primaryLabel.text = "responses submitted"
+                } completion: { completed in
+                    UIView.animate(withDuration: 2) { [self] in
+                        secondaryLabel.alpha = 1
+                    } completion: { completed in
+                        self.primaryButton.internalButton.isEnabled = true
+                        UIView.animate(withDuration: 2) { [self] in
+                            primaryButton.alpha = 1
+                        }
+                    }
+                }
+            } else {
                 activityIndicatorView.stopAnimating()
                 primaryLabel.text = "responses submitted"
-            } completion: { completed in
-                UIView.animate(withDuration: 2) { [self] in
-                    secondaryLabel.alpha = 1
-                } completion: { completed in
-                    self.primaryButton.internalButton.isEnabled = true
-                    UIView.animate(withDuration: 2) { [self] in
-                        primaryButton.alpha = 1
-                    }
+                self.primaryButton.internalButton.isEnabled = true
+                UIView.animate(withDuration: 1) { [self] in
+                    primaryButton.alpha = 1
                 }
             }
         }
@@ -106,6 +121,10 @@ class TestTextVC: UIViewController {
         case .finished:
             dismiss(animated: true)
         }
+    }
+    
+    @IBAction func cancelButtonDidTapped() {
+        dismiss(animated: true)
     }
 
 }

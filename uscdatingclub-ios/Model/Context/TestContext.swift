@@ -10,8 +10,10 @@ import Foundation
 
 struct TestContext {
     static var testResponses: [Int:Int] = [:]
-    
+    static var isFirstTest: Bool = false
+
     static func reset() {
         testResponses = [:]
+        isFirstTest = false
     }
 }

@@ -415,15 +415,33 @@
                                 </constraints>
                                 <color key="color" name="customWhite"/>
                             </activityIndicatorView>
+                            <button hidden="YES" opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIL-D1-OIm">
+                                <rect key="frame" x="10" y="69" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="mLZ-59-bP2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="xmark" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButtonDidTapped" destination="L1s-It-K9S" eventType="touchUpInside" id="S1B-yj-A1b"/>
+                                    <action selector="didTapBack" destination="Jag-G4-TPf" eventType="touchUpInside" id="y98-Rr-hzA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2fL-WO-dJd"/>
                         <color key="backgroundColor" name="AccentColor"/>
                         <constraints>
                             <constraint firstItem="dnU-4K-LQr" firstAttribute="leading" secondItem="2fL-WO-dJd" secondAttribute="leading" constant="20" id="4Xv-3X-02J"/>
                             <constraint firstItem="2fL-WO-dJd" firstAttribute="trailing" secondItem="dnU-4K-LQr" secondAttribute="trailing" constant="20" id="4ce-yz-gFb"/>
+                            <constraint firstItem="FIL-D1-OIm" firstAttribute="leading" secondItem="2fL-WO-dJd" secondAttribute="leading" constant="10" id="6qK-xe-P1C"/>
+                            <constraint firstItem="FIL-D1-OIm" firstAttribute="width" secondItem="FIL-D1-OIm" secondAttribute="height" multiplier="1:1" id="95G-mx-zGu"/>
                             <constraint firstItem="Y48-Hu-Oab" firstAttribute="centerY" secondItem="IyU-eF-TwS" secondAttribute="centerY" constant="-35" id="Ckt-jQ-obt"/>
                             <constraint firstItem="2fL-WO-dJd" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Y48-Hu-Oab" secondAttribute="trailing" constant="55" id="EVI-4p-qZg"/>
                             <constraint firstItem="Y48-Hu-Oab" firstAttribute="leading" secondItem="2fL-WO-dJd" secondAttribute="leading" constant="20" id="HHc-Xr-UjF"/>
+                            <constraint firstItem="FIL-D1-OIm" firstAttribute="top" secondItem="2fL-WO-dJd" secondAttribute="top" constant="10" id="Kes-BR-ibl"/>
                             <constraint firstItem="2fL-WO-dJd" firstAttribute="bottom" secondItem="dnU-4K-LQr" secondAttribute="bottom" constant="20" id="Nct-15-VpZ"/>
                             <constraint firstItem="qAu-in-20u" firstAttribute="centerY" secondItem="Y48-Hu-Oab" secondAttribute="centerY" id="Nj8-WG-zhe"/>
                             <constraint firstItem="fWL-1h-2BA" firstAttribute="top" secondItem="Y48-Hu-Oab" secondAttribute="bottom" constant="15" id="V1h-14-S5R"/>
@@ -434,6 +452,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicatorView" destination="qAu-in-20u" id="kZH-aH-cZB"/>
+                        <outlet property="cancelButton" destination="FIL-D1-OIm" id="PVG-2P-tXi"/>
                         <outlet property="primaryButton" destination="dnU-4K-LQr" id="WTn-Ya-B85"/>
                         <outlet property="primaryLabel" destination="Y48-Hu-Oab" id="AN8-GE-yGt"/>
                         <outlet property="secondaryLabel" destination="fWL-1h-2BA" id="eXV-B1-0dd"/>
@@ -494,7 +513,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="part 1: personality" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7f-RA-HnQ">
-                                        <rect key="frame" x="55" y="15.666666666666671" width="318" height="24"/>
+                                        <rect key="frame" x="112.00000000000001" y="15.666666666666671" width="169.33333333333337" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -510,7 +529,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="x7f-RA-HnQ" firstAttribute="leading" secondItem="zud-FD-OPN" secondAttribute="trailing" constant="10" id="G2s-d3-inU"/>
+                                    <constraint firstItem="x7f-RA-HnQ" firstAttribute="centerX" secondItem="HKQ-ok-ydH" secondAttribute="centerX" id="9N0-li-Vqc"/>
                                     <constraint firstAttribute="bottom" secondItem="PRH-AY-RBD" secondAttribute="bottom" id="Gfn-O1-aoS"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="HgP-Tc-aEQ"/>
                                     <constraint firstItem="PRH-AY-RBD" firstAttribute="leading" secondItem="HKQ-ok-ydH" secondAttribute="leading" id="Qct-1O-Q73"/>
@@ -518,7 +537,6 @@
                                     <constraint firstAttribute="height" constant="55" id="XJh-pi-5ek"/>
                                     <constraint firstItem="x7f-RA-HnQ" firstAttribute="centerY" secondItem="HKQ-ok-ydH" secondAttribute="centerY" id="ZA8-l1-cYP"/>
                                     <constraint firstItem="zud-FD-OPN" firstAttribute="leading" secondItem="HKQ-ok-ydH" secondAttribute="leading" constant="10" id="ZbD-xS-V3y"/>
-                                    <constraint firstAttribute="trailing" secondItem="x7f-RA-HnQ" secondAttribute="trailing" constant="20" id="cO2-jG-kFG"/>
                                     <constraint firstAttribute="trailing" secondItem="PRH-AY-RBD" secondAttribute="trailing" id="tKy-9h-BYO"/>
                                 </constraints>
                             </view>
@@ -553,6 +571,7 @@
         <image name="info.circle" catalog="system" width="128" height="123"/>
         <image name="person.crop.circle" catalog="system" width="128" height="123"/>
         <image name="safari" catalog="system" width="128" height="123"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="AccentColor">
             <color red="0.8901960784313725" green="0.30588235294117649" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

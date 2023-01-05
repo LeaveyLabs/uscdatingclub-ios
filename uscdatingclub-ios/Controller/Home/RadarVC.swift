@@ -255,6 +255,8 @@ class RadarVC: UIViewController, PageVCChild {
     //MARK: - Helpers
     
     func presentTest() {
+        TestContext.reset()
+        TestContext.isFirstTest = true
         let nav = UINavigationController(rootViewController: TestTextVC.create(type: .welcome))
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true)
