@@ -15,14 +15,16 @@ class TestQuestionsVC: UIViewController {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var nextButton: SimpleButton!
     
+    var testPage: TestPage!
     var questions: [TestQuestion] {
-        return TestQuestions
+        return TestQuestions[testPage]!
     }
     
     //MARK: - Initialization
     
-    class func create() -> TestQuestionsVC {
+    class func create(page: TestPage) -> TestQuestionsVC {
         let vc = UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.TestQuestions) as! TestQuestionsVC
+        vc.testPage = page
         return vc
     }
     
@@ -45,7 +47,8 @@ class TestQuestionsVC: UIViewController {
     }
     
     func setupHeaderFooter() {
-        nextButton.configure(title: "next", systemImage: "")
+        titleLabel.text = TestPageTitles[testPage]
+        nextButton.configure(title: testPage == TestPages-1 ? "finish" : "next", systemImage: "")
         nextButton.internalButton.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
     }
     
@@ -65,7 +68,11 @@ class TestQuestionsVC: UIViewController {
     //MARK: - Interaciton
     
     @objc func didTapNextButton() {
-        
+        if testPage == TestPages-1 {
+            navigationController?.pushViewController(TestTextVC.create(type: .submitting), animated: true)
+        } else {
+            navigationController?.pushViewController(TestQuestionsVC.create(page: testPage+1), animated: true)
+        }
     }
     
     @IBAction func didTapBack() {
@@ -102,7 +109,6 @@ extension TestQuestionsVC: UITableViewDataSource {
 extension TestQuestionsVC: SpectrumTestCellDelegate {
     
     func buttonDidTapped(questionId: Int, selection: Int) {
-        print("TAP", questionId, selection)
         TestContext.testResponses[questionId] = selection
         scrollDownIfNecessary(prevQuestionId: questionId)
     }

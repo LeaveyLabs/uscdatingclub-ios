@@ -12,28 +12,28 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="SpectrumTestCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SpectrumTestCell" rowHeight="218" id="KGk-i7-Jjw" customClass="SpectrumTestCell" customModule="uscdatingclub_ios" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="329" height="218"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="SpectrumTestCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SpectrumTestCell" rowHeight="240" id="KGk-i7-Jjw" customClass="SpectrumTestCell" customModule="uscdatingclub_ios" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="329" height="240"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="329" height="218"/>
+                <rect key="frame" x="0.0" y="0.0" width="329" height="240"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="openness to new experiences" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dd6-PW-s6i">
-                        <rect key="frame" x="20" y="40" width="289" height="55.666666666666657"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                        <rect key="frame" x="20" y="40.000000000000007" width="289" height="67.666666666666686"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                         <color key="textColor" name="customWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6YV-Ds-tJY">
-                        <rect key="frame" x="25" y="130.66666666666666" width="279" height="2"/>
+                        <rect key="frame" x="25" y="152.66666666666666" width="279" height="2"/>
                         <color key="backgroundColor" name="customWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="2" id="Hra-s5-Qwv"/>
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jJD-m2-nuv">
-                        <rect key="frame" x="25" y="115" width="279" height="33"/>
+                        <rect key="frame" x="25" y="137" width="279" height="33"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q99-On-I7l">
                                 <rect key="frame" x="0.0" y="0.0" width="33" height="33"/>
@@ -92,7 +92,7 @@
                         </constraints>
                     </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="very open" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGm-WF-on8">
-                        <rect key="frame" x="25" y="163" width="66.333333333333329" height="15"/>
+                        <rect key="frame" x="25" y="185" width="66.333333333333329" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="qxz-Mv-wsF"/>
                         </constraints>
@@ -101,7 +101,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="very open" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVB-jG-dfo">
-                        <rect key="frame" x="237.66666666666666" y="163" width="66.333333333333343" height="17.666666666666657"/>
+                        <rect key="frame" x="237.66666666666666" y="185" width="66.333333333333343" height="17.666666666666657"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                         <color key="textColor" name="customWhite"/>
                         <nil key="highlightedColor"/>
@@ -111,7 +111,7 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="jJD-m2-nuv" secondAttribute="trailing" constant="25" id="ALg-ek-uxa"/>
                     <constraint firstItem="NGm-WF-on8" firstAttribute="leading" secondItem="Q99-On-I7l" secondAttribute="leading" id="Ddz-P3-22T"/>
-                    <constraint firstItem="6YV-Ds-tJY" firstAttribute="top" secondItem="Dd6-PW-s6i" secondAttribute="bottom" constant="35" id="Euf-ee-xS3"/>
+                    <constraint firstItem="6YV-Ds-tJY" firstAttribute="top" secondItem="Dd6-PW-s6i" secondAttribute="bottom" constant="45" id="Euf-ee-xS3"/>
                     <constraint firstItem="6YV-Ds-tJY" firstAttribute="trailing" secondItem="jJD-m2-nuv" secondAttribute="trailing" id="JPc-pc-Ujc"/>
                     <constraint firstItem="BVB-jG-dfo" firstAttribute="trailing" secondItem="yku-hd-GGc" secondAttribute="trailing" id="KPp-I1-KSg"/>
                     <constraint firstItem="jJD-m2-nuv" firstAttribute="centerY" secondItem="6YV-Ds-tJY" secondAttribute="centerY" id="MCK-iG-F5L"/>
@@ -137,7 +137,7 @@
                 <outlet property="rightLabel" destination="BVB-jG-dfo" id="8vP-lR-AE5"/>
                 <outlet property="titleLabel" destination="Dd6-PW-s6i" id="v45-l2-x1w"/>
             </connections>
-            <point key="canvasLocation" x="107.63358778625954" y="80.985915492957744"/>
+            <point key="canvasLocation" x="107.63358778625954" y="88.028169014084511"/>
         </tableViewCell>
     </objects>
     <resources>
