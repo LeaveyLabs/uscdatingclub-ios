@@ -97,9 +97,7 @@ extension TestQuestionsVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SpectrumTestCell, for: indexPath) as! SpectrumTestCell
-        let question = questions[indexPath.row]
-        //TODO: apply the context here
-        
+        let question = questions[indexPath.row]        
         cell.configure(testQuestion: question, response: TestContext.testResponses[question.id], delegate: self)
         return cell
     }
