@@ -7,7 +7,7 @@
 
 import UIKit
 
-var temphasAnsweredQuestions = false
+var temphasAnsweredQuestions = true
 
 class RadarVC: UIViewController, PageVCChild {
     
@@ -20,14 +20,15 @@ class RadarVC: UIViewController, PageVCChild {
     //Flags
     var isCurrentlyVisible = false
     var isLocationServicesEnabled: Bool = false
+    var isPulsing = false
     
     var uiState: HomeState {
         return temphasAnsweredQuestions ? .radar : .arrow
 //        UserService.singleton.hasAnsweredQuestions
     }
     
-    let PULSE_DURATION: Double = 4.0
-    let CIRCLE_WIDTH_RATIO: Double = 0.2
+    static let PULSE_DURATION: Double = 4.0
+    static let CIRCLE_WIDTH_RATIO: Double = 0.2
     
     var centerCircleButton = UIButton()
     var firstCircleView = UIView()
@@ -58,8 +59,6 @@ class RadarVC: UIViewController, PageVCChild {
         super.viewDidLoad()
         setupCircleViews()
         setupButtons()
-        renderIsActive()
-        pulseArrow()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,6 +74,9 @@ class RadarVC: UIViewController, PageVCChild {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         isCurrentlyVisible = false
+        stopPulsing()
+        firstCircleView.layer.removeAllAnimations()
+        secondCircleView.layer.removeAllAnimations()
     }
     
     override func viewDidLayoutSubviews() {
@@ -87,6 +89,17 @@ class RadarVC: UIViewController, PageVCChild {
     
     //MARK: - Setup
     
+    func setupButtons() {
+        aboutButton.addAction(.init(handler: { [self] _ in
+            pageVCDelegate.didPressBackwardButton()
+        }), for: .touchUpInside)
+        accountButton.addAction(.init(handler: { [self] _ in
+            pageVCDelegate.didPressForwardButton()
+        }), for: .touchUpInside)
+        
+        primaryButton.internalButton.addTarget(self, action: #selector(didTapActiveButton), for: .touchUpInside)
+    }
+    
     func renderUI() {
         switch uiState {
         case .arrow:
@@ -98,6 +111,7 @@ class RadarVC: UIViewController, PageVCChild {
             primaryButton.internalButton.backgroundColor = .customWhite
             primaryButton.internalButton.setTitleColor(.customBlack, for: .normal)
             primaryButtonHeightConstraint.constant = 90
+            pulseArrow()
         case .radar:
             arrowView.isHidden = true
             centerCircleButton.isHidden = false
@@ -110,23 +124,13 @@ class RadarVC: UIViewController, PageVCChild {
         }
     }
     
-    func setupButtons() {
-        aboutButton.addAction(.init(handler: { [self] _ in
-            pageVCDelegate.didPressBackwardButton()
-        }), for: .touchUpInside)
-        accountButton.addAction(.init(handler: { [self] _ in
-            pageVCDelegate.didPressForwardButton()
-        }), for: .touchUpInside)
-        
-        primaryButton.internalButton.addTarget(self, action: #selector(didTapActiveButton), for: .touchUpInside)
-    }
-    
     func renderIsActive() {
         if isLocationServicesEnabled {
             primaryButton.configure(title: "active", systemImage: "")
             primaryButton.internalButton.backgroundColor = .customGreen
             primaryButton.internalButton.setTitleColor(.black, for: .normal)
             
+            //if already loaded?
             startPulsing()
             LocationManager.shared.startLocationServices()
         } else {
@@ -134,6 +138,7 @@ class RadarVC: UIViewController, PageVCChild {
             primaryButton.internalButton.backgroundColor = .customRed
             primaryButton.internalButton.setTitleColor(.white, for: .normal)
             
+            stopPulsing()
             LocationManager.shared.stopLocationServices()
         }
     }
@@ -146,35 +151,57 @@ class RadarVC: UIViewController, PageVCChild {
             aboutButton.alpha = visible ? 1 : 0
         }
     }
+    
+    func stopPulsing() {
+        isPulsing = false
+    }
 
     func startPulsing() {
-        pulse(pulseView: firstCircleView, repeating: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + PULSE_DURATION / 2) {
-            self.pulse(pulseView: self.secondCircleView, repeating: true)
+        isPulsing = true
+        firstCircleView.layer.removeAllAnimations()
+        secondCircleView.layer.removeAllAnimations()
+        pulse(pulseView: firstCircleView, repeating: true, duration: RadarVC.PULSE_DURATION)
+        DispatchQueue.main.asyncAfter(deadline: .now() + RadarVC.PULSE_DURATION / 2) { [weak self] in
+            guard let self else { return }
+            self.pulse(pulseView: self.secondCircleView, repeating: true, duration: RadarVC.PULSE_DURATION)
         }
     }
     
-    func pulse(pulseView: UIView, repeating: Bool) {
-        guard isLocationServicesEnabled else { return }
+//    func resumePulsing() {
+//        firstCircleView.layer.removeAllAnimations()
+//        secondCircleView.layer.removeAllAnimations()
+//
+//        firstCircleView.transform = CGAffineTransform(scaleX: 100, y: 100)
+//        secondCircleView.transform = .identity
+//
+//        pulse(pulseView: firstCircleView, repeating: true, duration: RadarVC.PULSE_DURATION/2)
+//        pulse(pulseView: secondCircleView, repeating: true, duration: RadarVC.PULSE_DURATION)
+//    }
+    
+    func pulse(pulseView: UIView, repeating: Bool, duration: Double) {
+        guard isPulsing else { return }
         if isCurrentlyVisible {
             UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
         }
-        UIView.animate(withDuration: PULSE_DURATION, delay: 0, options: [.curveLinear, .allowUserInteraction]) {
-            pulseView.transform = CGAffineTransform(scaleX: 1 / self.CIRCLE_WIDTH_RATIO, y: 1 / self.CIRCLE_WIDTH_RATIO)
+        UIView.animate(withDuration: duration, delay: 0, options: [.curveLinear, .allowUserInteraction]) { [weak self] in
+            guard self != nil else { return }
+            pulseView.transform = CGAffineTransform(scaleX: 1 / RadarVC.CIRCLE_WIDTH_RATIO, y: 1 / RadarVC.CIRCLE_WIDTH_RATIO)
             pulseView.alpha = 0
             pulseView.layer.borderWidth = 0
-        } completion: { [self] _ in
+        } completion: { [weak self] completed in
+            guard let self else { return }
             pulseView.transform = .identity
             pulseView.alpha = 1
             pulseView.layer.borderWidth = 2
-            if repeating {
-                pulse(pulseView: pulseView, repeating: true)
+            if repeating && completed {
+                self.pulse(pulseView: pulseView, repeating: true, duration: duration)
             }
         }
     }
     
     func pulseArrow() {
-        UIView.animate(withDuration: 2, delay: 0, options: [.curveLinear, .allowUserInteraction, .autoreverse, .repeat]) {
+        arrowView.transform = .identity //necessary to ensure the animation resumes after recreating VC
+        UIView.animate(withDuration: 1.5, delay: 0, options: [.curveLinear, .allowUserInteraction, .autoreverse, .repeat]) {
             self.arrowView.transform = CGAffineTransform(translationX: 0, y: 100)
         }
     }
@@ -185,7 +212,7 @@ class RadarVC: UIViewController, PageVCChild {
             circleView.translatesAutoresizingMaskIntoConstraints = false
             circleView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
             circleView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            circleView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: CIRCLE_WIDTH_RATIO, constant: -10).isActive = true
+            circleView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: RadarVC.CIRCLE_WIDTH_RATIO, constant: -10).isActive = true
             circleView.widthAnchor.constraint(equalTo: circleView.heightAnchor, multiplier: 1).isActive = true
             
             circleView.backgroundColor = .clear
@@ -197,7 +224,7 @@ class RadarVC: UIViewController, PageVCChild {
         centerCircleButton.translatesAutoresizingMaskIntoConstraints = false
         centerCircleButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         centerCircleButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        centerCircleButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: CIRCLE_WIDTH_RATIO).isActive = true
+        centerCircleButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: RadarVC.CIRCLE_WIDTH_RATIO).isActive = true
         centerCircleButton.widthAnchor.constraint(equalTo: centerCircleButton.heightAnchor, multiplier: 1).isActive = true
         
         centerCircleButton.backgroundColor = .white
@@ -240,14 +267,14 @@ class RadarVC: UIViewController, PageVCChild {
         newCircleView.translatesAutoresizingMaskIntoConstraints = false
         newCircleView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         newCircleView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        newCircleView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: CIRCLE_WIDTH_RATIO, constant: -10).isActive = true
+        newCircleView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: RadarVC.CIRCLE_WIDTH_RATIO, constant: -10).isActive = true
         newCircleView.widthAnchor.constraint(equalTo: newCircleView.heightAnchor, multiplier: 1).isActive = true
         newCircleView.backgroundColor = .clear
         newCircleView.layer.borderWidth = 2
         newCircleView.layer.borderColor = UIColor.white.cgColor
         newCircleView.roundCornersViaCornerRadius(radius: firstCircleView.bounds.width / 2)
-        pulse(pulseView: newCircleView, repeating: false)
-        DispatchQueue.main.asyncAfter(deadline: .now() + PULSE_DURATION) {
+        pulse(pulseView: newCircleView, repeating: false, duration: RadarVC.PULSE_DURATION)
+        DispatchQueue.main.asyncAfter(deadline: .now() + RadarVC.PULSE_DURATION) {
             newCircleView.removeFromSuperview()
         }
     }

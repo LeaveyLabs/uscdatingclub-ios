@@ -174,17 +174,49 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="rWX-Az-VeG"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adam Novak" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xth-2Z-hjs">
+                                <rect key="frame" x="20" y="144" width="353" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <color key="textColor" name="customWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3xO-gO-WgI" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                <rect key="frame" x="20" y="214" width="353" height="90"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="zzd-Ge-ZCT"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SgE-fI-iAt" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                <rect key="frame" x="20" y="324" width="353" height="60"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="i3N-DZ-ffL"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gx4-88-1am"/>
                         <color key="backgroundColor" name="AccentColor"/>
                         <constraints>
                             <constraint firstItem="sTq-D3-3Fy" firstAttribute="leading" secondItem="gx4-88-1am" secondAttribute="leading" id="0xh-5m-BjW"/>
+                            <constraint firstItem="3xO-gO-WgI" firstAttribute="leading" secondItem="gx4-88-1am" secondAttribute="leading" constant="20" id="5qf-F5-m1k"/>
+                            <constraint firstItem="SgE-fI-iAt" firstAttribute="top" secondItem="3xO-gO-WgI" secondAttribute="bottom" constant="20" id="83Y-Yw-jDI"/>
                             <constraint firstAttribute="trailing" secondItem="sTq-D3-3Fy" secondAttribute="trailing" id="9ta-GD-Nn7"/>
+                            <constraint firstItem="SgE-fI-iAt" firstAttribute="leading" secondItem="gx4-88-1am" secondAttribute="leading" constant="20" id="9xg-iw-K6y"/>
+                            <constraint firstItem="Xth-2Z-hjs" firstAttribute="leading" secondItem="gx4-88-1am" secondAttribute="leading" constant="20" id="Bbk-1C-uds"/>
+                            <constraint firstItem="gx4-88-1am" firstAttribute="trailing" secondItem="3xO-gO-WgI" secondAttribute="trailing" constant="20" id="BdT-1P-ykK"/>
                             <constraint firstItem="sTq-D3-3Fy" firstAttribute="top" secondItem="gx4-88-1am" secondAttribute="top" id="DBd-RQ-Lrn"/>
+                            <constraint firstItem="3xO-gO-WgI" firstAttribute="top" secondItem="Xth-2Z-hjs" secondAttribute="bottom" constant="40" id="U6c-15-Yr2"/>
+                            <constraint firstItem="gx4-88-1am" firstAttribute="trailing" secondItem="Xth-2Z-hjs" secondAttribute="trailing" constant="20" id="gnE-0z-16c"/>
+                            <constraint firstItem="gx4-88-1am" firstAttribute="trailing" secondItem="SgE-fI-iAt" secondAttribute="trailing" constant="20" id="t7g-mw-IIY"/>
+                            <constraint firstItem="Xth-2Z-hjs" firstAttribute="top" secondItem="sTq-D3-3Fy" secondAttribute="bottom" constant="30" id="u3p-ei-5wk"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="editAccountButton" destination="SgE-fI-iAt" id="J5f-aB-aRv"/>
+                        <outlet property="nameLabel" destination="Xth-2Z-hjs" id="Rwx-dx-P9j"/>
                         <outlet property="radarButton" destination="eXa-jR-ZiY" id="wgK-ES-BSf"/>
+                        <outlet property="retakeTestButton" destination="3xO-gO-WgI" id="fOK-RN-CbN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rjZ-SP-G5b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

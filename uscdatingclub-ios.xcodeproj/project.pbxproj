@@ -66,6 +66,7 @@
 		478BECD52966249300930DAF /* TestQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECD42966249300930DAF /* TestQuestion.swift */; };
 		478BECD729662C8100930DAF /* TestContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECD629662C8100930DAF /* TestContext.swift */; };
 		47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A80614295F8D23001DEE64 /* EnterBiosVC.swift */; };
+		47BBF9E12969DFE400802573 /* PermissionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BBF9E02969DFE400802573 /* PermissionsManager.swift */; };
 		47C40EE9295CB930007C27F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40EE8295CB930007C27F0 /* SceneDelegate.swift */; };
 		47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEC295CB930007C27F0 /* Main.storyboard */; };
 		47C40EF0295CB931007C27F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEF295CB931007C27F0 /* Assets.xcassets */; };
@@ -233,6 +234,7 @@
 		478BECD42966249300930DAF /* TestQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestQuestion.swift; sourceTree = "<group>"; };
 		478BECD629662C8100930DAF /* TestContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestContext.swift; sourceTree = "<group>"; };
 		47A80614295F8D23001DEE64 /* EnterBiosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterBiosVC.swift; sourceTree = "<group>"; };
+		47BBF9E02969DFE400802573 /* PermissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsManager.swift; sourceTree = "<group>"; };
 		47C40EE3295CB930007C27F0 /* uscdatingclub-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "uscdatingclub-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47C40EE8295CB930007C27F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		47C40EED295CB930007C27F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -884,6 +886,7 @@
 				47E38FE7295F69DC007CB77F /* AlertManager.swift */,
 				47E38FE8295F69DC007CB77F /* NotificationsManager.swift */,
 				47E38FE9295F69DC007CB77F /* LocationManager.swift */,
+				47BBF9E02969DFE400802573 /* PermissionsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1141,6 +1144,7 @@
 				4731F507295CD4770013F626 /* UIView+ParentVC.swift in Sources */,
 				4731F50B295CD4770013F626 /* UIView+RoundedIndividualCorners.swift in Sources */,
 				470221E7295CCE3E00119FA8 /* UIColor+Custom.swift in Sources */,
+				47BBF9E12969DFE400802573 /* PermissionsManager.swift in Sources */,
 				47DE3248295CC7C40063C55A /* UIImageView+Inspectable.swift in Sources */,
 				4731F52E295CE0C10013F626 /* AccountVC.swift in Sources */,
 				476FD864295DF89A0014DD42 /* SimpleButton.swift in Sources */,

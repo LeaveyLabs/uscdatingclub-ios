@@ -136,16 +136,22 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
     func scrollDownIfNecessary(prevQuestionId: Int) {
         guard
             let prevQuestionIndex = questions.firstIndex(where: { $0.id == prevQuestionId }),
-            prevQuestionIndex+2 < questions.count,
+            prevQuestionIndex+1 < questions.count
+        else { //they are answering the last question. move to bottom
+            tableView.setContentOffset(CGPoint(x: tableView.contentOffset.x, y: tableView.verticalOffsetForBottom), animated: true)
+            return
+        }
+        
+        guard
             TestContext.testResponses[prevQuestionId+1] == nil
-        else { return }
+        else { return }  //they went back to answer an earlier question. do nothing
         
         let questionIndex = prevQuestionIndex + 1
         let questionBottomYWithinFeed = tableView.rectForRow(at: IndexPath(row: questionIndex, section: 0))
         let questionBottomY = tableView.convert(questionBottomYWithinFeed, to: view).maxY
 
         let totalHeight = view.bounds.height + view.safeAreaInsets.top + view.safeAreaInsets.bottom
-        var desiredOffset = questionBottomY - totalHeight/2
+        let desiredOffset = questionBottomY - totalHeight/2
         print(totalHeight/2, questionBottomY, desiredOffset)
 
         if desiredOffset < 50 { return } //don't go in wrong direction, and don't scroll if a small amount

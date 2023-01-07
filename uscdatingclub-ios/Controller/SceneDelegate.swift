@@ -56,8 +56,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         
         if !UserService.singleton.isLoggedIntoAnAccount {
-            window.rootViewController = LoadingVC.create()
-//            window.rootViewController = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateInitialViewController()
+//            window.rootViewController = LoadingVC.create()
+            window.rootViewController = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateInitialViewController()
         } else {
             let loadingVC = LoadingVC.create()
             window.rootViewController = loadingVC
@@ -70,8 +70,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
 
         window.makeKeyAndVisible()
-    }
 
+    }
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
@@ -88,10 +89,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
     }
-
+    
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        
+        PermissionsManager.requestPermissionsIfNecessary()
+        //dont need to do notification below when you put the code in this delegate call
+//        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { notification in
+//            DispatchQueue.main.async {
+//                PermissionsManager.requestPermissionsIfNecessary()
+//            }
+//        }
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
