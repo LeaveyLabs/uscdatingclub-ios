@@ -7,8 +7,12 @@
 
 import Foundation
 import CoreLocation
+import FirebaseAnalytics
+import FirebaseAnalyticsSwift
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    
+    //MARK: - Properties
     
     static let shared = LocationManager()
     
@@ -47,39 +51,13 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.showsBackgroundLocationIndicator = false
     }
     
-    func requestPermissionServices() throws {
-        if locationStatus == .authorizedWhenInUse ||
-            locationStatus == .denied ||
-            locationAccuracy == .reducedAccuracy {
-            throw PermissionsError()
-        }
-                        
-        locationManager.requestWhenInUseAuthorization()
-    }
-    
-    func startLocationServices() {
-        locationManager.startUpdatingLocation()
-        locationManager.startMonitoringSignificantLocationChanges()
-        locationManager.startMonitoringLocationPushes { [self] data, error in
-            //TODO: how do we actually get the new locaiton tho?
-            guard let lastLocation else { return }
-            postToDatabase(lat: lastLocation.coordinate.latitude, long: lastLocation.coordinate.longitude)
-        }
-    }
-    
-    func stopLocationServices() {
-        locationManager.stopUpdatingLocation()
-        locationManager.stopMonitoringLocationPushes()
-        locationManager.stopMonitoringSignificantLocationChanges()
-    }
-        
-    func isLocationServicesProperlyAuthorized() -> Bool {
-        return properAuthorizations
-    }
+    //MARK: - CLLocationManagerDelegate
     
     //this function is (usually?) also called when the app is running in the background and the user changes authorization from settings... but this can't be a guarantee
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         print(#function, statusString, locationAccuracy == .fullAccuracy ? "Full acc" : "Reduced acc")
+        NotificationCenter.default.post(name: .locationStatusDidUpdate, object: "myObject", userInfo: ["key": "Value"])
+
         locationStatus = status
         locationAccuracy = manager.accuracyAuthorization
         
@@ -96,10 +74,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             locationManager.stopUpdatingLocation()
         }
         
-        NotificationCenter.default.post(name: .locationStatusDidUpdate, object: "myObject", userInfo: ["key": "Value"])
     }
     
-    //double check that
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         lastLocation = location
@@ -109,19 +85,56 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             postToDatabase(lat: lastLocation.coordinate.latitude, long: lastLocation.coordinate.longitude)
         }
         
-        if properAuthorizations {
-            locationManager.startUpdatingLocation() //does calling "start updating location" again right now do anything? we're already updating location... could it prolong the duration, though?
-        } else {
-            locationManager.stopUpdatingLocation()
-        }
+        //TODO: idea: should we stop and then start location services here to restart them and potentially prolong the total background time?
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(#function, error.localizedDescription)
+        let analyticsId = "location"
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+          AnalyticsParameterItemID: "id-\(analyticsId)",
+        ])
+    }
+    
+    //MARK: - Helpers
+    
+    func requestPermissionServices() throws {
+        if locationStatus == .authorizedWhenInUse ||
+            locationStatus == .denied ||
+            locationAccuracy == .reducedAccuracy {
+            throw PermissionsError()
+        }
+                        
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
+    func startLocationServices() {
+        locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
+        locationManager.startMonitoringLocationPushes { [self] data, error in
+            //TODO: does the below method get us the new location?
+            locationManager.stopUpdatingLocation()
+            locationManager.startUpdatingLocation()
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 1) { [self] in
+                guard let lastLocation else { return }
+                postToDatabase(lat: lastLocation.coordinate.latitude, long: lastLocation.coordinate.longitude)
+            }
+        }
+    }
+    
+    func stopLocationServices() {
+        locationManager.stopUpdatingLocation()
+        locationManager.stopMonitoringSignificantLocationChanges()
+        locationManager.stopMonitoringLocationPushes()
+    }
         
+    func isLocationServicesProperlyAuthorized() -> Bool {
+        return properAuthorizations
     }
     
     func postToDatabase(lat: Double, long: Double) {
+        //TODO: why is this not posting?
+        Analytics.logEvent("updateLocationSuccess", parameters: nil)
         Task {
             try await UserAPI.updateLocation(latitude: lat, longitude: long, email: UserService.singleton.getEmail())
         }
