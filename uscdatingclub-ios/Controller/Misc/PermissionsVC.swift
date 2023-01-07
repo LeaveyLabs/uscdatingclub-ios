@@ -108,7 +108,7 @@ class PermissionsVC: UIViewController {
         do {
             try LocationManager.shared.requestPermissionServices()
         } catch {
-            AlertManager.showSettingsAlertController(title: "open settings to share location", message: "precise, always", on: self)
+            AlertManager.showSettingsAlertController(title: "open settings to share location", message: "precise, always", settingsType: .location, on: self)
         }
     }
     
@@ -116,7 +116,7 @@ class PermissionsVC: UIViewController {
         NotificationsManager.shared.askForNewNotificationPermissionsIfNecessary { granted in
             DispatchQueue.main.async { [self] in
                 if !granted {
-                    AlertManager.showSettingsAlertController(title: "open settings to turn on notifications", message: "", on: self)
+                    AlertManager.showSettingsAlertController(title: "open settings to turn on notifications", message: "", settingsType: .notifications, on: self)
                 } else {
                     rerender()
                 }
@@ -126,7 +126,7 @@ class PermissionsVC: UIViewController {
     
     @objc func backgroundRefreshButtonDidTapped() {
         if UIApplication.shared.backgroundRefreshStatus != .available && !ProcessInfo.processInfo.isLowPowerModeEnabled {
-            AlertManager.showSettingsAlertController(title: "turn on background app refresh in settings", message: "", on: SceneDelegate.visibleViewController!)
+            AlertManager.showSettingsAlertController(title: "turn on background app refresh in settings", message: "", settingsType: .backgroundRefresh, on: SceneDelegate.visibleViewController!)
         }
     }
 

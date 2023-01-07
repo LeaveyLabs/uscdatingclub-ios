@@ -248,7 +248,9 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
         switch confirmMethod {
         case .text:
             if UserService.singleton.isLoggedIntoAnAccount {
-                transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
+                transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5, completion: { completed in
+                    PermissionsManager.requestPermissionsIfNecessary()
+                })
             } else {
                 navigationController?.pushViewController(EnterEmailVC.create(), animated: true, completion: { [weak self] in
                     self?.isSubmitting = false

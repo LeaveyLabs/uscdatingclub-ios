@@ -67,6 +67,8 @@
 		478BECD729662C8100930DAF /* TestContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECD629662C8100930DAF /* TestContext.swift */; };
 		47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A80614295F8D23001DEE64 /* EnterBiosVC.swift */; };
 		47BBF9E12969DFE400802573 /* PermissionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BBF9E02969DFE400802573 /* PermissionsManager.swift */; };
+		47BBF9E5296A390600802573 /* UIAlertController+AddImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BBF9E4296A390600802573 /* UIAlertController+AddImage.swift */; };
+		47BBF9E7296A391600802573 /* UIImage+WithSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BBF9E6296A391600802573 /* UIImage+WithSize.swift */; };
 		47C40EE9295CB930007C27F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40EE8295CB930007C27F0 /* SceneDelegate.swift */; };
 		47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEC295CB930007C27F0 /* Main.storyboard */; };
 		47C40EF0295CB931007C27F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47C40EEF295CB931007C27F0 /* Assets.xcassets */; };
@@ -235,6 +237,8 @@
 		478BECD629662C8100930DAF /* TestContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestContext.swift; sourceTree = "<group>"; };
 		47A80614295F8D23001DEE64 /* EnterBiosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterBiosVC.swift; sourceTree = "<group>"; };
 		47BBF9E02969DFE400802573 /* PermissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsManager.swift; sourceTree = "<group>"; };
+		47BBF9E4296A390600802573 /* UIAlertController+AddImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+AddImage.swift"; sourceTree = "<group>"; };
+		47BBF9E6296A391600802573 /* UIImage+WithSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+WithSize.swift"; sourceTree = "<group>"; };
 		47C40EE3295CB930007C27F0 /* uscdatingclub-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "uscdatingclub-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47C40EE8295CB930007C27F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		47C40EED295CB930007C27F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -695,6 +699,7 @@
 				47C4107C295CC0BE007C27F0 /* UISegmentedControl+Twitter.swift */,
 				4731F524295CD9870013F626 /* UIColor+Hex.swift */,
 				4731F52F295CF7DB0013F626 /* UIPageViewController+GoTo.swift */,
+				47BBF9E4296A390600802573 /* UIAlertController+AddImage.swift */,
 			);
 			path = UIKitExtensions;
 			sourceTree = "<group>";
@@ -847,6 +852,7 @@
 				47DE3235295CC7C40063C55A /* UIImage+FromColor.swift */,
 				47DE3236295CC7C40063C55A /* UIImage+Blur.swift */,
 				47DE3237295CC7C40063C55A /* UIImage+Thumbnail.swift */,
+				47BBF9E6296A391600802573 /* UIImage+WithSize.swift */,
 			);
 			path = UIImage;
 			sourceTree = "<group>";
@@ -901,6 +907,7 @@
 				47C40EDF295CB930007C27F0 /* Sources */,
 				47C40EE0295CB930007C27F0 /* Frameworks */,
 				47C40EE1295CB930007C27F0 /* Resources */,
+				47BBF9E3296A372000802573 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1050,6 +1057,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		47BBF9E3296A372000802573 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		47C40EDF295CB930007C27F0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1113,6 +1142,7 @@
 				47DE3221295CC52F0063C55A /* ProfilePicWrapper.swift in Sources */,
 				47C40F8C295CBBBD007C27F0 /* NotificationResponseHandler.swift in Sources */,
 				4731F504295CD4610013F626 /* UIScrollView+IsAt.swift in Sources */,
+				47BBF9E5296A390600802573 /* UIAlertController+AddImage.swift in Sources */,
 				47C40EE9295CB930007C27F0 /* SceneDelegate.swift in Sources */,
 				478BECBB2963463300930DAF /* GenericAPI.swift in Sources */,
 				47E38FEB295F69DC007CB77F /* AlertManager.swift in Sources */,
@@ -1152,6 +1182,7 @@
 				4731F50D295CD4770013F626 /* UIView+TopBorder.swift in Sources */,
 				47C40F8E295CBBBD007C27F0 /* Constants.swift in Sources */,
 				47E38FEC295F69DC007CB77F /* NotificationsManager.swift in Sources */,
+				47BBF9E7296A391600802573 /* UIImage+WithSize.swift in Sources */,
 				434A0539295E99FE00C15945 /* EmailAPI.swift in Sources */,
 				4731F509295CD4770013F626 /* UIView+Shadow.swift in Sources */,
 				47DE325C295CC7C40063C55A /* UIViewController+Loading.swift in Sources */,
@@ -1363,13 +1394,14 @@
 				CODE_SIGN_ENTITLEMENTS = "uscdatingclub-ios/uscdatingclub-ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = SHD3A2G97F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "uscdatingclub-ios/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "usc dating club";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The app needs to continually check if a match is nearby while you aren't on the app";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Share your precise location to find out when a match is near you.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your phone will look for nearby matches in the background—even while in your pocket.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your phone will look for matches near you.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1403,13 +1435,14 @@
 				CODE_SIGN_ENTITLEMENTS = "uscdatingclub-ios/uscdatingclub-ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = SHD3A2G97F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "uscdatingclub-ios/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "usc dating club";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The app needs to continually check if a match is nearby while you aren't on the app";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Share your precise location to find out when a match is near you.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your phone will look for nearby matches in the background—even while in your pocket.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your phone will look for matches near you.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

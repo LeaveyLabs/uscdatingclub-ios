@@ -95,12 +95,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to undo the changes made on entering the background.
         
         PermissionsManager.requestPermissionsIfNecessary()
-        //dont need to do notification below when you put the code in this delegate call
-//        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { notification in
-//            DispatchQueue.main.async {
-//                PermissionsManager.requestPermissionsIfNecessary()
-//            }
-//        }
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {

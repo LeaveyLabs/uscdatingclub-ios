@@ -63,17 +63,33 @@ enum AlertManager {
         }
     }
     
-    static func showSettingsAlertController(title: String, message: String, on controller: UIViewController) {
+    enum OpenSettingsType {
+        case location, backgroundRefresh, notifications
+    }
+    
+    static func showSettingsAlertController(title: String,
+                                            message: String,
+                                            settingsType: OpenSettingsType,
+                                            on controller: UIViewController) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil)
         let settingsAction = UIAlertAction(title: NSLocalizedString("settings", comment: ""), style: .default) { (UIAlertAction) in
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)! as URL, options: [:], completionHandler: nil)
+        }
+        switch settingsType {
+        case .backgroundRefresh:
+            alertController.addImage(image: UIImage(named: "permissions-bgrefresh")!.withRenderingMode(.alwaysOriginal))
+        case .location:
+            alertController.addImage(image: UIImage(named: "permissions-location")!.withRenderingMode(.alwaysOriginal))
+        case .notifications:
+            break
         }
         
         alertController.addAction(cancelAction)
         alertController.addAction(settingsAction)
         controller.present(alertController, animated: true)
     }
+    
     
     static func showInfoCentered(_ title: String, _ message: String,  on controller: UIViewController) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)

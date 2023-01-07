@@ -7,8 +7,6 @@
 
 import Foundation
 import CoreLocation
-import FirebaseFirestore
-import FirebaseCore
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
@@ -55,28 +53,24 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             locationAccuracy == .reducedAccuracy {
             throw PermissionsError()
         }
-        
-//        locationStatus == .
-                
+                        
         locationManager.requestWhenInUseAuthorization()
     }
     
     func startLocationServices() {
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
-        let region = CLCircularRegion(center: .init(latitude: 0, longitude: 0), radius: 10, identifier: "me")
-        locationManager.startMonitoring(for: region)
-        
-//        locationManager.startMonitoringLocationPushes { data, error in
-//            //asdf
-//        }
+        locationManager.startMonitoringLocationPushes { [self] data, error in
+            //TODO: how do we actually get the new locaiton tho?
+            guard let lastLocation else { return }
+            postToDatabase(lat: lastLocation.coordinate.latitude, long: lastLocation.coordinate.longitude)
+        }
     }
     
     func stopLocationServices() {
         locationManager.stopUpdatingLocation()
         locationManager.stopMonitoringLocationPushes()
         locationManager.stopMonitoringSignificantLocationChanges()
-//        locationManager.stopMonitoring(for: region)
     }
         
     func isLocationServicesProperlyAuthorized() -> Bool {
@@ -124,20 +118,19 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(#function, error.localizedDescription)
+        
     }
     
     func postToDatabase(lat: Double, long: Double) {
-        updates += 1
         Task {
-//            try await UserAPI.updateLocation(latitude: lat, longitude: long, email: UserService.singleton.getEmail())
-            let db = Firestore.firestore()
-            db.collection("location").document("hi").setData([
-                "latestTime":Date(),
-                "updates":updates
-            ])
+            try await UserAPI.updateLocation(latitude: lat, longitude: long, email: UserService.singleton.getEmail())
         }
     }
     
 }
 
-var updates = 0
+//            let db = Firestore.firestore()
+//            db.collection("location").document("hi").setData([
+//                "latestTime":Date(),
+//                "updates":updates
+//            ])
