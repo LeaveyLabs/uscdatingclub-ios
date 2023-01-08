@@ -223,6 +223,70 @@
             </objects>
             <point key="canvasLocation" x="1723" y="681"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="GHa-Ub-ja6">
+            <objects>
+                <viewController id="g2y-cG-uEw" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bc5-xQ-XOs">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ve5-7N-s4F">
+                                <rect key="frame" x="0.0" y="59" width="393" height="55"/>
+                                <subviews>
+                                    <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iyD-aR-4s6">
+                                        <rect key="frame" x="10" y="10" width="35" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="35" id="yJl-dv-1ll"/>
+                                            <constraint firstAttribute="width" secondItem="iyD-aR-4s6" secondAttribute="height" multiplier="1:1" id="zez-mt-oUG"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="chevron.left" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
+                                        </state>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="edit account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0m3-Ih-dVU">
+                                        <rect key="frame" x="138" y="15.666666666666671" width="117" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="leh-Ng-7hj">
+                                        <rect key="frame" x="0.0" y="54.666666666666671" width="393" height="0.3333333333333357"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="0.5" id="akl-bF-xyx"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="0m3-Ih-dVU" firstAttribute="centerX" secondItem="ve5-7N-s4F" secondAttribute="centerX" id="MKx-5X-d78"/>
+                                    <constraint firstItem="iyD-aR-4s6" firstAttribute="leading" secondItem="ve5-7N-s4F" secondAttribute="leading" constant="10" id="Nsr-3h-RuP"/>
+                                    <constraint firstItem="iyD-aR-4s6" firstAttribute="centerY" secondItem="ve5-7N-s4F" secondAttribute="centerY" id="NxH-ce-q1v"/>
+                                    <constraint firstAttribute="bottom" secondItem="leh-Ng-7hj" secondAttribute="bottom" id="Pln-7g-KsX"/>
+                                    <constraint firstAttribute="trailing" secondItem="leh-Ng-7hj" secondAttribute="trailing" id="Vsa-Nl-y3Q"/>
+                                    <constraint firstAttribute="height" constant="55" id="fQV-TI-c49"/>
+                                    <constraint firstItem="0m3-Ih-dVU" firstAttribute="centerY" secondItem="ve5-7N-s4F" secondAttribute="centerY" id="sKz-iv-wPB"/>
+                                    <constraint firstItem="leh-Ng-7hj" firstAttribute="leading" secondItem="ve5-7N-s4F" secondAttribute="leading" id="zBe-Wm-a6f"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="dQT-Z6-s80"/>
+                        <color key="backgroundColor" name="AccentColor"/>
+                        <constraints>
+                            <constraint firstItem="ve5-7N-s4F" firstAttribute="leading" secondItem="bc5-xQ-XOs" secondAttribute="leading" id="8vC-8O-4Xj"/>
+                            <constraint firstItem="dQT-Z6-s80" firstAttribute="trailing" secondItem="ve5-7N-s4F" secondAttribute="trailing" id="Sz3-I1-Xj7"/>
+                            <constraint firstItem="ve5-7N-s4F" firstAttribute="top" secondItem="dQT-Z6-s80" secondAttribute="top" id="Yfa-Kk-PHt"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lll-dk-YFg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2436" y="681"/>
+        </scene>
         <!--AboutVC-->
         <scene sceneID="bwP-Ob-oNb">
             <objects>
@@ -605,7 +669,7 @@
         <image name="safari" catalog="system" width="128" height="123"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="AccentColor">
-            <color red="0.8901960784313725" green="0.30588235294117649" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="customWhite">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

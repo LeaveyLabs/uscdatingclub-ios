@@ -15,6 +15,10 @@ class TestQuestionsVC: UIViewController {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var nextButton: SimpleButton!
     
+    var lastNonAnsweredQuestionIndex: Int {
+        questions.firstIndex(where: { TestContext.testResponses[$0.id] == nil }) ?? questions.count
+    }
+    
     var testPage: TestPage!
     var questions: [TestQuestion] {
         return TestQuestions[testPage]!
@@ -116,8 +120,13 @@ extension TestQuestionsVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SpectrumTestCell, for: indexPath) as! SpectrumTestCell
-        let question = questions[indexPath.row]        
-        cell.configure(testQuestion: question, response: TestContext.testResponses[question.id], delegate: self)
+        let question = questions[indexPath.row]
+        cell.configure(testQuestion: question,
+                       response: TestContext.testResponses[question.id],
+                       delegate: self,
+                       shouldBeHighlighted: lastNonAnsweredQuestionIndex == indexPath.row,
+                       isLastCell: indexPath.row == questions.count - 1,
+                       isFirstCell: indexPath.row == 0)
         return cell
     }
     
@@ -129,6 +138,9 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
         TestContext.testResponses[questionId] = selection
         scrollDownIfNecessary(prevQuestionId: questionId)
         rerenderNextButton()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     //if there are no more selected testResponses after this one,
