@@ -35,14 +35,14 @@ class SpectrumTestCell: UITableViewCell {
         [circle1Button, circle2Button, circle3Button, circle4Button, circle5Button, circle6Button, circle7Button]
     }
     
-    var testQuestion: TestQuestion!
+    var testQuestion: SpectrumTestQuestion!
     var cellDelegate: SpectrumTestCellDelegate!
 
     
     //MARK: - Initializer
     
     //Resposne is an int between 1 and 5
-    func configure(testQuestion: TestQuestion,
+    func configure(testQuestion: SpectrumTestQuestion,
                    response: Int?,
                    delegate: SpectrumTestCellDelegate,
                    shouldBeHighlighted: Bool,

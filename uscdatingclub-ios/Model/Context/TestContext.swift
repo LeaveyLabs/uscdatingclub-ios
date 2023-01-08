@@ -9,7 +9,7 @@ import Foundation
 
 
 struct TestContext {
-    static var testResponses: [Int:Int] = [:]
+    static var testResponses: [Int:Any] = [:]
     static var isFirstTest: Bool = false
 
     static func reset() {

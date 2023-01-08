@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="SelectionHeaderTestCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectionHeaderTestCell" rowHeight="86" id="KGk-i7-Jjw" customClass="SelectionHeaderTestCell" customModule="uscdatingclub_ios" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="331" height="86"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="331" height="86"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubA-iJ-FAP">
+                        <rect key="frame" x="0.0" y="0.0" width="331" height="0.66666666666666663"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="GJu-pA-g20"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="maQ-MD-fn9">
+                        <rect key="frame" x="20" y="40" width="291" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="xjW-dF-aBe"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="22"/>
+                        <color key="tintColor" name="customWhite"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" title="religious beliefs">
+                            <color key="titleColor" name="customWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="toggleButtonDidTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="B17-hb-MOb"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQy-2G-AwM">
+                        <rect key="frame" x="276" y="40" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="bQy-2G-AwM" secondAttribute="height" id="6As-ye-2l8"/>
+                            <constraint firstAttribute="height" constant="40" id="9y6-AU-mSf"/>
+                        </constraints>
+                        <color key="tintColor" name="customWhite"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" image="chevron.down" catalog="system">
+                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22"/>
+                        </state>
+                        <connections>
+                            <action selector="toggleButtonDidTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bql-qQ-drh"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" name="primaryColor"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="ubA-iJ-FAP" secondAttribute="trailing" id="BBH-TS-3qx"/>
+                    <constraint firstItem="maQ-MD-fn9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Bqp-nK-kq6"/>
+                    <constraint firstAttribute="bottom" secondItem="bQy-2G-AwM" secondAttribute="bottom" constant="10" id="Kz9-As-l3Y"/>
+                    <constraint firstItem="bQy-2G-AwM" firstAttribute="centerY" secondItem="maQ-MD-fn9" secondAttribute="centerY" id="Ts5-iK-G9V"/>
+                    <constraint firstAttribute="bottom" secondItem="maQ-MD-fn9" secondAttribute="bottom" constant="5" id="caR-pK-m0L"/>
+                    <constraint firstAttribute="trailing" secondItem="bQy-2G-AwM" secondAttribute="trailing" constant="15" id="dzN-uk-U52"/>
+                    <constraint firstItem="maQ-MD-fn9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="40" id="nmR-ln-Lyx"/>
+                    <constraint firstAttribute="trailing" secondItem="maQ-MD-fn9" secondAttribute="trailing" constant="20" id="oCf-Hp-Tfi"/>
+                    <constraint firstItem="ubA-iJ-FAP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="wVa-VT-JDo"/>
+                    <constraint firstItem="ubA-iJ-FAP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="zIF-T4-Uad"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="bottomConstraint" destination="caR-pK-m0L" id="61a-h1-KQb"/>
+                <outlet property="titleButton" destination="maQ-MD-fn9" id="5vz-i3-lJN"/>
+                <outlet property="toggleButton" destination="bQy-2G-AwM" id="srS-wR-0cD"/>
+                <outlet property="topLineView" destination="ubA-iJ-FAP" id="8wE-uh-Yvh"/>
+            </connections>
+            <point key="canvasLocation" x="147.32824427480915" y="34.507042253521128"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="chevron.down" catalog="system" width="128" height="70"/>
+        <namedColor name="customWhite">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="primaryColor">
+            <color red="0.8901960784313725" green="0.30588235294117649" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

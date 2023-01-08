@@ -36,6 +36,8 @@ enum Constants {
         struct Cell {
             static let HowItWorksCell = "HowItWorksCell"
             static let SpectrumTestCell = "SpectrumTestCell"
+            static let SelectionHeaderCell = "SelectionHeaderTestCell"
+            static let SelectionCell = "SelectionTestCell"
         }
         struct VC {
             //Home

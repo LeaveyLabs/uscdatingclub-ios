@@ -48,6 +48,10 @@
 		4731F52C295CE0B40013F626 /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4731F52B295CE0B40013F626 /* AboutVC.swift */; };
 		4731F52E295CE0C10013F626 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4731F52D295CE0C10013F626 /* AccountVC.swift */; };
 		4731F530295CF7DB0013F626 /* UIPageViewController+GoTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4731F52F295CF7DB0013F626 /* UIPageViewController+GoTo.swift */; };
+		47582897296A82C700F10415 /* SelectionHeaderTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47582895296A82C700F10415 /* SelectionHeaderTestCell.swift */; };
+		47582898296A82C800F10415 /* SelectionHeaderTestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47582896296A82C700F10415 /* SelectionHeaderTestCell.xib */; };
+		4758289B296A82D900F10415 /* SelectionTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47582899296A82D900F10415 /* SelectionTestCell.swift */; };
+		4758289C296A82D900F10415 /* SelectionTestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4758289A296A82D900F10415 /* SelectionTestCell.xib */; };
 		476FD861295DEDCF0014DD42 /* UIFont+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD860295DEDCF0014DD42 /* UIFont+Custom.swift */; };
 		476FD864295DF89A0014DD42 /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD862295DF89A0014DD42 /* SimpleButton.swift */; };
 		476FD865295DF89A0014DD42 /* SimpleButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 476FD863295DF89A0014DD42 /* SimpleButton.xib */; };
@@ -63,7 +67,7 @@
 		478BECC42964C2FD00930DAF /* TakeTheTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECC32964C2FD00930DAF /* TakeTheTestVC.swift */; };
 		478BECC62964C4D000930DAF /* TestQuestionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECC52964C4D000930DAF /* TestQuestionsVC.swift */; };
 		478BECC92964C60900930DAF /* TestTextVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECC82964C60900930DAF /* TestTextVC.swift */; };
-		478BECD52966249300930DAF /* TestQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECD42966249300930DAF /* TestQuestion.swift */; };
+		478BECD52966249300930DAF /* SpectrumTestQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECD42966249300930DAF /* SpectrumTestQuestion.swift */; };
 		478BECD729662C8100930DAF /* TestContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECD629662C8100930DAF /* TestContext.swift */; };
 		47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A80614295F8D23001DEE64 /* EnterBiosVC.swift */; };
 		47BBF9E12969DFE400802573 /* PermissionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BBF9E02969DFE400802573 /* PermissionsManager.swift */; };
@@ -218,6 +222,10 @@
 		4731F52B295CE0B40013F626 /* AboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
 		4731F52D295CE0C10013F626 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
 		4731F52F295CF7DB0013F626 /* UIPageViewController+GoTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPageViewController+GoTo.swift"; sourceTree = "<group>"; };
+		47582895296A82C700F10415 /* SelectionHeaderTestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionHeaderTestCell.swift; sourceTree = "<group>"; };
+		47582896296A82C700F10415 /* SelectionHeaderTestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionHeaderTestCell.xib; sourceTree = "<group>"; };
+		47582899296A82D900F10415 /* SelectionTestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTestCell.swift; sourceTree = "<group>"; };
+		4758289A296A82D900F10415 /* SelectionTestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionTestCell.xib; sourceTree = "<group>"; };
 		476FD860295DEDCF0014DD42 /* UIFont+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Custom.swift"; sourceTree = "<group>"; };
 		476FD862295DF89A0014DD42 /* SimpleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleButton.swift; sourceTree = "<group>"; };
 		476FD863295DF89A0014DD42 /* SimpleButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleButton.xib; sourceTree = "<group>"; };
@@ -233,7 +241,7 @@
 		478BECC32964C2FD00930DAF /* TakeTheTestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeTheTestVC.swift; sourceTree = "<group>"; };
 		478BECC52964C4D000930DAF /* TestQuestionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestQuestionsVC.swift; sourceTree = "<group>"; };
 		478BECC82964C60900930DAF /* TestTextVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTextVC.swift; sourceTree = "<group>"; };
-		478BECD42966249300930DAF /* TestQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestQuestion.swift; sourceTree = "<group>"; };
+		478BECD42966249300930DAF /* SpectrumTestQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumTestQuestion.swift; sourceTree = "<group>"; };
 		478BECD629662C8100930DAF /* TestContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestContext.swift; sourceTree = "<group>"; };
 		47A80614295F8D23001DEE64 /* EnterBiosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterBiosVC.swift; sourceTree = "<group>"; };
 		47BBF9E02969DFE400802573 /* PermissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsManager.swift; sourceTree = "<group>"; };
@@ -552,7 +560,7 @@
 				478BECD929662CFB00930DAF /* Device */,
 				47C41041295CBFDF007C27F0 /* Error.swift */,
 				47C40F5C295CBAF0007C27F0 /* Feature.swift */,
-				478BECD42966249300930DAF /* TestQuestion.swift */,
+				478BECD42966249300930DAF /* SpectrumTestQuestion.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -796,6 +804,10 @@
 				476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */,
 				478BECBC2963755000930DAF /* SpectrumTestCell.swift */,
 				478BECBD2963755000930DAF /* SpectrumTestCell.xib */,
+				47582895296A82C700F10415 /* SelectionHeaderTestCell.swift */,
+				47582896296A82C700F10415 /* SelectionHeaderTestCell.xib */,
+				47582899296A82D900F10415 /* SelectionTestCell.swift */,
+				4758289A296A82D900F10415 /* SelectionTestCell.xib */,
 			);
 			path = TableCells;
 			sourceTree = "<group>";
@@ -1032,8 +1044,10 @@
 				47C40EF3295CB931007C27F0 /* LaunchScreen.storyboard in Resources */,
 				47C40F17295CBAB7007C27F0 /* GoogleService-Info.plist in Resources */,
 				478BECBF2963755000930DAF /* SpectrumTestCell.xib in Resources */,
+				4758289C296A82D900F10415 /* SelectionTestCell.xib in Resources */,
 				47DE3225295CC57C0063C55A /* Auth.storyboard in Resources */,
 				47C40EF0295CB931007C27F0 /* Assets.xcassets in Resources */,
+				47582898296A82C800F10415 /* SelectionHeaderTestCell.xib in Resources */,
 				47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */,
 				476FD865295DF89A0014DD42 /* SimpleButton.xib in Resources */,
 				476FD86F295E4A1F0014DD42 /* HowItWorksCell.xib in Resources */,
@@ -1132,7 +1146,8 @@
 				434A052C295E1E9700C15945 /* DeviceAPI.swift in Sources */,
 				47E38FF3295F72B9007CB77F /* FeatureView.swift in Sources */,
 				4731F508295CD4770013F626 /* UIView+PostBubble.swift in Sources */,
-				478BECD52966249300930DAF /* TestQuestion.swift in Sources */,
+				4758289B296A82D900F10415 /* SelectionTestCell.swift in Sources */,
+				478BECD52966249300930DAF /* SpectrumTestQuestion.swift in Sources */,
 				4731F503295CD45F0013F626 /* UIScrollView+ToTop.swift in Sources */,
 				47DE3264295CC94F0063C55A /* UIButton+LoadingIndicator.swift in Sources */,
 				47DE3207295CC4B40063C55A /* CreateProfileVC.swift in Sources */,
@@ -1155,6 +1170,7 @@
 				4731F525295CD9870013F626 /* UIColor+Hex.swift in Sources */,
 				47DE321D295CC52F0063C55A /* User.swift in Sources */,
 				47C40F60295CBAF0007C27F0 /* DeviceService.swift in Sources */,
+				47582897296A82C700F10415 /* SelectionHeaderTestCell.swift in Sources */,
 				47C41079295CC0AB007C27F0 /* CLLocationCoordinate.swift in Sources */,
 				47DE3256295CC7C40063C55A /* UIViewController+DismissFlag.swift in Sources */,
 				47DE3266295CC94F0063C55A /* UIBarButtonItem+Image.swift in Sources */,
@@ -1400,7 +1416,7 @@
 				INFOPLIST_FILE = "uscdatingclub-ios/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "usc dating club";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your phone will look for nearby matches in the background—even while in your pocket.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your phone will look for nearby matches in the background. This feature is required for the app to work.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your phone will look for matches near you.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -1441,7 +1457,7 @@
 				INFOPLIST_FILE = "uscdatingclub-ios/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "usc dating club";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your phone will look for nearby matches in the background—even while in your pocket.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your phone will look for nearby matches in the background. This feature is required for the app to work.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your phone will look for matches near you.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;

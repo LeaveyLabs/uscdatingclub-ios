@@ -18,6 +18,7 @@ class TestQuestionsVC: UIViewController {
     var lastNonAnsweredQuestionIndex: Int {
         questions.firstIndex(where: { TestContext.testResponses[$0.id] == nil }) ?? questions.count
     }
+    var manuallyOpenedSelectionQuestionIndex: Int? = nil
     
     var testPage: TestPage!
     var questions: [TestQuestion] {
@@ -52,12 +53,10 @@ class TestQuestionsVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print(TestContext.testResponses)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print(TestContext.testResponses)
     }
     
     func setupHeaderFooter() {
@@ -77,6 +76,8 @@ class TestQuestionsVC: UIViewController {
 
         //the below was giving me issues for some reason
         tableView.register(UINib(nibName: Constants.SBID.Cell.SpectrumTestCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SpectrumTestCell)
+        tableView.register(UINib(nibName: Constants.SBID.Cell.SelectionCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SelectionCell)
+        tableView.register(UINib(nibName: Constants.SBID.Cell.SelectionHeaderCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SelectionHeaderCell)
     }
     
     func rerenderNextButton() {
@@ -114,20 +115,87 @@ extension TestQuestionsVC: UITableViewDelegate {
 
 extension TestQuestionsVC: UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return questions.count
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let selectionQuestion = questions[section] as? SelectionTestQuestion {
+            if lastNonAnsweredQuestionIndex == section {
+                return 1 + selectionQuestion.options.count
+            } else if let manuallyOpenedSelectionQuestionIndex, manuallyOpenedSelectionQuestionIndex == section {
+                return 1 + selectionQuestion.options.count
+            } else {
+                return 1
+            }
+        }
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SpectrumTestCell, for: indexPath) as! SpectrumTestCell
-        let question = questions[indexPath.row]
-        cell.configure(testQuestion: question,
-                       response: TestContext.testResponses[question.id],
-                       delegate: self,
-                       shouldBeHighlighted: lastNonAnsweredQuestionIndex == indexPath.row,
-                       isLastCell: indexPath.row == questions.count - 1,
-                       isFirstCell: indexPath.row == 0)
-        return cell
+        let question = questions[indexPath.section]
+        if let spectrumQuestion = question as? SpectrumTestQuestion {
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SpectrumTestCell, for: indexPath) as! SpectrumTestCell
+            cell.configure(testQuestion: spectrumQuestion,
+                           response: TestContext.testResponses[spectrumQuestion.id] as? Int,
+                           delegate: self,
+                           shouldBeHighlighted: lastNonAnsweredQuestionIndex == indexPath.section,
+                           isLastCell: indexPath.section == questions.count - 1,
+                           isFirstCell: indexPath.section == 0)
+            return cell
+        } else if let selectionQuestion = question as? SelectionTestQuestion {
+            if indexPath.row == 0 {
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SelectionHeaderCell, for: indexPath) as! SelectionHeaderTestCell
+                cell.configure(testQuestion: selectionQuestion,
+                               delegate: self,
+                               shouldBeOpened: lastNonAnsweredQuestionIndex == indexPath.section || manuallyOpenedSelectionQuestionIndex == indexPath.section,
+                               isAnswered: TestContext.testResponses[question.id] != nil,
+                               isLastCell: indexPath.section == questions.count - 1,
+                               isFirstCell: indexPath.section == 0)
+                return cell
+            } else {
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SelectionCell, for: indexPath) as! SelectionTestCell
+                let option = selectionQuestion.options[indexPath.row-1]
+                cell.configure(testQuestion: selectionQuestion,
+                               testAnswer: option,
+                               delegate: self,
+                               isCurrentlySelected: TestContext.testResponses[question.id] as? String == option,
+                               isLastCell: indexPath.row == selectionQuestion.options.count)
+                return cell
+            }
+        } else {
+            fatalError()
+        }
+    }
+    
+}
+
+extension TestQuestionsVC: SelectionHeaderTestCellDelegate {
+    
+    func toggleButtonDidTapped(questionId: Int) {
+        if manuallyOpenedSelectionQuestionIndex != nil {
+            manuallyOpenedSelectionQuestionIndex = nil
+        } else {
+            manuallyOpenedSelectionQuestionIndex = questions.firstIndex(where: { $0.id == questionId})
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                self.scrollDownIfNecessary(questionId: questionId)
+            }
+        }
+        tableView.reloadData()
+    }
+    
+}
+
+extension TestQuestionsVC: SelectionTestCellDelegate {
+    
+    func didSelect(questionId: Int, testAnswer: String) {
+        TestContext.testResponses[questionId] = testAnswer
+        scrollDownIfNecessary(prevQuestionId: questionId)
+        rerenderNextButton()
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
 }
@@ -143,9 +211,31 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
         }
     }
     
-    //if there are no more selected testResponses after this one,
-    //ensure the contentOffset
-    func scrollDownIfNecessary(prevQuestionId: Int) {
+    //code duplicated in two functions below... oh well, fix later
+    //needed two entry points, one for when going to next question, one for expanding the toggled seleciton question
+    func scrollDownIfNecessary(questionId: Int, redo: Bool = false) {
+        guard let questionIndex = questions.firstIndex(where:  { $0.id == questionId }),
+              questionIndex < questions.count
+        else {
+            return
+        }
+        let questionBottomYWithinFeed = tableView.rectForRow(at: IndexPath(row: 0, section: questionIndex))
+        let questionBottomY = tableView.convert(questionBottomYWithinFeed, to: view).maxY
+
+        let totalHeight = view.bounds.height + view.safeAreaInsets.top + view.safeAreaInsets.bottom
+        let desiredOffset = questionBottomY - totalHeight/2
+
+        if desiredOffset < 50 { return } //don't go in wrong direction, and don't scroll if a small amount
+        
+        let willWeBeAtBottom = desiredOffset + tableView.contentOffset.y > tableView.verticalOffsetForBottom
+        if willWeBeAtBottom {
+            tableView.setContentOffset(CGPoint(x: tableView.contentOffset.x, y: tableView.verticalOffsetForBottom), animated: true)
+        } else {
+            tableView.setContentOffset(tableView.contentOffset.applying(.init(translationX: 0, y: desiredOffset)), animated: true)
+        }
+    }
+    
+    func scrollDownIfNecessary(prevQuestionId: Int, redo: Bool = false) {
         guard
             let prevQuestionIndex = questions.firstIndex(where: { $0.id == prevQuestionId }),
             prevQuestionIndex+1 < questions.count
@@ -159,12 +249,22 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
         else { return }  //they went back to answer an earlier question. do nothing
         
         let questionIndex = prevQuestionIndex + 1
-        let questionBottomYWithinFeed = tableView.rectForRow(at: IndexPath(row: questionIndex, section: 0))
+        
+        //when a selection question is appearing or disappearing, need a slight delay so that expanded UI's constraints can update
+        let beforeQ = questions[questionIndex] as? SelectionTestQuestion
+        let q = questions[questionIndex] as? SelectionTestQuestion
+        if (beforeQ != nil || q != nil) && !redo {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.scrollDownIfNecessary(prevQuestionId: prevQuestionId, redo: true)
+            }
+            return
+        }
+                
+        let questionBottomYWithinFeed = tableView.rectForRow(at: IndexPath(row: 0, section: questionIndex))
         let questionBottomY = tableView.convert(questionBottomYWithinFeed, to: view).maxY
 
         let totalHeight = view.bounds.height + view.safeAreaInsets.top + view.safeAreaInsets.bottom
         let desiredOffset = questionBottomY - totalHeight/2
-        print(totalHeight/2, questionBottomY, desiredOffset)
 
         if desiredOffset < 50 { return } //don't go in wrong direction, and don't scroll if a small amount
         
@@ -173,7 +273,6 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
             tableView.setContentOffset(CGPoint(x: tableView.contentOffset.x, y: tableView.verticalOffsetForBottom), animated: true)
         } else {
             tableView.setContentOffset(tableView.contentOffset.applying(.init(translationX: 0, y: desiredOffset)), animated: true)
-
         }
     }
     
