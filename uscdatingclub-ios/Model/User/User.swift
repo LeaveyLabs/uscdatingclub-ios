@@ -50,6 +50,7 @@ struct CompleteUser: Codable, CompleteUserType {
     let sexIdentity: String
     let sexPreference: String
     let phoneNumber: String
+    var surveyResponses: [SurveyResponse]
     
     //Equatable
     static func == (lhs: CompleteUser, rhs: CompleteUser) -> Bool { return lhs.id == rhs.id }
@@ -66,6 +67,7 @@ struct FrontendCompleteUser: Codable, CompleteUserType, ReadOnlyUserType {
     //    var picture: String
     var sexIdentity: String
     var sexPreference: String
+    var surveyResponses: [SurveyResponse]
     
     // Complete-only properties
     //    var profilePicWrapper: ProfilePicWrapper
@@ -80,10 +82,11 @@ struct FrontendCompleteUser: Codable, CompleteUserType, ReadOnlyUserType {
         self.sexIdentity = completeUser.sexIdentity
         self.sexPreference = completeUser.sexPreference
 //        self.profilePicWrapper = profilePicWrapper
+        self.surveyResponses = completeUser.surveyResponses
     }
     
     //Equatable
     static func == (lhs: FrontendCompleteUser, rhs: FrontendCompleteUser) -> Bool { return lhs.id == rhs.id }
     
-    static let nilUser = FrontendCompleteUser(completeUser: CompleteUser(id: -1, firstName: "", lastName: "", email: "", sexIdentity: "", sexPreference: "", phoneNumber: ""))
+    static let nilUser = FrontendCompleteUser(completeUser: CompleteUser(id: -1, firstName: "", lastName: "", email: "", sexIdentity: "", sexPreference: "", phoneNumber: "", surveyResponses: []))
 }

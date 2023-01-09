@@ -33,7 +33,7 @@ struct DeviceErrors: Codable {
 
 class DeviceAPI {
     // MARK: Endpoints
-    static let PATH_TO_DEVICES = "api/devices/"
+    static let PATH_TO_DEVICES = "devices/"
     static let DEVICE_RECOVERY_MESSAGE = "Please try again."
     
     static func filterDeviceErrors(data: Data, response: HTTPURLResponse) throws {

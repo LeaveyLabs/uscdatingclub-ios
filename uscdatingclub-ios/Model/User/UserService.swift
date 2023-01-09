@@ -168,7 +168,7 @@ class UserService: NSObject {
 //    }
     
     func updateTestResults() async throws {
-        try await UserAPI.postSurveyAnswers(email: authedUser.email, responses: [2:3])
+        try await UserAPI.postSurveyAnswers(email: authedUser.email, surveyResponses: [SurveyResponse(category: 2, answer: 3)])
     }
     
     func updateLocation(lat: Double, long: Double) async throws {
