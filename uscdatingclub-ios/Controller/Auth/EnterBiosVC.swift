@@ -95,7 +95,7 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
         sexIdentityTextField.inputView = sexPicker        
         sexPreferenceTextField.delegate = self
         sexPreferenceTextField.inputView = sexPicker
-        sexOptions = [.blank, .f, .b, .b]
+        sexOptions = [.blank, .f, .m, .b]
     }
     
     func setupContinueButton() {
@@ -151,10 +151,10 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
         guard
             let sexIdentityText = sexIdentityTextField.text,
             sexIdentityText != "",
-            let sexIdentity = Sex(rawValue: sexIdentityText)?.databaseName,
+            let sexIdentity = sexIdentityText.first,
             let sexPreferenceText = sexIdentityTextField.text,
             sexPreferenceText != "",
-            let sexPreference = Sex(rawValue: sexPreferenceText)?.databaseName
+            let sexPreference = sexIdentityText.first
         else {
             AlertManager.displayError("no sex option selected", "please try again")
             return
@@ -169,10 +169,10 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
 //                    profilePic: AuthContext.profilePic!,
                     phoneNumber: AuthContext.phoneNumber,
                     email: AuthContext.email,
-                    sexIdentity: sexIdentity,
-                    sexPreference: sexPreference)
+                    sexIdentity: String(sexIdentity),
+                    sexPreference: String(sexPreference))
                 AuthContext.reset()
-                navigationController?.pushViewController(CreateProfileVC.create(), animated: true, completion: { [weak self] in
+                navigationController?.pushViewController(HowItWorksVC.create(), animated: true, completion: { [weak self] in
                     self?.isSubmitting = false
                 })
             } catch {

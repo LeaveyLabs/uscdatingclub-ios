@@ -58,6 +58,9 @@ enum Constants {
             static let EditAccount = "EditAccountVC"
             //Navigation Controllers
             
+            //Connect
+            static let MatchFound = "MatchFoundVC"
+            static let Coordinate = "CoordinateVC"
             //TabBar
             static let TabBarController = "TabBarController"
             //Misc

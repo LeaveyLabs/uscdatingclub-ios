@@ -55,13 +55,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         self.window = window
         
+//        let matchInfo = MatchInfo(matchName: "Mei", compatibility: "93", matchTime: Date())
+//        window.rootViewController = MatchFoundVC.create(matchInfo: matchInfo)
         if !UserService.singleton.isLoggedIntoAnAccount {
 //            window.rootViewController = LoadingVC.create()
             window.rootViewController = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateInitialViewController()
         } else {
             let loadingVC = LoadingVC.create()
             window.rootViewController = loadingVC
-            
+
             if let notificationResponse = connectionOptions.notificationResponse,
                let notificationResponseHandler = generateNotificationResponseHandler(notificationResponse) {
                 loadingVC.notificationResponseHandler = notificationResponseHandler

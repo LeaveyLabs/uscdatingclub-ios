@@ -67,9 +67,10 @@ class HowItWorksVC: UIViewController {
     //MARK: - Interaction
     
     @objc func gotItButtonDidTapped() {
-        if let parent = parent as? UINavigationController {
-            let vc = PermissionsVC.create()
-            parent.pushViewController(vc, animated: true)
+        if let _ = parent as? UINavigationController {
+//            let vc = PermissionsVC.create()
+//            parent.pushViewController(vc, animated: true)
+            dismiss(animated: true)
         } else {
             dismiss(animated: true)
         }

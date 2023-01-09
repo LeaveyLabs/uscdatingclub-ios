@@ -63,6 +63,56 @@ enum AlertManager {
         }
     }
     
+    static func showInfoCentered(_ title: String, _ message: String,  on controller: UIViewController) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default) { (UIAlertAction) in
+            
+        }
+        alertController.addAction(okAction)
+        controller.present(alertController, animated: true)
+    }
+    
+    static func showAlert(title: String,
+                          subtitle: String,
+                          primaryActionTitle: String,
+                          primaryActionHandler: @escaping () -> Void,
+                          secondaryActionTitle: String? = nil,
+                          secondaryActionHandler: (() -> Void)? = nil,
+                          on controller: UIViewController) {
+        let alertController = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
+        let primaryAction = UIAlertAction(title: NSLocalizedString(primaryActionTitle, comment: ""), style: .default) { (UIAlertAction) in
+            primaryActionHandler()
+        }
+        alertController.addAction(primaryAction)
+        if let secondaryActionTitle, let secondaryActionHandler {
+            let secondaryAction = UIAlertAction(title: NSLocalizedString(secondaryActionTitle, comment: ""), style: .cancel) { (UIAlertAction) in
+                secondaryActionHandler()
+            }
+            alertController.addAction(secondaryAction)
+        }
+        controller.present(alertController, animated: true)
+    }
+    
+    //MARK: - Specific Use Cases
+    
+    static func showDeleteAccountAlert(on controller: UIViewController) {
+        let alertController = UIAlertController(title: "are you sure you want to delete your account?", message: "this cannot be undone", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: NSLocalizedString("yes, delete my account", comment: ""), style: .default) { (UIAlertAction) in
+            Task {
+                try await UserService.singleton.deleteMyAccount()
+                DispatchQueue.main.async {
+                    transitionToAuth()
+                }
+            }
+        }
+        let noAction = UIAlertAction(title: NSLocalizedString("nevermind", comment: ""), style: .cancel) { (UIAlertAction) in
+            
+        }
+        alertController.addAction(yesAction)
+        alertController.addAction(noAction)
+        controller.present(alertController, animated: true)
+    }
+    
     enum OpenSettingsType {
         case location, backgroundRefresh, notifications
     }
@@ -87,34 +137,6 @@ enum AlertManager {
         
         alertController.addAction(cancelAction)
         alertController.addAction(settingsAction)
-        controller.present(alertController, animated: true)
-    }
-    
-    
-    static func showInfoCentered(_ title: String, _ message: String,  on controller: UIViewController) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default) { (UIAlertAction) in
-            
-        }
-        alertController.addAction(okAction)
-        controller.present(alertController, animated: true)
-    }
-    
-    static func showDeleteAccountAlert(on controller: UIViewController) {
-        let alertController = UIAlertController(title: "are you sure you want to delete your account?", message: "this cannot be undone", preferredStyle: .alert)
-        let yesAction = UIAlertAction(title: NSLocalizedString("yes, delete my account", comment: ""), style: .default) { (UIAlertAction) in
-            Task {
-                try await UserService.singleton.deleteMyAccount()
-                DispatchQueue.main.async {
-                    transitionToAuth()
-                }
-            }
-        }
-        let noAction = UIAlertAction(title: NSLocalizedString("nevermind", comment: ""), style: .cancel) { (UIAlertAction) in
-            
-        }
-        alertController.addAction(yesAction)
-        alertController.addAction(noAction)
         controller.present(alertController, animated: true)
     }
     
