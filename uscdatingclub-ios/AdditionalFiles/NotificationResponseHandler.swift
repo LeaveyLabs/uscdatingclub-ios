@@ -18,7 +18,7 @@ enum NotificationTypes: String, CaseIterable {
 //    static let newMentionedMist = Notification.Name("tag")
 //}
 
-struct MatchedUser: Codable {
+struct MatchPartner: Codable {
     let id: Int
     let firstName: String
 }
@@ -32,7 +32,7 @@ extension Notification {
 
 struct NotificationResponseHandler {
     var notificationType: NotificationTypes
-    var newMatchedUser: MatchedUser?
+    var newMatchPartner: MatchPartner?
 }
 
 func generateNotificationResponseHandler(_ notificationResponse: UNNotificationResponse) -> NotificationResponseHandler? {
@@ -50,7 +50,7 @@ func generateNotificationResponseHandler(_ notificationResponse: UNNotificationR
             let data = try JSONSerialization.data(withJSONObject: json as Any, options: .prettyPrinted)
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            handler.newMatchedUser = try decoder.decode(MatchedUser.self, from: data)
+            handler.newMatchPartner = try decoder.decode(MatchPartner.self, from: data)
 //            handler.newMatchRequest = try JSONDecoder().decode(MatchRequest.self, from: data)
         }
         return handler
