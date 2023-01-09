@@ -27,7 +27,7 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="maQ-MD-fn9">
-                        <rect key="frame" x="10" y="40" width="311" height="40"/>
+                        <rect key="frame" x="20" y="30" width="291" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="xjW-dF-aBe"/>
                         </constraints>
@@ -46,10 +46,10 @@
                 <color key="backgroundColor" name="primaryColor"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="ubA-iJ-FAP" secondAttribute="trailing" id="BBH-TS-3qx"/>
-                    <constraint firstItem="maQ-MD-fn9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Bqp-nK-kq6"/>
-                    <constraint firstAttribute="bottom" secondItem="maQ-MD-fn9" secondAttribute="bottom" constant="5" id="caR-pK-m0L"/>
-                    <constraint firstItem="maQ-MD-fn9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="40" id="nmR-ln-Lyx"/>
-                    <constraint firstAttribute="trailing" secondItem="maQ-MD-fn9" secondAttribute="trailing" constant="10" id="oCf-Hp-Tfi"/>
+                    <constraint firstItem="maQ-MD-fn9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Bqp-nK-kq6"/>
+                    <constraint firstAttribute="bottom" secondItem="maQ-MD-fn9" secondAttribute="bottom" constant="30" id="caR-pK-m0L"/>
+                    <constraint firstItem="maQ-MD-fn9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="nmR-ln-Lyx"/>
+                    <constraint firstAttribute="trailing" secondItem="maQ-MD-fn9" secondAttribute="trailing" constant="20" id="oCf-Hp-Tfi"/>
                     <constraint firstItem="ubA-iJ-FAP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="wVa-VT-JDo"/>
                     <constraint firstItem="ubA-iJ-FAP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="zIF-T4-Uad"/>
                 </constraints>

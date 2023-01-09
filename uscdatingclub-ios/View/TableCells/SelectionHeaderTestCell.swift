@@ -49,12 +49,12 @@ class SelectionHeaderTestCell: UITableViewCell {
         }
         
         titleButton.setTitle(testQuestion.title, for: .normal)
-        titleButton.setTitleColor(shouldBeOpened ? .customWhite : isAnswered ? .testGreen : .testPurple, for: .normal)
+        titleButton.setTitleColor(shouldBeOpened ? .customWhite : isAnswered ? .customWhite : .testPurple, for: .normal)
         titleButton.setImage(UIImage(systemName: shouldBeOpened ? "chevron.up" : "chevron.down"), for: .normal)
-        titleButton.tintColor = shouldBeOpened ? .customWhite : isAnswered ? .testGreen : .testPurple
+        titleButton.tintColor = shouldBeOpened ? .customWhite : isAnswered ? .customWhite : .testPurple
         contentView.alpha = shouldBeOpened ? 1 : 0.7
         
-        bottomConstraint.constant = isOpen ? 10 : 40
+//        bottomConstraint.constant = isOpen ? 10 : 30
     }
     
     //MARK: - Lifecycle

@@ -126,6 +126,8 @@ extension TestQuestionsVC: UITableViewDataSource {
             } else if let manuallyOpenedSelectionQuestionIndex, manuallyOpenedSelectionQuestionIndex == section {
                 return 1 + selectionQuestion.options.count
             } else {
+                //if it's answered, return 1+ the number answered?
+                
                 return 1
             }
         }
@@ -190,11 +192,11 @@ extension TestQuestionsVC: SelectionTestCellDelegate {
     
     func didSelect(questionId: Int, testAnswer: String) {
         TestContext.testResponses[questionId] = testAnswer
-        scrollDownIfNecessary(prevQuestionId: questionId)
         rerenderNextButton()
         
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+        tableView.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { //wait for tableView to reload
+            self.scrollDownIfNecessary(prevQuestionId: questionId)
         }
     }
     
