@@ -59,6 +59,24 @@ class RadarVC: UIViewController, PageVCChild {
         super.viewDidLoad()
         setupCircleViews()
         setupButtons()
+        
+        setupPermissions()
+    }
+    
+    func setupPermissions() {
+        PermissionsManager.areAllPermissionsGranted(closure: { enabled in
+            if !enabled {
+                DispatchQueue.main.async { [self] in
+                    isLocationServicesEnabled = false
+                    renderIsActive()
+                }
+            }
+        })
+        
+        NotificationCenter.default.addObserver(forName: .permissionsWereRevoked, object: nil, queue: .main) { [self] notification in
+            isLocationServicesEnabled = false
+            renderIsActive()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -238,8 +256,23 @@ class RadarVC: UIViewController, PageVCChild {
     @objc func didTapActiveButton() {
         switch uiState {
         case .radar:
-            isLocationServicesEnabled.toggle()
-            renderIsActive()
+            if isLocationServicesEnabled {
+                isLocationServicesEnabled = false
+                renderIsActive()
+            } else {
+                PermissionsManager.areAllPermissionsGranted { areAllGranted in
+                    DispatchQueue.main.async { [self] in
+                        if areAllGranted {
+                            isLocationServicesEnabled = true
+                            renderIsActive()
+                        } else {
+                            let permissionsVC = PermissionsVC.create()
+                            permissionsVC.modalPresentationStyle = .fullScreen
+                            present(permissionsVC, animated: true)
+                        }
+                    }
+                }
+            }
         case .arrow:
             presentTest()
         }

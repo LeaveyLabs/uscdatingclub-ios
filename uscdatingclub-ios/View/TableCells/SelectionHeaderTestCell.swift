@@ -20,7 +20,6 @@ class SelectionHeaderTestCell: UITableViewCell {
 //    @IBOutlet weak var bottomLineView: UIView!
     
     @IBOutlet weak var titleButton: UIButton!
-    @IBOutlet weak var toggleButton: UIButton!
     @IBOutlet var bottomConstraint: NSLayoutConstraint!
     
     var testQuestion: SelectionTestQuestion!
@@ -51,8 +50,8 @@ class SelectionHeaderTestCell: UITableViewCell {
         
         titleButton.setTitle(testQuestion.title, for: .normal)
         titleButton.setTitleColor(shouldBeOpened ? .customWhite : isAnswered ? .testGreen : .testPurple, for: .normal)
-        toggleButton.setImage(UIImage(systemName: shouldBeOpened ? "chevron.up" : "chevron.down"), for: .normal)
-        toggleButton.tintColor = shouldBeOpened ? .customWhite : isAnswered ? .testGreen : .testPurple
+        titleButton.setImage(UIImage(systemName: shouldBeOpened ? "chevron.up" : "chevron.down"), for: .normal)
+        titleButton.tintColor = shouldBeOpened ? .customWhite : isAnswered ? .testGreen : .testPurple
         contentView.alpha = shouldBeOpened ? 1 : 0.7
         
         bottomConstraint.constant = isOpen ? 10 : 40

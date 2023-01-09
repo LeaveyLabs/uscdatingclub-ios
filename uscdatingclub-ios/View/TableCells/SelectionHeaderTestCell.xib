@@ -26,47 +26,30 @@
                             <constraint firstAttribute="height" constant="0.5" id="GJu-pA-g20"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="maQ-MD-fn9">
-                        <rect key="frame" x="20" y="40" width="291" height="40"/>
+                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="maQ-MD-fn9">
+                        <rect key="frame" x="10" y="40" width="311" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="xjW-dF-aBe"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="22"/>
                         <color key="tintColor" name="customWhite"/>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                        <state key="normal" title="religious beliefs">
+                        <inset key="titleEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="religious beliefs" image="chevron.down" catalog="system">
                             <color key="titleColor" name="customWhite"/>
                         </state>
                         <connections>
                             <action selector="toggleButtonDidTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="B17-hb-MOb"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQy-2G-AwM">
-                        <rect key="frame" x="276" y="40" width="40" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="bQy-2G-AwM" secondAttribute="height" id="6As-ye-2l8"/>
-                            <constraint firstAttribute="height" constant="40" id="9y6-AU-mSf"/>
-                        </constraints>
-                        <color key="tintColor" name="customWhite"/>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                        <state key="normal" image="chevron.down" catalog="system">
-                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22"/>
-                        </state>
-                        <connections>
-                            <action selector="toggleButtonDidTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bql-qQ-drh"/>
-                        </connections>
-                    </button>
                 </subviews>
                 <color key="backgroundColor" name="primaryColor"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="ubA-iJ-FAP" secondAttribute="trailing" id="BBH-TS-3qx"/>
-                    <constraint firstItem="maQ-MD-fn9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Bqp-nK-kq6"/>
-                    <constraint firstAttribute="bottom" secondItem="bQy-2G-AwM" secondAttribute="bottom" constant="10" id="Kz9-As-l3Y"/>
-                    <constraint firstItem="bQy-2G-AwM" firstAttribute="centerY" secondItem="maQ-MD-fn9" secondAttribute="centerY" id="Ts5-iK-G9V"/>
+                    <constraint firstItem="maQ-MD-fn9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Bqp-nK-kq6"/>
                     <constraint firstAttribute="bottom" secondItem="maQ-MD-fn9" secondAttribute="bottom" constant="5" id="caR-pK-m0L"/>
-                    <constraint firstAttribute="trailing" secondItem="bQy-2G-AwM" secondAttribute="trailing" constant="15" id="dzN-uk-U52"/>
                     <constraint firstItem="maQ-MD-fn9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="40" id="nmR-ln-Lyx"/>
-                    <constraint firstAttribute="trailing" secondItem="maQ-MD-fn9" secondAttribute="trailing" constant="20" id="oCf-Hp-Tfi"/>
+                    <constraint firstAttribute="trailing" secondItem="maQ-MD-fn9" secondAttribute="trailing" constant="10" id="oCf-Hp-Tfi"/>
                     <constraint firstItem="ubA-iJ-FAP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="wVa-VT-JDo"/>
                     <constraint firstItem="ubA-iJ-FAP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="zIF-T4-Uad"/>
                 </constraints>
@@ -75,7 +58,6 @@
             <connections>
                 <outlet property="bottomConstraint" destination="caR-pK-m0L" id="61a-h1-KQb"/>
                 <outlet property="titleButton" destination="maQ-MD-fn9" id="5vz-i3-lJN"/>
-                <outlet property="toggleButton" destination="bQy-2G-AwM" id="srS-wR-0cD"/>
                 <outlet property="topLineView" destination="ubA-iJ-FAP" id="8wE-uh-Yvh"/>
             </connections>
             <point key="canvasLocation" x="147.32824427480915" y="34.507042253521128"/>

@@ -150,8 +150,10 @@ class EditAccountVC: UIViewController {
     
     func validateInput() {
         let isValidName = Validate.validateName(firstName) && Validate.validateName(lastName)
+        let isValidSex = Validate.validateSex(sexIdentity) && Validate.validateSex(sexPreference)
         let isNewName = (firstName != UserService.singleton.getFirstName() || lastName != UserService.singleton.getLastName())
-        let isValid = isValidName && (isNewName)
+        let isNewSex = sexIdentity != UserService.singleton.getSexIdentity() || sexPreference != UserService.singleton.getSexPreference()
+        let isValid = isValidName && isValidSex && (isNewName || isNewSex)
         
         saveButton.isEnabled = isValid
         if saveButton.titleLabel!.text == "" {
@@ -170,6 +172,10 @@ class EditAccountVC: UIViewController {
 }
 
 extension EditAccountVC: UITableViewDelegate {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        view.endEditing(true)
+    }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 10
@@ -218,7 +224,6 @@ extension EditAccountVC: UITableViewDataSource {
         case 1:
             let simpleEntryCell = tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SimpleEntryCell, for: indexPath) as! SimpleEntryCell
             simpleEntryCell.configureDropdown(title: indexPath.row == 0 ? "sexual identity" : "sexual preference", content: Sex(rawValue: indexPath.row == 0 ? sexIdentity : sexPreference)?.displayName ?? "", textFieldDelegate: self, pickerDelegate: self, pickerDataSource: self)
-            simpleEntryCell.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
             if indexPath.row == 0 {
                 sexIdentityTextField = simpleEntryCell.textField
             } else {
@@ -253,10 +258,6 @@ extension EditAccountVC: UITextFieldDelegate {
             firstName = newText
         } else if textField == lastNameTextField {
             lastName = newText
-        } else if textField == sexIdentityTextField {
-            sexIdentity = newText
-        } else if textField == sexPreferenceTextField {
-            sexPreference = newText
         }
         validateInput()
     }
@@ -286,11 +287,15 @@ extension EditAccountVC: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let sexDisplayName = sexOptions[pickerView.selectedRow(inComponent: component)].displayName
         if sexIdentityTextField.isFirstResponder {
-            sexIdentityTextField.text = sexOptions[pickerView.selectedRow(inComponent: component)].displayName
+            sexIdentityTextField.text = sexDisplayName
+            sexIdentity = sexDisplayName.isEmpty ? "" : String(sexDisplayName.first!)
         } else {
             sexPreferenceTextField.text = sexOptions[pickerView.selectedRow(inComponent: component)].displayName
+            sexPreference = sexDisplayName.isEmpty ? "" : String(sexDisplayName.first!)
         }
+        
         validateInput()
     }
     

@@ -24,4 +24,8 @@ struct Validate {
         return isValidName
     }
     
+    static func validateSex(_ sex: String) -> Bool {
+        return sex != "" && sex != "blank"
+    }
+    
 }

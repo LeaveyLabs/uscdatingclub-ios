@@ -11,6 +11,7 @@ import UIKit
 extension Notification.Name {
     static let locationStatusDidUpdate = Notification.Name("locationStatusDidUpdate")
     static let remoteConfigDidActivate = Notification.Name("remoteConfigDidActivate")
+    static let permissionsWereRevoked = Notification.Name("permissionsWereRevoked")
 }
 
 class NotificationsManager: NSObject {

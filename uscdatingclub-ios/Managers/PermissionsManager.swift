@@ -18,23 +18,13 @@ struct PermissionsManager {
         })
     }
     
-    static func requestPermissionsIfNecessary() {
-        guard UserService.singleton.isLoggedIntoAnAccount else { return }
-
-        //slight delay just in case settings aren't persisted right away
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
-            areAllPermissionsGranted { areAllGranted in
-                guard !areAllGranted else { return }
-                DispatchQueue.main.async {
-                    guard
-                        let visibleVC = SceneDelegate.visibleViewController,
-                        !visibleVC .isKind(of: PermissionsVC.self)
-                    else { return }
-                    let permissionsVC = PermissionsVC.create()
-                    permissionsVC.modalPresentationStyle = .fullScreen
-                    visibleVC.present(permissionsVC, animated: true)
-                }
+    static func ensurePermissionsAreGranted() {
+        areAllPermissionsGranted { granted in
+            if !granted {
+                LocationManager.shared.stopLocationServices()
+                NotificationCenter.default.post(name: .permissionsWereRevoked, object: nil)
             }
         }
     }
+    
 }
