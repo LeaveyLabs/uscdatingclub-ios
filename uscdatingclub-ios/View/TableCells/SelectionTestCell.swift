@@ -8,7 +8,8 @@
 import UIKit
 
 protocol SelectionTestCellDelegate {
-    func didSelect(questionId: Int, testAnswer: String)
+    func didSelect(questionId: Int, testAnswer: String, allowsMultipleSelection: Bool)
+    func didSelectMultipleSelection(questionId: Int, testAnswer: String, alreadySelected: Bool)
 }
 
 class SelectionTestCell: UITableViewCell {
@@ -23,6 +24,7 @@ class SelectionTestCell: UITableViewCell {
     var testAnswer: String!
     var testQuestion: SelectionTestQuestion!
     var cellDelegate: SelectionTestCellDelegate!
+    var isCurrentlySelected: Bool!
     
     //MARK: - Initializer
     
@@ -34,6 +36,7 @@ class SelectionTestCell: UITableViewCell {
                    isLastCell: Bool = false) {
         self.testQuestion = testQuestion
         self.testAnswer = testAnswer
+        self.isCurrentlySelected = isCurrentlySelected
         cellDelegate = delegate
         selectionStyle = .none
         backgroundColor = .clear
@@ -41,10 +44,15 @@ class SelectionTestCell: UITableViewCell {
         titleButton.setTitle(testAnswer, for: .normal)
         titleButton.setTitleColor(isCurrentlySelected ? .testGreen : .customWhite, for: .normal)
         titleButton.tintColor = isCurrentlySelected ? .testGreen : .customWhite
-        titleButton.setImage(UIImage(systemName: isCurrentlySelected ? "circle.fill" : "circle"), for: .normal)
 //        bottomLineView.isHidden =
         if isLastCell {
         
+        }
+        
+        if testQuestion.allowsMultipleSelection {
+            titleButton.setImage(UIImage(systemName: isCurrentlySelected ? "square.fill" : "square"), for: .normal)
+        } else {
+            titleButton.setImage(UIImage(systemName: isCurrentlySelected ? "circle.fill" : "circle"), for: .normal)
         }
         bottomConstraint.constant = isLastCell ? 40 : 5
         
@@ -57,7 +65,11 @@ class SelectionTestCell: UITableViewCell {
     }
     
     @IBAction func circleButtonDidTapped(_ sender: UIButton) {
-        cellDelegate.didSelect(questionId: testQuestion.id, testAnswer: testAnswer)
+        if testQuestion.allowsMultipleSelection {
+            cellDelegate.didSelectMultipleSelection(questionId: testQuestion.id, testAnswer: testAnswer, alreadySelected: isCurrentlySelected)
+        } else {
+            cellDelegate.didSelect(questionId: testQuestion.id, testAnswer: testAnswer, allowsMultipleSelection: testQuestion.allowsMultipleSelection)
+        }
     }
     
 }

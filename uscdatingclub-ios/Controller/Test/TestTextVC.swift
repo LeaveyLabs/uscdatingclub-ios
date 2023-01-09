@@ -41,6 +41,7 @@ class TestTextVC: UIViewController {
         super.viewDidLoad()
         setupUI()
         primaryButton.internalButton.addTarget(self, action: #selector(didTapPrimaryButton), for: .touchUpInside)
+        print(TestContext.testResponses)
         
         navigationController?.setNavigationBarHidden(true, animated: false)
         switch testTextType {

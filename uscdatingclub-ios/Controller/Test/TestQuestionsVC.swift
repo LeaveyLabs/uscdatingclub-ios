@@ -13,7 +13,6 @@ class TestQuestionsVC: UIViewController {
     //UI
     @IBOutlet var tableView: UITableView!
     @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var nextButton: SimpleButton!
     
     var lastNonAnsweredQuestionIndex: Int {
         questions.firstIndex(where: { TestContext.testResponses[$0.id] == nil }) ?? questions.count
@@ -48,7 +47,6 @@ class TestQuestionsVC: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupHeaderFooter()
-        rerenderNextButton()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -61,8 +59,6 @@ class TestQuestionsVC: UIViewController {
     
     func setupHeaderFooter() {
         titleLabel.text = TestPageTitles[testPage]
-        nextButton.configure(title: testPage == TestPages-1 ? "finish" : "next", systemImage: "")
-        nextButton.internalButton.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
     }
     
     func setupTableView() {
@@ -78,20 +74,13 @@ class TestQuestionsVC: UIViewController {
         tableView.register(UINib(nibName: Constants.SBID.Cell.SpectrumTestCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SpectrumTestCell)
         tableView.register(UINib(nibName: Constants.SBID.Cell.SelectionCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SelectionCell)
         tableView.register(UINib(nibName: Constants.SBID.Cell.SelectionHeaderCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SelectionHeaderCell)
-    }
-    
-    func rerenderNextButton() {
-        nextButton.alpha = didAnswerAllQuestionsOnPage ? 1 : 0.5
-//        nextButton.isUserInteractionEnabled = didAnswerAllQuestionsOnPage
+        tableView.register(UINib(nibName: Constants.SBID.Cell.SimpleButtonCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SimpleButtonCell)
     }
     
     //MARK: - Interaciton
     
     @objc func didTapNextButton() {
-        guard didAnswerAllQuestionsOnPage else {
-            AlertManager.displayError("respond to all questions to move on", "")
-            return
-        }
+        guard didAnswerAllQuestionsOnPage else { return }
         if testPage == TestPages-1 {
             navigationController?.pushViewController(TestTextVC.create(type: .submitting), animated: true)
         } else {
@@ -116,10 +105,11 @@ extension TestQuestionsVC: UITableViewDelegate {
 extension TestQuestionsVC: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return questions.count
+        return questions.count + 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard section < questions.count else { return 1 }
         if let selectionQuestion = questions[section] as? SelectionTestQuestion {
             if lastNonAnsweredQuestionIndex == section {
                 return 1 + selectionQuestion.options.count
@@ -135,6 +125,14 @@ extension TestQuestionsVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == questions.count {
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SimpleButtonCell, for: indexPath) as! SimpleButtonCell
+            cell.configure(title: "next", systemImage: "") {
+                self.didTapNextButton()
+            }
+            cell.simpleButton.alpha = didAnswerAllQuestionsOnPage ? 1 : 0.5
+            return cell
+        }
         let question = questions[indexPath.section]
         if let spectrumQuestion = question as? SpectrumTestQuestion {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SpectrumTestCell, for: indexPath) as! SpectrumTestCell
@@ -161,7 +159,7 @@ extension TestQuestionsVC: UITableViewDataSource {
                 cell.configure(testQuestion: selectionQuestion,
                                testAnswer: option,
                                delegate: self,
-                               isCurrentlySelected: TestContext.testResponses[question.id] as? String == option,
+                               isCurrentlySelected: TestContext.testResponses[question.id] as? String == option || (TestContext.testResponses[question.id] as? [String] ?? []).contains(option),
                                isLastCell: indexPath.row == selectionQuestion.options.count)
                 return cell
             }
@@ -174,8 +172,8 @@ extension TestQuestionsVC: UITableViewDataSource {
 
 extension TestQuestionsVC: SelectionHeaderTestCellDelegate {
     
-    func toggleButtonDidTapped(questionId: Int) {
-        if manuallyOpenedSelectionQuestionIndex != nil {
+    func toggleButtonDidTapped(questionId: Int) {        
+        if manuallyOpenedSelectionQuestionIndex == questions.firstIndex(where: { $0.id == questionId}) {
             manuallyOpenedSelectionQuestionIndex = nil
         } else {
             manuallyOpenedSelectionQuestionIndex = questions.firstIndex(where: { $0.id == questionId})
@@ -190,14 +188,27 @@ extension TestQuestionsVC: SelectionHeaderTestCellDelegate {
 
 extension TestQuestionsVC: SelectionTestCellDelegate {
     
-    func didSelect(questionId: Int, testAnswer: String) {
-        TestContext.testResponses[questionId] = testAnswer
-        rerenderNextButton()
+    func didSelect(questionId: Int, testAnswer: String, allowsMultipleSelection: Bool) {
+        manuallyOpenedSelectionQuestionIndex = questions.firstIndex(where: { $0.id == questionId }) //keep the question open so they know what they selected
         
+        TestContext.testResponses[questionId] = testAnswer
         tableView.reloadData()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { //wait for tableView to reload
-            self.scrollDownIfNecessary(prevQuestionId: questionId)
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { //wait for tableView to reload
+//            self.scrollDownIfNecessary(prevQuestionId: questionId)
+//        }
+    }
+    
+    func didSelectMultipleSelection(questionId: Int, testAnswer: String, alreadySelected: Bool) {
+        manuallyOpenedSelectionQuestionIndex = questions.firstIndex(where: { $0.id == questionId }) //keep the question open so they can select multiple
+        
+        var responses = TestContext.testResponses[questionId] as? [String] ?? []
+        if alreadySelected {
+            responses.removeFirstAppearanceOf(object: testAnswer)
+        } else {
+            responses.append(testAnswer)
         }
+        TestContext.testResponses[questionId] = responses
+        tableView.reloadData()
     }
     
 }
@@ -207,7 +218,6 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
     func buttonDidTapped(questionId: Int, selection: Int) {
         TestContext.testResponses[questionId] = selection
         scrollDownIfNecessary(prevQuestionId: questionId)
-        rerenderNextButton()
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }

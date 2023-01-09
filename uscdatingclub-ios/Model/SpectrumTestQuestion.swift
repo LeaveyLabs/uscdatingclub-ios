@@ -22,6 +22,7 @@ struct SelectionTestQuestion: TestQuestion {
     let id: Int
     let title: String
     let options: [String]
+    let allowsMultipleSelection: Bool
 }
 
 typealias TestPage = Int
@@ -36,6 +37,8 @@ let TestPageTitles: [String] = [
     "part 4: lifestyle",
 ]
 
+//what if each testQuestion had a testAnswer associated with it?
+
 let TestQuestions: [TestPage: [TestQuestion]] = [
     0: [SpectrumTestQuestion(id: 0,
                      title: "I would consider myself clean & organized."),
@@ -47,9 +50,10 @@ let TestQuestions: [TestPage: [TestQuestion]] = [
                      title: "I’m more inclined to follow my heart than my head."),
         SpectrumTestQuestion(id: 4,
                     title: "I’m usually the one to take charge in a situation."),
-//        SelectionTestQuestion(id: 5,
-//                              title: "languages spoken",
-//                              options: ["arabic", "english", "korean", ])
+        SelectionTestQuestion(id: 5,
+                              title: "languages spoken",
+                              options: ["arabic", "english", "korean", ],
+                              allowsMultipleSelection: true)
     ],
     1: [SpectrumTestQuestion(id: 6,
                      title: "I would rather go to a music festival than a museum."),
@@ -63,7 +67,8 @@ let TestQuestions: [TestPage: [TestQuestion]] = [
                     title: "I would think twice about an awesome experience if it’s out of my budget."),
         SelectionTestQuestion(id: 11,
                               title: "love language",
-                              options: ["gift giving", "quality time", "acts of service", "words of affirmation", "physical touch"])],
+                              options: ["gift giving", "quality time", "acts of service", "words of affirmation", "physical touch"],
+                             allowsMultipleSelection: false),],
     2: [SpectrumTestQuestion(id: 12,
                      title: "Family is an important part of my life."),
         SpectrumTestQuestion(id: 13,
@@ -76,10 +81,12 @@ let TestQuestions: [TestPage: [TestQuestion]] = [
                     title: "I would like to have pets down the road."),
         SelectionTestQuestion(id: 17,
                               title: "political leaning",
-                              options: ["not political", "liberal", "moderate", "conservative", "other"]),
+                              options: ["not political", "liberal", "moderate", "conservative", "other"],
+                             allowsMultipleSelection: false),
         SelectionTestQuestion(id: 18,
                               title: "religious beliefs",
-                              options: ["agnostic", "atheist", "buddhist", "catholic", "christian", "hindu", "jewish", "muslim", "sikh", "spiritual", "other"])],
+                              options: ["agnostic", "atheist", "buddhist", "catholic", "christian", "hindu", "jewish", "muslim", "sikh", "spiritual", "other"],
+                             allowsMultipleSelection: true)],
     3: [SpectrumTestQuestion(id: 19,
                      title: "I would like to live abroad for a long period of time."),
         SpectrumTestQuestion(id: 20,
@@ -90,8 +97,10 @@ let TestQuestions: [TestPage: [TestQuestion]] = [
                     title: "I’m always open to trying new experiences."),
         SelectionTestQuestion(id: 23,
                               title: "dietary preference",
-                              options: ["none", "vegan", "vegetarian", "flexitarian", "pescatarian", "carnivore", "gluten-free", "dairy-free", "raw food", "halal", "other"]),
+                              options: ["none", "vegan", "vegetarian", "flexitarian", "pescatarian", "carnivore", "gluten-free", "dairy-free", "raw food", "halal", "other"],
+                             allowsMultipleSelection: true),
         SelectionTestQuestion(id: 24,
                               title: "drug consumption",
-                              options: ["none", "drinking", "smoking", "marijuana", "other"])]
+                              options: ["none", "drinking", "smoking", "marijuana", "other"],
+                             allowsMultipleSelection: true)]
 ]

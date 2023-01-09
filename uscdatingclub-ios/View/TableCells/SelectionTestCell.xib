@@ -14,14 +14,14 @@
         <tableViewCell contentMode="scaleToFill" restorationIdentifier="SelectionTestCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectionTestCell" rowHeight="68" id="KGk-i7-Jjw" customClass="SelectionTestCell" customModule="uscdatingclub_ios" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="350" height="68"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="350" height="68"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QpG-BK-pz4">
-                        <rect key="frame" x="20" y="0.0" width="310" height="40"/>
+                        <rect key="frame" x="20" y="0.0" width="310" height="58"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="fE3-eW-kbE"/>
+                            <constraint firstAttribute="height" priority="999" constant="40" id="fE3-eW-kbE"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                         <color key="tintColor" name="customWhite"/>

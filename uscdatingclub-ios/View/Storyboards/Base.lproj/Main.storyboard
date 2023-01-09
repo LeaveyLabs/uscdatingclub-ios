@@ -801,26 +801,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="d68-Kh-bBo">
                                 <rect key="frame" x="0.0" y="114" width="393" height="704"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="XWG-4T-4kU">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="101"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a23-Zy-cSB" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                            <rect key="frame" x="20" y="10" width="353" height="56"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="60" id="txd-n6-R4T"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstItem="a23-Zy-cSB" firstAttribute="top" secondItem="XWG-4T-4kU" secondAttribute="top" constant="10" id="FeW-Gn-2St"/>
-                                        <constraint firstAttribute="bottom" secondItem="a23-Zy-cSB" secondAttribute="bottom" constant="35" id="fE5-Zd-o2t"/>
-                                        <constraint firstAttribute="trailing" secondItem="a23-Zy-cSB" secondAttribute="trailing" constant="20" id="oCr-XN-Q3J"/>
-                                        <constraint firstItem="a23-Zy-cSB" firstAttribute="leading" secondItem="XWG-4T-4kU" secondAttribute="leading" constant="20" id="vqa-QW-ryP"/>
-                                    </constraints>
-                                </view>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HKQ-ok-ydH">
                                 <rect key="frame" x="0.0" y="59" width="393" height="55"/>
@@ -882,7 +862,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="nextButton" destination="a23-Zy-cSB" id="Dvn-69-pge"/>
                         <outlet property="tableView" destination="d68-Kh-bBo" id="CmC-f8-GIU"/>
                         <outlet property="titleLabel" destination="x7f-RA-HnQ" id="TTt-eP-9hF"/>
                     </connections>
