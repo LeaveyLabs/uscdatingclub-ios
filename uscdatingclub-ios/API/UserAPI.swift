@@ -37,7 +37,7 @@ struct SurveyResponse: Codable {
     let answer: Int
 }
 
-struct PostSurveyAnswers: Codable {
+struct PostSurveyAnswersParams: Codable {
     let email: String
     let responses: [SurveyResponse]
 }
@@ -48,8 +48,10 @@ class UserAPI {
         case registerUser = "register-user/"
         case postSurveyAnswers = "post-survey-answers/"
         case updateLocation = "update-location/"
-        case matchUsers = "match-users/"
         case deleteAccount = "delete-account/"
+        case updateMatchableStatus = "update-matchable-status/"
+        // REST Endpoint
+        case users = "users/"
     }
     
     // Parameters for API
@@ -63,6 +65,7 @@ class UserAPI {
         case latitude = "latitude"
         case longitude = "longitude"
         case responses = "responses"
+        case isMatchable = "is_matchable"
     }
     
     static let USER_RECOVERY_MESSAGE = "try again later"
@@ -133,13 +136,9 @@ class UserAPI {
     }
     
     static func postSurveyAnswers(email:String,
-                                  responses:[Int:Int]) async throws {
+                                  surveyResponses:[SurveyResponse]) async throws {
         let url = "\(Env.BASE_URL)\(Endpoints.postSurveyAnswers.rawValue)"
-        var surveyResponses:[SurveyResponse] = []
-        for (category, answer) in responses {
-            surveyResponses.append(SurveyResponse(category: category, answer: answer))
-        }
-        let params = PostSurveyAnswers(email: email, responses: surveyResponses)
+        let params = PostSurveyAnswersParams(email: email, responses: surveyResponses)
         let json = try JSONEncoder().encode(params)
         let (data, response) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
         try filterUserErrors(data: data, response: response)
@@ -153,6 +152,24 @@ class UserAPI {
             ParameterKeys.longitude.rawValue: String(longitude),
         ]
         let json = try JSONEncoder().encode(params)
+        let (data, response) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: json, method: HTTPMethods.PATCH.rawValue)
+        try filterUserErrors(data: data, response: response)
+    }
+    
+    static func updateMatchableStatus(matchableStatus:Bool, email:String) async throws {
+        let url = "\(Env.BASE_URL)\(Endpoints.updateMatchableStatus.rawValue)"
+        let params:[String:String] = [
+            ParameterKeys.email.rawValue: email,
+            ParameterKeys.isMatchable.rawValue: String(matchableStatus)
+        ]
+        let json = try JSONEncoder().encode(params)
+        let (data, response) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: json, method: HTTPMethods.PATCH.rawValue)
+        try filterUserErrors(data: data, response: response)
+    }
+    
+    static func updateUser(id:Int, user:CompleteUser) async throws {
+        let url = "\(Env.BASE_URL)\(Endpoints.users.rawValue)\(id)/"
+        let json = try JSONEncoder().encode(user)
         let (data, response) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: json, method: HTTPMethods.PATCH.rawValue)
         try filterUserErrors(data: data, response: response)
     }
