@@ -31,40 +31,6 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
 //        return datePicker
 //    }()
     
-    enum Sex: String, CaseIterable {
-        case blank, female, male, both
-        
-        var displayName: String {
-            switch self {
-            case .blank:
-                return ""
-            case .female:
-                return "female"
-            case .male:
-                return "male"
-            case .both:
-                return "both"
-//            case .other:
-//                return "other"
-//            case .ratherNotSay:
-//                return "rather not say"
-            }
-        }
-        
-        var databaseName: String? {
-            switch self {
-            case .blank:
-                return "" //should never be accessed.. throw?
-            case .female:
-                return "f"
-            case .male:
-                return "m"
-            case .both:
-                return "b"
-            }
-        }
-    }
-    
 //    var dobData = ""
     var sexOptions = [Sex]()
     private lazy var sexPicker: UIPickerView = {
@@ -114,7 +80,6 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        disableInteractivePopGesture()
         validateInput()
     }
     
@@ -122,22 +87,15 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         sexIdentityTextField.becomeFirstResponder()
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        enableInteractivePopGesture()
-    }
 
     //MARK: - Setup
 
     func setupTextFields() {
         sexIdentityTextField.delegate = self
-        sexIdentityTextField.inputView = sexPicker
-        sexOptions = [.blank, .female, .male]
-        
+        sexIdentityTextField.inputView = sexPicker        
         sexPreferenceTextField.delegate = self
         sexPreferenceTextField.inputView = sexPicker
-        sexOptions = [.blank, .female, .male, .both]
+        sexOptions = [.blank, .f, .b, .b]
     }
     
     func setupContinueButton() {

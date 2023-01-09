@@ -25,16 +25,7 @@ class AuthStartVC: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        mistWideLogoView.alpha = 0
-//        loginButton.alpha = 0
-//        registerButton.alpha = 0
-//        agreementTextView.alpha = 0
-//        UIView.animate(withDuration: 1.5, delay: 0.3, options: .curveLinear) { [self] in
-//            mistWideLogoView.alpha = 1
-//            loginButton.alpha = 1
-//            registerButton.alpha = 1
-//            agreementTextView.alpha = 1
-//        }        
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,7 +54,7 @@ class AuthStartVC: UIViewController, UITextViewDelegate {
             
             agreementTextView.attributedText = attributedText
             agreementTextView.font = UIFont(name: "Avenir", size: 12)
-            agreementTextView.textColor = UIColor.white
+            agreementTextView.textColor = UIColor.white.withAlphaComponent(0.7)
             agreementTextView.isEditable = false
             agreementTextView.delegate = self
             agreementTextView.isUserInteractionEnabled = true

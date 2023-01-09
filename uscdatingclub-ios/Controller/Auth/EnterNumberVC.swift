@@ -49,19 +49,9 @@ class EnterNumberVC: KUIViewController, UITextFieldDelegate {
         setupBackButton()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        enableInteractivePopGesture()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         enterNumberTextField.becomeFirstResponder()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        disableInteractivePopGesture()
     }
     
     //MARK: - Setup

@@ -86,7 +86,6 @@ class SpectrumTestCell: UITableViewCell {
             setButton(circleButtons[response-1], selected: true)
         }
         
-        print("SHOULD BE", shouldBeHighlighted)
         contentView.alpha = shouldBeHighlighted ? 1 : 0.2
         self.alpha = shouldBeHighlighted ? 1 : 0.7
     }

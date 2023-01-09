@@ -20,7 +20,7 @@ class PermissionsVC: UIViewController {
     //MARK: - Initialization
     
     class func create() -> PermissionsVC {
-        let vc = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Permissions) as! PermissionsVC
+        let vc = UIStoryboard(name: Constants.SBID.SB.Misc, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Permissions) as! PermissionsVC
         return vc
     }
     

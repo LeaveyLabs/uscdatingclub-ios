@@ -55,7 +55,7 @@ class SelectionHeaderTestCell: UITableViewCell {
         toggleButton.tintColor = shouldBeOpened ? .customWhite : isAnswered ? .testGreen : .testPurple
         contentView.alpha = shouldBeOpened ? 1 : 0.7
         
-        bottomConstraint.constant = isOpen ? 5 : 40
+        bottomConstraint.constant = isOpen ? 10 : 40
     }
     
     //MARK: - Lifecycle

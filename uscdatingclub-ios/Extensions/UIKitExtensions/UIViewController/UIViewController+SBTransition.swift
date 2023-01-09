@@ -67,7 +67,7 @@ func transitionToAuth() {
     window.rootViewController = homeVC
 
     let options: UIView.AnimationOptions = .transitionCrossDissolve
-    let duration: TimeInterval = 2
+    let duration: TimeInterval = 0.5
     UIView.transition(with: window, duration: duration, options: options, animations: {}, completion: nil)
 }
 
@@ -91,7 +91,7 @@ func transitionToHomeAndRequestPermissions(completion: @escaping () -> Void) {
     let options: UIView.AnimationOptions = .transitionCrossDissolve
 
     // The duration of the transition animation, measured in seconds.
-    let duration: TimeInterval = 1
+    let duration: TimeInterval = 0.5
 
     
     // Creates a transition animation.

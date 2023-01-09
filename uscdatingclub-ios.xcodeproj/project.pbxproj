@@ -70,6 +70,24 @@
 		478BECD52966249300930DAF /* SpectrumTestQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECD42966249300930DAF /* SpectrumTestQuestion.swift */; };
 		478BECD729662C8100930DAF /* TestContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECD629662C8100930DAF /* TestContext.swift */; };
 		47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A80614295F8D23001DEE64 /* EnterBiosVC.swift */; };
+		47B6B49E296B2E3500539353 /* LocationPushService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B6B49D296B2E3500539353 /* LocationPushService.swift */; };
+		47B6B4A2296B2E3500539353 /* locationPushExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 47B6B49B296B2E3500539353 /* locationPushExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		47B6B4A7296B45BE00539353 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A0531295E1F1300C15945 /* UserAPI.swift */; };
+		47B6B4AA296B46FB00539353 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 47B6B4A9296B46FB00539353 /* FirebaseAnalytics */; };
+		47B6B4AC296B46FB00539353 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 47B6B4AB296B46FB00539353 /* FirebaseAnalyticsSwift */; };
+		47B6B4AE296B487D00539353 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41041295CBFDF007C27F0 /* Error.swift */; };
+		47B6B4B0296B8D6100539353 /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DE320A295CC4F90063C55A /* Env.swift */; };
+		47B6B4B3296B8DA700539353 /* String+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41065295CC095007C27F0 /* String+Random.swift */; };
+		47B6B4B4296B8E7C00539353 /* BasicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A0529295E1E6700C15945 /* BasicAPI.swift */; };
+		47B6B4B5296B8F2000539353 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DE3211295CC52F0063C55A /* User.swift */; };
+		47B6B4B6296B90F200539353 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40F83295CBBBD007C27F0 /* Constants.swift */; };
+		47B6B4B8296B924D00539353 /* EditAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B6B4B7296B924D00539353 /* EditAccountVC.swift */; };
+		47B6B4BC296B959C00539353 /* SimpleEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B6B4BA296B959C00539353 /* SimpleEntryCell.swift */; };
+		47B6B4BD296B959C00539353 /* SimpleEntryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47B6B4BB296B959C00539353 /* SimpleEntryCell.xib */; };
+		47B6B4BF296B97E200539353 /* UINavigationController+SwipeBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B6B4BE296B97E200539353 /* UINavigationController+SwipeBack.swift */; };
+		47B6B4C2296B99E600539353 /* SimpleButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B6B4C0296B99E600539353 /* SimpleButtonCell.swift */; };
+		47B6B4C3296B99E600539353 /* SimpleButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47B6B4C1296B99E600539353 /* SimpleButtonCell.xib */; };
+		47B6B4C5296BABFB00539353 /* Sex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B6B4C4296BABFB00539353 /* Sex.swift */; };
 		47BBF9E12969DFE400802573 /* PermissionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BBF9E02969DFE400802573 /* PermissionsManager.swift */; };
 		47BBF9E5296A390600802573 /* UIAlertController+AddImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BBF9E4296A390600802573 /* UIAlertController+AddImage.swift */; };
 		47BBF9E7296A391600802573 /* UIImage+WithSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BBF9E6296A391600802573 /* UIImage+WithSize.swift */; };
@@ -157,7 +175,6 @@
 		47DE3258295CC7C40063C55A /* UIViewController+Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DE323E295CC7C40063C55A /* UIViewController+Window.swift */; };
 		47DE3259295CC7C40063C55A /* UIViewController+MistShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DE323F295CC7C40063C55A /* UIViewController+MistShareActivity.swift */; };
 		47DE325A295CC7C40063C55A /* UIViewController+FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DE3240295CC7C40063C55A /* UIViewController+FloatingButton.swift */; };
-		47DE325B295CC7C40063C55A /* UIViewController+Logout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DE3241295CC7C40063C55A /* UIViewController+Logout.swift */; };
 		47DE325C295CC7C40063C55A /* UIViewController+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DE3242295CC7C40063C55A /* UIViewController+Loading.swift */; };
 		47DE325D295CC7C40063C55A /* UIViewController+ShareImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DE3243295CC7C40063C55A /* UIViewController+ShareImage.swift */; };
 		47DE3264295CC94F0063C55A /* UIButton+LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DE3261295CC94F0063C55A /* UIButton+LoadingIndicator.swift */; };
@@ -175,6 +192,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		47B6B4A0296B2E3500539353 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47C40EDB295CB930007C27F0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 47B6B49A296B2E3500539353;
+			remoteInfo = locationPushExtension;
+		};
 		47C40EFA295CB931007C27F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 47C40EDB295CB930007C27F0 /* Project object */;
@@ -201,6 +225,17 @@
 				434A057F2963D3AB00C15945 /* PhoneNumberKit-Dynamic in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47B6B4A3296B2E3500539353 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				47B6B4A2296B2E3500539353 /* locationPushExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -244,6 +279,16 @@
 		478BECD42966249300930DAF /* SpectrumTestQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumTestQuestion.swift; sourceTree = "<group>"; };
 		478BECD629662C8100930DAF /* TestContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestContext.swift; sourceTree = "<group>"; };
 		47A80614295F8D23001DEE64 /* EnterBiosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterBiosVC.swift; sourceTree = "<group>"; };
+		47B6B49B296B2E3500539353 /* locationPushExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = locationPushExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		47B6B49D296B2E3500539353 /* LocationPushService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPushService.swift; sourceTree = "<group>"; };
+		47B6B49F296B2E3500539353 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		47B6B4B7296B924D00539353 /* EditAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountVC.swift; sourceTree = "<group>"; };
+		47B6B4BA296B959C00539353 /* SimpleEntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleEntryCell.swift; sourceTree = "<group>"; };
+		47B6B4BB296B959C00539353 /* SimpleEntryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleEntryCell.xib; sourceTree = "<group>"; };
+		47B6B4BE296B97E200539353 /* UINavigationController+SwipeBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+SwipeBack.swift"; sourceTree = "<group>"; };
+		47B6B4C0296B99E600539353 /* SimpleButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleButtonCell.swift; sourceTree = "<group>"; };
+		47B6B4C1296B99E600539353 /* SimpleButtonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleButtonCell.xib; sourceTree = "<group>"; };
+		47B6B4C4296BABFB00539353 /* Sex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sex.swift; sourceTree = "<group>"; };
 		47BBF9E02969DFE400802573 /* PermissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsManager.swift; sourceTree = "<group>"; };
 		47BBF9E4296A390600802573 /* UIAlertController+AddImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+AddImage.swift"; sourceTree = "<group>"; };
 		47BBF9E6296A391600802573 /* UIImage+WithSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+WithSize.swift"; sourceTree = "<group>"; };
@@ -347,7 +392,6 @@
 		47DE323E295CC7C40063C55A /* UIViewController+Window.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Window.swift"; sourceTree = "<group>"; };
 		47DE323F295CC7C40063C55A /* UIViewController+MistShareActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+MistShareActivity.swift"; sourceTree = "<group>"; };
 		47DE3240295CC7C40063C55A /* UIViewController+FloatingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+FloatingButton.swift"; sourceTree = "<group>"; };
-		47DE3241295CC7C40063C55A /* UIViewController+Logout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Logout.swift"; sourceTree = "<group>"; };
 		47DE3242295CC7C40063C55A /* UIViewController+Loading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Loading.swift"; sourceTree = "<group>"; };
 		47DE3243295CC7C40063C55A /* UIViewController+ShareImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShareImage.swift"; sourceTree = "<group>"; };
 		47DE3261295CC94F0063C55A /* UIButton+LoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+LoadingIndicator.swift"; sourceTree = "<group>"; };
@@ -365,6 +409,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		47B6B498296B2E3500539353 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47B6B4AC296B46FB00539353 /* FirebaseAnalyticsSwift in Frameworks */,
+				47B6B4AA296B46FB00539353 /* FirebaseAnalytics in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		47C40EE0295CB930007C27F0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -490,6 +543,23 @@
 			path = Misc;
 			sourceTree = "<group>";
 		};
+		47B6B49C296B2E3500539353 /* locationPushExtension */ = {
+			isa = PBXGroup;
+			children = (
+				47B6B49D296B2E3500539353 /* LocationPushService.swift */,
+				47B6B49F296B2E3500539353 /* Info.plist */,
+			);
+			path = locationPushExtension;
+			sourceTree = "<group>";
+		};
+		47B6B4B9296B946500539353 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				47B6B4B7296B924D00539353 /* EditAccountVC.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
 		47C40EDA295CB930007C27F0 = {
 			isa = PBXGroup;
 			children = (
@@ -497,6 +567,7 @@
 				47C40EE5295CB930007C27F0 /* uscdatingclub-ios */,
 				47C40EFC295CB931007C27F0 /* uscdatingclub-iosTests */,
 				47C40F06295CB931007C27F0 /* uscdatingclub-iosUITests */,
+				47B6B49C296B2E3500539353 /* locationPushExtension */,
 				47C40EE4295CB930007C27F0 /* Products */,
 				434A0538295E99FB00C15945 /* Recovered References */,
 				434A05432963D3AA00C15945 /* Frameworks */,
@@ -509,6 +580,7 @@
 				47C40EE3295CB930007C27F0 /* uscdatingclub-ios.app */,
 				47C40EF9295CB931007C27F0 /* uscdatingclub-iosTests.xctest */,
 				47C40F03295CB931007C27F0 /* uscdatingclub-iosUITests.xctest */,
+				47B6B49B296B2E3500539353 /* locationPushExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -608,6 +680,7 @@
 				47A80613295F8CBD001DEE64 /* Misc */,
 				4731F526295CDCE80013F626 /* Home */,
 				4731F516295CD5750013F626 /* App */,
+				47B6B4B9296B946500539353 /* Account */,
 				47DE31D3295CC4B40063C55A /* Auth */,
 				47C40F98295CBF61007C27F0 /* AbstractControllers */,
 			);
@@ -770,6 +843,7 @@
 			children = (
 				47C41097295CC0C0007C27F0 /* UINavigationController+Completion.swift */,
 				47C41096295CC0BF007C27F0 /* UINavigationItem+UIButton.swift */,
+				47B6B4BE296B97E200539353 /* UINavigationController+SwipeBack.swift */,
 			);
 			path = UINavigation;
 			sourceTree = "<group>";
@@ -793,6 +867,7 @@
 				47DE3211295CC52F0063C55A /* User.swift */,
 				47DE320D295CC52F0063C55A /* UserService.swift */,
 				47DE3216295CC52F0063C55A /* ProfilePicWrapper.swift */,
+				47B6B4C4296BABFB00539353 /* Sex.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -808,6 +883,10 @@
 				47582896296A82C700F10415 /* SelectionHeaderTestCell.xib */,
 				47582899296A82D900F10415 /* SelectionTestCell.swift */,
 				4758289A296A82D900F10415 /* SelectionTestCell.xib */,
+				47B6B4BA296B959C00539353 /* SimpleEntryCell.swift */,
+				47B6B4BB296B959C00539353 /* SimpleEntryCell.xib */,
+				47B6B4C0296B99E600539353 /* SimpleButtonCell.swift */,
+				47B6B4C1296B99E600539353 /* SimpleButtonCell.xib */,
 			);
 			path = TableCells;
 			sourceTree = "<group>";
@@ -880,7 +959,6 @@
 				47DE323E295CC7C40063C55A /* UIViewController+Window.swift */,
 				47DE323F295CC7C40063C55A /* UIViewController+MistShareActivity.swift */,
 				47DE3240295CC7C40063C55A /* UIViewController+FloatingButton.swift */,
-				47DE3241295CC7C40063C55A /* UIViewController+Logout.swift */,
 				47DE3242295CC7C40063C55A /* UIViewController+Loading.swift */,
 				47DE3243295CC7C40063C55A /* UIViewController+ShareImage.swift */,
 			);
@@ -912,6 +990,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		47B6B49A296B2E3500539353 /* locationPushExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47B6B4A6296B2E3500539353 /* Build configuration list for PBXNativeTarget "locationPushExtension" */;
+			buildPhases = (
+				47B6B497296B2E3500539353 /* Sources */,
+				47B6B498296B2E3500539353 /* Frameworks */,
+				47B6B499296B2E3500539353 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = locationPushExtension;
+			packageProductDependencies = (
+				47B6B4A9296B46FB00539353 /* FirebaseAnalytics */,
+				47B6B4AB296B46FB00539353 /* FirebaseAnalyticsSwift */,
+			);
+			productName = locationPushExtension;
+			productReference = 47B6B49B296B2E3500539353 /* locationPushExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		47C40EE2295CB930007C27F0 /* uscdatingclub-ios */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47C40F0D295CB931007C27F0 /* Build configuration list for PBXNativeTarget "uscdatingclub-ios" */;
@@ -919,11 +1018,13 @@
 				47C40EDF295CB930007C27F0 /* Sources */,
 				47C40EE0295CB930007C27F0 /* Frameworks */,
 				47C40EE1295CB930007C27F0 /* Resources */,
+				47B6B4A3296B2E3500539353 /* Embed Foundation Extensions */,
 				47BBF9E3296A372000802573 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				47B6B4A1296B2E3500539353 /* PBXTargetDependency */,
 			);
 			name = "uscdatingclub-ios";
 			packageProductDependencies = (
@@ -995,6 +1096,9 @@
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					47B6B49A296B2E3500539353 = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					47C40EE2295CB930007C27F0 = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -1030,11 +1134,19 @@
 				47C40EE2295CB930007C27F0 /* uscdatingclub-ios */,
 				47C40EF8295CB931007C27F0 /* uscdatingclub-iosTests */,
 				47C40F02295CB931007C27F0 /* uscdatingclub-iosUITests */,
+				47B6B49A296B2E3500539353 /* locationPushExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		47B6B499296B2E3500539353 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		47C40EE1295CB930007C27F0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1043,6 +1155,7 @@
 				478BECC129647FC000930DAF /* matchsound.wav in Resources */,
 				47C40EF3295CB931007C27F0 /* LaunchScreen.storyboard in Resources */,
 				47C40F17295CBAB7007C27F0 /* GoogleService-Info.plist in Resources */,
+				47B6B4BD296B959C00539353 /* SimpleEntryCell.xib in Resources */,
 				478BECBF2963755000930DAF /* SpectrumTestCell.xib in Resources */,
 				4758289C296A82D900F10415 /* SelectionTestCell.xib in Resources */,
 				47DE3225295CC57C0063C55A /* Auth.storyboard in Resources */,
@@ -1051,6 +1164,7 @@
 				47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */,
 				476FD865295DF89A0014DD42 /* SimpleButton.xib in Resources */,
 				476FD86F295E4A1F0014DD42 /* HowItWorksCell.xib in Resources */,
+				47B6B4C3296B99E600539353 /* SimpleButtonCell.xib in Resources */,
 				47E38FF5295F7368007CB77F /* FeatureView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1074,6 +1188,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		47BBF9E3296A372000802573 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1094,6 +1209,21 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		47B6B497296B2E3500539353 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47B6B4B4296B8E7C00539353 /* BasicAPI.swift in Sources */,
+				47B6B4B3296B8DA700539353 /* String+Random.swift in Sources */,
+				47B6B49E296B2E3500539353 /* LocationPushService.swift in Sources */,
+				47B6B4B5296B8F2000539353 /* User.swift in Sources */,
+				47B6B4A7296B45BE00539353 /* UserAPI.swift in Sources */,
+				47B6B4AE296B487D00539353 /* Error.swift in Sources */,
+				47B6B4B0296B8D6100539353 /* Env.swift in Sources */,
+				47B6B4B6296B90F200539353 /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		47C40EDF295CB930007C27F0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1116,7 +1246,6 @@
 				478BECC62964C4D000930DAF /* TestQuestionsVC.swift in Sources */,
 				47C41059295CBFFC007C27F0 /* Distance.swift in Sources */,
 				47DE3206295CC4B40063C55A /* EnterEmailVC.swift in Sources */,
-				47DE325B295CC7C40063C55A /* UIViewController+Logout.swift in Sources */,
 				47C40F95295CBBBD007C27F0 /* AppDelegate.swift in Sources */,
 				47C40F8F295CBBBD007C27F0 /* RemoteConfig.swift in Sources */,
 				47DE3208295CC4B40063C55A /* EnterNumberVC.swift in Sources */,
@@ -1144,6 +1273,7 @@
 				47DE321A295CC52F0063C55A /* UserService.swift in Sources */,
 				4731F511295CD4870013F626 /* UITextField+Padding.swift in Sources */,
 				434A052C295E1E9700C15945 /* DeviceAPI.swift in Sources */,
+				47B6B4BC296B959C00539353 /* SimpleEntryCell.swift in Sources */,
 				47E38FF3295F72B9007CB77F /* FeatureView.swift in Sources */,
 				4731F508295CD4770013F626 /* UIView+PostBubble.swift in Sources */,
 				4758289B296A82D900F10415 /* SelectionTestCell.swift in Sources */,
@@ -1176,6 +1306,7 @@
 				47DE3266295CC94F0063C55A /* UIBarButtonItem+Image.swift in Sources */,
 				47DE3253295CC7C40063C55A /* UIViewController+Child.swift in Sources */,
 				47C41055295CBFFC007C27F0 /* Validate.swift in Sources */,
+				47B6B4BF296B97E200539353 /* UINavigationController+SwipeBack.swift in Sources */,
 				434A052A295E1E6700C15945 /* BasicAPI.swift in Sources */,
 				47DE320B295CC4F90063C55A /* Env.swift in Sources */,
 				47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */,
@@ -1200,6 +1331,7 @@
 				47E38FEC295F69DC007CB77F /* NotificationsManager.swift in Sources */,
 				47BBF9E7296A391600802573 /* UIImage+WithSize.swift in Sources */,
 				434A0539295E99FE00C15945 /* EmailAPI.swift in Sources */,
+				47B6B4C2296B99E600539353 /* SimpleButtonCell.swift in Sources */,
 				4731F509295CD4770013F626 /* UIView+Shadow.swift in Sources */,
 				47DE325C295CC7C40063C55A /* UIViewController+Loading.swift in Sources */,
 				47DE324D295CC7C40063C55A /* UITextView+PreventPeriod.swift in Sources */,
@@ -1222,6 +1354,7 @@
 				47C41057295CBFFC007C27F0 /* CustomAttributedString.swift in Sources */,
 				4731F506295CD4770013F626 /* UIView+AddBorders.swift in Sources */,
 				47C4106B295CC095007C27F0 /* StringChat+Emoji.swift in Sources */,
+				47B6B4B8296B924D00539353 /* EditAccountVC.swift in Sources */,
 				47C4105F295CC079007C27F0 /* Array+FirstWhere.swift in Sources */,
 				476FD86E295E4A1F0014DD42 /* HowItWorksCell.swift in Sources */,
 				47C41069295CC095007C27F0 /* String+Indexing.swift in Sources */,
@@ -1229,6 +1362,7 @@
 				47DE3268295CCA5C0063C55A /* UIView+BecomeRound.swift in Sources */,
 				47DE3250295CC7C40063C55A /* UIImage+FromColor.swift in Sources */,
 				47C41047295CBFDF007C27F0 /* Error.swift in Sources */,
+				47B6B4C5296BABFB00539353 /* Sex.swift in Sources */,
 				47DE3247295CC7C40063C55A /* UIImageView+ProfilePic.swift in Sources */,
 				4731F502295CD43A0013F626 /* UINavigationItem+UIButton.swift in Sources */,
 			);
@@ -1255,6 +1389,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		47B6B4A1296B2E3500539353 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 47B6B49A296B2E3500539353 /* locationPushExtension */;
+			targetProxy = 47B6B4A0296B2E3500539353 /* PBXContainerItemProxy */;
+		};
 		47C40EFB295CB931007C27F0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 47C40EE2295CB930007C27F0 /* uscdatingclub-ios */;
@@ -1287,6 +1426,58 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		47B6B4A4296B2E3500539353 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SHD3A2G97F;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = locationPushExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = locationPushExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "leaveylabs.uscdatingclub-ios.locationPushExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		47B6B4A5296B2E3500539353 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SHD3A2G97F;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = locationPushExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = locationPushExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "leaveylabs.uscdatingclub-ios.locationPushExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		47C40F0B295CB931007C27F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1574,6 +1765,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		47B6B4A6296B2E3500539353 /* Build configuration list for PBXNativeTarget "locationPushExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47B6B4A4296B2E3500539353 /* Debug */,
+				47B6B4A5296B2E3500539353 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		47C40EDE295CB930007C27F0 /* Build configuration list for PBXProject "uscdatingclub-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1657,6 +1857,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 47DE31CB295CC2340063C55A /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
 			productName = "PhoneNumberKit-Dynamic";
+		};
+		47B6B4A9296B46FB00539353 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47C40F69295CBB41007C27F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		47B6B4AB296B46FB00539353 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47C40F69295CBB41007C27F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
 		};
 		47C40F6A295CBB41007C27F0 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

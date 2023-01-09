@@ -177,7 +177,7 @@ extension TestQuestionsVC: SelectionHeaderTestCellDelegate {
             manuallyOpenedSelectionQuestionIndex = nil
         } else {
             manuallyOpenedSelectionQuestionIndex = questions.firstIndex(where: { $0.id == questionId})
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 self.scrollDownIfNecessary(questionId: questionId)
             }
         }
@@ -254,7 +254,7 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
         let beforeQ = questions[questionIndex] as? SelectionTestQuestion
         let q = questions[questionIndex] as? SelectionTestQuestion
         if (beforeQ != nil || q != nil) && !redo {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 self.scrollDownIfNecessary(prevQuestionId: prevQuestionId, redo: true)
             }
             return

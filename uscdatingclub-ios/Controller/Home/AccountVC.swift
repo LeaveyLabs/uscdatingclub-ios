@@ -50,7 +50,9 @@ class AccountVC: UIViewController, PageVCChild {
     }
 
     @objc func editAccountButtonDidPressed() {
-        
+        let nav = UINavigationController(rootViewController: EditAccountVC.create())
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
     }
     
     //MARK: - Helpers

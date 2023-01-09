@@ -93,5 +93,5 @@ let TestQuestions: [TestPage: [TestQuestion]] = [
                               options: ["none", "vegan", "vegetarian", "flexitarian", "pescatarian", "carnivore", "gluten-free", "dairy-free", "raw food", "halal", "other"]),
         SelectionTestQuestion(id: 24,
                               title: "drug consumption",
-                              options: ["drinking", "smoking", "marijuana", "other"])]
+                              options: ["none", "drinking", "smoking", "marijuana", "other"])]
 ]

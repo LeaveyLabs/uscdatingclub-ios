@@ -111,13 +111,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func startLocationServices() {
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
-        locationManager.startMonitoringLocationPushes { [self] data, error in
-            //TODO: does the below method get us the new location?
-            locationManager.stopUpdatingLocation()
-            locationManager.startUpdatingLocation()
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 1) { [self] in
-                guard let lastLocation else { return }
-                postToDatabase(lat: lastLocation.coordinate.latitude, long: lastLocation.coordinate.longitude)
+        locationManager.startMonitoringLocationPushes { data, error in
+            if let data {
+                let token = data.reduce("", {$0 + String(format: "%02X", $1)})
+                print("location pushes good to go. APNs token for location pushes:", token)
+            } else if let error {
+                print("error with location pushes", error)
             }
         }
     }
@@ -133,7 +132,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func postToDatabase(lat: Double, long: Double) {
-        //TODO: why is this not posting?
+        //TODO: why is the analytics not posting?
         Analytics.logEvent("updateLocationSuccess", parameters: nil)
         Task {
             try await UserAPI.updateLocation(latitude: lat, longitude: long, email: UserService.singleton.getEmail())

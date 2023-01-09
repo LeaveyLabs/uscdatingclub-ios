@@ -83,17 +83,11 @@ class CreateProfileVC: KUIViewController, UITextFieldDelegate {
         super.viewDidAppear(animated)
         setupImagePicker()
         validateInput()
-        disableInteractivePopGesture()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        enableInteractivePopGesture()
     }
     
     //MARK: - Setup

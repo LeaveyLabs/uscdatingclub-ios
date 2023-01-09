@@ -20,6 +20,10 @@ enum Constants {
     }
     
     static let maxPasswordLength = 1000
+    
+    struct Filesystem {
+        static let AccountPath: String = "myaccount.json"
+    }
 
     // Note: all nib names should be the same ss their storyboard ID
     struct SBID {
@@ -38,6 +42,8 @@ enum Constants {
             static let SpectrumTestCell = "SpectrumTestCell"
             static let SelectionHeaderCell = "SelectionHeaderTestCell"
             static let SelectionCell = "SelectionTestCell"
+            static let SimpleButtonCell = "SimpleButtonCell"
+            static let SimpleEntryCell = "SimpleEntryCell"
         }
         struct VC {
             //Home
@@ -49,9 +55,7 @@ enum Constants {
             static let TestText = "TestTextVC"
             static let TestQuestions = "TestQuestionsVC"
             //Settings
-            static let Settings = "SettingsVC"
-            static let UpdateProfile = "UpdateProfileSettingVC"
-            static let DefaultSettings = "DefaultsSettingsVC"
+            static let EditAccount = "EditAccountVC"
             //Navigation Controllers
             
             //TabBar

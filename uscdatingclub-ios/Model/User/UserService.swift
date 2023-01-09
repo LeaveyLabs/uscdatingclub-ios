@@ -31,8 +31,9 @@ class UserService: NSObject {
     }
 
     //add a local device storage object
-    private let LOCAL_FILE_APPENDING_PATH = "myaccount.json"
-    private var localFileLocation: URL!
+//    private let LOCAL_FILE_APPENDING_PATH = "myaccount.json"
+//    private var localFileLocation: URL!
+    static let LOCAL_FILE_LOCATION = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(Constants.Filesystem.AccountPath)
     
     private var SLEEP_INTERVAL:UInt32 = 30
     
@@ -48,10 +49,10 @@ class UserService: NSObject {
     //private initializer because there will only ever be one instance of UserService, the singleton
     private override init() {
         super.init()
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        localFileLocation = documentsDirectory.appendingPathComponent(LOCAL_FILE_APPENDING_PATH)
+//        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+//        localFileLocation = documentsDirectory.appendingPathComponent(LOCAL_FILE_APPENDING_PATH)
         
-        if FileManager.default.fileExists(atPath: localFileLocation.path) {
+        if FileManager.default.fileExists(atPath: UserService.LOCAL_FILE_LOCATION.path) {
             self.loadUserFromFilesystem()
             setupFirebaseAnalyticsProperties()
             isLoggedIntoApp = true
@@ -75,6 +76,8 @@ class UserService: NSObject {
     func getFirstLastName() -> String { return authedUser.firstName + " " + authedUser.lastName }
     func getPhoneNumber() -> String? { return authedUser.phoneNumber }
     func getEmail() -> String { return authedUser.email }
+    func getSexPreference() -> String { return authedUser.sexPreference }
+    func getSexIdentity() -> String { return authedUser.sexIdentity }
     func getPhoneNumberPretty() -> String? { return authedUser.phoneNumber.asNationalPhoneNumber }
 //    func getProfilePic() -> UIImage { return authedUser.profilePicWrapper.image }
     
@@ -176,7 +179,7 @@ class UserService: NSObject {
 //
 //    //MARK: - Logout and delete user
 //
-    func logOutFromDevice()  {
+    private func logOutFromDevice()  {
         guard isLoggedIntoAnAccount else { return } //prevents infinite loop on authedUser didSet
 //        if getGlobalDeviceToken() != "" {
 //            Task {
@@ -241,7 +244,7 @@ class UserService: NSObject {
             let encoder = JSONEncoder()
             let data: Data = try encoder.encode(frontendCompleteUser)
             let jsonString = String(data: data, encoding: .utf8)!
-            try jsonString.write(to: self.localFileLocation, atomically: true, encoding: .utf8)
+            try jsonString.write(to: UserService.LOCAL_FILE_LOCATION, atomically: true, encoding: .utf8)
         } catch {
             print("COULD NOT SAVE: \(error)")
         }
@@ -249,7 +252,7 @@ class UserService: NSObject {
 
     func loadUserFromFilesystem() {
         do {
-            let data = try Data(contentsOf: self.localFileLocation)
+            let data = try Data(contentsOf: UserService.LOCAL_FILE_LOCATION)
             frontendCompleteUser = try JSONDecoder().decode(FrontendCompleteUser.self, from: data)
             guard let frontendCompleteUser = frontendCompleteUser else { return }
 //            setGlobalAuthToken(token: frontendCompleteUser.token) //this shouldn't be necessary, but to be safe
@@ -262,7 +265,7 @@ class UserService: NSObject {
     func eraseUserFromFilesystem() {
         do {
 //            setGlobalAuthToken(token: "")
-            try FileManager.default.removeItem(at: self.localFileLocation)
+            try FileManager.default.removeItem(at: UserService.LOCAL_FILE_LOCATION)
         } catch {
             print("\(error)")
         }

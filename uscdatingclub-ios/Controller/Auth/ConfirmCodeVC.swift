@@ -88,16 +88,6 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
         validateInput()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        enableInteractivePopGesture()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        disableInteractivePopGesture()
-    }
-    
     //MARK: - Setup
     
     func setupConfirmEmailTextField() {

@@ -100,4 +100,22 @@ enum AlertManager {
         controller.present(alertController, animated: true)
     }
     
+    static func showDeleteAccountAlert(on controller: UIViewController) {
+        let alertController = UIAlertController(title: "are you sure you want to delete your account?", message: "this cannot be undone", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: NSLocalizedString("yes, delete my account", comment: ""), style: .default) { (UIAlertAction) in
+            Task {
+                try await UserService.singleton.deleteMyAccount()
+                DispatchQueue.main.async {
+                    transitionToAuth()
+                }
+            }
+        }
+        let noAction = UIAlertAction(title: NSLocalizedString("nevermind", comment: ""), style: .cancel) { (UIAlertAction) in
+            
+        }
+        alertController.addAction(yesAction)
+        alertController.addAction(noAction)
+        controller.present(alertController, animated: true)
+    }
+    
 }
