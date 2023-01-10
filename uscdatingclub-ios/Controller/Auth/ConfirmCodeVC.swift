@@ -223,7 +223,9 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
     func validate(validationCode: String) async throws {
         switch confirmMethod {
         case .text:
+            print("VALIDATING")
             if let user = try await PhoneNumberAPI.verifyCode(phoneNumber: AuthContext.phoneNumber, code: validationCode, uuid: AuthContext.uuid) {
+                print("ACCOUNT EXISTS")
                 try await UserService.singleton.logInWith(completeUser: user)
             }
         case .email:

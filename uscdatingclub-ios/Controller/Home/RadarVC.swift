@@ -259,12 +259,18 @@ class RadarVC: UIViewController, PageVCChild {
             if isLocationServicesEnabled {
                 isLocationServicesEnabled = false
                 renderIsActive()
+                Task {
+                    try await UserService.singleton.updateMatchableStatus(active:false)
+                }
             } else {
                 PermissionsManager.areAllPermissionsGranted { areAllGranted in
                     DispatchQueue.main.async { [self] in
                         if areAllGranted {
                             isLocationServicesEnabled = true
                             renderIsActive()
+                            Task {
+                                try await UserService.singleton.updateMatchableStatus(active:true)
+                            }
                         } else {
                             let permissionsVC = PermissionsVC.create()
                             permissionsVC.modalPresentationStyle = .fullScreen

@@ -115,29 +115,12 @@ class EditAccountVC: UIViewController {
         isSaving = true
         Task {
             do {
-//                try await withThrowingTaskGroup(of: Void.self) { group in
-//                    if firstName != UserService.singleton.getFirstName() {
-//                        group.addTask {
-//                            try await UserService.singleton.updateFirstName(to: self.firstName)
-//                        }
-//                    }
-//                    if lastName != UserService.singleton.getLastName() {
-//                        group.addTask {
-//                            try await UserService.singleton.updateLastName(to: self.lastName)
-//                        }
-//                    }
-//                    if sexIdentity != UserService.singleton.getSexIdentity() {
-//                        group.addTask {
-//                            try await UserService.singleton.updateLastName(to: self.lastName)
-//                        }
-//                    }
-//                    if sexIdentity != UserService.singleton.getSexPreference() {
-//                        group.addTask {
-//                            try await UserService.singleton.updateLastName(to: self.lastName)
-//                        }
-//                    }
-//                    try await group.waitForAll()
-//                }
+                try await withThrowingTaskGroup(of: Void.self) { [self] group in
+                    group.addTask {
+                        try await UserService.singleton.updateUser(firstName: self.firstName, lastName: self.lastName, sexIdentity: self.sexIdentity, sexPreference: self.sexPreference)
+                    }
+                    try await group.waitForAll()
+                }
                 handleSuccessfulUpdate()
             } catch {
                 AlertManager.displayError(error)

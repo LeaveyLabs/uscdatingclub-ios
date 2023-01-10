@@ -15,7 +15,7 @@ class PermissionsError: NSError {
     
 }
 
-enum AlertManager {
+class AlertManager {
     
     static func displayError(_ errorDescription: String, _ recoveryDescription: String) {
         print(errorDescription)
@@ -69,7 +69,7 @@ enum AlertManager {
             
         }
         alertController.addAction(okAction)
-        controller.present(alertController, animated: true)
+        DispatchQueue.main.async { controller.present(alertController, animated: true) }
     }
     
     static func showAlert(title: String,
@@ -90,11 +90,12 @@ enum AlertManager {
             }
             alertController.addAction(secondaryAction)
         }
-        controller.present(alertController, animated: true)
+        DispatchQueue.main.async { controller.present(alertController, animated: true) }
     }
     
     //MARK: - Specific Use Cases
     
+    @MainActor
     static func showDeleteAccountAlert(on controller: UIViewController) {
         let alertController = UIAlertController(title: "are you sure you want to delete your account?", message: "this cannot be undone", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: NSLocalizedString("yes, delete my account", comment: ""), style: .default) { (UIAlertAction) in
@@ -110,13 +111,14 @@ enum AlertManager {
         }
         alertController.addAction(yesAction)
         alertController.addAction(noAction)
-        controller.present(alertController, animated: true)
+        DispatchQueue.main.async { controller.present(alertController, animated: true) }
     }
     
     enum OpenSettingsType {
         case location, backgroundRefresh, notifications
     }
     
+    @MainActor
     static func showSettingsAlertController(title: String,
                                             message: String,
                                             settingsType: OpenSettingsType,
@@ -137,7 +139,7 @@ enum AlertManager {
         
         alertController.addAction(cancelAction)
         alertController.addAction(settingsAction)
-        controller.present(alertController, animated: true)
+        DispatchQueue.main.async { controller.present(alertController, animated: true) }
     }
     
 }

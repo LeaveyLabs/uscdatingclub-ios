@@ -79,6 +79,7 @@ class UserService: NSObject {
     func getSexPreference() -> String { return authedUser.sexPreference }
     func getSexIdentity() -> String { return authedUser.sexIdentity }
     func getPhoneNumberPretty() -> String? { return authedUser.phoneNumber.asNationalPhoneNumber }
+    func getSurveyResponses() -> [SurveyResponse] { return authedUser.surveyResponses }
 //    func getProfilePic() -> UIImage { return authedUser.profilePicWrapper.image }
     
     //MARK: - Login and create user
@@ -127,29 +128,20 @@ class UserService: NSObject {
 //
 //    //MARK: - Update user
 //
-//    func updateFirstName(to newFirstName: String) async throws {
-//        guard let frontendCompleteUser = frontendCompleteUser else { return }
-//
-//        let updatedCompleteUser = try await UserAPI.patchFirstName(firstName: newFirstName, id: frontendCompleteUser.id)
-//        self.authedUser.first_name = updatedCompleteUser.first_name
-//        Task {
-//            await self.saveUserToFilesystem()
-//            await UsersService.singleton.updateCachedUser(updatedUser: self.getUserAsFrontendReadOnlyUser())
-//        }
-//    }
-//
-//    func updateLastName(to newLastName: String) async throws {
-//        guard let frontendCompleteUser = frontendCompleteUser else { return }
-//
-//        let updatedCompleteUser = try await UserAPI.patchLastName(lastName: newLastName, id: frontendCompleteUser.id)
-//        self.authedUser.last_name = updatedCompleteUser.last_name
-//        Task {
-//            await self.saveUserToFilesystem()
-//            await UsersService.singleton.updateCachedUser(updatedUser: self.getUserAsFrontendReadOnlyUser())
-//        }
-//    }
-//
-//    // No need to return new profilePic bc it is updated globally
+    func updateUser(firstName: String, lastName: String, sexIdentity: String, sexPreference: String) async throws {
+        let updatedUser = CompleteUser(id: authedUser.id, firstName: firstName, lastName: lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, surveyResponses: authedUser.surveyResponses)
+        try await UserAPI.updateUser(id:updatedUser.id, user:updatedUser)
+        authedUser = FrontendCompleteUser(completeUser: updatedUser)
+        Task { await self.saveUserToFilesystem() }
+    }
+    
+    func updateMatchableStatus(active: Bool) async throws {
+        try await UserAPI.updateMatchableStatus(matchableStatus: active, email: authedUser.email)
+        //TODO: update the authedUser
+        Task { await self.saveUserToFilesystem() }
+    }
+
+    // No need to return new profilePic bc it is updated globally
 //    func updateProfilePic(to newProfilePic: UIImage) async throws {
 //        guard let frontendCompleteUser = frontendCompleteUser else { return }
 //
@@ -166,15 +158,6 @@ class UserService: NSObject {
 //            await UsersService.singleton.updateCachedUser(updatedUser: self.getUserAsFrontendReadOnlyUser())
 //        }
 //    }
-    
-    func updateTestResults() async throws {
-        try await UserAPI.postSurveyAnswers(email: authedUser.email, surveyResponses: [SurveyResponse(category: 2, answer: 3)])
-    }
-    
-    func updateLocation(lat: Double, long: Double) async throws {
-        //TODO: save the last location here
-        try await UserAPI.updateLocation(latitude: lat, longitude: long, email: authedUser.email)
-    }
     
 //
 //    //MARK: - Logout and delete user

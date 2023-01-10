@@ -24,6 +24,7 @@ class MatchFoundVC: UIViewController {
     @IBOutlet var nameSublabel: UILabel!
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var timeSublabel: UILabel!
+    @IBOutlet var bottomButtonHeightConstraint: NSLayoutConstraint!
     
     //Info
     var matchInfo: MatchInfo!
@@ -34,20 +35,32 @@ class MatchFoundVC: UIViewController {
     class func create(matchInfo: MatchInfo) -> MatchFoundVC {
         let vc = UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.MatchFound) as! MatchFoundVC
         vc.matchInfo = matchInfo
+        vc.connectManager = ConnectManager(startTime: matchInfo.matchTime, delegate: vc)
         return vc
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        connectManager.startTimer() //must come first
         setupButtons()
-        nameLabel.text = matchInfo.matchName
-        nameSublabel.text = "you and " + matchInfo.matchName + " are\n\(matchInfo.compatibility)% compatible"
-        timeSublabel.text = "left to respond"
-        timeLabel.text = connectManager.timeLeft(fromDate: matchInfo.matchTime)
-        connectManager = ConnectManager(startTime: matchInfo.matchTime, delegate: self)
+        setupLabels() //must come after setting up connectManager
     }
     
     //MARK: - Setup
+    
+    func setupLabels() {
+        timeLabel.text = connectManager.timeLeft(fromDate: matchInfo.matchTime)
+        nameLabel.text = matchInfo.matchName
+        timeSublabel.text = "left to respond"
+        
+        let boldedText = "\(matchInfo.compatibility)% compatible"
+        let nameSublabelText = "you and " + matchInfo.matchName + " are\n\(matchInfo.compatibility)% compatible"
+        let attributedText = NSMutableAttributedString(string: nameSublabelText)
+        if let boldedRange = nameSublabelText.range(of: boldedText) {
+            attributedText.setAttributes([.font: UIFont(name: "HelveticaNeue-Bold", size: 20)!], range: NSRange(boldedRange, in: nameSublabelText))
+        }
+        nameSublabel.attributedText = attributedText
+    }
     
     func setupButtons() {
         meetUpButton.configure(title: "meet up", systemImage: "figure.wave")
@@ -60,17 +73,20 @@ class MatchFoundVC: UIViewController {
     
     @objc func meetupButtonDidPressed() {
         //post to database
-        meetUpButton.isHidden = true
-        passButton.configure(title: "waiting for " + matchInfo.matchName, systemImage: "")
-        timeSublabel.text = "left for Mei to respond"
-        passButton.isUserInteractionEnabled = false
-        passButton.alpha = 0.5
+//        meetUpButton.isHidden = true
+//        passButton.configure(title: "waiting for " + matchInfo.matchName, systemImage: "")
+//        timeSublabel.text = "left for \(matchInfo.matchName) to respond"
+//        passButton.isUserInteractionEnabled = false
+//        passButton.alpha = 0.5
+//        bottomButtonHeightConstraint.constant = 60
+        
+        transitionToViewController(CoordinateVC.create(matchInfo: matchInfo), duration: 1)
     }
 
     @objc func passButtonDidPressed() {
-        AlertManager.showAlert(title: "are you sure you want to pass?",
-                               subtitle: "you won't be able to connect with \(matchInfo.matchName) again",
-                               primaryActionTitle: "yes",
+        AlertManager.showAlert(title: "are you sure you want to pass on \(matchInfo.matchName)?",
+                               subtitle: "you won't be able to connect again",
+                               primaryActionTitle: "i'm sure",
                                primaryActionHandler: {
             //post to database
             DispatchQueue.main.async {
@@ -81,19 +97,7 @@ class MatchFoundVC: UIViewController {
                                secondaryActionHandler: {
             //do nothing
         }, on: self)
-        dismiss(animated: true)
     }
-    
-    //MARK: - Helpers
-    
-    func presentTest() {
-        TestContext.reset()
-        TestContext.isFirstTest = false
-        let nav = UINavigationController(rootViewController: TestTextVC.create(type: .welcome))
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true)
-    }
-    
 
 }
 
@@ -108,12 +112,16 @@ extension MatchFoundVC: ConnectManagerDelegate {
     func timeRanOut() {
         AlertManager.showAlert(title: "your time to connect with " + matchInfo.matchName + " has run out",
                                subtitle: "",
-                               primaryActionTitle: "return hom",
+                               primaryActionTitle: "return home",
                                primaryActionHandler: {
             DispatchQueue.main.async {
                 self.dismiss(animated: true)
             }
         }, on: self)
+    }
+    
+    func newRelativePositioning(heading: CGFloat, distance: Double) {
+        //do nothing
     }
     
 }

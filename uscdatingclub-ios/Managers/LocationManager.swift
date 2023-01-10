@@ -15,6 +15,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     //MARK: - Properties
     
     static let shared = LocationManager()
+    static let DEFAULT_DISTANCE_FILTER: Double = 5.0
     
     private let locationManager = CLLocationManager()
     @Published var locationStatus: CLAuthorizationStatus?
@@ -45,7 +46,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         locationManager.pausesLocationUpdatesAutomatically = false
         locationManager.delegate = self
-        locationManager.distanceFilter = 5 //update after moving x meters
+        locationManager.distanceFilter = LocationManager.DEFAULT_DISTANCE_FILTER //update after moving x meters
         locationManager.desiredAccuracy = kCLLocationAccuracyBest //within a few meters
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.showsBackgroundLocationIndicator = false
@@ -96,8 +97,21 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         ])
     }
     
-    //MARK: - Helpers
+    //MARK: - Public API
     
+    func queryCurrentLocation() -> CLLocation? {
+        locationManager.requestLocation()
+        return lastLocation
+    }
+    
+    func updateDistancefilter(to newDistanceFilter: Double) {
+        locationManager.distanceFilter = newDistanceFilter
+    }
+    
+    func resetDistanceFilter() {
+        locationManager.distanceFilter = LocationManager.DEFAULT_DISTANCE_FILTER
+    }
+        
     func requestPermissionServices() throws {
         if locationStatus == .authorizedWhenInUse ||
             locationStatus == .denied ||
@@ -130,6 +144,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func isLocationServicesProperlyAuthorized() -> Bool {
         return properAuthorizations
     }
+    
+    //MARK: - Helpers
     
     func postToDatabase(lat: Double, long: Double) {
         //TODO: why is the analytics not posting?
