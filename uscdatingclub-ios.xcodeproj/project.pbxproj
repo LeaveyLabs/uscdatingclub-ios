@@ -72,6 +72,7 @@
 		47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A80614295F8D23001DEE64 /* EnterBiosVC.swift */; };
 		47B60B0A296C834600657C1D /* ConnectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B09296C834600657C1D /* ConnectManager.swift */; };
 		47B60B0C296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B0B296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift */; };
+		47B60B0E296D0E3900657C1D /* SheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B0D296D0E3900657C1D /* SheetVC.swift */; };
 		47B6B49E296B2E3500539353 /* LocationPushService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B6B49D296B2E3500539353 /* LocationPushService.swift */; };
 		47B6B4A2296B2E3500539353 /* locationPushExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 47B6B49B296B2E3500539353 /* locationPushExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		47B6B4A7296B45BE00539353 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A0531295E1F1300C15945 /* UserAPI.swift */; };
@@ -285,6 +286,7 @@
 		47A80614295F8D23001DEE64 /* EnterBiosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterBiosVC.swift; sourceTree = "<group>"; };
 		47B60B09296C834600657C1D /* ConnectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectManager.swift; sourceTree = "<group>"; };
 		47B60B0B296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate+Heading.swift"; sourceTree = "<group>"; };
+		47B60B0D296D0E3900657C1D /* SheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetVC.swift; sourceTree = "<group>"; };
 		47B6B49B296B2E3500539353 /* locationPushExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = locationPushExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		47B6B49D296B2E3500539353 /* LocationPushService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPushService.swift; sourceTree = "<group>"; };
 		47B6B49F296B2E3500539353 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -547,6 +549,7 @@
 				476FD86A295E46E30014DD42 /* HowItWorksVC.swift */,
 				47E38FF0295F7076007CB77F /* UpdateAvailableVC.swift */,
 				476FD866295E16290014DD42 /* PermissionsVC.swift */,
+				47B60B0D296D0E3900657C1D /* SheetVC.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -1318,6 +1321,7 @@
 				47DE3252295CC7C40063C55A /* UIImage+Thumbnail.swift in Sources */,
 				4731F50E295CD4820013F626 /* UITableView+AnimateReload.swift in Sources */,
 				47B60B0C296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift in Sources */,
+				47B60B0E296D0E3900657C1D /* SheetVC.swift in Sources */,
 				4731F513295CD48B0013F626 /* PanGesture+Direction.swift in Sources */,
 				47DE3249295CC7C40063C55A /* UIImageView+Initials.swift in Sources */,
 				4731F525295CD9870013F626 /* UIColor+Hex.swift in Sources */,

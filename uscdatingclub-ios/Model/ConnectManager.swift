@@ -29,11 +29,13 @@ class ConnectManager: NSObject {
         self.startTime = startTime
         self.delegate = delegate
         motionManager = CMMotionManager()
+        LocationManager.shared.lastConnectTime = startTime.timeIntervalSince1970
         super.init()
     }
     
     deinit {
-        LocationManager.shared.resetDistanceFilter() //TODO: will this suffice
+        print("DEINIT CONNECT MANAGER")
+        LocationManager.shared.resetDistanceFilter() //TODO: will this suffice?
     }
 
     //MARK: - Setup
@@ -41,9 +43,9 @@ class ConnectManager: NSObject {
     func startLocationCalculation() {
         //TODO: should the queue be main though?
         
-        motionManager.startGyroUpdates(to: .main) { gyroData, error in
+        motionManager.startDeviceMotionUpdates(using: .xTrueNorthZVertical, to: .main) { cmDeviceMotion, error in
             if let error {
-                print("GYRO ERROR", error)
+                print("MOTION ERROR", error)
                 return
             }
             self.updateRelativePositioning()
@@ -61,15 +63,14 @@ class ConnectManager: NSObject {
     func startTimer() {
         Task {
             while true {
-                let timeLeft = timeLeft(fromDate: startTime)
-                delegate.newTimeElapsed(newTime: timeLeft)
-                
                 let elapsedTime = Date.init().timeIntervalSince1970.getElapsedTime(since: startTime.timeIntervalSince1970)
-
-                if elapsedTime.minutes == 5 {
+                if elapsedTime.minutes == 3 {
                     delegate.timeRanOut()
                     return
                 }
+                let timeLeft = timeLeft(fromDate: startTime)
+                delegate.newTimeElapsed(newTime: timeLeft)
+                
                 try await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)
             }
         }
@@ -79,7 +80,7 @@ class ConnectManager: NSObject {
     
     func timeLeft(fromDate: Date) -> String {
         let elapsedTime = Date.init().timeIntervalSince1970.getElapsedTime(since: startTime.timeIntervalSince1970)
-        let timeRemainingString = "\(4 - elapsedTime.minutes)m \(59 - elapsedTime.seconds)s"
+        let timeRemainingString = "\(2 - elapsedTime.minutes)m \(59 - elapsedTime.seconds)s"
         return timeRemainingString
     }
     
@@ -88,12 +89,18 @@ class ConnectManager: NSObject {
             print("ERROR GETTING CURRENT LOCATION, IT'S NIL")
             return
         }
+        guard let deviceHeading = motionManager.deviceMotion?.heading else {
+            print("ERROR GETTING CURRENT LOCATION, IT'S NIL")
+            return
+        }
         
-        let matchLocation = CLLocation(latitude: 35.96169926794049, longitude: -86.79752282310865)
-        let heading = currentLocation.coordinate.heading(to: matchLocation.coordinate)
+        let matchLocation = CLLocation(latitude: 34.022123871588995, longitude: -118.28505424318654)
         let distance = currentLocation.distance(from: matchLocation)
         
-        delegate.newRelativePositioning(heading: heading, distance: distance)
+        let locationHeading = currentLocation.coordinate.heading(to: matchLocation.coordinate)
+        let relativeHeading = -(deviceHeading - locationHeading).degreesToRadians
+        
+        delegate.newRelativePositioning(heading: relativeHeading, distance: distance)
     }
 
 }

@@ -27,6 +27,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                 locationManager.accuracyAuthorization == .fullAccuracy)
     }
     
+    var lastConnectTime: Double? = nil
+    //wait... this won't be available when the code stops running
+    //will it still be findable while the app is in the background...?
+    
     var statusString: String {
         guard let status = locationStatus else {
             return "unknown"
@@ -86,6 +90,15 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             postToDatabase(lat: lastLocation.coordinate.latitude, long: lastLocation.coordinate.longitude)
         }
         
+        
+        //Update distance filter if necessary
+        if locationManager.distanceFilter == 0 {
+            if let lastConnectTime,
+               Date().timeIntervalSince1970.getElapsedTime(since: lastConnectTime).minutes >= 5 {
+                resetDistanceFilter()
+            }
+        }
+        
         //TODO: idea: should we stop and then start location services here to restart them and potentially prolong the total background time?
     }
     
@@ -103,11 +116,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.requestLocation()
         return lastLocation
     }
-    
+
     func updateDistancefilter(to newDistanceFilter: Double) {
         locationManager.distanceFilter = newDistanceFilter
     }
-    
+
     func resetDistanceFilter() {
         locationManager.distanceFilter = LocationManager.DEFAULT_DISTANCE_FILTER
     }

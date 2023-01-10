@@ -80,6 +80,13 @@ class CoordinateVC: UIViewController {
     }
     
     func moreButtonDidPressed() {
+        let moreVC = SheetVC.create(sheetButtons: [SheetButton(title: "report", systemImageName: "exclamationmark.triangle", handler: {
+            self.presentReportAlert()
+        })])
+        present(moreVC, animated: true)
+    }
+    
+    func presentReportAlert() {
         AlertManager.showAlert(title: "would you like to report \(matchInfo.matchName)?",
                                subtitle: "your location will stop sharing immediately",
                                primaryActionTitle: "report",
@@ -92,7 +99,7 @@ class CoordinateVC: UIViewController {
                                secondaryActionTitle: "nevermind",
                                secondaryActionHandler: {
             //do nothing
-        }, on: self)
+        }, on: SceneDelegate.visibleViewController!)
     }
 
 }
@@ -116,13 +123,9 @@ extension CoordinateVC: ConnectManagerDelegate {
         }, on: self)
     }
     
-    func newRelativePositioning(heading: CGFloat, distance: Double) {
-        print("newrelativepositioning", heading, distance)
-        
-        //TODO: animate the below?
-        
+    func newRelativePositioning(heading: CGFloat, distance: Double) {        
         DispatchQueue.main.async { [self] in
-            locationLabel.text = String(distance)
+            locationLabel.text = prettyDistance(meters: distance)
             locationImageView.transform = CGAffineTransform.identity.rotated(by: heading)
         }
     }

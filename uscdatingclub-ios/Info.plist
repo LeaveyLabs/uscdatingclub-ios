@@ -5,7 +5,7 @@
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>NSUserNotificationsUsageDescription</key>
-	<string>When you're matched, you both get a notification and have 5 minutes to respond.</string>
+	<string>When you&apos;re matched, you both get a notification and have 3 minutes to respond.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
