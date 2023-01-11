@@ -23,11 +23,15 @@ extension Double {
     
 }
 
-func prettyDistance(meters: Double) -> String {
+func prettyDistance(meters: Double, shortened: Bool) -> String {
     let feet = meters.metersToFeet()
-    if feet >= 1000 {
-        return "\(Int(feet.feetToMiles())) miles"
+    if feet <= 10 {
+        return shortened ? "<10ft" : "<10 feet"
+    }
+    if feet >= 500 {
+        let roundedMiles = Double(Int(feet.feetToMiles() * 10)) / 10
+        return String(roundedMiles) + (shortened ? "mi" : " miles")
     } else {
-        return "\(Int(feet)) feet"
+        return String(Int(feet)) + (shortened ? "ft" : " feet")
     }
 }

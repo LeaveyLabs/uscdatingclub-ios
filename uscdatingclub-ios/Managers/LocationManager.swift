@@ -60,11 +60,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     //this function is (usually?) also called when the app is running in the background and the user changes authorization from settings... but this can't be a guarantee
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print(#function, statusString, locationAccuracy == .fullAccuracy ? "Full acc" : "Reduced acc")
         NotificationCenter.default.post(name: .locationStatusDidUpdate, object: "myObject", userInfo: ["key": "Value"])
 
         locationStatus = status
         locationAccuracy = manager.accuracyAuthorization
+        print("didChangeLocationAuthorization", locationAccuracy == .fullAccuracy ? "Full acc" : "Reduced acc")
         
         //Auto-request always permissions after in-use permissions granted
         if locationManager.authorizationStatus == .authorizedWhenInUse {
@@ -84,7 +84,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         lastLocation = location
-        print(#function, location)
+        print("didUpdateLocations")
         
         if let lastLocation {
             postToDatabase(lat: lastLocation.coordinate.latitude, long: lastLocation.coordinate.longitude)
@@ -103,7 +103,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(#function, error.localizedDescription)
+        print("didFailWithError", error.localizedDescription)
         let analyticsId = "location"
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
           AnalyticsParameterItemID: "id-\(analyticsId)",

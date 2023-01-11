@@ -5,7 +5,7 @@
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>NSUserNotificationsUsageDescription</key>
-	<string>When you&apos;re matched, you both get a notification and have 3 minutes to respond.</string>
+	<string>When you&apos;re matched, you&apos;ll both get a notification and have 3 minutes to respond.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -32,5 +32,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>ChivoMono.ttf</string>
+		<string>ChivoMono-Italic.ttf</string>
+	</array>
 </dict>
 </plist>

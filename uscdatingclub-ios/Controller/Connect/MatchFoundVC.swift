@@ -7,12 +7,6 @@
 
 import UIKit
 
-struct MatchInfo {
-    let matchName: String
-    let compatibility: String
-    let matchTime: Date
-}
-
 class MatchFoundVC: UIViewController {
         
     //MARK: - Properties
@@ -35,7 +29,7 @@ class MatchFoundVC: UIViewController {
     class func create(matchInfo: MatchInfo) -> MatchFoundVC {
         let vc = UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.MatchFound) as! MatchFoundVC
         vc.matchInfo = matchInfo
-        vc.connectManager = ConnectManager(startTime: matchInfo.matchTime, delegate: vc)
+        vc.connectManager = ConnectManager(matchInfo: matchInfo, delegate: vc)
         return vc
     }
     
@@ -49,12 +43,12 @@ class MatchFoundVC: UIViewController {
     //MARK: - Setup
     
     func setupLabels() {
-        timeLabel.text = connectManager.timeLeft(fromDate: matchInfo.matchTime)
-        nameLabel.text = matchInfo.matchName
+        timeLabel.text = matchInfo.timeLeftString
+        nameLabel.text = matchInfo.userName
         timeSublabel.text = "left to respond"
         
         let boldedText = "\(matchInfo.compatibility)% compatible"
-        let nameSublabelText = "you and " + matchInfo.matchName + " are\n\(matchInfo.compatibility)% compatible"
+        let nameSublabelText = "you and " + matchInfo.userName + " are\n\(matchInfo.compatibility)% compatible"
         let attributedText = NSMutableAttributedString(string: nameSublabelText)
         if let boldedRange = nameSublabelText.range(of: boldedText) {
             attributedText.setAttributes([.font: UIFont(name: "HelveticaNeue-Bold", size: 20)!], range: NSRange(boldedRange, in: nameSublabelText))
@@ -84,7 +78,7 @@ class MatchFoundVC: UIViewController {
     }
 
     @objc func passButtonDidPressed() {
-        AlertManager.showAlert(title: "are you sure you want to pass on \(matchInfo.matchName)?",
+        AlertManager.showAlert(title: "are you sure you want to pass on \(matchInfo.userName)?",
                                subtitle: "you won't be able to connect again",
                                primaryActionTitle: "i'm sure",
                                primaryActionHandler: {
@@ -103,14 +97,14 @@ class MatchFoundVC: UIViewController {
 
 extension MatchFoundVC: ConnectManagerDelegate {
     
-    func newTimeElapsed(newTime: String) {
-        DispatchQueue.main.async {
-            self.timeLabel.text = newTime
+    func newTimeElapsed() {
+        DispatchQueue.main.async { [self] in
+            timeLabel.text = matchInfo.timeLeftString
         }
     }
     
     func timeRanOut() {
-        AlertManager.showAlert(title: "your time to connect with " + matchInfo.matchName + " has run out",
+        AlertManager.showAlert(title: "your time to connect with " + matchInfo.userName + " has run out",
                                subtitle: "",
                                primaryActionTitle: "return home",
                                primaryActionHandler: {

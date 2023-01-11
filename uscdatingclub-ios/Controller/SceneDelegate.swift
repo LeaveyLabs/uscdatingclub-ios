@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -68,8 +69,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
         
-        let matchInfo = MatchInfo(matchName: "Mei", compatibility: "93", matchTime: Date())
-        window.rootViewController = MatchFoundVC.create(matchInfo: matchInfo)
+        //usc lat long: 34.022123871588995, -118.28505424318654
+        //TODO: remove core location after this is gone below
+        let distance = CLLocationCoordinate2D(latitude: 39.5501, longitude: 105.7821).distanceInMeters(from: CLLocationCoordinate2D(latitude: 34.022123871588995, longitude: -118.28505424318654))
+        print(distance)
+        let matchInfo = MatchInfo(userId: 0, userName: "Mei", compatibility: 99, time: Date(), distance: distance, percents: [
+            Percent(trait: "skiing", avgPercent: 30, youPercent: 60, matchPercent: 90),
+            Percent(trait: "spontaneity", avgPercent: 20, youPercent: 80, matchPercent: 60),
+            Percent(trait: "creativity", avgPercent: 50, youPercent: 85, matchPercent: 100),
+        ])
+        window.rootViewController = MatchFoundTableVC.create(matchInfo: matchInfo)
 
         window.makeKeyAndVisible()
 

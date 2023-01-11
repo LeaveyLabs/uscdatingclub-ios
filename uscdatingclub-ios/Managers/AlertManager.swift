@@ -64,13 +64,17 @@ class AlertManager {
     }
     
     static func showInfoCentered(_ title: String, _ message: String,  on controller: UIViewController) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default) { (UIAlertAction) in
-            
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default) { (UIAlertAction) in
+                
+            }
+            alertController.addAction(okAction)
+            controller.present(alertController, animated: true)
         }
-        alertController.addAction(okAction)
-        DispatchQueue.main.async { controller.present(alertController, animated: true) }
     }
+    
+    //TODO: instead of using DispatchQueue.main.async, we should @MainActor on the function. but adding that tag is not requiring the function be called on main actor...
     
     static func showAlert(title: String,
                           subtitle: String,
@@ -79,39 +83,43 @@ class AlertManager {
                           secondaryActionTitle: String? = nil,
                           secondaryActionHandler: (() -> Void)? = nil,
                           on controller: UIViewController) {
-        let alertController = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
-        let primaryAction = UIAlertAction(title: NSLocalizedString(primaryActionTitle, comment: ""), style: .default) { (UIAlertAction) in
-            primaryActionHandler()
-        }
-        alertController.addAction(primaryAction)
-        if let secondaryActionTitle, let secondaryActionHandler {
-            let secondaryAction = UIAlertAction(title: NSLocalizedString(secondaryActionTitle, comment: ""), style: .cancel) { (UIAlertAction) in
-                secondaryActionHandler()
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
+            let primaryAction = UIAlertAction(title: NSLocalizedString(primaryActionTitle, comment: ""), style: .default) { (UIAlertAction) in
+                primaryActionHandler()
             }
-            alertController.addAction(secondaryAction)
+            alertController.addAction(primaryAction)
+            if let secondaryActionTitle, let secondaryActionHandler {
+                let secondaryAction = UIAlertAction(title: NSLocalizedString(secondaryActionTitle, comment: ""), style: .cancel) { (UIAlertAction) in
+                    secondaryActionHandler()
+                }
+                alertController.addAction(secondaryAction)
+            }
+            controller.present(alertController, animated: true)
         }
-        DispatchQueue.main.async { controller.present(alertController, animated: true) }
     }
     
     //MARK: - Specific Use Cases
     
     @MainActor
     static func showDeleteAccountAlert(on controller: UIViewController) {
-        let alertController = UIAlertController(title: "are you sure you want to delete your account?", message: "this cannot be undone", preferredStyle: .alert)
-        let yesAction = UIAlertAction(title: NSLocalizedString("yes, delete my account", comment: ""), style: .default) { (UIAlertAction) in
-            Task {
-                try await UserService.singleton.deleteMyAccount()
-                DispatchQueue.main.async {
-                    transitionToAuth()
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "are you sure you want to delete your account?", message: "this cannot be undone", preferredStyle: .alert)
+            let yesAction = UIAlertAction(title: NSLocalizedString("yes, delete my account", comment: ""), style: .default) { (UIAlertAction) in
+                Task {
+                    try await UserService.singleton.deleteMyAccount()
+                    DispatchQueue.main.async {
+                        transitionToAuth()
+                    }
                 }
             }
+            let noAction = UIAlertAction(title: NSLocalizedString("nevermind", comment: ""), style: .cancel) { (UIAlertAction) in
+                
+            }
+            alertController.addAction(yesAction)
+            alertController.addAction(noAction)
+            controller.present(alertController, animated: true)
         }
-        let noAction = UIAlertAction(title: NSLocalizedString("nevermind", comment: ""), style: .cancel) { (UIAlertAction) in
-            
-        }
-        alertController.addAction(yesAction)
-        alertController.addAction(noAction)
-        DispatchQueue.main.async { controller.present(alertController, animated: true) }
     }
     
     enum OpenSettingsType {
@@ -123,23 +131,25 @@ class AlertManager {
                                             message: String,
                                             settingsType: OpenSettingsType,
                                             on controller: UIViewController) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil)
-        let settingsAction = UIAlertAction(title: NSLocalizedString("settings", comment: ""), style: .default) { (UIAlertAction) in
-            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)! as URL, options: [:], completionHandler: nil)
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil)
+            let settingsAction = UIAlertAction(title: NSLocalizedString("settings", comment: ""), style: .default) { (UIAlertAction) in
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)! as URL, options: [:], completionHandler: nil)
+            }
+            switch settingsType {
+            case .backgroundRefresh:
+                alertController.addImage(image: UIImage(named: "permissions-bgrefresh")!.withRenderingMode(.alwaysOriginal))
+            case .location:
+                alertController.addImage(image: UIImage(named: "permissions-location")!.withRenderingMode(.alwaysOriginal))
+            case .notifications:
+                break
+            }
+            
+            alertController.addAction(cancelAction)
+            alertController.addAction(settingsAction)
+            controller.present(alertController, animated: true)
         }
-        switch settingsType {
-        case .backgroundRefresh:
-            alertController.addImage(image: UIImage(named: "permissions-bgrefresh")!.withRenderingMode(.alwaysOriginal))
-        case .location:
-            alertController.addImage(image: UIImage(named: "permissions-location")!.withRenderingMode(.alwaysOriginal))
-        case .notifications:
-            break
-        }
-        
-        alertController.addAction(cancelAction)
-        alertController.addAction(settingsAction)
-        DispatchQueue.main.async { controller.present(alertController, animated: true) }
     }
     
 }

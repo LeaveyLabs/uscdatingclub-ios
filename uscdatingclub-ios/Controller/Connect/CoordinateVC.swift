@@ -27,7 +27,7 @@ class CoordinateVC: UIViewController {
     class func create(matchInfo: MatchInfo) -> CoordinateVC {
         let vc = UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Coordinate) as! CoordinateVC
         vc.matchInfo = matchInfo
-        vc.connectManager = ConnectManager(startTime: matchInfo.matchTime, delegate: vc)
+        vc.connectManager = ConnectManager(matchInfo: matchInfo, delegate: vc)
         return vc
     }
     
@@ -51,7 +51,7 @@ class CoordinateVC: UIViewController {
     
     func setupLabels() {
         nameLabel.text = "Mei"
-        timeLabel.text = connectManager.timeLeft(fromDate: matchInfo.matchTime)
+        timeLabel.text = matchInfo.timeLeftString
         timeSublabel.text = "left to connect"
     }
     
@@ -64,7 +64,7 @@ class CoordinateVC: UIViewController {
     //MARK: - Interaction
     
     func closeButtonDidPressed() {
-        AlertManager.showAlert(title: "stop sharing your location with \(matchInfo.matchName)?",
+        AlertManager.showAlert(title: "stop sharing your location with \(matchInfo.userName)?",
                                subtitle: "you won't be able to restart it afterwards",
                                primaryActionTitle: "stop sharing location",
                                primaryActionHandler: {
@@ -87,7 +87,7 @@ class CoordinateVC: UIViewController {
     }
     
     func presentReportAlert() {
-        AlertManager.showAlert(title: "would you like to report \(matchInfo.matchName)?",
+        AlertManager.showAlert(title: "would you like to report \(matchInfo.userName)?",
                                subtitle: "your location will stop sharing immediately",
                                primaryActionTitle: "report",
                                primaryActionHandler: {
@@ -106,14 +106,14 @@ class CoordinateVC: UIViewController {
 
 extension CoordinateVC: ConnectManagerDelegate {
     
-    func newTimeElapsed(newTime: String) {
-        DispatchQueue.main.async {
-            self.timeLabel.text = newTime
+    func newTimeElapsed() {
+        DispatchQueue.main.async { [self] in
+            timeLabel.text = matchInfo.timeLeftString
         }
     }
     
     func timeRanOut() {
-        AlertManager.showAlert(title: "your time to connect with " + matchInfo.matchName + " has run out",
+        AlertManager.showAlert(title: "your time to connect with " + matchInfo.userName + " has run out",
                                subtitle: "",
                                primaryActionTitle: "return home",
                                primaryActionHandler: {
@@ -125,7 +125,7 @@ extension CoordinateVC: ConnectManagerDelegate {
     
     func newRelativePositioning(heading: CGFloat, distance: Double) {        
         DispatchQueue.main.async { [self] in
-            locationLabel.text = prettyDistance(meters: distance)
+            locationLabel.text = prettyDistance(meters: distance, shortened: false)
             locationImageView.transform = CGAffineTransform.identity.rotated(by: heading)
         }
     }

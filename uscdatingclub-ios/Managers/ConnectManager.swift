@@ -10,7 +10,7 @@ import MapKit
 import CoreMotion
 
 protocol ConnectManagerDelegate {
-    func newTimeElapsed(newTime: String)
+    func newTimeElapsed()
     func timeRanOut()
     func newRelativePositioning(heading: CGFloat, distance: Double)
 }
@@ -19,23 +19,22 @@ class ConnectManager: NSObject {
 
     //MARK: - Properties
 
-    let startTime: Date
+    let matchInfo: MatchInfo
     let delegate: ConnectManagerDelegate
     let motionManager: CMMotionManager
     
     //MARK: - Initializer
     
-    init(startTime: Date, delegate: ConnectManagerDelegate) {
-        self.startTime = startTime
+    init(matchInfo: MatchInfo, delegate: ConnectManagerDelegate) {
+        self.matchInfo = matchInfo
         self.delegate = delegate
         motionManager = CMMotionManager()
-        LocationManager.shared.lastConnectTime = startTime.timeIntervalSince1970
+        LocationManager.shared.lastConnectTime = matchInfo.time.timeIntervalSince1970
         super.init()
     }
     
     deinit {
-        print("DEINIT CONNECT MANAGER")
-        LocationManager.shared.resetDistanceFilter() //TODO: will this suffice?
+        LocationManager.shared.resetDistanceFilter() //TODO: this won't relaly suffice
     }
 
     //MARK: - Setup
@@ -63,13 +62,11 @@ class ConnectManager: NSObject {
     func startTimer() {
         Task {
             while true {
-                let elapsedTime = Date.init().timeIntervalSince1970.getElapsedTime(since: startTime.timeIntervalSince1970)
-                if elapsedTime.minutes == 3 {
+                if matchInfo.elapsedTime.minutes == 3 {
                     delegate.timeRanOut()
                     return
                 }
-                let timeLeft = timeLeft(fromDate: startTime)
-                delegate.newTimeElapsed(newTime: timeLeft)
+                delegate.newTimeElapsed()
                 
                 try await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)
             }
@@ -77,12 +74,6 @@ class ConnectManager: NSObject {
     }
     
     //MARK: - Helpers
-    
-    func timeLeft(fromDate: Date) -> String {
-        let elapsedTime = Date.init().timeIntervalSince1970.getElapsedTime(since: startTime.timeIntervalSince1970)
-        let timeRemainingString = "\(2 - elapsedTime.minutes)m \(59 - elapsedTime.seconds)s"
-        return timeRemainingString
-    }
     
     func updateRelativePositioning() {
         guard let currentLocation = LocationManager.shared.lastLocation else {
@@ -94,6 +85,7 @@ class ConnectManager: NSObject {
             return
         }
         
+        //TODO: feed in data from the socket
         let matchLocation = CLLocation(latitude: 34.022123871588995, longitude: -118.28505424318654)
         let distance = currentLocation.distance(from: matchLocation)
         

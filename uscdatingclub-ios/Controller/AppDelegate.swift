@@ -16,14 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         UIStackView.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).spacing = -10
-        UIFont.overrideInitialize()
+
         UNUserNotificationCenter.current().delegate = self
         NotificationsManager.shared.registerForNotificationsOnStartupIfAccessExists()
         
         NotificationCenter.default.addObserver(forName: .remoteConfigDidActivate, object: nil, queue: .main) { notification in
             Version.checkForNewUpdate()
         }
-        
+                
         FirebaseApp.configure()
 //        Constants.fetchRemoteConfig()
         Constants.fetchRemoteConfigDebug()

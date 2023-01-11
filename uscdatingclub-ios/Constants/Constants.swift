@@ -43,7 +43,12 @@ enum Constants {
             static let SelectionHeaderCell = "SelectionHeaderTestCell"
             static let SelectionCell = "SelectionTestCell"
             static let SimpleButtonCell = "SimpleButtonCell"
-            static let SimpleEntryCell = "SimpleEntryCell"
+            static let SimpleEntryCell = "SimplezntryCell"
+            //Match
+            static let ConnectHeaderCell = "ConnectHeaderCell"
+            static let ConnectTitleCell = "ConnectTitleCell"
+            static let ConnectSpectrumCell = "ConnectSpectrumCell"
+
         }
         struct VC {
             //Home
@@ -59,6 +64,7 @@ enum Constants {
             //Navigation Controllers
             
             //Connect
+            static let MatchFoundTable = "MatchFoundTableVC"
             static let MatchFound = "MatchFoundVC"
             static let Coordinate = "CoordinateVC"
             //TabBar

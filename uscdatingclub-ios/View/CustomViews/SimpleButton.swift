@@ -37,6 +37,7 @@ class SimpleButton: UIView {
     func setupButtons() {
         internalButton.titleLabel?.numberOfLines = 0
         internalButton.titleLabel?.textAlignment = .center
+        internalButton.titleLabel?.font = AppFont.bold.size(20)
     }
         
     //MARK: - User Interaction
@@ -73,11 +74,11 @@ extension SimpleButton {
             let fullText = title + "\n" + subtitle
             let attributedText = NSMutableAttributedString(string: fullText)
             if let titleRange = fullText.range(of: title) {
-                attributedText.setAttributes([.font: UIFont(name: AppFontName.bold, size: 20)!], range: NSRange(titleRange, in: fullText))
+                attributedText.setAttributes([.font: AppFont.bold.size(20)], range: NSRange(titleRange, in: fullText))
             }
             
             if let subtitleRange = fullText.range(of: subtitle) {
-                attributedText.setAttributes([.font: UIFont(name: AppFontName.regular, size: 16)!], range: NSRange(subtitleRange, in: fullText))
+                attributedText.setAttributes([.font: AppFont.regular.size(16)], range: NSRange(subtitleRange, in: fullText))
             }
 
             internalButton.setAttributedTitle(attributedText, for: .normal)
