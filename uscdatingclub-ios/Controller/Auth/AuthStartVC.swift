@@ -14,6 +14,7 @@ class AuthStartVC: UIViewController, UITextViewDelegate {
     //UI
     @IBOutlet weak var agreementTextView: UITextView!
     @IBOutlet var continueButton: SimpleButton!
+    @IBOutlet var titleLabel: UILabel!
     
     //MARK: - Lifecycle
     
@@ -26,6 +27,7 @@ class AuthStartVC: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        titleLabel.font = AppFont.bold.size(30)
     }
     
     override func viewDidAppear(_ animated: Bool) {

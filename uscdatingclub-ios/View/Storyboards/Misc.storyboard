@@ -19,27 +19,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="DXr-HJ-PIo">
-                                <rect key="frame" x="186.66666666666666" y="483.66666666666669" width="20" height="20"/>
+                                <rect key="frame" x="186.66666666666666" y="486" width="20" height="20"/>
                                 <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2K-H0-amf">
-                                <rect key="frame" x="156.33333333333334" y="383.66666666666669" width="90.333333333333343" height="85"/>
-                                <string key="text">usc
-dating
-club</string>
-                                <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="25"/>
-                                <color key="textColor" name="customWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uscdatingclub-title-threelines" translatesAutoresizingMaskIntoConstraints="NO" id="DUb-8A-KMt">
+                                <rect key="frame" x="151.66666666666666" y="376" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="DUb-8A-KMt" secondAttribute="height" id="08R-jW-Oxj"/>
+                                    <constraint firstAttribute="width" constant="100" id="fh5-ha-pzM"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="AccentColor"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="DXr-HJ-PIo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="TrS-TX-unr"/>
-                            <constraint firstItem="q2K-H0-amf" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="aEq-HB-i8g"/>
-                            <constraint firstItem="q2K-H0-amf" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="5" id="dca-SU-RzZ"/>
-                            <constraint firstItem="DXr-HJ-PIo" firstAttribute="top" secondItem="q2K-H0-amf" secondAttribute="bottom" constant="15" id="kOk-Wu-WUa"/>
+                            <constraint firstItem="DXr-HJ-PIo" firstAttribute="top" secondItem="DUb-8A-KMt" secondAttribute="bottom" constant="10" id="XT9-HK-wiD"/>
+                            <constraint firstItem="DUb-8A-KMt" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="oY4-Ja-qn7"/>
+                            <constraint firstItem="DUb-8A-KMt" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="5" id="wSd-ew-5bK"/>
                         </constraints>
                     </view>
                     <connections>
@@ -63,7 +61,7 @@ club</string>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="50O-iT-Gnl"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -122,6 +120,7 @@ club</string>
                         <outlet property="featureView1" destination="3vx-gv-vbj" id="5XS-vY-lCa"/>
                         <outlet property="featureView2" destination="POs-kf-NCu" id="gER-So-Zcc"/>
                         <outlet property="featureView3" destination="FNZ-z4-4ae" id="pdl-9O-dcT"/>
+                        <outlet property="titleLabel" destination="1Ao-t2-2Zq" id="hLT-d4-eOK"/>
                         <outlet property="updateButton" destination="NcV-g1-LA0" id="A4d-iW-VDH"/>
                     </connections>
                 </viewController>
@@ -251,6 +250,7 @@ we use new Apple APIs for minimal battery usage and don’t save any location da
                         <outlet property="backgroundRefreshButton" destination="qNn-gA-sjH" id="7wH-G8-00W"/>
                         <outlet property="locationButton" destination="C6v-33-zp7" id="qhY-Jb-V2d"/>
                         <outlet property="notificationsButton" destination="Hnf-PW-fEK" id="Weh-tn-LT8"/>
+                        <outlet property="titleLabel" destination="gSF-0u-J85" id="HuY-zY-p5F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="42b-IU-B7u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -259,11 +259,9 @@ we use new Apple APIs for minimal battery usage and don’t save any location da
         </scene>
     </scenes>
     <resources>
+        <image name="uscdatingclub-title-threelines" width="356" height="302"/>
         <namedColor name="AccentColor">
-            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="customWhite">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8901960784313725" green="0.30588235294117649" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

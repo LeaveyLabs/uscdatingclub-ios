@@ -18,6 +18,7 @@ private let familyName = "ChivoMono-Medium"
 enum AppFont: String {
     case light = "_Light"
     case regular = "_Regular"
+    case medium = ""
     case bold = "_Bold"
     case italic = "Italic"
 

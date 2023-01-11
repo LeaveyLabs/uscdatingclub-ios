@@ -17,6 +17,8 @@ class EnterNumberVC: KUIViewController, UITextFieldDelegate {
     @IBOutlet weak var continueButton: SimpleButton!
     @IBOutlet weak var enterNumberTextFieldWrapperView: UIView!
     
+    @IBOutlet var titleLabel: UILabel!
+    
     var isValidInput: Bool! {
         didSet {
             continueButton.internalButton.isEnabled = isValidInput
@@ -47,6 +49,8 @@ class EnterNumberVC: KUIViewController, UITextFieldDelegate {
         setupEnterNumberTextField()
         setupContinueButton()
         setupBackButton()
+        
+        titleLabel.font = AppFont.bold.size(30)
     }
     
     override func viewWillAppear(_ animated: Bool) {

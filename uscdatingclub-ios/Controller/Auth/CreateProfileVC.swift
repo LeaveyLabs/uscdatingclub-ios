@@ -28,6 +28,8 @@ class CreateProfileVC: KUIViewController, UITextFieldDelegate {
     @IBOutlet weak var headerSpacingView: UIView!
     @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
     
+    @IBOutlet var titleLabel: UILabel!
+    
     var imagePicker: ImagePicker!
     
     var isValidInput: Bool! {
@@ -71,6 +73,7 @@ class CreateProfileVC: KUIViewController, UITextFieldDelegate {
         setupHeaderAndImageBasedOnScreenSize()
         firstNameTextField.becomeFirstResponder()
         setupIndicatorViews()
+        titleLabel.font = AppFont.bold.size(30)
     }
     
     override func viewWillAppear(_ animated: Bool) {

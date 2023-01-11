@@ -31,11 +31,13 @@ class ConnectSpectrumCell: UITableViewCell {
     func configure(title: String, matchName: String, avgPercent: CGFloat, youPercent: CGFloat, matchPercent: CGFloat, shouldDisplayLabels: Bool) {
         titleLabel.text = title
         titleLabel.font = AppFont.bold.size(18)
-        youLabel.font = AppFont.light.size(14)
-        avgLabel.font = AppFont.light.size(14)
-        matchLabel.font = AppFont.light.size(14)
+        youLabel.font = AppFont.medium.size(14)
+        avgLabel.font = AppFont.medium.size(14)
+        matchLabel.font = AppFont.medium.size(14)
         
-        let avgPercent = CGFloat.random(in: 20..<40)
+        backgroundLineView.backgroundColor = .customWhite.withAlphaComponent(0.5)
+        avgLabel.textColor = .customWhite.withAlphaComponent(0.7)
+        
         var youPercent = youPercent
         var matchPercent = matchPercent
 

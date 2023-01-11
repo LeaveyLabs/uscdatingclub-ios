@@ -11,7 +11,8 @@ class UpdateAvailableVC: UIViewController {
     
     @IBOutlet var updateButton: SimpleButton!
     @IBOutlet var dismissButton: SimpleButton!
-    
+    @IBOutlet var titleLabel: UILabel!
+
     @IBOutlet var featureView1: FeatureView!
     @IBOutlet var featureView2: FeatureView!
     @IBOutlet var featureView3: FeatureView!
@@ -31,6 +32,7 @@ class UpdateAvailableVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.font = AppFont.bold.size(30)
         setupButtons()
         for i in 0..<features.count {
             featureViews[i].configure(features[i])

@@ -33,6 +33,8 @@ class FeatureView: UIView {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(contentView)
+        
+        featureTitleLabel.font = AppFont.bold.size(25)
     }
 }
 

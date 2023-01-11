@@ -12,6 +12,7 @@ class PermissionsVC: UIViewController {
     @IBOutlet var notificationsButton: SimpleButton!
     @IBOutlet var locationButton: SimpleButton!
     @IBOutlet var backgroundRefreshButton: SimpleButton!
+    @IBOutlet var titleLabel: UILabel!
 
     var goodToGo: Bool {
         locationButton.internalButton.backgroundColor == .customGreen && notificationsButton.internalButton.backgroundColor == .customGreen
@@ -28,6 +29,7 @@ class PermissionsVC: UIViewController {
         super.viewDidLoad()
         setupButtons()
         rerender()
+        titleLabel.font = AppFont.bold.size(30)
         
         NotificationCenter.default.addObserver(self, selector: #selector(delayedRerender), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(delayedRerender), name: .locationStatusDidUpdate, object: nil)

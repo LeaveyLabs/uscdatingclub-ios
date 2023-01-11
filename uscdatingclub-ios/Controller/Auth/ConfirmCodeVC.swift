@@ -113,6 +113,7 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
     
     func setupLabel() {
         sentToLabel.text! += recipient
+        titleLabel.font = AppFont.bold.size(30)
     }
     
     //MARK: - User Interaction

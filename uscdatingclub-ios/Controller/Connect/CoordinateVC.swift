@@ -50,9 +50,14 @@ class CoordinateVC: UIViewController {
     }
     
     func setupLabels() {
-        nameLabel.text = "Mei"
+        nameLabel.text = matchInfo.userName
         timeLabel.text = matchInfo.timeLeftString
         timeSublabel.text = "left to connect"
+        
+        nameLabel.font = AppFont.bold.size(22)
+        timeLabel.font = AppFont.bold.size(40)
+        timeSublabel.font = AppFont.light.size(16)
+        locationLabel.font = AppFont.bold.size(40)
     }
     
     func startTimer() {

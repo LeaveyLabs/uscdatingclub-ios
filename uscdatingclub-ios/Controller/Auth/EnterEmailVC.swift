@@ -13,7 +13,8 @@ class EnterEmailVC: KUIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var enterEmailTextField: UITextField!
     @IBOutlet weak var continueButton: SimpleButton!
-     
+    @IBOutlet var titleLabel: UILabel!
+
     var isValidInput: Bool! {
         didSet {
             continueButton.internalButton.isEnabled = isValidInput
@@ -45,6 +46,7 @@ class EnterEmailVC: KUIViewController, UITextFieldDelegate {
         setupEnterEmailTextField()
         setupContinueButton() //uncomment this button for standard button behavior, where !isEnabled greys it out
         setupBackButton()
+        titleLabel.font = AppFont.bold.size(30)
     }
     
     override func viewWillAppear(_ animated: Bool) {

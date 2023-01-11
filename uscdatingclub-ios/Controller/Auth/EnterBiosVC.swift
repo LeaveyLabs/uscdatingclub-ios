@@ -46,7 +46,8 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
 //    @IBOutlet weak var dobTextField: UITextField!
     
     @IBOutlet weak var continueButton: SimpleButton!
-    
+    @IBOutlet var titleLabel: UILabel!
+
     var isValidInput: Bool! {
         didSet {
             continueButton.internalButton.isEnabled = isValidInput
@@ -76,6 +77,7 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
         shouldNotAnimateKUIAccessoryInputView = true
         setupTextFields()
         setupContinueButton()
+        titleLabel.font = AppFont.bold.size(30)
     }
 
     override func viewDidAppear(_ animated: Bool) {

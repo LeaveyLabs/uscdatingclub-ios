@@ -17,7 +17,8 @@ class HowItWorksVC: UIViewController {
     
     @IBOutlet var gotItButton: SimpleButton!
     @IBOutlet var tableView: UITableView!
-    
+    @IBOutlet var titleLabel: UILabel!
+
     let coreFeatures: [HowItWorksItem] = [
         HowItWorksItem(image: UIImage(systemName: "testtube.2")!,
                        title: "take the test",
@@ -40,6 +41,7 @@ class HowItWorksVC: UIViewController {
         super.viewDidLoad()
         setupButtons()
         setupTableView()
+        titleLabel.font = AppFont.bold.size(30)
     }
     
     //MARK: - Setup
