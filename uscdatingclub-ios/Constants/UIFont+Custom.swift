@@ -19,6 +19,7 @@ enum AppFont: String {
     case light = "_Light"
     case regular = "_Regular"
     case medium = ""
+    case semibold = "_Semibold"
     case bold = "_Bold"
     case italic = "Italic"
 

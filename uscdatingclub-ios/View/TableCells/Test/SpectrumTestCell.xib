@@ -20,8 +20,8 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="openness to new experiences" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dd6-PW-s6i">
-                        <rect key="frame" x="20" y="40" width="313" height="26.333333333333329"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
+                        <rect key="frame" x="20" y="40" width="313" height="25.666666666666671"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                         <color key="textColor" name="customWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -40,17 +40,17 @@
                         </constraints>
                     </view>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6YV-Ds-tJY">
-                        <rect key="frame" x="20" y="118.33333333333333" width="313" height="2"/>
+                        <rect key="frame" x="20" y="117.66666666666667" width="313" height="2"/>
                         <color key="backgroundColor" name="customWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="2" id="Hra-s5-Qwv"/>
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jJD-m2-nuv">
-                        <rect key="frame" x="20" y="73.666666666666686" width="313" height="91.333333333333314"/>
+                        <rect key="frame" x="20" y="72.333333333333314" width="313" height="92.666666666666686"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q99-On-I7l">
-                                <rect key="frame" x="0.0" y="23.333333333333329" width="45" height="45"/>
+                                <rect key="frame" x="0.0" y="24" width="45" height="45"/>
                                 <color key="backgroundColor" name="customWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Q99-On-I7l" secondAttribute="height" id="DBb-Co-ZNP"/>
@@ -62,7 +62,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uo1-aa-EyC">
-                                <rect key="frame" x="58" y="28.333333333333329" width="35" height="35"/>
+                                <rect key="frame" x="58" y="29" width="35" height="35"/>
                                 <color key="backgroundColor" name="customWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="xH0-uZ-6Bd"/>
@@ -73,7 +73,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Wc-tI-l3d">
-                                <rect key="frame" x="105.66666666666667" y="32.333333333333329" width="27.000000000000014" height="27"/>
+                                <rect key="frame" x="105.66666666666667" y="33" width="27.000000000000014" height="27"/>
                                 <color key="backgroundColor" name="customWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="27" id="pzc-3Q-g44"/>
@@ -84,7 +84,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6oy-Yf-Qaq">
-                                <rect key="frame" x="145.66666666666666" y="34.666666666666657" width="22" height="22"/>
+                                <rect key="frame" x="145.66666666666666" y="35.333333333333343" width="22" height="22"/>
                                 <color key="backgroundColor" name="customWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="6oy-Yf-Qaq" secondAttribute="height" id="Lli-SA-4TU"/>
@@ -96,7 +96,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yku-hd-GGc">
-                                <rect key="frame" x="180.33333333333334" y="32.333333333333329" width="27" height="27"/>
+                                <rect key="frame" x="180.33333333333334" y="33" width="27" height="27"/>
                                 <color key="backgroundColor" name="customWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="27" id="0Q2-ig-qV3"/>
@@ -107,7 +107,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0Z-Mw-6gW">
-                                <rect key="frame" x="220.33333333333334" y="28.333333333333329" width="35" height="35"/>
+                                <rect key="frame" x="220.33333333333334" y="29" width="35" height="35"/>
                                 <color key="backgroundColor" name="customWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="w4P-kc-TIP"/>
@@ -118,7 +118,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p6q-K6-gfN">
-                                <rect key="frame" x="268" y="23.333333333333329" width="45" height="45"/>
+                                <rect key="frame" x="268" y="24" width="45" height="45"/>
                                 <color key="backgroundColor" name="customWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="bZ5-41-ipg"/>

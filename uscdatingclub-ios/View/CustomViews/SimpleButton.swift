@@ -13,6 +13,7 @@ class SimpleButton: UIView {
     
     //UI
     @IBOutlet weak var internalButton: UIButton!
+    @IBOutlet weak var internalButtonHeightAnchor: NSLayoutConstraint!
     
     //MARK: - Constructors
         
@@ -37,7 +38,7 @@ class SimpleButton: UIView {
     func setupButtons() {
         internalButton.titleLabel?.numberOfLines = 0
         internalButton.titleLabel?.textAlignment = .center
-        internalButton.titleLabel?.font = AppFont.bold.size(20)
+        internalButton.titleLabel?.font = AppFont.semibold.size(20)
     }
         
     //MARK: - User Interaction

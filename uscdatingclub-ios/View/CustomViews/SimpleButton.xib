@@ -21,6 +21,9 @@
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OBV-qT-bwj">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="ccB-lS-9yr"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                     <color key="tintColor" name="customBlack"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>

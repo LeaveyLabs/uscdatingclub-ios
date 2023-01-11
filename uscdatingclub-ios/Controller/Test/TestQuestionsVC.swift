@@ -59,6 +59,7 @@ class TestQuestionsVC: UIViewController {
     
     func setupHeaderFooter() {
         titleLabel.text = TestPageTitles[testPage]
+        titleLabel.font = AppFont.bold.size(20)
     }
     
     func setupTableView() {
@@ -264,8 +265,8 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
         
         //when a selection question is appearing or disappearing, need a slight delay so that expanded UI's constraints can update
         let beforeQ = questions[questionIndex] as? SelectionTestQuestion
-        let q = questions[questionIndex] as? SelectionTestQuestion
-        if (beforeQ != nil || q != nil) && !redo {
+        let selectionQ = questions[questionIndex] as? SelectionTestQuestion
+        if (beforeQ != nil || selectionQ != nil) && !redo {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 self.scrollDownIfNecessary(prevQuestionId: prevQuestionId, redo: true)
             }
@@ -276,7 +277,12 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
         let questionBottomY = tableView.convert(questionBottomYWithinFeed, to: view).maxY
 
         let totalHeight = view.bounds.height + view.safeAreaInsets.top + view.safeAreaInsets.bottom
-        let desiredOffset = questionBottomY - totalHeight/2
+        let desiredOffset: CGFloat
+        if (selectionQ != nil) {
+            desiredOffset = questionBottomY - totalHeight/3
+        } else {
+            desiredOffset = questionBottomY - totalHeight/1.4
+        }
 
         if desiredOffset < 50 { return } //don't go in wrong direction, and don't scroll if a small amount
         

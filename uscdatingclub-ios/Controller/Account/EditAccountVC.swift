@@ -61,6 +61,7 @@ class EditAccountVC: UIViewController {
         setupButtons()
         setupTableView()
         titleLabel.text = "edit account"
+        titleLabel.font = AppFont.bold.size(20)
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapBackground)))
     }
     
@@ -90,6 +91,7 @@ class EditAccountVC: UIViewController {
         saveButton.setTitleColor(.customWhite.withAlphaComponent(0.5), for: .disabled)
         saveButton.setTitle("save", for: .normal)
         saveButton.setTitle("", for: .disabled)
+        saveButton.titleLabel?.font = AppFont.regular.size(16)
     }
     
     //MARK: - Interaction

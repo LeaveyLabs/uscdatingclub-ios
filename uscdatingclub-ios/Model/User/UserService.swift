@@ -140,6 +140,13 @@ class UserService: NSObject {
         //TODO: update the authedUser
         Task { await self.saveUserToFilesystem() }
     }
+    
+    func updateTestResponses(newResponses: [Int:Any]) async throws {
+        try await UserAPI.postSurveyAnswers(email: authedUser.email, surveyResponses: [])
+        //TODO: update the authedUser
+        //is backend not returning the updatedUser anymore?
+        Task { await self.saveUserToFilesystem() }
+    }
 
     // No need to return new profilePic bc it is updated globally
 //    func updateProfilePic(to newProfilePic: UIImage) async throws {

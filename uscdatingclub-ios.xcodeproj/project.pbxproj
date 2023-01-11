@@ -74,6 +74,8 @@
 		478BECD729662C8100930DAF /* TestContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECD629662C8100930DAF /* TestContext.swift */; };
 		47A1C8EB296E2AD900F8B4D6 /* UIFont+Override.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A1C8EA296E2AD900F8B4D6 /* UIFont+Override.swift */; };
 		47A1C8ED296E414600F8B4D6 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A1C8EC296E414600F8B4D6 /* Match.swift */; };
+		47A24A25296F71250077AB11 /* SimpleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A24A23296F71250077AB11 /* SimpleTitleCell.swift */; };
+		47A24A26296F71250077AB11 /* SimpleTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47A24A24296F71250077AB11 /* SimpleTitleCell.xib */; };
 		47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A80614295F8D23001DEE64 /* EnterBiosVC.swift */; };
 		47B60B0A296C834600657C1D /* ConnectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B09296C834600657C1D /* ConnectManager.swift */; };
 		47B60B0C296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B0B296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift */; };
@@ -299,6 +301,8 @@
 		478BECD629662C8100930DAF /* TestContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestContext.swift; sourceTree = "<group>"; };
 		47A1C8EA296E2AD900F8B4D6 /* UIFont+Override.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Override.swift"; sourceTree = "<group>"; };
 		47A1C8EC296E414600F8B4D6 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		47A24A23296F71250077AB11 /* SimpleTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTitleCell.swift; sourceTree = "<group>"; };
+		47A24A24296F71250077AB11 /* SimpleTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleTitleCell.xib; sourceTree = "<group>"; };
 		47A80614295F8D23001DEE64 /* EnterBiosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterBiosVC.swift; sourceTree = "<group>"; };
 		47B60B09296C834600657C1D /* ConnectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectManager.swift; sourceTree = "<group>"; };
 		47B60B0B296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate+Heading.swift"; sourceTree = "<group>"; };
@@ -572,6 +576,30 @@
 				47C40F5E295CBAF0007C27F0 /* Device.swift */,
 			);
 			path = Device;
+			sourceTree = "<group>";
+		};
+		47A24A21296F70FC0077AB11 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				478BECBC2963755000930DAF /* SpectrumTestCell.swift */,
+				478BECBD2963755000930DAF /* SpectrumTestCell.xib */,
+				47582895296A82C700F10415 /* SelectionHeaderTestCell.swift */,
+				47582896296A82C700F10415 /* SelectionHeaderTestCell.xib */,
+				47582899296A82D900F10415 /* SelectionTestCell.swift */,
+				4758289A296A82D900F10415 /* SelectionTestCell.xib */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		47A24A22296F71040077AB11 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				47B6B4BA296B959C00539353 /* SimpleEntryCell.swift */,
+				47B6B4BB296B959C00539353 /* SimpleEntryCell.xib */,
+				47A24A23296F71250077AB11 /* SimpleTitleCell.swift */,
+				47A24A24296F71250077AB11 /* SimpleTitleCell.xib */,
+			);
+			path = Account;
 			sourceTree = "<group>";
 		};
 		47A80613295F8CBD001DEE64 /* Misc */ = {
@@ -945,17 +973,11 @@
 		47DE3226295CC5A00063C55A /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
+				47A24A22296F71040077AB11 /* Account */,
+				47A24A21296F70FC0077AB11 /* Test */,
 				47DC97A7296E000900A374B5 /* Connect */,
 				476FD86C295E4A1F0014DD42 /* HowItWorksCell.swift */,
 				476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */,
-				478BECBC2963755000930DAF /* SpectrumTestCell.swift */,
-				478BECBD2963755000930DAF /* SpectrumTestCell.xib */,
-				47582895296A82C700F10415 /* SelectionHeaderTestCell.swift */,
-				47582896296A82C700F10415 /* SelectionHeaderTestCell.xib */,
-				47582899296A82D900F10415 /* SelectionTestCell.swift */,
-				4758289A296A82D900F10415 /* SelectionTestCell.xib */,
-				47B6B4BA296B959C00539353 /* SimpleEntryCell.swift */,
-				47B6B4BB296B959C00539353 /* SimpleEntryCell.xib */,
 				47B6B4C0296B99E600539353 /* SimpleButtonCell.swift */,
 				47B6B4C1296B99E600539353 /* SimpleButtonCell.xib */,
 			);
@@ -1229,6 +1251,7 @@
 				478BECC129647FC000930DAF /* matchsound.wav in Resources */,
 				47C40EF3295CB931007C27F0 /* LaunchScreen.storyboard in Resources */,
 				47C40F17295CBAB7007C27F0 /* GoogleService-Info.plist in Resources */,
+				47A24A26296F71250077AB11 /* SimpleTitleCell.xib in Resources */,
 				47B6B4BD296B959C00539353 /* SimpleEntryCell.xib in Resources */,
 				478BECBF2963755000930DAF /* SpectrumTestCell.xib in Resources */,
 				4758289C296A82D900F10415 /* SelectionTestCell.xib in Resources */,
@@ -1349,6 +1372,7 @@
 				4731F530295CF7DB0013F626 /* UIPageViewController+GoTo.swift in Sources */,
 				476FD861295DEDCF0014DD42 /* UIFont+Custom.swift in Sources */,
 				47C41076295CC0AB007C27F0 /* CLLocationCoordinate+Distance.swift in Sources */,
+				47A24A25296F71250077AB11 /* SimpleTitleCell.swift in Sources */,
 				4731F52C295CE0B40013F626 /* AboutVC.swift in Sources */,
 				47DE321A295CC52F0063C55A /* UserService.swift in Sources */,
 				4731F511295CD4870013F626 /* UITextField+Padding.swift in Sources */,

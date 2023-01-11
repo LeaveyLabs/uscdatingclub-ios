@@ -43,7 +43,8 @@ enum Constants {
             static let SelectionHeaderCell = "SelectionHeaderTestCell"
             static let SelectionCell = "SelectionTestCell"
             static let SimpleButtonCell = "SimpleButtonCell"
-            static let SimpleEntryCell = "SimplezntryCell"
+            static let SimpleEntryCell = "SimpleEntryCell"
+            static let SimpleTitleCell = "SimpleTitleCell"
             //Match
             static let ConnectHeaderCell = "ConnectHeaderCell"
             static let ConnectTitleCell = "ConnectTitleCell"

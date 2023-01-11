@@ -11,8 +11,13 @@ class SimpleButtonCell: UITableViewCell {
 
     @IBOutlet weak var simpleButton: SimpleButton!
     @IBOutlet weak var footerLabel: UILabel!
+    @IBOutlet weak var buttonHeightAnchor: NSLayoutConstraint!
     
     func configure(title: String, systemImage: String, footerText: String? = nil, onButtonPress: @escaping () -> Void) {
+        if title.rangeOfCharacter(from: .newlines) != nil {
+            buttonHeightAnchor.constant = 72
+        }
+        
         if let footerText {
             footerLabel.text = footerText
         } else {

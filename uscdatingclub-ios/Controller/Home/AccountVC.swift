@@ -9,12 +9,13 @@ import UIKit
 
 class AccountVC: UIViewController, PageVCChild {
     
+    //MARK: - Properties
+    //UI
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var titleLabel: UILabel!
     @IBOutlet var radarButton: UIButton!
     var pageVCDelegate: PageVCDelegate!
     
-    @IBOutlet var retakeTestButton: SimpleButton!
-    @IBOutlet var editAccountButton: SimpleButton!
-    @IBOutlet var nameLabel: UILabel!
 
 
     //MARK: - Initialization
@@ -28,19 +29,34 @@ class AccountVC: UIViewController, PageVCChild {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtons()
-        nameLabel.text = UserService.singleton.getFirstLastName()
+        setupLabels()
+        setupTableView()
     }
     
     //MARK: - Setup
     
+    func setupLabels() {
+        titleLabel.font = AppFont.bold.size(20)
+    }
+    
+    func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .clear
+        tableView.estimatedRowHeight = 60
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.showsVerticalScrollIndicator = true
+        tableView.indicatorStyle = .white
+        tableView.separatorStyle = .none
+
+        tableView.register(UINib(nibName: Constants.SBID.Cell.SimpleTitleCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SimpleTitleCell)
+        tableView.register(UINib(nibName: Constants.SBID.Cell.SimpleButtonCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SimpleButtonCell)
+    }
+    
     func setupButtons() {
-        retakeTestButton.configure(title: "retake the\ncompatibility test", systemImage: "testtube.2")
-        editAccountButton.configure(title: "edit account", systemImage: "gearshape")
         radarButton.addAction(.init(handler: { [self] _ in
             pageVCDelegate.didPressBackwardButton()
         }), for: .touchUpInside)
-        retakeTestButton.internalButton.addTarget(self, action: #selector(retakeTestButtonDidPressed), for: .touchUpInside)
-        editAccountButton.internalButton.addTarget(self, action: #selector(editAccountButtonDidPressed), for: .touchUpInside)
     }
     
     //MARK: - Interaction
@@ -63,6 +79,57 @@ class AccountVC: UIViewController, PageVCChild {
         let nav = UINavigationController(rootViewController: TestTextVC.create(type: .welcome))
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true)
+    }
+    
+}
+
+extension AccountVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }
+}
+
+extension AccountVC: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.section {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SimpleTitleCell, for: indexPath) as! SimpleTitleCell
+            cell.configure(title: UserService.singleton.getFirstLastName())
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SimpleButtonCell, for: indexPath) as! SimpleButtonCell
+            switch indexPath.row {
+            case 0:
+                cell.configure(title: "retake the\ncompatibility test", systemImage: "testtube.2", footerText: nil) {
+                    self.retakeTestButtonDidPressed()
+                }
+            case 1:
+                cell.configure(title: "edit account", systemImage: "gearshape") {
+                    self.editAccountButtonDidPressed()
+                }
+            default:
+                fatalError()
+            }
+            return cell
+        default:
+            fatalError()
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return section == 0 ? 1 : 2
     }
     
 }

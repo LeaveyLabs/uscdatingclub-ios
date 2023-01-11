@@ -37,6 +37,7 @@ class RadarVC: UIViewController, PageVCChild {
         [firstCircleView, secondCircleView]
     }
     
+    @IBOutlet var titleLabel: UILabel!
     @IBOutlet var arrowView: UIImageView!
     @IBOutlet var aboutButton: UIButton!
     @IBOutlet var accountButton: UIButton!
@@ -59,7 +60,7 @@ class RadarVC: UIViewController, PageVCChild {
         super.viewDidLoad()
         setupCircleViews()
         setupButtons()
-        
+        titleLabel.font = AppFont.bold.size(20)
         setupPermissions()
     }
     

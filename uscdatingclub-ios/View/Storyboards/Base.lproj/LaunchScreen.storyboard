@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uscdatingclub-title-threelines" translatesAutoresizingMaskIntoConstraints="NO" id="t0o-Kc-Vyx">
-                                <rect key="frame" x="151.66666666666666" y="376" width="100" height="100"/>
+                                <rect key="frame" x="156.66666666666666" y="381" width="90" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="t0o-Kc-Vyx" secondAttribute="height" id="KGo-sv-hRF"/>
-                                    <constraint firstAttribute="width" constant="100" id="zTx-oa-dgU"/>
+                                    <constraint firstAttribute="width" constant="90" id="zTx-oa-dgU"/>
                                 </constraints>
                             </imageView>
                         </subviews>

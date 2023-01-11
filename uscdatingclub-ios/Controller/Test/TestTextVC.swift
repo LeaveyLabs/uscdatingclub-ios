@@ -50,8 +50,8 @@ class TestTextVC: UIViewController {
         case .submitting:
             Task {
                 do {
-                    await Thread.sleep(forTimeInterval: 2)
-//                    try await UserService.singleton.updateTestResults()
+                    try await UserService.singleton.updateTestResponses(newResponses: TestContext.testResponses)
+                    try await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)
                     TestContext.reset()
                     DispatchQueue.main.async { [self] in
                         testTextType = .finished
@@ -69,22 +69,26 @@ class TestTextVC: UIViewController {
     //MARK: - Setup
     
     func setupUI() {
+        secondaryLabel.font = AppFont.regular.size(18)
+        secondaryLabel.textColor = .customWhite.withAlphaComponent(0.7)
+        primaryLabel.font = AppFont.bold.size(26)
         switch testTextType {
         case .welcome:
             cancelButton.isHidden = isFirstTest
             activityIndicatorView.stopAnimating()
             primaryLabel.text = "the compatibility test"
-            secondaryLabel.text = "(no cheating allowed)"
+            secondaryLabel.text = "you got this"
             primaryButton.configure(title: "begin", systemImage: "")
         case .submitting:
             cancelButton.isHidden = true
             activityIndicatorView.startAnimating()
             primaryLabel.text = "submitting responses"
-            secondaryLabel.alpha = 0
+            secondaryLabel.text = "you are an incredible individual"
             primaryButton.configure(title: "aye", systemImage: "")
             primaryButton.internalButton.isEnabled = false
             primaryButton.alpha = 0
         case .finished:
+            //TODO: send them to "permissionVC" after this
             if isFirstTest {
                 secondaryLabel.text = "welcome to the usc dating club."
                 UIView.animate(withDuration: 2) { [self] in
