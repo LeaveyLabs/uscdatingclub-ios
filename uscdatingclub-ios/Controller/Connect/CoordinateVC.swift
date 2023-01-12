@@ -75,7 +75,7 @@ class CoordinateVC: UIViewController {
                                primaryActionHandler: {
             //end the match
             DispatchQueue.main.async {
-                transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
+                self.finish()
             }
         },
                                secondaryActionTitle: "nevermind",
@@ -98,7 +98,7 @@ class CoordinateVC: UIViewController {
                                primaryActionHandler: {
             //block user
             DispatchQueue.main.async {
-                transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
+                self.finish()
             }
         },
                                secondaryActionTitle: "nevermind",
@@ -106,14 +106,44 @@ class CoordinateVC: UIViewController {
             //do nothing
         }, on: SceneDelegate.visibleViewController!)
     }
+    
+    //MARK: - Helpers
 
+    @MainActor
+    func finish() {
+        connectManager.endConnection()
+        transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
+    }
+    
 }
+
+//MARK: - ConnectManagerDelegate
 
 extension CoordinateVC: ConnectManagerDelegate {
     
     func newTimeElapsed() {
         DispatchQueue.main.async { [self] in
+            switch matchInfo.elapsedTime.minutes {
+            case 0:
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            case 1:
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            case 2:
+                UIImpactFeedbackGenerator(style: matchInfo.elapsedTime.seconds >= 50 ? .rigid : .heavy).impactOccurred()
+            default:
+                break
+            }
             timeLabel.text = matchInfo.timeLeftString
+//            print("NEW TIME ELAPSED")
+//            self.timeLeftLabel.alpha = 0.5
+//            self.timeLeftLabel.textColor = .customWhite
+//            UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear) {
+//                print("START ANIMATE")
+//                self.timeLeftLabel.alpha = 1
+//                self.timeLeftLabel.textColor = .blue
+//            } completion: { completed in
+//                print("FINISH ANIMATE")
+//            }
         }
     }
     
@@ -123,7 +153,7 @@ extension CoordinateVC: ConnectManagerDelegate {
                                primaryActionTitle: "return home",
                                primaryActionHandler: {
             DispatchQueue.main.async {
-                transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
+                self.finish()
             }
         }, on: self)
     }

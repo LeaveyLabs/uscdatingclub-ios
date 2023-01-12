@@ -83,6 +83,13 @@ class MatchFoundTableVC: UIViewController {
 //            //do nothing
 //        }, on: self)
 //    }
+    
+    //MARK: - Helpers
+    
+    func finish() {
+        connectManager.endConnection()
+        transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
+    }
 
 }
 
@@ -207,7 +214,7 @@ extension MatchFoundTableVC: ConnectManagerDelegate {
                                primaryActionTitle: "return home",
                                primaryActionHandler: {
             DispatchQueue.main.async {
-                transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
+                self.finish()
             }
         }, on: self)
     }
