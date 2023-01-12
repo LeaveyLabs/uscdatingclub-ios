@@ -128,6 +128,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 //                } else {
 //                    //if we do have a converation open, this code is handled in Conversation
 //                }
+            case .accept:
+                break
             }
         }
 //        catch {
