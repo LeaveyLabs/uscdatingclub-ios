@@ -72,14 +72,14 @@ class RadarVC: UIViewController, PageVCChild {
             if !enabled {
                 DispatchQueue.main.async { [self] in
                     isLocationServicesEnabled = false
-                    renderIsActive()
+                    renderUI()
                 }
             }
         })
         
         NotificationCenter.default.addObserver(forName: .permissionsWereRevoked, object: nil, queue: .main) { [self] notification in
             isLocationServicesEnabled = false
-            renderIsActive()
+            renderUI()
         }
     }
     

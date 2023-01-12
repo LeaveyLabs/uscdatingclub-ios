@@ -7,7 +7,11 @@
 
 import UserNotifications
 import UIKit
+import FirebaseAnalytics
 
+//MARK: - Structs
+
+//Internal Notifications
 extension Notification.Name {
     static let locationStatusDidUpdate = Notification.Name("locationStatusDidUpdate")
     static let remoteConfigDidActivate = Notification.Name("remoteConfigDidActivate")
@@ -16,21 +20,35 @@ extension Notification.Name {
     static let matchReceived = Notification.Name("matchReceived")
 }
 
+//Remote Notifications
+enum NotificationTypes: String, CaseIterable {
+    case match = "match"
+    case accept = "accept"
+}
+
+extension Notification {
+    enum extra: String {
+        case type = "type"
+        case data = "data"
+    }
+}
+
+struct NotificationResponseHandler {
+    var notificationType: NotificationTypes
+    var newMatchPartner: MatchPartner?
+    var newMatchAcceptance: MatchAcceptance?
+}
+
+//MARK: - NotificationsManager
+
 class NotificationsManager: NSObject {
     
     private var center: UNUserNotificationCenter = UNUserNotificationCenter.current()
     static let shared = NotificationsManager()
+    var currentlyLaunchedAppNotification: UNNotification?
     
     private override init() {
         super.init()
-    }
-    
-    //MARK: - Posting
-    
-    func post() {
-//        NotificationCenter.default.post(name: .newDM,
-//                                        object: nil,
-//                                        userInfo:[Notification.Key.key1: "value", "key1": 1234])
     }
     
     //MARK: - Permission and Status
@@ -74,26 +92,89 @@ class NotificationsManager: NSObject {
         })
     }
     
-    func handleExistingNotifications() {
+    //we just need to make sure to also check the currently launched notification, and make sure we don't handle anything newer than that
+
+    func checkPreviouslyReceivedNotifications() {
         Task {
             guard await isNotificationsEnabled() else { return }
-            
-//            let notificationRequests = await UNUserNotificationCenter.current().pendingNotificationRequests() //this is just for local notifications
+            print("most recent saved notification", mostRecentSavedNotification())
             
             //The below function returns all the notifications currently visible in the NotificationCenter on their device
             //As soon as the user clicks on a notification to open the app, that notification is gone from the notification center (and thus won't be returned from the below function). That action should be handled in AppDelegate
-            let notifications = await UNUserNotificationCenter.current().deliveredNotifications()
-            guard notifications.count > 0 else { return }
+            let notifications = await center.deliveredNotifications().sorted(by: { $0.date.isMoreRecentThan($1.date)} )
+                        
+            let threeMinsAgo = Calendar.current.date(byAdding: .minute, value: -3, to: Date())!
+            guard let mostRecentReceivedNotif = notifications.first ?? mostRecentSavedNotification(), mostRecentReceivedNotif.date.isMoreRecentThan(threeMinsAgo) else {
+                return
+            }
             print("opened app with delivered notifications:", notifications)
+
+            if let currentlyLaunchedAppNotification {
+                guard mostRecentReceivedNotif.date.isMoreRecentThan(currentlyLaunchedAppNotification.date) else {
+                    return
+                }
+            }
+                        
+            let notificationResponseHandler = generateNotificationResponseHandler(mostRecentReceivedNotif)
             
-//            DispatchQueue.main.async {
-//                UIApplication.shared.applicationIconBadgeNumber = 0
-//            }
-//            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+            DispatchQueue.main.async {
+                let loadingVC = LoadingVC.create(notificationResponseHandler: notificationResponseHandler)
+                transitionToViewController(loadingVC, duration: 0)
+                UIApplication.shared.applicationIconBadgeNumber = 0
+            }
+            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         }
     }
     
-    //TODO: save matchInfo notification in userDefaults as "mostRecentMatchInfo" after receiving it from anywhere in the code
-    //if it appears you don't have any notifications, as one last check, check userDefaults to make sure you don't have an existing match
+    func generateNotificationResponseHandler(_ notification: UNNotification) -> NotificationResponseHandler? {
+        guard
+            let userInfo = notification.request.content.userInfo as? [String : AnyObject],
+            let notificationTypeString = userInfo[Notification.extra.type.rawValue] as? String,
+            let notificationType = NotificationTypes.init(rawValue: notificationTypeString)
+        else { return nil }
+        
+        saveNotification(notification)
+        
+        do {
+            var handler = NotificationResponseHandler(notificationType: notificationType)
+            switch notificationType {
+                case .match:
+                    guard let json = userInfo[Notification.extra.data.rawValue] else { return nil }
+                    let data = try JSONSerialization.data(withJSONObject: json as Any, options: .prettyPrinted)
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    handler.newMatchPartner = try decoder.decode(MatchPartner.self, from: data)
+                case .accept:
+                    guard let json = userInfo[Notification.extra.data.rawValue] else { return nil }
+                    let data = try JSONSerialization.data(withJSONObject: json as Any, options: .prettyPrinted)
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    handler.newMatchAcceptance = try decoder.decode(MatchAcceptance.self, from: data)
+            }
+            return handler
+        } catch {
+            let analyticsId = "notiifcation"
+            let analyticsTitle = "displayingVCafterRemoteNotificationFailed"
+            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+              AnalyticsParameterItemID: "id-\(analyticsId)",
+              AnalyticsParameterItemName: analyticsTitle,
+            ])
+            return nil
+        }
+    }
+    
+    //MARK: - Local Storage
+    
+    let MostRecentNotifiationStorageKey: String = "mostRecentNotification"
+    
+    func mostRecentSavedNotification() -> UNNotification? {
+        return UserDefaults.value(forKey: MostRecentNotifiationStorageKey) as? UNNotification ?? nil
+    }
+    
+    func saveNotification(_ notification: UNNotification) {
+        Task {
+            UserDefaults.setValue(notification, forKey: MostRecentNotifiationStorageKey)
+        }
+    }
         
 }

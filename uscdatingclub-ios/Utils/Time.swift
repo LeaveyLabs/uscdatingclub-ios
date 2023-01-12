@@ -347,3 +347,11 @@ extension Date {
         return dayAfter.month != month
     }
 }
+
+extension Date {
+    
+    func isMoreRecentThan(_ otherDate: Date) -> Bool {
+        return self.timeIntervalSince1970 > otherDate.timeIntervalSince1970
+    }
+    
+}

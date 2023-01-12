@@ -36,6 +36,7 @@ enum Constants {
             static let Launch = "Launch"
             static let Auth = "Auth"
             static let Misc = "Misc"
+            static let Connect = "Connect"
         }
         struct Cell {
             static let HowItWorksCell = "HowItWorksCell"

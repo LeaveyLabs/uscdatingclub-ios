@@ -76,11 +76,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         print("didFAILtoRegisterForRemoteNotificationsWithError")
     }
         
-    //MARK: - Alert Notifications
+    //MARK: - Notification Handling
     
     //user launched app via a notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         print("launched app via notification")
+        NotificationsManager.shared.currentlyLaunchedAppNotification = response.notification
         handleAppLaunchViaNotification(response)
         completionHandler()
     }
@@ -93,7 +94,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     
     func handleReceivedNotificationWhileInApp(_ notification: UNNotification) async {
-        guard let notificationResponseHandler = generateNotificationResponseHandler(notification) else {
+        guard let notificationResponseHandler = NotificationsManager.shared.generateNotificationResponseHandler(notification) else {
             return
         }
         if let partner = notificationResponseHandler.newMatchPartner {
@@ -106,7 +107,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     
     func handleAppLaunchViaNotification(_ notificationResponse: UNNotificationResponse) {
-        guard let notificationResponseHandler = generateNotificationResponseHandler(notificationResponse.notification) else {
+        guard let notificationResponseHandler = NotificationsManager.shared.generateNotificationResponseHandler(notificationResponse.notification) else {
             return
         }
         let loadingVC = LoadingVC.create()

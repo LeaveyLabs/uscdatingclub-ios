@@ -27,7 +27,7 @@
 //    //MARK: - Initialization
 //
 //    class func create(matchInfo: MatchInfo) -> MatchFoundVC {
-//        let vc = UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.MatchFound) as! MatchFoundVC
+//        let vc = UIStoryboard(name: Constants.SBID.SB.Connect, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.MatchFound) as! MatchFoundVC
 //        vc.matchInfo = matchInfo
 //        vc.connectManager = ConnectManager(matchInfo: matchInfo, delegate: vc)
 //        return vc

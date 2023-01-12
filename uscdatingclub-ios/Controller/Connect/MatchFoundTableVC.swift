@@ -24,7 +24,7 @@ class MatchFoundTableVC: UIViewController {
     //MARK: - Initialization
     
     class func create(matchInfo: MatchInfo) -> MatchFoundTableVC {
-        let vc = UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.MatchFoundTable) as! MatchFoundTableVC
+        let vc = UIStoryboard(name: Constants.SBID.SB.Connect, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.MatchFoundTable) as! MatchFoundTableVC
         vc.matchInfo = matchInfo
         vc.connectManager = ConnectManager(matchInfo: matchInfo, delegate: vc)
         return vc

@@ -79,6 +79,7 @@
 		47A24A26296F71250077AB11 /* SimpleTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47A24A24296F71250077AB11 /* SimpleTitleCell.xib */; };
 		47A24A29297088FF0077AB11 /* SurveyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A24A28297088FF0077AB11 /* SurveyResponse.swift */; };
 		47A24A2B29708D020077AB11 /* SurveyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A24A28297088FF0077AB11 /* SurveyResponse.swift */; };
+		47A24A302970B6160077AB11 /* Connect.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47A24A2F2970B6160077AB11 /* Connect.storyboard */; };
 		47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A80614295F8D23001DEE64 /* EnterBiosVC.swift */; };
 		47B60B0A296C834600657C1D /* ConnectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B09296C834600657C1D /* ConnectManager.swift */; };
 		47B60B0C296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B0B296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift */; };
@@ -125,7 +126,6 @@
 		47C40F79295CBB42007C27F0 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 47C40F78295CBB42007C27F0 /* FirebasePerformance */; };
 		47C40F7B295CBB42007C27F0 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 47C40F7A295CBB42007C27F0 /* FirebaseRemoteConfig */; };
 		47C40F7D295CBB42007C27F0 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 47C40F7C295CBB42007C27F0 /* FirebaseRemoteConfigSwift */; };
-		47C40F8C295CBBBD007C27F0 /* NotificationResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40F80295CBBBD007C27F0 /* NotificationResponseHandler.swift */; };
 		47C40F8E295CBBBD007C27F0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40F83295CBBBD007C27F0 /* Constants.swift */; };
 		47C40F8F295CBBBD007C27F0 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40F84295CBBBD007C27F0 /* RemoteConfig.swift */; };
 		47C40F91295CBBBD007C27F0 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40F87295CBBBD007C27F0 /* Color+Hex.swift */; };
@@ -308,6 +308,7 @@
 		47A24A23296F71250077AB11 /* SimpleTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTitleCell.swift; sourceTree = "<group>"; };
 		47A24A24296F71250077AB11 /* SimpleTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleTitleCell.xib; sourceTree = "<group>"; };
 		47A24A28297088FF0077AB11 /* SurveyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyResponse.swift; sourceTree = "<group>"; };
+		47A24A2F2970B6160077AB11 /* Connect.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Connect.storyboard; sourceTree = "<group>"; };
 		47A80614295F8D23001DEE64 /* EnterBiosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterBiosVC.swift; sourceTree = "<group>"; };
 		47B60B09296C834600657C1D /* ConnectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectManager.swift; sourceTree = "<group>"; };
 		47B60B0B296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate+Heading.swift"; sourceTree = "<group>"; };
@@ -341,7 +342,6 @@
 		47C40F5D295CBAF0007C27F0 /* DeviceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceService.swift; sourceTree = "<group>"; };
 		47C40F5E295CBAF0007C27F0 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		47C40F7E295CBB6A007C27F0 /* uscdatingclub-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "uscdatingclub-ios.entitlements"; sourceTree = "<group>"; };
-		47C40F80295CBBBD007C27F0 /* NotificationResponseHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationResponseHandler.swift; sourceTree = "<group>"; };
 		47C40F83295CBBBD007C27F0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		47C40F84295CBBBD007C27F0 /* RemoteConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
 		47C40F87295CBBBD007C27F0 /* Color+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
@@ -736,7 +736,6 @@
 			isa = PBXGroup;
 			children = (
 				47DE31D5295CC4B40063C55A /* ImagePicker.swift */,
-				47C40F80295CBBBD007C27F0 /* NotificationResponseHandler.swift */,
 			);
 			path = AdditionalFiles;
 			sourceTree = "<group>";
@@ -1014,6 +1013,7 @@
 				47DE3224295CC57B0063C55A /* Auth.storyboard */,
 				47C40EEC295CB930007C27F0 /* Main.storyboard */,
 				47C40EF1295CB931007C27F0 /* LaunchScreen.storyboard */,
+				47A24A2F2970B6160077AB11 /* Connect.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1285,6 +1285,7 @@
 				47DC97AB296E002700A374B5 /* ConnectHeaderCell.xib in Resources */,
 				47582898296A82C800F10415 /* SelectionHeaderTestCell.xib in Resources */,
 				47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */,
+				47A24A302970B6160077AB11 /* Connect.storyboard in Resources */,
 				476FD865295DF89A0014DD42 /* SimpleButton.xib in Resources */,
 				476FD86F295E4A1F0014DD42 /* HowItWorksCell.xib in Resources */,
 				47B6B4C3296B99E600539353 /* SimpleButtonCell.xib in Resources */,
@@ -1414,7 +1415,6 @@
 				4731F514295CD48F0013F626 /* UISearchBar+CenterText.swift in Sources */,
 				47C40F94295CBBBD007C27F0 /* Encodable+Dict.swift in Sources */,
 				47DE3221295CC52F0063C55A /* ProfilePicWrapper.swift in Sources */,
-				47C40F8C295CBBBD007C27F0 /* NotificationResponseHandler.swift in Sources */,
 				4731F504295CD4610013F626 /* UIScrollView+IsAt.swift in Sources */,
 				47BBF9E5296A390600802573 /* UIAlertController+AddImage.swift in Sources */,
 				47DC97AE296E023A00A374B5 /* ConnectTitleCell.swift in Sources */,

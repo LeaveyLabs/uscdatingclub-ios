@@ -30,8 +30,9 @@ class LoadingVC: UIViewController {
     
     //MARK: - Initialization
     
-    class func create() -> LoadingVC {
+    class func create(notificationResponseHandler: NotificationResponseHandler? = nil) -> LoadingVC {
         let vc = UIStoryboard(name: Constants.SBID.SB.Misc, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Loading) as! LoadingVC
+        vc.notificationResponseHandler = notificationResponseHandler
         return vc
     }
     

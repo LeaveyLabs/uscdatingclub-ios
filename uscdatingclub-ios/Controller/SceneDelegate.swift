@@ -61,7 +61,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let loadingVC = LoadingVC.create()
                         
             if let notification = connectionOptions.notificationResponse?.notification,
-               let notificationResponseHandler = generateNotificationResponseHandler(notification) {
+               let notificationResponseHandler = NotificationsManager.shared.generateNotificationResponseHandler(notification) {
                 loadingVC.notificationResponseHandler = notificationResponseHandler
             }
             window.rootViewController = loadingVC
@@ -91,7 +91,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
-        NotificationsManager.shared.handleExistingNotifications()
+        NotificationsManager.shared.checkPreviouslyReceivedNotifications()
         PermissionsManager.ensurePermissionsAreGranted()
     }
 

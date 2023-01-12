@@ -25,7 +25,7 @@ class SheetVC: UIViewController {
     var sheetButtons: [SheetButton]!
         
     class func create(sheetButtons: [SheetButton]) -> SheetVC {
-        let vc = UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Sheet) as! SheetVC
+        let vc = UIStoryboard(name: Constants.SBID.SB.Misc, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Sheet) as! SheetVC
         vc.sheetButtons = sheetButtons
         return vc
     }
