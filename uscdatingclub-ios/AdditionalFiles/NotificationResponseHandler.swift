@@ -22,11 +22,19 @@ enum NotificationTypes: String, CaseIterable {
 struct MatchPartner: Codable {
     let id: Int
     let firstName: String
+    let email: String
+    let compatibility: Int
+    let distance: Double
+    let time: Double
 }
 
 struct MatchAcceptance: Codable {
     let id: Int
     let firstName: String
+    let email: String
+    let compatibilty: Int
+    let distance: Double
+    let time: Double
 }
 
 extension Notification {
@@ -42,9 +50,9 @@ struct NotificationResponseHandler {
     var newMatchAcceptance: MatchAcceptance?
 }
 
-func generateNotificationResponseHandler(_ notificationResponse: UNNotificationResponse) -> NotificationResponseHandler? {
+func generateNotificationResponseHandler(_ notification: UNNotification) -> NotificationResponseHandler? {
     guard
-        let userInfo = notificationResponse.notification.request.content.userInfo as? [String : AnyObject],
+        let userInfo = notification.request.content.userInfo as? [String : AnyObject],
         let notificationTypeString = userInfo[Notification.extra.type.rawValue] as? String,
         let notificationType = NotificationTypes.init(rawValue: notificationTypeString)
     else { return nil }
@@ -57,8 +65,8 @@ func generateNotificationResponseHandler(_ notificationResponse: UNNotificationR
                 let data = try JSONSerialization.data(withJSONObject: json as Any, options: .prettyPrinted)
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
+            print(json, data)
                 handler.newMatchPartner = try decoder.decode(MatchPartner.self, from: data)
-                
             case .accept:
                 guard let json = userInfo[Notification.extra.data.rawValue] else { return nil }
                 let data = try JSONSerialization.data(withJSONObject: json as Any, options: .prettyPrinted)

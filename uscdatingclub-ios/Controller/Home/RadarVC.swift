@@ -7,8 +7,6 @@
 
 import UIKit
 
-var temphasAnsweredQuestions = true
-
 class RadarVC: UIViewController, PageVCChild {
     
     enum HomeState {
@@ -19,12 +17,17 @@ class RadarVC: UIViewController, PageVCChild {
     
     //Flags
     var isCurrentlyVisible = false
-    var isLocationServicesEnabled: Bool = false
     var isPulsing = false
+    var isLocationServicesEnabled: Bool = UserService.singleton.getIsMatchable() {
+        didSet {
+            Task {
+                try await UserService.singleton.updateMatchableStatus(active: isLocationServicesEnabled)
+            }
+        }
+    }
     
     var uiState: HomeState {
-        return temphasAnsweredQuestions ? .radar : .arrow
-//        UserService.singleton.hasAnsweredQuestions
+        return UserService.singleton.getSurveyResponses().isEmpty ? .arrow : .radar
     }
     
     static let PULSE_DURATION: Double = 4.0

@@ -12,6 +12,8 @@ extension Notification.Name {
     static let locationStatusDidUpdate = Notification.Name("locationStatusDidUpdate")
     static let remoteConfigDidActivate = Notification.Name("remoteConfigDidActivate")
     static let permissionsWereRevoked = Notification.Name("permissionsWereRevoked")
+    static let matchAccepted = Notification.Name("matchAccepted")
+    static let matchReceived = Notification.Name("matchReceived")
 }
 
 class NotificationsManager: NSObject {

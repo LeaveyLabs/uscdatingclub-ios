@@ -108,12 +108,12 @@ extension AccountVC: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SimpleButtonCell, for: indexPath) as! SimpleButtonCell
             switch indexPath.row {
             case 0:
-                cell.configure(title: "retake the\ncompatibility test", systemImage: "testtube.2", footerText: nil) {
-                    self.retakeTestButtonDidPressed()
-                }
-            case 1:
                 cell.configure(title: "edit account", systemImage: "gearshape") {
                     self.editAccountButtonDidPressed()
+                }
+            case 1:
+                cell.configure(title: "retake the\ncompatibility test", systemImage: "testtube.2", footerText: nil) {
+                    self.retakeTestButtonDidPressed()
                 }
             default:
                 fatalError()
@@ -129,7 +129,7 @@ extension AccountVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : 2
+        return section == 0 ? 1 : (UserService.singleton.getSurveyResponses().isEmpty ? 1 : 2) //don't display "retake test" button if they haven't taken the test
     }
     
 }

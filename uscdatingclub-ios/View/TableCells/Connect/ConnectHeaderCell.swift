@@ -14,7 +14,8 @@ class ConnectHeaderCell: UITableViewCell {
     @IBOutlet weak var timeLeftAccessoryLabel: UILabel!
     @IBOutlet weak var distanceAwayAccessoryLabel: UILabel!
 
-    func configure(timeLeft: String, distanceAway: String) {
+    func configure(timeLeft: String, distanceAway: String, isWaiting: Bool, matchName: String) {
+        timeLeftAccessoryLabel.text = isWaiting ? "left for \(matchName) to respond" : "to respond"
         timeLeftLabel.text = timeLeft
         distanceAwayLabel.text = distanceAway
         distanceAwayLabel.font = AppFont.bold.size(28)

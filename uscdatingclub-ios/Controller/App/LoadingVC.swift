@@ -11,10 +11,6 @@ import FirebaseAnalytics
 func loadEverything() async throws {
     try await withThrowingTaskGroup(of: Void.self) { group in
 //        group.addTask { try await ConversationService.singleton.loadInitialMessageThreads() }
-//        group.addTask { try await FriendRequestService.singleton.loadFriendRequests() }
-//        group.addTask { try await UserService.singleton.reloadTodaysPrompts() }
-//        group.addTask { try await CommentService.singleton.fetchTaggedTags() }
-//        group.addTask { try await UsersService.singleton.loadTotalUserCount() }
 //        group.addTask { await UsersService.singleton.loadUsersAssociatedWithContacts() }
         try await group.waitForAll()
     }
@@ -100,26 +96,17 @@ class LoadingVC: UIViewController {
         guard let handler = notificationResponseHandler else { return }
         
         let mainSB = UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil)
-        guard let tabbarVC = mainSB.instantiateViewController(withIdentifier: Constants.SBID.VC.TabBarController) as? SpecialTabBarController else { return }
-        transitionToViewController(tabbarVC, duration: Env.TRANSITION_TO_HOME_DURATION) { _ in }
 
         switch handler.notificationType {
-            case .match:
-                break
-            case .accept:
-                break
-//            guard let matchRequest = handler.newMatchRequest,
-//                  let convo = ConversationService.singleton.getConversationWith(userId: matchRequest.match_requesting_user) else {
-//                CustomSwiftMessages.displayError("not found", "these message have been deleted")
-//                return
-//            }
-//            guard
-//                let myActivityNavigation = mainSB.instantiateViewController(withIdentifier: Constants.SBID.VC.MyActivityNavigation) as? UINavigationController
-//            else { return }
-//            tabbarVC.present(myActivityNavigation, animated: false)
-////            let chatVC = ChatViewController.create(conversation: convo)
-////            chatVC.modalPresentationStyle = .fullScreen
-//            myActivityNavigation.pushViewController(chatVC, animated: false)
+        case .match:
+            guard let matchPartner = handler.newMatchPartner else {
+                fatalError()
+            }
+            let matchInfo = MatchInfo(matchPartner: matchPartner)
+            let matchFoundTableVC = MatchFoundTableVC.create(matchInfo: matchInfo)
+            transitionToViewController(matchFoundTableVC, duration: 0) { _ in }
+        case .accept:
+            break
         }
     }
     
@@ -129,14 +116,8 @@ class LoadingVC: UIViewController {
             case .match:
                 break
             case .accept:
+                //TODO: connect to the socket
                 break
-//            guard let tag = handler.newTag else { return }
-//            do {
-//                let loadedPost = try await PostAPI.fetchPostByPostID(postId: tag.post.id)
-//                self.notificationResponseHandler?.newTaggedPost = loadedPost
-//            } catch {
-//                //error will be handled in transitionToNotificaitonScreen
-//            }
         }
     }
     

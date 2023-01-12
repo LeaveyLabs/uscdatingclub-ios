@@ -77,6 +77,7 @@
 		47A1C8ED296E414600F8B4D6 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A1C8EC296E414600F8B4D6 /* Match.swift */; };
 		47A24A25296F71250077AB11 /* SimpleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A24A23296F71250077AB11 /* SimpleTitleCell.swift */; };
 		47A24A26296F71250077AB11 /* SimpleTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47A24A24296F71250077AB11 /* SimpleTitleCell.xib */; };
+		47A24A29297088FF0077AB11 /* SurveyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A24A28297088FF0077AB11 /* SurveyResponse.swift */; };
 		47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A80614295F8D23001DEE64 /* EnterBiosVC.swift */; };
 		47B60B0A296C834600657C1D /* ConnectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B09296C834600657C1D /* ConnectManager.swift */; };
 		47B60B0C296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B0B296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift */; };
@@ -86,7 +87,7 @@
 		47B6B4A7296B45BE00539353 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A0531295E1F1300C15945 /* UserAPI.swift */; };
 		47B6B4AA296B46FB00539353 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 47B6B4A9296B46FB00539353 /* FirebaseAnalytics */; };
 		47B6B4AC296B46FB00539353 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 47B6B4AB296B46FB00539353 /* FirebaseAnalyticsSwift */; };
-		47B6B4AE296B487D00539353 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41041295CBFDF007C27F0 /* Error.swift */; };
+		47B6B4AE296B487D00539353 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41041295CBFDF007C27F0 /* APIError.swift */; };
 		47B6B4B0296B8D6100539353 /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DE320A295CC4F90063C55A /* Env.swift */; };
 		47B6B4B3296B8DA700539353 /* String+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41065295CC095007C27F0 /* String+Random.swift */; };
 		47B6B4B4296B8E7C00539353 /* BasicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A0529295E1E6700C15945 /* BasicAPI.swift */; };
@@ -132,7 +133,7 @@
 		47C40F9C295CBF61007C27F0 /* KUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40F99295CBF61007C27F0 /* KUIViewController.swift */; };
 		47C40F9E295CBF61007C27F0 /* CustomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40F9B295CBF61007C27F0 /* CustomSheetViewController.swift */; };
 		47C4103B295CBFCE007C27F0 /* AuthContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41039295CBFCE007C27F0 /* AuthContext.swift */; };
-		47C41047295CBFDF007C27F0 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41041295CBFDF007C27F0 /* Error.swift */; };
+		47C41047295CBFDF007C27F0 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41041295CBFDF007C27F0 /* APIError.swift */; };
 		47C41054295CBFFC007C27F0 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4104C295CBFFC007C27F0 /* Time.swift */; };
 		47C41055295CBFFC007C27F0 /* Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4104D295CBFFC007C27F0 /* Validate.swift */; };
 		47C41057295CBFFC007C27F0 /* CustomAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4104F295CBFFC007C27F0 /* CustomAttributedString.swift */; };
@@ -305,6 +306,7 @@
 		47A1C8EC296E414600F8B4D6 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		47A24A23296F71250077AB11 /* SimpleTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTitleCell.swift; sourceTree = "<group>"; };
 		47A24A24296F71250077AB11 /* SimpleTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleTitleCell.xib; sourceTree = "<group>"; };
+		47A24A28297088FF0077AB11 /* SurveyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyResponse.swift; sourceTree = "<group>"; };
 		47A80614295F8D23001DEE64 /* EnterBiosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterBiosVC.swift; sourceTree = "<group>"; };
 		47B60B09296C834600657C1D /* ConnectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectManager.swift; sourceTree = "<group>"; };
 		47B60B0B296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate+Heading.swift"; sourceTree = "<group>"; };
@@ -347,7 +349,7 @@
 		47C40F99295CBF61007C27F0 /* KUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KUIViewController.swift; sourceTree = "<group>"; };
 		47C40F9B295CBF61007C27F0 /* CustomSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSheetViewController.swift; sourceTree = "<group>"; };
 		47C41039295CBFCE007C27F0 /* AuthContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthContext.swift; sourceTree = "<group>"; };
-		47C41041295CBFDF007C27F0 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		47C41041295CBFDF007C27F0 /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		47C4104C295CBFFC007C27F0 /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		47C4104D295CBFFC007C27F0 /* Validate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validate.swift; sourceTree = "<group>"; };
 		47C4104F295CBFFC007C27F0 /* CustomAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAttributedString.swift; sourceTree = "<group>"; };
@@ -605,6 +607,14 @@
 			path = Account;
 			sourceTree = "<group>";
 		};
+		47A24A27297088AE0077AB11 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				47C41041295CBFDF007C27F0 /* APIError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		47A80613295F8CBD001DEE64 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
@@ -701,13 +711,14 @@
 		47C40F5B295CBAF0007C27F0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				47A24A27297088AE0077AB11 /* Error */,
 				47DE320C295CC52F0063C55A /* User */,
 				47C41038295CBFCE007C27F0 /* Context */,
 				478BECD929662CFB00930DAF /* Device */,
-				47C41041295CBFDF007C27F0 /* Error.swift */,
 				47C40F5C295CBAF0007C27F0 /* Feature.swift */,
 				478BECD42966249300930DAF /* SpectrumTestQuestion.swift */,
 				47A1C8EC296E414600F8B4D6 /* Match.swift */,
+				47A24A28297088FF0077AB11 /* SurveyResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1321,7 +1332,7 @@
 				47B6B49E296B2E3500539353 /* LocationPushService.swift in Sources */,
 				47B6B4B5296B8F2000539353 /* User.swift in Sources */,
 				47B6B4A7296B45BE00539353 /* UserAPI.swift in Sources */,
-				47B6B4AE296B487D00539353 /* Error.swift in Sources */,
+				47B6B4AE296B487D00539353 /* APIError.swift in Sources */,
 				47B6B4B0296B8D6100539353 /* Env.swift in Sources */,
 				47B6B4B6296B90F200539353 /* Constants.swift in Sources */,
 			);
@@ -1385,6 +1396,7 @@
 				4731F508295CD4770013F626 /* UIView+PostBubble.swift in Sources */,
 				4758289B296A82D900F10415 /* SelectionTestCell.swift in Sources */,
 				478BECD52966249300930DAF /* SpectrumTestQuestion.swift in Sources */,
+				47A24A29297088FF0077AB11 /* SurveyResponse.swift in Sources */,
 				4731F503295CD45F0013F626 /* UIScrollView+ToTop.swift in Sources */,
 				47DE3264295CC94F0063C55A /* UIButton+LoadingIndicator.swift in Sources */,
 				47DE3207295CC4B40063C55A /* CreateProfileVC.swift in Sources */,
@@ -1476,7 +1488,7 @@
 				434A0532295E1F1300C15945 /* UserAPI.swift in Sources */,
 				47DE3268295CCA5C0063C55A /* UIView+BecomeRound.swift in Sources */,
 				47DE3250295CC7C40063C55A /* UIImage+FromColor.swift in Sources */,
-				47C41047295CBFDF007C27F0 /* Error.swift in Sources */,
+				47C41047295CBFDF007C27F0 /* APIError.swift in Sources */,
 				47B6B4C5296BABFB00539353 /* Sex.swift in Sources */,
 				47DE3247295CC7C40063C55A /* UIImageView+ProfilePic.swift in Sources */,
 				4731F502295CD43A0013F626 /* UINavigationItem+UIButton.swift in Sources */,

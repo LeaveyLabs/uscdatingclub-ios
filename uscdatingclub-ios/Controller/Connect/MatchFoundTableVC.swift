@@ -17,6 +17,7 @@ class MatchFoundTableVC: UIViewController {
     var timeLeftLabel: UILabel!
     
     //Info
+    var isWaiting = false
     var matchInfo: MatchInfo!
     var connectManager: ConnectManager!
 
@@ -33,6 +34,12 @@ class MatchFoundTableVC: UIViewController {
         super.viewDidLoad()
         connectManager.startTimer() //must come first
         setupTableView() //must come after setting up connectManager
+        
+        NotificationCenter.default.addObserver(forName: .matchAccepted, object: nil, queue: nil) { notification in
+            DispatchQueue.main.async {
+                self.goToCoordinateVC()
+            }
+        }
     }
     
     //MARK: - Setup
@@ -58,14 +65,18 @@ class MatchFoundTableVC: UIViewController {
     //MARK: - Interaction
     
     @objc func meetupButtonDidPressed() {
-        //post to database
-//        meetUpButton.isHidden = true
-//        passButton.configure(title: "waiting for " + matchInfo.matchName, systemImage: "")
-//        timeSublabel.text = "left for \(matchInfo.matchName) to respond"
-//        passButton.isUserInteractionEnabled = false
-//        passButton.alpha = 0.5
-//        bottomButtonHeightConstraint.constant = 60
-        
+        Task {
+            try await MatchAPI.acceptMatch(userId: UserService.singleton.getId(),
+                                           partnerId: matchInfo.userId)
+            DispatchQueue.main.async {
+                self.isWaiting = true
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    @MainActor
+    func goToCoordinateVC() {
         transitionToViewController(CoordinateVC.create(matchInfo: matchInfo), duration: 1)
     }
 
@@ -138,7 +149,10 @@ extension MatchFoundTableVC: UITableViewDataSource {
         case 0:
             let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.ConnectHeaderCell, for: indexPath) as! ConnectHeaderCell
             cell.configure(timeLeft: matchInfo.timeLeftString,
-                           distanceAway: prettyDistance(meters: matchInfo.distance, shortened: true))
+                           distanceAway: prettyDistance(meters: Double(matchInfo.distance),
+                                                        shortened: true),
+                           isWaiting: isWaiting,
+                           matchName: matchInfo.userName)
             self.timeLeftLabel = cell.timeLeftLabel
             return cell
         case 1:
@@ -159,8 +173,12 @@ extension MatchFoundTableVC: UITableViewDataSource {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SimpleButtonCell, for: indexPath) as! SimpleButtonCell
             switch indexPath.row {
             case 0:
-                cell.configure(title: "meet up", systemImage: "figure.wave", buttonHeight: 60) {
-                    self.meetupButtonDidPressed()
+                if isWaiting {
+                    cell.configure(title: "waiting for \(matchInfo.userName)", systemImage: "", buttonHeight: 60, onButtonPress: {} )
+                } else {
+                    cell.configure(title: "meet up", systemImage: "figure.wave", buttonHeight: 60) {
+                        self.meetupButtonDidPressed()
+                    }
                 }
 //            case 1:
 //                cell.configure(title: "pass", systemImage: "xmark") {

@@ -22,6 +22,8 @@ protocol CompleteUserType: ReadOnlyUserType {
     var email: String { get }
     var sexIdentity: String { get }
     var sexPreference: String { get }
+    var isMatchable: Bool { get }
+    var surveyResponses: [SurveyResponse] { get }
 }
 
 //MARK: - Structs
@@ -50,10 +52,12 @@ struct CompleteUser: Codable, CompleteUserType {
     let sexIdentity: String
     let sexPreference: String
     let phoneNumber: String
+    var isMatchable: Bool
     var surveyResponses: [SurveyResponse]
     
     //Equatable
     static func == (lhs: CompleteUser, rhs: CompleteUser) -> Bool { return lhs.id == rhs.id }
+    
 }
 
 struct FrontendCompleteUser: Codable, CompleteUserType, ReadOnlyUserType {
@@ -67,6 +71,7 @@ struct FrontendCompleteUser: Codable, CompleteUserType, ReadOnlyUserType {
     //    var picture: String
     var sexIdentity: String
     var sexPreference: String
+    var isMatchable: Bool
     var surveyResponses: [SurveyResponse]
     
     // Complete-only properties
@@ -82,11 +87,12 @@ struct FrontendCompleteUser: Codable, CompleteUserType, ReadOnlyUserType {
         self.sexIdentity = completeUser.sexIdentity
         self.sexPreference = completeUser.sexPreference
 //        self.profilePicWrapper = profilePicWrapper
+        self.isMatchable = completeUser.isMatchable
         self.surveyResponses = completeUser.surveyResponses
     }
     
     //Equatable
     static func == (lhs: FrontendCompleteUser, rhs: FrontendCompleteUser) -> Bool { return lhs.id == rhs.id }
     
-    static let nilUser = FrontendCompleteUser(completeUser: CompleteUser(id: -1, firstName: "", lastName: "", email: "", sexIdentity: "", sexPreference: "", phoneNumber: "", surveyResponses: []))
+    static let nilUser = FrontendCompleteUser(completeUser: CompleteUser(id: -1, firstName: "", lastName: "", email: "", sexIdentity: "", sexPreference: "", phoneNumber: "", isMatchable: false, surveyResponses: []))
 }

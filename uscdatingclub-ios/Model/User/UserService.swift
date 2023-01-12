@@ -78,6 +78,7 @@ class UserService: NSObject {
     func getEmail() -> String { return authedUser.email }
     func getSexPreference() -> String { return authedUser.sexPreference }
     func getSexIdentity() -> String { return authedUser.sexIdentity }
+    func getIsMatchable() -> Bool { return authedUser.isMatchable }
     func getPhoneNumberPretty() -> String? { return authedUser.phoneNumber.asNationalPhoneNumber }
     func getSurveyResponses() -> [SurveyResponse] { return authedUser.surveyResponses }
 //    func getProfilePic() -> UIImage { return authedUser.profilePicWrapper.image }
@@ -129,22 +130,23 @@ class UserService: NSObject {
 //    //MARK: - Update user
 //
     func updateUser(firstName: String, lastName: String, sexIdentity: String, sexPreference: String) async throws {
-        let updatedUser = CompleteUser(id: authedUser.id, firstName: firstName, lastName: lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, surveyResponses: authedUser.surveyResponses)
+        let updatedUser = CompleteUser(id: authedUser.id, firstName: firstName, lastName: lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: authedUser.surveyResponses)
         try await UserAPI.updateUser(id:updatedUser.id, user:updatedUser)
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
         Task { await self.saveUserToFilesystem() }
     }
     
     func updateMatchableStatus(active: Bool) async throws {
+        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: active, surveyResponses: authedUser.surveyResponses)
         try await UserAPI.updateMatchableStatus(matchableStatus: active, email: authedUser.email)
-        //TODO: update the authedUser
+        authedUser = FrontendCompleteUser(completeUser: updatedUser)
         Task { await self.saveUserToFilesystem() }
     }
     
     func updateTestResponses(newResponses: [Int:Any]) async throws {
+        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: [])
         try await UserAPI.postSurveyAnswers(email: authedUser.email, surveyResponses: [])
-        //TODO: update the authedUser
-        //is backend not returning the updatedUser anymore?
+        authedUser = FrontendCompleteUser(completeUser: updatedUser)
         Task { await self.saveUserToFilesystem() }
     }
 

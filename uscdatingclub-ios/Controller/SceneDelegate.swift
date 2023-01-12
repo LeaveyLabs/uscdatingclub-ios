@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CoreLocation
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -60,24 +59,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateInitialViewController()
         } else {
             let loadingVC = LoadingVC.create()
-            window.rootViewController = loadingVC
-
-            if let notificationResponse = connectionOptions.notificationResponse,
-               let notificationResponseHandler = generateNotificationResponseHandler(notificationResponse) {
+            if let notification = connectionOptions.notificationResponse?.notification,
+               let notificationResponseHandler = generateNotificationResponseHandler(notification) {
                 loadingVC.notificationResponseHandler = notificationResponseHandler
-                loadingVC.goToNotification()
             }
+            window.rootViewController = loadingVC
         }
-        
-        //usc lat long: 34.022123871588995, -118.28505424318654
-        //TODO: remove core location after this is gone below
-        let distance = CLLocationCoordinate2D(latitude: 39.5501, longitude: 105.7821).distanceInMeters(from: CLLocationCoordinate2D(latitude: 34.022123871588995, longitude: -118.28505424318654))
-        let matchInfo = MatchInfo(userId: 0, userName: "Mei", compatibility: 99, time: Date(), distance: distance, percents: [
-            Percent(trait: "skiing", avgPercent: CGFloat.random(in: 20..<40), youPercent: 60, matchPercent: 90),
-            Percent(trait: "spontaneity", avgPercent: CGFloat.random(in: 20..<40), youPercent: 80, matchPercent: 60),
-            Percent(trait: "creativity", avgPercent: CGFloat.random(in: 20..<40), youPercent: 85, matchPercent: 100),
-        ])
-        window.rootViewController = MatchFoundTableVC.create(matchInfo: matchInfo)
 
         window.makeKeyAndVisible()
 

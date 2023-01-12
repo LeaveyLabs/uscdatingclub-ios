@@ -30,12 +30,12 @@ class ConnectManager: NSObject {
         self.matchInfo = matchInfo
         self.delegate = delegate
         motionManager = CMMotionManager()
-        LocationManager.shared.lastConnectTime = matchInfo.time.timeIntervalSince1970
+        LocationManager.shared.lastConnectTime = matchInfo.date.timeIntervalSince1970
         super.init()
     }
     
     deinit {
-        LocationManager.shared.resetDistanceFilter() //TODO: this won't relaly suffice
+        LocationManager.shared.resetDistanceFilter() //TODO: this won't suffice
     }
 
     //MARK: - Public Interface

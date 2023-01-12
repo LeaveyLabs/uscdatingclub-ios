@@ -69,7 +69,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("didFAILLLLLLToRegisterForRemoteNotificationsWithError")
+        print("didFAILtoRegisterForRemoteNotificationsWithError")
     }
         
     //MARK: - Alert Notifications
@@ -77,7 +77,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     //user was not in app
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
-        guard var _ = SceneDelegate.visibleViewController else {
+        print("will present notification while NOT in app")
+
+        guard var visibleVC = SceneDelegate.visibleViewController else {
             return //the app wasn't running in the background. scene delegate will handle
         }
         //delete the below if the above works
@@ -85,56 +87,39 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 //            return
 //        }
                 
-//        let loadingVC = UIStoryboard(name: "Loading", bundle: nil).instantiateViewController(withIdentifier: "LoadingViewController") as! LoadingViewController
+//        let loadingVC = UIStoryboard(name: Constants.SBID.SB.Misc, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Loading) as! LoadingVC
 //        if let notificationResponseHandler = generateNotificationResponseHandler(response) {
 //            loadingVC.notificationResponseHandler = notificationResponseHandler
 //        }
-//        UIApplication.shared.windows.first?.rootViewController = loadingVC
-
-        completionHandler()
+//        visibleVC = loadingVC
+////        UIApplication.shared.windows.first?.rootViewController = loadingVC
+//
+//        completionHandler()
     }
 
     //user was in app
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("WILL PRESENT NOTIFIATION WHILE IN APP")
-        guard let userInfo = notification.request.content.userInfo as? [String : AnyObject] else { return }
+        print("will present notification while in app")
+        
         Task {
-            await handleNotificationWhileInApp(userInfo: userInfo)
+            await handleNotificationWhileInApp(notification)
         }
                 
-//        completionHandler([.alert, .sound, .badge]) //when the user is in the app, we don't want to do an ios system displays
+        completionHandler([.sound]) //when the user is in the app, we don't want to do an ios system displays
     }
     
-    func handleNotificationWhileInApp(userInfo: [String: AnyObject]) async {
-        //both of these methods work here. we'll just use the first
-//        guard let _ = UIApplication.shared.windows.first?.rootViewController as? SpecialTabBarController else { return }
-//        guard let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController as? SpecialTabBarController else { return }
-        
-        guard
-            let notificaitonTypeString = userInfo[Notification.extra.type.rawValue] as? String,
-            let notificationType = NotificationTypes(rawValue: notificaitonTypeString)
-        else { return }
-        
-        do {
-            //Note: we actually only want to deserialize the data if the notification has data. the below code should be moved out of match
-//            let json = userInfo[Notification.extra.data.rawValue]
-//            _ = try JSONSerialization.data(withJSONObject: json as Any, options: .prettyPrinted)
-            switch notificationType {
-            case .match:
-                break //do nothing, this is handled within ConversationService every 15 seconds
-//                let matchRequest = try JSONDecoder().decode(MatchRequest.self, from: data)
-//                if (ConversationService.singleton.getConversationWith(userId: matchRequest.match_requesting_user) == nil) {
-//                    try await ConversationService.singleton.load
-//                } else {
-//                    //if we do have a converation open, this code is handled in Conversation
-//                }
-            case .accept:
-                break
-            }
+    func handleNotificationWhileInApp(_ notification: UNNotification) async {
+        guard let notificationResponseHandler = generateNotificationResponseHandler(notification) else {
+            return
         }
-//        catch {
-//            print("failed to load data after notification:", error.localizedDescription)
-//        }
+        if let partner = notificationResponseHandler.newMatchPartner {
+            DispatchQueue.main.async {
+                transitionToViewController(MatchFoundVC.create(matchInfo: MatchInfo(matchPartner: partner)), duration: 0.5)
+            }
+        } else if let _ = notificationResponseHandler.newMatchAcceptance {
+            //TODO: open socket?
+            NotificationCenter.default.post(name: .matchAccepted, object: nil)
+        }
     }
     
     //MARK: - Background / silent notifications
