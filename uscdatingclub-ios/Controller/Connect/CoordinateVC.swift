@@ -75,7 +75,7 @@ class CoordinateVC: UIViewController {
                                primaryActionHandler: {
             //end the match
             DispatchQueue.main.async {
-                self.dismiss(animated: true)
+                transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
             }
         },
                                secondaryActionTitle: "nevermind",
@@ -98,7 +98,7 @@ class CoordinateVC: UIViewController {
                                primaryActionHandler: {
             //block user
             DispatchQueue.main.async {
-                self.dismiss(animated: true)
+                transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
             }
         },
                                secondaryActionTitle: "nevermind",
@@ -123,7 +123,7 @@ extension CoordinateVC: ConnectManagerDelegate {
                                primaryActionTitle: "return home",
                                primaryActionHandler: {
             DispatchQueue.main.async {
-                self.dismiss(animated: true)
+                transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
             }
         }, on: self)
     }
