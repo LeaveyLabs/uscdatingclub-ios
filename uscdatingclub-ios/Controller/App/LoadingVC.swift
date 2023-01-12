@@ -104,8 +104,10 @@ class LoadingVC: UIViewController {
         transitionToViewController(tabbarVC, duration: Env.TRANSITION_TO_HOME_DURATION) { _ in }
 
         switch handler.notificationType {
-        case .match:
-            break
+            case .match:
+                break
+            case .accept:
+                break
 //            guard let matchRequest = handler.newMatchRequest,
 //                  let convo = ConversationService.singleton.getConversationWith(userId: matchRequest.match_requesting_user) else {
 //                CustomSwiftMessages.displayError("not found", "these message have been deleted")
@@ -124,8 +126,10 @@ class LoadingVC: UIViewController {
     func loadNotificationData() async throws {
         guard let handler = notificationResponseHandler else { return }
         switch handler.notificationType {
-        case .match:
-            break
+            case .match:
+                break
+            case .accept:
+                break
 //            guard let tag = handler.newTag else { return }
 //            do {
 //                let loadedPost = try await PostAPI.fetchPostByPostID(postId: tag.post.id)
