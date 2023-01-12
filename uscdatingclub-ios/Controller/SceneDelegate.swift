@@ -77,7 +77,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             Percent(trait: "spontaneity", avgPercent: CGFloat.random(in: 20..<40), youPercent: 80, matchPercent: 60),
             Percent(trait: "creativity", avgPercent: CGFloat.random(in: 20..<40), youPercent: 85, matchPercent: 100),
         ])
-//        window.rootViewController = MatchFoundTableVC.create(matchInfo: matchInfo)
+        window.rootViewController = MatchFoundTableVC.create(matchInfo: matchInfo)
 
         window.makeKeyAndVisible()
 

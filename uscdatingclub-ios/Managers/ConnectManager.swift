@@ -19,6 +19,7 @@ class ConnectManager: NSObject {
 
     //MARK: - Properties
 
+    private var finished: Bool = false
     let matchInfo: MatchInfo
     let delegate: ConnectManagerDelegate
     let motionManager: CMMotionManager
@@ -37,7 +38,7 @@ class ConnectManager: NSObject {
         LocationManager.shared.resetDistanceFilter() //TODO: this won't relaly suffice
     }
 
-    //MARK: - Setup
+    //MARK: - Public Interface
     
     func startLocationCalculation() {
         //TODO: should the queue be main though?
@@ -62,6 +63,7 @@ class ConnectManager: NSObject {
     func startTimer() {
         Task {
             while true {
+                if finished { return }
                 if matchInfo.elapsedTime.minutes == 3 {
                     delegate.timeRanOut()
                     return
@@ -71,6 +73,12 @@ class ConnectManager: NSObject {
                 try await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)
             }
         }
+    }
+    
+    func endConnection() {
+        finished = true
+        NotificationCenter.default.removeObserver(self)
+        LocationManager.shared.resetDistanceFilter()
     }
     
     //MARK: - Helpers

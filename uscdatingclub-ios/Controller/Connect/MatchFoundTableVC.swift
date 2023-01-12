@@ -68,20 +68,27 @@ class MatchFoundTableVC: UIViewController {
         transitionToViewController(CoordinateVC.create(matchInfo: matchInfo), duration: 1)
     }
 
-    @objc func passButtonDidPressed() {
-        AlertManager.showAlert(title: "are you sure you want to pass on \(matchInfo.userName)?",
-                               subtitle: "you won't be able to connect again",
-                               primaryActionTitle: "i'm sure",
-                               primaryActionHandler: {
-            //post to database
-            DispatchQueue.main.async {
-                self.dismiss(animated: true)
-            }
-        },
-                               secondaryActionTitle: "nevermind",
-                               secondaryActionHandler: {
-            //do nothing
-        }, on: self)
+//    @objc func passButtonDidPressed() {
+//        AlertManager.showAlert(title: "are you sure you want to pass on \(matchInfo.userName)?",
+//                               subtitle: "you won't be able to connect again",
+//                               primaryActionTitle: "i'm sure",
+//                               primaryActionHandler: {
+//            //post to database
+//            DispatchQueue.main.async {
+//                self.dismiss(animated: true)
+//            }
+//        },
+//                               secondaryActionTitle: "nevermind",
+//                               secondaryActionHandler: {
+//            //do nothing
+//        }, on: self)
+//    }
+    
+    //MARK: - Helpers
+    
+    func finish() {
+        connectManager.endConnection()
+        transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
     }
 
 }
@@ -119,7 +126,7 @@ extension MatchFoundTableVC: UITableViewDataSource {
         case 2:
             return 3
         case 3:
-            return 2
+            return 1
         default:
             fatalError()
         }
@@ -151,14 +158,14 @@ extension MatchFoundTableVC: UITableViewDataSource {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SimpleButtonCell, for: indexPath) as! SimpleButtonCell
             switch indexPath.row {
             case 0:
-                cell.configure(title: "meet up", systemImage: "figure.wave") {
+                cell.configure(title: "meet up", systemImage: "figure.wave", buttonHeight: 60) {
                     self.meetupButtonDidPressed()
                 }
-            case 1:
-                cell.configure(title: "pass", systemImage: "xmark") {
-                    self.passButtonDidPressed()
-                }
-                cell.simpleButton.alpha = 0.7
+//            case 1:
+//                cell.configure(title: "pass", systemImage: "xmark") {
+//                    self.passButtonDidPressed()
+//                }
+//                cell.simpleButton.alpha = 0.7
             default:
                 fatalError()
             }
@@ -207,7 +214,7 @@ extension MatchFoundTableVC: ConnectManagerDelegate {
                                primaryActionTitle: "return home",
                                primaryActionHandler: {
             DispatchQueue.main.async {
-                self.dismiss(animated: true)
+                self.finish()
             }
         }, on: self)
     }
