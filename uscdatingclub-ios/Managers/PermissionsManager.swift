@@ -10,12 +10,13 @@ import UIKit
 struct PermissionsManager {
     
     static func areAllPermissionsGranted(closure: @escaping (Bool) -> Void) {
-        NotificationsManager.shared.isNotificationsEnabled(closure: { isNotificationsEnabled in
-            DispatchQueue.main.async {
-                let areGranted = isNotificationsEnabled && LocationManager.shared.isLocationServicesProperlyAuthorized() && (UIApplication.shared.backgroundRefreshStatus == .available || ProcessInfo.processInfo.isLowPowerModeEnabled)
-                closure(areGranted)
+        Task {
+            let isNotifsEnabled = await NotificationsManager.shared.isNotificationsEnabled()
+            DispatchQueue.main.async { //UIApplication properties must be accessed on main thread
+                let areAllGranted = LocationManager.shared.isLocationServicesProperlyAuthorized() && (UIApplication.shared.backgroundRefreshStatus == .available || ProcessInfo.processInfo.isLowPowerModeEnabled) && isNotifsEnabled
+                closure(areAllGranted)
             }
-        })
+        }
     }
     
     static func ensurePermissionsAreGranted() {

@@ -19,24 +19,6 @@ enum NotificationTypes: String, CaseIterable {
 //    static let newMentionedMist = Notification.Name("tag")
 //}
 
-struct MatchPartner: Codable {
-    let id: Int
-    let firstName: String
-    let email: String
-    let compatibility: Int
-    let distance: Double
-    let time: Double
-}
-
-struct MatchAcceptance: Codable {
-    let id: Int
-    let firstName: String
-    let email: String
-    let compatibilty: Int
-    let distance: Double
-    let time: Double
-}
-
 extension Notification {
     enum extra: String {
         case type = "type"

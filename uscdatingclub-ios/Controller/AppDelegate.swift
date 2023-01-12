@@ -44,6 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        LocationManager.shared.resetDistanceFilter()
+    }
 
 }
 
@@ -74,52 +78,40 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
     //MARK: - Alert Notifications
     
-    //user was not in app
+    //user launched app via a notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        
-        print("will present notification while NOT in app")
-
-        guard var visibleVC = SceneDelegate.visibleViewController else {
-            return //the app wasn't running in the background. scene delegate will handle
-        }
-        //delete the below if the above works
-//        guard var _ = UIApplication.shared.windows.first?.rootViewController else {
-//            return
-//        }
-                
-//        let loadingVC = UIStoryboard(name: Constants.SBID.SB.Misc, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Loading) as! LoadingVC
-//        if let notificationResponseHandler = generateNotificationResponseHandler(response) {
-//            loadingVC.notificationResponseHandler = notificationResponseHandler
-//        }
-//        visibleVC = loadingVC
-////        UIApplication.shared.windows.first?.rootViewController = loadingVC
-//
-//        completionHandler()
+        print("launched app via notification")
+        handleAppLaunchViaNotification(response)
+        completionHandler()
     }
 
-    //user was in app
+    //user received notification while in app
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("will present notification while in app")
-        
-        Task {
-            await handleNotificationWhileInApp(notification)
-        }
-                
+        print("receved notification while in app")
+        Task { await handleReceivedNotificationWhileInApp(notification) }
         completionHandler([.sound]) //when the user is in the app, we don't want to do an ios system displays
     }
     
-    func handleNotificationWhileInApp(_ notification: UNNotification) async {
+    func handleReceivedNotificationWhileInApp(_ notification: UNNotification) async {
         guard let notificationResponseHandler = generateNotificationResponseHandler(notification) else {
             return
         }
         if let partner = notificationResponseHandler.newMatchPartner {
-            DispatchQueue.main.async {
-                transitionToViewController(MatchFoundVC.create(matchInfo: MatchInfo(matchPartner: partner)), duration: 0.5)
-            }
+            AlertManager.showAlert(title: "you've been matched with \(partner.firstName)!", subtitle: "you have \(Constants.minutesToRespond) minutes to respond", primaryActionTitle: "see your compatibility", primaryActionHandler: {
+                transitionToViewController(MatchFoundTableVC.create(matchInfo: MatchInfo(matchPartner: partner)), duration: 0.5)
+            }, on: SceneDelegate.visibleViewController!)
         } else if let _ = notificationResponseHandler.newMatchAcceptance {
-            //TODO: open socket?
             NotificationCenter.default.post(name: .matchAccepted, object: nil)
         }
+    }
+    
+    func handleAppLaunchViaNotification(_ notificationResponse: UNNotificationResponse) {
+        guard let notificationResponseHandler = generateNotificationResponseHandler(notificationResponse.notification) else {
+            return
+        }
+        let loadingVC = LoadingVC.create()
+        loadingVC.notificationResponseHandler = notificationResponseHandler
+        transitionToViewController(loadingVC, duration: 0)
     }
     
     //MARK: - Background / silent notifications
@@ -127,8 +119,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 //    When sending messages with the content_available key (equivalent to APNs's content-available, the messages will be delivered as silent notifications, waking your app in the background for tasks like background data refresh. Unlike foreground notifications, these notifications must be handled via the function below
     
     func application(_ application: UIApplication,
-                     didReceiveRemoteNotification userInfo: [AnyHashable: Any]) async
-      -> UIBackgroundFetchResult {
+                     didReceiveRemoteNotification userInfo: [AnyHashable: Any]) async -> UIBackgroundFetchResult {
+
+        
       // If you are receiving a notification message while your app is in the background,
       // this callback will not be fired till the user taps on the notification launching the application.
       // TODO: Handle data of notification

@@ -11,6 +11,7 @@ import FirebaseRemoteConfigSwift
 
 enum RemoteConfigKeys: String, CaseIterable {
     case updateAvailableVersion, updateAvailableFeatures
+    case minutesToRespond
     case appStoreLink, landingPageLink, privacyPageLink, feedbackLink
 }
 
@@ -21,7 +22,8 @@ extension Constants {
     //    static let maxContinuousScreenTime = remoteConfig.configValue(forKey: RemoteConfigKeys.maxContinuousScreenTime.rawValue).numberValue as? Int ?? 40
     static let updateAvailableVersion = remoteConfig.configValue(forKey: RemoteConfigKeys.updateAvailableVersion.rawValue).stringValue ?? "0.0.0"
     static let updateAvailableFeatures: Features = Features(json: remoteConfig.configValue(forKey: RemoteConfigKeys.updateAvailableFeatures.rawValue).jsonValue as? [String:Any] ?? [:]) ?? Features()
-    
+    static let minutesToRespond: Int = remoteConfig.configValue(forKey: RemoteConfigKeys.minutesToRespond.rawValue).numberValue as? Int ?? 3
+
     //why is the below approach giving me errors?
 //    static let faqLink = URL(string: remoteConfig.configValue(forKey: RemoteConfigKeys.appStoreLink.rawValue).stringValue ?? "https://uscdatingclub.com/faq")!
     static let faqLink = URL(string: "https://uscdatingclub.com/faq")!

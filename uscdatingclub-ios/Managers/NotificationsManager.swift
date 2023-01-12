@@ -35,16 +35,12 @@ class NotificationsManager: NSObject {
     
     //MARK: - Permission and Status
     
-    func getNotificationStatus(closure: @escaping (UNAuthorizationStatus) -> Void) {
-        center.getNotificationSettings { setting in
-            closure(setting.authorizationStatus)
-        }
+    func getNotificationStatus()async -> UNAuthorizationStatus {
+        return await center.notificationSettings().authorizationStatus
     }
     
-    func isNotificationsEnabled(closure: @escaping (Bool) -> Void) {
-        center.getNotificationSettings { setting in
-            closure(setting.authorizationStatus == .authorized)
-        }
+    func isNotificationsEnabled() async -> Bool {
+        return await center.notificationSettings().authorizationStatus == .authorized
     }
     
     func registerForNotificationsOnStartupIfAccessExists() {
@@ -77,5 +73,27 @@ class NotificationsManager: NSObject {
             }
         })
     }
+    
+    func handleExistingNotifications() {
+        Task {
+            guard await isNotificationsEnabled() else { return }
+            
+//            let notificationRequests = await UNUserNotificationCenter.current().pendingNotificationRequests() //this is just for local notifications
+            
+            //The below function returns all the notifications currently visible in the NotificationCenter on their device
+            //As soon as the user clicks on a notification to open the app, that notification is gone from the notification center (and thus won't be returned from the below function). That action should be handled in AppDelegate
+            let notifications = await UNUserNotificationCenter.current().deliveredNotifications()
+            guard notifications.count > 0 else { return }
+            print("opened app with delivered notifications:", notifications)
+            
+//            DispatchQueue.main.async {
+//                UIApplication.shared.applicationIconBadgeNumber = 0
+//            }
+//            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        }
+    }
+    
+    //TODO: save matchInfo notification in userDefaults as "mostRecentMatchInfo" after receiving it from anywhere in the code
+    //if it appears you don't have any notifications, as one last check, check userDefaults to make sure you don't have an existing match
         
 }

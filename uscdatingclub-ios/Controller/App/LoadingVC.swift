@@ -52,6 +52,8 @@ class LoadingVC: UIViewController {
         }
     }
     
+    //MARK: - GoTos
+    
 //    func goToAuth() {
 //        DispatchQueue.main.asyncAfter(deadline: .now()) {
 //            guard !self.wasUpdateFoundAvailable else { return }
@@ -91,12 +93,12 @@ class LoadingVC: UIViewController {
         }
     }
     
+    //MARK: - Notifications
+    
     @MainActor
     func transitionToNotificationScreen() {
         guard let handler = notificationResponseHandler else { return }
         
-        let mainSB = UIStoryboard(name: Constants.SBID.SB.Main, bundle: nil)
-
         switch handler.notificationType {
         case .match:
             guard let matchPartner = handler.newMatchPartner else {
@@ -106,7 +108,13 @@ class LoadingVC: UIViewController {
             let matchFoundTableVC = MatchFoundTableVC.create(matchInfo: matchInfo)
             transitionToViewController(matchFoundTableVC, duration: 0) { _ in }
         case .accept:
-            break
+            guard let acceptance = handler.newMatchAcceptance else {
+                fatalError()
+                //TODO: post to crashlytics
+            }
+            let matchInfo = MatchInfo(matchAcceptance: acceptance)
+            let coordinateVC = CoordinateVC.create(matchInfo: matchInfo)
+            transitionToViewController(coordinateVC, duration: 0) { _ in }
         }
     }
     
@@ -116,7 +124,6 @@ class LoadingVC: UIViewController {
             case .match:
                 break
             case .accept:
-                //TODO: connect to the socket
                 break
         }
     }

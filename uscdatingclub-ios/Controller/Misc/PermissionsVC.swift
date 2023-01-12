@@ -80,20 +80,18 @@ class PermissionsVC: UIViewController {
                 locationButton.configure(title: "share location", subtitle: "precise, always",  systemImage: "location")
             }
         }
-        
-        NotificationsManager.shared.isNotificationsEnabled(closure: { [self] isEnabled in
-            if isEnabled {
-                DispatchQueue.main.async { [self] in
+        Task {
+            let isEnabled = await NotificationsManager.shared.isNotificationsEnabled()
+            DispatchQueue.main.async { [self] in
+                if isEnabled {
                     notificationsButton.internalButton.backgroundColor = .customGreen
                     notificationsButton.configure(title: "notifications enabled", systemImage: "bell")
-                }
-            } else {
-                DispatchQueue.main.async { [self] in
+                } else {
                     notificationsButton.internalButton.backgroundColor = .customWhite
                     notificationsButton.configure(title: "turn on notifications", systemImage: "bell")
                 }
             }
-        })
+        }
         
         if UIApplication.shared.backgroundRefreshStatus == .available || ProcessInfo.processInfo.isLowPowerModeEnabled {
             backgroundRefreshButton.internalButton.backgroundColor = .customGreen
