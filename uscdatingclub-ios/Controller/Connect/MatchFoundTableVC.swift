@@ -46,6 +46,7 @@ class MatchFoundTableVC: UIViewController {
         tableView.showsVerticalScrollIndicator = true
         tableView.indicatorStyle = .white
         tableView.separatorStyle = .none
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 15))
 
         //the below was giving me issues for some reason
         tableView.register(UINib(nibName: Constants.SBID.Cell.ConnectHeaderCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.ConnectHeaderCell)

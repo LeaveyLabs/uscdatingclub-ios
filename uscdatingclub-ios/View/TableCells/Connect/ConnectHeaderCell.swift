@@ -19,8 +19,8 @@ class ConnectHeaderCell: UITableViewCell {
         distanceAwayLabel.text = distanceAway
         distanceAwayLabel.font = AppFont.bold.size(28)
         timeLeftLabel.font = AppFont.bold.size(28)
-        timeLeftAccessoryLabel.font = AppFont.light.size(16)
-        distanceAwayAccessoryLabel.font = AppFont.light.size(16)
+        timeLeftAccessoryLabel.font = AppFont.light.size(12)
+        distanceAwayAccessoryLabel.font = AppFont.light.size(12)
     }
     
 }

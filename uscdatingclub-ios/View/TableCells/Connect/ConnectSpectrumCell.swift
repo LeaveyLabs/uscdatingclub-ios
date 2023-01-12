@@ -30,7 +30,7 @@ class ConnectSpectrumCell: UITableViewCell {
 
     func configure(title: String, matchName: String, avgPercent: CGFloat, youPercent: CGFloat, matchPercent: CGFloat, shouldDisplayLabels: Bool) {
         titleLabel.text = title
-        titleLabel.font = AppFont.bold.size(18)
+        titleLabel.font = AppFont.medium.size(18)
         youLabel.font = AppFont.medium.size(14)
         avgLabel.font = AppFont.medium.size(14)
         matchLabel.font = AppFont.medium.size(14)
