@@ -13,7 +13,6 @@ class SimpleButton: UIView {
     
     //UI
     @IBOutlet weak var internalButton: UIButton!
-    @IBOutlet weak var internalButtonHeightAnchor: NSLayoutConstraint!
     
     //MARK: - Constructors
         

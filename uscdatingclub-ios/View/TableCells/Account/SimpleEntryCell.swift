@@ -12,6 +12,14 @@ class SimpleEntryCell: UITableViewCell {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var titleLabel: UILabel!
     
+    //MARK: - Lifecycle
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        titleLabel.font = AppFont.light.size(16)
+        textField.font = AppFont.semibold.size(20)
+    }
+    
     func configure(title: String, content: String, delegate: UITextFieldDelegate) {
         textField.autocorrectionType = .no
         textField.autocapitalizationType = .words

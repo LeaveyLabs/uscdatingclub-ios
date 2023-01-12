@@ -15,11 +15,12 @@ class SimpleButtonCell: UITableViewCell {
     
     func configure(title: String, systemImage: String, footerText: String? = nil, onButtonPress: @escaping () -> Void) {
         if title.rangeOfCharacter(from: .newlines) != nil {
-            buttonHeightAnchor.constant = 72
+            buttonHeightAnchor.constant = 80
         }
         
         if let footerText {
             footerLabel.text = footerText
+            footerLabel.font = AppFont.light.size(14)
         } else {
             footerLabel.isHidden = true
         }
