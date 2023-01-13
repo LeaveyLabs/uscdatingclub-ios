@@ -130,21 +130,21 @@ class UserService: NSObject {
 //    //MARK: - Update user
 //
     func updateUser(firstName: String, lastName: String, sexIdentity: String, sexPreference: String) async throws {
-        let updatedUser = CompleteUser(id: authedUser.id, firstName: firstName, lastName: lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: authedUser.surveyResponses)
+        let updatedUser = CompleteUser(id: authedUser.id, firstName: firstName, lastName: lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: authedUser.surveyResponses, token: "")
         try await UserAPI.updateUser(id:updatedUser.id, user:updatedUser)
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
         Task { await self.saveUserToFilesystem() }
     }
     
     func updateMatchableStatus(active: Bool) async throws {
-        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: active, surveyResponses: authedUser.surveyResponses)
+        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: active, surveyResponses: authedUser.surveyResponses, token: "")
         try await UserAPI.updateMatchableStatus(matchableStatus: active, email: authedUser.email)
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
         Task { await self.saveUserToFilesystem() }
     }
     
     func updateTestResponses(newResponses: [Int:Any]) async throws {
-        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: [])
+        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: [], token: "")
         try await UserAPI.postSurveyAnswers(email: authedUser.email, surveyResponses: [])
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
         Task { await self.saveUserToFilesystem() }
