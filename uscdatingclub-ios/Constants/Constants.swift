@@ -46,11 +46,12 @@ enum Constants {
             static let SimpleButtonCell = "SimpleButtonCell"
             static let SimpleEntryCell = "SimpleEntryCell"
             static let SimpleTitleCell = "SimpleTitleCell"
+            static let PermissionsCell = "PermissionsCell"
             //Match
             static let ConnectHeaderCell = "ConnectHeaderCell"
             static let ConnectTitleCell = "ConnectTitleCell"
             static let ConnectSpectrumCell = "ConnectSpectrumCell"
-
+            
         }
         struct VC {
             //Home
@@ -73,6 +74,7 @@ enum Constants {
             static let TabBarController = "TabBarController"
             //Misc
             static let Permissions = "PermissionsVC"
+            static let PermissionsTable = "PermissionsTableVC"
             static let HowItWorks = "HowItWorksVC"
             static let UpdateAvailable = "UpdateAvailableVC"
             static let Loading = "LoadingVC"

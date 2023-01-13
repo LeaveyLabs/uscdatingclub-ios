@@ -143,9 +143,9 @@ class UserService: NSObject {
         Task { await self.saveUserToFilesystem() }
     }
     
-    func updateTestResponses(newResponses: [Int:Any]) async throws {
-        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: [])
-        try await UserAPI.postSurveyAnswers(email: authedUser.email, surveyResponses: [])
+    func updateTestResponses(newResponses: [SurveyResponse]) async throws {
+        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: newResponses)
+        try await UserAPI.postSurveyAnswers(email: authedUser.email, surveyResponses: newResponses)
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
         Task { await self.saveUserToFilesystem() }
     }

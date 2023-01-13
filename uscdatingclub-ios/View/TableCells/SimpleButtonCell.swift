@@ -23,7 +23,7 @@ class SimpleButtonCell: UITableViewCell {
         
         if let footerText {
             footerLabel.text = footerText
-            footerLabel.font = AppFont.light.size(14)
+            footerLabel.font = AppFont2.light.size(14)
         } else {
             footerLabel.isHidden = true
         }

@@ -276,7 +276,7 @@ class RadarVC: UIViewController, PageVCChild {
                                 try await UserService.singleton.updateMatchableStatus(active:true)
                             }
                         } else {
-                            let permissionsVC = PermissionsVC.create()
+                            let permissionsVC = PermissionsTableVC.create()
                             permissionsVC.modalPresentationStyle = .fullScreen
                             present(permissionsVC, animated: true)
                         }

@@ -168,12 +168,12 @@ class NotificationsManager: NSObject {
     let MostRecentNotifiationStorageKey: String = "mostRecentNotification"
     
     func mostRecentSavedNotification() -> UNNotification? {
-        return UserDefaults.value(forKey: MostRecentNotifiationStorageKey) as? UNNotification ?? nil
+        return UserDefaults.standard.value(forKey: MostRecentNotifiationStorageKey) as? UNNotification ?? nil
     }
     
     func saveNotification(_ notification: UNNotification) {
         Task {
-            UserDefaults.setValue(notification, forKey: MostRecentNotifiationStorageKey)
+            UserDefaults.standard.setValue(notification, forKey: MostRecentNotifiationStorageKey)
         }
     }
         

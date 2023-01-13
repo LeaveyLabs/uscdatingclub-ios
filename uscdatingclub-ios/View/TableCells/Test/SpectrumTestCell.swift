@@ -48,6 +48,10 @@ class SpectrumTestCell: UITableViewCell {
                    shouldBeHighlighted: Bool,
                    isLastCell: Bool = false,
                    isFirstCell: Bool = false) {
+        titleLabel.font = AppFont2.medium.size(22)
+        rightLabel.font = AppFont2.medium.size(15)
+        leftLabel.font = AppFont2.medium.size(15)
+
         titleLabel.text = testQuestion.title
         leftLabel.text = "disagree"
         leftLabel.textColor = .testPurple

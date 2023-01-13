@@ -11,9 +11,8 @@
 
 import UIKit
 
-//printFonts()
-
 private let familyName = "ChivoMono-Medium"
+private let familyName2 = "SFPro"
 
 enum AppFont: String {
     case light = "_Light"
@@ -43,4 +42,22 @@ func printFonts() {
            print(fontName)
        }
    }
+}
+
+enum AppFont2: String {
+    case light = "-Light"
+    case regular = "-Regular"
+    case medium = "-Medium"
+    case semibold = "-Semibold"
+    case bold = "-Bold"
+
+    func size(_ size: CGFloat) -> UIFont {
+        if let font = UIFont(name: fullFontName, size: size + 1.0) {
+            return font
+        }
+        fatalError("Font '\(fullFontName)' does not exist.")
+    }
+    fileprivate var fullFontName: String {
+        return rawValue.isEmpty ? familyName2 : familyName2 + rawValue
+    }
 }

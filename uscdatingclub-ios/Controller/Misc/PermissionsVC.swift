@@ -13,9 +13,19 @@ class PermissionsVC: UIViewController {
     @IBOutlet var locationButton: SimpleButton!
     @IBOutlet var backgroundRefreshButton: SimpleButton!
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var learnMoreButton: UIButton!
+    @IBOutlet var label1: UILabel!
+    @IBOutlet var label2: UILabel!
+    @IBOutlet var label3: UILabel!
+    @IBOutlet var checkmarkImageView1: UIImageView!
+    @IBOutlet var checkmarkImageView2: UIImageView!
+    @IBOutlet var checkmarkImageView3: UIImageView!
+
+    let GOODTOGO_ALPHA = 0.5
 
     var goodToGo: Bool {
-        locationButton.internalButton.backgroundColor == .customGreen && notificationsButton.internalButton.backgroundColor == .customGreen
+        false
+//        view1.alpha == GOODTOGO_ALPHA && view2.alpha == GOODTOGO_ALPHA && view3.alpha == GOODTOGO_ALPHA
     }
 
     //MARK: - Initialization
@@ -30,7 +40,10 @@ class PermissionsVC: UIViewController {
         setupButtons()
         rerender()
         titleLabel.font = AppFont.bold.size(30)
-        
+        label1.font = AppFont2.regular.size(15)
+        label2.font = AppFont2.regular.size(15)
+        label3.font = AppFont2.regular.size(15)
+
         NotificationCenter.default.addObserver(self, selector: #selector(delayedRerender), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(delayedRerender), name: .locationStatusDidUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(delayedRerender), name: UIApplication.backgroundRefreshStatusDidChangeNotification, object: nil)
@@ -46,6 +59,8 @@ class PermissionsVC: UIViewController {
         locationButton.internalButton.addTarget(self, action: #selector(locationButtonDidTapped), for: .touchUpInside)
         notificationsButton.internalButton.addTarget(self, action: #selector(notificationsButtonDidTapped), for: .touchUpInside)
         backgroundRefreshButton.internalButton.addTarget(self, action: #selector(backgroundRefreshButtonDidTapped), for: .touchUpInside)
+        learnMoreButton.addTarget(self, action: #selector(learnMoreButtonPressed), for: .touchUpInside)
+        learnMoreButton.setTitleColor(.customWhite.withAlphaComponent(0.7), for: .normal)
     }
     
     @objc func delayedRerender() {
@@ -71,12 +86,12 @@ class PermissionsVC: UIViewController {
     @objc func rerender() {
         if LocationManager.shared.isLocationServicesProperlyAuthorized() {
             DispatchQueue.main.async { [self] in
-                locationButton.internalButton.backgroundColor = .customGreen
+                locationButton.alpha = 1
                 locationButton.configure(title: "location enabled",  systemImage: "location")
             }
         } else {
             DispatchQueue.main.async { [self] in
-                locationButton.internalButton.backgroundColor = .customWhite
+                locationButton.alpha = GOODTOGO_ALPHA
                 locationButton.configure(title: "share location", subtitle: "precise, always",  systemImage: "location")
             }
         }
@@ -84,25 +99,29 @@ class PermissionsVC: UIViewController {
             let isEnabled = await NotificationsManager.shared.isNotificationsEnabled()
             DispatchQueue.main.async { [self] in
                 if isEnabled {
-                    notificationsButton.internalButton.backgroundColor = .customGreen
+                    notificationsButton.alpha = 1
                     notificationsButton.configure(title: "notifications enabled", systemImage: "bell")
                 } else {
-                    notificationsButton.internalButton.backgroundColor = .customWhite
+                    notificationsButton.alpha = GOODTOGO_ALPHA
                     notificationsButton.configure(title: "turn on notifications", systemImage: "bell")
                 }
             }
         }
         
         if UIApplication.shared.backgroundRefreshStatus == .available || ProcessInfo.processInfo.isLowPowerModeEnabled {
-            backgroundRefreshButton.internalButton.backgroundColor = .customGreen
+            backgroundRefreshButton.alpha = 1
             backgroundRefreshButton.configure(title: "background app refresh enabled",  systemImage: "arrow.clockwise.circle")
         } else {
-            backgroundRefreshButton.internalButton.backgroundColor = .customWhite
+            backgroundRefreshButton.alpha = GOODTOGO_ALPHA
             backgroundRefreshButton.configure(title: "turn on background app refresh",  systemImage: "arrow.clockwise.circle")
         }
     }
     
     //MARK: - Interaction
+    
+    @objc func learnMoreButtonPressed() {
+        openURL(Constants.faqLink)
+    }
     
     @objc func locationButtonDidTapped() {
         do {
@@ -131,3 +150,5 @@ class PermissionsVC: UIViewController {
     }
 
 }
+
+//we use new Apple APIs for minimal battery usage and don’t save any location data.

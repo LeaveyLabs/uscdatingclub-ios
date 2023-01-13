@@ -44,10 +44,12 @@ class TestTextVC: UIViewController {
         switch testTextType {
         case .welcome:
             break //MAKE SURE TO reset test context before presenting this VC
-        case .submitting:
+        case .submitting, .finished:
+            navigationController?.interactivePopGestureRecognizer?.isEnabled = false
             Task {
                 do {
-                    try await UserService.singleton.updateTestResponses(newResponses: TestContext.testResponses)
+                    try await UserService.singleton.updateTestResponses(newResponses:[])
+//                    try await UserService.singleton.updateTestResponses(newResponses: TestContext.testResponses)
                     try await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)
                     DispatchQueue.main.async { [self] in
                         testTextType = .finished
@@ -57,8 +59,6 @@ class TestTextVC: UIViewController {
                     AlertManager.displayError(error)
                 }
             }
-        case .finished:
-            break //submit test context to database
         }
     }
     
@@ -85,16 +85,16 @@ class TestTextVC: UIViewController {
             primaryButton.alpha = 0
         case .finished:
             if TestContext.isFirstTest {
-                secondaryLabel.text = "welcome to the usc dating club."
+                secondaryLabel.text = "welcome to the\nusc dating club."
                 UIView.animate(withDuration: 2) { [self] in
                     activityIndicatorView.stopAnimating()
                     primaryLabel.text = "responses submitted"
                 } completion: { completed in
-                    UIView.animate(withDuration: 2) { [self] in
+                    UIView.animate(withDuration: 1) { [self] in
                         secondaryLabel.alpha = 1
                     } completion: { completed in
                         self.primaryButton.internalButton.isEnabled = true
-                        UIView.animate(withDuration: 2) { [self] in
+                        UIView.animate(withDuration: 0.7) { [self] in
                             primaryButton.alpha = 1
                         }
                     }
@@ -122,7 +122,7 @@ class TestTextVC: UIViewController {
             break
         case .finished:
             if TestContext.isFirstTest {
-                navigationController?.pushViewController(PermissionsVC.create(), animated: true)
+                navigationController?.pushViewController(PermissionsTableVC.create(), animated: true)
             } else {
                 dismiss(animated: true)
             }

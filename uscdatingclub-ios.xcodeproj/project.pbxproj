@@ -20,6 +20,11 @@
 		434A057F2963D3AB00C15945 /* PhoneNumberKit-Dynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 434A057C2963D3AB00C15945 /* PhoneNumberKit-Dynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		470221E7295CCE3E00119FA8 /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4107D295CC0BE007C27F0 /* UIColor+Custom.swift */; };
 		470221E9295CCFA200119FA8 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470221E8295CCFA200119FA8 /* Version.swift */; };
+		4715490F2970F0AF00756BE1 /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4715490D2970F0AF00756BE1 /* SF-Pro.ttf */; };
+		471549102970F0AF00756BE1 /* SF-Pro-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4715490E2970F0AF00756BE1 /* SF-Pro-Italic.ttf */; };
+		471549142970FB1700756BE1 /* PermissionsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471549132970FB1700756BE1 /* PermissionsTableVC.swift */; };
+		471549172970FCB900756BE1 /* PermissionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471549152970FCB900756BE1 /* PermissionsCell.swift */; };
+		471549182970FCB900756BE1 /* PermissionsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 471549162970FCB900756BE1 /* PermissionsCell.xib */; };
 		4729B22E296E096400971351 /* MatchFoundTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4729B22D296E096400971351 /* MatchFoundTableVC.swift */; };
 		4729B232296E233100971351 /* ChivoMono-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4729B230296E233100971351 /* ChivoMono-Italic.ttf */; };
 		4729B233296E233100971351 /* ChivoMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4729B231296E233100971351 /* ChivoMono.ttf */; };
@@ -81,6 +86,7 @@
 		47A24A29297088FF0077AB11 /* SurveyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A24A28297088FF0077AB11 /* SurveyResponse.swift */; };
 		47A24A2B29708D020077AB11 /* SurveyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A24A28297088FF0077AB11 /* SurveyResponse.swift */; };
 		47A24A302970B6160077AB11 /* Connect.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47A24A2F2970B6160077AB11 /* Connect.storyboard */; };
+		47A24A322970E5FE0077AB11 /* UncertainValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A24A312970E5FE0077AB11 /* UncertainValue.swift */; };
 		47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A80614295F8D23001DEE64 /* EnterBiosVC.swift */; };
 		47B60B0A296C834600657C1D /* ConnectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B09296C834600657C1D /* ConnectManager.swift */; };
 		47B60B0C296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B0B296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift */; };
@@ -272,6 +278,11 @@
 		434A0531295E1F1300C15945 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		434A053C2963A77200C15945 /* LocationSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSocket.swift; sourceTree = "<group>"; };
 		470221E8295CCFA200119FA8 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
+		4715490D2970F0AF00756BE1 /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
+		4715490E2970F0AF00756BE1 /* SF-Pro-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Italic.ttf"; sourceTree = "<group>"; };
+		471549132970FB1700756BE1 /* PermissionsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsTableVC.swift; sourceTree = "<group>"; };
+		471549152970FCB900756BE1 /* PermissionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsCell.swift; sourceTree = "<group>"; };
+		471549162970FCB900756BE1 /* PermissionsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PermissionsCell.xib; sourceTree = "<group>"; };
 		4729B22D296E096400971351 /* MatchFoundTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchFoundTableVC.swift; sourceTree = "<group>"; };
 		4729B230296E233100971351 /* ChivoMono-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChivoMono-Italic.ttf"; sourceTree = "<group>"; };
 		4729B231296E233100971351 /* ChivoMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChivoMono.ttf; sourceTree = "<group>"; };
@@ -311,6 +322,7 @@
 		47A24A24296F71250077AB11 /* SimpleTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleTitleCell.xib; sourceTree = "<group>"; };
 		47A24A28297088FF0077AB11 /* SurveyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyResponse.swift; sourceTree = "<group>"; };
 		47A24A2F2970B6160077AB11 /* Connect.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Connect.storyboard; sourceTree = "<group>"; };
+		47A24A312970E5FE0077AB11 /* UncertainValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UncertainValue.swift; sourceTree = "<group>"; };
 		47A80614295F8D23001DEE64 /* EnterBiosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterBiosVC.swift; sourceTree = "<group>"; };
 		47B60B09296C834600657C1D /* ConnectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectManager.swift; sourceTree = "<group>"; };
 		47B60B0B296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate+Heading.swift"; sourceTree = "<group>"; };
@@ -541,6 +553,8 @@
 		4729B235296E297B00971351 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				4715490E2970F0AF00756BE1 /* SF-Pro-Italic.ttf */,
+				4715490D2970F0AF00756BE1 /* SF-Pro.ttf */,
 				4729B230296E233100971351 /* ChivoMono-Italic.ttf */,
 				4729B231296E233100971351 /* ChivoMono.ttf */,
 			);
@@ -634,6 +648,7 @@
 				47E38FF0295F7076007CB77F /* UpdateAvailableVC.swift */,
 				476FD866295E16290014DD42 /* PermissionsVC.swift */,
 				47B60B0D296D0E3900657C1D /* SheetVC.swift */,
+				471549132970FB1700756BE1 /* PermissionsTableVC.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -731,6 +746,7 @@
 				478BECD42966249300930DAF /* SpectrumTestQuestion.swift */,
 				47A1C8EC296E414600F8B4D6 /* Match.swift */,
 				47A24A28297088FF0077AB11 /* SurveyResponse.swift */,
+				47A24A312970E5FE0077AB11 /* UncertainValue.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1005,6 +1021,8 @@
 				476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */,
 				47B6B4C0296B99E600539353 /* SimpleButtonCell.swift */,
 				47B6B4C1296B99E600539353 /* SimpleButtonCell.xib */,
+				471549152970FCB900756BE1 /* PermissionsCell.swift */,
+				471549162970FCB900756BE1 /* PermissionsCell.xib */,
 			);
 			path = TableCells;
 			sourceTree = "<group>";
@@ -1278,6 +1296,8 @@
 				47C40EF3295CB931007C27F0 /* LaunchScreen.storyboard in Resources */,
 				47C40F17295CBAB7007C27F0 /* GoogleService-Info.plist in Resources */,
 				47A24A26296F71250077AB11 /* SimpleTitleCell.xib in Resources */,
+				471549182970FCB900756BE1 /* PermissionsCell.xib in Resources */,
+				471549102970F0AF00756BE1 /* SF-Pro-Italic.ttf in Resources */,
 				47B6B4BD296B959C00539353 /* SimpleEntryCell.xib in Resources */,
 				478BECBF2963755000930DAF /* SpectrumTestCell.xib in Resources */,
 				4758289C296A82D900F10415 /* SelectionTestCell.xib in Resources */,
@@ -1292,6 +1312,7 @@
 				476FD865295DF89A0014DD42 /* SimpleButton.xib in Resources */,
 				476FD86F295E4A1F0014DD42 /* HowItWorksCell.xib in Resources */,
 				47B6B4C3296B99E600539353 /* SimpleButtonCell.xib in Resources */,
+				4715490F2970F0AF00756BE1 /* SF-Pro.ttf in Resources */,
 				47E38FF5295F7368007CB77F /* FeatureView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1405,6 +1426,7 @@
 				47DE321A295CC52F0063C55A /* UserService.swift in Sources */,
 				4731F511295CD4870013F626 /* UITextField+Padding.swift in Sources */,
 				434A052C295E1E9700C15945 /* DeviceAPI.swift in Sources */,
+				471549172970FCB900756BE1 /* PermissionsCell.swift in Sources */,
 				47B6B4BC296B959C00539353 /* SimpleEntryCell.swift in Sources */,
 				47E38FF3295F72B9007CB77F /* FeatureView.swift in Sources */,
 				4731F508295CD4770013F626 /* UIView+PostBubble.swift in Sources */,
@@ -1436,6 +1458,7 @@
 				47DE3249295CC7C40063C55A /* UIImageView+Initials.swift in Sources */,
 				4731F525295CD9870013F626 /* UIColor+Hex.swift in Sources */,
 				47DE321D295CC52F0063C55A /* User.swift in Sources */,
+				47A24A322970E5FE0077AB11 /* UncertainValue.swift in Sources */,
 				47C40F60295CBAF0007C27F0 /* DeviceService.swift in Sources */,
 				47582897296A82C700F10415 /* SelectionHeaderTestCell.swift in Sources */,
 				47C41079295CC0AB007C27F0 /* CLLocationCoordinate.swift in Sources */,
@@ -1467,6 +1490,7 @@
 				47C41068295CC095007C27F0 /* String+Capitalization.swift in Sources */,
 				4731F50D295CD4770013F626 /* UIView+TopBorder.swift in Sources */,
 				47C40F8E295CBBBD007C27F0 /* Constants.swift in Sources */,
+				471549142970FB1700756BE1 /* PermissionsTableVC.swift in Sources */,
 				47E38FEC295F69DC007CB77F /* NotificationsManager.swift in Sources */,
 				47BBF9E7296A391600802573 /* UIImage+WithSize.swift in Sources */,
 				434A0539295E99FE00C15945 /* EmailAPI.swift in Sources */,
@@ -1502,7 +1526,7 @@
 				47DE3268295CCA5C0063C55A /* UIView+BecomeRound.swift in Sources */,
 				47DE3250295CC7C40063C55A /* UIImage+FromColor.swift in Sources */,
 				47C41047295CBFDF007C27F0 /* APIError.swift in Sources */,
-				47C41047295CBFDF007C27F0 /* Error.swift in Sources */,
+				47C41047295CBFDF007C27F0 /* APIError.swift in Sources */,
 				433B9D192970A71A0088445B /* QuestionAPI.swift in Sources */,
 				47B6B4C5296BABFB00539353 /* Sex.swift in Sources */,
 				47DE3247295CC7C40063C55A /* UIImageView+ProfilePic.swift in Sources */,

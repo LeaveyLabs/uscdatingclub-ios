@@ -9,7 +9,7 @@ import Foundation
 
 struct SurveyResponse: Codable {
     let question_id: Int
-    let answer: Int
+    let answer: String
 }
 
 struct PostSurveyAnswersParams: Codable {
