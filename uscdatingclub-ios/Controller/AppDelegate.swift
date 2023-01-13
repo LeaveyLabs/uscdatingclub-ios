@@ -107,12 +107,15 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     
     func handleAppLaunchViaNotification(_ notificationResponse: UNNotificationResponse) {
-        guard let notificationResponseHandler = NotificationsManager.shared.generateNotificationResponseHandler(notificationResponse.notification) else {
-            return
-        }
-        let loadingVC = LoadingVC.create()
-        loadingVC.notificationResponseHandler = notificationResponseHandler
-        transitionToViewController(loadingVC, duration: 0)
+        //TODO: wait do i need to do the below?
+        //isnt the below hanlded through scene delegate?
+        
+//        guard let notificationResponseHandler = NotificationsManager.shared.generateNotificationResponseHandler(notificationResponse.notification) else {
+//            return
+//        }
+//        let loadingVC = LoadingVC.create()
+//        loadingVC.notificationResponseHandler = notificationResponseHandler
+//        transitionToViewController(loadingVC, duration: 0)
     }
     
     //MARK: - Background / silent notifications
