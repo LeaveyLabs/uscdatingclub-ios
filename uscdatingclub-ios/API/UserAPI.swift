@@ -32,16 +32,6 @@ struct UserError: Codable {
     let detail: String?
 }
 
-struct SurveyResponse: Codable {
-    let question_id: Int
-    let answer: Int
-}
-
-struct PostSurveyAnswersParams: Codable {
-    let email: String
-    let responses: [SurveyResponse]
-}
-
 class UserAPI {
     // Paths to API endpoints
     enum Endpoints: String {
