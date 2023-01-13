@@ -129,7 +129,9 @@ class UserAPI {
                                   surveyResponses:[SurveyResponse]) async throws {
         let url = "\(Env.BASE_URL)\(Endpoints.postSurveyAnswers.rawValue)"
         let params = PostSurveyAnswersParams(email: email, responses: surveyResponses)
-        let json = try JSONEncoder().encode(params)
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        let json = try encoder.encode(params)
         let (data, response) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
         try filterUserErrors(data: data, response: response)
     }
