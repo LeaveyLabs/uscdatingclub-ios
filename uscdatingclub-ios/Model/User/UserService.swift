@@ -130,21 +130,21 @@ class UserService: NSObject {
 //    //MARK: - Update user
 //
     func updateUser(firstName: String, lastName: String, sexIdentity: String, sexPreference: String) async throws {
-        let updatedUser = CompleteUser(id: authedUser.id, firstName: firstName, lastName: lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: authedUser.surveyResponses, token: "")
+        let updatedUser = CompleteUser(id: authedUser.id, firstName: firstName, lastName: lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: authedUser.surveyResponses, token: authedUser.token)
         try await UserAPI.updateUser(id:updatedUser.id, user:updatedUser)
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
         Task { await self.saveUserToFilesystem() }
     }
     
     func updateMatchableStatus(active: Bool) async throws {
-        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: active, surveyResponses: authedUser.surveyResponses, token: "")
+        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: active, surveyResponses: authedUser.surveyResponses, token: authedUser.token)
         try await UserAPI.updateMatchableStatus(matchableStatus: active, email: authedUser.email)
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
         Task { await self.saveUserToFilesystem() }
     }
     
     func updateTestResponses(newResponses: [Int:Any]) async throws {
-        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: [], token: "")
+        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: [], token: authedUser.token)
         try await UserAPI.postSurveyAnswers(email: authedUser.email, surveyResponses: [])
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
         Task { await self.saveUserToFilesystem() }
@@ -274,6 +274,7 @@ class UserService: NSObject {
                 try await Task.sleep(nanoseconds: NSEC_PER_SEC * UInt64(SLEEP_INTERVAL))
             }
         } catch {
+            print("\(error)")
             print("ERROR WAITING TO REGISTER DEVICE TOKEN")
         }
     }
