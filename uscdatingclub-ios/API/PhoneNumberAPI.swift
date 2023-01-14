@@ -80,7 +80,9 @@ class PhoneNumberAPI {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         do {
-            return try decoder.decode(CompleteUser.self, from: data)
+            let completeUser = try decoder.decode(CompleteUser.self, from: data)
+            setGlobalAuthToken(token: completeUser.token)
+            return completeUser            
         }
         catch is DecodingError {
             return nil

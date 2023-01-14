@@ -8,7 +8,7 @@
 import Foundation
 
 struct SurveyResponse: Codable {
-    let question_id: Int
+    let questionId: Int
     let answer: String
 }
 

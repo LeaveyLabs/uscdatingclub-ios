@@ -130,14 +130,14 @@ class UserService: NSObject {
 //    //MARK: - Update user
 //
     func updateUser(firstName: String, lastName: String, sexIdentity: String, sexPreference: String) async throws {
-        let updatedUser = CompleteUser(id: authedUser.id, firstName: firstName, lastName: lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: authedUser.surveyResponses)
+        let updatedUser = CompleteUser(id: authedUser.id, firstName: firstName, lastName: lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: authedUser.surveyResponses, token: "")
         try await UserAPI.updateUser(id:updatedUser.id, user:updatedUser)
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
         Task { await self.saveUserToFilesystem() }
     }
     
     func updateMatchableStatus(active: Bool) async throws {
-        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: active, surveyResponses: authedUser.surveyResponses)
+        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: active, surveyResponses: authedUser.surveyResponses, token: "")
         try await UserAPI.updateMatchableStatus(matchableStatus: active, email: authedUser.email)
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
         Task { await self.saveUserToFilesystem() }
@@ -247,7 +247,7 @@ class UserService: NSObject {
             let data = try Data(contentsOf: UserService.LOCAL_FILE_LOCATION)
             frontendCompleteUser = try JSONDecoder().decode(FrontendCompleteUser.self, from: data)
             guard let frontendCompleteUser = frontendCompleteUser else { return }
-//            setGlobalAuthToken(token: frontendCompleteUser.token) //this shouldn't be necessary, but to be safe
+            setGlobalAuthToken(token: frontendCompleteUser.token) //this shouldn't be necessary, but to be safe
             Task { await waitAndRegisterDeviceToken(id: frontendCompleteUser.id) }
         } catch {
             print("COULD NOT LOAD: \(error)")
@@ -268,9 +268,9 @@ class UserService: NSObject {
     func waitAndRegisterDeviceToken(id:Int) async {
         do {
             while true {
-//                if getGlobalDeviceToken() != "" && getGlobalAuthToken() != "" {
-//                    try await DeviceAPI.registerCurrentDeviceWithUser(user: id)
-//                }
+                if getGlobalDeviceToken() != "" && getGlobalAuthToken() != "" {
+                    try await DeviceAPI.registerCurrentDeviceWithUser(user: id)
+                }
                 try await Task.sleep(nanoseconds: NSEC_PER_SEC * UInt64(SLEEP_INTERVAL))
             }
         } catch {
