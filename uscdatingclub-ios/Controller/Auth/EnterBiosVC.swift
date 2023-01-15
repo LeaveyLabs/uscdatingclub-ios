@@ -98,9 +98,9 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
     
     func setupLabels() {
         sexIdentityLabel.font = AppFont2.medium.size(17)
-        sexIdentityLabel.insets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        sexIdentityLabel.insets = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 10)
         sexPreferenceLabel.font = AppFont2.medium.size(17)
-        sexPreferenceLabel.insets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        sexPreferenceLabel.insets = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 10)
     }
 
     func setupTextFields() {
@@ -111,6 +111,9 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
         sexOptions = [.blank, .f, .m, .b]
         sexIdentityTextField.font = AppFont.medium.size(17)
         sexPreferenceTextField.font = AppFont.medium.size(17)
+        //Left insets
+        sexIdentityTextField.setLeftPaddingPoints(8)
+        sexPreferenceTextField.setLeftPaddingPoints(8)
     }
     
     func setupContinueButton() {
@@ -144,16 +147,17 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
     }
 
     @IBAction func whyWeAskDidTapped(_ sender: UIButton) {
-        AlertManager.showInfoCentered("why we ask about sex", "in order to follow legal guidelines for platforms with user-generated content, apple requires us to ensure all account holders are above their country's minimum age requirement", on: self)
+        AlertManager.showInfoCentered("why we ask about sex", "usc dating club is a dating app, so your sexual identity & preferences determine who you'll be matched with.", on: self)
     }
     
     //MARK: - TextField Delegate
 
     @IBAction func textFieldEditingChanged(_ sender: UITextField) {
-        if sender == sexIdentityTextField, sender.text?.count == 10 {
-            sexPreferenceTextField.becomeFirstResponder()
-        }
-        validateInput()
+//        print("DID CHANGE")
+//        if sender == sexIdentityTextField, let textCount = sender.text?.count, textCount > 0 {
+//            sexPreferenceTextField.becomeFirstResponder()
+//        }
+//        validateInput()
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -232,6 +236,12 @@ extension EnterBiosVC: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if sexIdentityTextField.isFirstResponder {
             sexIdentityTextField.text = sexOptions[pickerView.selectedRow(inComponent: component)].displayName
+            if let textCount = sexIdentityTextField.text?.count,
+                textCount > 0,
+               let prefTextCount = sexPreferenceTextField.text?.count,
+               prefTextCount == 0 {
+                sexPreferenceTextField.becomeFirstResponder()
+            }
         } else {
             sexPreferenceTextField.text = sexOptions[pickerView.selectedRow(inComponent: component)].displayName
         }

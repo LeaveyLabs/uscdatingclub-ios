@@ -78,21 +78,10 @@ class CreateProfileVC: KUIViewController, UITextFieldDelegate {
         subtitleLabel.font = AppFont2.medium.size(17)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        print(view.bounds.height)
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupImagePicker()
         validateInput()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     //MARK: - Setup

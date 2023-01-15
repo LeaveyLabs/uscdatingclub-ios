@@ -20,7 +20,7 @@ class HowItWorksVC: UIViewController {
     @IBOutlet var titleLabel: UILabel!
 
     let coreFeatures: [HowItWorksItem] = [
-        HowItWorksItem(image: UIImage(systemName: "test")!,
+        HowItWorksItem(image: UIImage(named: "test")!,
                        title: "take the compatibility test",
                        description: "we’ll calculate your compatibility with other usc students"),
         HowItWorksItem(image: UIImage(named: "pulse")!,

@@ -99,7 +99,7 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
         let spacing = (textFieldWidth / 7) - numberWidth
         confirmTextField.setLeftPaddingPoints(spacing)
         confirmTextField.defaultTextAttributes.updateValue(spacing, forKey: NSAttributedString.Key.kern)
-        confirmTextField.font = AppFont.semibold.size(20)
+        confirmTextField.font = AppFont.medium.size(20)
     }
     
     func setupContinueButton() {

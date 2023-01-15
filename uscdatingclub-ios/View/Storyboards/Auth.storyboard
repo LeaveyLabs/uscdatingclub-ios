@@ -927,7 +927,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" textAlignment="justified" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pnW-a9-ddQ">
-                                        <rect key="frame" x="170" y="86" width="180" height="40"/>
+                                        <rect key="frame" x="25" y="114" width="325" height="40"/>
                                         <color key="backgroundColor" name="customWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="3X8-Yv-tuI"/>
@@ -938,14 +938,15 @@
                                             <action selector="textFieldEditingChanged:" destination="nhc-Zl-MuL" eventType="editingChanged" id="E30-w9-dLd"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cbR-24-UpR">
-                                        <rect key="frame" x="287" y="186" width="63" height="20"/>
+                                    <button opaque="NO" alpha="0.40000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cbR-24-UpR">
+                                        <rect key="frame" x="330" y="247" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="W94-YY-lO4"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                        <color key="tintColor" name="customWhite"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="why we ask">
+                                        <state key="normal" image="questionmark.circle" catalog="system">
                                             <color key="titleColor" name="customWhite"/>
                                         </state>
                                         <connections>
@@ -953,7 +954,7 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" textAlignment="justified" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tv8-up-ZiQ">
-                                        <rect key="frame" x="170" y="141" width="180" height="40"/>
+                                        <rect key="frame" x="25" y="197" width="325" height="40"/>
                                         <color key="backgroundColor" name="customWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="ByI-bZ-mVE"/>
@@ -972,18 +973,21 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sexual identity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7m2-TO-Szv" customClass="InsetLabel" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                        <rect key="frame" x="25" y="86" width="145" height="40"/>
+                                        <rect key="frame" x="24.999999999999993" y="86" width="109.33333333333331" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="145" id="0TX-wy-11Y"/>
+                                            <constraint firstAttribute="height" constant="20" id="0HP-zf-Qdu"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" name="customWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sexual preference" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWg-br-xyG" customClass="InsetLabel" customModule="uscdatingclub_ios" customModuleProvider="target">
-                                        <rect key="frame" x="25" y="141" width="145" height="40"/>
+                                        <rect key="frame" x="25" y="169" width="135.33333333333334" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="MLi-gX-4Og"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" name="customWhite"/>
                                         <nil key="highlightedColor"/>
@@ -995,21 +999,18 @@
                                     <constraint firstItem="OOh-9z-UKg" firstAttribute="leading" secondItem="nxG-Ka-3qq" secondAttribute="leading" constant="25" id="1Ph-jn-eyW"/>
                                     <constraint firstAttribute="trailing" secondItem="pnW-a9-ddQ" secondAttribute="trailing" constant="25" id="4E4-N8-dfS"/>
                                     <constraint firstItem="OOh-9z-UKg" firstAttribute="top" secondItem="nxG-Ka-3qq" secondAttribute="top" constant="30" id="63D-cc-iRH"/>
-                                    <constraint firstItem="cbR-24-UpR" firstAttribute="top" secondItem="tv8-up-ZiQ" secondAttribute="bottom" constant="5" id="7FL-pF-AGa"/>
-                                    <constraint firstItem="7m2-TO-Szv" firstAttribute="width" secondItem="jWg-br-xyG" secondAttribute="width" id="90W-ym-t8S"/>
+                                    <constraint firstItem="cbR-24-UpR" firstAttribute="top" secondItem="tv8-up-ZiQ" secondAttribute="bottom" constant="10" id="7FL-pF-AGa"/>
+                                    <constraint firstItem="jWg-br-xyG" firstAttribute="top" secondItem="pnW-a9-ddQ" secondAttribute="bottom" constant="15" id="7Kn-c9-Yyt"/>
                                     <constraint firstAttribute="trailing" secondItem="FP0-rY-adH" secondAttribute="trailing" constant="20" id="BPU-38-UYa"/>
-                                    <constraint firstItem="jWg-br-xyG" firstAttribute="centerY" secondItem="tv8-up-ZiQ" secondAttribute="centerY" id="DVe-Rq-jG8"/>
+                                    <constraint firstItem="pnW-a9-ddQ" firstAttribute="leading" secondItem="nxG-Ka-3qq" secondAttribute="leading" constant="25" id="HEE-gM-HDG"/>
                                     <constraint firstAttribute="trailing" secondItem="OOh-9z-UKg" secondAttribute="trailing" constant="25" id="I8D-sK-NUV"/>
                                     <constraint firstAttribute="trailing" secondItem="tv8-up-ZiQ" secondAttribute="trailing" constant="25" id="QlW-xk-DSz"/>
-                                    <constraint firstItem="pnW-a9-ddQ" firstAttribute="leading" secondItem="7m2-TO-Szv" secondAttribute="trailing" id="SpY-Wv-kmS"/>
                                     <constraint firstItem="jWg-br-xyG" firstAttribute="leading" secondItem="nxG-Ka-3qq" secondAttribute="leading" constant="25" id="T9g-S6-g1j"/>
+                                    <constraint firstItem="tv8-up-ZiQ" firstAttribute="leading" secondItem="nxG-Ka-3qq" secondAttribute="leading" constant="25" id="UnU-Qw-KEc"/>
                                     <constraint firstAttribute="bottom" secondItem="FP0-rY-adH" secondAttribute="bottom" constant="15" id="W8N-0B-FKZ"/>
-                                    <constraint firstItem="jWg-br-xyG" firstAttribute="height" secondItem="tv8-up-ZiQ" secondAttribute="height" id="WE0-QI-dth"/>
-                                    <constraint firstItem="7m2-TO-Szv" firstAttribute="centerY" secondItem="pnW-a9-ddQ" secondAttribute="centerY" id="WKX-GA-Zkl"/>
-                                    <constraint firstItem="tv8-up-ZiQ" firstAttribute="top" secondItem="pnW-a9-ddQ" secondAttribute="bottom" constant="15" id="YNG-zY-iSp"/>
-                                    <constraint firstItem="7m2-TO-Szv" firstAttribute="height" secondItem="pnW-a9-ddQ" secondAttribute="height" id="Yvi-3K-y3b"/>
-                                    <constraint firstItem="pnW-a9-ddQ" firstAttribute="top" secondItem="OOh-9z-UKg" secondAttribute="bottom" constant="20" id="e2J-OO-LIt"/>
-                                    <constraint firstItem="tv8-up-ZiQ" firstAttribute="leading" secondItem="jWg-br-xyG" secondAttribute="trailing" id="jX1-j2-Dhf"/>
+                                    <constraint firstItem="tv8-up-ZiQ" firstAttribute="top" secondItem="pnW-a9-ddQ" secondAttribute="bottom" constant="43" id="YNG-zY-iSp"/>
+                                    <constraint firstItem="pnW-a9-ddQ" firstAttribute="top" secondItem="OOh-9z-UKg" secondAttribute="bottom" constant="48" id="e2J-OO-LIt"/>
+                                    <constraint firstItem="7m2-TO-Szv" firstAttribute="top" secondItem="OOh-9z-UKg" secondAttribute="bottom" constant="20" id="o78-Oc-kMF"/>
                                     <constraint firstItem="7m2-TO-Szv" firstAttribute="leading" secondItem="nxG-Ka-3qq" secondAttribute="leading" constant="25" id="t3P-Mu-mLS"/>
                                     <constraint firstItem="FP0-rY-adH" firstAttribute="leading" secondItem="nxG-Ka-3qq" secondAttribute="leading" constant="20" id="yyp-aN-xf7"/>
                                 </constraints>
@@ -1035,6 +1036,7 @@
                         <outlet property="sexPreferenceLabel" destination="jWg-br-xyG" id="Dpg-xK-dUO"/>
                         <outlet property="sexPreferenceTextField" destination="tv8-up-ZiQ" id="Iib-MS-9V2"/>
                         <outlet property="titleLabel" destination="OOh-9z-UKg" id="w5e-8M-ypp"/>
+                        <outlet property="whyWeAskButton" destination="cbR-24-UpR" id="ajD-d7-rL9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J0z-xU-Dsi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1107,6 +1109,7 @@ hold tight and we'll send you an email as soon as you can signup!</string>
         <image name="camera.circle.fill" catalog="system" width="128" height="123"/>
         <image name="chevron.left" catalog="system" width="97" height="128"/>
         <image name="circle.fill" catalog="system" width="128" height="123"/>
+        <image name="questionmark.circle" catalog="system" width="128" height="123"/>
         <namedColor name="AccentColor">
             <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
