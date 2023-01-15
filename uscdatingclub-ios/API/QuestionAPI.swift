@@ -29,6 +29,7 @@ class QuestionAPI {
     // Paths to API endpoints
     enum Endpoints: String {
         case getQuestions = "get-questions/"
+        case getPageOrder = "get-page-order/"
     }
     
     // Parameters for API
@@ -63,11 +64,17 @@ class QuestionAPI {
     
     static func getQuestions() async throws -> [Question] {
         let url = "\(Env.BASE_URL)\(Endpoints.getQuestions.rawValue)"
-        let (data, response) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: Data(), method: HTTPMethods.PATCH.rawValue)
+        let (data, response) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: Data(), method: HTTPMethods.GET.rawValue)
         try filterQuestionErrors(data: data, response: response)
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return try decoder.decode([Question].self, from: data)
+    }
+    
+    static func getPageOrder() async throws -> [String] {
+        let url = "\(Env.BASE_URL)\(Endpoints.getQuestions.rawValue)"
+        let (data, _) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: Data(), method: HTTPMethods.GET.rawValue)
+        return try JSONDecoder().decode([String].self, from: data)
     }
 }
 
