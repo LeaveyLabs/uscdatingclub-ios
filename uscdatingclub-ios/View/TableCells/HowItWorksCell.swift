@@ -24,6 +24,10 @@ class HowItWorksCell: UITableViewCell {
         bigImageView.image = image
         selectionStyle = .none
         backgroundColor = .clear
+        
+        titleLabel.font = AppFont.semibold.size(22)
+        descriptionLabel.font = AppFont2.medium.size(16)
+        descriptionLabel.textColor = .customWhite.withAlphaComponent(0.7)
     }
     
     //MARK: - Lifecycle

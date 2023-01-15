@@ -89,4 +89,5 @@ class EmailAPI {
         let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
         try filterEmailErrors(data: data, response: response)
     }
+    
 }
