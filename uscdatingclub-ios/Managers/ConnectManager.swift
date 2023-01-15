@@ -23,6 +23,7 @@ class ConnectManager: NSObject {
     let matchInfo: MatchInfo
     let delegate: ConnectManagerDelegate
     let motionManager: CMMotionManager
+    var locationSocket: LocationSocket?
     
     //MARK: - Initializer
     
@@ -39,7 +40,7 @@ class ConnectManager: NSObject {
     }
 
     //MARK: - Public Interface
-    
+        
     func startLocationCalculation() {
         //TODO: should the queue be main though?
         
@@ -75,10 +76,20 @@ class ConnectManager: NSObject {
         }
     }
     
+    func startConnection() throws {
+        self.locationSocket = try LocationSocket(sender: UserService.singleton.getId(), receiver: matchInfo.userId)
+        self.locationSocket?.locationDidChange = self.onLocationChange
+    }
+    
     func endConnection() {
         finished = true
         NotificationCenter.default.removeObserver(self)
         LocationManager.shared.resetDistanceFilter()
+    }
+    
+    func onLocationChange(location:Location) {
+        print("HOLY SHIT LOCATION CHANGED!")
+        return
     }
     
     //MARK: - Helpers

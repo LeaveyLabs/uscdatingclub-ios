@@ -33,7 +33,15 @@ class LocationSocket: WebSocketDelegate {
     let receiver: Int!
     let request: URLRequest
     
-    var partnerLocation: Location?
+    var partnerLocation: Location? {
+        didSet {
+            if let location = partnerLocation {
+                locationDidChange?(location)
+            }
+        }
+    }
+    
+    var locationDidChange: ((Location) -> (Void))? = nil
     
 //    var unsent_messages: [String];
 //    var server_messages: [Message] {

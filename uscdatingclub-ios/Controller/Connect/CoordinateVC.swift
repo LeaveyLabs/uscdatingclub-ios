@@ -27,7 +27,7 @@ class CoordinateVC: UIViewController {
     class func create(matchInfo: MatchInfo) -> CoordinateVC {
         let vc = UIStoryboard(name: Constants.SBID.SB.Connect, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Coordinate) as! CoordinateVC
         vc.matchInfo = matchInfo
-        vc.connectManager = ConnectManager(matchInfo: matchInfo, delegate: vc)
+        vc.connectManager = try ConnectManager(matchInfo: matchInfo, delegate: vc)
         return vc
     }
     
