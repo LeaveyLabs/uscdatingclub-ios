@@ -121,7 +121,7 @@ class UserAPI {
             ParameterKeys.sexPreference.rawValue: String(sexPreference),
         ]
         let json = try JSONEncoder().encode(params)
-        let (data, response) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
+        let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
         try filterUserErrors(data: data, response: response)
     }
     
