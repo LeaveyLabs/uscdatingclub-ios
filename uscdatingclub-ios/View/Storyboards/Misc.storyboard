@@ -387,7 +387,7 @@ we don't save any location data and use new Apple APIs for minimal battery usage
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to join the club" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKQ-uU-Y5V">
-                                <rect key="frame" x="94.333333333333329" y="84" width="204.33333333333337" height="60"/>
+                                <rect key="frame" x="94.666666666666686" y="84" width="204" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="8Wl-Cs-w7G"/>
                                 </constraints>

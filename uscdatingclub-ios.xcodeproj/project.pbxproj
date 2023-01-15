@@ -58,6 +58,7 @@
 		4731F52C295CE0B40013F626 /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4731F52B295CE0B40013F626 /* AboutVC.swift */; };
 		4731F52E295CE0C10013F626 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4731F52D295CE0C10013F626 /* AccountVC.swift */; };
 		4731F530295CF7DB0013F626 /* UIPageViewController+GoTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4731F52F295CF7DB0013F626 /* UIPageViewController+GoTo.swift */; };
+		4756882B29738C9E00D6DBB1 /* InsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4756882A29738C9E00D6DBB1 /* InsetLabel.swift */; };
 		47582897296A82C700F10415 /* SelectionHeaderTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47582895296A82C700F10415 /* SelectionHeaderTestCell.swift */; };
 		47582898296A82C800F10415 /* SelectionHeaderTestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47582896296A82C700F10415 /* SelectionHeaderTestCell.xib */; };
 		4758289B296A82D900F10415 /* SelectionTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47582899296A82D900F10415 /* SelectionTestCell.swift */; };
@@ -295,6 +296,7 @@
 		4731F52B295CE0B40013F626 /* AboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
 		4731F52D295CE0C10013F626 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
 		4731F52F295CF7DB0013F626 /* UIPageViewController+GoTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPageViewController+GoTo.swift"; sourceTree = "<group>"; };
+		4756882A29738C9E00D6DBB1 /* InsetLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetLabel.swift; sourceTree = "<group>"; };
 		47582895296A82C700F10415 /* SelectionHeaderTestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionHeaderTestCell.swift; sourceTree = "<group>"; };
 		47582896296A82C700F10415 /* SelectionHeaderTestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionHeaderTestCell.xib; sourceTree = "<group>"; };
 		47582899296A82D900F10415 /* SelectionTestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTestCell.swift; sourceTree = "<group>"; };
@@ -898,6 +900,7 @@
 				4731F524295CD9870013F626 /* UIColor+Hex.swift */,
 				4731F52F295CF7DB0013F626 /* UIPageViewController+GoTo.swift */,
 				47BBF9E4296A390600802573 /* UIAlertController+AddImage.swift */,
+				4756882A29738C9E00D6DBB1 /* InsetLabel.swift */,
 			);
 			path = UIKitExtensions;
 			sourceTree = "<group>";
@@ -1495,6 +1498,7 @@
 				47BBF9E7296A391600802573 /* UIImage+WithSize.swift in Sources */,
 				434A0539295E99FE00C15945 /* EmailAPI.swift in Sources */,
 				47B6B4C2296B99E600539353 /* SimpleButtonCell.swift in Sources */,
+				4756882B29738C9E00D6DBB1 /* InsetLabel.swift in Sources */,
 				4731F509295CD4770013F626 /* UIView+Shadow.swift in Sources */,
 				47DE325C295CC7C40063C55A /* UIViewController+Loading.swift in Sources */,
 				47DE324D295CC7C40063C55A /* UITextView+PreventPeriod.swift in Sources */,

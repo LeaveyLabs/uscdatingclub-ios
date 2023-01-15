@@ -23,7 +23,6 @@ class EditAccountVC: UIViewController {
     var sexPreferenceTextField: UITextField!
     var sexOptions: [Sex] = [.blank, .f, .m, .b]
 
-
     //State
     var firstName: String = UserService.singleton.getFirstName() {
         didSet { validateInput() }
@@ -245,6 +244,10 @@ extension EditAccountVC: UITextFieldDelegate {
             lastName = newText
         }
         validateInput()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        tableView.reloadData()
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

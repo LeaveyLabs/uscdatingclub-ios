@@ -144,7 +144,7 @@ class UserService: NSObject {
     }
     
     func updateTestResponses(newResponses: [SurveyResponse]) async throws {
-        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: newResponses)
+        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: newResponses, token: authedUser.token)
         try await UserAPI.postSurveyAnswers(email: authedUser.email, surveyResponses: newResponses)
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
         Task { await self.saveUserToFilesystem() }
@@ -256,7 +256,7 @@ class UserService: NSObject {
 
     func eraseUserFromFilesystem() {
         do {
-//            setGlobalAuthToken(token: "")
+            setGlobalAuthToken(token: "")
             try FileManager.default.removeItem(at: UserService.LOCAL_FILE_LOCATION)
         } catch {
             print("\(error)")

@@ -42,6 +42,8 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var sexIdentityTextField: UITextField!
     @IBOutlet weak var sexPreferenceTextField: UITextField!
+    @IBOutlet var sexIdentityLabel: InsetLabel!
+    @IBOutlet var sexPreferenceLabel: InsetLabel!
     
 //    @IBOutlet weak var dobTextField: UITextField!
     
@@ -72,10 +74,12 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.sexPicker.reloadAllComponents()
 
         validateInput()
         shouldNotAnimateKUIAccessoryInputView = true
         setupTextFields()
+        setupLabels()
         setupContinueButton()
         titleLabel.font = AppFont.bold.size(30)
     }
@@ -88,9 +92,17 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         sexIdentityTextField.becomeFirstResponder()
+        sexIdentityTextField.tintColor = .customBlack //ensure cursor is visible
     }
 
     //MARK: - Setup
+    
+    func setupLabels() {
+        sexIdentityLabel.font = AppFont2.regular.size(15)
+        sexIdentityLabel.insets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        sexPreferenceLabel.font = AppFont2.regular.size(15)
+        sexPreferenceLabel.insets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+    }
 
     func setupTextFields() {
         sexIdentityTextField.delegate = self
@@ -98,6 +110,8 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
         sexPreferenceTextField.delegate = self
         sexPreferenceTextField.inputView = sexPicker
         sexOptions = [.blank, .f, .m, .b]
+        sexIdentityTextField.font = AppFont2.semibold.size(15)
+        sexPreferenceTextField.font = AppFont2.semibold.size(15)
     }
     
     func setupContinueButton() {
@@ -141,6 +155,10 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
             sexPreferenceTextField.becomeFirstResponder()
         }
         validateInput()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        sexPicker.reloadAllComponents()
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -201,7 +219,7 @@ extension EnterBiosVC: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        sexIdentityTextField.isFirstResponder ? 3 : 4
+        return sexIdentityTextField.isFirstResponder ? 3 : 4
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
