@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="first name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0T-wG-uTi">
-                        <rect key="frame" x="15" y="20" width="81" height="30"/>
+                        <rect key="frame" x="15" y="20" width="81" height="40"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" name="customWhite"/>
                         <nil key="highlightedColor"/>
@@ -32,7 +32,7 @@
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="70m-Sw-ma2">
-                        <rect key="frame" x="15" y="60" width="320" height="1"/>
+                        <rect key="frame" x="15" y="70" width="320" height="1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="xR9-jA-VFd"/>
@@ -40,7 +40,7 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="70m-Sw-ma2" secondAttribute="bottom" constant="20" id="0gS-Lr-5GC"/>
+                    <constraint firstAttribute="bottom" secondItem="70m-Sw-ma2" secondAttribute="bottom" constant="10" id="0gS-Lr-5GC"/>
                     <constraint firstItem="70m-Sw-ma2" firstAttribute="top" secondItem="f0T-wG-uTi" secondAttribute="bottom" constant="10" id="460-Ye-9BF"/>
                     <constraint firstItem="f0T-wG-uTi" firstAttribute="leading" secondItem="70m-Sw-ma2" secondAttribute="leading" id="8em-Hh-Vi2"/>
                     <constraint firstItem="EKM-iJ-Z7d" firstAttribute="trailing" secondItem="70m-Sw-ma2" secondAttribute="trailing" id="K4T-Pr-ili"/>
@@ -65,7 +65,7 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="primaryColor">
-            <color red="0.8901960784313725" green="0.30588235294117649" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.83529411764705885" green="0.30588235294117649" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

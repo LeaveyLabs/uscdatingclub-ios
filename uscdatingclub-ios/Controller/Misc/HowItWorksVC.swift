@@ -25,7 +25,7 @@ class HowItWorksVC: UIViewController {
                        description: "we’ll calculate your compatibility with other usc students"),
         HowItWorksItem(image: UIImage(named: "pulse")!,
                        title: "keep your phone in your pocket",
-                       description: "your phone will look for your next match"),
+                       description: "your phone will search for compatible students near you"),
         HowItWorksItem(image: UIImage(named: "ring")!,
                        title: "get matched",
                        description: "you’ll both get a notification and have \(Constants.minutesToRespond) to respond")]
@@ -70,9 +70,7 @@ class HowItWorksVC: UIViewController {
     
     @objc func gotItButtonDidTapped() {
         if let _ = parent as? UINavigationController {
-//            let vc = PermissionsVC.create()
-//            parent.pushViewController(vc, animated: true)
-            dismiss(animated: true)
+            transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.3)
         } else {
             dismiss(animated: true)
         }
