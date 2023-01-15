@@ -175,7 +175,7 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
             let sexIdentityText = sexIdentityTextField.text,
             sexIdentityText != "",
             let sexIdentity = sexIdentityText.first,
-            let sexPreferenceText = sexIdentityTextField.text,
+            let sexPreferenceText = sexPreferenceTextField.text,
             sexPreferenceText != "",
             let sexPreference = sexIdentityText.first
         else {
