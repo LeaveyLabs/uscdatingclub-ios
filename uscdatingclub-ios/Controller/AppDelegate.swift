@@ -24,11 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Version.checkForNewUpdate()
         }
                 
-//        printFonts()
         
         FirebaseApp.configure()
 //        Constants.fetchRemoteConfig()
         Constants.fetchRemoteConfigDebug()
+        TestService.shared.initialize()
                 
         return true
     }

@@ -25,7 +25,7 @@ class HowItWorksCell: UITableViewCell {
         selectionStyle = .none
         backgroundColor = .clear
         
-        titleLabel.font = AppFont.semibold.size(24)
+        titleLabel.font = AppFont.semibold.size(21)
         descriptionLabel.font = AppFont2.medium.size(16)
         descriptionLabel.textColor = .customWhite.withAlphaComponent(0.7)
     }

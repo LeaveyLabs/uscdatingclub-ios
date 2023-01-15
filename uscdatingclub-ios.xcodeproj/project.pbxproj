@@ -71,6 +71,8 @@
 		476FD86B295E46E30014DD42 /* HowItWorksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD86A295E46E30014DD42 /* HowItWorksVC.swift */; };
 		476FD86E295E4A1F0014DD42 /* HowItWorksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FD86C295E4A1F0014DD42 /* HowItWorksCell.swift */; };
 		476FD86F295E4A1F0014DD42 /* HowItWorksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */; };
+		4788155D2974800300671618 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4788155C2974800300671618 /* Question.swift */; };
+		478815602974826900671618 /* TestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4788155F2974826900671618 /* TestService.swift */; };
 		478BECBB2963463300930DAF /* GenericAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECBA2963463300930DAF /* GenericAPI.swift */; };
 		478BECBE2963755000930DAF /* SpectrumTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECBC2963755000930DAF /* SpectrumTestCell.swift */; };
 		478BECBF2963755000930DAF /* SpectrumTestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 478BECBD2963755000930DAF /* SpectrumTestCell.xib */; };
@@ -80,7 +82,6 @@
 		478BECC62964C4D000930DAF /* TestQuestionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECC52964C4D000930DAF /* TestQuestionsVC.swift */; };
 		478BECC92964C60900930DAF /* TestTextVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECC82964C60900930DAF /* TestTextVC.swift */; };
 		478BECD52966249300930DAF /* SpectrumTestQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECD42966249300930DAF /* SpectrumTestQuestion.swift */; };
-		478BECD729662C8100930DAF /* TestContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECD629662C8100930DAF /* TestContext.swift */; };
 		47A1C8EB296E2AD900F8B4D6 /* UIFont+Override.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A1C8EA296E2AD900F8B4D6 /* UIFont+Override.swift */; };
 		47A1C8ED296E414600F8B4D6 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A1C8EC296E414600F8B4D6 /* Match.swift */; };
 		47A24A25296F71250077AB11 /* SimpleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A24A23296F71250077AB11 /* SimpleTitleCell.swift */; };
@@ -311,6 +312,8 @@
 		476FD86A295E46E30014DD42 /* HowItWorksVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorksVC.swift; sourceTree = "<group>"; };
 		476FD86C295E4A1F0014DD42 /* HowItWorksCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowItWorksCell.swift; sourceTree = "<group>"; };
 		476FD86D295E4A1F0014DD42 /* HowItWorksCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HowItWorksCell.xib; sourceTree = "<group>"; };
+		4788155C2974800300671618 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		4788155F2974826900671618 /* TestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestService.swift; sourceTree = "<group>"; };
 		478BECBA2963463300930DAF /* GenericAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAPI.swift; sourceTree = "<group>"; };
 		478BECBC2963755000930DAF /* SpectrumTestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumTestCell.swift; sourceTree = "<group>"; };
 		478BECBD2963755000930DAF /* SpectrumTestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpectrumTestCell.xib; sourceTree = "<group>"; };
@@ -319,7 +322,6 @@
 		478BECC52964C4D000930DAF /* TestQuestionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestQuestionsVC.swift; sourceTree = "<group>"; };
 		478BECC82964C60900930DAF /* TestTextVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTextVC.swift; sourceTree = "<group>"; };
 		478BECD42966249300930DAF /* SpectrumTestQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumTestQuestion.swift; sourceTree = "<group>"; };
-		478BECD629662C8100930DAF /* TestContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestContext.swift; sourceTree = "<group>"; };
 		47A1C8EA296E2AD900F8B4D6 /* UIFont+Override.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Override.swift"; sourceTree = "<group>"; };
 		47A1C8EC296E414600F8B4D6 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		47A24A23296F71250077AB11 /* SimpleTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTitleCell.swift; sourceTree = "<group>"; };
@@ -587,6 +589,17 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		4788155E2974800E00671618 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				4788155C2974800300671618 /* Question.swift */,
+				478BECD42966249300930DAF /* SpectrumTestQuestion.swift */,
+				47A24A28297088FF0077AB11 /* SurveyResponse.swift */,
+				4788155F2974826900671618 /* TestService.swift */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
 		478BECC72964C5E300930DAF /* Test */ = {
 			isa = PBXGroup;
 			children = (
@@ -742,14 +755,13 @@
 		47C40F5B295CBAF0007C27F0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4788155E2974800E00671618 /* Test */,
 				47A24A27297088AE0077AB11 /* Error */,
 				47DE320C295CC52F0063C55A /* User */,
 				47C41038295CBFCE007C27F0 /* Context */,
 				478BECD929662CFB00930DAF /* Device */,
 				47C40F5C295CBAF0007C27F0 /* Feature.swift */,
-				478BECD42966249300930DAF /* SpectrumTestQuestion.swift */,
 				47A1C8EC296E414600F8B4D6 /* Match.swift */,
-				47A24A28297088FF0077AB11 /* SurveyResponse.swift */,
 				47A24A312970E5FE0077AB11 /* UncertainValue.swift */,
 			);
 			path = Model;
@@ -830,7 +842,6 @@
 			isa = PBXGroup;
 			children = (
 				47C41039295CBFCE007C27F0 /* AuthContext.swift */,
-				478BECD629662C8100930DAF /* TestContext.swift */,
 			);
 			path = Context;
 			sourceTree = "<group>";
@@ -1389,6 +1400,7 @@
 				47DE3203295CC4B40063C55A /* ConfirmCodeVC.swift in Sources */,
 				47C4103B295CBFCE007C27F0 /* AuthContext.swift in Sources */,
 				47C40F9C295CBF61007C27F0 /* KUIViewController.swift in Sources */,
+				478815602974826900671618 /* TestService.swift in Sources */,
 				47E38FEA295F69DC007CB77F /* AppStoreReviewManager.swift in Sources */,
 				47C41078295CC0AB007C27F0 /* MKPlacemark+Address.swift in Sources */,
 				4731F510295CD4820013F626 /* UITableView+DeselectAll.swift in Sources */,
@@ -1520,12 +1532,12 @@
 				47A1C8ED296E414600F8B4D6 /* Match.swift in Sources */,
 				4731F52A295CE0980013F626 /* RadarVC.swift in Sources */,
 				47DE324A295CC7C40063C55A /* UITextView+Newline.swift in Sources */,
-				478BECD729662C8100930DAF /* TestContext.swift in Sources */,
 				4731F528295CDF4A0013F626 /* PageVC.swift in Sources */,
 				47DE324E295CC7C40063C55A /* UIImage+Compress.swift in Sources */,
 				47C41057295CBFFC007C27F0 /* CustomAttributedString.swift in Sources */,
 				4731F506295CD4770013F626 /* UIView+AddBorders.swift in Sources */,
 				47C4106B295CC095007C27F0 /* StringChat+Emoji.swift in Sources */,
+				4788155D2974800300671618 /* Question.swift in Sources */,
 				47B6B4B8296B924D00539353 /* EditAccountVC.swift in Sources */,
 				47C4105F295CC079007C27F0 /* Array+FirstWhere.swift in Sources */,
 				476FD86E295E4A1F0014DD42 /* HowItWorksCell.swift in Sources */,

@@ -22,14 +22,14 @@ class SelectionHeaderTestCell: UITableViewCell {
     @IBOutlet weak var titleButton: UIButton!
     @IBOutlet var bottomConstraint: NSLayoutConstraint!
     
-    var testQuestion: SelectionTestQuestion!
+    var testQuestion: Question!
     var cellDelegate: SelectionHeaderTestCellDelegate!
     var isOpen: Bool!
     
     //MARK: - Initializer
     
     //Resposne is an int between 1 and 5
-    func configure(testQuestion: SelectionTestQuestion,
+    func configure(testQuestion: Question,
                    delegate: SelectionHeaderTestCellDelegate,
                    shouldBeOpened: Bool,
                    isAnswered: Bool,
@@ -49,7 +49,7 @@ class SelectionHeaderTestCell: UITableViewCell {
         }
         
         
-        titleButton.setTitle(testQuestion.title, for: .normal)
+        titleButton.setTitle(testQuestion.prompt, for: .normal)
         titleButton.setTitleColor(shouldBeOpened ? .customWhite : isAnswered ? .customWhite : .testPurple, for: .normal)
         titleButton.setImage(UIImage(systemName: shouldBeOpened ? "chevron.up" : "chevron.down"), for: .normal)
         titleButton.tintColor = shouldBeOpened ? .customWhite : isAnswered ? .customWhite : .testPurple
