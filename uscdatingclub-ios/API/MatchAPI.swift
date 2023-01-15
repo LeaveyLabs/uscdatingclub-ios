@@ -23,6 +23,8 @@ class MatchAPI {
     // Paths to API endpoints
     enum Endpoints: String {
         case acceptMatch = "accept-match/"
+        // REST
+        case matches = "matches/"
     }
     
     // Parameters for API

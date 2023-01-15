@@ -8,6 +8,11 @@
 import Foundation
 
 //MARK: - From Backend
+struct Match: Codable {
+    let user1Id: Int
+    let user2Id: Int
+}
+
 
 struct MatchPartner: Codable {
     let id: Int

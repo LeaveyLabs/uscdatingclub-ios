@@ -26,6 +26,8 @@ class EmailAPI {
     enum Endpoints: String {
         case sendCode = "send-email-code/"
         case verifyCode = "verify-email-code/"
+        // REST (for Waiting List)
+        case waitingEmails = "waiting-emails/"
     }
     
     // Parameters for API
@@ -75,6 +77,16 @@ class EmailAPI {
         ]
         let json = try JSONEncoder().encode(params)
         let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.PATCH.rawValue)
+        try filterEmailErrors(data: data, response: response)
+    }
+    
+    static func placeOnWaitingList(email:String) async throws {
+        let url = "\(Env.BASE_URL)\(Endpoints.waitingEmails.rawValue)"
+        let params = [
+            ParameterKeys.email.rawValue: email,
+        ]
+        let json = try JSONEncoder().encode(params)
+        let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
         try filterEmailErrors(data: data, response: response)
     }
 }
