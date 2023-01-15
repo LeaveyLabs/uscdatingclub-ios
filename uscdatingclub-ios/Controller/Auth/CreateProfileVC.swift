@@ -29,6 +29,7 @@ class CreateProfileVC: KUIViewController, UITextFieldDelegate {
     @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
     
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var subtitleLabel: UILabel!
     
     var imagePicker: ImagePicker!
     
@@ -74,6 +75,7 @@ class CreateProfileVC: KUIViewController, UITextFieldDelegate {
         firstNameTextField.becomeFirstResponder()
         setupIndicatorViews()
         titleLabel.font = AppFont.bold.size(30)
+        subtitleLabel.font = AppFont2.medium.size(17)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -127,10 +129,12 @@ class CreateProfileVC: KUIViewController, UITextFieldDelegate {
         firstNameTextField.delegate = self
         firstNameTextField.smartInsertDeleteType = UITextSmartInsertDeleteType.no
         firstNameTextField.setLeftAndRightPadding(10)
+        firstNameTextField.font = AppFont.medium.size(17)
         
         lastNameTextField.delegate = self
         lastNameTextField.smartInsertDeleteType = UITextSmartInsertDeleteType.no
         lastNameTextField.setLeftAndRightPadding(10)
+        lastNameTextField.font = AppFont.medium.size(17)
     }
     
     func setupImagePicker() {
@@ -228,7 +232,7 @@ class CreateProfileVC: KUIViewController, UITextFieldDelegate {
         })
     }
     
-    //TODO: make sure these error messages are descriptive
+    @MainActor
     func handleFailure(_ error: Error) {
         isSubmitting = false
         AlertManager.displayError(error)
@@ -240,8 +244,8 @@ class CreateProfileVC: KUIViewController, UITextFieldDelegate {
         let validName = firstNameTextField.text!.count > 0 && lastNameTextField.text!.count > 0
         isValidInput = validName
         
-        firstNameIndicatorView.isHidden = firstNameTextField.text!.count > 0
-        lastNameIndicatorView.isHidden = lastNameTextField.text!.count > 0
+//        firstNameIndicatorView.isHidden = firstNameTextField.text!.count > 0
+//        lastNameIndicatorView.isHidden = lastNameTextField.text!.count > 0
 //        usernameIndicatorView.isHidden = usernameTextField.text!.count > 0
 //        profilePicIndicatorView.isHidden = validPic
     }

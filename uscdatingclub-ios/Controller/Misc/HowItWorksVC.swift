@@ -20,15 +20,15 @@ class HowItWorksVC: UIViewController {
     @IBOutlet var titleLabel: UILabel!
 
     let coreFeatures: [HowItWorksItem] = [
-        HowItWorksItem(image: UIImage(systemName: "testtube.2")!,
-                       title: "take the test",
+        HowItWorksItem(image: UIImage(systemName: "test")!,
+                       title: "take the compatibility test",
                        description: "we’ll calculate your compatibility with other usc students"),
         HowItWorksItem(image: UIImage(named: "pulse")!,
-                       title: "walk around",
-                       description: "your phone will look for compatible students nearby"),
-        HowItWorksItem(image: UIImage(named: "matchalarm")!,
+                       title: "keep your phone in your pocket",
+                       description: "your phone will look for your next match"),
+        HowItWorksItem(image: UIImage(named: "ring")!,
                        title: "get matched",
-                       description: "you’ll both get a notification—either meet up or start texting")]
+                       description: "you’ll both get a notification and have \(Constants.minutesToRespond) to respond")]
     
     //MARK: - Initialization
     

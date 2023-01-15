@@ -44,9 +44,7 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
     @IBOutlet weak var sexPreferenceTextField: UITextField!
     @IBOutlet var sexIdentityLabel: InsetLabel!
     @IBOutlet var sexPreferenceLabel: InsetLabel!
-    
-//    @IBOutlet weak var dobTextField: UITextField!
-    
+    @IBOutlet var whyWeAskButton: UIButton!
     @IBOutlet weak var continueButton: SimpleButton!
     @IBOutlet var titleLabel: UILabel!
 
@@ -82,6 +80,7 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
         setupLabels()
         setupContinueButton()
         titleLabel.font = AppFont.bold.size(30)
+        whyWeAskButton.titleLabel?.font = AppFont2.medium.size(12)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -98,9 +97,9 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
     //MARK: - Setup
     
     func setupLabels() {
-        sexIdentityLabel.font = AppFont2.regular.size(15)
+        sexIdentityLabel.font = AppFont2.medium.size(17)
         sexIdentityLabel.insets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        sexPreferenceLabel.font = AppFont2.regular.size(15)
+        sexPreferenceLabel.font = AppFont2.medium.size(17)
         sexPreferenceLabel.insets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     }
 
@@ -110,8 +109,8 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
         sexPreferenceTextField.delegate = self
         sexPreferenceTextField.inputView = sexPicker
         sexOptions = [.blank, .f, .m, .b]
-        sexIdentityTextField.font = AppFont2.semibold.size(15)
-        sexPreferenceTextField.font = AppFont2.semibold.size(15)
+        sexIdentityTextField.font = AppFont.medium.size(17)
+        sexPreferenceTextField.font = AppFont.medium.size(17)
     }
     
     func setupContinueButton() {
@@ -192,16 +191,20 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
                     sexIdentity: String(sexIdentity),
                     sexPreference: String(sexPreference))
                 AuthContext.reset()
-                navigationController?.pushViewController(HowItWorksVC.create(), animated: true, completion: { [weak self] in
-                    self?.isSubmitting = false
-                })
+                DispatchQueue.main.async { [self] in
+                    navigationController?.pushViewController(HowItWorksVC.create(), animated: true, completion: { [weak self] in
+                        self?.isSubmitting = false
+                    })
+                }
             } catch {
-                handleFailure(error)
+                DispatchQueue.main.async {
+                    self.handleFailure(error)
+                }
             }
         }
     }
     
-    //TODO: make sure these error messages are descriptive
+    @MainActor
     func handleFailure(_ error: Error) {
         isSubmitting = false
         AlertManager.displayError(error)

@@ -14,6 +14,7 @@ class EnterEmailVC: KUIViewController, UITextFieldDelegate {
     @IBOutlet weak var enterEmailTextField: UITextField!
     @IBOutlet weak var continueButton: SimpleButton!
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var subtitleLabel: UILabel!
 
     var isValidInput: Bool! {
         didSet {
@@ -47,6 +48,7 @@ class EnterEmailVC: KUIViewController, UITextFieldDelegate {
         setupContinueButton() //uncomment this button for standard button behavior, where !isEnabled greys it out
         setupBackButton()
         titleLabel.font = AppFont.bold.size(30)
+        subtitleLabel.font = AppFont2.medium.size(17)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,6 +61,7 @@ class EnterEmailVC: KUIViewController, UITextFieldDelegate {
     func setupEnterEmailTextField() {
         enterEmailTextField.delegate = self
         enterEmailTextField.setLeftAndRightPadding(10)
+        enterEmailTextField.font = AppFont.medium.size(17)
     }
     
     func setupContinueButton() {
@@ -113,17 +116,26 @@ class EnterEmailVC: KUIViewController, UITextFieldDelegate {
                 do {
                     try await EmailAPI.requestCode(email: email, uuid: AuthContext.uuid)
                     AuthContext.email = email
-                    let vc = ConfirmCodeVC.create(confirmMethod: .email)
-                    self.navigationController?.pushViewController(vc, animated: true, completion: { [weak self] in
-                        self?.isSubmitting = false
-                    })
+                    DispatchQueue.main.async {
+                        let vc = ConfirmCodeVC.create(confirmMethod: .email)
+                        self.navigationController?.pushViewController(vc, animated: true, completion: { [weak self] in
+                            self?.isSubmitting = false
+                        })
+                    }
                 } catch {
-                    handleFailure(error)
+                    DispatchQueue.main.async {
+                        if let apiErrorDescription = (error as? APIError)?.errorDescription?.lowercased(),
+                           apiErrorDescription.contains("usc") {
+                                self.handleNonUSCSignup()
+                            }
+                        self.handleFailure(error)
+                    }
                 }
             }
         }
     }
     
+    @MainActor
     func handleFailure(_ error: Error) {
         isSubmitting = false
         enterEmailTextField.text = ""
@@ -131,9 +143,16 @@ class EnterEmailVC: KUIViewController, UITextFieldDelegate {
         AlertManager.displayError(error)
     }
     
+    @MainActor
+    func handleNonUSCSignup() {
+        let vc = WaitListVC.create()
+        self.navigationController?.pushViewController(vc, animated: true, completion: { [weak self] in
+            self?.isSubmitting = false
+        })
+    }
+    
     func validateInput() {
-        isValidInput = (enterEmailTextField.text?.contains("@usc.edu"))! || enterEmailTextField.text == "adamvnovak@protonmail.com"
-//        isValidInput = enterEmailTextField.text?.suffix(8).lowercased() == "@usc.edu"
+        isValidInput = (enterEmailTextField.text?.contains("@"))!
     }
     
     //MARK: DetectAutoFill

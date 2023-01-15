@@ -99,6 +99,7 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
         let spacing = (textFieldWidth / 7) - numberWidth
         confirmTextField.setLeftPaddingPoints(spacing)
         confirmTextField.defaultTextAttributes.updateValue(spacing, forKey: NSAttributedString.Key.kern)
+        confirmTextField.font = AppFont.semibold.size(20)
     }
     
     func setupContinueButton() {
@@ -114,6 +115,9 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
     func setupLabel() {
         sentToLabel.text! += recipient
         titleLabel.font = AppFont.bold.size(30)
+        sentToLabel.font = AppFont2.medium.size(17)
+        resendButton.titleLabel?.font = AppFont2.medium.size(12)
+        resendButton.setTitleColor(.customWhite.withAlphaComponent(0.5), for: .normal)
     }
     
     //MARK: - User Interaction
@@ -193,7 +197,9 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
                     self.continueToNextScreen()
                 }
             } catch {
-                handleError(error)
+                DispatchQueue.main.async {
+                    self.handleError(error)
+                }
             }
         }
     }
@@ -202,6 +208,7 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
         isValidInput = confirmTextField.text?.count == 6
     }
     
+    @MainActor
     func handleError(_ error: Error) {
         isSubmitting = false
         confirmTextField.text = ""
@@ -224,9 +231,7 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
     func validate(validationCode: String) async throws {
         switch confirmMethod {
         case .text:
-            print("VALIDATING")
             if let user = try await PhoneNumberAPI.verifyCode(phoneNumber: AuthContext.phoneNumber, code: validationCode, uuid: AuthContext.uuid) {
-                print("ACCOUNT EXISTS")
                 try await UserService.singleton.logInWith(completeUser: user)
             }
         case .email:

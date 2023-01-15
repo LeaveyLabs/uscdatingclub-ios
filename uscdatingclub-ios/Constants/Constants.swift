@@ -24,6 +24,10 @@ enum Constants {
     struct Filesystem {
         static let AccountPath: String = "myaccount.json"
     }
+    
+    struct UserDefaultsKeys {
+        static let isOnWaitList: String = "isOnWaitList"
+    }
 
     // Note: all nib names should be the same ss their storyboard ID
     struct SBID {
@@ -86,7 +90,8 @@ enum Constants {
             static let EnterEmail = "EnterEmailVC"
             static let CreateProfile = "CreateProfileVC"
             static let EnterBios = "EnterBiosVC"
-            
+            static let WaitList = "WaitListVC"
+
             //Reset password
     //            static let RequestReset = "RequestResetNumberViewController"
     //            static let RequestResetPassword = "RequestResetPasswordViewController"

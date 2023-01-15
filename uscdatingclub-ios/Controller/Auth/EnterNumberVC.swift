@@ -16,8 +16,8 @@ class EnterNumberVC: KUIViewController, UITextFieldDelegate {
     @IBOutlet weak var enterNumberTextField: PhoneNumberTextField!
     @IBOutlet weak var continueButton: SimpleButton!
     @IBOutlet weak var enterNumberTextFieldWrapperView: UIView!
-    
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var subtitleLabel: UILabel!
     
     var isValidInput: Bool! {
         didSet {
@@ -51,6 +51,7 @@ class EnterNumberVC: KUIViewController, UITextFieldDelegate {
         setupBackButton()
         
         titleLabel.font = AppFont.bold.size(30)
+        subtitleLabel.font = AppFont2.medium.size(17)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +68,7 @@ class EnterNumberVC: KUIViewController, UITextFieldDelegate {
         enterNumberTextField.countryCodePlaceholderColor = .red
         enterNumberTextField.withFlag = true
         enterNumberTextField.withPrefix = true
+        enterNumberTextField.font = AppFont.medium.size(17)
 //        enterNumberTextField.withExamplePlaceholder = true
     }
     
@@ -136,12 +138,16 @@ class EnterNumberVC: KUIViewController, UITextFieldDelegate {
             do {
                 try await PhoneNumberAPI.requestCode(phoneNumber: number, uuid: AuthContext.uuid)
                 AuthContext.phoneNumber = number
-                let vc = ConfirmCodeVC.create(confirmMethod: .text)
-                self.navigationController?.pushViewController(vc, animated: true, completion: { [weak self] in
-                    self?.isSubmitting = false
-                })
+                DispatchQueue.main.async {
+                    let vc = ConfirmCodeVC.create(confirmMethod: .text)
+                    self.navigationController?.pushViewController(vc, animated: true, completion: { [weak self] in
+                        self?.isSubmitting = false
+                    })
+                }
             } catch {
-                handleFailure(error)
+                DispatchQueue.main.async { [weak self] in
+                    self?.handleFailure(error)
+                }
             }
         }
     }

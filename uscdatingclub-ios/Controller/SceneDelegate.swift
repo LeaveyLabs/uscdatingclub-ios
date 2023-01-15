@@ -57,7 +57,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if !UserService.singleton.isLoggedIntoAnAccount {
             window.rootViewController = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateInitialViewController()
-//            window.rootViewController = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.EnterBios) //for debugging
+            
         } else {
             let loadingVC = LoadingVC.create()
                         
@@ -68,6 +68,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = loadingVC
         }
 
+        if let isOnWaitList = UserDefaults.standard.value(forKey: Constants.UserDefaultsKeys.isOnWaitList) as? Bool,
+           isOnWaitList {
+            window.rootViewController = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.WaitList)
+        }
+        
         window.makeKeyAndVisible()
 
     }

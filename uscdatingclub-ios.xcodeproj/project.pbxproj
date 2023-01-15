@@ -18,6 +18,7 @@
 		434A053D2963A77200C15945 /* LocationSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A053C2963A77200C15945 /* LocationSocket.swift */; };
 		434A05402963C92B00C15945 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 434A053F2963C92B00C15945 /* Starscream */; };
 		434A057F2963D3AB00C15945 /* PhoneNumberKit-Dynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 434A057C2963D3AB00C15945 /* PhoneNumberKit-Dynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		47002FB72973AD51007EDFBC /* WaitListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47002FB62973AD51007EDFBC /* WaitListVC.swift */; };
 		470221E7295CCE3E00119FA8 /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4107D295CC0BE007C27F0 /* UIColor+Custom.swift */; };
 		470221E9295CCFA200119FA8 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470221E8295CCFA200119FA8 /* Version.swift */; };
 		4715490F2970F0AF00756BE1 /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4715490D2970F0AF00756BE1 /* SF-Pro.ttf */; };
@@ -278,6 +279,7 @@
 		434A052F295E1EDB00C15945 /* EmailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAPI.swift; sourceTree = "<group>"; };
 		434A0531295E1F1300C15945 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		434A053C2963A77200C15945 /* LocationSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSocket.swift; sourceTree = "<group>"; };
+		47002FB62973AD51007EDFBC /* WaitListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitListVC.swift; sourceTree = "<group>"; };
 		470221E8295CCFA200119FA8 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		4715490D2970F0AF00756BE1 /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
 		4715490E2970F0AF00756BE1 /* SF-Pro-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Italic.ttf"; sourceTree = "<group>"; };
@@ -999,6 +1001,7 @@
 				47DE31ED295CC4B40063C55A /* EnterEmailVC.swift */,
 				47DE31EE295CC4B40063C55A /* CreateProfileVC.swift */,
 				47A80614295F8D23001DEE64 /* EnterBiosVC.swift */,
+				47002FB62973AD51007EDFBC /* WaitListVC.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1439,6 +1442,7 @@
 				4731F503295CD45F0013F626 /* UIScrollView+ToTop.swift in Sources */,
 				47DE3264295CC94F0063C55A /* UIButton+LoadingIndicator.swift in Sources */,
 				47DE3207295CC4B40063C55A /* CreateProfileVC.swift in Sources */,
+				47002FB72973AD51007EDFBC /* WaitListVC.swift in Sources */,
 				4731F50F295CD4820013F626 /* UITableView+SectionShadow.swift in Sources */,
 				4731F514295CD48F0013F626 /* UISearchBar+CenterText.swift in Sources */,
 				47C40F94295CBBBD007C27F0 /* Encodable+Dict.swift in Sources */,
