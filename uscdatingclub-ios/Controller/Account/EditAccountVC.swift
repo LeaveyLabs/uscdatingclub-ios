@@ -113,20 +113,38 @@ class EditAccountVC: UIViewController {
     
     func tryToUpdateProfile() {
         view.endEditing(true)
+        
+        //Extract database values from sex
+        guard let sexIdentityText = sexIdentityTextField.text,
+              sexIdentityText != "",
+              let sexIdentity = sexIdentityText.first,
+              let sexPreferenceText = sexIdentityTextField.text,
+              sexPreferenceText != "",
+              let sexPreference = sexIdentityText.first
+        else {
+            AlertManager.displayError("error updating account", "please try again later")
+            //TODO: post to firebase crashlytics
+            return
+        }
+        
         isSaving = true
         Task {
             do {
                 try await withThrowingTaskGroup(of: Void.self) { [self] group in
                     group.addTask {
-                        try await UserService.singleton.updateUser(firstName: self.firstName, lastName: self.lastName, sexIdentity: self.sexIdentity, sexPreference: self.sexPreference)
+                        try await UserService.singleton.updateUser(firstName: self.firstName, lastName: self.lastName, sexIdentity: String(sexIdentity), sexPreference: String(sexPreference))
                     }
                     try await group.waitForAll()
                 }
-                handleSuccessfulUpdate()
+                DispatchQueue.main.async { [self] in
+                    handleSuccessfulUpdate()
+                }
             } catch {
                 AlertManager.displayError(error)
             }
-            isSaving = false
+            DispatchQueue.main.async { [self] in
+                isSaving = false
+            }
         }
     }
     
