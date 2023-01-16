@@ -71,7 +71,7 @@ class QuestionAPI {
     }
     
     static func getPageOrder() async throws -> [String] {
-        let url = "\(Env.BASE_URL)\(Endpoints.getQuestions.rawValue)"
+        let url = "\(Env.BASE_URL)\(Endpoints.getPageOrder.rawValue)"
         let (data, _) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: Data(), method: HTTPMethods.GET.rawValue)
         return try JSONDecoder().decode([String].self, from: data)
     }
