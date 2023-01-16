@@ -28,6 +28,16 @@ enum Constants {
     struct UserDefaultsKeys {
         static let isOnWaitList: String = "isOnWaitList"
     }
+    
+    static let defaultMailLink = URL(string: "mailto://")!
+    static let gmailLink = URL(string: "googlegmail://")!
+    static let faqLink = URL(string: "https://uscdatingclub.com/faq")!
+    static let appStoreLink = URL(string: "https://apps.apple.com/app/apple-store/id1661018857")!
+    static let landingPageLink = URL(string: "https://uscdatingclub.com")!
+    static let privacyPageLink = URL(string: "https://uscdatingclub.com/privacy")!
+    static let termsLink = URL(string: "https://uscdatingclub.com/terms")!
+    static let feedbackLink = URL(string: "https://forms.gle/151vRvEa11Tnn3CC7")!
+    static let contactLink = URL(string: "mailto:leaveylabs@gmail.com")!
 
     // Note: all nib names should be the same ss their storyboard ID
     struct SBID {

@@ -88,6 +88,21 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
         validateInput()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if confirmMethod == .email {
+            presentMailOpenAlert()
+        }
+    }
+    
+    func presentMailOpenAlert() {
+        if UIApplication.shared.canOpenURL(Constants.gmailLink) {
+            UIApplication.shared.open(Constants.gmailLink, options: [:], completionHandler: nil)
+        } else if UIApplication.shared.canOpenURL(Constants.defaultMailLink) {
+            UIApplication.shared.open(Constants.defaultMailLink, options: [:], completionHandler: nil)
+        }
+    }
+    
     //MARK: - Setup
     
     func setupConfirmEmailTextField() {
