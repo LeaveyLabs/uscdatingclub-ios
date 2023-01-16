@@ -81,6 +81,8 @@ class UserService: NSObject {
     func getIsMatchable() -> Bool { return authedUser.isMatchable }
     func getPhoneNumberPretty() -> String? { return authedUser.phoneNumber.asNationalPhoneNumber }
     func getSurveyResponses() -> [SurveyResponse] { return authedUser.surveyResponses }
+    func isFirstTest() -> Bool { return authedUser.surveyResponses.isEmpty }
+
 //    func getProfilePic() -> UIImage { return authedUser.profilePicWrapper.image }
     
     //MARK: - Login and create user

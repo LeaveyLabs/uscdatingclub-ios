@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SelectionTestCellDelegate {
-    func didSelect(questionId: Int, testAnswer: String, allowsMultipleSelection: Bool)
+    func didSelect(questionId: Int, testAnswer: String)
     func didSelectMultipleSelection(questionId: Int, testAnswer: String, alreadySelected: Bool)
 }
 
@@ -22,14 +22,14 @@ class SelectionTestCell: UITableViewCell {
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
 
     var testAnswer: String!
-    var testQuestion: SelectionTestQuestion!
+    var testQuestion: Question!
     var cellDelegate: SelectionTestCellDelegate!
     var isCurrentlySelected: Bool!
     
     //MARK: - Initializer
     
     //Resposne is an int between 1 and 5
-    func configure(testQuestion: SelectionTestQuestion,
+    func configure(testQuestion: Question,
                    testAnswer: String,
                    delegate: SelectionTestCellDelegate,
                    isCurrentlySelected: Bool,
@@ -49,7 +49,7 @@ class SelectionTestCell: UITableViewCell {
         
         }
         
-        if testQuestion.allowsMultipleSelection {
+        if testQuestion.isMultipleAnswer {
             titleButton.setImage(UIImage(systemName: isCurrentlySelected ? "square.fill" : "square"), for: .normal)
         } else {
             titleButton.setImage(UIImage(systemName: isCurrentlySelected ? "circle.fill" : "circle"), for: .normal)
@@ -65,10 +65,10 @@ class SelectionTestCell: UITableViewCell {
     }
     
     @IBAction func circleButtonDidTapped(_ sender: UIButton) {
-        if testQuestion.allowsMultipleSelection {
+        if testQuestion.isMultipleAnswer {
             cellDelegate.didSelectMultipleSelection(questionId: testQuestion.id, testAnswer: testAnswer, alreadySelected: isCurrentlySelected)
         } else {
-            cellDelegate.didSelect(questionId: testQuestion.id, testAnswer: testAnswer, allowsMultipleSelection: testQuestion.allowsMultipleSelection)
+            cellDelegate.didSelect(questionId: testQuestion.id, testAnswer: testAnswer)
         }
     }
     

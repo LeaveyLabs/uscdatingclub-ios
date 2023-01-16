@@ -15,18 +15,18 @@ class TestQuestionsVC: UIViewController {
     @IBOutlet var titleLabel: UILabel!
     
     var lastNonAnsweredQuestionIndex: Int {
-        questions.firstIndex(where: { TestContext.testResponses[$0.id] == nil }) ?? questions.count
+        TestService.shared.firstNonAnsweredQuestion(on: testPage)
     }
     var manuallyOpenedSelectionQuestionIndex: Int? = nil
     
     var testPage: TestPage!
-    var questions: [TestQuestion] {
-        return TestQuestions[testPage]!
-    }
     
+    //we want the context to be a dictionary ordered by question id
+    
+    //do all the questions on this page have a response in the context?
     var didAnswerAllQuestionsOnPage: Bool {
-        for question in questions {
-            if TestContext.testResponses[question.id] == nil {
+        for question in testPage.questions {
+            if !TestService.shared.hasAnswered(question) {
                 return false
             }
         }
@@ -58,7 +58,7 @@ class TestQuestionsVC: UIViewController {
     }
     
     func setupHeaderFooter() {
-        titleLabel.text = TestPageTitles[testPage]
+        titleLabel.text = testPage.header
         titleLabel.font = AppFont.bold.size(20)
     }
     
@@ -82,10 +82,10 @@ class TestQuestionsVC: UIViewController {
     
     @objc func didTapNextButton() {
         guard didAnswerAllQuestionsOnPage else { return }
-        if testPage == TestPages-1 {
-            navigationController?.pushViewController(TestTextVC.create(type: .submitting), animated: true)
+        if let nextPage = TestService.shared.getNextPage(currentPage: testPage) {
+            navigationController?.pushViewController(TestQuestionsVC.create(page: nextPage), animated: true)
         } else {
-            navigationController?.pushViewController(TestQuestionsVC.create(page: testPage+1), animated: true)
+            navigationController?.pushViewController(TestTextVC.create(type: .submitting), animated: true)
         }
     }
     
@@ -106,19 +106,18 @@ extension TestQuestionsVC: UITableViewDelegate {
 extension TestQuestionsVC: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return questions.count + 1
+        return testPage.questions.count + 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard section < questions.count else { return 1 }
-        if let selectionQuestion = questions[section] as? SelectionTestQuestion {
+        guard section < testPage.questions.count else { return 1 }
+        let question = testPage.questions[section]
+        if question.isMultipleAnswer {
             if lastNonAnsweredQuestionIndex == section {
-                return 1 + selectionQuestion.options.count
+                return 1 + question.textAnswerChoices!.count
             } else if let manuallyOpenedSelectionQuestionIndex, manuallyOpenedSelectionQuestionIndex == section {
-                return 1 + selectionQuestion.options.count
+                return 1 + question.textAnswerChoices!.count
             } else {
-                //if it's answered, return 1+ the number answered?
-                
                 return 1
             }
         }
@@ -126,7 +125,7 @@ extension TestQuestionsVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == questions.count {
+        if indexPath.section == testPage.questions.count {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SimpleButtonCell, for: indexPath) as! SimpleButtonCell
             cell.configure(title: "next", systemImage: "") {
                 self.didTapNextButton()
@@ -134,38 +133,38 @@ extension TestQuestionsVC: UITableViewDataSource {
             cell.simpleButton.alpha = didAnswerAllQuestionsOnPage ? 1 : 0.5
             return cell
         }
-        let question = questions[indexPath.section]
-        if let spectrumQuestion = question as? SpectrumTestQuestion {
+        let question = testPage.questions[indexPath.section]
+        if question.isNumerical {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SpectrumTestCell, for: indexPath) as! SpectrumTestCell
-            cell.configure(testQuestion: spectrumQuestion,
-                           response: TestContext.testResponses[spectrumQuestion.id] as? Int,
+            let currentResponse = TestService.shared.currentResponseFor(question)
+            cell.configure(testQuestion: question,
+                           response: currentResponse != nil ? Int(currentResponse!.answer) : nil,
                            delegate: self,
                            shouldBeHighlighted: lastNonAnsweredQuestionIndex == indexPath.section,
-                           isLastCell: indexPath.section == questions.count - 1,
+                           isLastCell: indexPath.section == testPage.questions.count - 1,
                            isFirstCell: indexPath.section == 0)
             return cell
-        } else if let selectionQuestion = question as? SelectionTestQuestion {
+        } else {
             if indexPath.row == 0 {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SelectionHeaderCell, for: indexPath) as! SelectionHeaderTestCell
-                cell.configure(testQuestion: selectionQuestion,
+                cell.configure(testQuestion: question,
                                delegate: self,
                                shouldBeOpened: lastNonAnsweredQuestionIndex == indexPath.section || manuallyOpenedSelectionQuestionIndex == indexPath.section,
-                               isAnswered: TestContext.testResponses[question.id] != nil,
-                               isLastCell: indexPath.section == questions.count - 1,
+                               isAnswered: TestService.shared.hasAnswered(question),
+                               isLastCell: indexPath.section == testPage.questions.count - 1,
                                isFirstCell: indexPath.section == 0)
                 return cell
             } else {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SelectionCell, for: indexPath) as! SelectionTestCell
-                let option = selectionQuestion.options[indexPath.row-1]
-                cell.configure(testQuestion: selectionQuestion,
+                let option = question.textAnswerChoices![indexPath.row-1]
+                let isCurrentlySelected = TestService.shared.currentResponsesFor(question).contains(SurveyResponse(questionId: question.id, answer: option))
+                cell.configure(testQuestion: question,
                                testAnswer: option,
                                delegate: self,
-                               isCurrentlySelected: TestContext.testResponses[question.id] as? String == option || (TestContext.testResponses[question.id] as? [String] ?? []).contains(option),
-                               isLastCell: indexPath.row == selectionQuestion.options.count)
+                               isCurrentlySelected: isCurrentlySelected,
+                               isLastCell: indexPath.row == question.textAnswerChoices!.count)
                 return cell
             }
-        } else {
-            fatalError()
         }
     }
     
@@ -174,10 +173,10 @@ extension TestQuestionsVC: UITableViewDataSource {
 extension TestQuestionsVC: SelectionHeaderTestCellDelegate {
     
     func toggleButtonDidTapped(questionId: Int) {        
-        if manuallyOpenedSelectionQuestionIndex == questions.firstIndex(where: { $0.id == questionId}) {
+        if manuallyOpenedSelectionQuestionIndex == testPage.questions.firstIndex(where: { $0.id == questionId}) {
             manuallyOpenedSelectionQuestionIndex = nil
         } else {
-            manuallyOpenedSelectionQuestionIndex = questions.firstIndex(where: { $0.id == questionId})
+            manuallyOpenedSelectionQuestionIndex = testPage.questions.firstIndex(where: { $0.id == questionId})
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 self.scrollDownIfNecessary(questionId: questionId)
             }
@@ -189,10 +188,12 @@ extension TestQuestionsVC: SelectionHeaderTestCellDelegate {
 
 extension TestQuestionsVC: SelectionTestCellDelegate {
     
-    func didSelect(questionId: Int, testAnswer: String, allowsMultipleSelection: Bool) {
-        manuallyOpenedSelectionQuestionIndex = questions.firstIndex(where: { $0.id == questionId }) //keep the question open so they know what they selected
+    func didSelect(questionId: Int, testAnswer: String) {
+        manuallyOpenedSelectionQuestionIndex = testPage.questions.firstIndex(where: { $0.id == questionId }) //keep the question open so they know what they selected
         
-        TestContext.testResponses[questionId] = testAnswer
+        let newResponse = SurveyResponse(questionId: questionId, answer: testAnswer)
+        TestService.shared.setResponse(newResponse)
+        
         tableView.reloadData()
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { //wait for tableView to reload
 //            self.scrollDownIfNecessary(prevQuestionId: questionId)
@@ -200,15 +201,11 @@ extension TestQuestionsVC: SelectionTestCellDelegate {
     }
     
     func didSelectMultipleSelection(questionId: Int, testAnswer: String, alreadySelected: Bool) {
-        manuallyOpenedSelectionQuestionIndex = questions.firstIndex(where: { $0.id == questionId }) //keep the question open so they can select multiple
+        manuallyOpenedSelectionQuestionIndex = testPage.questions.firstIndex(where: { $0.id == questionId }) //keep the question open so they can select multiple
         
-        var responses = TestContext.testResponses[questionId] as? [String] ?? []
-        if alreadySelected {
-            responses.removeFirstAppearanceOf(object: testAnswer)
-        } else {
-            responses.append(testAnswer)
-        }
-        TestContext.testResponses[questionId] = responses
+        let newResponse = SurveyResponse(questionId: questionId, answer: testAnswer)
+        TestService.shared.toggleResponse(newResponse)
+        
         tableView.reloadData()
     }
     
@@ -217,7 +214,9 @@ extension TestQuestionsVC: SelectionTestCellDelegate {
 extension TestQuestionsVC: SpectrumTestCellDelegate {
     
     func buttonDidTapped(questionId: Int, selection: Int) {
-        TestContext.testResponses[questionId] = selection
+        let newResponse = SurveyResponse(questionId: questionId, answer: String(selection))
+        TestService.shared.setResponse(newResponse)
+
         scrollDownIfNecessary(prevQuestionId: questionId)
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -227,8 +226,8 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
     //code duplicated in two functions below... oh well, fix later
     //needed two entry points, one for when going to next question, one for expanding the toggled seleciton question
     func scrollDownIfNecessary(questionId: Int, redo: Bool = false) {
-        guard let questionIndex = questions.firstIndex(where:  { $0.id == questionId }),
-              questionIndex < questions.count
+        guard let questionIndex = testPage.questions.firstIndex(where:  { $0.id == questionId }),
+              questionIndex < testPage.questions.count
         else {
             return
         }
@@ -250,23 +249,21 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
     
     func scrollDownIfNecessary(prevQuestionId: Int, redo: Bool = false) {
         guard
-            let prevQuestionIndex = questions.firstIndex(where: { $0.id == prevQuestionId }),
-            prevQuestionIndex+1 < questions.count
+            let prevQuestionIndex = testPage.questions.firstIndex(where: { $0.id == prevQuestionId }),
+            prevQuestionIndex+1 < testPage.questions.count
         else { //they are answering the last question. move to bottom
             tableView.setContentOffset(CGPoint(x: tableView.contentOffset.x, y: tableView.verticalOffsetForBottom), animated: true)
             return
         }
         
-        guard
-            TestContext.testResponses[prevQuestionId+1] == nil
-        else { return }  //they went back to answer an earlier question. do nothing
+        guard !TestService.shared.hasAnswered(questionId: prevQuestionId+1) else { return } //they went back to answer an earlier question. do nothing
         
         let questionIndex = prevQuestionIndex + 1
         
         //when a selection question is appearing or disappearing, need a slight delay so that expanded UI's constraints can update
-        let beforeQ = questions[questionIndex] as? SelectionTestQuestion
-        let selectionQ = questions[questionIndex] as? SelectionTestQuestion
-        if (beforeQ != nil || selectionQ != nil) && !redo {
+        let beforeQ = testPage.questions[questionIndex]
+        let selectionQ = testPage.questions[questionIndex]
+        if (beforeQ.isMultipleAnswer || selectionQ.isMultipleAnswer) && !redo {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 self.scrollDownIfNecessary(prevQuestionId: prevQuestionId, redo: true)
             }
@@ -278,7 +275,7 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
 
         let totalHeight = view.bounds.height + view.safeAreaInsets.top + view.safeAreaInsets.bottom
         let desiredOffset: CGFloat
-        if (selectionQ != nil) {
+        if (selectionQ.isMultipleAnswer) {
             desiredOffset = questionBottomY - totalHeight/3
         } else {
             desiredOffset = questionBottomY - totalHeight/1.4

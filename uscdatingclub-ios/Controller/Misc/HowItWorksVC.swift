@@ -25,10 +25,13 @@ class HowItWorksVC: UIViewController {
                        description: "we’ll calculate your compatibility with other usc students"),
         HowItWorksItem(image: UIImage(named: "pulse")!,
                        title: "keep your phone in your pocket",
-                       description: "your phone will search for compatible students near you"),
+                       description: "your phone will scan your immediate area for your next match"),
         HowItWorksItem(image: UIImage(named: "ring")!,
-                       title: "get matched",
-                       description: "you’ll both get a notification and have \(Constants.minutesToRespond) to respond")]
+                       title: "find out when your next match is nearby",
+                       description: "you’ll both get a notification and have \(Constants.minutesToRespond) to respond"),
+        HowItWorksItem(image: UIImage(named: "meet")!,
+                       title: "go and say hi!",
+                       description: "if you both press \"meet up\", you'll get \(5) minutes to find each other and say hi")]
     
     //MARK: - Initialization
     

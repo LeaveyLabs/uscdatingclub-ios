@@ -18,13 +18,6 @@ struct QuestionError: Codable {
     let detail: String?
 }
 
-struct Question: Codable {
-    let id: Int
-    let category: String
-    let isNumerical: Bool
-    let isMultipleAnswer: Bool
-}
-
 class QuestionAPI {
     // Paths to API endpoints
     enum Endpoints: String {

@@ -35,14 +35,14 @@ class SpectrumTestCell: UITableViewCell {
         [circle1Button, circle2Button, circle3Button, circle4Button, circle5Button, circle6Button, circle7Button]
     }
     
-    var testQuestion: SpectrumTestQuestion!
+    var testQuestion: Question!
     var cellDelegate: SpectrumTestCellDelegate!
 
     
     //MARK: - Initializer
     
     //Resposne is an int between 1 and 5
-    func configure(testQuestion: SpectrumTestQuestion,
+    func configure(testQuestion: Question,
                    response: Int?,
                    delegate: SpectrumTestCellDelegate,
                    shouldBeHighlighted: Bool,
@@ -52,7 +52,7 @@ class SpectrumTestCell: UITableViewCell {
         rightLabel.font = AppFont2.medium.size(15)
         leftLabel.font = AppFont2.medium.size(15)
 
-        titleLabel.text = testQuestion.title
+        titleLabel.text = testQuestion.prompt
         leftLabel.text = "disagree"
         leftLabel.textColor = .testPurple
         rightLabel.textColor = .testGreen

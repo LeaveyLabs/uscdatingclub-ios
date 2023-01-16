@@ -23,6 +23,7 @@ class TestTextVC: UIViewController {
     @IBOutlet var cancelButton: UIButton!
     
     var testTextType: TestTextType = .welcome
+    var isFirstTest: Bool = UserService.singleton.isFirstTest()
     
     //MARK: - Initialization
     
@@ -38,18 +39,16 @@ class TestTextVC: UIViewController {
         super.viewDidLoad()
         setupUI()
         primaryButton.internalButton.addTarget(self, action: #selector(didTapPrimaryButton), for: .touchUpInside)
-        print(TestContext.testResponses)
         
         navigationController?.setNavigationBarHidden(true, animated: false)
         switch testTextType {
         case .welcome:
-            break //MAKE SURE TO reset test context before presenting this VC
+            TestService.shared.resetResponseContext()
         case .submitting, .finished:
             navigationController?.interactivePopGestureRecognizer?.isEnabled = false
             Task {
                 do {
-                    try await UserService.singleton.updateTestResponses(newResponses:[])
-//                    try await UserService.singleton.updateTestResponses(newResponses: TestContext.testResponses)
+                    try await UserService.singleton.updateTestResponses(newResponses:TestService.shared.getResponsesContext())
                     try await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)
                     DispatchQueue.main.async { [self] in
                         testTextType = .finished
@@ -70,7 +69,7 @@ class TestTextVC: UIViewController {
         primaryLabel.font = AppFont.bold.size(26)
         switch testTextType {
         case .welcome:
-            cancelButton.isHidden = TestContext.isFirstTest
+            cancelButton.isHidden = isFirstTest
             activityIndicatorView.stopAnimating()
             primaryLabel.text = "the compatibility test"
             secondaryLabel.text = "you got this"
@@ -84,7 +83,7 @@ class TestTextVC: UIViewController {
             primaryButton.internalButton.isEnabled = false
             primaryButton.alpha = 0
         case .finished:
-            if TestContext.isFirstTest {
+            if isFirstTest {
                 secondaryLabel.text = "welcome to the\nusc dating club."
                 UIView.animate(withDuration: 2) { [self] in
                     activityIndicatorView.stopAnimating()
@@ -117,16 +116,16 @@ class TestTextVC: UIViewController {
     @objc func didTapPrimaryButton() {
         switch testTextType {
         case .welcome:
-            navigationController?.pushViewController(TestQuestionsVC.create(page: 0), animated: true)
+            let nextTestPage = TestService.shared.getPage(number: 0)
+            navigationController?.pushViewController(TestQuestionsVC.create(page: nextTestPage), animated: true)
         case .submitting:
             break
         case .finished:
-            if TestContext.isFirstTest {
+            if isFirstTest {
                 navigationController?.pushViewController(PermissionsTableVC.create(), animated: true)
             } else {
                 dismiss(animated: true)
             }
-            TestContext.reset() //this must wait until here, so that we can get isFirstText like above
         }
     }
     
