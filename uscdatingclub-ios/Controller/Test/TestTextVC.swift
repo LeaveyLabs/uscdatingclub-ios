@@ -72,7 +72,7 @@ class TestTextVC: UIViewController {
             cancelButton.isHidden = isFirstTest
             activityIndicatorView.stopAnimating()
             primaryLabel.text = "the compatibility test"
-            secondaryLabel.text = "you got this"
+            secondaryLabel.text = "we'll calculate your compatibility with other usc students"
             primaryButton.configure(title: "begin", systemImage: "")
         case .submitting:
             cancelButton.isHidden = true
@@ -122,7 +122,7 @@ class TestTextVC: UIViewController {
             break
         case .finished:
             if isFirstTest {
-                navigationController?.pushViewController(PermissionsTableVC.create(), animated: true)
+                navigationController?.pushViewController(PermissionsVC.create(), animated: true)
             } else {
                 dismiss(animated: true)
             }

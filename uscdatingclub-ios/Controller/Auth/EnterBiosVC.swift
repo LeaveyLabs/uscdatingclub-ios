@@ -177,7 +177,7 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
             let sexIdentity = sexIdentityText.first,
             let sexPreferenceText = sexPreferenceTextField.text,
             sexPreferenceText != "",
-            let sexPreference = sexIdentityText.first
+            let sexPreference = sexPreferenceText.first
         else {
             AlertManager.displayError("no sex option selected", "please try again")
             return

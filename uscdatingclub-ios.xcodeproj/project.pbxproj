@@ -21,6 +21,7 @@
 		47002FB72973AD51007EDFBC /* WaitListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47002FB62973AD51007EDFBC /* WaitListVC.swift */; };
 		470221E7295CCE3E00119FA8 /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4107D295CC0BE007C27F0 /* UIColor+Custom.swift */; };
 		470221E9295CCFA200119FA8 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470221E8295CCFA200119FA8 /* Version.swift */; };
+		4711A1F32975BF8F00B07577 /* UIViewController+OpenMailApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711A1F22975BF8F00B07577 /* UIViewController+OpenMailApp.swift */; };
 		4715490F2970F0AF00756BE1 /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4715490D2970F0AF00756BE1 /* SF-Pro.ttf */; };
 		471549102970F0AF00756BE1 /* SF-Pro-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4715490E2970F0AF00756BE1 /* SF-Pro-Italic.ttf */; };
 		471549142970FB1700756BE1 /* PermissionsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471549132970FB1700756BE1 /* PermissionsTableVC.swift */; };
@@ -282,6 +283,7 @@
 		434A053C2963A77200C15945 /* LocationSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSocket.swift; sourceTree = "<group>"; };
 		47002FB62973AD51007EDFBC /* WaitListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitListVC.swift; sourceTree = "<group>"; };
 		470221E8295CCFA200119FA8 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
+		4711A1F22975BF8F00B07577 /* UIViewController+OpenMailApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+OpenMailApp.swift"; sourceTree = "<group>"; };
 		4715490D2970F0AF00756BE1 /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
 		4715490E2970F0AF00756BE1 /* SF-Pro-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Italic.ttf"; sourceTree = "<group>"; };
 		471549132970FB1700756BE1 /* PermissionsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsTableVC.swift; sourceTree = "<group>"; };
@@ -1115,6 +1117,7 @@
 				47DE3240295CC7C40063C55A /* UIViewController+FloatingButton.swift */,
 				47DE3242295CC7C40063C55A /* UIViewController+Loading.swift */,
 				47DE3243295CC7C40063C55A /* UIViewController+ShareImage.swift */,
+				4711A1F22975BF8F00B07577 /* UIViewController+OpenMailApp.swift */,
 			);
 			path = UIViewController;
 			sourceTree = "<group>";
@@ -1414,6 +1417,7 @@
 				47C4105A295CBFFC007C27F0 /* Numbers.swift in Sources */,
 				478BECC62964C4D000930DAF /* TestQuestionsVC.swift in Sources */,
 				47C41059295CBFFC007C27F0 /* Distance.swift in Sources */,
+				4711A1F32975BF8F00B07577 /* UIViewController+OpenMailApp.swift in Sources */,
 				47DE3206295CC4B40063C55A /* EnterEmailVC.swift in Sources */,
 				47C40F95295CBBBD007C27F0 /* AppDelegate.swift in Sources */,
 				47C40F8F295CBBBD007C27F0 /* RemoteConfig.swift in Sources */,

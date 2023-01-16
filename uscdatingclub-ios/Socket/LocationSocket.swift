@@ -7,18 +7,14 @@
 
 import Foundation
 import Starscream
-
-struct Location: Codable {
-    let latitude: Float
-    let longitude: Float
-}
+import CoreLocation
 
 struct LocationIntermediate: Codable {
     var type: String = "location"
     let sender: Int
     let receiver: Int
-    let latitude: Float
-    let longitude: Float
+    let latitude: Double
+    let longitude: Double
 }
 
 struct ConversationStarter: Codable {
@@ -33,15 +29,15 @@ class LocationSocket: WebSocketDelegate {
     let receiver: Int!
     let request: URLRequest
     
-    var partnerLocation: Location? {
+    var partnerLocation: CLLocationCoordinate2D? {
         didSet {
             if let location = partnerLocation {
-                locationDidChange?(location)
+                partnerLocationDidChange?(location)
             }
         }
     }
     
-    var locationDidChange: ((Location) -> (Void))? = nil
+    var partnerLocationDidChange: ((CLLocationCoordinate2D) -> (Void))? = nil
     
 //    var unsent_messages: [String];
 //    var server_messages: [Message] {
@@ -86,7 +82,7 @@ class LocationSocket: WebSocketDelegate {
         self.socket.disconnect()
     }
     
-    func sendLocation(location:Location) throws {
+    func sendLocation(location:CLLocationCoordinate2D) throws {
         if (connected) {
             let locationIntermediate = LocationIntermediate(sender: self.sender, receiver: self.receiver, latitude: location.latitude, longitude: location.longitude)
             let json = try JSONEncoder().encode(locationIntermediate)
@@ -175,7 +171,7 @@ class LocationSocket: WebSocketDelegate {
                 do {
                     let newLocationIntermediate = try JSONDecoder().decode(LocationIntermediate.self, from: string.data(using: .utf8)!)
                     if newLocationIntermediate.sender != self.sender {
-                        self.partnerLocation = Location(latitude: newLocationIntermediate.latitude, longitude: newLocationIntermediate.longitude)
+                        self.partnerLocation = CLLocationCoordinate2D(latitude: newLocationIntermediate.latitude, longitude: newLocationIntermediate.longitude)
                     }
                     
                 } catch {}
@@ -186,7 +182,7 @@ class LocationSocket: WebSocketDelegate {
                 do {
                     let newLocationIntermediate = try JSONDecoder().decode(LocationIntermediate.self, from: data)
                     if newLocationIntermediate.sender != self.sender {
-                        self.partnerLocation = Location(latitude: newLocationIntermediate.latitude, longitude: newLocationIntermediate.longitude)
+                        self.partnerLocation = CLLocationCoordinate2D(latitude: newLocationIntermediate.latitude, longitude: newLocationIntermediate.longitude)
                     }
                 } catch {}
             }

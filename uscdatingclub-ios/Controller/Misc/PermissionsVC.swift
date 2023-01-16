@@ -21,11 +21,10 @@ class PermissionsVC: UIViewController {
     @IBOutlet var checkmarkImageView2: UIImageView!
     @IBOutlet var checkmarkImageView3: UIImageView!
 
-    let GOODTOGO_ALPHA = 0.5
+    let NOTALLOWED_ALPHA = 0.5
 
     var goodToGo: Bool {
-        false
-//        view1.alpha == GOODTOGO_ALPHA && view2.alpha == GOODTOGO_ALPHA && view3.alpha == GOODTOGO_ALPHA
+        checkmarkImageView1.alpha == 1 && checkmarkImageView2.alpha == 1 && checkmarkImageView3.alpha == 1
     }
 
     //MARK: - Initialization
@@ -44,9 +43,15 @@ class PermissionsVC: UIViewController {
         label2.font = AppFont2.regular.size(15)
         label3.font = AppFont2.regular.size(15)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(delayedRerender), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(delayedRerender), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onResignActive), name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(delayedRerender), name: .locationStatusDidUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(delayedRerender), name: UIApplication.backgroundRefreshStatusDidChangeNotification, object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        animateUnallowedViews()
     }
     
     deinit {
@@ -63,8 +68,27 @@ class PermissionsVC: UIViewController {
         learnMoreButton.setTitleColor(.customWhite.withAlphaComponent(0.7), for: .normal)
     }
     
+    @objc func onResignActive() {
+        if locationButton.alpha < 1 {
+            locationButton.alpha = NOTALLOWED_ALPHA
+            locationButton.transform = .identity
+            locationButton.layer.removeAllAnimations()
+        }
+        if backgroundRefreshButton.alpha < 1 {
+            backgroundRefreshButton.alpha = NOTALLOWED_ALPHA
+            backgroundRefreshButton.transform = .identity
+            backgroundRefreshButton.layer.removeAllAnimations()
+        }
+        if notificationsButton.alpha < 1 {
+            notificationsButton.alpha = NOTALLOWED_ALPHA
+            notificationsButton.transform = .identity
+            notificationsButton.layer.removeAllAnimations()
+        }
+    }
+    
     @objc func delayedRerender() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
+            animateUnallowedViews()
             rerender()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) { [self] in
                 if goodToGo {
@@ -83,37 +107,69 @@ class PermissionsVC: UIViewController {
         }
     }
     
+    //for each non approved view, animate it
+    func animateUnallowedViews() {
+        if locationButton.alpha < 1 {
+            UIView.animate(withDuration: 1, delay: 0, options: [.repeat, .autoreverse, .curveEaseInOut, .allowUserInteraction]) { [self] in
+                locationButton.alpha = 0.7
+                locationButton.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+            }
+        }
+        if backgroundRefreshButton.alpha < 1 {
+            UIView.animate(withDuration: 1, delay: 0, options: [.repeat, .autoreverse, .curveEaseInOut, .allowUserInteraction]) { [self] in
+                backgroundRefreshButton.alpha = 0.7
+                backgroundRefreshButton.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+            }
+        }
+        if notificationsButton.alpha < 1 {
+            UIView.animate(withDuration: 1, delay: 0, options: [.repeat, .autoreverse, .curveEaseInOut, .allowUserInteraction]) { [self] in
+                notificationsButton.alpha = 0.7
+                notificationsButton.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+            }
+        }
+    }
+    
     @objc func rerender() {
         if LocationManager.shared.isLocationServicesProperlyAuthorized() {
             DispatchQueue.main.async { [self] in
                 locationButton.alpha = 1
+                checkmarkImageView1.alpha = 1
+                locationButton.layer.removeAllAnimations()
                 locationButton.configure(title: "location enabled",  systemImage: "location")
             }
         } else {
             DispatchQueue.main.async { [self] in
-                locationButton.alpha = GOODTOGO_ALPHA
+                locationButton.alpha = NOTALLOWED_ALPHA
+                checkmarkImageView1.alpha = 0
                 locationButton.configure(title: "share location", subtitle: "precise, always",  systemImage: "location")
-            }
-        }
-        Task {
-            let isEnabled = await NotificationsManager.shared.isNotificationsEnabled()
-            DispatchQueue.main.async { [self] in
-                if isEnabled {
-                    notificationsButton.alpha = 1
-                    notificationsButton.configure(title: "notifications enabled", systemImage: "bell")
-                } else {
-                    notificationsButton.alpha = GOODTOGO_ALPHA
-                    notificationsButton.configure(title: "turn on notifications", systemImage: "bell")
-                }
             }
         }
         
         if UIApplication.shared.backgroundRefreshStatus == .available || ProcessInfo.processInfo.isLowPowerModeEnabled {
             backgroundRefreshButton.alpha = 1
+            backgroundRefreshButton.layer.removeAllAnimations()
+            checkmarkImageView2.alpha = 1
             backgroundRefreshButton.configure(title: "background app refresh enabled",  systemImage: "arrow.clockwise.circle")
         } else {
-            backgroundRefreshButton.alpha = GOODTOGO_ALPHA
+            backgroundRefreshButton.alpha = NOTALLOWED_ALPHA
+            checkmarkImageView2.alpha = 0
             backgroundRefreshButton.configure(title: "turn on background app refresh",  systemImage: "arrow.clockwise.circle")
+        }
+        
+        Task {
+            let isEnabled = await NotificationsManager.shared.isNotificationsEnabled()
+            DispatchQueue.main.async { [self] in
+                if isEnabled {
+                    notificationsButton.alpha = 1
+                    notificationsButton.layer.removeAllAnimations()
+                    checkmarkImageView3.alpha = 1
+                    notificationsButton.configure(title: "notifications enabled", systemImage: "bell")
+                } else {
+                    notificationsButton.alpha = NOTALLOWED_ALPHA
+                    checkmarkImageView3.alpha = 0
+                    notificationsButton.configure(title: "turn on notifications", systemImage: "bell")
+                }
+            }
         }
     }
     
