@@ -26,6 +26,7 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
     @IBOutlet weak var confirmTextField: UITextField!
     @IBOutlet weak var resendButton: UIButton!
     @IBOutlet weak var continueButton: SimpleButton!
+    @IBOutlet var openEmailAppButton: SimpleButton!
 
     var isValidInput: Bool! {
         didSet {
@@ -82,17 +83,10 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
         validateInput()
         shouldNotAnimateKUIAccessoryInputView = true
         setupConfirmEmailTextField()
-        setupContinueButton()
+        setupButtons()
         setupLabel()
         confirmTextField.becomeFirstResponder()
         validateInput()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if confirmMethod == .email {
-            presentOpenMailAppAlert()
-        }
     }
     
     //MARK: - Setup
@@ -109,7 +103,7 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
         confirmTextField.font = AppFont.medium.size(20)
     }
     
-    func setupContinueButton() {
+    func setupButtons() {
         continueButton.internalButton.isEnabled = false
         continueButton.internalButton.setBackgroundImage(UIImage.imageFromColor(color: .customWhite), for: .normal)
         continueButton.internalButton.setBackgroundImage(UIImage.imageFromColor(color: .customWhite.withAlphaComponent(0.2)), for: .disabled)
@@ -117,6 +111,14 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
         continueButton.internalButton.setTitleColor(.customBlack, for: .disabled)
         continueButton.configure(title: "continue", systemImage: "")
         continueButton.internalButton.addTarget(self, action: #selector(tryToContinue), for: .touchUpInside)
+        
+        openEmailAppButton.isHidden = confirmMethod != .email
+        openEmailAppButton.configure(title: "open email app", systemImage: "envelope")
+        openEmailAppButton.backgroundColor = .clear
+        openEmailAppButton.internalButton.tintColor = .customWhite
+        openEmailAppButton.internalButton.setTitleColor(.customWhite, for: .normal)
+        
+        openEmailAppButton.internalButton.addTarget(self, action: #selector(openEmailButtonTapped), for: .touchUpInside)
     }
     
     func setupLabel() {
@@ -128,6 +130,10 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
     }
     
     //MARK: - User Interaction
+    
+    @objc func openEmailButtonTapped() {
+        presentOpenMailAppAlert()
+    }
     
     @IBAction func backButtonDidPressed(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)

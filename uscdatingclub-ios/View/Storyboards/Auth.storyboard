@@ -305,6 +305,13 @@ connection again.</string>
                                             <constraint firstAttribute="height" constant="50" id="KPh-7h-lC0"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Gy-Jo-jwp" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="578" width="335" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="ilb-kT-qZK"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -312,17 +319,20 @@ connection again.</string>
                                     <constraint firstItem="dKh-ip-f21" firstAttribute="leading" secondItem="QH6-Z8-zfn" secondAttribute="leading" constant="25" id="AVA-LU-5T3"/>
                                     <constraint firstItem="7de-VV-9m2" firstAttribute="leading" secondItem="QH6-Z8-zfn" secondAttribute="leading" constant="25" id="HGs-mF-fyw"/>
                                     <constraint firstItem="dKh-ip-f21" firstAttribute="top" secondItem="QH6-Z8-zfn" secondAttribute="top" constant="30" id="ISd-dx-2Jc"/>
+                                    <constraint firstItem="5Gy-Jo-jwp" firstAttribute="leading" secondItem="QH6-Z8-zfn" secondAttribute="leading" constant="20" id="KVy-xk-MZJ"/>
                                     <constraint firstAttribute="trailing" secondItem="dKh-ip-f21" secondAttribute="trailing" constant="25" id="NBL-a7-ccX"/>
                                     <constraint firstAttribute="bottom" secondItem="2An-cd-KXL" secondAttribute="bottom" constant="15" id="NEy-4z-eFb"/>
                                     <constraint firstItem="OPx-I9-xIv" firstAttribute="trailing" secondItem="qUa-1v-kQZ" secondAttribute="trailing" id="VjT-FY-ejG"/>
                                     <constraint firstItem="OPx-I9-xIv" firstAttribute="top" secondItem="qUa-1v-kQZ" secondAttribute="bottom" constant="8" id="bEH-02-TWg"/>
                                     <constraint firstItem="2An-cd-KXL" firstAttribute="leading" secondItem="QH6-Z8-zfn" secondAttribute="leading" constant="20" id="cRE-tE-IXw"/>
                                     <constraint firstItem="qUa-1v-kQZ" firstAttribute="top" secondItem="7de-VV-9m2" secondAttribute="bottom" constant="24" id="gBV-ke-Kne"/>
+                                    <constraint firstAttribute="trailing" secondItem="5Gy-Jo-jwp" secondAttribute="trailing" constant="20" id="ldO-3n-3KL"/>
                                     <constraint firstAttribute="trailing" secondItem="2An-cd-KXL" secondAttribute="trailing" constant="20" id="oNV-cR-pa3"/>
                                     <constraint firstItem="qUa-1v-kQZ" firstAttribute="centerX" secondItem="QH6-Z8-zfn" secondAttribute="centerX" id="raP-jP-hsh"/>
                                     <constraint firstAttribute="trailing" secondItem="qUa-1v-kQZ" secondAttribute="trailing" constant="25" id="sIc-Wg-pNR"/>
                                     <constraint firstItem="qUa-1v-kQZ" firstAttribute="leading" secondItem="QH6-Z8-zfn" secondAttribute="leading" constant="25" id="ty1-Do-h2w"/>
                                     <constraint firstItem="7de-VV-9m2" firstAttribute="top" secondItem="dKh-ip-f21" secondAttribute="bottom" constant="10" id="usj-Eo-f4x"/>
+                                    <constraint firstItem="2An-cd-KXL" firstAttribute="top" secondItem="5Gy-Jo-jwp" secondAttribute="bottom" constant="15" id="vYf-ha-Muh"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -346,6 +356,7 @@ connection again.</string>
                         <outlet property="bottomConstraintForKeyboard" destination="vtN-f1-ZU4" id="X8u-vG-YC1"/>
                         <outlet property="confirmTextField" destination="qUa-1v-kQZ" id="Cu8-qE-iH0"/>
                         <outlet property="continueButton" destination="2An-cd-KXL" id="iqV-Mg-tDe"/>
+                        <outlet property="openEmailAppButton" destination="5Gy-Jo-jwp" id="gmT-Cy-EXa"/>
                         <outlet property="resendButton" destination="OPx-I9-xIv" id="Pkk-Hb-qNC"/>
                         <outlet property="sentToLabel" destination="7de-VV-9m2" id="qXE-Ie-xPh"/>
                         <outlet property="titleLabel" destination="dKh-ip-f21" id="wGw-tL-UPj"/>

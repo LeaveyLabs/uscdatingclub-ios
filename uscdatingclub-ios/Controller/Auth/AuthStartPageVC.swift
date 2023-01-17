@@ -33,6 +33,7 @@ class AuthStartPageVC: UIPageViewController {
         setupPageVC()
         setupPageControl()
         setupContinueButton()
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundDidTapped)))
     }
     
     //MARK: - Setup
@@ -73,6 +74,12 @@ class AuthStartPageVC: UIPageViewController {
     }
     
     //MARK: - Interaction
+    
+    @objc func backgroundDidTapped() {
+        goToNextPage(animated: true) { completed in
+            self.recalculateCurrentIndex()
+        }
+    }
     
     @objc func continueButtonDidPressed() {
         navigationController?.pushViewController(EnterNumberVC.create(), animated: true)
