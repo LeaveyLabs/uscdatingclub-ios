@@ -60,6 +60,7 @@
 		4731F52C295CE0B40013F626 /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4731F52B295CE0B40013F626 /* AboutVC.swift */; };
 		4731F52E295CE0C10013F626 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4731F52D295CE0C10013F626 /* AccountVC.swift */; };
 		4731F530295CF7DB0013F626 /* UIPageViewController+GoTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4731F52F295CF7DB0013F626 /* UIPageViewController+GoTo.swift */; };
+		474FFCBA297708A4000BE9E0 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41041295CBFDF007C27F0 /* APIError.swift */; };
 		4756882B29738C9E00D6DBB1 /* InsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4756882A29738C9E00D6DBB1 /* InsetLabel.swift */; };
 		47582897296A82C700F10415 /* SelectionHeaderTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47582895296A82C700F10415 /* SelectionHeaderTestCell.swift */; };
 		47582898296A82C800F10415 /* SelectionHeaderTestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47582896296A82C700F10415 /* SelectionHeaderTestCell.xib */; };
@@ -149,7 +150,6 @@
 		47C40F9C295CBF61007C27F0 /* KUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40F99295CBF61007C27F0 /* KUIViewController.swift */; };
 		47C40F9E295CBF61007C27F0 /* CustomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40F9B295CBF61007C27F0 /* CustomSheetViewController.swift */; };
 		47C4103B295CBFCE007C27F0 /* AuthContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41039295CBFCE007C27F0 /* AuthContext.swift */; };
-		47C41047295CBFDF007C27F0 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41041295CBFDF007C27F0 /* APIError.swift */; };
 		47C41054295CBFFC007C27F0 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4104C295CBFFC007C27F0 /* Time.swift */; };
 		47C41055295CBFFC007C27F0 /* Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4104D295CBFFC007C27F0 /* Validate.swift */; };
 		47C41057295CBFFC007C27F0 /* CustomAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4104F295CBFFC007C27F0 /* CustomAttributedString.swift */; };
@@ -1409,6 +1409,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				474FFCBA297708A4000BE9E0 /* APIError.swift in Sources */,
 				4729B22E296E096400971351 /* MatchFoundTableVC.swift in Sources */,
 				47C40F5F295CBAF0007C27F0 /* Feature.swift in Sources */,
 				4731F501295CD4350013F626 /* UINavigationController+Completion.swift in Sources */,
@@ -1565,8 +1566,6 @@
 				434A0532295E1F1300C15945 /* UserAPI.swift in Sources */,
 				47DE3268295CCA5C0063C55A /* UIView+BecomeRound.swift in Sources */,
 				47DE3250295CC7C40063C55A /* UIImage+FromColor.swift in Sources */,
-				47C41047295CBFDF007C27F0 /* APIError.swift in Sources */,
-				47C41047295CBFDF007C27F0 /* APIError.swift in Sources */,
 				433B9D192970A71A0088445B /* QuestionAPI.swift in Sources */,
 				47B6B4C5296BABFB00539353 /* Sex.swift in Sources */,
 				47DE3247295CC7C40063C55A /* UIImageView+ProfilePic.swift in Sources */,

@@ -24,7 +24,6 @@ extension Constants {
     static let updateAvailableVersion = remoteConfig.configValue(forKey: RemoteConfigKeys.updateAvailableVersion.rawValue).stringValue ?? "0.0.0"
     static let updateMandatoryVersion: String = remoteConfig.configValue(forKey: RemoteConfigKeys.updateMandatoryVersion.rawValue).stringValue ?? "0.0.0"
     static let updateAvailableFeatures: Features = Features(json: remoteConfig.configValue(forKey: RemoteConfigKeys.updateAvailableFeatures.rawValue).jsonValue as? [String:Any] ?? [:]) ?? Features()
-    static let emailWhitelist: EmailWhitelist = EmailWhitelist(json: remoteConfig.configValue(forKey: RemoteConfigKeys.emailWhitelist.rawValue).jsonValue as? [String:Any] ?? [:]) ?? EmailWhitelist()
 
     static let minutesToRespond: Int = remoteConfig.configValue(forKey: RemoteConfigKeys.minutesToRespond.rawValue).numberValue as? Int ?? 3
     static let minutesToConnect: Int = remoteConfig.configValue(forKey: RemoteConfigKeys.minutesToConnect.rawValue).numberValue as? Int ?? 5

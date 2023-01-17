@@ -50,7 +50,8 @@ class AuthStartPageVC: UIPageViewController {
     
     var authStartVC: AuthStartVC!
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         authStartVC.agreementTextView.isHidden = navigationController == nil
     }
     
