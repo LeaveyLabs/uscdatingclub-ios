@@ -13,21 +13,29 @@ class AuthStartVC: UIViewController, UITextViewDelegate {
     
     //UI
     @IBOutlet weak var agreementTextView: UITextView!
-    @IBOutlet var continueButton: SimpleButton!
+//    @IBOutlet var continueButton: SimpleButton!
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var subtitleLabel: UILabel!
+    
+    //MARK: - Initialization
+    
+    class func create() -> AuthStartVC {
+        let vc = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.AuthStart) as! AuthStartVC
+        return vc
+    }
     
     //MARK: - Lifecycle
     
     override func loadView() {
         super.loadView()
         setupAgreementTextView()
-        setupButtons()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         titleLabel.font = AppFont.bold.size(30)
+        subtitleLabel.font = AppFont.medium.size(18)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -36,11 +44,6 @@ class AuthStartVC: UIViewController, UITextViewDelegate {
     }
     
     //MARK: - Setup
-    
-    func setupButtons() {
-        continueButton.configure(title: "join the club", systemImage: "")
-        continueButton.internalButton.addTarget(self, action: #selector(continueButtonDidPressed), for: .touchUpInside)
-    }
     
     func setupAgreementTextView() {
         if let agreementText = agreementTextView.text {
@@ -55,7 +58,7 @@ class AuthStartVC: UIViewController, UITextViewDelegate {
             }
             
             agreementTextView.attributedText = attributedText
-            agreementTextView.font = UIFont(name: "Avenir", size: 12)
+            agreementTextView.font = AppFont2.regular.size(12)
             agreementTextView.textColor = UIColor.white.withAlphaComponent(0.7)
             agreementTextView.isEditable = false
             agreementTextView.delegate = self
@@ -71,10 +74,6 @@ class AuthStartVC: UIViewController, UITextViewDelegate {
     
     func textViewDidChangeSelection(_ textView: UITextView) {
         agreementTextView.selectedTextRange = nil
-    }
-    
-    @objc func continueButtonDidPressed() {
-        navigationController?.pushViewController(EnterNumberVC.create(), animated: true)
     }
 
 }

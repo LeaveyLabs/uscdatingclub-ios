@@ -94,6 +94,8 @@ enum Constants {
             static let Loading = "LoadingVC"
             static let Sheet = "SheetVC"
             //Auth
+            static let ScreenDemo = "ScreenDemoVC"
+            static let AuthStart = "AuthStartVC"
             static let AuthNav = "AuthNavVC"
             static let EnterNumber = "EnterNumberVC"
             static let ConfirmCode = "ConfirmCodeVC"

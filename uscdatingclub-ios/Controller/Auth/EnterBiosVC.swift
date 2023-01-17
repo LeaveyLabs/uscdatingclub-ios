@@ -196,9 +196,9 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
                     sexPreference: String(sexPreference))
                 AuthContext.reset()
                 DispatchQueue.main.async { [self] in
-                    navigationController?.pushViewController(HowItWorksVC.create(), animated: true, completion: { [weak self] in
+                    transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.3) { [weak self] finished in
                         self?.isSubmitting = false
-                    })
+                    }
                 }
             } catch {
                 DispatchQueue.main.async {

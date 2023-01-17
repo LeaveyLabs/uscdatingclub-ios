@@ -92,6 +92,8 @@
 		47A24A302970B6160077AB11 /* Connect.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47A24A2F2970B6160077AB11 /* Connect.storyboard */; };
 		47A24A322970E5FE0077AB11 /* UncertainValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A24A312970E5FE0077AB11 /* UncertainValue.swift */; };
 		47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A80614295F8D23001DEE64 /* EnterBiosVC.swift */; };
+		47ABA6E62976221000F0FDFE /* AuthStartPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ABA6E52976221000F0FDFE /* AuthStartPageVC.swift */; };
+		47ABA6E82976241500F0FDFE /* ScreenDemoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ABA6E72976241500F0FDFE /* ScreenDemoVC.swift */; };
 		47B60B0A296C834600657C1D /* ConnectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B09296C834600657C1D /* ConnectManager.swift */; };
 		47B60B0C296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B0B296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift */; };
 		47B60B0E296D0E3900657C1D /* SheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B0D296D0E3900657C1D /* SheetVC.swift */; };
@@ -332,6 +334,8 @@
 		47A24A2F2970B6160077AB11 /* Connect.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Connect.storyboard; sourceTree = "<group>"; };
 		47A24A312970E5FE0077AB11 /* UncertainValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UncertainValue.swift; sourceTree = "<group>"; };
 		47A80614295F8D23001DEE64 /* EnterBiosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterBiosVC.swift; sourceTree = "<group>"; };
+		47ABA6E52976221000F0FDFE /* AuthStartPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStartPageVC.swift; sourceTree = "<group>"; };
+		47ABA6E72976241500F0FDFE /* ScreenDemoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDemoVC.swift; sourceTree = "<group>"; };
 		47B60B09296C834600657C1D /* ConnectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectManager.swift; sourceTree = "<group>"; };
 		47B60B0B296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate+Heading.swift"; sourceTree = "<group>"; };
 		47B60B0D296D0E3900657C1D /* SheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetVC.swift; sourceTree = "<group>"; };
@@ -1009,6 +1013,8 @@
 			isa = PBXGroup;
 			children = (
 				47DE31EB295CC4B40063C55A /* AuthStartVC.swift */,
+				47ABA6E72976241500F0FDFE /* ScreenDemoVC.swift */,
+				47ABA6E52976221000F0FDFE /* AuthStartPageVC.swift */,
 				47DE31EF295CC4B40063C55A /* EnterNumberVC.swift */,
 				47DE31E9295CC4B40063C55A /* ConfirmCodeVC.swift */,
 				47DE31ED295CC4B40063C55A /* EnterEmailVC.swift */,
@@ -1435,6 +1441,7 @@
 				47C40F91295CBBBD007C27F0 /* Color+Hex.swift in Sources */,
 				47C40F61295CBAF0007C27F0 /* Device.swift in Sources */,
 				47DE324F295CC7C40063C55A /* UIImage+Resize.swift in Sources */,
+				47ABA6E62976221000F0FDFE /* AuthStartPageVC.swift in Sources */,
 				47DE3259295CC7C40063C55A /* UIViewController+MistShareActivity.swift in Sources */,
 				47C41077295CC0AB007C27F0 /* CLLocationCoordiante+Midpoint.swift in Sources */,
 				47C4106E295CC095007C27F0 /* String+Random.swift in Sources */,
@@ -1455,6 +1462,7 @@
 				4758289B296A82D900F10415 /* SelectionTestCell.swift in Sources */,
 				478BECD52966249300930DAF /* SpectrumTestQuestion.swift in Sources */,
 				47A24A29297088FF0077AB11 /* SurveyResponse.swift in Sources */,
+				47ABA6E82976241500F0FDFE /* ScreenDemoVC.swift in Sources */,
 				4731F503295CD45F0013F626 /* UIScrollView+ToTop.swift in Sources */,
 				47DE3264295CC94F0063C55A /* UIButton+LoadingIndicator.swift in Sources */,
 				47DE3207295CC4B40063C55A /* CreateProfileVC.swift in Sources */,
