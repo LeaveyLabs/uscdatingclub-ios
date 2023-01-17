@@ -125,7 +125,9 @@ class UserAPI {
         try filterUserErrors(data: data, response: response)
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return try decoder.decode(CompleteUser.self, from: data)
+        let registeredUser = try decoder.decode(CompleteUser.self, from: data)
+        setGlobalAuthToken(token: registeredUser.token)
+        return registeredUser
     }
     
     static func postSurveyAnswers(email:String,
