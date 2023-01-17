@@ -116,8 +116,25 @@ class TestTextVC: UIViewController {
     @objc func didTapPrimaryButton() {
         switch testTextType {
         case .welcome:
-            let nextTestPage = TestService.shared.getPage(number: 0)
-            navigationController?.pushViewController(TestQuestionsVC.create(page: nextTestPage), animated: true)
+            if !TestService.shared.needsLoading() {
+                startTest()
+            } else {
+                primaryButton.internalButton.loadingIndicator(true)
+                primaryButton.alpha = 0.7
+                primaryButton.configure(title: "", systemImage: "")
+                Task {
+                    do {
+                        try await TestService.shared.loadTestQuestions()
+                        DispatchQueue.main.async {
+                            self.startTest()
+                        }
+                    } catch {
+                        DispatchQueue.main.async {
+                            self.handleErrorLoadingQuestions(error)
+                        }
+                    }
+                }
+            }
         case .submitting:
             break
         case .finished:
@@ -127,6 +144,20 @@ class TestTextVC: UIViewController {
                 dismiss(animated: true)
             }
         }
+    }
+    
+    @MainActor
+    func handleErrorLoadingQuestions(_ error: Error) {
+        AlertManager.displayError("error loading questions", "please try again")
+        primaryButton.internalButton.loadingIndicator(false)
+        primaryButton.alpha = 1
+        primaryButton.configure(title: "continue", systemImage: "")
+    }
+    
+    @MainActor
+    func startTest() {
+        let nextTestPage = TestService.shared.getPage(number: 0)
+        navigationController?.pushViewController(TestQuestionsVC.create(page: nextTestPage), animated: true)
     }
     
     @IBAction func cancelButtonDidTapped() {

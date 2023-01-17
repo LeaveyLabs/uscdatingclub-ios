@@ -209,6 +209,8 @@ extension TestQuestionsVC: SelectionTestCellDelegate {
 extension TestQuestionsVC: SpectrumTestCellDelegate {
     
     func buttonDidTapped(questionId: Int, selection: Int) {
+        manuallyOpenedSelectionQuestionIndex = nil
+        
         let newResponse = SurveyResponse(questionId: questionId, answer: String(selection))
         TestService.shared.setResponse(newResponse)
 
@@ -255,27 +257,26 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
         
         let questionIndex = prevQuestionIndex + 1
 
-        //TODO: i dont think i need the below code anymore
         //when a selection question is appearing or disappearing, need a slight delay so that expanded UI's constraints can update
-//        let beforeQ = testPage.questions[questionIndex]
-//        let selectionQ = testPage.questions[questionIndex]
-//        if (beforeQ.isMultipleAnswer || selectionQ.isMultipleAnswer) && !redo {
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-//                self.scrollDownIfNecessary(prevQuestionId: prevQuestionId, redo: true)
-//            }
-//            return
-//        }
+        let beforeQ = testPage.questions[questionIndex]
+        let selectionQ = testPage.questions[questionIndex]
+        if (beforeQ.isMultipleAnswer || selectionQ.isMultipleAnswer) && !redo {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.scrollDownIfNecessary(prevQuestionId: prevQuestionId, redo: true)
+            }
+            return
+        }
                 
         let questionBottomYWithinFeed = tableView.rectForRow(at: IndexPath(row: 0, section: questionIndex))
         let questionBottomY = tableView.convert(questionBottomYWithinFeed, to: view).maxY
 
         let totalHeight = view.bounds.height + view.safeAreaInsets.top + view.safeAreaInsets.bottom
         let desiredOffset: CGFloat
-//        if (selectionQ.isMultipleAnswer) {
-//            desiredOffset = questionBottomY - totalHeight/3
-//        } else {
+        if (selectionQ.isMultipleAnswer) {
+            desiredOffset = questionBottomY - totalHeight/2.2
+        } else {
             desiredOffset = questionBottomY - totalHeight/1.5
-//        }
+        }
 
         if desiredOffset < 50 { return } //don't go in wrong direction, and don't scroll if a small amount
         

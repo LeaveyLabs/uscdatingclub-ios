@@ -31,6 +31,10 @@ class TestService: NSObject {
         }
     }
     
+    func needsLoading() -> Bool {
+        return pageHeaders.count == 0
+    }
+    
     func loadTestQuestions() async throws {
         pageHeaders = try await QuestionAPI.getPageOrder()
         let questions = try await QuestionAPI.getQuestions()
