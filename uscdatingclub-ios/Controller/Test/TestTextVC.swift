@@ -48,7 +48,7 @@ class TestTextVC: UIViewController {
             navigationController?.interactivePopGestureRecognizer?.isEnabled = false
             Task {
                 do {
-                    try await UserService.singleton.updateTestResponses(newResponses:TestService.shared.getResponsesContext())
+                    try await UserService.singleton.updateTestResponses(newResponses:TestService.shared.getResponsesContextAsArray())
                     try await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)
                     DispatchQueue.main.async { [self] in
                         testTextType = .finished
@@ -71,7 +71,7 @@ class TestTextVC: UIViewController {
         case .welcome:
             cancelButton.isHidden = isFirstTest
             activityIndicatorView.stopAnimating()
-            primaryLabel.text = "the compatibility test"
+            primaryLabel.text = "the compatibility test™"
             secondaryLabel.text = "we'll calculate your compatibility with other usc students"
             primaryButton.configure(title: "begin", systemImage: "")
         case .submitting:
@@ -84,19 +84,19 @@ class TestTextVC: UIViewController {
             primaryButton.alpha = 0
         case .finished:
             if isFirstTest {
-                secondaryLabel.text = "welcome to the\nusc dating club."
-                UIView.animate(withDuration: 2) { [self] in
+                secondaryLabel.text = "welcome to\nusc dating club."
+                UIView.animate(withDuration: 1) { [self] in
                     activityIndicatorView.stopAnimating()
                     primaryLabel.text = "responses submitted"
                 } completion: { completed in
-                    UIView.animate(withDuration: 1) { [self] in
-                        secondaryLabel.alpha = 1
-                    } completion: { completed in
-                        self.primaryButton.internalButton.isEnabled = true
+//                    UIView.animate(withDuration: 1) { [self] in
+//                        secondaryLabel.alpha = 1
+//                    } completion: { completed in
+//                        self.primaryButton.internalButton.isEnabled = true
                         UIView.animate(withDuration: 0.7) { [self] in
                             primaryButton.alpha = 1
                         }
-                    }
+//                    }
                 }
             } else {
                 activityIndicatorView.stopAnimating()
@@ -116,8 +116,25 @@ class TestTextVC: UIViewController {
     @objc func didTapPrimaryButton() {
         switch testTextType {
         case .welcome:
-            let nextTestPage = TestService.shared.getPage(number: 0)
-            navigationController?.pushViewController(TestQuestionsVC.create(page: nextTestPage), animated: true)
+            if !TestService.shared.needsLoading() {
+                startTest()
+            } else {
+                primaryButton.internalButton.loadingIndicator(true)
+                primaryButton.alpha = 0.7
+                primaryButton.configure(title: "", systemImage: "")
+                Task {
+                    do {
+                        try await TestService.shared.loadTestQuestions()
+                        DispatchQueue.main.async {
+                            self.startTest()
+                        }
+                    } catch {
+                        DispatchQueue.main.async {
+                            self.handleErrorLoadingQuestions(error)
+                        }
+                    }
+                }
+            }
         case .submitting:
             break
         case .finished:
@@ -127,6 +144,20 @@ class TestTextVC: UIViewController {
                 dismiss(animated: true)
             }
         }
+    }
+    
+    @MainActor
+    func handleErrorLoadingQuestions(_ error: Error) {
+        AlertManager.displayError("error loading questions", "please try again")
+        primaryButton.internalButton.loadingIndicator(false)
+        primaryButton.alpha = 1
+        primaryButton.configure(title: "continue", systemImage: "")
+    }
+    
+    @MainActor
+    func startTest() {
+        let nextTestPage = TestService.shared.getPage(number: 0)
+        navigationController?.pushViewController(TestQuestionsVC.create(page: nextTestPage), animated: true)
     }
     
     @IBAction func cancelButtonDidTapped() {

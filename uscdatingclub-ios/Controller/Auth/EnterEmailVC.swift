@@ -112,10 +112,6 @@ class EnterEmailVC: KUIViewController, UITextFieldDelegate {
     @objc func tryToContinue() {
         if let email = enterEmailTextField.text?.lowercased() {
             isSubmitting = true
-            if Constants.onlyUscStudents && !email.contains("usc") {
-                handleNonUSCSignup(email)
-                return
-            }
             Task {
                 do {
                     try await EmailAPI.requestCode(email: email, uuid: AuthContext.uuid)
@@ -128,7 +124,12 @@ class EnterEmailVC: KUIViewController, UITextFieldDelegate {
                     }
                 } catch {
                     DispatchQueue.main.async {
-                        self.handleFailure(error)
+                        if let description = (error as? APIError)?.errorDescription,
+                           description.contains("list") {
+                            self.handleNonUSCSignup(email)
+                        } else {
+                            self.handleFailure(error)
+                        }
                     }
                 }
             }
@@ -147,6 +148,7 @@ class EnterEmailVC: KUIViewController, UITextFieldDelegate {
     func handleNonUSCSignup(_ email: String) {
         Task {
             do {
+                UserDefaults.standard.setValue(true, forKey: Constants.UserDefaultsKeys.isOnWaitList)
                 try await EmailAPI.placeOnWaitingList(email: email)
                 DispatchQueue.main.async {
                     let vc = WaitListVC.create()

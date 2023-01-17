@@ -28,8 +28,5 @@ class WaitListVC: UIViewController {
         titleLabel.font = AppFont.bold.size(30)
         subtitleLabel.font = AppFont2.medium.size(17)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        Task {
-            UserDefaults.standard.setValue(true, forKey: Constants.UserDefaultsKeys.isOnWaitList)
-        }
     }
 }

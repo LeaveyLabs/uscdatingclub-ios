@@ -17,6 +17,7 @@ class AboutVC: UIViewController, PageVCChild {
     @IBOutlet weak var appNameLabel: UILabel!
     @IBOutlet var tableView: UITableView!
 
+    let messageComposer = MessageComposer() //need to hold a storng reference so the delegate will be called
 
     //MARK: - Initialization
     
@@ -37,7 +38,8 @@ class AboutVC: UIViewController, PageVCChild {
     
     func setupLabels() {
         versionLabel.text = "\(Version.currentVersion)"
-        versionLabel.font = AppFont.bold.size(12)
+        versionLabel.font = AppFont.medium.size(12)
+        versionLabel.alpha = 0.7
         appNameLabel.font = AppFont.bold.size(18)
         titleLabel.font = AppFont.bold.size(20)
     }
@@ -52,6 +54,7 @@ class AboutVC: UIViewController, PageVCChild {
         tableView.indicatorStyle = .white
         tableView.separatorStyle = .none
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 10))
+        tableView.delaysContentTouches = false //for responsive button highlight
 
         tableView.register(UINib(nibName: Constants.SBID.Cell.SimpleButtonCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SimpleButtonCell)
     }
@@ -65,7 +68,7 @@ class AboutVC: UIViewController, PageVCChild {
     //MARK: - Interaction
     
     @objc func howItWorksButtonPressed() {
-        let howItWorksVC = HowItWorksVC.create()
+        let howItWorksVC = AuthStartPageVC.create()
         present(howItWorksVC, animated: true)
     }
     
@@ -84,9 +87,29 @@ class AboutVC: UIViewController, PageVCChild {
     @objc func feedbackButtonPressed() {
         openURL(Constants.feedbackLink)
     }
-    
+        
     @objc func contactButtonPressed() {
-        openMailtoURL(Constants.contactLink)
+        let who = Int.random(in: 0...1)
+        let adamsNumber = "6159754270"
+        let kevinsNumber = "3108741292"
+        let recipient = who == 0 ? adamsNumber : kevinsNumber
+        
+        if (messageComposer.canSendText()) {
+            let messageComposeVC = messageComposer.configuredMessageComposeViewController(recipients: [recipient], body: "")
+            present(messageComposeVC, animated: true)
+        } else {
+            AlertManager.showAlert(title: "Cannot Send Text Message", subtitle: "Your device is not able to send text messages.", primaryActionTitle: "OK", primaryActionHandler: {}, on: self)
+        }
+        
+        //MAIL:
+//        guard
+//            let textURL = URL(string: "sms:\(recipient)&body=\(text)"),
+//            UIApplication.shared.canOpenURL(textURL)
+//        else {
+//            openMailtoURL(Constants.contactLink)
+//            return
+//        }
+//        UIApplication.shared.open(textURL)
     }
     
     @IBAction func termsButtonDidPressed() {
@@ -124,7 +147,7 @@ extension AboutVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -147,12 +170,12 @@ extension AboutVC: UITableViewDataSource {
                 self.rateButtonPressed()
             }
         case 4:
-            cell.configure(title: "give feedback", systemImage: "message") {
-                self.feedbackButtonPressed()
+            cell.configure(title: "text us", systemImage: "message") {
+                self.contactButtonPressed()
             }
         case 5:
-            cell.configure(title: "contact us", systemImage: "hand.wave") {
-                self.contactButtonPressed()
+            cell.configure(title: "give feedback", systemImage: "hand.wave") {
+                self.feedbackButtonPressed()
             }
         default:
             fatalError()

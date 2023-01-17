@@ -96,20 +96,17 @@ class UserService: NSObject {
                     sexPreference: String) async throws {
 //        let newProfilePicWrapper = ProfilePicWrapper(image: profilePic, withCompresssion: true)
 //        let compressedProfilePic = newProfilePicWrapper.image
-        try await UserAPI.registerUser(email: email,
+        let newCompleteUser = try await UserAPI.registerUser(email: email,
                                        phoneNumber: phoneNumber,
                                        firstName: firstName,
                                        lastName: lastName,
                                        sexIdentity: sexIdentity,
                                        sexPreference: sexPreference)
-//        setGlobalAuthToken(token: token)
-//        let completeUser = try await UserAPI.fetchAuthedUserByToken(token: token)
-//        frontendCompleteUser = FrontendCompleteUser(completeUser: completeUser,
-//                                                    profilePicWrapper: newProfilePicWrapper,
-//                                                    token: token)
-//        authedUser = frontendCompleteUser!
+        setGlobalAuthToken(token: newCompleteUser.token)
+        frontendCompleteUser = FrontendCompleteUser(completeUser: newCompleteUser)
+        authedUser = frontendCompleteUser!
         await self.saveUserToFilesystem()
-//        Task { await waitAndRegisterDeviceToken(id: completeUser.id) }
+        Task { await waitAndRegisterDeviceToken(id: authedUser.id) }
         Task {
             setupFirebaseAnalyticsProperties() //must come later at the end of this process so that we dont access authedUser while it's null and kick the user to the home screen
         }
@@ -118,12 +115,7 @@ class UserService: NSObject {
 
     func logInWith(completeUser: CompleteUser) async throws {
         Task { await waitAndRegisterDeviceToken(id: completeUser.id) }
-        
-//        guard let profilePicUIImage = try await GenericAPI.UIImageFromURLString(url: completeUser.picture) else {
-//            throw NSError()
-//        }
-        
-        frontendCompleteUser = FrontendCompleteUser(completeUser: completeUser)
+        authedUser = FrontendCompleteUser(completeUser: completeUser)
         setupFirebaseAnalyticsProperties()
         await self.saveUserToFilesystem()
         isLoggedIntoApp = true
@@ -141,6 +133,7 @@ class UserService: NSObject {
     func updateMatchableStatus(active: Bool) async throws {
         let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: active, surveyResponses: authedUser.surveyResponses, token: authedUser.token)
         try await UserAPI.updateMatchableStatus(matchableStatus: active, email: authedUser.email)
+        //LocationManager start/stop updating location is handled in RadarVC on rerender right now
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
         Task { await self.saveUserToFilesystem() }
     }

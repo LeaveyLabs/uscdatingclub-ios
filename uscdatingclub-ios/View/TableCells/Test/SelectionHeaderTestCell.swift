@@ -41,20 +41,14 @@ class SelectionHeaderTestCell: UITableViewCell {
         cellDelegate = delegate
         self.testQuestion = testQuestion
         
-        if isLastCell {
-//            bottomLineView.isHidden = true //having annoying constraint issues w this...
-        }
-        if isFirstCell {
-            topLineView.isHidden = true
-        }
-        
+        topLineView.isHidden = isFirstCell
         
         titleButton.setTitle(testQuestion.prompt, for: .normal)
         titleButton.setTitleColor(shouldBeOpened ? .customWhite : isAnswered ? .customWhite : .testPurple, for: .normal)
         titleButton.setImage(UIImage(systemName: shouldBeOpened ? "chevron.up" : "chevron.down"), for: .normal)
         titleButton.tintColor = shouldBeOpened ? .customWhite : isAnswered ? .customWhite : .testPurple
-        contentView.alpha = shouldBeOpened ? 1 : 0.7
         
+        contentView.alpha = shouldBeOpened ? 1 : 0.2
         bottomConstraint.constant = isOpen ? 10 : 40
     }
     

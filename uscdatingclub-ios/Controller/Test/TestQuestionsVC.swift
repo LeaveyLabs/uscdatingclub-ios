@@ -14,24 +14,8 @@ class TestQuestionsVC: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var titleLabel: UILabel!
     
-    var lastNonAnsweredQuestionIndex: Int {
-        TestService.shared.firstNonAnsweredQuestion(on: testPage)
-    }
     var manuallyOpenedSelectionQuestionIndex: Int? = nil
-    
     var testPage: TestPage!
-    
-    //we want the context to be a dictionary ordered by question id
-    
-    //do all the questions on this page have a response in the context?
-    var didAnswerAllQuestionsOnPage: Bool {
-        for question in testPage.questions {
-            if !TestService.shared.hasAnswered(question) {
-                return false
-            }
-        }
-        return true
-    }
     
     //MARK: - Initialization
     
@@ -49,13 +33,7 @@ class TestQuestionsVC: UIViewController {
         setupHeaderFooter()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
+    //MARK: - Setup
     
     func setupHeaderFooter() {
         titleLabel.text = testPage.header
@@ -73,7 +51,7 @@ class TestQuestionsVC: UIViewController {
 
         //the below was giving me issues for some reason
         tableView.register(UINib(nibName: Constants.SBID.Cell.SpectrumTestCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SpectrumTestCell)
-        tableView.register(UINib(nibName: Constants.SBID.Cell.SelectionCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SelectionCell)
+        tableView.register(UINib(nibName: Constants.SBID.Cell.SelectionTableViewCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SelectionTableViewCell)
         tableView.register(UINib(nibName: Constants.SBID.Cell.SelectionHeaderCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SelectionHeaderCell)
         tableView.register(UINib(nibName: Constants.SBID.Cell.SimpleButtonCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SimpleButtonCell)
     }
@@ -81,7 +59,7 @@ class TestQuestionsVC: UIViewController {
     //MARK: - Interaciton
     
     @objc func didTapNextButton() {
-        guard didAnswerAllQuestionsOnPage else { return }
+        guard TestService.shared.didAnswerAllQuestions(on: testPage) else { return }
         if let nextPage = TestService.shared.getNextPage(currentPage: testPage) {
             navigationController?.pushViewController(TestQuestionsVC.create(page: nextPage), animated: true)
         } else {
@@ -112,11 +90,11 @@ extension TestQuestionsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard section < testPage.questions.count else { return 1 }
         let question = testPage.questions[section]
-        if question.isMultipleAnswer {
-            if lastNonAnsweredQuestionIndex == section {
-                return 1 + question.textAnswerChoices!.count
+        if !question.isNumerical {
+            if TestService.shared.firstNonAnsweredQuestion(on: testPage) == section {
+                return 2 //header and tableViewCell
             } else if let manuallyOpenedSelectionQuestionIndex, manuallyOpenedSelectionQuestionIndex == section {
-                return 1 + question.textAnswerChoices!.count
+                return 2 //header and tableViewCell
             } else {
                 return 1
             }
@@ -127,10 +105,10 @@ extension TestQuestionsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == testPage.questions.count {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SimpleButtonCell, for: indexPath) as! SimpleButtonCell
-            cell.configure(title: "next", systemImage: "") {
+            cell.configure(title: TestService.shared.isLastPage(testPage) ? "finish" : "next", systemImage: "") {
                 self.didTapNextButton()
             }
-            cell.simpleButton.alpha = didAnswerAllQuestionsOnPage ? 1 : 0.5
+            cell.simpleButton.alpha = TestService.shared.didAnswerAllQuestions(on: testPage) ? 1 : 0.5
             return cell
         }
         let question = testPage.questions[indexPath.section]
@@ -140,7 +118,7 @@ extension TestQuestionsVC: UITableViewDataSource {
             cell.configure(testQuestion: question,
                            response: currentResponse != nil ? Int(currentResponse!.answer) : nil,
                            delegate: self,
-                           shouldBeHighlighted: lastNonAnsweredQuestionIndex == indexPath.section,
+                           shouldBeHighlighted: TestService.shared.firstNonAnsweredQuestion(on: testPage) == indexPath.section,
                            isLastCell: indexPath.section == testPage.questions.count - 1,
                            isFirstCell: indexPath.section == 0)
             return cell
@@ -149,26 +127,23 @@ extension TestQuestionsVC: UITableViewDataSource {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SelectionHeaderCell, for: indexPath) as! SelectionHeaderTestCell
                 cell.configure(testQuestion: question,
                                delegate: self,
-                               shouldBeOpened: lastNonAnsweredQuestionIndex == indexPath.section || manuallyOpenedSelectionQuestionIndex == indexPath.section,
+                               shouldBeOpened: TestService.shared.firstNonAnsweredQuestion(on: testPage) == indexPath.section || manuallyOpenedSelectionQuestionIndex == indexPath.section,
                                isAnswered: TestService.shared.hasAnswered(question),
                                isLastCell: indexPath.section == testPage.questions.count - 1,
                                isFirstCell: indexPath.section == 0)
                 return cell
             } else {
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SelectionCell, for: indexPath) as! SelectionTestCell
-                let option = question.textAnswerChoices![indexPath.row-1]
-                let isCurrentlySelected = TestService.shared.currentResponsesFor(question).contains(SurveyResponse(questionId: question.id, answer: option))
-                cell.configure(testQuestion: question,
-                               testAnswer: option,
-                               delegate: self,
-                               isCurrentlySelected: isCurrentlySelected,
-                               isLastCell: indexPath.row == question.textAnswerChoices!.count)
+                //TABLEVIEWCELL
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SelectionTableViewCell, for: indexPath) as! SelectionTableViewCell
+                cell.configure(testQuestion: question, delegate: self)
                 return cell
             }
         }
     }
     
 }
+
+//MARK: - SelectionHeaderTestCellDelegate
 
 extension TestQuestionsVC: SelectionHeaderTestCellDelegate {
     
@@ -185,6 +160,8 @@ extension TestQuestionsVC: SelectionHeaderTestCellDelegate {
     }
     
 }
+
+//MARK: - SelectionTestCellDelegate
 
 extension TestQuestionsVC: SelectionTestCellDelegate {
     
@@ -211,9 +188,13 @@ extension TestQuestionsVC: SelectionTestCellDelegate {
     
 }
 
+//MARK: - SpectrumTestCellDelegate
+
 extension TestQuestionsVC: SpectrumTestCellDelegate {
     
     func buttonDidTapped(questionId: Int, selection: Int) {
+        manuallyOpenedSelectionQuestionIndex = nil
+        
         let newResponse = SurveyResponse(questionId: questionId, answer: String(selection))
         TestService.shared.setResponse(newResponse)
 
@@ -259,7 +240,7 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
         guard !TestService.shared.hasAnswered(questionId: prevQuestionId+1) else { return } //they went back to answer an earlier question. do nothing
         
         let questionIndex = prevQuestionIndex + 1
-        
+
         //when a selection question is appearing or disappearing, need a slight delay so that expanded UI's constraints can update
         let beforeQ = testPage.questions[questionIndex]
         let selectionQ = testPage.questions[questionIndex]
@@ -276,9 +257,9 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
         let totalHeight = view.bounds.height + view.safeAreaInsets.top + view.safeAreaInsets.bottom
         let desiredOffset: CGFloat
         if (selectionQ.isMultipleAnswer) {
-            desiredOffset = questionBottomY - totalHeight/3
+            desiredOffset = questionBottomY - totalHeight/2.2
         } else {
-            desiredOffset = questionBottomY - totalHeight/1.4
+            desiredOffset = questionBottomY - totalHeight/1.5
         }
 
         if desiredOffset < 50 { return } //don't go in wrong direction, and don't scroll if a small amount

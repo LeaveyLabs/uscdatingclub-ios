@@ -258,35 +258,28 @@ class RadarVC: UIViewController, PageVCChild {
     //MARK: - Interaction
     
     @objc func didTapActiveButton() {
-        present(PermissionsVC.create(), animated: true)
-//        switch uiState {
-//        case .radar:
-//            if isLocationServicesEnabled {
-//                isLocationServicesEnabled = false
-//                renderIsActive()
-//                Task {
-//                    try await UserService.singleton.updateMatchableStatus(active:false)
-//                }
-//            } else {
-//                PermissionsManager.areAllPermissionsGranted { areAllGranted in
-//                    DispatchQueue.main.async { [self] in
-//                        if areAllGranted {
-//                            isLocationServicesEnabled = true
-//                            renderIsActive()
-//                            Task {
-//                                try await UserService.singleton.updateMatchableStatus(active:true)
-//                            }
-//                        } else {
-//                            let permissionsVC = PermissionsTableVC.create()
-//                            permissionsVC.modalPresentationStyle = .fullScreen
-//                            present(permissionsVC, animated: true)
-//                        }
-//                    }
-//                }
-//            }
-//        case .arrow:
-//            presentTest()
-//        }
+        switch uiState {
+        case .radar:
+            if isLocationServicesEnabled {
+                isLocationServicesEnabled = false
+                renderIsActive()
+            } else {
+                PermissionsManager.areAllPermissionsGranted { areAllGranted in
+                    DispatchQueue.main.async { [self] in
+                        if areAllGranted {
+                            isLocationServicesEnabled = true
+                            renderIsActive()
+                        } else {
+                            let permissionsVC = PermissionsTableVC.create()
+                            permissionsVC.modalPresentationStyle = .fullScreen
+                            present(permissionsVC, animated: true)
+                        }
+                    }
+                }
+            }
+        case .arrow:
+            presentTest()
+        }
     }
     
     @objc func centerCircleTouchDown() {
@@ -302,6 +295,10 @@ class RadarVC: UIViewController, PageVCChild {
     }
     
     @objc func didTapCenterCircle() {
+        didTapActiveButton()
+    }
+    
+    func animateANewCircle() {
         UIView.animate(withDuration: 0.2, delay: 0) {
             self.centerCircleButton.transform = .identity
         }

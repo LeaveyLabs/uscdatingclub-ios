@@ -48,6 +48,7 @@ class AccountVC: UIViewController, PageVCChild {
         tableView.showsVerticalScrollIndicator = true
         tableView.indicatorStyle = .white
         tableView.separatorStyle = .none
+        tableView.delaysContentTouches = false //for responsive button highlight
 
         tableView.register(UINib(nibName: Constants.SBID.Cell.SimpleTitleCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SimpleTitleCell)
         tableView.register(UINib(nibName: Constants.SBID.Cell.SimpleButtonCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SimpleButtonCell)

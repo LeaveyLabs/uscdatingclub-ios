@@ -31,6 +31,10 @@ class TestService: NSObject {
         }
     }
     
+    func needsLoading() -> Bool {
+        return pageHeaders.count == 0
+    }
+    
     func loadTestQuestions() async throws {
         pageHeaders = try await QuestionAPI.getPageOrder()
         let questions = try await QuestionAPI.getQuestions()
@@ -41,10 +45,13 @@ class TestService: NSObject {
                 pagedQuestions[question.header] = [question]
             }
         }
-        print("test questions:", pageHeaders, questions)
     }
+        
+    //MARK: - Getters
     
-    //MARK: - Public Interface
+    func isLastPage(_ testPage: TestPage) -> Bool {
+        return getNextPage(currentPage: testPage) == nil
+    }
     
     func pageCount() -> Int {
         return pageHeaders.count
@@ -71,19 +78,6 @@ class TestService: NSObject {
         return TestPage(header: pageHeader, questions: questions)
     }
     
-    func setResponse(_ newResponse: SurveyResponse) {
-        let newResponseSet: Set = [newResponse]
-        responseContext[newResponse.questionId] = newResponseSet
-    }
-    
-    func toggleResponse(_ newResponse: SurveyResponse) {
-        if responseContext[newResponse.questionId] != nil, responseContext[newResponse.questionId]!.contains(newResponse) {
-            responseContext[newResponse.questionId]!.remove(newResponse)
-        } else {
-            responseContext[newResponse.questionId]?.insert(newResponse)
-        }
-    }
-    
     func currentResponseFor(_ question: Question) -> SurveyResponse? {
         return responseContext[question.id]?.first
     }
@@ -100,13 +94,46 @@ class TestService: NSObject {
         return responseContext.keys.contains(questionId)
     }
     
-    func getResponsesContext() -> [SurveyResponse] {
-        let responseArray = Array(responseContext.values) as! [SurveyResponse]
+    func getResponsesContextAsArray() -> [SurveyResponse] {
+        var responseArray: [SurveyResponse] = []
+        for responseSet in responseContext.values {
+            for response in responseSet {
+                responseArray.append(response)
+            }
+        }
         return responseArray
     }
     
     func firstNonAnsweredQuestion(on testPage: TestPage) -> Int {
         return testPage.questions.firstIndex(where: { responseContext[$0.id] == nil }) ?? testPage.questions.count
+    }
+    
+    func didAnswerAllQuestions(on testPage: TestPage) -> Bool {
+        for question in testPage.questions {
+            if !hasAnswered(question) {
+                return false
+            }
+        }
+        return true
+    }
+    
+    //MARK: - Setters
+    
+    func setResponse(_ newResponse: SurveyResponse) {
+        let newResponseSet: Set = [newResponse]
+        responseContext[newResponse.questionId] = newResponseSet
+    }
+    
+    func toggleResponse(_ newResponse: SurveyResponse) {
+        if responseContext.keys.contains(newResponse.questionId) {
+            if responseContext[newResponse.questionId]!.contains(newResponse) {
+                responseContext[newResponse.questionId]!.remove(newResponse)
+            } else {
+                responseContext[newResponse.questionId]!.insert(newResponse)
+            }
+        } else {
+            setResponse(newResponse)
+        }
     }
     
     func resetResponseContext() {

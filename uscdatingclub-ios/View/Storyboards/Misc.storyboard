@@ -169,7 +169,7 @@ we don't save any location data and use new Apple APIs for minimal battery usage
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hpG-cj-tUU">
-                                                <rect key="frame" x="293" y="27.000000000000007" width="53" height="51.333333333333321"/>
+                                                <rect key="frame" x="293" y="27.000000000000004" width="53" height="51.333333333333329"/>
                                                 <color key="tintColor" name="customGreen"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="hpG-cj-tUU" secondAttribute="height" id="XRT-Sg-uUQ"/>
@@ -206,7 +206,7 @@ we don't save any location data and use new Apple APIs for minimal battery usage
                                                     <constraint firstAttribute="height" constant="70" id="5ia-0u-X7D"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="your phone will automatically scan your immediate area in the background." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fIt-5U-R37">
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="your phone will scan your immediate area in the background." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fIt-5U-R37">
                                                 <rect key="frame" x="10" y="157.33333333333331" width="333" height="39.666666666666657"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -257,7 +257,7 @@ we don't save any location data and use new Apple APIs for minimal battery usage
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i4e-on-Dhb">
-                                                <rect key="frame" x="293" y="17.000000000000007" width="53" height="51.333333333333321"/>
+                                                <rect key="frame" x="293" y="17.000000000000004" width="53" height="51.333333333333329"/>
                                                 <color key="tintColor" name="customGreen"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="i4e-on-Dhb" secondAttribute="height" id="aoM-NO-nSA"/>
@@ -430,7 +430,7 @@ we don't save any location data and use new Apple APIs for minimal battery usage
         <image name="checkmark.circle.fill" catalog="system" width="128" height="123"/>
         <image name="uscdatingclub-title-threelines" width="356" height="302"/>
         <namedColor name="AccentColor">
-            <color red="0.83529411764705885" green="0.30588235294117649" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="customGreen">
             <color red="0.41176470588235292" green="0.77647058823529413" blue="0.45098039215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

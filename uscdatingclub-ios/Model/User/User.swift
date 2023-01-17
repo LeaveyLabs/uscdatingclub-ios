@@ -95,6 +95,35 @@ struct FrontendCompleteUser: Codable, CompleteUserType, ReadOnlyUserType {
         self.token = completeUser.token
     }
     
+    //Custom Codable 1, so that decoding a user when new properties are necessary doesn't force a logout
+    enum CodingKeys: String, CodingKey {
+        case id
+        case email
+        case phoneNumber
+        case firstName
+        case lastName
+        case sexIdentity
+        case sexPreference
+        case isMatchable
+        case surveyResponses
+        case token
+    }
+    
+    //Custom Codable 2
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try values.decode(Int.self, forKey: .id)
+        email = try values.decode(String.self, forKey: .email)
+        phoneNumber = try values.decode(String.self, forKey: .phoneNumber)
+        firstName = try values.decode(String.self, forKey: .firstName)
+        lastName = try values.decode(String.self, forKey: .lastName)
+        sexIdentity = try values.decode(String.self, forKey: .sexIdentity)
+        sexPreference = try values.decode(String.self, forKey: .sexPreference)
+        surveyResponses = try values.decode([SurveyResponse].self, forKey: .surveyResponses)
+        token = try values.decode(String.self, forKey: .token)
+        isMatchable = try values.decodeIfPresent(Bool.self, forKey: .isMatchable) ?? false
+    }
+    
     //Equatable
     static func == (lhs: FrontendCompleteUser, rhs: FrontendCompleteUser) -> Bool { return lhs.id == rhs.id }
     

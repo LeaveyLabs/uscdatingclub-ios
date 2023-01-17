@@ -9,6 +9,8 @@ import UIKit
 
 class AuthStartPageVC: UIPageViewController {
 
+    //MARK: - Properties
+    
     var vcs: [UIViewController]!
     var pageControl: UIPageControl!
     var continueButton: SimpleButton!
@@ -27,6 +29,16 @@ class AuthStartPageVC: UIPageViewController {
             }
         }
     }
+    
+    
+    //MARK: - Initialization
+    
+    class func create() -> AuthStartPageVC {
+        let vc = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.AuthStartPage) as! AuthStartPageVC
+        return vc
+    }
+    
+    //MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,12 +48,21 @@ class AuthStartPageVC: UIPageViewController {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundDidTapped)))
     }
     
+    var authStartVC: AuthStartVC!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        authStartVC.agreementTextView.isHidden = navigationController == nil
+    }
+    
     //MARK: - Setup
     
     func setupPageVC() {
-        vcs = [AuthStartVC.create(),
+        authStartVC = AuthStartVC.create()
+        vcs = [authStartVC,
                ScreenDemoVC.create(type: .notif),
                ScreenDemoVC.create(type: .match)]
+        
         self.dataSource = self
         self.delegate = self
         
@@ -60,6 +81,7 @@ class AuthStartPageVC: UIPageViewController {
         continueButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         continueButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         continueButton.alpha = 0
+        continueButton.isHidden = navigationController == nil
     }
     
     func setupPageControl() {
