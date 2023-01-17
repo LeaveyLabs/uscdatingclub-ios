@@ -124,7 +124,8 @@ class EnterEmailVC: KUIViewController, UITextFieldDelegate {
                     }
                 } catch {
                     DispatchQueue.main.async {
-                        if error.localizedDescription.contains("list") {
+                        if let description = (error as? APIError)?.errorDescription,
+                           description.contains("list") {
                             self.handleNonUSCSignup(email)
                         } else {
                             self.handleFailure(error)
