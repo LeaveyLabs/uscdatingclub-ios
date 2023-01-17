@@ -1113,7 +1113,7 @@ hold tight and we'll send you an email as soon as you can signup!</string>
         <image name="circle.fill" catalog="system" width="128" height="123"/>
         <image name="questionmark.circle" catalog="system" width="128" height="123"/>
         <namedColor name="AccentColor">
-            <color red="0.83529411764705885" green="0.30588235294117649" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="customBlack">
             <color red="0.067000001668930054" green="0.067000001668930054" blue="0.067000001668930054" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

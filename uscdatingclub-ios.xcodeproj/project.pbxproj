@@ -1799,7 +1799,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "usc dating club";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your phone will look for nearby matches in the background. This feature is required for the app to work.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your phone will look for matches near you.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your phone will scan your immediate area for your next match.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1840,7 +1840,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "usc dating club";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your phone will look for nearby matches in the background. This feature is required for the app to work.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your phone will look for matches near you.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your phone will scan your immediate area for your next match.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

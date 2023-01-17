@@ -181,9 +181,13 @@ class PermissionsVC: UIViewController {
     
     @objc func locationButtonDidTapped() {
         do {
-            try LocationManager.shared.requestPermissionServices()
+            if LocationManager.shared.locationStatus == .notDetermined  {
+                AlertManager.showLocationDemoController(on: self)
+            } else {
+                try LocationManager.shared.requestPermissionServices()
+            }
         } catch {
-            AlertManager.showSettingsAlertController(title: "open settings to share location", message: "precise, always", settingsType: .location, on: self)
+            AlertManager.showSettingsAlertController(title: "usc dating club requires \"always, precise\" location to work properly", message: "", settingsType: .location, on: self)
         }
     }
     

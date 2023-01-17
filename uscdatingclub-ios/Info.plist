@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>googlegmail</string>
@@ -9,10 +11,15 @@
 		<string>https</string>
 		<string>http</string>
 	</array>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>NSUserNotificationsUsageDescription</key>
-	<string>when you&apos;re matched, you&apos;ll both get a notification and have 3 minutes to respond.</string>
+	<string>when you're matched, you'll both get a notification and have 3 minutes to respond.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>ChivoMono.ttf</string>
+		<string>ChivoMono-Italic.ttf</string>
+		<string>SF-Pro.ttf</string>
+		<string>SF-Pro-Italic.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -39,12 +46,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>UIAppFonts</key>
-	<array>
-		<string>ChivoMono.ttf</string>
-		<string>ChivoMono-Italic.ttf</string>
-		<string>SF-Pro.ttf</string>
-		<string>SF-Pro-Italic.ttf</string>
-	</array>
 </dict>
 </plist>
