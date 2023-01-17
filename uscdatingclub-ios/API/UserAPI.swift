@@ -110,7 +110,7 @@ class UserAPI {
                              firstName: String,
                              lastName: String,
                              sexIdentity: String,
-                             sexPreference: String) async throws {
+                             sexPreference: String) async throws -> CompleteUser {
         let url =  "\(Env.BASE_URL)\(Endpoints.registerUser.rawValue)"
         let params:[String:String] = [
             ParameterKeys.email.rawValue: email,
@@ -123,6 +123,9 @@ class UserAPI {
         let json = try JSONEncoder().encode(params)
         let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
         try filterUserErrors(data: data, response: response)
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return try decoder.decode(CompleteUser.self, from: data)
     }
     
     static func postSurveyAnswers(email:String,
