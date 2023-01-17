@@ -33,7 +33,7 @@ class CoordinateVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        connectManager.startLocationCalculation() //must come first
+        connectManager.startRelativeLocationCalculation() //must come first
         connectManager.startTimer()
         setupButtons()
         setupLabels() //must come after connect manager created

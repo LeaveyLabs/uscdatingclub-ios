@@ -177,7 +177,7 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
             let sexIdentity = sexIdentityText.first,
             let sexPreferenceText = sexPreferenceTextField.text,
             sexPreferenceText != "",
-            let sexPreference = sexIdentityText.first
+            let sexPreference = sexPreferenceText.first
         else {
             AlertManager.displayError("no sex option selected", "please try again")
             return
@@ -196,9 +196,9 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
                     sexPreference: String(sexPreference))
                 AuthContext.reset()
                 DispatchQueue.main.async { [self] in
-                    navigationController?.pushViewController(HowItWorksVC.create(), animated: true, completion: { [weak self] in
+                    transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.3) { [weak self] finished in
                         self?.isSubmitting = false
-                    })
+                    }
                 }
             } catch {
                 DispatchQueue.main.async {

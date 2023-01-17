@@ -41,9 +41,8 @@ class ConnectManager: NSObject {
 
     //MARK: - Public Interface
         
-    func startLocationCalculation() {
-        //TODO: should the queue be main though?
-        
+    func startRelativeLocationCalculation() {
+        //MY HEADING
         motionManager.startDeviceMotionUpdates(using: .xTrueNorthZVertical, to: .main) { cmDeviceMotion, error in
             if let error {
                 print("MOTION ERROR", error)
@@ -51,14 +50,21 @@ class ConnectManager: NSObject {
             }
             self.updateRelativePositioning()
         }
+        
+        //MY LOCATION
         LocationManager.shared.updateDistancefilter(to: 0)
-        
-        //TODO: reset distance filter automatically after 5 minutes
-        
-        //TODO: start sharing location to the socket
         NotificationCenter.default.addObserver(forName: .locationStatusDidUpdate, object: nil, queue: nil) { notification in
             self.updateRelativePositioning()
         }
+        
+        //PARTNER LOCATION
+        do {
+            self.locationSocket = try LocationSocket(sender: UserService.singleton.getId(), receiver: matchInfo.userId)
+        } catch {
+            //TODO: post to crashlytics
+            print("error opening location socket", error)
+        }
+        self.locationSocket?.partnerLocationDidChange = self.onPartnerLocationDidChange
     }
 
     func startTimer() {
@@ -76,19 +82,14 @@ class ConnectManager: NSObject {
         }
     }
     
-    func startConnection() throws {
-        self.locationSocket = try LocationSocket(sender: UserService.singleton.getId(), receiver: matchInfo.userId)
-        self.locationSocket?.locationDidChange = self.onLocationChange
-    }
-    
     func endConnection() {
         finished = true
         NotificationCenter.default.removeObserver(self)
         LocationManager.shared.resetDistanceFilter()
     }
     
-    func onLocationChange(location:Location) {
-        print("HOLY SHIT LOCATION CHANGED!")
+    func onPartnerLocationDidChange(location:CLLocationCoordinate2D) {
+        updateRelativePositioning()
         return
     }
     
@@ -103,9 +104,9 @@ class ConnectManager: NSObject {
             print("ERROR GETTING CURRENT LOCATION, IT'S NIL")
             return
         }
-        
-        //TODO: feed in data from the socket
-        let matchLocation = CLLocation(latitude: 34.022123871588995, longitude: -118.28505424318654)
+                
+        let matchCoordinate = locationSocket?.partnerLocation ?? matchInfo.location
+        let matchLocation = CLLocation(latitude: matchCoordinate.latitude, longitude: matchCoordinate.longitude)
         let distance = currentLocation.distance(from: matchLocation)
         
         let locationHeading = currentLocation.coordinate.heading(to: matchLocation.coordinate)

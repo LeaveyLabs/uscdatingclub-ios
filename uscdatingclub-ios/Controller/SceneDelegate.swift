@@ -57,7 +57,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if !UserService.singleton.isLoggedIntoAnAccount {
             window.rootViewController = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateInitialViewController()
-//            window.rootViewController = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.HowItWorks)
         } else {
             let loadingVC = LoadingVC.create()
                         
@@ -97,7 +96,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
-        NotificationsManager.shared.checkPreviouslyReceivedNotifications()
+        
+        //TODO: finish this
+//        NotificationsManager.shared.checkPreviouslyReceivedNotifications()
         PermissionsManager.ensurePermissionsAreGranted()
     }
 

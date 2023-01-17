@@ -134,7 +134,7 @@ class AlertManager {
         DispatchQueue.main.async {
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil)
-            let settingsAction = UIAlertAction(title: NSLocalizedString("settings", comment: ""), style: .default) { (UIAlertAction) in
+            let settingsAction = UIAlertAction(title: NSLocalizedString("open settings", comment: ""), style: .default) { (UIAlertAction) in
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)! as URL, options: [:], completionHandler: nil)
             }
             switch settingsType {
@@ -148,6 +148,24 @@ class AlertManager {
             
             alertController.addAction(cancelAction)
             alertController.addAction(settingsAction)
+            controller.present(alertController, animated: true)
+        }
+    }
+    
+    @MainActor
+    static func showLocationDemoController(on controller: UIViewController) {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "usc dating club requires \"always, precise\" location to work properly", message: "", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: NSLocalizedString("sounds good", comment: ""), style: .default) { (UIAlertAction) in
+                do {
+                    try LocationManager.shared.requestPermissionServices()
+                } catch {
+                    
+                }
+            }
+            alertController.addImage(image: UIImage(named: "permissions-location")!.withRenderingMode(.alwaysOriginal))
+            
+            alertController.addAction(okAction)
             controller.present(alertController, animated: true)
         }
     }
