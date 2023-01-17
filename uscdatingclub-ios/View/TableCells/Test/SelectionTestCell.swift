@@ -44,10 +44,6 @@ class SelectionTestCell: UITableViewCell {
         titleButton.setTitle(testAnswer, for: .normal)
         titleButton.setTitleColor(isCurrentlySelected ? .testGreen : .customWhite, for: .normal)
         titleButton.tintColor = isCurrentlySelected ? .testGreen : .customWhite
-//        bottomLineView.isHidden =
-        if isLastCell {
-        
-        }
         
         if testQuestion.isMultipleAnswer {
             titleButton.setImage(UIImage(systemName: isCurrentlySelected ? "square.fill" : "square"), for: .normal)

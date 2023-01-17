@@ -92,18 +92,26 @@ class PermissionsVC: UIViewController {
             rerender()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) { [self] in
                 if goodToGo {
-                    LocationManager.shared.startLocationServices()
-                    finish()
+                    finishWithProperPermissions()
                 }
             }
         }
     }
     
-    func finish() {
-        if let _ = parent as? UINavigationController {
-            transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
-        } else {
-            dismiss(animated: true)
+    func finishWithProperPermissions() {
+        Task {
+            do {
+                try await UserService.singleton.updateMatchableStatus(active:true)
+            } catch {
+                //TODO: log to firebase
+            }
+            DispatchQueue.main.async { [self] in
+                if let _ = parent as? UINavigationController {
+                    transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
+                } else {
+                    dismiss(animated: true)
+                }
+            }
         }
     }
     

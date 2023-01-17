@@ -263,18 +263,12 @@ class RadarVC: UIViewController, PageVCChild {
             if isLocationServicesEnabled {
                 isLocationServicesEnabled = false
                 renderIsActive()
-                Task {
-                    try await UserService.singleton.updateMatchableStatus(active:false)
-                }
             } else {
                 PermissionsManager.areAllPermissionsGranted { areAllGranted in
                     DispatchQueue.main.async { [self] in
                         if areAllGranted {
                             isLocationServicesEnabled = true
                             renderIsActive()
-                            Task {
-                                try await UserService.singleton.updateMatchableStatus(active:true)
-                            }
                         } else {
                             let permissionsVC = PermissionsTableVC.create()
                             permissionsVC.modalPresentationStyle = .fullScreen
@@ -301,6 +295,10 @@ class RadarVC: UIViewController, PageVCChild {
     }
     
     @objc func didTapCenterCircle() {
+        didTapActiveButton()
+    }
+    
+    func animateANewCircle() {
         UIView.animate(withDuration: 0.2, delay: 0) {
             self.centerCircleButton.transform = .identity
         }

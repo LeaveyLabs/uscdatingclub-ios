@@ -49,6 +49,10 @@ class TestService: NSObject {
         
     //MARK: - Getters
     
+    func isLastPage(_ testPage: TestPage) -> Bool {
+        return getNextPage(currentPage: testPage) == nil
+    }
+    
     func pageCount() -> Int {
         return pageHeaders.count
     }
@@ -90,13 +94,27 @@ class TestService: NSObject {
         return responseContext.keys.contains(questionId)
     }
     
-    func getResponsesContext() -> [SurveyResponse] {
-        let responseArray = Array(responseContext.values) as! [SurveyResponse]
+    func getResponsesContextAsArray() -> [SurveyResponse] {
+        var responseArray: [SurveyResponse] = []
+        for responseSet in responseContext.values {
+            for response in responseSet {
+                responseArray.append(response)
+            }
+        }
         return responseArray
     }
     
     func firstNonAnsweredQuestion(on testPage: TestPage) -> Int {
         return testPage.questions.firstIndex(where: { responseContext[$0.id] == nil }) ?? testPage.questions.count
+    }
+    
+    func didAnswerAllQuestions(on testPage: TestPage) -> Bool {
+        for question in testPage.questions {
+            if !hasAnswered(question) {
+                return false
+            }
+        }
+        return true
     }
     
     //MARK: - Setters

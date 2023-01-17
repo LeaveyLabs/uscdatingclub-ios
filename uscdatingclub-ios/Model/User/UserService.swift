@@ -133,6 +133,7 @@ class UserService: NSObject {
     func updateMatchableStatus(active: Bool) async throws {
         let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: active, surveyResponses: authedUser.surveyResponses, token: authedUser.token)
         try await UserAPI.updateMatchableStatus(matchableStatus: active, email: authedUser.email)
+        //LocationManager start/stop updating location is handled in RadarVC on rerender right now
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
         Task { await self.saveUserToFilesystem() }
     }

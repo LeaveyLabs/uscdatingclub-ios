@@ -14,24 +14,8 @@ class TestQuestionsVC: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var titleLabel: UILabel!
     
-    var lastNonAnsweredQuestionIndex: Int {
-        TestService.shared.firstNonAnsweredQuestion(on: testPage)
-    }
     var manuallyOpenedSelectionQuestionIndex: Int? = nil
-    
     var testPage: TestPage!
-    
-    //we want the context to be a dictionary ordered by question id
-    
-    //do all the questions on this page have a response in the context?
-    var didAnswerAllQuestionsOnPage: Bool {
-        for question in testPage.questions {
-            if !TestService.shared.hasAnswered(question) {
-                return false
-            }
-        }
-        return true
-    }
     
     //MARK: - Initialization
     
@@ -75,7 +59,7 @@ class TestQuestionsVC: UIViewController {
     //MARK: - Interaciton
     
     @objc func didTapNextButton() {
-        guard didAnswerAllQuestionsOnPage else { return }
+        guard TestService.shared.didAnswerAllQuestions(on: testPage) else { return }
         if let nextPage = TestService.shared.getNextPage(currentPage: testPage) {
             navigationController?.pushViewController(TestQuestionsVC.create(page: nextPage), animated: true)
         } else {
@@ -106,8 +90,8 @@ extension TestQuestionsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard section < testPage.questions.count else { return 1 }
         let question = testPage.questions[section]
-        if question.isMultipleAnswer {
-            if lastNonAnsweredQuestionIndex == section {
+        if !question.isNumerical {
+            if TestService.shared.firstNonAnsweredQuestion(on: testPage) == section {
                 return 2 //header and tableViewCell
             } else if let manuallyOpenedSelectionQuestionIndex, manuallyOpenedSelectionQuestionIndex == section {
                 return 2 //header and tableViewCell
@@ -121,10 +105,10 @@ extension TestQuestionsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == testPage.questions.count {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SimpleButtonCell, for: indexPath) as! SimpleButtonCell
-            cell.configure(title: "next", systemImage: "") {
+            cell.configure(title: TestService.shared.isLastPage(testPage) ? "finish" : "next", systemImage: "") {
                 self.didTapNextButton()
             }
-            cell.simpleButton.alpha = didAnswerAllQuestionsOnPage ? 1 : 0.5
+            cell.simpleButton.alpha = TestService.shared.didAnswerAllQuestions(on: testPage) ? 1 : 0.5
             return cell
         }
         let question = testPage.questions[indexPath.section]
@@ -134,7 +118,7 @@ extension TestQuestionsVC: UITableViewDataSource {
             cell.configure(testQuestion: question,
                            response: currentResponse != nil ? Int(currentResponse!.answer) : nil,
                            delegate: self,
-                           shouldBeHighlighted: lastNonAnsweredQuestionIndex == indexPath.section,
+                           shouldBeHighlighted: TestService.shared.firstNonAnsweredQuestion(on: testPage) == indexPath.section,
                            isLastCell: indexPath.section == testPage.questions.count - 1,
                            isFirstCell: indexPath.section == 0)
             return cell
@@ -143,7 +127,7 @@ extension TestQuestionsVC: UITableViewDataSource {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SelectionHeaderCell, for: indexPath) as! SelectionHeaderTestCell
                 cell.configure(testQuestion: question,
                                delegate: self,
-                               shouldBeOpened: lastNonAnsweredQuestionIndex == indexPath.section || manuallyOpenedSelectionQuestionIndex == indexPath.section,
+                               shouldBeOpened: TestService.shared.firstNonAnsweredQuestion(on: testPage) == indexPath.section || manuallyOpenedSelectionQuestionIndex == indexPath.section,
                                isAnswered: TestService.shared.hasAnswered(question),
                                isLastCell: indexPath.section == testPage.questions.count - 1,
                                isFirstCell: indexPath.section == 0)

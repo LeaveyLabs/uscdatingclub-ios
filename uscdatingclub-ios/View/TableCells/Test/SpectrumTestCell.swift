@@ -51,7 +51,7 @@ class SpectrumTestCell: UITableViewCell {
         titleLabel.font = AppFont2.medium.size(22)
         rightLabel.font = AppFont2.medium.size(15)
         leftLabel.font = AppFont2.medium.size(15)
-
+        self.testQuestion = testQuestion
         titleLabel.text = testQuestion.prompt
         leftLabel.text = "disagree"
         leftLabel.textColor = .testPurple
@@ -60,13 +60,9 @@ class SpectrumTestCell: UITableViewCell {
         selectionStyle = .none
         backgroundColor = .clear
         
-        if isLastCell {
-            bottomLineView.isHidden = true
-        }
-        if isFirstCell {
-            topLineView.isHidden = true
-        }
-        
+        bottomLineView.isHidden = isLastCell
+        topLineView.isHidden = isFirstCell
+
         cellDelegate = delegate
         
         for i in 1...circleButtons.count {
@@ -83,9 +79,7 @@ class SpectrumTestCell: UITableViewCell {
                 button.layer.borderColor = UIColor.testGreen.cgColor
             }
         }
-        
-        self.testQuestion = testQuestion
-        
+                
         if let response {
             setButton(circleButtons[response-1], selected: true)
         }

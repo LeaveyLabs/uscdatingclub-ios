@@ -48,7 +48,7 @@ class TestTextVC: UIViewController {
             navigationController?.interactivePopGestureRecognizer?.isEnabled = false
             Task {
                 do {
-                    try await UserService.singleton.updateTestResponses(newResponses:TestService.shared.getResponsesContext())
+                    try await UserService.singleton.updateTestResponses(newResponses:TestService.shared.getResponsesContextAsArray())
                     try await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)
                     DispatchQueue.main.async { [self] in
                         testTextType = .finished
@@ -84,19 +84,19 @@ class TestTextVC: UIViewController {
             primaryButton.alpha = 0
         case .finished:
             if isFirstTest {
-                secondaryLabel.text = "welcome to the\nusc dating club."
-                UIView.animate(withDuration: 2) { [self] in
+                secondaryLabel.text = "welcome to\nusc dating club."
+                UIView.animate(withDuration: 1) { [self] in
                     activityIndicatorView.stopAnimating()
                     primaryLabel.text = "responses submitted"
                 } completion: { completed in
-                    UIView.animate(withDuration: 1) { [self] in
-                        secondaryLabel.alpha = 1
-                    } completion: { completed in
-                        self.primaryButton.internalButton.isEnabled = true
+//                    UIView.animate(withDuration: 1) { [self] in
+//                        secondaryLabel.alpha = 1
+//                    } completion: { completed in
+//                        self.primaryButton.internalButton.isEnabled = true
                         UIView.animate(withDuration: 0.7) { [self] in
                             primaryButton.alpha = 1
                         }
-                    }
+//                    }
                 }
             } else {
                 activityIndicatorView.stopAnimating()

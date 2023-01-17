@@ -38,7 +38,8 @@ class AboutVC: UIViewController, PageVCChild {
     
     func setupLabels() {
         versionLabel.text = "\(Version.currentVersion)"
-        versionLabel.font = AppFont.bold.size(12)
+        versionLabel.font = AppFont.medium.size(12)
+        versionLabel.alpha = 0.7
         appNameLabel.font = AppFont.bold.size(18)
         titleLabel.font = AppFont.bold.size(20)
     }

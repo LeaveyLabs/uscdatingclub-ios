@@ -37,16 +37,9 @@ class SelectionTableViewCell: UITableViewCell {
         backgroundColor = .clear
         self.delegate = delegate
         self.question = testQuestion
-        
-        if isLastCell {
-            bottomLineView.isHidden = true //having annoying constraint issues w this...
-        }
+        bottomLineView.isHidden = isLastCell
         
         tableView.reloadData()
-        
-//        contentView.alpha = shouldBeOpened ? 1 : 0.7
-//
-//        bottomConstraint.constant = isOpen ? 10 : 40
     }
     
     func setupTableView() {
