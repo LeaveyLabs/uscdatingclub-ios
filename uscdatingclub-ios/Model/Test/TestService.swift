@@ -42,8 +42,8 @@ class TestService: NSObject {
             }
         }
     }
-    
-    //MARK: - Public Interface
+        
+    //MARK: - Getters
     
     func pageCount() -> Int {
         return pageHeaders.count
@@ -70,19 +70,6 @@ class TestService: NSObject {
         return TestPage(header: pageHeader, questions: questions)
     }
     
-    func setResponse(_ newResponse: SurveyResponse) {
-        let newResponseSet: Set = [newResponse]
-        responseContext[newResponse.questionId] = newResponseSet
-    }
-    
-    func toggleResponse(_ newResponse: SurveyResponse) {
-        if responseContext[newResponse.questionId] != nil, responseContext[newResponse.questionId]!.contains(newResponse) {
-            responseContext[newResponse.questionId]!.remove(newResponse)
-        } else {
-            responseContext[newResponse.questionId]?.insert(newResponse)
-        }
-    }
-    
     func currentResponseFor(_ question: Question) -> SurveyResponse? {
         return responseContext[question.id]?.first
     }
@@ -106,6 +93,25 @@ class TestService: NSObject {
     
     func firstNonAnsweredQuestion(on testPage: TestPage) -> Int {
         return testPage.questions.firstIndex(where: { responseContext[$0.id] == nil }) ?? testPage.questions.count
+    }
+    
+    //MARK: - Setters
+    
+    func setResponse(_ newResponse: SurveyResponse) {
+        let newResponseSet: Set = [newResponse]
+        responseContext[newResponse.questionId] = newResponseSet
+    }
+    
+    func toggleResponse(_ newResponse: SurveyResponse) {
+        if responseContext.keys.contains(newResponse.questionId) {
+            if responseContext[newResponse.questionId]!.contains(newResponse) {
+                responseContext[newResponse.questionId]!.remove(newResponse)
+            } else {
+                responseContext[newResponse.questionId]!.insert(newResponse)
+            }
+        } else {
+            setResponse(newResponse)
+        }
     }
     
     func resetResponseContext() {

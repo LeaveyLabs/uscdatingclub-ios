@@ -25,14 +25,14 @@
                         <color key="textColor" name="customWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xAD-37-8bD">
+                    <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xAD-37-8bD">
                         <rect key="frame" x="0.0" y="0.0" width="353" height="0.33333333333333331"/>
                         <color key="backgroundColor" name="customWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="0.25" id="mMm-XF-zXF"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t7B-qV-Nxn">
+                    <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t7B-qV-Nxn">
                         <rect key="frame" x="0.0" y="239.66666666666666" width="353" height="0.33333333333334281"/>
                         <color key="backgroundColor" name="customWhite"/>
                         <constraints>
@@ -204,7 +204,7 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="primaryColor">
-            <color red="0.8901960784313725" green="0.30588235294117649" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.83529411764705885" green="0.30588235294117649" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>

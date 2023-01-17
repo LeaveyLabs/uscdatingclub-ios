@@ -57,6 +57,7 @@ enum Constants {
             static let SpectrumTestCell = "SpectrumTestCell"
             static let SelectionHeaderCell = "SelectionHeaderTestCell"
             static let SelectionCell = "SelectionTestCell"
+            static let SelectionTableViewCell = "SelectionTableViewCell"
             static let SimpleButtonCell = "SimpleButtonCell"
             static let SimpleEntryCell = "SimpleEntryCell"
             static let SimpleTitleCell = "SimpleTitleCell"

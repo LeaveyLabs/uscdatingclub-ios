@@ -49,13 +49,7 @@ class TestQuestionsVC: UIViewController {
         setupHeaderFooter()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
+    //MARK: - Setup
     
     func setupHeaderFooter() {
         titleLabel.text = testPage.header
@@ -73,7 +67,7 @@ class TestQuestionsVC: UIViewController {
 
         //the below was giving me issues for some reason
         tableView.register(UINib(nibName: Constants.SBID.Cell.SpectrumTestCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SpectrumTestCell)
-        tableView.register(UINib(nibName: Constants.SBID.Cell.SelectionCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SelectionCell)
+        tableView.register(UINib(nibName: Constants.SBID.Cell.SelectionTableViewCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SelectionTableViewCell)
         tableView.register(UINib(nibName: Constants.SBID.Cell.SelectionHeaderCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SelectionHeaderCell)
         tableView.register(UINib(nibName: Constants.SBID.Cell.SimpleButtonCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SimpleButtonCell)
     }
@@ -114,9 +108,9 @@ extension TestQuestionsVC: UITableViewDataSource {
         let question = testPage.questions[section]
         if question.isMultipleAnswer {
             if lastNonAnsweredQuestionIndex == section {
-                return 1 + question.textAnswerChoices!.count
+                return 2 //header and tableViewCell
             } else if let manuallyOpenedSelectionQuestionIndex, manuallyOpenedSelectionQuestionIndex == section {
-                return 1 + question.textAnswerChoices!.count
+                return 2 //header and tableViewCell
             } else {
                 return 1
             }
@@ -155,20 +149,17 @@ extension TestQuestionsVC: UITableViewDataSource {
                                isFirstCell: indexPath.section == 0)
                 return cell
             } else {
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SelectionCell, for: indexPath) as! SelectionTestCell
-                let option = question.textAnswerChoices![indexPath.row-1]
-                let isCurrentlySelected = TestService.shared.currentResponsesFor(question).contains(SurveyResponse(questionId: question.id, answer: option))
-                cell.configure(testQuestion: question,
-                               testAnswer: option,
-                               delegate: self,
-                               isCurrentlySelected: isCurrentlySelected,
-                               isLastCell: indexPath.row == question.textAnswerChoices!.count)
+                //TABLEVIEWCELL
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SelectionTableViewCell, for: indexPath) as! SelectionTableViewCell
+                cell.configure(testQuestion: question, delegate: self)
                 return cell
             }
         }
     }
     
 }
+
+//MARK: - SelectionHeaderTestCellDelegate
 
 extension TestQuestionsVC: SelectionHeaderTestCellDelegate {
     
@@ -185,6 +176,8 @@ extension TestQuestionsVC: SelectionHeaderTestCellDelegate {
     }
     
 }
+
+//MARK: - SelectionTestCellDelegate
 
 extension TestQuestionsVC: SelectionTestCellDelegate {
     
@@ -210,6 +203,8 @@ extension TestQuestionsVC: SelectionTestCellDelegate {
     }
     
 }
+
+//MARK: - SpectrumTestCellDelegate
 
 extension TestQuestionsVC: SpectrumTestCellDelegate {
     
@@ -259,27 +254,28 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
         guard !TestService.shared.hasAnswered(questionId: prevQuestionId+1) else { return } //they went back to answer an earlier question. do nothing
         
         let questionIndex = prevQuestionIndex + 1
-        
+
+        //TODO: i dont think i need the below code anymore
         //when a selection question is appearing or disappearing, need a slight delay so that expanded UI's constraints can update
-        let beforeQ = testPage.questions[questionIndex]
-        let selectionQ = testPage.questions[questionIndex]
-        if (beforeQ.isMultipleAnswer || selectionQ.isMultipleAnswer) && !redo {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                self.scrollDownIfNecessary(prevQuestionId: prevQuestionId, redo: true)
-            }
-            return
-        }
+//        let beforeQ = testPage.questions[questionIndex]
+//        let selectionQ = testPage.questions[questionIndex]
+//        if (beforeQ.isMultipleAnswer || selectionQ.isMultipleAnswer) && !redo {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//                self.scrollDownIfNecessary(prevQuestionId: prevQuestionId, redo: true)
+//            }
+//            return
+//        }
                 
         let questionBottomYWithinFeed = tableView.rectForRow(at: IndexPath(row: 0, section: questionIndex))
         let questionBottomY = tableView.convert(questionBottomYWithinFeed, to: view).maxY
 
         let totalHeight = view.bounds.height + view.safeAreaInsets.top + view.safeAreaInsets.bottom
         let desiredOffset: CGFloat
-        if (selectionQ.isMultipleAnswer) {
-            desiredOffset = questionBottomY - totalHeight/3
-        } else {
-            desiredOffset = questionBottomY - totalHeight/1.4
-        }
+//        if (selectionQ.isMultipleAnswer) {
+//            desiredOffset = questionBottomY - totalHeight/3
+//        } else {
+            desiredOffset = questionBottomY - totalHeight/1.5
+//        }
 
         if desiredOffset < 50 { return } //don't go in wrong direction, and don't scroll if a small amount
         

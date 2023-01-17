@@ -61,6 +61,8 @@
 		4731F52E295CE0C10013F626 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4731F52D295CE0C10013F626 /* AccountVC.swift */; };
 		4731F530295CF7DB0013F626 /* UIPageViewController+GoTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4731F52F295CF7DB0013F626 /* UIPageViewController+GoTo.swift */; };
 		474FFCBA297708A4000BE9E0 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41041295CBFDF007C27F0 /* APIError.swift */; };
+		474FFCBD29770B79000BE9E0 /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474FFCBB29770B79000BE9E0 /* SelectionTableViewCell.swift */; };
+		474FFCBE29770B79000BE9E0 /* SelectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 474FFCBC29770B79000BE9E0 /* SelectionTableViewCell.xib */; };
 		4756882B29738C9E00D6DBB1 /* InsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4756882A29738C9E00D6DBB1 /* InsetLabel.swift */; };
 		47582897296A82C700F10415 /* SelectionHeaderTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47582895296A82C700F10415 /* SelectionHeaderTestCell.swift */; };
 		47582898296A82C800F10415 /* SelectionHeaderTestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47582896296A82C700F10415 /* SelectionHeaderTestCell.xib */; };
@@ -305,6 +307,8 @@
 		4731F52B295CE0B40013F626 /* AboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
 		4731F52D295CE0C10013F626 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
 		4731F52F295CF7DB0013F626 /* UIPageViewController+GoTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPageViewController+GoTo.swift"; sourceTree = "<group>"; };
+		474FFCBB29770B79000BE9E0 /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
+		474FFCBC29770B79000BE9E0 /* SelectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionTableViewCell.xib; sourceTree = "<group>"; };
 		4756882A29738C9E00D6DBB1 /* InsetLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetLabel.swift; sourceTree = "<group>"; };
 		47582895296A82C700F10415 /* SelectionHeaderTestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionHeaderTestCell.swift; sourceTree = "<group>"; };
 		47582896296A82C700F10415 /* SelectionHeaderTestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionHeaderTestCell.xib; sourceTree = "<group>"; };
@@ -635,6 +639,8 @@
 				478BECBD2963755000930DAF /* SpectrumTestCell.xib */,
 				47582895296A82C700F10415 /* SelectionHeaderTestCell.swift */,
 				47582896296A82C700F10415 /* SelectionHeaderTestCell.xib */,
+				474FFCBB29770B79000BE9E0 /* SelectionTableViewCell.swift */,
+				474FFCBC29770B79000BE9E0 /* SelectionTableViewCell.xib */,
 				47582899296A82D900F10415 /* SelectionTestCell.swift */,
 				4758289A296A82D900F10415 /* SelectionTestCell.xib */,
 			);
@@ -1341,6 +1347,7 @@
 				47582898296A82C800F10415 /* SelectionHeaderTestCell.xib in Resources */,
 				47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */,
 				47A24A302970B6160077AB11 /* Connect.storyboard in Resources */,
+				474FFCBE29770B79000BE9E0 /* SelectionTableViewCell.xib in Resources */,
 				476FD865295DF89A0014DD42 /* SimpleButton.xib in Resources */,
 				476FD86F295E4A1F0014DD42 /* HowItWorksCell.xib in Resources */,
 				47B6B4C3296B99E600539353 /* SimpleButtonCell.xib in Resources */,
@@ -1493,6 +1500,7 @@
 				47DC97AA296E002700A374B5 /* ConnectHeaderCell.swift in Sources */,
 				4731F50E295CD4820013F626 /* UITableView+AnimateReload.swift in Sources */,
 				47B60B0C296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift in Sources */,
+				474FFCBD29770B79000BE9E0 /* SelectionTableViewCell.swift in Sources */,
 				47B60B0E296D0E3900657C1D /* SheetVC.swift in Sources */,
 				4731F513295CD48B0013F626 /* PanGesture+Direction.swift in Sources */,
 				47DE3249295CC7C40063C55A /* UIImageView+Initials.swift in Sources */,
