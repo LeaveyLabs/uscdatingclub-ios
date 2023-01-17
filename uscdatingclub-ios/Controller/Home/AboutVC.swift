@@ -65,7 +65,7 @@ class AboutVC: UIViewController, PageVCChild {
     //MARK: - Interaction
     
     @objc func howItWorksButtonPressed() {
-        let howItWorksVC = HowItWorksVC.create()
+        let howItWorksVC = AuthStartPageVC.create()
         present(howItWorksVC, animated: true)
     }
     

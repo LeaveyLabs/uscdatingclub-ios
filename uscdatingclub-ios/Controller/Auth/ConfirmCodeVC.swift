@@ -260,7 +260,6 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
         case .text:
             if UserService.singleton.isLoggedIntoAnAccount {
                 transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5, completion: { completed in
-                    
                 })
             } else {
                 navigationController?.pushViewController(EnterEmailVC.create(), animated: true, completion: { [weak self] in

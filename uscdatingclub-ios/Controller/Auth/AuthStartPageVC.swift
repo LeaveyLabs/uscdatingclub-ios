@@ -9,6 +9,8 @@ import UIKit
 
 class AuthStartPageVC: UIPageViewController {
 
+    //MARK: - Properties
+    
     var vcs: [UIViewController]!
     var pageControl: UIPageControl!
     var continueButton: SimpleButton!
@@ -27,12 +29,24 @@ class AuthStartPageVC: UIPageViewController {
             }
         }
     }
+    
+    
+    //MARK: - Initialization
+    
+    class func create() -> AuthStartPageVC {
+        let vc = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.AuthStartPage) as! AuthStartPageVC
+        return vc
+    }
+    
+    //MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPageVC()
         setupPageControl()
-        setupContinueButton()
+        if navigationController != nil {
+            setupContinueButton()
+        }
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundDidTapped)))
     }
     

@@ -618,8 +618,8 @@
 		478BECD929662CFB00930DAF /* Device */ = {
 			isa = PBXGroup;
 			children = (
-				47C40F5D295CBAF0007C27F0 /* DeviceService.swift */,
 				47C40F5E295CBAF0007C27F0 /* Device.swift */,
+				47C40F5D295CBAF0007C27F0 /* DeviceService.swift */,
 			);
 			path = Device;
 			sourceTree = "<group>";
@@ -659,6 +659,7 @@
 		47A24A2C29709E690077AB11 /* Decomissioned */ = {
 			isa = PBXGroup;
 			children = (
+				476FD86A295E46E30014DD42 /* HowItWorksVC.swift */,
 				47D901BA296C7C6B00F9AB18 /* MatchFoundVC.swift */,
 			);
 			path = Decomissioned;
@@ -667,7 +668,6 @@
 		47A80613295F8CBD001DEE64 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				476FD86A295E46E30014DD42 /* HowItWorksVC.swift */,
 				47E38FF0295F7076007CB77F /* UpdateAvailableVC.swift */,
 				476FD866295E16290014DD42 /* PermissionsVC.swift */,
 				47B60B0D296D0E3900657C1D /* SheetVC.swift */,

@@ -102,12 +102,13 @@ class UserService: NSObject {
                                        lastName: lastName,
                                        sexIdentity: sexIdentity,
                                        sexPreference: sexPreference)
+        
 //        setGlobalAuthToken(token: token)
 //        let completeUser = try await UserAPI.fetchAuthedUserByToken(token: token)
 //        frontendCompleteUser = FrontendCompleteUser(completeUser: completeUser,
 //                                                    profilePicWrapper: newProfilePicWrapper,
 //                                                    token: token)
-//        authedUser = frontendCompleteUser!
+        authedUser = frontendCompleteUser!
         await self.saveUserToFilesystem()
 //        Task { await waitAndRegisterDeviceToken(id: completeUser.id) }
         Task {
@@ -118,12 +119,7 @@ class UserService: NSObject {
 
     func logInWith(completeUser: CompleteUser) async throws {
         Task { await waitAndRegisterDeviceToken(id: completeUser.id) }
-        
-//        guard let profilePicUIImage = try await GenericAPI.UIImageFromURLString(url: completeUser.picture) else {
-//            throw NSError()
-//        }
-        
-        frontendCompleteUser = FrontendCompleteUser(completeUser: completeUser)
+        authedUser = FrontendCompleteUser(completeUser: completeUser)
         setupFirebaseAnalyticsProperties()
         await self.saveUserToFilesystem()
         isLoggedIntoApp = true
