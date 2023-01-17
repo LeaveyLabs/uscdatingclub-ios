@@ -41,7 +41,6 @@ class TestService: NSObject {
                 pagedQuestions[question.header] = [question]
             }
         }
-        print("test questions:", pageHeaders, questions)
     }
     
     //MARK: - Public Interface

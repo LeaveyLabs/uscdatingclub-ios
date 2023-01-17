@@ -22,11 +22,14 @@ class UpdateAvailableVC: UIViewController {
     var features: [Feature] {
         return Constants.updateAvailableFeatures.newFeatures
     }
+    var isMandatory: Bool!
 
     //MARK: - Initialization
     
-    class func create() -> UpdateAvailableVC {
+    
+    class func create(isMandatory: Bool) -> UpdateAvailableVC {
         let vc = UIStoryboard(name: Constants.SBID.SB.Misc, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.UpdateAvailable) as! UpdateAvailableVC
+        vc.isMandatory = isMandatory
         return vc
     }
     
@@ -51,6 +54,7 @@ class UpdateAvailableVC: UIViewController {
         updateButton.configure(title: "update", systemImage: "")
         dismissButton.configure(title: "later", systemImage: "")
         dismissButton.alpha = 0.5
+        dismissButton.isHidden = isMandatory
     }
     
     //MARK: - Interaction

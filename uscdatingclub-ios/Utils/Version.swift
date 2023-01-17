@@ -46,8 +46,7 @@ enum Version {
     }
     
     static func checkForNewUpdate() {
-        print("checking for new update")
-        print("is ", Constants.updateAvailableVersion, " newer than ", Version.currentVersion, isVersion(Constants.updateAvailableVersion, newerThan: Version.currentVersion) ?? false)
+        print("checking for new update", Constants.updateAvailableVersion, Constants.updateMandatoryVersion, Version.currentVersion)
         
         let isUpdateDetailsAvailable =
         isVersion(Constants.updateAvailableVersion, newerThan: Version.currentVersion) ?? false
@@ -55,8 +54,8 @@ enum Version {
         
         let isUpdateMandatory = isVersion(Constants.updateMandatoryVersion, newerThan: Version.currentVersion) ?? false
         
-        if isUpdateDetailsAvailable {
-            let vc = UpdateAvailableVC.create()
+        if isUpdateDetailsAvailable || isUpdateMandatory {
+            let vc = UpdateAvailableVC.create(isMandatory: isUpdateMandatory)
             vc.modalPresentationStyle = isUpdateMandatory ? .fullScreen : .automatic
             SceneDelegate.visibleViewController?.present(vc, animated: true)
         }
