@@ -94,6 +94,8 @@
 		47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A80614295F8D23001DEE64 /* EnterBiosVC.swift */; };
 		47ABA6E62976221000F0FDFE /* AuthStartPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ABA6E52976221000F0FDFE /* AuthStartPageVC.swift */; };
 		47ABA6E82976241500F0FDFE /* ScreenDemoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ABA6E72976241500F0FDFE /* ScreenDemoVC.swift */; };
+		47ABA6EA2976405900F0FDFE /* MessageComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ABA6E92976405900F0FDFE /* MessageComposer.swift */; };
+		47ABA6EC297644A400F0FDFE /* EmailWhitelist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ABA6EB297644A400F0FDFE /* EmailWhitelist.swift */; };
 		47B60B0A296C834600657C1D /* ConnectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B09296C834600657C1D /* ConnectManager.swift */; };
 		47B60B0C296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B0B296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift */; };
 		47B60B0E296D0E3900657C1D /* SheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B0D296D0E3900657C1D /* SheetVC.swift */; };
@@ -336,6 +338,8 @@
 		47A80614295F8D23001DEE64 /* EnterBiosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterBiosVC.swift; sourceTree = "<group>"; };
 		47ABA6E52976221000F0FDFE /* AuthStartPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStartPageVC.swift; sourceTree = "<group>"; };
 		47ABA6E72976241500F0FDFE /* ScreenDemoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDemoVC.swift; sourceTree = "<group>"; };
+		47ABA6E92976405900F0FDFE /* MessageComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageComposer.swift; sourceTree = "<group>"; };
+		47ABA6EB297644A400F0FDFE /* EmailWhitelist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailWhitelist.swift; sourceTree = "<group>"; };
 		47B60B09296C834600657C1D /* ConnectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectManager.swift; sourceTree = "<group>"; };
 		47B60B0B296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate+Heading.swift"; sourceTree = "<group>"; };
 		47B60B0D296D0E3900657C1D /* SheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetVC.swift; sourceTree = "<group>"; };
@@ -769,6 +773,7 @@
 				47C40F5C295CBAF0007C27F0 /* Feature.swift */,
 				47A1C8EC296E414600F8B4D6 /* Match.swift */,
 				47A24A312970E5FE0077AB11 /* UncertainValue.swift */,
+				47ABA6EB297644A400F0FDFE /* EmailWhitelist.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -777,6 +782,7 @@
 			isa = PBXGroup;
 			children = (
 				47DE31D5295CC4B40063C55A /* ImagePicker.swift */,
+				47ABA6E92976405900F0FDFE /* MessageComposer.swift */,
 			);
 			path = AdditionalFiles;
 			sourceTree = "<group>";
@@ -1419,6 +1425,7 @@
 				476FD86B295E46E30014DD42 /* HowItWorksVC.swift in Sources */,
 				47C4106A295CC095007C27F0 /* String+Ranges.swift in Sources */,
 				47DE324B295CC7C40063C55A /* UITextView+MaxLength.swift in Sources */,
+				47ABA6EC297644A400F0FDFE /* EmailWhitelist.swift in Sources */,
 				434A052E295E1EB600C15945 /* PhoneNumberAPI.swift in Sources */,
 				47C4105A295CBFFC007C27F0 /* Numbers.swift in Sources */,
 				478BECC62964C4D000930DAF /* TestQuestionsVC.swift in Sources */,
@@ -1436,6 +1443,7 @@
 				434A053D2963A77200C15945 /* LocationSocket.swift in Sources */,
 				4731F512295CD4870013F626 /* UITextField+MaxLength.swift in Sources */,
 				4731F515295CD48F0013F626 /* UISegmentedControl+Twitter.swift in Sources */,
+				47ABA6EA2976405900F0FDFE /* MessageComposer.swift in Sources */,
 				478BECC92964C60900930DAF /* TestTextVC.swift in Sources */,
 				47DE3254295CC7C40063C55A /* UIViewController+OpenURL.swift in Sources */,
 				47C40F91295CBBBD007C27F0 /* Color+Hex.swift in Sources */,

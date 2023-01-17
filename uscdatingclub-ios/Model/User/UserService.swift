@@ -96,21 +96,17 @@ class UserService: NSObject {
                     sexPreference: String) async throws {
 //        let newProfilePicWrapper = ProfilePicWrapper(image: profilePic, withCompresssion: true)
 //        let compressedProfilePic = newProfilePicWrapper.image
-        try await UserAPI.registerUser(email: email,
+        let newCompleteUser = try await UserAPI.registerUser(email: email,
                                        phoneNumber: phoneNumber,
                                        firstName: firstName,
                                        lastName: lastName,
                                        sexIdentity: sexIdentity,
                                        sexPreference: sexPreference)
-        
-//        setGlobalAuthToken(token: token)
-//        let completeUser = try await UserAPI.fetchAuthedUserByToken(token: token)
-//        frontendCompleteUser = FrontendCompleteUser(completeUser: completeUser,
-//                                                    profilePicWrapper: newProfilePicWrapper,
-//                                                    token: token)
+        setGlobalAuthToken(token: newCompleteUser.token)
+        frontendCompleteUser = FrontendCompleteUser(completeUser: newCompleteUser)
         authedUser = frontendCompleteUser!
         await self.saveUserToFilesystem()
-//        Task { await waitAndRegisterDeviceToken(id: completeUser.id) }
+        Task { await waitAndRegisterDeviceToken(id: authedUser.id) }
         Task {
             setupFirebaseAnalyticsProperties() //must come later at the end of this process so that we dont access authedUser while it's null and kick the user to the home screen
         }
