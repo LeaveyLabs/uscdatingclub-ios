@@ -132,7 +132,7 @@ class UserAPI {
     
     static func fetchAllUsers() async throws -> [ReadOnlyUser] {
         let url = "\(Env.BASE_URL)\(Endpoints.users.rawValue)"
-        let (data, response) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: Data(), method: HTTPMethods.GET.rawValue)
+        let (data, _) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: Data(), method: HTTPMethods.GET.rawValue)
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return try decoder.decode([ReadOnlyUser].self, from: data)

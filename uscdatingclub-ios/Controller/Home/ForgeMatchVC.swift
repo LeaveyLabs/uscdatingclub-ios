@@ -9,11 +9,17 @@ import UIKit
 
 class ForgeMatchVC: UIViewController {
     
+    @IBOutlet weak var searchBarTextField: UITextField!
     @IBOutlet var forgeButton: SimpleButton!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var titleLabel: UILabel!
-    var users: [ReadOnlyUser] = []
-    var selectedIds: Set<Int> = []
+    var allUsers: [ReadOnlyUser] = []
+    var filteredUsers: [ReadOnlyUser] = []
+    var selectedIds: [Int] = [] {
+        didSet {
+            forgeButton.internalButton.isEnabled = selectedIds.count==2
+        }
+    }
 
     //MARK: - Initialization
     
@@ -28,7 +34,32 @@ class ForgeMatchVC: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupUI()
-        
+        loadAllUsers()
+        setupTextField()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
+    func setupTextField() {
+        searchBarTextField.delegate = self
+        searchBarTextField.layer.cornerRadius = 10
+        searchBarTextField.layer.cornerCurve = .continuous
+    }
+    
+    func loadAllUsers() {
+        Task {
+            do {
+                allUsers = try await UserAPI.fetchAllUsers()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            } catch {
+                AlertManager.displayError(error)
+            }
+        }
     }
     
     //MARK: - TableView
@@ -52,14 +83,16 @@ class ForgeMatchVC: UIViewController {
         titleLabel.text = "play cupid"
         titleLabel.font = AppFont.bold.size(15)
         forgeButton.configure(title: "shoot", systemImage: "")
+        forgeButton.internalButton.addTarget(self, action: #selector(sendButtonPressed), for: .touchUpInside)
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
     }
     
     //MARK: - Interaction
     
-    func sendButtonPressed() {
+    @objc func sendButtonPressed() {
         Task {
             do {
-                
+                try await MatchAPI.postMatch(user1Id: selectedIds.first!, user2Id: selectedIds.last!)
                 DispatchQueue.main.async {
                     self.dismiss(animated: true)
                 }
@@ -74,19 +107,55 @@ class ForgeMatchVC: UIViewController {
 
 }
 
-extension ForgeMatchVC: UITableViewDelegate {
+extension ForgeMatchVC: UIScrollViewDelegate, UITableViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        view.endEditing(true)
+    }
+}
+
+//MARK: - UITextFieldDelegate
+
+extension ForgeMatchVC: UITextFieldDelegate {
+    
+    @IBAction func textFieldEditingChanged(_ sender: UITextField) {
+        filterRecipients()
+        tableView.reloadData()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return false
+    }
+    
+}
+
+extension ForgeMatchVC {
+    
+    //MARK: - Helpers
+    
+    func filterRecipients() {
+        let query = searchBarTextField.text!
+        if query.isEmpty { filteredUsers = allUsers }
+        else {
+            filteredUsers = allUsers.filter( { ($0.firstName+$0.lastName).lowercased().contains(query.lowercased()) })
+        }
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
     
 }
 
 extension ForgeMatchVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        users.count
+        filteredUsers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SelectionCell, for: indexPath) as! SelectionTestCell
-        let user = users[indexPath.row]
+        let user = filteredUsers[indexPath.row]
         let isCurrentlySelected = selectedIds.contains(user.id)
         cell.configure(user: user, delegate: self, isCurrentlySelected: isCurrentlySelected)
         return cell
@@ -98,10 +167,13 @@ extension ForgeMatchVC: SelectionUserCellDelegate {
     
     func didSelect(userId: Int, alreadySelected: Bool) {
         if selectedIds.contains(userId) {
-            selectedIds.remove(userId)
+            selectedIds.removeFirstAppearanceOf(object: userId)
         } else {
-            selectedIds.insert(userId)
+            if selectedIds.count < 2 {
+                selectedIds.append(userId)
+            }
         }
+        tableView.reloadData()
     }
     
 }
