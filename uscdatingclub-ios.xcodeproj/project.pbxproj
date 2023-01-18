@@ -91,7 +91,6 @@
 		47A24A25296F71250077AB11 /* SimpleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A24A23296F71250077AB11 /* SimpleTitleCell.swift */; };
 		47A24A26296F71250077AB11 /* SimpleTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47A24A24296F71250077AB11 /* SimpleTitleCell.xib */; };
 		47A24A29297088FF0077AB11 /* SurveyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A24A28297088FF0077AB11 /* SurveyResponse.swift */; };
-		47A24A2B29708D020077AB11 /* SurveyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A24A28297088FF0077AB11 /* SurveyResponse.swift */; };
 		47A24A302970B6160077AB11 /* Connect.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47A24A2F2970B6160077AB11 /* Connect.storyboard */; };
 		47A24A322970E5FE0077AB11 /* UncertainValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A24A312970E5FE0077AB11 /* UncertainValue.swift */; };
 		47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A80614295F8D23001DEE64 /* EnterBiosVC.swift */; };
@@ -102,17 +101,6 @@
 		47B60B0A296C834600657C1D /* ConnectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B09296C834600657C1D /* ConnectManager.swift */; };
 		47B60B0C296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B0B296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift */; };
 		47B60B0E296D0E3900657C1D /* SheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B60B0D296D0E3900657C1D /* SheetVC.swift */; };
-		47B6B49E296B2E3500539353 /* LocationPushService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B6B49D296B2E3500539353 /* LocationPushService.swift */; };
-		47B6B4A2296B2E3500539353 /* locationPushExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 47B6B49B296B2E3500539353 /* locationPushExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		47B6B4A7296B45BE00539353 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A0531295E1F1300C15945 /* UserAPI.swift */; };
-		47B6B4AA296B46FB00539353 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 47B6B4A9296B46FB00539353 /* FirebaseAnalytics */; };
-		47B6B4AC296B46FB00539353 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 47B6B4AB296B46FB00539353 /* FirebaseAnalyticsSwift */; };
-		47B6B4AE296B487D00539353 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41041295CBFDF007C27F0 /* APIError.swift */; };
-		47B6B4B0296B8D6100539353 /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DE320A295CC4F90063C55A /* Env.swift */; };
-		47B6B4B3296B8DA700539353 /* String+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41065295CC095007C27F0 /* String+Random.swift */; };
-		47B6B4B4296B8E7C00539353 /* BasicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A0529295E1E6700C15945 /* BasicAPI.swift */; };
-		47B6B4B5296B8F2000539353 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DE3211295CC52F0063C55A /* User.swift */; };
-		47B6B4B6296B90F200539353 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40F83295CBBBD007C27F0 /* Constants.swift */; };
 		47B6B4B8296B924D00539353 /* EditAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B6B4B7296B924D00539353 /* EditAccountVC.swift */; };
 		47B6B4BC296B959C00539353 /* SimpleEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B6B4BA296B959C00539353 /* SimpleEntryCell.swift */; };
 		47B6B4BD296B959C00539353 /* SimpleEntryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47B6B4BB296B959C00539353 /* SimpleEntryCell.xib */; };
@@ -231,13 +219,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		47B6B4A0296B2E3500539353 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 47C40EDB295CB930007C27F0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 47B6B49A296B2E3500539353;
-			remoteInfo = locationPushExtension;
-		};
 		47C40EFA295CB931007C27F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 47C40EDB295CB930007C27F0 /* Project object */;
@@ -264,17 +245,6 @@
 				434A057F2963D3AB00C15945 /* PhoneNumberKit-Dynamic in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		47B6B4A3296B2E3500539353 /* Embed Foundation Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				47B6B4A2296B2E3500539353 /* locationPushExtension.appex in Embed Foundation Extensions */,
-			);
-			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -348,9 +318,6 @@
 		47B60B09296C834600657C1D /* ConnectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectManager.swift; sourceTree = "<group>"; };
 		47B60B0B296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate+Heading.swift"; sourceTree = "<group>"; };
 		47B60B0D296D0E3900657C1D /* SheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetVC.swift; sourceTree = "<group>"; };
-		47B6B49B296B2E3500539353 /* locationPushExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = locationPushExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		47B6B49D296B2E3500539353 /* LocationPushService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPushService.swift; sourceTree = "<group>"; };
-		47B6B49F296B2E3500539353 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47B6B4B7296B924D00539353 /* EditAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountVC.swift; sourceTree = "<group>"; };
 		47B6B4BA296B959C00539353 /* SimpleEntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleEntryCell.swift; sourceTree = "<group>"; };
 		47B6B4BB296B959C00539353 /* SimpleEntryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleEntryCell.xib; sourceTree = "<group>"; };
@@ -486,15 +453,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		47B6B498296B2E3500539353 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				47B6B4AC296B46FB00539353 /* FirebaseAnalyticsSwift in Frameworks */,
-				47B6B4AA296B46FB00539353 /* FirebaseAnalytics in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		47C40EE0295CB930007C27F0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -689,15 +647,6 @@
 			path = Misc;
 			sourceTree = "<group>";
 		};
-		47B6B49C296B2E3500539353 /* locationPushExtension */ = {
-			isa = PBXGroup;
-			children = (
-				47B6B49D296B2E3500539353 /* LocationPushService.swift */,
-				47B6B49F296B2E3500539353 /* Info.plist */,
-			);
-			path = locationPushExtension;
-			sourceTree = "<group>";
-		};
 		47B6B4B9296B946500539353 /* Account */ = {
 			isa = PBXGroup;
 			children = (
@@ -713,7 +662,6 @@
 				47C40EE5295CB930007C27F0 /* uscdatingclub-ios */,
 				47C40EFC295CB931007C27F0 /* uscdatingclub-iosTests */,
 				47C40F06295CB931007C27F0 /* uscdatingclub-iosUITests */,
-				47B6B49C296B2E3500539353 /* locationPushExtension */,
 				47C40EE4295CB930007C27F0 /* Products */,
 				434A0538295E99FB00C15945 /* Recovered References */,
 				434A05432963D3AA00C15945 /* Frameworks */,
@@ -726,7 +674,6 @@
 				47C40EE3295CB930007C27F0 /* uscdatingclub-ios.app */,
 				47C40EF9295CB931007C27F0 /* uscdatingclub-iosTests.xctest */,
 				47C40F03295CB931007C27F0 /* uscdatingclub-iosUITests.xctest */,
-				47B6B49B296B2E3500539353 /* locationPushExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1169,27 +1116,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		47B6B49A296B2E3500539353 /* locationPushExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 47B6B4A6296B2E3500539353 /* Build configuration list for PBXNativeTarget "locationPushExtension" */;
-			buildPhases = (
-				47B6B497296B2E3500539353 /* Sources */,
-				47B6B498296B2E3500539353 /* Frameworks */,
-				47B6B499296B2E3500539353 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = locationPushExtension;
-			packageProductDependencies = (
-				47B6B4A9296B46FB00539353 /* FirebaseAnalytics */,
-				47B6B4AB296B46FB00539353 /* FirebaseAnalyticsSwift */,
-			);
-			productName = locationPushExtension;
-			productReference = 47B6B49B296B2E3500539353 /* locationPushExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		47C40EE2295CB930007C27F0 /* uscdatingclub-ios */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47C40F0D295CB931007C27F0 /* Build configuration list for PBXNativeTarget "uscdatingclub-ios" */;
@@ -1197,13 +1123,11 @@
 				47C40EDF295CB930007C27F0 /* Sources */,
 				47C40EE0295CB930007C27F0 /* Frameworks */,
 				47C40EE1295CB930007C27F0 /* Resources */,
-				47B6B4A3296B2E3500539353 /* Embed Foundation Extensions */,
 				47BBF9E3296A372000802573 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				47B6B4A1296B2E3500539353 /* PBXTargetDependency */,
 			);
 			name = "uscdatingclub-ios";
 			packageProductDependencies = (
@@ -1275,9 +1199,6 @@
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
-					47B6B49A296B2E3500539353 = {
-						CreatedOnToolsVersion = 14.2;
-					};
 					47C40EE2295CB930007C27F0 = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -1313,19 +1234,11 @@
 				47C40EE2295CB930007C27F0 /* uscdatingclub-ios */,
 				47C40EF8295CB931007C27F0 /* uscdatingclub-iosTests */,
 				47C40F02295CB931007C27F0 /* uscdatingclub-iosUITests */,
-				47B6B49A296B2E3500539353 /* locationPushExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		47B6B499296B2E3500539353 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		47C40EE1295CB930007C27F0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1399,22 +1312,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		47B6B497296B2E3500539353 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				47B6B4B4296B8E7C00539353 /* BasicAPI.swift in Sources */,
-				47B6B4B3296B8DA700539353 /* String+Random.swift in Sources */,
-				47B6B49E296B2E3500539353 /* LocationPushService.swift in Sources */,
-				47B6B4B5296B8F2000539353 /* User.swift in Sources */,
-				47B6B4A7296B45BE00539353 /* UserAPI.swift in Sources */,
-				47B6B4AE296B487D00539353 /* APIError.swift in Sources */,
-				47B6B4B0296B8D6100539353 /* Env.swift in Sources */,
-				47B6B4B6296B90F200539353 /* Constants.swift in Sources */,
-				47A24A2B29708D020077AB11 /* SurveyResponse.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		47C40EDF295CB930007C27F0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1607,11 +1504,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		47B6B4A1296B2E3500539353 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 47B6B49A296B2E3500539353 /* locationPushExtension */;
-			targetProxy = 47B6B4A0296B2E3500539353 /* PBXContainerItemProxy */;
-		};
 		47C40EFB295CB931007C27F0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 47C40EE2295CB930007C27F0 /* uscdatingclub-ios */;
@@ -1644,58 +1536,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		47B6B4A4296B2E3500539353 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SHD3A2G97F;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = locationPushExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = locationPushExtension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "leaveylabs.uscdatingclub-ios.locationPushExtension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		47B6B4A5296B2E3500539353 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SHD3A2G97F;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = locationPushExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = locationPushExtension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "leaveylabs.uscdatingclub-ios.locationPushExtension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
 		47C40F0B295CB931007C27F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1813,7 +1653,6 @@
 		47C40F0E295CB931007C27F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "uscdatingclub-ios/uscdatingclub-ios.entitlements";
@@ -1854,7 +1693,6 @@
 		47C40F0F295CB931007C27F0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "uscdatingclub-ios/uscdatingclub-ios.entitlements";
@@ -1983,15 +1821,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		47B6B4A6296B2E3500539353 /* Build configuration list for PBXNativeTarget "locationPushExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				47B6B4A4296B2E3500539353 /* Debug */,
-				47B6B4A5296B2E3500539353 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		47C40EDE295CB930007C27F0 /* Build configuration list for PBXProject "uscdatingclub-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2075,16 +1904,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 47DE31CB295CC2340063C55A /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
 			productName = "PhoneNumberKit-Dynamic";
-		};
-		47B6B4A9296B46FB00539353 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 47C40F69295CBB41007C27F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		47B6B4AB296B46FB00539353 /* FirebaseAnalyticsSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 47C40F69295CBB41007C27F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsSwift;
 		};
 		47C40F6A295CBB41007C27F0 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
