@@ -125,7 +125,17 @@ class UserAPI {
         try filterUserErrors(data: data, response: response)
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return try decoder.decode(CompleteUser.self, from: data)
+        let registeredUser = try decoder.decode(CompleteUser.self, from: data)
+        setGlobalAuthToken(token: registeredUser.token)
+        return registeredUser
+    }
+    
+    static func fetchAllUsers() async throws -> [ReadOnlyUser] {
+        let url = "\(Env.BASE_URL)\(Endpoints.users.rawValue)"
+        let (data, response) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: Data(), method: HTTPMethods.GET.rawValue)
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return try decoder.decode([ReadOnlyUser].self, from: data)
     }
     
     static func postSurveyAnswers(email:String,

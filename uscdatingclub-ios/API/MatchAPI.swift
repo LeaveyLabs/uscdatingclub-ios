@@ -31,6 +31,8 @@ class MatchAPI {
     enum ParameterKeys: String {
         case userId = "user_id"
         case partnerId = "partner_id"
+        case user1Id = "user1_id"
+        case user2Id = "user2_id"
     }
     
     static let MATCH_RECOVERY_MESSAGE = "try again later"
@@ -67,5 +69,17 @@ class MatchAPI {
         let (data, response) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: json, method: HTTPMethods.PATCH.rawValue)
         try filterMatchErrors(data: data, response: response)
     }
+    
+    static func postMatch(user1Id:Int, user2Id:Int) async throws {
+        let url = "\(Env.BASE_URL)\(Endpoints.matches.rawValue)"
+        let params = [
+            ParameterKeys.user1Id: String(user1Id)
+            ParameterKeys.user2Id: String(user2Id)
+        ]
+        let json = try JSONEncoder().encode(params)
+        let (data, response) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
+        try filterMatchErrors(data: data, response: response)
+    }
+    
 }
 
