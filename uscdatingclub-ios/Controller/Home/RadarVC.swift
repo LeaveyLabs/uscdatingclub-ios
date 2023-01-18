@@ -46,6 +46,7 @@ class RadarVC: UIViewController, PageVCChild {
     @IBOutlet var accountButton: UIButton!
     @IBOutlet var primaryButton: SimpleButton!
     @IBOutlet var primaryButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var cupidButton: UIButton!
     
     var pageVCDelegate: PageVCDelegate!
 
@@ -112,6 +113,11 @@ class RadarVC: UIViewController, PageVCChild {
     //MARK: - Setup
     
     func setupButtons() {
+        cupidButton.isHidden = !UserService.singleton.isSuperuser()
+        cupidButton.addAction(.init(handler: { [self] _ in
+            cupidButtonPressed()
+        }), for: .touchUpInside)
+        
         aboutButton.addAction(.init(handler: { [self] _ in
             pageVCDelegate.didPressBackwardButton()
         }), for: .touchUpInside)
@@ -280,6 +286,10 @@ class RadarVC: UIViewController, PageVCChild {
         case .arrow:
             presentTest()
         }
+    }
+    
+    func cupidButtonPressed() {
+        present(ForgeMatchVC.create(), animated: true)
     }
     
     @objc func centerCircleTouchDown() {

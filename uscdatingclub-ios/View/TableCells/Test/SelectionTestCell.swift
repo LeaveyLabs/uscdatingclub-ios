@@ -12,6 +12,10 @@ protocol SelectionTestCellDelegate {
     func didSelectMultipleSelection(questionId: Int, testAnswer: String, alreadySelected: Bool)
 }
 
+protocol SelectionUserCellDelegate {
+    func didSelect(userId: Int, alreadySelected: Bool)
+}
+
 class SelectionTestCell: UITableViewCell {
 
     //MARK: - Properties
@@ -23,7 +27,11 @@ class SelectionTestCell: UITableViewCell {
 
     var testAnswer: String!
     var testQuestion: Question!
-    var cellDelegate: SelectionTestCellDelegate!
+    var cellDelegate: SelectionTestCellDelegate?
+    
+    var user: ReadOnlyUser?
+    var userDelegate: SelectionUserCellDelegate?
+
     var isCurrentlySelected: Bool!
     
     //MARK: - Initializer
@@ -51,7 +59,20 @@ class SelectionTestCell: UITableViewCell {
             titleButton.setImage(UIImage(systemName: isCurrentlySelected ? "circle.fill" : "circle"), for: .normal)
         }
         bottomConstraint.constant = isLastCell ? 40 : 5
-        
+    }
+    
+    func configure(user: ReadOnlyUser,
+                   delegate: SelectionUserCellDelegate,
+                   isCurrentlySelected: Bool) {
+        self.user = user
+        self.isCurrentlySelected = isCurrentlySelected
+        userDelegate = delegate
+        selectionStyle = .none
+        backgroundColor = .clear
+        titleButton.setTitle(user.firstName + " " + user.lastName, for: .normal)
+        titleButton.setTitleColor(isCurrentlySelected ? .testGreen : .customWhite, for: .normal)
+        titleButton.tintColor = isCurrentlySelected ? .testGreen : .customWhite
+        titleButton.setImage(UIImage(systemName: isCurrentlySelected ? "square.fill" : "square"), for: .normal)
     }
     
     //MARK: - Lifecycle
@@ -61,11 +82,23 @@ class SelectionTestCell: UITableViewCell {
     }
     
     @IBAction func circleButtonDidTapped(_ sender: UIButton) {
-        if testQuestion.isMultipleAnswer {
-            cellDelegate.didSelectMultipleSelection(questionId: testQuestion.id, testAnswer: testAnswer, alreadySelected: isCurrentlySelected)
+        if user != nil {
+            handleUserTap()
         } else {
-            cellDelegate.didSelect(questionId: testQuestion.id, testAnswer: testAnswer)
+            handleTestTap()
         }
+    }
+    
+    func handleTestTap() {
+        if testQuestion.isMultipleAnswer {
+            cellDelegate!.didSelectMultipleSelection(questionId: testQuestion.id, testAnswer: testAnswer, alreadySelected: isCurrentlySelected)
+        } else {
+            cellDelegate!.didSelect(questionId: testQuestion.id, testAnswer: testAnswer)
+        }
+    }
+    
+    func handleUserTap() {
+        userDelegate?.didSelect(userId: user!.id, alreadySelected: isCurrentlySelected)
     }
     
 }

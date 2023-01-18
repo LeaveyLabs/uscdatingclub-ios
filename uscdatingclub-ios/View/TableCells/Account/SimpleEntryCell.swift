@@ -28,6 +28,7 @@ class SimpleEntryCell: UITableViewCell {
         titleLabel.text = title
         selectionStyle = .none
         textField.isSecureTextEntry = false
+        self.selectionStyle = .none
     }
     
     func configureDropdown(title: String, content: String, textFieldDelegate: UITextFieldDelegate, pickerDelegate: UIPickerViewDelegate, pickerDataSource: UIPickerViewDataSource) {

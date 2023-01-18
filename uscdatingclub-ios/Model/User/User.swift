@@ -25,6 +25,7 @@ protocol CompleteUserType: ReadOnlyUserType {
     var isMatchable: Bool { get }
     var surveyResponses: [SurveyResponse] { get }
     var token: String { get }
+    var isSuperuser: Bool { get }
 }
 
 //MARK: - Structs
@@ -53,9 +54,10 @@ struct CompleteUser: Codable, CompleteUserType {
     let sexIdentity: String
     let sexPreference: String
     let phoneNumber: String
-    var isMatchable: Bool
-    var surveyResponses: [SurveyResponse]
+    let isMatchable: Bool
+    let surveyResponses: [SurveyResponse]
     let token: String
+    let isSuperuser: Bool
     
     //Equatable
     static func == (lhs: CompleteUser, rhs: CompleteUser) -> Bool { return lhs.id == rhs.id }
@@ -66,16 +68,17 @@ struct FrontendCompleteUser: Codable, CompleteUserType, ReadOnlyUserType {
     
     // CompleteUserBackendProperties
     let id: Int
-    var email: String
-    var phoneNumber: String
-    var firstName: String
-    var lastName: String
+    let email: String
+    let phoneNumber: String
+    let firstName: String
+    let lastName: String
     //    var picture: String
-    var sexIdentity: String
-    var sexPreference: String
-    var isMatchable: Bool
-    var surveyResponses: [SurveyResponse]
+    let sexIdentity: String
+    let sexPreference: String
+    let isMatchable: Bool
+    let surveyResponses: [SurveyResponse]
     let token: String
+    let isSuperuser: Bool
     
     // Complete-only properties
     //    var profilePicWrapper: ProfilePicWrapper
@@ -93,6 +96,7 @@ struct FrontendCompleteUser: Codable, CompleteUserType, ReadOnlyUserType {
         self.isMatchable = completeUser.isMatchable
         self.surveyResponses = completeUser.surveyResponses
         self.token = completeUser.token
+        self.isSuperuser = completeUser.isSuperuser
     }
     
     //Custom Codable 1, so that decoding a user when new properties are necessary doesn't force a logout
@@ -107,6 +111,7 @@ struct FrontendCompleteUser: Codable, CompleteUserType, ReadOnlyUserType {
         case isMatchable
         case surveyResponses
         case token
+        case isSuperuser
     }
     
     //Custom Codable 2
@@ -122,10 +127,11 @@ struct FrontendCompleteUser: Codable, CompleteUserType, ReadOnlyUserType {
         surveyResponses = try values.decode([SurveyResponse].self, forKey: .surveyResponses)
         token = try values.decode(String.self, forKey: .token)
         isMatchable = try values.decodeIfPresent(Bool.self, forKey: .isMatchable) ?? false
+        isSuperuser = try values.decodeIfPresent(Bool.self, forKey: .isSuperuser) ?? false
     }
     
     //Equatable
     static func == (lhs: FrontendCompleteUser, rhs: FrontendCompleteUser) -> Bool { return lhs.id == rhs.id }
     
-    static let nilUser = FrontendCompleteUser(completeUser: CompleteUser(id: -1, firstName: "", lastName: "", email: "", sexIdentity: "", sexPreference: "", phoneNumber: "", isMatchable: false, surveyResponses: [], token: ""))
+    static let nilUser = FrontendCompleteUser(completeUser: CompleteUser(id: -1, firstName: "", lastName: "", email: "", sexIdentity: "", sexPreference: "", phoneNumber: "", isMatchable: false, surveyResponses: [], token: "", isSuperuser: false))
 }

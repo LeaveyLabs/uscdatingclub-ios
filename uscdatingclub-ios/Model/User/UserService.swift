@@ -82,6 +82,7 @@ class UserService: NSObject {
     func getPhoneNumberPretty() -> String? { return authedUser.phoneNumber.asNationalPhoneNumber }
     func getSurveyResponses() -> [SurveyResponse] { return authedUser.surveyResponses }
     func isFirstTest() -> Bool { return authedUser.surveyResponses.isEmpty }
+    func isSuperuser() -> Bool { return authedUser.isSuperuser }
 
 //    func getProfilePic() -> UIImage { return authedUser.profilePicWrapper.image }
     
@@ -124,14 +125,14 @@ class UserService: NSObject {
 //    //MARK: - Update user
 //
     func updateUser(firstName: String, lastName: String, sexIdentity: String, sexPreference: String) async throws {
-        let updatedUser = CompleteUser(id: authedUser.id, firstName: firstName, lastName: lastName, email:authedUser.email, sexIdentity: sexIdentity, sexPreference: sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: authedUser.surveyResponses, token: authedUser.token)
+        let updatedUser = CompleteUser(id: authedUser.id, firstName: firstName, lastName: lastName, email:authedUser.email, sexIdentity: sexIdentity, sexPreference: sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: authedUser.surveyResponses, token: authedUser.token, isSuperuser: authedUser.isSuperuser)
         try await UserAPI.updateUser(id:updatedUser.id, user:updatedUser)
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
         Task { await self.saveUserToFilesystem() }
     }
     
     func updateMatchableStatus(active: Bool) async throws {
-        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: active, surveyResponses: authedUser.surveyResponses, token: authedUser.token)
+        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: active, surveyResponses: authedUser.surveyResponses, token: authedUser.token, isSuperuser: authedUser.isSuperuser)
         try await UserAPI.updateMatchableStatus(matchableStatus: active, email: authedUser.email)
         //LocationManager start/stop updating location is handled in RadarVC on rerender right now
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
@@ -139,7 +140,7 @@ class UserService: NSObject {
     }
     
     func updateTestResponses(newResponses: [SurveyResponse]) async throws {
-        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: newResponses, token: authedUser.token)
+        let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: newResponses, token: authedUser.token, isSuperuser: authedUser.isSuperuser)
         try await UserAPI.postSurveyAnswers(email: authedUser.email, surveyResponses: newResponses)
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
         Task { await self.saveUserToFilesystem() }

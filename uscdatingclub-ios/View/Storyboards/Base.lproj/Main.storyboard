@@ -43,6 +43,18 @@
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
                                         </state>
                                     </button>
+                                    <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DXg-s9-mpy">
+                                        <rect key="frame" x="55" y="10" width="35" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="35" id="aSS-oS-6mM"/>
+                                            <constraint firstAttribute="width" secondItem="DXg-s9-mpy" secondAttribute="height" multiplier="1:1" id="cx0-6R-hej"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="heart" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
+                                        </state>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="usc dating club" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17b-iR-ILN">
                                         <rect key="frame" x="135.5" y="15.5" width="143" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
@@ -74,12 +86,15 @@
                                     <constraint firstItem="17b-iR-ILN" firstAttribute="centerX" secondItem="8kL-2b-au4" secondAttribute="centerX" id="3nV-5j-FzZ"/>
                                     <constraint firstItem="17b-iR-ILN" firstAttribute="centerY" secondItem="8kL-2b-au4" secondAttribute="centerY" id="7uU-tW-ViK"/>
                                     <constraint firstItem="PUp-hs-wx8" firstAttribute="centerY" secondItem="8kL-2b-au4" secondAttribute="centerY" id="BSi-cW-fWf"/>
+                                    <constraint firstItem="DXg-s9-mpy" firstAttribute="centerY" secondItem="nEh-2P-7Eh" secondAttribute="centerY" id="C9p-fM-LXT"/>
                                     <constraint firstAttribute="bottom" secondItem="0LT-XO-rMe" secondAttribute="bottom" id="CWd-sf-0HY"/>
                                     <constraint firstItem="nEh-2P-7Eh" firstAttribute="leading" secondItem="8kL-2b-au4" secondAttribute="leading" constant="10" id="II2-F4-awR"/>
                                     <constraint firstItem="nEh-2P-7Eh" firstAttribute="centerY" secondItem="8kL-2b-au4" secondAttribute="centerY" id="PbR-L7-PQC"/>
+                                    <constraint firstItem="DXg-s9-mpy" firstAttribute="leading" secondItem="nEh-2P-7Eh" secondAttribute="trailing" constant="10" id="TfK-Dr-EVY"/>
                                     <constraint firstAttribute="height" constant="55" id="cuZ-BC-klK"/>
                                     <constraint firstAttribute="trailing" secondItem="PUp-hs-wx8" secondAttribute="trailing" constant="10" id="dwk-NG-wri"/>
                                     <constraint firstAttribute="trailing" secondItem="0LT-XO-rMe" secondAttribute="trailing" id="ect-26-LHp"/>
+                                    <constraint firstItem="DXg-s9-mpy" firstAttribute="width" secondItem="DXg-s9-mpy" secondAttribute="height" multiplier="1:1" id="rnO-hb-rNw"/>
                                     <constraint firstItem="0LT-XO-rMe" firstAttribute="leading" secondItem="8kL-2b-au4" secondAttribute="leading" id="yVd-6a-QXc"/>
                                 </constraints>
                             </view>
@@ -115,6 +130,7 @@
                         <outlet property="aboutButton" destination="nEh-2P-7Eh" id="yrg-mu-GqJ"/>
                         <outlet property="accountButton" destination="PUp-hs-wx8" id="IFY-k1-SxN"/>
                         <outlet property="arrowView" destination="Dgk-tx-ALA" id="PZ1-Mv-5yk"/>
+                        <outlet property="cupidButton" destination="DXg-s9-mpy" id="dcO-jY-Pe9"/>
                         <outlet property="primaryButton" destination="imS-AG-fa5" id="9mu-A5-9mD"/>
                         <outlet property="primaryButtonHeightConstraint" destination="jx8-9X-3F0" id="22Z-J9-AHc"/>
                         <outlet property="titleLabel" destination="17b-iR-ILN" id="xYw-8D-jG1"/>
@@ -654,6 +670,7 @@
     <resources>
         <image name="arrow.down" catalog="system" width="118" height="128"/>
         <image name="chevron.left" catalog="system" width="97" height="128"/>
+        <image name="heart" catalog="system" width="128" height="107"/>
         <image name="info.circle" catalog="system" width="128" height="123"/>
         <image name="person.crop.circle" catalog="system" width="128" height="123"/>
         <image name="safari" catalog="system" width="128" height="123"/>
