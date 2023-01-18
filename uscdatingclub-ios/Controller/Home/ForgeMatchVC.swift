@@ -38,11 +38,6 @@ class ForgeMatchVC: UIViewController {
         setupTextField()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
-    }
-    
     func setupTextField() {
         searchBarTextField.delegate = self
         searchBarTextField.layer.cornerRadius = 10
@@ -53,6 +48,7 @@ class ForgeMatchVC: UIViewController {
         Task {
             do {
                 allUsers = try await UserAPI.fetchAllUsers()
+                filteredUsers = allUsers
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
