@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        print("Starting app in \(Env.environment) mode")
+        
         UIStackView.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).spacing = -10
 
         UNUserNotificationCenter.current().delegate = self
@@ -23,11 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.addObserver(forName: .remoteConfigDidActivate, object: nil, queue: .main) { notification in
             Version.checkForNewUpdate()
         }
-                
-        
         FirebaseApp.configure()
-//        Constants.fetchRemoteConfig()
-        Constants.fetchRemoteConfigDebug()
+        Constants.fetchRemoteConfig()
         TestService.shared.initialize()
                 
         return true

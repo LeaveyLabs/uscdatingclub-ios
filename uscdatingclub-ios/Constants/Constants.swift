@@ -74,6 +74,7 @@ enum Constants {
             static let Radar = "RadarVC"
             static let Account = "AccountVC"
             static let TakeTheTest = "TakeTheTestVC"
+            static let ForgeMatch = "ForgeMatchVC"
             //Test
             static let TestText = "TestTextVC"
             static let TestQuestions = "TestQuestionsVC"

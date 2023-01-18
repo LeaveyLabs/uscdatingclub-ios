@@ -31,7 +31,7 @@ class CreateProfileVC: KUIViewController, UITextFieldDelegate {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
     
-    var imagePicker: ImagePicker!
+    var imagePicker = ImagePicker()
     
     var isValidInput: Bool! {
         didSet {
@@ -127,7 +127,7 @@ class CreateProfileVC: KUIViewController, UITextFieldDelegate {
     }
     
     func setupImagePicker() {
-        imagePicker = ImagePicker(presentationController: self, delegate: self, pickerSources: [.camera, .photoLibrary])
+        imagePicker.configure(presentationController: self, delegate: self, pickerSources: [.camera, .photoLibrary])
     }
     
     func setupHeaderAndImageBasedOnScreenSize() {

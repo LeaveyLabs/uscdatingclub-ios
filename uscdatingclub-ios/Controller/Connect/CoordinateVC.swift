@@ -134,15 +134,12 @@ extension CoordinateVC: ConnectManagerDelegate {
                 break
             }
             timeLabel.text = matchInfo.timeLeftString
-//            print("NEW TIME ELAPSED")
 //            self.timeLeftLabel.alpha = 0.5
 //            self.timeLeftLabel.textColor = .customWhite
 //            UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear) {
-//                print("START ANIMATE")
 //                self.timeLeftLabel.alpha = 1
 //                self.timeLeftLabel.textColor = .blue
 //            } completion: { completed in
-//                print("FINISH ANIMATE")
 //            }
         }
     }

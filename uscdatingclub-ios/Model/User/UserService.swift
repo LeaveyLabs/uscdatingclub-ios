@@ -175,6 +175,7 @@ class UserService: NSObject {
 //        }
         //reset any caches
 //        setGlobalAuthToken(token: "")
+        LocationManager.shared.stopLocationServices()
         eraseUserFromFilesystem()
         frontendCompleteUser = nil
         isLoggedIntoApp = false

@@ -227,6 +227,7 @@
 		47E38FF3295F72B9007CB77F /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E38FF2295F72B9007CB77F /* FeatureView.swift */; };
 		47E38FF5295F7368007CB77F /* FeatureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47E38FF4295F7368007CB77F /* FeatureView.xib */; };
 		47E38FF7295F75AD007CB77F /* Misc.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47E38FF6295F75AD007CB77F /* Misc.storyboard */; };
+		47EA9B2929777EFB00B6C209 /* ForgeMatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EA9B2829777EFB00B6C209 /* ForgeMatchVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -481,6 +482,7 @@
 		47E38FF2295F72B9007CB77F /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
 		47E38FF4295F7368007CB77F /* FeatureView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeatureView.xib; sourceTree = "<group>"; };
 		47E38FF6295F75AD007CB77F /* Misc.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Misc.storyboard; sourceTree = "<group>"; };
+		47EA9B2829777EFB00B6C209 /* ForgeMatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgeMatchVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -594,6 +596,7 @@
 		4731F526295CDCE80013F626 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				47EA9B2829777EFB00B6C209 /* ForgeMatchVC.swift */,
 				4731F527295CDF4A0013F626 /* PageVC.swift */,
 				4731F529295CE0980013F626 /* RadarVC.swift */,
 				4731F52B295CE0B40013F626 /* AboutVC.swift */,
@@ -1502,6 +1505,7 @@
 				47B60B0C296CEBDB00657C1D /* CLLocationCoordinate+Heading.swift in Sources */,
 				474FFCBD29770B79000BE9E0 /* SelectionTableViewCell.swift in Sources */,
 				47B60B0E296D0E3900657C1D /* SheetVC.swift in Sources */,
+				47EA9B2929777EFB00B6C209 /* ForgeMatchVC.swift in Sources */,
 				4731F513295CD48B0013F626 /* PanGesture+Direction.swift in Sources */,
 				47DE3249295CC7C40063C55A /* UIImageView+Initials.swift in Sources */,
 				4731F525295CD9870013F626 /* UIColor+Hex.swift in Sources */,

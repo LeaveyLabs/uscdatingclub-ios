@@ -19,11 +19,12 @@ open class ImagePicker: NSObject {
     private weak var delegate: ImagePickerDelegate?
     private var pickerSources: [UIImagePickerController.SourceType]! //cameraRoll is contained within photoLibrary
 
-    public init(presentationController: UIViewController, delegate: ImagePickerDelegate, pickerSources: [UIImagePickerController.SourceType]) {
+    public override init() {
         self.pickerController = UIImagePickerController()
-
         super.init()
-
+    }
+    
+    public func configure(presentationController: UIViewController, delegate: ImagePickerDelegate, pickerSources: [UIImagePickerController.SourceType]) {
         self.presentationController = presentationController
         self.delegate = delegate
         self.pickerSources = pickerSources

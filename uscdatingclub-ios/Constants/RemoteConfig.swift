@@ -41,6 +41,11 @@ extension Constants {
     }
     
     static func fetchRemoteConfig() {
+        guard Env.environment == .prod else {
+            Constants.fetchRemoteConfigDebug()
+            return
+        }
+
 //        setupRemoteConfigDefaults()
         remoteConfig.fetchAndActivate { fetchStatus, error in
             guard error == nil else {

@@ -11,22 +11,10 @@ enum VersionError: Error {
     case invalidBundleInfo, invalidResponse
 }
 
-//using the below code looks like...
-//        _ = try? isUpdateAvailable { (isUpdateAvailable, error) in
-//            if let error = error {
-//                print(error)
-//            } else if let isUpdateAvailable = isUpdateAvailable {
-//                guard isUpdateAvailable else { return }
-////                self.wasUpdateFoundAvailable = true
-//                //DO SOMETHING SINCE UPDATE IS AVAILABLE
-//            }
-//        }
-
 enum Version {
     static let currentVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
     
     static func isVersion(_ versionA: String, newerThan versionB: String) -> Bool? {
-        print("is version " + versionA + " newer than " + versionB)
         let componentsA: [Int] = versionA.components(separatedBy: ".").compactMap { Int($0) }
         let componentsB: [Int] = versionB.components(separatedBy: ".").compactMap { Int($0) }
         guard componentsB.count == 3, componentsA.count == 3 else { return nil }
@@ -46,7 +34,7 @@ enum Version {
     }
     
     static func checkForNewUpdate() {
-        print("checking for new update", Constants.updateAvailableVersion, Constants.updateMandatoryVersion, Version.currentVersion)
+        print("checking for new update")
         
         let isUpdateDetailsAvailable =
         isVersion(Constants.updateAvailableVersion, newerThan: Version.currentVersion) ?? false

@@ -17,16 +17,6 @@ class AuthStartPageVC: UIPageViewController {
     var currentIndex: Int = 0 {
         didSet {
             pageControl.currentPage = currentIndex
-            if currentIndex == vcs.count-1 && continueButton.alpha==0 {
-                UIView.animate(withDuration: 0.3) {
-                    self.continueButton.alpha = 1
-                }
-            }
-            if currentIndex != vcs.count-1 && continueButton.alpha>0 {
-                UIView.animate(withDuration: 0.3) {
-                    self.continueButton.alpha = 0
-                }
-            }
         }
     }
     
@@ -65,6 +55,11 @@ class AuthStartPageVC: UIPageViewController {
         
         self.dataSource = self
         self.delegate = self
+        for view in view.subviews {
+            if let scrollView = view as? UIScrollView {
+                scrollView.delegate = self
+            }
+        }
         
         setViewControllers([vcs[0]], direction: .forward, animated: false)
     }
@@ -111,6 +106,11 @@ class AuthStartPageVC: UIPageViewController {
     
     func recalculateCurrentIndex() {
         currentIndex = vcs.firstIndex(of: viewControllers!.first!)!
+        if currentIndex == vcs.count-1 && continueButton.alpha==0 {
+            UIView.animate(withDuration: 0.3) {
+                self.continueButton.alpha = 1
+            }
+        }
     }
     
 }
@@ -125,13 +125,28 @@ extension AuthStartPageVC: UIPageViewControllerDelegate, UIScrollViewDelegate {
         }
     }
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if continueButton.alpha>0 {
+            UIView.animate(withDuration: 0.3) {
+                self.continueButton.alpha = 0
+            }
+        }
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if currentIndex == vcs.count-1 && continueButton.alpha==0 {
+            UIView.animate(withDuration: 0.3) {
+                self.continueButton.alpha = 1
+            }
+        }
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        recalculateCurrentIndex()
     //        let offSet = scrollView.contentOffset.x
     //        let width = scrollView.frame.width
     //        let horizontalCenter = width / 2
     //        pageControl.currentPage = Int(offSet + horizontalCenter) / Int(width)
-        
+
         //prevent going beyond edge
         if (currentIndex == 0 && scrollView.contentOffset.x < scrollView.bounds.size.width) || (currentIndex == vcs.count - 1 && scrollView.contentOffset.x > scrollView.bounds.size.width) {
           scrollView.contentOffset = CGPoint(x: scrollView.bounds.size.width, y: 0)

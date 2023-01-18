@@ -24,7 +24,6 @@ class AlertManager {
     
     static func displayError(_ error: Error) {
         if let apiError = error as? APIError {
-            print(apiError)
             createAndShowError(title: apiError.errorDescription!, body: apiError.recoverySuggestion!, emoji: "😔")
         } else if let mkError = error as? MKError {
             if mkError.errorCode == 4 {
@@ -33,7 +32,6 @@ class AlertManager {
                 print(error.localizedDescription)
             }
         } else {
-            print(error.localizedDescription)
             createAndShowError(title: "something went wrong", body: "try again later", emoji: "😔")
         }
     }
