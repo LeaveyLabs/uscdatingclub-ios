@@ -237,9 +237,10 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
             return
         }
         
-        guard !TestService.shared.hasAnswered(questionId: prevQuestionId+1) else { return } //they went back to answer an earlier question. do nothing
-        
         let questionIndex = prevQuestionIndex + 1
+        let questionId = testPage.questions[questionIndex].id
+        guard !TestService.shared.hasAnswered(questionId: questionId) else { return } //they went back to answer an earlier question. do nothing
+        
 
         //when a selection question is appearing or disappearing, need a slight delay so that expanded UI's constraints can update
         let beforeQ = testPage.questions[questionIndex]
@@ -261,6 +262,7 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
         } else {
             desiredOffset = questionBottomY - totalHeight/1.5
         }
+
 
         if desiredOffset < 50 { return } //don't go in wrong direction, and don't scroll if a small amount
         
