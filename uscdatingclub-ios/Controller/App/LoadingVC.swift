@@ -145,7 +145,7 @@ class LoadingVC: UIViewController {
     
     func handleInitialLoadError(_ error: Error, reloadType: InitialReloadType, failCount: Int) async throws {
         if let apiError = error as? APIError, apiError == .Unauthorized {
-            UserService.singleton.kickUserToHomeScreenAndLogOut()
+            try await UserService.singleton.kickUserToHomeScreenAndLogOut()
             return
         }
         if failCount >= 2 {

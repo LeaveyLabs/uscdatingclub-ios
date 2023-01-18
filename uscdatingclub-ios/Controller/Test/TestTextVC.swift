@@ -89,10 +89,10 @@ class TestTextVC: UIViewController {
                     activityIndicatorView.stopAnimating()
                     primaryLabel.text = "responses submitted"
                 } completion: { completed in
+                    self.primaryButton.internalButton.isEnabled = true
 //                    UIView.animate(withDuration: 1) { [self] in
 //                        secondaryLabel.alpha = 1
 //                    } completion: { completed in
-//                        self.primaryButton.internalButton.isEnabled = true
                         UIView.animate(withDuration: 0.7) { [self] in
                             primaryButton.alpha = 1
                         }

@@ -104,7 +104,13 @@ class EditAccountVC: UIViewController {
     }
     
     func logoutButtonPressed() {
-        UserService.singleton.kickUserToHomeScreenAndLogOut()
+        Task {
+            do {
+                try await UserService.singleton.kickUserToHomeScreenAndLogOut()
+            } catch {
+                AlertManager.displayError(error)
+            }
+        }
     }
     
     func deleteAccountButtonPressed() {

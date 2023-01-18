@@ -166,7 +166,8 @@ class UserService: NSObject {
 //
 //    //MARK: - Logout and delete user
 //
-    private func logOutFromDevice()  {
+    private func logOutFromDevice() async throws {
+        try await UserAPI.updateMatchableStatus(matchableStatus: false, email: UserService.singleton.getEmail())
         guard isLoggedIntoAnAccount else { return } //prevents infinite loop on authedUser didSet
 //        if getGlobalDeviceToken() != "" {
 //            Task {
@@ -181,10 +182,10 @@ class UserService: NSObject {
         isLoggedIntoApp = false
     }
 
-    func kickUserToHomeScreenAndLogOut() {
+    func kickUserToHomeScreenAndLogOut() async throws {
         //they might already be logged out, so don't try and logout again. this will cause an infinite loop for checkingAuthedUser :(
         if isLoggedIntoAnAccount {
-            logOutFromDevice()
+            try await logOutFromDevice()
         }
         DispatchQueue.main.async {
             transitionToAuth()
@@ -194,7 +195,7 @@ class UserService: NSObject {
     func deleteMyAccount() async throws {
         do {
             try await UserAPI.deleteUser(email: authedUser.email)
-            logOutFromDevice()
+            try await logOutFromDevice()
         } catch {
             print(error)
             throw(error)
