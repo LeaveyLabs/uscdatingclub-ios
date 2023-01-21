@@ -28,7 +28,7 @@ struct MatchPartner: Codable {
     
     //Compatibility
     let compatibility: Int
-    let similarities: [Similarity]
+    let similarities: [NumericalSimilarity]
 }
 
 struct MatchAcceptance: Codable {
@@ -45,16 +45,22 @@ struct MatchAcceptance: Codable {
     
     //Compatibility
     let compatibilty: Int
-    let similarities: [Similarity]
+    let numericalSimilarities: [NumericalSimilarity]
+    let textSimilarities: [TextSimilarity]
 }
 
 //MARK: - Frontend
 
-struct Similarity: Codable {
+struct NumericalSimilarity: Codable {
     let trait: String
     let avgPercent: CGFloat
     let youPercent: CGFloat
-    let matchPercent: CGFloat
+    let partnerPercent: CGFloat
+}
+
+struct TextSimilarity: Codable {
+    let trait: String
+    let sharedResponse: String
 }
 
 struct MatchInfo: Codable {
@@ -63,7 +69,7 @@ struct MatchInfo: Codable {
     let compatibility: Int
     let date: Date
     let distance: Double //meters
-    let percents: [Similarity]
+    let percents: [NumericalSimilarity]
     let latitude: Double
     let longitude: Double
     
@@ -87,9 +93,9 @@ struct MatchInfo: Codable {
         date = Date(timeIntervalSince1970: matchPartner.time)
         distance = matchPartner.distance
         percents = [
-            Similarity(trait: "skiing", avgPercent: CGFloat.random(in: 20..<40), youPercent: 60, matchPercent: 90),
-            Similarity(trait: "spontaneity", avgPercent: CGFloat.random(in: 20..<40), youPercent: 80, matchPercent: 60),
-            Similarity(trait: "creativity", avgPercent: CGFloat.random(in: 20..<40), youPercent: 85, matchPercent: 100),
+            NumericalSimilarity(trait: "skiing", avgPercent: CGFloat.random(in: 20..<40), youPercent: 60, partnerPercent: 90),
+            NumericalSimilarity(trait: "spontaneity", avgPercent: CGFloat.random(in: 20..<40), youPercent: 80, partnerPercent: 60),
+            NumericalSimilarity(trait: "creativity", avgPercent: CGFloat.random(in: 20..<40), youPercent: 85, partnerPercent: 100),
         ]
         latitude = matchPartner.latitude
         longitude = matchPartner.longitude
@@ -101,9 +107,9 @@ struct MatchInfo: Codable {
         compatibility = matchAcceptance.compatibilty
         date = Date(timeIntervalSince1970: matchAcceptance.time)
         percents = [
-            Similarity(trait: "skiing", avgPercent: CGFloat.random(in: 20..<40), youPercent: 60, matchPercent: 90),
-            Similarity(trait: "spontaneity", avgPercent: CGFloat.random(in: 20..<40), youPercent: 80, matchPercent: 60),
-            Similarity(trait: "creativity", avgPercent: CGFloat.random(in: 20..<40), youPercent: 85, matchPercent: 100),
+            NumericalSimilarity(trait: "skiing", avgPercent: CGFloat.random(in: 20..<40), youPercent: 60, partnerPercent: 90),
+            NumericalSimilarity(trait: "spontaneity", avgPercent: CGFloat.random(in: 20..<40), youPercent: 80, partnerPercent: 60),
+            NumericalSimilarity(trait: "creativity", avgPercent: CGFloat.random(in: 20..<40), youPercent: 85, partnerPercent: 100),
         ]
         latitude = matchAcceptance.latitude
         longitude = matchAcceptance.longitude

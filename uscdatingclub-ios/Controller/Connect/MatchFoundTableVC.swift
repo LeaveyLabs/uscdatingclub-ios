@@ -166,7 +166,7 @@ extension MatchFoundTableVC: UITableViewDataSource {
                            matchName: matchInfo.userName,
                            avgPercent: percent.avgPercent,
                            youPercent: percent.youPercent,
-                           matchPercent: percent.matchPercent,
+                           matchPercent: percent.partnerPercent,
                            shouldDisplayLabels: indexPath.row == 2)
             return cell
         case 3:
