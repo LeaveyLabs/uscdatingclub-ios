@@ -23,6 +23,7 @@ class MatchAPI {
     // Paths to API endpoints
     enum Endpoints: String {
         case acceptMatch = "accept-match/"
+        case forceCreateMatch = "force-create-match/"
         // REST
         case matches = "matches/"
     }
@@ -72,6 +73,17 @@ class MatchAPI {
     
     static func postMatch(user1Id:Int, user2Id:Int) async throws {
         let url = "\(Env.BASE_URL)\(Endpoints.matches.rawValue)"
+        let params = [
+            ParameterKeys.user1.rawValue: String(user1Id),
+            ParameterKeys.user2.rawValue: String(user2Id)
+        ]
+        let json = try JSONEncoder().encode(params)
+        let (data, response) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
+        try filterMatchErrors(data: data, response: response)
+    }
+    
+    static func forceCreateMatch(user1Id:Int, user2Id:Int) async throws {
+        let url = "\(Env.BASE_URL)\(Endpoints.forceCreateMatch.rawValue)"
         let params = [
             ParameterKeys.user1.rawValue: String(user1Id),
             ParameterKeys.user2.rawValue: String(user2Id)
