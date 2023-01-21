@@ -168,7 +168,7 @@ class UserAPI {
             ParameterKeys.isMatchable.rawValue: String(matchableStatus)
         ]
         let json = try JSONEncoder().encode(params)
-        let (data, response) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: json, method: HTTPMethods.PATCH.rawValue)
+        let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.PATCH.rawValue)
         try filterUserErrors(data: data, response: response)
     }
     
