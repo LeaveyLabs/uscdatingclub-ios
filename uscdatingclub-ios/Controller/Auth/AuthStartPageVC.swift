@@ -72,7 +72,7 @@ class AuthStartPageVC: UIPageViewController {
         continueButton.internalButton.addTarget(self, action: #selector(continueButtonDidPressed), for: .touchUpInside)
         continueButton.translatesAutoresizingMaskIntoConstraints = false
         continueButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        continueButton.bottomAnchor.constraint(equalTo: view.safeBottomAnchor, constant: -10).isActive = true
+        continueButton.bottomAnchor.constraint(equalTo: view.safeBottomAnchor, constant: -20).isActive = true
         continueButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         continueButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         continueButton.alpha = 0
@@ -80,7 +80,7 @@ class AuthStartPageVC: UIPageViewController {
     }
     
     func setupPageControl() {
-        pageControl = UIPageControl(frame: CGRect(x: 0,y: UIScreen.main.bounds.maxY - 110,width: UIScreen.main.bounds.width,height: 50))
+        pageControl = UIPageControl()
         self.pageControl.numberOfPages = vcs.count
         self.pageControl.currentPage = 0
         self.pageControl.alpha = 0.5
@@ -88,6 +88,12 @@ class AuthStartPageVC: UIPageViewController {
         self.pageControl.pageIndicatorTintColor = .customWhite.withAlphaComponent(0.5)
         self.pageControl.currentPageIndicatorTintColor = .customWhite
         self.view.addSubview(pageControl)
+        
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        pageControl.bottomAnchor.constraint(equalTo: view.safeBottomAnchor, constant: -35).isActive = true
+        pageControl.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        pageControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
     }
     
     //MARK: - Interaction

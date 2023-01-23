@@ -147,7 +147,7 @@ extension AboutVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -162,16 +162,16 @@ extension AboutVC: UITableViewDataSource {
                 self.faqButtonPressed()
             }
         case 2:
-            cell.configure(title: "share", systemImage: "square.and.arrow.up") {
+            cell.configure(title: "invite your friends", systemImage: "square.and.arrow.up") {
                 self.shareButtonPressed()
             }
         case 3:
-            cell.configure(title: "rate", systemImage: "star") {
-                self.rateButtonPressed()
-            }
-        case 4:
             cell.configure(title: "text us", systemImage: "message") {
                 self.contactButtonPressed()
+            }
+        case 4:
+            cell.configure(title: "rate", systemImage: "star") {
+                self.rateButtonPressed()
             }
         case 5:
             cell.configure(title: "give feedback", systemImage: "hand.wave") {

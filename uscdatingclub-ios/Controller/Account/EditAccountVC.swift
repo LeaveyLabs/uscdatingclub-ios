@@ -124,9 +124,9 @@ class EditAccountVC: UIViewController {
         guard let sexIdentityText = sexIdentityTextField.text,
               sexIdentityText != "",
               let sexIdentity = sexIdentityText.first,
-              let sexPreferenceText = sexIdentityTextField.text,
+              let sexPreferenceText = sexPreferenceTextField.text,
               sexPreferenceText != "",
-              let sexPreference = sexIdentityText.first
+              let sexPreference = sexPreferenceText.first
         else {
             AlertManager.displayError("error updating account", "please try again later")
             //TODO: post to firebase crashlytics

@@ -65,15 +65,15 @@ class SpectrumTestCell: UITableViewCell {
 
         cellDelegate = delegate
         
-        for i in 1...circleButtons.count {
-            let button = circleButtons[i-1]
+        for i in 0...circleButtons.count-1 {
+            let button = circleButtons[i]
             button.tag = i
             button.becomeRound()
             setButton(button, selected: false)
             button.layer.borderWidth = 2
-            if button.tag <= 3 {
+            if button.tag <= 2 {
                 button.layer.borderColor = UIColor.testPurple.cgColor
-            } else if button.tag == 4 {
+            } else if button.tag == 3 {
                 button.layer.borderColor = UIColor.customWhite.withAlphaComponent(0.7).cgColor
             } else {
                 button.layer.borderColor = UIColor.testGreen.cgColor
@@ -81,7 +81,7 @@ class SpectrumTestCell: UITableViewCell {
         }
                 
         if let response {
-            setButton(circleButtons[response-1], selected: true)
+            setButton(circleButtons[response], selected: true)
         }
         
         contentView.alpha = shouldBeHighlighted ? 1 : 0.2
@@ -98,16 +98,16 @@ class SpectrumTestCell: UITableViewCell {
         for button in circleButtons {
             setButton(button, selected: false)
         }
-        setButton(circleButtons[sender.tag-1], selected: true)
+        setButton(circleButtons[sender.tag], selected: true)
         cellDelegate.buttonDidTapped(questionId: testQuestion.id, selection: sender.tag)
     }
     
     //MARK: - Helper
     
     func setButton(_ button: UIButton, selected: Bool) {
-        if button.tag <= 3 {
+        if button.tag <= 2 {
             button.backgroundColor = selected ? .testPurple : .clear
-        } else if button.tag == 4 {
+        } else if button.tag == 3 {
             button.backgroundColor = selected ? .customWhite.withAlphaComponent(0.7) : .clear
         } else {
             button.backgroundColor = selected ? .testGreen : .clear

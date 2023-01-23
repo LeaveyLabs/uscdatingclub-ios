@@ -32,7 +32,7 @@ class MatchFoundTableVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        connectManager.startTimer() //must come first
+        connectManager.startRespondSession() //must come first
         setupTableView() //must come after setting up connectManager
         
         NotificationCenter.default.addObserver(forName: .matchAccepted, object: nil, queue: nil) { notification in
@@ -201,7 +201,7 @@ extension MatchFoundTableVC: UITableViewDataSource {
 
 extension MatchFoundTableVC: ConnectManagerDelegate {
     
-    func newTimeElapsed() {
+    func newSecondElapsed() {
         DispatchQueue.main.async { [self] in
             switch matchInfo.elapsedTime.minutes {
             case 0:

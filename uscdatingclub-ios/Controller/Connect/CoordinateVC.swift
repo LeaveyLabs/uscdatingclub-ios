@@ -33,11 +33,9 @@ class CoordinateVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        connectManager.startRelativeLocationCalculation() //must come first
-        connectManager.startTimer()
+        connectManager.startConnectSession()
         setupButtons()
         setupLabels() //must come after connect manager created
-        startTimer()
     }
     
     func setupButtons() {
@@ -58,11 +56,9 @@ class CoordinateVC: UIViewController {
         timeLabel.font = AppFont.bold.size(40)
         timeSublabel.font = AppFont.light.size(16)
         locationLabel.font = AppFont.bold.size(40)
-    }
-    
-    func startTimer() {
-        let minsLeft = 3
-        let secsLeft = 34
+        
+        let minsLeft = 4
+        let secsLeft = 59
         timeLabel.text = String(minsLeft) + "m " + String(secsLeft) + "s"
     }
     
@@ -97,6 +93,7 @@ class CoordinateVC: UIViewController {
                                primaryActionTitle: "report",
                                primaryActionHandler: {
             //block user
+            
             DispatchQueue.main.async {
                 self.finish()
             }
@@ -121,7 +118,7 @@ class CoordinateVC: UIViewController {
 
 extension CoordinateVC: ConnectManagerDelegate {
     
-    func newTimeElapsed() {
+    func newSecondElapsed() {
         DispatchQueue.main.async { [self] in
             switch matchInfo.elapsedTime.minutes {
             case 0:

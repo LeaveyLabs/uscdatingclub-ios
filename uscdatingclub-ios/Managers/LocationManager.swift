@@ -94,12 +94,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         //Update distance filter if necessary
         if locationManager.distanceFilter == 0 {
             if let lastConnectTime,
-               Date().timeIntervalSince1970.getElapsedTime(since: lastConnectTime).minutes >= 5 {
+               Date().timeIntervalSince1970.getElapsedTime(since: lastConnectTime).minutes >= Constants.minutesToConnect {
                 resetDistanceFilter()
             }
         }
-        
-        //TODO: idea: should we stop and then start location services here to restart them and potentially prolong the total background time?
+
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

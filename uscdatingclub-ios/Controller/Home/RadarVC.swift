@@ -276,7 +276,7 @@ class RadarVC: UIViewController, PageVCChild {
                             isLocationServicesEnabled = true
                             renderIsActive()
                         } else {
-                            let permissionsVC = PermissionsTableVC.create()
+                            let permissionsVC = PermissionsVC.create()
                             permissionsVC.modalPresentationStyle = .fullScreen
                             present(permissionsVC, animated: true)
                         }

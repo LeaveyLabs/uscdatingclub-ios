@@ -12,7 +12,7 @@
 		<string>http</string>
 	</array>
 	<key>NSUserNotificationsUsageDescription</key>
-	<string>when you're matched, you'll both get a notification and have 3 minutes to respond.</string>
+	<string>when you&apos;re matched, you&apos;ll both get a notification and have 5 minutes to respond.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>ChivoMono.ttf</string>

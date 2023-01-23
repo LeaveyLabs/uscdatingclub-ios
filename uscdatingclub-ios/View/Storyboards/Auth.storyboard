@@ -1184,7 +1184,7 @@ hold tight and we'll send you an email as soon as you can signup!</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="by continuing, you agree to our terms of use and privacy policy" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="aHp-Bi-SMf" userLabel="AgreementTextView">
-                                <rect key="frame" x="92.666666666666686" y="738" width="190" height="40"/>
+                                <rect key="frame" x="92.666666666666686" y="734" width="190" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Lk8-DK-LN2"/>
@@ -1215,7 +1215,7 @@ hold tight and we'll send you an email as soon as you can signup!</string>
                             <constraint firstItem="WLp-Hy-ia2" firstAttribute="centerY" secondItem="tON-0s-fSJ" secondAttribute="centerY" constant="-30" id="O60-e1-dUY"/>
                             <constraint firstItem="WLp-Hy-ia2" firstAttribute="top" secondItem="JfN-z1-UuP" secondAttribute="bottom" constant="10" id="Oa4-Zp-dJC"/>
                             <constraint firstItem="WLp-Hy-ia2" firstAttribute="centerX" secondItem="tON-0s-fSJ" secondAttribute="centerX" id="ct0-Rr-dyE"/>
-                            <constraint firstItem="2WV-F3-OcG" firstAttribute="bottom" secondItem="aHp-Bi-SMf" secondAttribute="bottom" id="gqO-mj-n8O"/>
+                            <constraint firstItem="2WV-F3-OcG" firstAttribute="bottom" secondItem="aHp-Bi-SMf" secondAttribute="bottom" constant="4" id="gqO-mj-n8O"/>
                             <constraint firstItem="WLp-Hy-ia2" firstAttribute="leading" secondItem="2WV-F3-OcG" secondAttribute="leading" constant="20" id="hM9-xf-PTw"/>
                             <constraint firstItem="2WV-F3-OcG" firstAttribute="trailing" secondItem="WLp-Hy-ia2" secondAttribute="trailing" constant="20" id="ku6-Oi-atn"/>
                             <constraint firstItem="JfN-z1-UuP" firstAttribute="centerX" secondItem="tON-0s-fSJ" secondAttribute="centerX" id="xpO-aP-djc"/>
@@ -1237,7 +1237,7 @@ hold tight and we'll send you an email as soon as you can signup!</string>
     <resources>
         <image name="camera.circle.fill" catalog="system" width="128" height="123"/>
         <image name="chevron.left" catalog="system" width="97" height="128"/>
-        <image name="circle.fill" catalog="system" width="128" height="123"/>
+        <image name="circle.fill" catalog="system" width="32" height="32"/>
         <image name="notificationscreen" width="860" height="1421"/>
         <image name="questionmark.circle" catalog="system" width="128" height="123"/>
         <namedColor name="AccentColor">

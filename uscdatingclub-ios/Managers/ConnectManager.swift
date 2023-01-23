@@ -10,7 +10,7 @@ import MapKit
 import CoreMotion
 
 protocol ConnectManagerDelegate {
-    func newTimeElapsed()
+    func newSecondElapsed()
     func timeRanOut()
     func newRelativePositioning(heading: CGFloat, distance: Double)
 }
@@ -36,7 +36,7 @@ class ConnectManager: NSObject {
     }
     
     deinit {
-        LocationManager.shared.resetDistanceFilter() //TODO: this won't suffice
+        LocationManager.shared.resetDistanceFilter()
     }
 
     //MARK: - Public Interface
@@ -59,23 +59,39 @@ class ConnectManager: NSObject {
         
         //PARTNER LOCATION
         do {
-            self.locationSocket = try LocationSocket(sender: UserService.singleton.getId(), receiver: matchInfo.userId)
+            locationSocket = try LocationSocket(sender: UserService.singleton.getId(), receiver: matchInfo.userId)
+            locationSocket!.partnerLocationDidChange = onPartnerLocationDidChange
         } catch {
             //TODO: post to crashlytics
             print("error opening location socket", error)
         }
-        self.locationSocket?.partnerLocationDidChange = self.onPartnerLocationDidChange
     }
-
-    func startTimer() {
+    
+    func startRespondSession() {
         Task {
             while true {
                 if finished { return }
-                if matchInfo.elapsedTime.minutes == 3 {
+                if matchInfo.elapsedTime.minutes == Constants.minutesToRespond {
                     delegate.timeRanOut()
                     return
                 }
-                delegate.newTimeElapsed()
+                delegate.newSecondElapsed()
+                
+                try await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)
+            }
+        }
+    }
+    
+    func startConnectSession() {
+        startRelativeLocationCalculation()
+        Task {
+            while true {
+                if finished { return }
+                if matchInfo.elapsedTime.minutes == Constants.minutesToConnect {
+                    delegate.timeRanOut()
+                    return
+                }
+                delegate.newSecondElapsed()
                 
                 try await Task.sleep(nanoseconds: NSEC_PER_SEC * 1)
             }
@@ -86,6 +102,7 @@ class ConnectManager: NSObject {
         finished = true
         NotificationCenter.default.removeObserver(self)
         LocationManager.shared.resetDistanceFilter()
+        
     }
     
     func onPartnerLocationDidChange(location:CLLocationCoordinate2D) {
@@ -97,11 +114,11 @@ class ConnectManager: NSObject {
     
     func updateRelativePositioning() {
         guard let currentLocation = LocationManager.shared.lastLocation else {
-            print("ERROR GETTING CURRENT LOCATION, IT'S NIL")
+            print("error getting current location")
             return
         }
         guard let deviceHeading = motionManager.deviceMotion?.heading else {
-            print("ERROR GETTING CURRENT LOCATION, IT'S NIL")
+            print("error getting current heading")
             return
         }
                 
