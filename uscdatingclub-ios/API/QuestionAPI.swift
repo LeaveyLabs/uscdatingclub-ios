@@ -21,8 +21,9 @@ struct QuestionError: Codable {
 class QuestionAPI {
     // Paths to API endpoints
     enum Endpoints: String {
-        case getQuestions = "get-questions/"
         case getPageOrder = "get-page-order/"
+        // REST
+        case questions = "questions/"
     }
     
     // Parameters for API
@@ -56,7 +57,7 @@ class QuestionAPI {
     }
     
     static func getQuestions() async throws -> [Question] {
-        let url = "\(Env.BASE_URL)\(Endpoints.getQuestions.rawValue)"
+        let url = "\(Env.BASE_URL)\(Endpoints.questions.rawValue)"
         let (data, _) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: Data(), method: HTTPMethods.GET.rawValue)
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
