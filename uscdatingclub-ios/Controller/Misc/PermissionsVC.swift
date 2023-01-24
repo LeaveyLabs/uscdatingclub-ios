@@ -52,6 +52,12 @@ class PermissionsVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         animateUnallowedViews()
+        
+        if goodToGo {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.dismiss(animated: true)
+            }
+        }
     }
     
     deinit {

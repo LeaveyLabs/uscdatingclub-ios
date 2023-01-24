@@ -90,9 +90,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             postToDatabase(lat: lastLocation.coordinate.latitude, long: lastLocation.coordinate.longitude)
         }
         
-        
         //Update distance filter if necessary
-        if locationManager.distanceFilter == 0 {
+        if locationManager.distanceFilter < LocationManager.DEFAULT_DISTANCE_FILTER {
             if let lastConnectTime,
                Date().timeIntervalSince1970.getElapsedTime(since: lastConnectTime).minutes >= Constants.minutesToConnect {
                 resetDistanceFilter()
@@ -122,6 +121,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     func resetDistanceFilter() {
         locationManager.distanceFilter = LocationManager.DEFAULT_DISTANCE_FILTER
+    }
+    
+    func getDistanceFiler() -> Double {
+        return locationManager.distanceFilter
     }
         
     func requestPermissionServices() throws {
