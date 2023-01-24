@@ -80,9 +80,12 @@ struct MatchInfo: Codable {
         return Date.init().timeIntervalSince1970.getElapsedTime(since: date.timeIntervalSince1970)
     }
     
-    var timeLeftString: String {
-        let timeRemainingString = "\(2 - elapsedTime.minutes)m \(59 - elapsedTime.seconds)s"
-        return timeRemainingString
+    var timeLeftToRespondString: String {
+        return "\(Constants.minutesToRespond - elapsedTime.minutes)m \(59 - elapsedTime.seconds)s"
+    }
+    
+    var timeLeftToConnectString: String {
+        return "\(Constants.minutesToConnect - elapsedTime.minutes)m \(59 - elapsedTime.seconds)s"
     }
     
     init(matchPartner: MatchPartner) {

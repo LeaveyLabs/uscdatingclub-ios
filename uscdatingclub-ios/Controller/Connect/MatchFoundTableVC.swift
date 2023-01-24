@@ -168,7 +168,7 @@ extension MatchFoundTableVC: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.ConnectHeaderCell, for: indexPath) as! ConnectHeaderCell
-            cell.configure(timeLeft: matchInfo.timeLeftString,
+            cell.configure(timeLeft: matchInfo.timeLeftToRespondString,
                            distanceAway: prettyDistance(meters: Double(matchInfo.distance),
                                                         shortened: true),
                            isWaiting: isWaiting,

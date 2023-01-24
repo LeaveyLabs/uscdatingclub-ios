@@ -49,7 +49,7 @@ class CoordinateVC: UIViewController {
     
     func setupLabels() {
         nameLabel.text = matchInfo.userName
-        timeLabel.text = matchInfo.timeLeftString
+        timeLabel.text = matchInfo.timeLeftToConnectString
         timeSublabel.text = "left to connect"
         
         nameLabel.font = AppFont.bold.size(22)
@@ -130,7 +130,7 @@ extension CoordinateVC: ConnectManagerDelegate {
             default:
                 break
             }
-            timeLabel.text = matchInfo.timeLeftString
+            timeLabel.text = matchInfo.timeLeftToConnectString
 //            self.timeLeftLabel.alpha = 0.5
 //            self.timeLeftLabel.textColor = .customWhite
 //            UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear) {

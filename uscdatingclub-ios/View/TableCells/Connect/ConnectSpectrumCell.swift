@@ -74,6 +74,7 @@ class ConnectSpectrumCell: UITableViewCell {
             labelsContainerView.isHidden = true
         }
         
+        print("AVGPERCENT", avgPercent)
         avgCircleViewLeadingConstraint.constant = (avgPercent/100) * (contentView.bounds.width - 50)
         youCircleViewLeadingConstraint.constant = (youPercent/100) * (contentView.bounds.width - 50)
         matchCircleViewLeadingConstraint.constant = (matchPercent/100) * (contentView.bounds.width - 50)
