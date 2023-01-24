@@ -83,7 +83,7 @@ class MatchFoundTableVC: UIViewController {
                 self.isWaiting = true
                 self.tableView.reloadData()
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) { //[weak self] in
 //                    if let self, self.isVisible {
                         DispatchQueue.main.async {
                             AppStoreReviewManager.requestReviewIfAppropriate()

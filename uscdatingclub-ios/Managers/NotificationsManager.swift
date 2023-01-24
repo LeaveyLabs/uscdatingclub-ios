@@ -106,35 +106,29 @@ class NotificationsManager: NSObject {
                 print("opened app with delivered notifications:", deliveredNotifications)
             }
 
-            //TODO: this function might do nothing...
-            //you need either a received or saved or opened to do anything
-            
             //THREE CHECKS: received, saved, opened notifications
             //1 saved notification (saved into the app through a previous phone unlock)
             //2 received notification (sitting in notification center)
             //3 opened notification (notification you clicked on)
             //you can't guarantee anyo one of these is newest. we want to put the app in the state of the newest notification
             
-            var relevantHandler: NotificationResponseHandler?
-            let threeMinsAgo = Calendar.current.date(byAdding: .minute, value: max(Constants.minutesToConnect, Constants.minutesToRespond), to: Date())!
+            var mostRecentHandler: NotificationResponseHandler?
             
             //Saved notification
             if let mostRecentSavedUserInfo = mostRecentSavedNotificationUserInfo(),
-               let savedHandler = generateNotificationResponseHandler(userInfo: mostRecentSavedUserInfo),
-               savedHandler.notificationDate.isMoreRecentThan(threeMinsAgo)
+               let savedHandler = generateNotificationResponseHandler(userInfo: mostRecentSavedUserInfo)
             {
-                relevantHandler = savedHandler
+                mostRecentHandler = savedHandler
             }
             
             //Received notification
             if let recentReceivedNotif = deliveredNotifications.first,
-               let recentReceivedHandler = generateNotificationResponseHandler(recentReceivedNotif),
-               recentReceivedHandler.notificationDate.isMoreRecentThan(threeMinsAgo) {
-                if relevantHandler == nil {
-                    relevantHandler = recentReceivedHandler
+               let recentReceivedHandler = generateNotificationResponseHandler(recentReceivedNotif) {
+                if mostRecentHandler == nil {
+                    mostRecentHandler = recentReceivedHandler
                 } else {
-                    if recentReceivedHandler.notificationDate.isMoreRecentThan(relevantHandler!.notificationDate) {
-                        relevantHandler = recentReceivedHandler
+                    if recentReceivedHandler.notificationDate.isMoreRecentThan(mostRecentHandler!.notificationDate) {
+                        mostRecentHandler = recentReceivedHandler
                     }
                 }
             }
@@ -142,20 +136,25 @@ class NotificationsManager: NSObject {
             //Opened notification
             if let currentlyLaunchedAppNotification,
                let openedHandler = generateNotificationResponseHandler(currentlyLaunchedAppNotification) {
-                if relevantHandler == nil {
-                    relevantHandler = openedHandler
+                if mostRecentHandler == nil {
+                    mostRecentHandler = openedHandler
                 } else {
-                    if openedHandler.notificationDate.isMoreRecentThan(relevantHandler!.notificationDate) {
-                        relevantHandler = openedHandler
+                    if openedHandler.notificationDate.isMoreRecentThan(mostRecentHandler!.notificationDate) {
+                        mostRecentHandler = openedHandler
                     }
                 }
             }
             
-            guard let relevantHandler else {
-                return
+            var activeHandler: NotificationResponseHandler?
+            let threeMinsAgo = Calendar.current.date(byAdding: .minute, value: max(Constants.minutesToConnect, Constants.minutesToRespond) * -1, to: Date())!
+            if let mostRecentHandler,
+                  mostRecentHandler.notificationDate.isMoreRecentThan(threeMinsAgo) {
+                activeHandler = mostRecentHandler
             }
+            guard let activeHandler else { return }
+            
             DispatchQueue.main.async {
-                let loadingVC = LoadingVC.create(notificationResponseHandler: relevantHandler)
+                let loadingVC = LoadingVC.create(notificationResponseHandler: activeHandler)
                 transitionToViewController(loadingVC, duration: 0)
                 UIApplication.shared.applicationIconBadgeNumber = 0
             }
@@ -226,7 +225,7 @@ class NotificationsManager: NSObject {
 //        }
         
         Task {
-            UserDefaults.standard.setValue(userInfo, forKey: MostRecentNotifiationStorageKey)
+            UserDefaults.standard.set(userInfo, forKey: MostRecentNotifiationStorageKey)
         }
     }
         
