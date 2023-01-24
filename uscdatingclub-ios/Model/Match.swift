@@ -28,7 +28,8 @@ struct MatchPartner: Codable {
     
     //Compatibility
     let compatibility: Int
-    let similarities: [NumericalSimilarity]
+    let numericalSimilarities: [NumericalSimilarity]
+    let textSimilarities: [TextSimilarity]
 }
 
 struct MatchAcceptance: Codable {
@@ -45,8 +46,6 @@ struct MatchAcceptance: Codable {
     
     //Compatibility
     let compatibilty: Int
-    let numericalSimilarities: [NumericalSimilarity]
-    let textSimilarities: [TextSimilarity]
 }
 
 //MARK: - Frontend
