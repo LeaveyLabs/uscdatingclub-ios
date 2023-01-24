@@ -34,47 +34,19 @@ class ConnectSpectrumCell: UITableViewCell {
         youLabel.font = AppFont.medium.size(14)
         avgLabel.font = AppFont.medium.size(14)
         matchLabel.font = AppFont.medium.size(14)
-        
+                
         backgroundLineView.backgroundColor = .customWhite.withAlphaComponent(0.5)
         avgLabel.textColor = .customWhite.withAlphaComponent(0.7)
-        
-        var youPercent = youPercent
-        var matchPercent = matchPercent
 
         if shouldDisplayLabels {
-            
             matchLabel.text = matchName
             labelsContainerView.isHidden = false
             youLabelYConstraint.constant = youPercent > matchPercent ? 0 : -45
             matchLabelYConstraint.constant = youPercent > matchPercent ? -45 : 0
-            
-            //ADJUSTMENTS
-            //Don't let matchLabel hang off right end
-            let matchNameLength = CGFloat(matchName.count)
-            matchPercent = min(100 - matchNameLength / 2, matchPercent)
-            
-            //Don't let matchLabel and youLabel crossover
-            let distanceBetween = abs(matchPercent - youPercent)
-            let correction = matchNameLength - distanceBetween
-            if correction > 0 {
-                if matchPercent + correction <= 100 {
-                    matchPercent += correction
-                } else if youPercent + correction <= 100 {
-                    youPercent += correction
-                } else {
-                    if matchPercent > youPercent {
-                        youPercent -= correction
-                    } else {
-                        matchPercent -= correction
-                    }
-                }
-            }
-            
         } else {
             labelsContainerView.isHidden = true
         }
         
-        print("AVGPERCENT", avgPercent)
         avgCircleViewLeadingConstraint.constant = (avgPercent/100) * (contentView.bounds.width - 50)
         youCircleViewLeadingConstraint.constant = (youPercent/100) * (contentView.bounds.width - 50)
         matchCircleViewLeadingConstraint.constant = (matchPercent/100) * (contentView.bounds.width - 50)

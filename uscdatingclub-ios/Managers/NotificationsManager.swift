@@ -206,11 +206,9 @@ class NotificationsManager: NSObject {
     }
     
     //MARK: - Local Storage
-    
-    let MostRecentNotifiationStorageKey: String = "mostRecentNotification"
-    
+        
     func mostRecentSavedNotificationUserInfo() -> [String: AnyObject]? {
-        return UserDefaults.standard.object(forKey: MostRecentNotifiationStorageKey) as? [String: AnyObject] ?? nil
+        return UserDefaults.standard.object(forKey: Constants.UserDefaultsKeys.MostRecentNotifiationStorageKey) as? [String: AnyObject] ?? nil
     }
     
     func saveNotificationUserInfo(userInfo: [String: AnyObject]) {
@@ -225,7 +223,7 @@ class NotificationsManager: NSObject {
 //        }
         
         Task {
-            UserDefaults.standard.set(userInfo, forKey: MostRecentNotifiationStorageKey)
+            UserDefaults.standard.set(userInfo, forKey: Constants.UserDefaultsKeys.MostRecentNotifiationStorageKey)
         }
     }
         

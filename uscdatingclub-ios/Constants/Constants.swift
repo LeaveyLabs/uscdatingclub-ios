@@ -27,6 +27,8 @@ enum Constants {
     
     struct UserDefaultsKeys {
         static let isOnWaitList: String = "isOnWaitList"
+        static let MostRecentNotifiationStorageKey: String = "mostRecentNotification"
+        static let MostRecentMeetUpButtonPressDate: String = "mostRecentMeetUpBuyttonPressDate"
     }
     
     static let defaultMailLink = URL(string: "mailto://")!

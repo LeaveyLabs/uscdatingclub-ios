@@ -14,7 +14,12 @@ struct Match: Codable {
     let user2Id: Int
 }
 
-struct MatchPartner: Codable {
+protocol MatchNotificationProtocol {
+    var firstName: String { get }
+    var numericalSimilarities: [NumericalSimilarity] { get }
+}
+
+struct MatchPartner: MatchNotificationProtocol, Codable {
     //Vitals
     let id: Int
     let firstName: String
@@ -32,7 +37,7 @@ struct MatchPartner: Codable {
     let textSimilarities: [TextSimilarity]
 }
 
-struct MatchAcceptance: Codable {
+struct MatchAcceptance: MatchNotificationProtocol, Codable {
     //Vitals
     let id: Int
     let firstName: String
@@ -46,6 +51,8 @@ struct MatchAcceptance: Codable {
     
     //Compatibility
     let compatibilty: Int
+    let numericalSimilarities: [NumericalSimilarity]
+    let textSimilarities: [TextSimilarity]
 }
 
 //MARK: - Frontend
@@ -68,7 +75,10 @@ struct MatchInfo: Codable {
     let compatibility: Int
     let date: Date
     let distance: Double //meters
-    let percents: [NumericalSimilarity]
+    
+    var numericalSimilarities: [NumericalSimilarity] //var because of xcode compiler quirk which won't let us use a function call
+    let textSimilarities: [TextSimilarity]
+    
     let latitude: Double
     let longitude: Double
     
@@ -81,11 +91,11 @@ struct MatchInfo: Codable {
     }
     
     var timeLeftToRespondString: String {
-        return "\(Constants.minutesToRespond - elapsedTime.minutes)m \(59 - elapsedTime.seconds)s"
+        return "\(Constants.minutesToRespond - 1 - elapsedTime.minutes)m \(59 - elapsedTime.seconds)s"
     }
     
     var timeLeftToConnectString: String {
-        return "\(Constants.minutesToConnect - elapsedTime.minutes)m \(59 - elapsedTime.seconds)s"
+        return "\(Constants.minutesToConnect - 1 - elapsedTime.minutes)m \(59 - elapsedTime.seconds)s"
     }
     
     init(matchPartner: MatchPartner) {
@@ -94,13 +104,12 @@ struct MatchInfo: Codable {
         compatibility = matchPartner.compatibility
         date = Date(timeIntervalSince1970: matchPartner.time)
         distance = matchPartner.distance
-        percents = [
-            NumericalSimilarity(trait: "skiing", avgPercent: CGFloat.random(in: 20..<40), youPercent: 60, partnerPercent: 90),
-            NumericalSimilarity(trait: "spontaneity", avgPercent: CGFloat.random(in: 20..<40), youPercent: 80, partnerPercent: 60),
-            NumericalSimilarity(trait: "creativity", avgPercent: CGFloat.random(in: 20..<40), youPercent: 85, partnerPercent: 100),
-        ]
+        textSimilarities = matchPartner.textSimilarities
         latitude = matchPartner.latitude
         longitude = matchPartner.longitude
+        
+        numericalSimilarities = matchPartner.numericalSimilarities
+        numericalSimilarities = adjustedNumericalSimilarities(matchPartner.firstName.count, existingNumericalSimilarities: numericalSimilarities)
     }
     
     init(matchAcceptance: MatchAcceptance) {
@@ -108,13 +117,45 @@ struct MatchInfo: Codable {
         userName = matchAcceptance.firstName
         compatibility = matchAcceptance.compatibilty
         date = Date(timeIntervalSince1970: matchAcceptance.time)
-        percents = [
-            NumericalSimilarity(trait: "skiing", avgPercent: CGFloat.random(in: 20..<40), youPercent: 60, partnerPercent: 90),
-            NumericalSimilarity(trait: "spontaneity", avgPercent: CGFloat.random(in: 20..<40), youPercent: 80, partnerPercent: 60),
-            NumericalSimilarity(trait: "creativity", avgPercent: CGFloat.random(in: 20..<40), youPercent: 85, partnerPercent: 100),
-        ]
+        textSimilarities = matchAcceptance.textSimilarities
         latitude = matchAcceptance.latitude
         longitude = matchAcceptance.longitude
         distance = matchAcceptance.distance
+        
+        numericalSimilarities = matchAcceptance.numericalSimilarities
+        numericalSimilarities = adjustedNumericalSimilarities(matchAcceptance.firstName.count, existingNumericalSimilarities: numericalSimilarities)
+    }
+    
+    func adjustedNumericalSimilarities(_ partnerNameLength: Int, existingNumericalSimilarities: [NumericalSimilarity]) -> [NumericalSimilarity] {
+        var adjustedNumericalSimilarities: [NumericalSimilarity] = []
+        for numericalSimilarity in existingNumericalSimilarities {
+            var adjustedPartnerPercent = numericalSimilarity.partnerPercent
+            var adjustedYouPercent = numericalSimilarity.youPercent
+
+            //Don't let matchLabel hang off right end
+            let matchNameLength = CGFloat(partnerNameLength)
+            adjustedPartnerPercent = min(100 - matchNameLength / 2, adjustedPartnerPercent)
+
+            //Don't let matchLabel and youLabel crossover
+            let distanceBetween = abs(adjustedPartnerPercent - adjustedYouPercent)
+            let correction = matchNameLength - distanceBetween
+            if correction > 0 {
+                if adjustedPartnerPercent + correction <= 100 {
+                    adjustedPartnerPercent += correction
+                } else if adjustedYouPercent + correction <= 100 {
+                    adjustedYouPercent += correction
+                } else {
+                    if adjustedPartnerPercent > adjustedYouPercent {
+                        adjustedYouPercent -= correction
+                    } else {
+                        adjustedPartnerPercent -= correction
+                    }
+                }
+            }
+
+            adjustedNumericalSimilarities.append(NumericalSimilarity(trait: numericalSimilarity.trait, avgPercent: numericalSimilarity.avgPercent, youPercent: adjustedYouPercent, partnerPercent: adjustedPartnerPercent))
+        }
+        
+        return adjustedNumericalSimilarities
     }
 }

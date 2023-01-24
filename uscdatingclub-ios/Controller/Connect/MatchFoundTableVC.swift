@@ -35,12 +35,13 @@ class MatchFoundTableVC: UIViewController {
         super.viewDidLoad()
         connectManager.startRespondSession() //must come first
         setupTableView() //must come after setting up connectManager
-        
+        handlePreviousButtonPress()
         NotificationCenter.default.addObserver(forName: .matchAccepted, object: nil, queue: nil) { notification in
             DispatchQueue.main.async {
                 self.goToCoordinateVC()
             }
         }
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,17 +74,25 @@ class MatchFoundTableVC: UIViewController {
         tableView.register(UINib(nibName: Constants.SBID.Cell.SimpleButtonCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SimpleButtonCell)
     }
     
+    func handlePreviousButtonPress() {
+        if let recentPressDate = UserDefaults.standard.object(forKey: Constants.UserDefaultsKeys.MostRecentMeetUpButtonPressDate) as? Date,
+           recentPressDate.isMoreRecentThan(Calendar.current.date(byAdding: .minute, value: -1 * Constants.minutesToRespond, to: Date())!) {
+            isWaiting = true
+        }
+    }
+    
     //MARK: - Interaction
     
     @objc func meetupButtonDidPressed() {
         Task {
             try await MatchAPI.acceptMatch(userId: UserService.singleton.getId(),
                                            partnerId: matchInfo.userId)
+            UserDefaults.standard.set(Date(), forKey: Constants.UserDefaultsKeys.MostRecentMeetUpButtonPressDate)
             DispatchQueue.main.async {
                 self.isWaiting = true
                 self.tableView.reloadData()
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) { //[weak self] in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) { //[weak self] in
 //                    if let self, self.isVisible {
                         DispatchQueue.main.async {
                             AppStoreReviewManager.requestReviewIfAppropriate()
@@ -156,7 +165,7 @@ extension MatchFoundTableVC: UITableViewDataSource {
         case 1:
             return 1
         case 2:
-            return 3
+            return matchInfo.numericalSimilarities.count
         case 3:
             return 1
         default:
@@ -181,13 +190,13 @@ extension MatchFoundTableVC: UITableViewDataSource {
             return cell
         case 2:
             let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.ConnectSpectrumCell, for: indexPath) as! ConnectSpectrumCell
-            let percent = matchInfo.percents[indexPath.row]
-            cell.configure(title: percent.trait,
+            let numericalSimilarity = matchInfo.numericalSimilarities[indexPath.row]
+            cell.configure(title: numericalSimilarity.trait,
                            matchName: matchInfo.userName,
-                           avgPercent: percent.avgPercent,
-                           youPercent: percent.youPercent,
-                           matchPercent: percent.partnerPercent,
-                           shouldDisplayLabels: indexPath.row == 2)
+                           avgPercent: numericalSimilarity.avgPercent,
+                           youPercent: numericalSimilarity.youPercent,
+                           matchPercent: numericalSimilarity.partnerPercent,
+                           shouldDisplayLabels: indexPath.row == matchInfo.numericalSimilarities.count-1)
             return cell
         case 3:
             let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SimpleButtonCell, for: indexPath) as! SimpleButtonCell
@@ -195,6 +204,7 @@ extension MatchFoundTableVC: UITableViewDataSource {
             case 0:
                 if isWaiting {
                     cell.configure(title: "waiting for \(matchInfo.userName)", systemImage: "", buttonHeight: 60, onButtonPress: {} )
+                    cell.simpleButton.alpha = 0.5
                 } else {
                     cell.configure(title: "meet up", systemImage: "figure.wave", buttonHeight: 60) {
                         self.meetupButtonDidPressed()

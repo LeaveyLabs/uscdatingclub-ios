@@ -92,9 +92,9 @@ class ForgeMatchVC: UIViewController {
         else { return }
         Task {
             do {
-                try await MatchAPI.forceCreateMatch(user1Id: selectedIds.first!, user2Id: selectedIds.last!)
+                try await MatchAPI.forceCreateMatch(user1Id: firstId, user2Id: secondId)
                 DispatchQueue.main.async {
-                    self.dismiss(animated: true)
+                    AlertManager.showInfoCentered("success", "", on: self)
                 }
             } catch {
                 DispatchQueue.main.async {
