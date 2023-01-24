@@ -88,7 +88,7 @@ class ForgeMatchVC: UIViewController {
     @objc func sendButtonPressed() {
         Task {
             do {
-                try await MatchAPI.postMatch(user1Id: selectedIds.first!, user2Id: selectedIds.last!)
+                try await MatchAPI.forceCreateMatch(user1Id: selectedIds.first!, user2Id: selectedIds.last!)
                 DispatchQueue.main.async {
                     self.dismiss(animated: true)
                 }

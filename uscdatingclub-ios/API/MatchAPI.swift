@@ -34,6 +34,8 @@ class MatchAPI {
         case partnerId = "partner_id"
         case user1 = "user1"
         case user2 = "user2"
+        case user1Id = "user1_id"
+        case user2Id = "user2_id"
     }
     
     static let MATCH_RECOVERY_MESSAGE = "try again later"
@@ -85,8 +87,8 @@ class MatchAPI {
     static func forceCreateMatch(user1Id:Int, user2Id:Int) async throws {
         let url = "\(Env.BASE_URL)\(Endpoints.forceCreateMatch.rawValue)"
         let params = [
-            ParameterKeys.user1.rawValue: String(user1Id),
-            ParameterKeys.user2.rawValue: String(user2Id)
+            ParameterKeys.user1Id.rawValue: String(user1Id),
+            ParameterKeys.user2Id.rawValue: String(user2Id)
         ]
         let json = try JSONEncoder().encode(params)
         let (data, response) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
