@@ -14,6 +14,7 @@ class MatchFoundTableVC: UIViewController {
     //UI
     @IBOutlet var tableView: UITableView!
     
+    var isVisible: Bool = false
     var timeLeftLabel: UILabel!
     
     //Info
@@ -40,6 +41,16 @@ class MatchFoundTableVC: UIViewController {
                 self.goToCoordinateVC()
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        isVisible = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        isVisible = false
     }
     
     //MARK: - Setup
@@ -71,6 +82,15 @@ class MatchFoundTableVC: UIViewController {
             DispatchQueue.main.async {
                 self.isWaiting = true
                 self.tableView.reloadData()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+//                    if let self, self.isVisible {
+                        DispatchQueue.main.async {
+                            AppStoreReviewManager.requestReviewIfAppropriate()
+                        }
+//                    }
+                }
+                
             }
         }
     }

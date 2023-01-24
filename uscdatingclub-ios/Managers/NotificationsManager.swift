@@ -21,7 +21,7 @@ extension Notification.Name {
 }
 
 //Remote Notifications
-enum NotificationTypes: String, CaseIterable {
+enum NotificationType: String, CaseIterable {
     case match = "match"
     case accept = "accept"
 }
@@ -34,7 +34,8 @@ extension Notification {
 }
 
 struct NotificationResponseHandler {
-    var notificationType: NotificationTypes
+    var notificationType: NotificationType
+    var notificationDate: Date!
     var newMatchPartner: MatchPartner?
     var newMatchAcceptance: MatchAcceptance?
 }
@@ -95,52 +96,72 @@ class NotificationsManager: NSObject {
     //we just need to make sure to also check the currently launched notification, and make sure we don't handle anything newer than that
 
     func checkPreviouslyReceivedMatchNotification() {
-//        Task {
-//            guard await isNotificationsEnabled() else { return }
-//            
-//            //The below function returns all the notifications currently visible in the NotificationCenter on their device
-//            //As soon as the user clicks on a notification to open the app, that notification is gone from the notification center (and thus won't be returned from the below function). That action should be handled in AppDelegate
-//            let notifications = await center.deliveredNotifications().sorted(by: { $0.date.isMoreRecentThan($1.date)} )
-//                        
-//            let threeMinsAgo = Calendar.current.date(byAdding: .minute, value: -3, to: Date())!
-//            
-//            if let userInfo = mostRecentSavedNotificationUserInfo(),
-//               let handler = generateNotificationResponseHandler(userInfo: userInfo) {
-//                handler.notificationType
-//            }
-//            
-//            guard let mostRecentReceivedNotif = notifications.first ?? mostRecentSavedNotification(), mostRecentReceivedNotif.date.isMoreRecentThan(threeMinsAgo) else {
-//                return
-//            }
-//            print("opened app with delivered notifications:", notifications)
-//
-//            if let currentlyLaunchedAppNotification {
-//                guard mostRecentReceivedNotif.date.isMoreRecentThan(currentlyLaunchedAppNotification.date) else {
-//                    return
-//                }
-//            }
-//                        
-//            let notificationResponseHandler = generateNotificationResponseHandler(mostRecentReceivedNotif)
-//            
-//            DispatchQueue.main.async {
-//                let loadingVC = LoadingVC.create(notificationResponseHandler: notificationResponseHandler)
-//                transitionToViewController(loadingVC, duration: 0)
-//                UIApplication.shared.applicationIconBadgeNumber = 0
-//            }
-//            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-//        }
+        Task {
+            guard await isNotificationsEnabled() else { return }
+            
+            //The below function returns all the notifications currently visible in the NotificationCenter on their device
+            //As soon as the user clicks on a notification to open the app, that notification is gone from the notification center (and thus won't be returned from the below function). That action should be handled in AppDelegate
+            let deliveredNotifications = await center.deliveredNotifications().sorted(by: { $0.date.isMoreRecentThan($1.date)} )
+            if deliveredNotifications.count > 0 {
+                print("opened app with delivered notifications:", deliveredNotifications)
+            }
+
+            //TODO: this function might do nothing...
+            //you need either a received or saved or opened to do anything
+            
+            //THREE CHECKS: received, saved, opened notifications
+            //1 saved notification (saved into the app through a previous phone unlock)
+            //2 received notification (sitting in notification center)
+            //3 opened notification (notification you clicked on)
+            //you can't guarantee anyo one of these is newest. we want to put the app in the state of the newest notification
+            
+            var relevantHandler: NotificationResponseHandler?
+            let threeMinsAgo = Calendar.current.date(byAdding: .minute, value: max(Constants.minutesToConnect, Constants.minutesToRespond), to: Date())!
+            
+            //Saved notification
+            if let mostRecentSavedUserInfo = mostRecentSavedNotificationUserInfo(),
+               let savedHandler = generateNotificationResponseHandler(userInfo: mostRecentSavedUserInfo),
+               savedHandler.notificationDate.isMoreRecentThan(threeMinsAgo)
+            {
+                relevantHandler = savedHandler
+            }
+            
+            //Received notification
+            if let recentReceivedNotif = deliveredNotifications.first,
+               let recentReceivedHandler = generateNotificationResponseHandler(recentReceivedNotif),
+               recentReceivedHandler.notificationDate.isMoreRecentThan(threeMinsAgo) {
+                if relevantHandler == nil {
+                    relevantHandler = recentReceivedHandler
+                } else {
+                    if recentReceivedHandler.notificationDate.isMoreRecentThan(relevantHandler!.notificationDate) {
+                        relevantHandler = recentReceivedHandler
+                    }
+                }
+            }
+                        
+            //Opened notification
+            if let currentlyLaunchedAppNotification,
+               let openedHandler = generateNotificationResponseHandler(currentlyLaunchedAppNotification) {
+                if relevantHandler == nil {
+                    relevantHandler = openedHandler
+                } else {
+                    if openedHandler.notificationDate.isMoreRecentThan(relevantHandler!.notificationDate) {
+                        relevantHandler = openedHandler
+                    }
+                }
+            }
+            
+            guard let relevantHandler else {
+                return
+            }
+            DispatchQueue.main.async {
+                let loadingVC = LoadingVC.create(notificationResponseHandler: relevantHandler)
+                transitionToViewController(loadingVC, duration: 0)
+                UIApplication.shared.applicationIconBadgeNumber = 0
+            }
+            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        }
     }
-    
-    //TODO: this won't work because we need to know if it was a match acceptance or match 
-//    func generateMatchStructFrom(notificationData: Data) -> MatchInfo {
-//        let decoder = JSONDecoder()
-//        decoder.keyDecodingStrategy = .convertFromSnakeCase
-//        if let matchPartner = try? decoder.decode(MatchPartner.self, from: notificationData) {
-//            return MatchInfo(matchPartner: matchPartner)
-//        } else {
-//            return try! decoder.decode(MatchAcceptance.self, from: notificationData)
-//        }
-//    }
     
     func generateNotificationResponseHandler(_ notification: UNNotification) -> NotificationResponseHandler? {
         guard let userInfo = notification.request.content.userInfo as? [String : AnyObject] else {
@@ -150,9 +171,10 @@ class NotificationsManager: NSObject {
     }
     
     func generateNotificationResponseHandler(userInfo: [String:AnyObject]) -> NotificationResponseHandler? {
+        
         guard
             let notificationTypeString = userInfo[Notification.extra.type.rawValue] as? String,
-            let notificationType = NotificationTypes.init(rawValue: notificationTypeString)
+            let notificationType = NotificationType.init(rawValue: notificationTypeString)
         else { return nil }
         
         saveNotificationUserInfo(userInfo: userInfo)
@@ -167,8 +189,10 @@ class NotificationsManager: NSObject {
             switch notificationType {
                 case .match:
                     handler.newMatchPartner = try decoder.decode(MatchPartner.self, from: data)
+                    handler.notificationDate = Date(timeIntervalSince1970: handler.newMatchPartner!.time)
                 case .accept:
                     handler.newMatchAcceptance = try decoder.decode(MatchAcceptance.self, from: data)
+                    handler.notificationDate = Date(timeIntervalSince1970: handler.newMatchAcceptance!.time)
             }
             return handler
         } catch {

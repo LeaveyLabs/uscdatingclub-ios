@@ -95,7 +95,7 @@ class AboutVC: UIViewController, PageVCChild {
         let recipient = who == 0 ? adamsNumber : kevinsNumber
         
         if (messageComposer.canSendText()) {
-            let messageComposeVC = messageComposer.configuredMessageComposeViewController(recipients: [recipient], body: "")
+            let messageComposeVC = messageComposer.configuredMessageComposeViewController(recipients: [recipient], body: "Hey \(who == 0 ? "Adam" : "Kevin"), ")
             present(messageComposeVC, animated: true)
         } else {
             AlertManager.showAlert(title: "Cannot Send Text Message", subtitle: "Your device is not able to send text messages.", primaryActionTitle: "OK", primaryActionHandler: {}, on: self)
