@@ -17,6 +17,13 @@ struct LocationIntermediate: Codable {
     let longitude: Double
 }
 
+struct MessageIntermediate: Codable {
+    var type: String = "message"
+    let sender: Int
+    let receiver: Int
+    let body: String
+}
+
 struct ConversationStarter: Codable {
     var type: String = "init"
     let sender: Int
@@ -50,12 +57,12 @@ class LocationSocket: WebSocketDelegate {
     var socket: WebSocket!
     var connected: Bool = false;
     var connectionInProgress: Bool = true;
+    var messages: [Message]
     
     init(sender: Int, receiver: Int) throws {
         self.sender = sender
         self.receiver = receiver
-//        self.unsent_messages = []
-//        self.server_messages = previousMessages.sorted()
+        self.messages = []
         
         let conversationStarter = ConversationStarter(sender: self.sender,
                                                       receiver: self.receiver)
@@ -86,6 +93,14 @@ class LocationSocket: WebSocketDelegate {
         if (connected) {
             let locationIntermediate = LocationIntermediate(sender: self.sender, receiver: self.receiver, latitude: location.latitude, longitude: location.longitude)
             let json = try JSONEncoder().encode(locationIntermediate)
+            self.socket.write(data:json)
+        }
+    }
+    
+    func sendMessage(message:Message) throws {
+        if (connected) {
+            let messageIntermediate = MessageIntermediate(sender: message.senderId, receiver: message.receiverId, body: message.body)
+            let json = try JSONEncoder().encode(messageIntermediate)
             self.socket.write(data:json)
         }
     }
@@ -174,7 +189,12 @@ class LocationSocket: WebSocketDelegate {
                         self.partnerLocation = CLLocationCoordinate2D(latitude: newLocationIntermediate.latitude, longitude: newLocationIntermediate.longitude)
                     }
                     
-                } catch {}
+                } catch {
+                    let messageIntermediate = try JSONDecoder().decode(MessageIntermediate.self, from: string.data(using: .utf8)!)
+                    if messageIntermediate.sender != self.sender {
+                        self.messages.append(Message(senderId: messageIntermediate.sender, receiverId: self.sender,  body: messageIntermediate.body))
+                    }
+                }
             }
         case .binary(let data):
             print("Received data: \(data.count)")
@@ -184,7 +204,12 @@ class LocationSocket: WebSocketDelegate {
                     if newLocationIntermediate.sender != self.sender {
                         self.partnerLocation = CLLocationCoordinate2D(latitude: newLocationIntermediate.latitude, longitude: newLocationIntermediate.longitude)
                     }
-                } catch {}
+                } catch {
+                    let messageIntermediate = try JSONDecoder().decode(MessageIntermediate.self, from: data)
+                    if messageIntermediate.sender != self.sender {
+                        self.messages.append(Message(senderId: messageIntermediate.sender, receiverId: self.sender, body: messageIntermediate.body))
+                    }
+                }
             }
         case .ping(_):
             break

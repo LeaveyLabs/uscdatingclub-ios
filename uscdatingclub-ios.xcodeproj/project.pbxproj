@@ -18,6 +18,7 @@
 		434A053D2963A77200C15945 /* LocationSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A053C2963A77200C15945 /* LocationSocket.swift */; };
 		434A05402963C92B00C15945 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 434A053F2963C92B00C15945 /* Starscream */; };
 		434A057F2963D3AB00C15945 /* PhoneNumberKit-Dynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 434A057C2963D3AB00C15945 /* PhoneNumberKit-Dynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4373C6512980FDB0005FB2B9 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373C6502980FDB0005FB2B9 /* Message.swift */; };
 		47002FB72973AD51007EDFBC /* WaitListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47002FB62973AD51007EDFBC /* WaitListVC.swift */; };
 		470221E7295CCE3E00119FA8 /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4107D295CC0BE007C27F0 /* UIColor+Custom.swift */; };
 		470221E9295CCFA200119FA8 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470221E8295CCFA200119FA8 /* Version.swift */; };
@@ -261,6 +262,7 @@
 		434A052F295E1EDB00C15945 /* EmailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAPI.swift; sourceTree = "<group>"; };
 		434A0531295E1F1300C15945 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		434A053C2963A77200C15945 /* LocationSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSocket.swift; sourceTree = "<group>"; };
+		4373C6502980FDB0005FB2B9 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		47002FB62973AD51007EDFBC /* WaitListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitListVC.swift; sourceTree = "<group>"; };
 		470221E8295CCFA200119FA8 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		4711A1F22975BF8F00B07577 /* UIViewController+OpenMailApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+OpenMailApp.swift"; sourceTree = "<group>"; };
@@ -736,6 +738,7 @@
 				47A1C8EC296E414600F8B4D6 /* Match.swift */,
 				47A24A312970E5FE0077AB11 /* UncertainValue.swift */,
 				47ABA6EB297644A400F0FDFE /* EmailWhitelist.swift */,
+				4373C6502980FDB0005FB2B9 /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1381,6 +1384,7 @@
 				47A24A25296F71250077AB11 /* SimpleTitleCell.swift in Sources */,
 				4731F52C295CE0B40013F626 /* AboutVC.swift in Sources */,
 				47DE321A295CC52F0063C55A /* UserService.swift in Sources */,
+				4373C6512980FDB0005FB2B9 /* Message.swift in Sources */,
 				4731F511295CD4870013F626 /* UITextField+Padding.swift in Sources */,
 				434A052C295E1E9700C15945 /* DeviceAPI.swift in Sources */,
 				471549172970FCB900756BE1 /* PermissionsCell.swift in Sources */,
