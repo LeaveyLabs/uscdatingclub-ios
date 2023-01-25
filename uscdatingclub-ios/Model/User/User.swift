@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import MessageKit
 
 //MARK: - Protocols
 
@@ -30,12 +31,16 @@ protocol CompleteUserType: ReadOnlyUserType {
 
 //MARK: - Structs
 
-struct ReadOnlyUser: Codable, ReadOnlyUserType, Hashable {
+struct ReadOnlyUser: ReadOnlyUserType, SenderType, Codable, Hashable {
     
     let id: Int
     let firstName: String
     let lastName: String
 //    let picture: String
+    
+    //MessageKit's SenderType
+    var senderId: String { return String(id) }
+    var displayName: String { return firstName }
     
     //Equatable
     static func == (lhs: ReadOnlyUser, rhs: ReadOnlyUser) -> Bool { return lhs.id == rhs.id }
@@ -44,7 +49,7 @@ struct ReadOnlyUser: Codable, ReadOnlyUserType, Hashable {
     func hash(into hasher: inout Hasher) { hasher.combine(id) }
 }
 
-struct CompleteUser: Codable, CompleteUserType {
+struct CompleteUser: Codable, CompleteUserType, SenderType {
     
     let id: Int
     let firstName: String
@@ -58,6 +63,10 @@ struct CompleteUser: Codable, CompleteUserType {
     let surveyResponses: [SurveyResponse]
     let token: String
     let isSuperuser: Bool
+    
+    //MessageKit's SenderType
+    var senderId: String { return String(id) }
+    var displayName: String { return firstName }
     
     //Equatable
     static func == (lhs: CompleteUser, rhs: CompleteUser) -> Bool { return lhs.id == rhs.id }

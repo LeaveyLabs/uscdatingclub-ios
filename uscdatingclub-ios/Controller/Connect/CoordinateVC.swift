@@ -48,7 +48,7 @@ class CoordinateVC: UIViewController {
     }
     
     func setupLabels() {
-        nameLabel.text = matchInfo.userName
+        nameLabel.text = matchInfo.partnerName
         timeLabel.text = matchInfo.timeLeftToConnectString
         timeSublabel.text = "left to connect"
         
@@ -65,7 +65,7 @@ class CoordinateVC: UIViewController {
     //MARK: - Interaction
     
     func closeButtonDidPressed() {
-        AlertManager.showAlert(title: "stop sharing your location with \(matchInfo.userName)?",
+        AlertManager.showAlert(title: "stop sharing your location with \(matchInfo.partnerName)?",
                                subtitle: "you won't be able to restart it afterwards",
                                primaryActionTitle: "stop sharing location",
                                primaryActionHandler: {
@@ -88,7 +88,7 @@ class CoordinateVC: UIViewController {
     }
     
     func presentReportAlert() {
-        AlertManager.showAlert(title: "would you like to report \(matchInfo.userName)?",
+        AlertManager.showAlert(title: "would you like to report \(matchInfo.partnerName)?",
                                subtitle: "your location will stop sharing immediately",
                                primaryActionTitle: "report",
                                primaryActionHandler: {
@@ -142,7 +142,7 @@ extension CoordinateVC: ConnectManagerDelegate {
     }
     
     func timeRanOut() {
-        AlertManager.showAlert(title: "your time to connect with " + matchInfo.userName + " has run out",
+        AlertManager.showAlert(title: "your time to connect with " + matchInfo.partnerName + " has run out",
                                subtitle: "",
                                primaryActionTitle: "return home",
                                primaryActionHandler: {

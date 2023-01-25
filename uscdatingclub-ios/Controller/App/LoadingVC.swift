@@ -116,15 +116,15 @@ class LoadingVC: UIViewController {
             let matchInfo = MatchInfo(matchAcceptance: acceptance)
             let coordinateVC = CoordinateVC.create(matchInfo: matchInfo)
             transitionToViewController(coordinateVC, duration: 0) { _ in }
+        default:
+            break
         }
     }
     
     func loadNotificationData() async throws {
         guard let handler = notificationResponseHandler else { return }
         switch handler.notificationType {
-            case .match:
-                break
-            case .accept:
+            default:
                 break
         }
     }

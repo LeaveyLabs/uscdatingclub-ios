@@ -65,8 +65,8 @@ struct TextSimilarity: Codable {
 }
 
 struct MatchInfo: Codable {
-    let userId: Int
-    let userName: String
+    let partnerId: Int
+    let partnerName: String
     let compatibility: Int
     let date: Date
     let distance: Double //meters
@@ -106,8 +106,8 @@ struct MatchInfo: Codable {
     }
     
     init(matchPartner: MatchPartner) {
-        userId = matchPartner.id
-        userName = matchPartner.firstName
+        partnerId = matchPartner.id
+        partnerName = matchPartner.firstName
         compatibility = matchPartner.compatibility
         date = Date(timeIntervalSince1970: matchPartner.time)
         distance = matchPartner.distance
@@ -120,8 +120,8 @@ struct MatchInfo: Codable {
     }
     
     init(matchAcceptance: MatchAcceptance) {
-        userId = matchAcceptance.id
-        userName = matchAcceptance.firstName
+        partnerId = matchAcceptance.id
+        partnerName = matchAcceptance.firstName
         compatibility = matchAcceptance.compatibility
         date = Date(timeIntervalSince1970: matchAcceptance.time)
         textSimilarities = matchAcceptance.textSimilarities

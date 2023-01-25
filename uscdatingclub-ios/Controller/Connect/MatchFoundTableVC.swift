@@ -91,7 +91,7 @@ class MatchFoundTableVC: UIViewController {
         Task {
             do {
                 try await MatchAPI.acceptMatch(userId: UserService.singleton.getId(),
-                                               partnerId: matchInfo.userId)
+                                               partnerId: matchInfo.partnerId)
                 UserDefaults.standard.set(Date(), forKey: Constants.UserDefaultsKeys.MostRecentMeetUpButtonPressDate)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) { //[weak self] in
                     AppStoreReviewManager.requestReviewIfAppropriate()
@@ -112,7 +112,7 @@ class MatchFoundTableVC: UIViewController {
     
     @MainActor
     func goToCoordinateVC() {
-        transitionToViewController(CoordinateVC.create(matchInfo: matchInfo), duration: 1)
+        transitionToViewController(CoordinateChatVC.create(matchInfo: matchInfo), duration: 1)
     }
 
 //    @objc func passButtonDidPressed() {
@@ -193,12 +193,12 @@ extension MatchFoundTableVC: UITableViewDataSource {
                            distanceAway: prettyDistance(meters: Double(matchInfo.distance),
                                                         shortened: true),
                            isWaiting: isWaiting,
-                           matchName: matchInfo.userName)
+                           matchName: matchInfo.partnerName)
             self.timeLeftLabel = cell.timeLeftLabel
             return cell
         case 1:
             let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.ConnectTitleCell, for: indexPath) as! ConnectTitleCell
-            cell.configure(name: matchInfo.userName, compatibility: matchInfo.compatibility)
+            cell.configure(name: matchInfo.partnerName, compatibility: matchInfo.compatibility)
             return cell
         case 2:
             if hasTextSimilarities {
@@ -226,7 +226,7 @@ extension MatchFoundTableVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.ConnectSpectrumCell, for: indexPath) as! ConnectSpectrumCell
         let numericalSimilarity = matchInfo.numericalSimilarities[indexPath.row]
         cell.configure(title: numericalSimilarity.trait,
-                       matchName: matchInfo.userName,
+                       matchName: matchInfo.partnerName,
                        avgPercent: numericalSimilarity.avgPercent,
                        youPercent: numericalSimilarity.youPercent,
                        matchPercent: numericalSimilarity.partnerPercent,
@@ -240,7 +240,7 @@ extension MatchFoundTableVC: UITableViewDataSource {
         switch indexPath.row {
         case 0:
             if isWaiting {
-                cell.configure(title: "waiting for \(matchInfo.userName)", systemImage: "", buttonHeight: 60, onButtonPress: {} )
+                cell.configure(title: "waiting for \(matchInfo.partnerName)", systemImage: "", buttonHeight: 60, onButtonPress: {} )
                 cell.simpleButton.alpha = 0.5
             } else {
                 cell.configure(title: "meet up", systemImage: "figure.wave", buttonHeight: 60) {
@@ -287,7 +287,7 @@ extension MatchFoundTableVC: ConnectManagerDelegate {
     }
     
     func timeRanOut() {
-        AlertManager.showAlert(title: "your time to connect with " + matchInfo.userName + " has run out",
+        AlertManager.showAlert(title: "your time to connect with " + matchInfo.partnerName + " has run out",
                                subtitle: "",
                                primaryActionTitle: "return home",
                                primaryActionHandler: {

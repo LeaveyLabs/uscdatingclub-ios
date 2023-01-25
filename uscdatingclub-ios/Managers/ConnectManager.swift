@@ -66,7 +66,7 @@ class ConnectManager: NSObject {
         
         //PARTNER LOCATION
         do {
-            locationSocket = try LocationSocket(sender: UserService.singleton.getId(), receiver: matchInfo.userId)
+            locationSocket = try LocationSocket(sender: UserService.singleton.getId(), receiver: matchInfo.partnerId)
             locationSocket!.partnerLocationDidChange = onPartnerLocationDidChange
         } catch {
             //TODO: post to crashlytics
