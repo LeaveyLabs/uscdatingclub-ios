@@ -112,6 +112,7 @@
                                             <constraint firstAttribute="width" secondItem="AuE-su-pg8" secondAttribute="height" multiplier="1:1" id="jBy-CO-Biu"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="tintColor" name="customWhite"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="xmark" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
@@ -137,6 +138,7 @@
                                             <constraint firstAttribute="width" constant="35" id="HPU-Xz-fLg"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="tintColor" name="customWhite"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="ellipsis" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
@@ -163,6 +165,7 @@
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location.north" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="9qG-bt-nhu">
                                 <rect key="frame" x="118" y="347.66666666666663" width="157" height="156.33333333333331"/>
+                                <color key="tintColor" name="customWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="9qG-bt-nhu" secondAttribute="height" id="8PH-O1-78c"/>
                                 </constraints>
@@ -248,12 +251,13 @@
             <point key="canvasLocation" x="1049" y="1396"/>
         </scene>
     </scenes>
+    <color key="tintColor" name="customWhite"/>
     <resources>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="location.north" catalog="system" width="110" height="128"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="AccentColor">
-            <color red="0.8901960784313725" green="0.30588235294117649" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.83529411764705885" green="0.30588235294117649" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="customWhite">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
