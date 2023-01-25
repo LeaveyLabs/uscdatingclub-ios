@@ -54,6 +54,11 @@ class ConnectManager: NSObject {
         //MY LOCATION
         LocationManager.shared.updateDistancefilter(to: 0)
         NotificationCenter.default.addObserver(forName: .locationStatusDidUpdate, object: nil, queue: nil) { notification in
+            do {
+                try self.locationSocket?.sendLocation(location: LocationManager.shared.lastLocation!.coordinate)
+            } catch {
+                print("error sending location to socket", error)
+            }
             self.updateRelativePositioning()
         }
         
