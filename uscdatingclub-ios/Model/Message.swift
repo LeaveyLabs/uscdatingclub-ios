@@ -11,4 +11,5 @@ struct Message {
     let senderId: Int
     let receiverId: Int
     let body: String
+    let timestamp: Double
 }

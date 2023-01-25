@@ -22,6 +22,7 @@ struct MessageIntermediate: Codable {
     let sender: Int
     let receiver: Int
     let body: String
+    let timestamp: Double
 }
 
 struct ConversationStarter: Codable {
@@ -99,7 +100,7 @@ class LocationSocket: WebSocketDelegate {
     
     func sendMessage(message:Message) throws {
         if (connected) {
-            let messageIntermediate = MessageIntermediate(sender: message.senderId, receiver: message.receiverId, body: message.body)
+            let messageIntermediate = MessageIntermediate(sender: message.senderId, receiver: message.receiverId, body: message.body, timestamp: currentTimeMillis())
             let json = try JSONEncoder().encode(messageIntermediate)
             self.socket.write(data:json)
         }
@@ -192,7 +193,7 @@ class LocationSocket: WebSocketDelegate {
                 } catch {
                     let messageIntermediate = try JSONDecoder().decode(MessageIntermediate.self, from: string.data(using: .utf8)!)
                     if messageIntermediate.sender != self.sender {
-                        self.messages.append(Message(senderId: messageIntermediate.sender, receiverId: self.sender,  body: messageIntermediate.body))
+                        self.messages.append(Message(senderId: messageIntermediate.sender, receiverId: self.sender,  body: messageIntermediate.body, timestamp: messageIntermediate.timestamp))
                     }
                 }
             }
@@ -207,7 +208,7 @@ class LocationSocket: WebSocketDelegate {
                 } catch {
                     let messageIntermediate = try JSONDecoder().decode(MessageIntermediate.self, from: data)
                     if messageIntermediate.sender != self.sender {
-                        self.messages.append(Message(senderId: messageIntermediate.sender, receiverId: self.sender, body: messageIntermediate.body))
+                        self.messages.append(Message(senderId: messageIntermediate.sender, receiverId: self.sender, body: messageIntermediate.body, timestamp: messageIntermediate.timestamp))
                     }
                 }
             }
