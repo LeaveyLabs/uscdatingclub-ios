@@ -78,7 +78,7 @@ class MatchFoundTableVC: UIViewController {
     func handlePreviousButtonPress() {
         if let recentPressDate = UserDefaults.standard.object(forKey: Constants.UserDefaultsKeys.MostRecentMeetUpButtonPressDate) as? Date,
            recentPressDate.isMoreRecentThan(Calendar.current.date(byAdding: .minute, value: -1 * Constants.minutesToRespond, to: Date())!) {
-            isWaiting = true
+//            isWaiting = true
         }
     }
     
