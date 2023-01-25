@@ -24,6 +24,7 @@ class MatchAPI {
     enum Endpoints: String {
         case acceptMatch = "accept-match/"
         case forceCreateMatch = "force-create-match/"
+        case stopSharingLocation = "stop-sharing-location/"
         // REST
         case matches = "matches/"
     }
@@ -95,5 +96,15 @@ class MatchAPI {
         try filterMatchErrors(data: data, response: response)
     }
     
+    static func stopSharingLocation(selfId:Int, partnerId:Int) async throws {
+        let url = "\(Env.BASE_URL)\(Endpoints.stopSharingLocation.rawValue)"
+        let params:[String:String] = [
+            ParameterKeys.user1Id.rawValue: String(selfId),
+            ParameterKeys.user2Id.rawValue: String(partnerId)
+        ]
+        let json = try JSONEncoder().encode(params)
+        let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
+        try filterMatchErrors(data: data, response: response)
+    }
 }
 

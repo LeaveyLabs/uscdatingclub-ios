@@ -25,6 +25,7 @@ extension Notification.Name {
 enum NotificationType: String, CaseIterable {
     case match = "match"
     case accept = "accept"
+    case stop = "stop"
 }
 
 extension Notification {
@@ -193,6 +194,8 @@ class NotificationsManager: NSObject {
                 case .accept:
                     handler.newMatchAcceptance = try decoder.decode(MatchAcceptance.self, from: data)
                     handler.notificationDate = Date(timeIntervalSince1970: handler.newMatchAcceptance!.time)
+                case .stop:
+                    break
             }
             return handler
         } catch {
