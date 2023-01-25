@@ -68,7 +68,7 @@ enum Constants {
             static let ConnectHeaderCell = "ConnectHeaderCell"
             static let ConnectTitleCell = "ConnectTitleCell"
             static let ConnectSpectrumCell = "ConnectSpectrumCell"
-            
+            static let ConnectInterestsCell = "ConnectInterestsCell"
         }
         struct VC {
             //Home

@@ -212,18 +212,8 @@ class NotificationsManager: NSObject {
     }
     
     func saveNotificationUserInfo(userInfo: [String: AnyObject]) {
-//        let dict: [AnyHashable: Any] = your dict
-//        do {
-//            let jsonData = try JSONSerialization.data(withJSONObject: dict)
-//            let itemsCollection = try JSONDecoder().decode(ItemsCollection.self, from: jsonData)
-//            //now access it as itemsCollection.items[0]
-//        }
-//        catch {
-//            print(error)
-//        }
-        
         Task {
-            UserDefaults.standard.set(userInfo, forKey: Constants.UserDefaultsKeys.MostRecentNotifiationStorageKey)
+            UserDefaults.standard.set(userInfo.withoutNullEntries(), forKey: Constants.UserDefaultsKeys.MostRecentNotifiationStorageKey)
         }
     }
         

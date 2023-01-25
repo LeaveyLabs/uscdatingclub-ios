@@ -71,6 +71,7 @@ class MatchFoundTableVC: UIViewController {
         tableView.register(UINib(nibName: Constants.SBID.Cell.ConnectHeaderCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.ConnectHeaderCell)
         tableView.register(UINib(nibName: Constants.SBID.Cell.ConnectTitleCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.ConnectTitleCell)
         tableView.register(UINib(nibName: Constants.SBID.Cell.ConnectSpectrumCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.ConnectSpectrumCell)
+        tableView.register(UINib(nibName: Constants.SBID.Cell.ConnectInterestsCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.ConnectInterestsCell)
         tableView.register(UINib(nibName: Constants.SBID.Cell.SimpleButtonCell, bundle: nil), forCellReuseIdentifier: Constants.SBID.Cell.SimpleButtonCell)
     }
     
@@ -154,8 +155,12 @@ extension MatchFoundTableVC: UITableViewDelegate {
 
 extension MatchFoundTableVC: UITableViewDataSource {
     
+    var hasTextSimilarities: Bool {
+        matchInfo.textSimilarities.count > 0
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return hasTextSimilarities ? 5 : 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -165,8 +170,10 @@ extension MatchFoundTableVC: UITableViewDataSource {
         case 1:
             return 1
         case 2:
-            return matchInfo.numericalSimilarities.count
+            return hasTextSimilarities ? matchInfo.textSimilarities.count : matchInfo.numericalSimilarities.count
         case 3:
+            return hasTextSimilarities ? matchInfo.numericalSimilarities.count : 1
+        case 4:
             return 1
         default:
             fatalError()
@@ -189,40 +196,67 @@ extension MatchFoundTableVC: UITableViewDataSource {
             cell.configure(name: matchInfo.userName, compatibility: matchInfo.compatibility)
             return cell
         case 2:
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.ConnectSpectrumCell, for: indexPath) as! ConnectSpectrumCell
-            let numericalSimilarity = matchInfo.numericalSimilarities[indexPath.row]
-            cell.configure(title: numericalSimilarity.trait,
-                           matchName: matchInfo.userName,
-                           avgPercent: numericalSimilarity.avgPercent,
-                           youPercent: numericalSimilarity.youPercent,
-                           matchPercent: numericalSimilarity.partnerPercent,
-                           shouldDisplayLabels: indexPath.row == matchInfo.numericalSimilarities.count-1)
-            return cell
+            if hasTextSimilarities {
+                return createConnectInterestsCell(at: indexPath)
+            } else {
+                return createConnectSpectrumCell(at: indexPath)
+            }
         case 3:
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SimpleButtonCell, for: indexPath) as! SimpleButtonCell
-            switch indexPath.row {
-            case 0:
-                if isWaiting {
-                    cell.configure(title: "waiting for \(matchInfo.userName)", systemImage: "", buttonHeight: 60, onButtonPress: {} )
-                    cell.simpleButton.alpha = 0.5
-                } else {
-                    cell.configure(title: "meet up", systemImage: "figure.wave", buttonHeight: 60) {
-                        self.meetupButtonDidPressed()
-                    }
+            if hasTextSimilarities {
+                return createConnectSpectrumCell(at: indexPath)
+            } else {
+                return createButtonCell(at: indexPath)
+            }
+        case 4:
+            return createButtonCell(at: indexPath)
+        default:
+            fatalError()
+        }
+        
+    }
+    
+    //MARK: - Cell Creation
+    
+    func createConnectSpectrumCell(at indexPath: IndexPath) -> ConnectSpectrumCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.ConnectSpectrumCell, for: indexPath) as! ConnectSpectrumCell
+        let numericalSimilarity = matchInfo.numericalSimilarities[indexPath.row]
+        cell.configure(title: numericalSimilarity.trait,
+                       matchName: matchInfo.userName,
+                       avgPercent: numericalSimilarity.avgPercent,
+                       youPercent: numericalSimilarity.youPercent,
+                       matchPercent: numericalSimilarity.partnerPercent,
+                       shouldDisplayFooter: indexPath.row == matchInfo.numericalSimilarities.count-1,
+                       shouldDisplayHeader: indexPath.row == 0)
+        return cell
+    }
+    
+    func createButtonCell(at indexPath: IndexPath) -> SimpleButtonCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SimpleButtonCell, for: indexPath) as! SimpleButtonCell
+        switch indexPath.row {
+        case 0:
+            if isWaiting {
+                cell.configure(title: "waiting for \(matchInfo.userName)", systemImage: "", buttonHeight: 60, onButtonPress: {} )
+                cell.simpleButton.alpha = 0.5
+            } else {
+                cell.configure(title: "meet up", systemImage: "figure.wave", buttonHeight: 60) {
+                    self.meetupButtonDidPressed()
                 }
+            }
 //            case 1:
 //                cell.configure(title: "pass", systemImage: "xmark") {
 //                    self.passButtonDidPressed()
 //                }
 //                cell.simpleButton.alpha = 0.7
-            default:
-                fatalError()
-            }
-            return cell
         default:
             fatalError()
         }
-        
+        return cell
+    }
+    
+    func createConnectInterestsCell(at indexPath: IndexPath) -> ConnectInterestsCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.ConnectInterestsCell, for: indexPath) as! ConnectInterestsCell
+        cell.configure(matchInfo.textSimilarities)
+        return cell
     }
     
 }

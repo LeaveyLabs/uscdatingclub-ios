@@ -215,6 +215,9 @@
 		47E38FF3295F72B9007CB77F /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E38FF2295F72B9007CB77F /* FeatureView.swift */; };
 		47E38FF5295F7368007CB77F /* FeatureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47E38FF4295F7368007CB77F /* FeatureView.xib */; };
 		47E38FF7295F75AD007CB77F /* Misc.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47E38FF6295F75AD007CB77F /* Misc.storyboard */; };
+		47EA74AC2980AB5400265DF3 /* Dict+RemoveNullEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EA74AB2980AB5400265DF3 /* Dict+RemoveNullEntries.swift */; };
+		47EA74AF2980AB9900265DF3 /* ConnectInterestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EA74AD2980AB9900265DF3 /* ConnectInterestsCell.swift */; };
+		47EA74B02980AB9900265DF3 /* ConnectInterestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47EA74AE2980AB9900265DF3 /* ConnectInterestsCell.xib */; };
 		47EA9B2929777EFB00B6C209 /* ForgeMatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EA9B2829777EFB00B6C209 /* ForgeMatchVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -449,6 +452,9 @@
 		47E38FF2295F72B9007CB77F /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
 		47E38FF4295F7368007CB77F /* FeatureView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeatureView.xib; sourceTree = "<group>"; };
 		47E38FF6295F75AD007CB77F /* Misc.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Misc.storyboard; sourceTree = "<group>"; };
+		47EA74AB2980AB5400265DF3 /* Dict+RemoveNullEntries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dict+RemoveNullEntries.swift"; sourceTree = "<group>"; };
+		47EA74AD2980AB9900265DF3 /* ConnectInterestsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectInterestsCell.swift; sourceTree = "<group>"; };
+		47EA74AE2980AB9900265DF3 /* ConnectInterestsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectInterestsCell.xib; sourceTree = "<group>"; };
 		47EA9B2829777EFB00B6C209 /* ForgeMatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgeMatchVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -765,6 +771,7 @@
 				47C4105C295CC065007C27F0 /* CNContact+Number.swift */,
 				47C40F87295CBBBD007C27F0 /* Color+Hex.swift */,
 				47C40F8A295CBBBD007C27F0 /* Encodable+Dict.swift */,
+				47EA74AB2980AB5400265DF3 /* Dict+RemoveNullEntries.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -967,6 +974,8 @@
 				47DC97AD296E023A00A374B5 /* ConnectTitleCell.xib */,
 				47DC97B0296E040800A374B5 /* ConnectSpectrumCell.swift */,
 				47DC97B1296E040800A374B5 /* ConnectSpectrumCell.xib */,
+				47EA74AD2980AB9900265DF3 /* ConnectInterestsCell.swift */,
+				47EA74AE2980AB9900265DF3 /* ConnectInterestsCell.xib */,
 			);
 			path = Connect;
 			sourceTree = "<group>";
@@ -1251,6 +1260,7 @@
 				47C40F17295CBAB7007C27F0 /* GoogleService-Info.plist in Resources */,
 				47A24A26296F71250077AB11 /* SimpleTitleCell.xib in Resources */,
 				471549182970FCB900756BE1 /* PermissionsCell.xib in Resources */,
+				47EA74B02980AB9900265DF3 /* ConnectInterestsCell.xib in Resources */,
 				471549102970F0AF00756BE1 /* SF-Pro-Italic.ttf in Resources */,
 				47B6B4BD296B959C00539353 /* SimpleEntryCell.xib in Resources */,
 				478BECBF2963755000930DAF /* SpectrumTestCell.xib in Resources */,
@@ -1352,6 +1362,8 @@
 				4731F512295CD4870013F626 /* UITextField+MaxLength.swift in Sources */,
 				4731F515295CD48F0013F626 /* UISegmentedControl+Twitter.swift in Sources */,
 				47ABA6EA2976405900F0FDFE /* MessageComposer.swift in Sources */,
+				47EA74AF2980AB9900265DF3 /* ConnectInterestsCell.swift in Sources */,
+				47EA74AC2980AB5400265DF3 /* Dict+RemoveNullEntries.swift in Sources */,
 				478BECC92964C60900930DAF /* TestTextVC.swift in Sources */,
 				47DE3254295CC7C40063C55A /* UIViewController+OpenURL.swift in Sources */,
 				47C40F91295CBBBD007C27F0 /* Color+Hex.swift in Sources */,

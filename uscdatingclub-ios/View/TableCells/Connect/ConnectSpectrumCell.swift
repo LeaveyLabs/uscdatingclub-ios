@@ -9,6 +9,7 @@ import UIKit
 
 class ConnectSpectrumCell: UITableViewCell {
 
+    @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var backgroundLineView: UIView!
     
@@ -28,17 +29,18 @@ class ConnectSpectrumCell: UITableViewCell {
     @IBOutlet var youLabel: UILabel!
     @IBOutlet var avgLabel: UILabel!
 
-    func configure(title: String, matchName: String, avgPercent: CGFloat, youPercent: CGFloat, matchPercent: CGFloat, shouldDisplayLabels: Bool) {
+    func configure(title: String, matchName: String, avgPercent: CGFloat, youPercent: CGFloat, matchPercent: CGFloat, shouldDisplayFooter: Bool, shouldDisplayHeader: Bool) {
         titleLabel.text = title
         titleLabel.font = AppFont.medium.size(18)
         youLabel.font = AppFont.medium.size(14)
         avgLabel.font = AppFont.medium.size(14)
         matchLabel.font = AppFont.medium.size(14)
-                
+        headerLabel.font = AppFont2.medium.size(12)
+
         backgroundLineView.backgroundColor = .customWhite.withAlphaComponent(0.5)
         avgLabel.textColor = .customWhite.withAlphaComponent(0.7)
 
-        if shouldDisplayLabels {
+        if shouldDisplayFooter {
             matchLabel.text = matchName
             labelsContainerView.isHidden = false
             youLabelYConstraint.constant = youPercent > matchPercent ? 0 : -45
@@ -47,9 +49,16 @@ class ConnectSpectrumCell: UITableViewCell {
             labelsContainerView.isHidden = true
         }
         
-        avgCircleViewLeadingConstraint.constant = (avgPercent/100) * (contentView.bounds.width - 50)
-        youCircleViewLeadingConstraint.constant = (youPercent/100) * (contentView.bounds.width - 50)
-        matchCircleViewLeadingConstraint.constant = (matchPercent/100) * (contentView.bounds.width - 50)
+        headerLabel.isHidden = !shouldDisplayHeader
+        
+//        let screenWidth = UIApplication.
+        avgCircleViewLeadingConstraint.constant = (avgPercent/100) * 300 //(contentView.bounds.width - 50)
+        youCircleViewLeadingConstraint.constant = (youPercent/100) * 300 //(contentView.bounds.width - 50)
+        matchCircleViewLeadingConstraint.constant = (matchPercent/100) * 300 //(contentView.bounds.width - 50)
+        
+        avgCircleView.applyLightShadow()
+        youCircleView.applyLightShadow()
+        matchCircleView.applyLightShadow()
     }
     
 }

@@ -131,6 +131,8 @@ class RadarVC: UIViewController, PageVCChild {
     func renderUI() {
         switch uiState {
         case .arrow:
+            aboutButton.isHidden = true
+            accountButton.isHidden = true
             arrowView.isHidden = false
             centerCircleButton.isHidden = true
             circleViews.forEach { $0.isHidden = true }
@@ -141,6 +143,8 @@ class RadarVC: UIViewController, PageVCChild {
             primaryButtonHeightConstraint.constant = 90
             pulseArrow()
         case .radar:
+            aboutButton.isHidden = false
+            accountButton.isHidden = false
             arrowView.isHidden = true
             centerCircleButton.isHidden = false
             circleViews.forEach { $0.isHidden = false }
