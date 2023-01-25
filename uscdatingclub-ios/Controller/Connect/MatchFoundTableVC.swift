@@ -76,33 +76,38 @@ class MatchFoundTableVC: UIViewController {
     }
     
     func handlePreviousButtonPress() {
+        guard Env.environment == .prod else { return }
         if let recentPressDate = UserDefaults.standard.object(forKey: Constants.UserDefaultsKeys.MostRecentMeetUpButtonPressDate) as? Date,
            recentPressDate.isMoreRecentThan(Calendar.current.date(byAdding: .minute, value: -1 * Constants.minutesToRespond, to: Date())!) {
-//            isWaiting = true
+            isWaiting = true
         }
     }
     
     //MARK: - Interaction
     
     @objc func meetupButtonDidPressed() {
+        isWaiting = true
+        tableView.reloadData()
         Task {
-            try await MatchAPI.acceptMatch(userId: UserService.singleton.getId(),
-                                           partnerId: matchInfo.userId)
-            UserDefaults.standard.set(Date(), forKey: Constants.UserDefaultsKeys.MostRecentMeetUpButtonPressDate)
-            DispatchQueue.main.async {
-                self.isWaiting = true
-                self.tableView.reloadData()
-                
+            do {
+                try await MatchAPI.acceptMatch(userId: UserService.singleton.getId(),
+                                               partnerId: matchInfo.userId)
+                UserDefaults.standard.set(Date(), forKey: Constants.UserDefaultsKeys.MostRecentMeetUpButtonPressDate)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) { //[weak self] in
-//                    if let self, self.isVisible {
-                        DispatchQueue.main.async {
-                            AppStoreReviewManager.requestReviewIfAppropriate()
-                        }
-//                    }
+                    AppStoreReviewManager.requestReviewIfAppropriate()
                 }
-                
+            } catch {
+                DispatchQueue.main.async {
+                    self.handleFailMeetupPress(error)
+                }
             }
         }
+    }
+    
+    func handleFailMeetupPress(_ error: Error) {
+        isWaiting = false
+        tableView.reloadData()
+        AlertManager.displayError(error)
     }
     
     @MainActor
