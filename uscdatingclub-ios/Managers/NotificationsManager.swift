@@ -13,6 +13,7 @@ import FirebaseAnalytics
 
 //Internal Notifications
 extension Notification.Name {
+    static let locationDidUpdate = Notification.Name("locationDidUpdate")
     static let locationStatusDidUpdate = Notification.Name("locationStatusDidUpdate")
     static let remoteConfigDidActivate = Notification.Name("remoteConfigDidActivate")
     static let permissionsWereRevoked = Notification.Name("permissionsWereRevoked")

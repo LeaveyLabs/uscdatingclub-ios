@@ -85,6 +85,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard let location = locations.last else { return }
         lastLocation = location
         print("didUpdateLocations")
+        NotificationCenter.default.post(name: .locationDidUpdate, object: "myObject", userInfo: ["key": "Value"])
         
         if let lastLocation {
             postToDatabase(lat: lastLocation.coordinate.latitude, long: lastLocation.coordinate.longitude)

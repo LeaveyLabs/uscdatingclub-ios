@@ -36,7 +36,7 @@ class MatchFoundTableVC: UIViewController {
         connectManager.startRespondSession() //must come first
         setupTableView() //must come after setting up connectManager
         handlePreviousButtonPress()
-        NotificationCenter.default.addObserver(forName: .matchAccepted, object: nil, queue: nil) { notification in
+        NotificationCenter.default.addObserver(forName: .matchAccepted, object: nil, queue: .main) { notification in
             DispatchQueue.main.async {
                 self.goToCoordinateVC()
             }

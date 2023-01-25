@@ -42,6 +42,7 @@ class ConnectManager: NSObject {
     //MARK: - Public Interface
         
     func startRelativeLocationCalculation() {
+        print("Starting relative locaiton claculation")
         //MY HEADING
         motionManager.startDeviceMotionUpdates(using: .xTrueNorthZVertical, to: .main) { cmDeviceMotion, error in
             if let error {
@@ -53,8 +54,9 @@ class ConnectManager: NSObject {
         
         //MY LOCATION
         LocationManager.shared.updateDistancefilter(to: 0)
-        NotificationCenter.default.addObserver(forName: .locationStatusDidUpdate, object: nil, queue: nil) { notification in
+        NotificationCenter.default.addObserver(forName: .locationDidUpdate, object: nil, queue: .main) { notification in
             do {
+                print("SENDING LOCATION")
                 try self.locationSocket?.sendLocation(location: LocationManager.shared.lastLocation!.coordinate)
             } catch {
                 print("error sending location to socket", error)
@@ -126,7 +128,8 @@ class ConnectManager: NSObject {
             print("error getting current heading")
             return
         }
-                
+        
+        let fixedMatchCoordinate = CLLocationCoordinate2D(latitude: 34.02172249062856, longitude: -118.2830645563657) //right in front of leavey library
         let matchCoordinate = locationSocket?.partnerLocation ?? matchInfo.location
         let matchLocation = CLLocation(latitude: matchCoordinate.latitude, longitude: matchCoordinate.longitude)
         let distance = currentLocation.distance(from: matchLocation)
