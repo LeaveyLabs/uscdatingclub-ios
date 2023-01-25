@@ -50,9 +50,7 @@ struct MatchAcceptance: MatchNotificationProtocol, Codable {
     let longitude: Double
     
     //Compatibility
-    let compatibilty: Int
-    let numericalSimilarities: [NumericalSimilarity]
-    let textSimilarities: [TextSimilarity]
+    let compatibility: Int
 }
 
 //MARK: - Frontend
@@ -115,7 +113,7 @@ struct MatchInfo: Codable {
     init(matchAcceptance: MatchAcceptance) {
         userId = matchAcceptance.id
         userName = matchAcceptance.firstName
-        compatibility = matchAcceptance.compatibilty
+        compatibility = matchAcceptance.compatibility
         date = Date(timeIntervalSince1970: matchAcceptance.time)
         textSimilarities = matchAcceptance.textSimilarities
         latitude = matchAcceptance.latitude
