@@ -14,12 +14,7 @@ struct Match: Codable {
     let user2Id: Int
 }
 
-protocol MatchNotificationProtocol {
-    var firstName: String { get }
-    var numericalSimilarities: [NumericalSimilarity] { get }
-}
-
-struct MatchPartner: MatchNotificationProtocol, Codable {
+struct MatchPartner: Codable {
     //Vitals
     let id: Int
     let firstName: String
@@ -37,7 +32,7 @@ struct MatchPartner: MatchNotificationProtocol, Codable {
     let textSimilarities: [TextSimilarity]
 }
 
-struct MatchAcceptance: MatchNotificationProtocol, Codable {
+struct MatchAcceptance: Codable {
     //Vitals
     let id: Int
     let firstName: String
@@ -51,6 +46,8 @@ struct MatchAcceptance: MatchNotificationProtocol, Codable {
     
     //Compatibility
     let compatibility: Int
+    let numericalSimilarities: [NumericalSimilarity]
+    let textSimilarities: [TextSimilarity]
 }
 
 //MARK: - Frontend
@@ -88,12 +85,24 @@ struct MatchInfo: Codable {
         return Date.init().timeIntervalSince1970.getElapsedTime(since: date.timeIntervalSince1970)
     }
     
+    //TODO: make the below code minimum 0:00
+    
     var timeLeftToRespondString: String {
-        return "\(Constants.minutesToRespond - 1 - elapsedTime.minutes)m \(59 - elapsedTime.seconds)s"
+        let minsLeft = Constants.minutesToRespond - 1 - elapsedTime.minutes
+        let secsLeft = 59 - elapsedTime.seconds
+        if minsLeft < 0 {
+            return "0m 0s"
+        }
+        return "\(minsLeft)m \(secsLeft)s"
     }
     
     var timeLeftToConnectString: String {
-        return "\(Constants.minutesToConnect - 1 - elapsedTime.minutes)m \(59 - elapsedTime.seconds)s"
+        let minsLeft = Constants.minutesToConnect - 1 - elapsedTime.minutes
+        let secsLeft = 59 - elapsedTime.seconds
+        if minsLeft < 0 {
+            return "0m 0s"
+        }
+        return "\(minsLeft)m \(secsLeft)s"
     }
     
     init(matchPartner: MatchPartner) {

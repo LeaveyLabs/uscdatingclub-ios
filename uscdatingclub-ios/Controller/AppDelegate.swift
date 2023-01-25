@@ -96,10 +96,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     func handleReceivedNotificationWhileInApp(_ notification: UNNotification) async {
         guard let notificationResponseHandler = NotificationsManager.shared.generateNotificationResponseHandler(notification) else {
-            print("FAIL")
+            print("failed generated notification response handler")
             return
         }
-        print("SUCCESS")
+
         if let partner = notificationResponseHandler.newMatchPartner {
             
             AlertManager.showAlert(title: "you've been matched with \(partner.firstName)!", subtitle: "you have \(Constants.minutesToRespond) minutes to respond", primaryActionTitle: "see your compatibility", primaryActionHandler: {

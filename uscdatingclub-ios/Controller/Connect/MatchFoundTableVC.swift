@@ -244,14 +244,6 @@ extension MatchFoundTableVC: ConnectManagerDelegate {
                 break
             }
             self.tableView.reloadData()
-//            self.timeLeftLabel.alpha = 0.5
-//            self.timeLeftLabel.textColor = .customWhite
-//            UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear) {
-//                self.timeLeftLabel.alpha = 1
-//                self.timeLeftLabel.textColor = .blue
-//            } completion: { completed in
-
-//            }
         }
     }
     
