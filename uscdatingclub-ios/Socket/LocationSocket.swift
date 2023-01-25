@@ -59,9 +59,13 @@ class LocationSocket: WebSocketDelegate {
     var socket: WebSocket!
     var connected: Bool = false;
     var connectionInProgress: Bool = true;
-    var messages: [Message]
+    var messages: [Message] {
+        didSet {
+            messagesDidChange?(messages)
+        }
+    }
     
-    var messagesDidChange: ((Message) -> (Void))? = nil
+    var messagesDidChange: (([Message]) -> (Void))? = nil
     
     init(sender: Int, receiver: Int) throws {
         self.sender = sender
