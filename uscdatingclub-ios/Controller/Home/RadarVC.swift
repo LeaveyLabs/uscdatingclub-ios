@@ -131,6 +131,7 @@ class RadarVC: UIViewController, PageVCChild {
     func renderUI() {
         switch uiState {
         case .arrow:
+            (parent as? PageVC)?.scrollView?.isScrollEnabled = false
             aboutButton.isHidden = true
             accountButton.isHidden = true
             arrowView.isHidden = false
@@ -143,6 +144,7 @@ class RadarVC: UIViewController, PageVCChild {
             primaryButtonHeightConstraint.constant = 90
             pulseArrow()
         case .radar:
+            (parent as? PageVC)?.scrollView?.isScrollEnabled = true
             aboutButton.isHidden = false
             accountButton.isHidden = false
             arrowView.isHidden = true

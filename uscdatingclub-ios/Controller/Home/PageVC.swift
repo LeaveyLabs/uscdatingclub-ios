@@ -84,18 +84,23 @@ class PageVC: UIPageViewController {
         accountXConstraint.isActive = true
     }
     
+    var scrollView: UIScrollView? {
+        for view in view.subviews {
+            if let scrollView = view as? UIScrollView {
+                return scrollView
+            }
+        }
+        return nil
+    }
+    
     func setupPageVC() {
         vcs = [AboutVC.create(delegate: self),
                RadarVC.create(delegate: self),
                AccountVC.create(delegate: self)]
         self.dataSource = self
         self.delegate = self
-        for view in view.subviews {
-            if let scrollView = view as? UIScrollView {
-                scrollView.delegate = self
-                scrollView.delaysContentTouches = false
-            }
-        }
+        self.scrollView!.delegate = self
+        self.scrollView!.delaysContentTouches = false
         setViewControllers([vcs[currentIndex]], direction: .forward, animated: false)
     }
     

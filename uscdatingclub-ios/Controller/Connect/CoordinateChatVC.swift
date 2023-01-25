@@ -89,7 +89,6 @@ class CoordinateChatVC: MessagesViewController {
     class func create(matchInfo: MatchInfo) -> CoordinateChatVC {
         let vc = UIStoryboard(name: Constants.SBID.SB.Connect, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.CoordinateChat) as! CoordinateChatVC
         vc.matchInfo = matchInfo
-        
         vc.connectManager = ConnectManager(matchInfo: matchInfo, delegate: vc)
         return vc
     }
@@ -98,6 +97,8 @@ class CoordinateChatVC: MessagesViewController {
     
     override func loadView() {
         super.loadView()
+        
+        //Note: codesmell. conversation and connect manager should be better integrated. 
         connectManager.startConnectSession()
         let partner = ReadOnlyUser(id: matchInfo.partnerId,
                                    firstName: matchInfo.partnerName,
@@ -113,14 +114,24 @@ class CoordinateChatVC: MessagesViewController {
         setupMessagesCollectionView()
         setupNavBar()
         setupKeyboard()
+        setupMessageInputBarForChatting()
         
-        //Note: codesmell
         setupButtons()
         setupLabels() //must come after connect manager created
         
         DispatchQueue.main.async { //scroll on the next cycle so that collectionView's data is loaded in beforehand
             self.messagesCollectionView.scrollToLastItem(at: .bottom, animated: false)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        messagesCollectionView.reloadDataAndKeepOffset()
+        
+        //TODO: add below
+//        if !inputBar.inputTextView.canBecomeFirstResponder {
+//            inputBar.inputTextView.canBecomeFirstResponder = true //bc we set to false in viewdiddisappear
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -213,17 +224,6 @@ class CoordinateChatVC: MessagesViewController {
         DispatchQueue.main.async {
             self.messagesCollectionView.scrollToLastItem(animated: true)
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController!.setNavigationBarHidden(true, animated: animated)
-        messagesCollectionView.reloadDataAndKeepOffset()
-        
-        //TODO: add below
-//        if !inputBar.inputTextView.canBecomeFirstResponder {
-//            inputBar.inputTextView.canBecomeFirstResponder = true //bc we set to false in viewdiddisappear
-//        }
     }
     
     func setupButtons() {
