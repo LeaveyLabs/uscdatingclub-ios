@@ -47,6 +47,7 @@ class LocationSocket: WebSocketDelegate {
     
     var partnerLocationDidChange: ((CLLocationCoordinate2D) -> (Void))? = nil
     
+    
 //    var unsent_messages: [String];
 //    var server_messages: [Message] {
 //        didSet {
@@ -59,6 +60,8 @@ class LocationSocket: WebSocketDelegate {
     var connected: Bool = false;
     var connectionInProgress: Bool = true;
     var messages: [Message]
+    
+    var messagesDidChange: ((Message) -> (Void))? = nil
     
     init(sender: Int, receiver: Int) throws {
         self.sender = sender
