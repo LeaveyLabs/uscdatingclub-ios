@@ -45,7 +45,7 @@ struct MatchAcceptance: Codable {
     let longitude: Double
     
     //Compatibility
-    let compatibilty: Int
+    let compatibility: Int
 }
 
 //MARK: - Frontend
@@ -103,7 +103,7 @@ struct MatchInfo: Codable {
     init(matchAcceptance: MatchAcceptance) {
         userId = matchAcceptance.id
         userName = matchAcceptance.firstName
-        compatibility = matchAcceptance.compatibilty
+        compatibility = matchAcceptance.compatibility
         date = Date(timeIntervalSince1970: matchAcceptance.time)
         percents = [
             NumericalSimilarity(trait: "skiing", avgPercent: CGFloat.random(in: 20..<40), youPercent: 60, partnerPercent: 90),
