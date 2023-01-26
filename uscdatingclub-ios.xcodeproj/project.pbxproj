@@ -1710,8 +1710,8 @@
 				DEVELOPMENT_TEAM = SHD3A2G97F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "uscdatingclub-ios/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "usc dating club";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_CFBundleDisplayName = "sc dating club";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your phone will look for nearby matches in the background. This feature is required for the app to work.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your phone will scan your immediate area for your next match.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1727,7 +1727,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "leaveylabs.uscdatingclub-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "leaveylabs.scdatingclub-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1750,8 +1750,8 @@
 				DEVELOPMENT_TEAM = SHD3A2G97F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "uscdatingclub-ios/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "usc dating club";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_CFBundleDisplayName = "sc dating club";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your phone will look for nearby matches in the background. This feature is required for the app to work.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your phone will scan your immediate area for your next match.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1767,7 +1767,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "leaveylabs.uscdatingclub-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "leaveylabs.scdatingclub-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

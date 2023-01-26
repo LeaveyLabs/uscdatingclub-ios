@@ -72,7 +72,7 @@ class TestTextVC: UIViewController {
             cancelButton.isHidden = isFirstTest
             activityIndicatorView.stopAnimating()
             primaryLabel.text = "the compatibility test™"
-            secondaryLabel.text = "we'll calculate your compatibility with other usc students"
+            secondaryLabel.text = "we'll calculate your compatibility with other students"
             primaryButton.configure(title: "begin", systemImage: "")
         case .submitting:
             cancelButton.isHidden = true
@@ -84,7 +84,7 @@ class TestTextVC: UIViewController {
             primaryButton.alpha = 0
         case .finished:
             if isFirstTest {
-                secondaryLabel.text = "welcome to\nusc dating club."
+                secondaryLabel.text = "welcome to\nsc dating club."
                 UIView.animate(withDuration: 1) { [self] in
                     activityIndicatorView.stopAnimating()
                     primaryLabel.text = "responses submitted"

@@ -204,7 +204,7 @@ class PermissionsVC: UIViewController {
                 try LocationManager.shared.requestPermissionServices()
             }
         } catch {
-            AlertManager.showSettingsAlertController(title: "usc dating club requires \"always, precise\" location to work properly", message: "", settingsType: .location, on: self)
+            AlertManager.showSettingsAlertController(title: "sc dating club requires \"always, precise\" location to work properly", message: "", settingsType: .location, on: self)
         }
     }
     

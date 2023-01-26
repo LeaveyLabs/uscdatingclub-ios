@@ -147,7 +147,7 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
     }
 
     @IBAction func whyWeAskDidTapped(_ sender: UIButton) {
-        AlertManager.showInfoCentered("why we ask about sex", "usc dating club is a dating app, so your sexual identity & preferences determine who you'll be matched with.", on: self)
+        AlertManager.showInfoCentered("why we ask about sex", "your sexual identity & preferences determine who you'll be matched with.", on: self)
     }
     
     //MARK: - TextField Delegate

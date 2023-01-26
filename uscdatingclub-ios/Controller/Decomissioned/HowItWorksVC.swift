@@ -22,7 +22,7 @@ class HowItWorksVC: UIViewController {
     let coreFeatures: [HowItWorksItem] = [
         HowItWorksItem(image: UIImage(named: "test")!,
                        title: "take the compatibility test",
-                       description: "we’ll calculate your compatibility with other usc students"),
+                       description: "we’ll calculate your compatibility with other students"),
         HowItWorksItem(image: UIImage(named: "pulse")!,
                        title: "put your phone in your pocket",
                        description: "your phone will scan your immediate area for your next match"),
