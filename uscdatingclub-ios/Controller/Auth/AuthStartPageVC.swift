@@ -51,7 +51,8 @@ class AuthStartPageVC: UIPageViewController {
         authStartVC = AuthStartVC.create()
         vcs = [authStartVC,
                ScreenDemoVC.create(type: .notif),
-               ScreenDemoVC.create(type: .match)]
+               ScreenDemoVC.create(type: .match),
+               ScreenDemoVC.create(type: .connect)]
         
         self.dataSource = self
         self.delegate = self

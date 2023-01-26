@@ -18,6 +18,7 @@ class SimpleEntryCell: UITableViewCell {
         super.awakeFromNib()
         titleLabel.font = AppFont.light.size(16)
         textField.font = AppFont.semibold.size(20)
+        self.selectionStyle = .none
     }
     
     func configure(title: String, content: String, delegate: UITextFieldDelegate) {

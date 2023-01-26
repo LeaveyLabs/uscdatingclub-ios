@@ -17,7 +17,7 @@ class ScreenDemoVC: UIViewController {
     //MARK: - Initialization
     
     enum ScreenDemoType: CaseIterable {
-        case notif, match
+        case notif, match, connect
     }
     
     class func create(type: ScreenDemoType) -> ScreenDemoVC {
@@ -38,12 +38,16 @@ class ScreenDemoVC: UIViewController {
         switch screenDemoType {
         case .match:
             screenImageView.image = UIImage(named: "matchscreen")
-            subtitleLabel.text = "5 minutes to"
-            titleLabel.text = "meet up and say hi"
+            subtitleLabel.text = "get matched based on"
+            titleLabel.text = "shared interests & values"
         case .notif:
             screenImageView.image = UIImage(named: "notificationscreen")
             subtitleLabel.text = "find out when your next match"
             titleLabel.text = "walks into your life"
+        case .connect:
+            screenImageView.image = UIImage(named: "connectscreen")
+            subtitleLabel.text = "5 minutes to"
+            titleLabel.text = "meet up and say hi"
         default:
             break
         }
