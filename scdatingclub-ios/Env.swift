@@ -15,15 +15,15 @@ class Env {
     
     #if DEBUG
     static let environment: EnvType = .dev
-    static let BASE_URL: String = "https://usc-dating-club-test.herokuapp.com/"
-    static let CHAT_URL: String = "wss://usc-dating-club-socket-test.herokuapp.com/"
+    static let BASE_URL: String = "https://sc-dating-club-test.herokuapp.com/"
+    static let CHAT_URL: String = "wss://sc-dating-club-socket-test.herokuapp.com/"
     static let Timeout_Duration: Double = 50
 //    #if DEBUG
     //^there's also the option for debug/release flags for more specificity within each environment
     #else
     static let environment: EnvType = .prod
-    static let BASE_URL: String = "https://usc-dating-club.herokuapp.com/"
-    static let CHAT_URL: String = "wss://usc-dating-club-socket.herokuapp.com/"
+    static let BASE_URL: String = "https://sc-dating-club.herokuapp.com/"
+    static let CHAT_URL: String = "wss://sc-dating-club-socket.herokuapp.com/"
     static let Timeout_Duration: Double = 15
     #endif
 }
