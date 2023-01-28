@@ -31,7 +31,7 @@ class ConnectSpectrumCell: UITableViewCell {
 
     func configure(title: String, matchName: String, avgPercent: CGFloat, youPercent: CGFloat, matchPercent: CGFloat, shouldDisplayFooter: Bool, shouldDisplayHeader: Bool) {
         titleLabel.text = title
-        titleLabel.font = AppFont.medium.size(18)
+        titleLabel.font = AppFont.medium.size(17)
         youLabel.font = AppFont.medium.size(14)
         avgLabel.font = AppFont.medium.size(14)
         matchLabel.font = AppFont.medium.size(14)
@@ -55,10 +55,6 @@ class ConnectSpectrumCell: UITableViewCell {
         avgCircleViewLeadingConstraint.constant = (avgPercent/100) * 300 //(contentView.bounds.width - 50)
         youCircleViewLeadingConstraint.constant = (youPercent/100) * 300 //(contentView.bounds.width - 50)
         matchCircleViewLeadingConstraint.constant = (matchPercent/100) * 300 //(contentView.bounds.width - 50)
-        
-        avgCircleView.applyLightShadow()
-        youCircleView.applyLightShadow()
-        matchCircleView.applyLightShadow()
     }
     
 }

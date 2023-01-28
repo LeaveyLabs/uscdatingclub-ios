@@ -145,7 +145,7 @@ class MatchFoundTableVC: UIViewController {
 extension MatchFoundTableVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return view.bounds.height / 20
+        return view.bounds.height / 30
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
