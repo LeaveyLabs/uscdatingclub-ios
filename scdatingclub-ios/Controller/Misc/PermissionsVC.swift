@@ -56,9 +56,7 @@ class PermissionsVC: UIViewController {
         animateUnallowedViews()
         
         if goodToGo {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.dismiss(animated: true)
-            }
+            finishWithProperPermissions()
         }
     }
     
@@ -115,11 +113,11 @@ class PermissionsVC: UIViewController {
             } catch {
                 //TODO: log to firebase
             }
-            DispatchQueue.main.async { [self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0) { [self] in
                 if let _ = parent as? UINavigationController {
                     transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        AlertManager.showInfoCentered("you're all set!", "while active, your phone will scan for matches in your immediate area.\n\njust live your life and wait for a notification!", on: SceneDelegate.visibleViewController!)
+                        AlertManager.showInfoCentered("you're all set", "\nwhile active, your phone will scan for matches in your immediate area.\n\njust live your life and wait for a notification!", on: SceneDelegate.visibleViewController!)
                     }
                 } else {
                     dismiss(animated: true)

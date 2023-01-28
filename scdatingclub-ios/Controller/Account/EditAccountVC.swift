@@ -37,6 +37,7 @@ class EditAccountVC: UIViewController {
         didSet { validateInput() }
     }
     
+    var isDeletingAccount: Bool = false
     var isSaving: Bool = false {
         didSet {
             saveButton.loadingIndicator(isSaving)
@@ -112,9 +113,36 @@ class EditAccountVC: UIViewController {
             }
         }
     }
-    
+        
     func deleteAccountButtonPressed() {
-        AlertManager.showDeleteAccountAlert(on: self)
+        AlertManager.showAlert(
+            title: "are you sure you want to delete your account?",
+            subtitle: "this cannot be undone",
+            primaryActionTitle: "yes, delete my account",
+            primaryActionHandler: {
+            DispatchQueue.main.async { [self] in
+                isDeletingAccount = true
+                tableView.reloadData()
+                Task {
+                    do {
+                        try await UserService.singleton.deleteMyAccount()
+                        DispatchQueue.main.async {
+                            transitionToAuth()
+                        }
+                    } catch {
+                        AlertManager.displayError(error)
+                        DispatchQueue.main.async { [self] in
+                            isDeletingAccount = false
+                            tableView.reloadData()
+                        }
+                    }
+                }
+            }
+        },
+            secondaryActionTitle: "nevermind",
+            secondaryActionHandler: {
+            //do nothing
+        }, on: self)
     }
     
     func tryToUpdateProfile() {
@@ -248,6 +276,11 @@ extension EditAccountVC: UITableViewDataSource {
             let simpleButtonCell = tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SimpleButtonCell, for: indexPath) as! SimpleButtonCell
             simpleButtonCell.configure(title: "delete account", systemImage: "trash") {
                 self.deleteAccountButtonPressed()
+            }
+            if isDeletingAccount {
+                simpleButtonCell.simpleButton.alpha = 0.7
+                simpleButtonCell.simpleButton.internalButton.isEnabled = false
+                simpleButtonCell.simpleButton.internalButton.loadingIndicator(true)
             }
             simpleButtonCell.simpleButton.internalButton.tintColor = .red
             simpleButtonCell.simpleButton.internalButton.setTitleColor(.red, for: .normal)

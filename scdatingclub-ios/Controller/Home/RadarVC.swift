@@ -84,7 +84,7 @@ class RadarVC: UIViewController, PageVCChild {
         })
         
         PermissionsManager.areAllPermissionsGranted { enabled in
-            if !enabled {
+            if !enabled && self.uiState == .radar {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                     self.presentPermissionsScreen()
                 }
@@ -99,6 +99,7 @@ class RadarVC: UIViewController, PageVCChild {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        isLocationServicesEnabled = UserService.singleton.getIsMatchable()
         renderUI()
     }
     
@@ -185,14 +186,7 @@ class RadarVC: UIViewController, PageVCChild {
         }
     }
     
-    //MARK: - Helpers
-    
-    func makeNavButtonsVisible(_ visible: Bool) {
-        UIView.animate(withDuration: 0.2, delay: 0, options: []) { [self] in
-            accountButton.alpha = visible ? 1 : 0
-            aboutButton.alpha = visible ? 1 : 0
-        }
-    }
+    //MARK: - Pulsing
     
     func stopPulsing() {
         isPulsing = false
@@ -275,6 +269,42 @@ class RadarVC: UIViewController, PageVCChild {
         centerCircleButton.addTarget(self, action: #selector(centerCircleTouchDown), for: .touchDown)
     }
     
+    //MARK: - Helpers
+    
+    func presentPermissionsScreen() {
+        let permissionsVC = PermissionsVC.create()
+        permissionsVC.modalPresentationStyle = .fullScreen
+        present(permissionsVC, animated: true)
+    }
+    
+    func animateANewCircle() {
+        UIView.animate(withDuration: 0.2, delay: 0) {
+            self.centerCircleButton.transform = .identity
+        }
+        guard isLocationServicesEnabled else { return }
+        let newCircleView = UIView()
+        view.addSubview(newCircleView)
+        newCircleView.translatesAutoresizingMaskIntoConstraints = false
+        newCircleView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        newCircleView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        newCircleView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: RadarVC.CIRCLE_WIDTH_RATIO, constant: -10).isActive = true
+        newCircleView.widthAnchor.constraint(equalTo: newCircleView.heightAnchor, multiplier: 1).isActive = true
+        newCircleView.backgroundColor = .clear
+        newCircleView.layer.borderWidth = 2
+        newCircleView.layer.borderColor = UIColor.white.cgColor
+        newCircleView.roundCornersViaCornerRadius(radius: firstCircleView.bounds.width / 2)
+        pulse(pulseView: newCircleView, repeating: false, duration: RadarVC.PULSE_DURATION)
+        DispatchQueue.main.asyncAfter(deadline: .now() + RadarVC.PULSE_DURATION) {
+            newCircleView.removeFromSuperview()
+        }
+    }
+    
+    func presentTest() {
+        let nav = UINavigationController(rootViewController: TestTextVC.create(type: .welcome))
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
+    }
+    
     //MARK: - Interaction
     
     @objc func didTapActiveButton() {
@@ -300,19 +330,6 @@ class RadarVC: UIViewController, PageVCChild {
         }
     }
     
-    func presentPermissionsScreen() {
-        let permissionsVC = PermissionsVC.create()
-        permissionsVC.modalPresentationStyle = .fullScreen
-        present(permissionsVC, animated: true, completion: {
-            PermissionsManager.areAllNecessaryPermissionsGranted { areAllGranted in
-                self.isLocationServicesEnabled = areAllGranted
-                DispatchQueue.main.async {
-                    self.renderIsActive()
-                }
-            }
-        })
-    }
-    
     func cupidButtonPressed() {
         present(ForgeMatchVC.create(), animated: true)
     }
@@ -331,36 +348,6 @@ class RadarVC: UIViewController, PageVCChild {
     
     @objc func didTapCenterCircle() {
         didTapActiveButton()
-    }
-    
-    func animateANewCircle() {
-        UIView.animate(withDuration: 0.2, delay: 0) {
-            self.centerCircleButton.transform = .identity
-        }
-        guard isLocationServicesEnabled else { return }
-        let newCircleView = UIView()
-        view.addSubview(newCircleView)
-        newCircleView.translatesAutoresizingMaskIntoConstraints = false
-        newCircleView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        newCircleView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        newCircleView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: RadarVC.CIRCLE_WIDTH_RATIO, constant: -10).isActive = true
-        newCircleView.widthAnchor.constraint(equalTo: newCircleView.heightAnchor, multiplier: 1).isActive = true
-        newCircleView.backgroundColor = .clear
-        newCircleView.layer.borderWidth = 2
-        newCircleView.layer.borderColor = UIColor.white.cgColor
-        newCircleView.roundCornersViaCornerRadius(radius: firstCircleView.bounds.width / 2)
-        pulse(pulseView: newCircleView, repeating: false, duration: RadarVC.PULSE_DURATION)
-        DispatchQueue.main.asyncAfter(deadline: .now() + RadarVC.PULSE_DURATION) {
-            newCircleView.removeFromSuperview()
-        }
-    }
-    
-    //MARK: - Helpers
-    
-    func presentTest() {
-        let nav = UINavigationController(rootViewController: TestTextVC.create(type: .welcome))
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true)
     }
     
 }

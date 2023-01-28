@@ -131,7 +131,6 @@ class UserService: NSObject {
     }
     
     func updateMatchableStatus(active: Bool) async throws {
-        
         let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: active, surveyResponses: authedUser.surveyResponses, token: authedUser.token, isSuperuser: authedUser.isSuperuser)
         try await UserAPI.updateMatchableStatus(matchableStatus: active, email: authedUser.email)
         //LocationManager start/stop updating location is handled in RadarVC on rerender right now
@@ -194,8 +193,8 @@ class UserService: NSObject {
     }
 
     func deleteMyAccount() async throws {
-        try await UserAPI.deleteUser(email: authedUser.email)
         guard isLoggedIntoAnAccount else { return } //prevents infinite loop on authedUser didSet
+        try await UserAPI.deleteUser(email: authedUser.email)
         LocationManager.shared.stopLocationServices()
         eraseUserFromFilesystem()
         frontendCompleteUser = nil
