@@ -107,10 +107,13 @@ class AlertManager {
     static func showSettingsAlertController(title: String,
                                             message: String,
                                             settingsType: OpenSettingsType,
+                                            cancelActionHandler: (() -> Void)? = nil,
                                             on controller: UIViewController) {
         DispatchQueue.main.async {
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel) { alertAction in
+                cancelActionHandler?()
+            }
             let settingsAction = UIAlertAction(title: NSLocalizedString("open settings", comment: ""), style: .default) { (UIAlertAction) in
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)! as URL, options: [:], completionHandler: nil)
             }
@@ -132,7 +135,7 @@ class AlertManager {
     @MainActor
     static func showLocationDemoController(on controller: UIViewController) {
         DispatchQueue.main.async {
-            let alertController = UIAlertController(title: "\(Constants.appDisplayName) requires \"always, precise\" location to work properly", message: "", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "\(Constants.appDisplayName) requires\n\"always, precise\"\nlocation to work properly", message: "", preferredStyle: .alert)
             let okAction = UIAlertAction(title: NSLocalizedString("sounds good", comment: ""), style: .default) { (UIAlertAction) in
                 do {
                     try LocationManager.shared.requestPermissionServices()

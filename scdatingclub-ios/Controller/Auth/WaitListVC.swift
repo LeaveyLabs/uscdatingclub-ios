@@ -26,7 +26,7 @@ class WaitListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.font = AppFont.bold.size(30)
-        subtitleLabel.font = AppFont2.medium.size(17)
+        subtitleLabel.font = AppFont2.regular.size(17)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
 }

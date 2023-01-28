@@ -95,10 +95,9 @@ class PermissionsVC: UIViewController {
     }
     
     @objc func delayedRerender() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
-            animateUnallowedViews()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in //could take a slight delay for permissions updates to persist
             rerender()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) { [self] in
+            DispatchQueue.main.asyncAfter(deadline: .now()) { [self] in //goodToGo depends on ui state, so give ui time to update
                 if goodToGo {
                     finishWithProperPermissions()
                 }
@@ -106,14 +105,17 @@ class PermissionsVC: UIViewController {
         }
     }
     
+    @MainActor
     func finishWithProperPermissions() {
+        let topLoadingView = createTopLoadingView()
         Task {
             do {
                 try await UserService.singleton.updateMatchableStatus(active:true)
             } catch {
                 //TODO: log to firebase
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0) { [self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
+                topLoadingView.removeFromSuperview()
                 if let _ = parent as? UINavigationController {
                     transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -148,6 +150,7 @@ class PermissionsVC: UIViewController {
         }
     }
     
+    @MainActor
     @objc func rerender() {
         if LocationManager.shared.isLocationServicesProperlyAuthorized() {
             DispatchQueue.main.async { [self] in
@@ -192,6 +195,8 @@ class PermissionsVC: UIViewController {
                 }
             }
         }
+        
+        animateUnallowedViews()
     }
     
     //MARK: - Interaction
@@ -200,12 +205,11 @@ class PermissionsVC: UIViewController {
     @objc func noNotificationsButtonPressed() {
         AlertManager.showAlert(
             title: "are you sure?",
-            subtitle: "you only get \(Constants.minutesToRespond) minutes to respond to your match.\n\nwithout notifications, you'll probably miss your chance each time.",
+            subtitle: "\nyou only get \(Constants.minutesToRespond) minutes to respond to your match.\n\nwithout notifications, you'll probably miss your chance each time.",
             primaryActionTitle: "continue without notifications",
             primaryActionHandler: {
             DispatchQueue.main.async { [self] in
                 declinedNotifications = true
-                rerender()
                 delayedRerender()
             }
         }, secondaryActionTitle: "go back", secondaryActionHandler: {
@@ -221,17 +225,28 @@ class PermissionsVC: UIViewController {
                 try LocationManager.shared.requestPermissionServices()
             }
         } catch {
-            AlertManager.showSettingsAlertController(title: "\(Constants.appDisplayName) requires \"always, precise\" location to work properly", message: "", settingsType: .location, on: self)
+            AlertManager.showSettingsAlertController(title: "\(Constants.appDisplayName) requires\n\"always, precise\"\nlocation to work properly", message: "", settingsType: .location, cancelActionHandler: {
+                self.animateUnallowedViews()
+            }, on: self)
         }
     }
     
     @objc func notificationsButtonDidTapped() {
-        NotificationsManager.shared.askForNewNotificationPermissionsIfNecessary { granted in
-            DispatchQueue.main.async { [self] in
-                if !granted {
-                    AlertManager.showSettingsAlertController(title: "turn on notifications in settings", message: "", settingsType: .notifications, on: self)
-                } else {
-                    rerender()
+        Task {
+            switch await NotificationsManager.shared.getNotificationStatus() {
+            case .denied:
+                AlertManager.showSettingsAlertController(title: "turn on notifications in settings", message: "", settingsType: .notifications, cancelActionHandler: {
+                    self.noNotificationsButtonPressed()
+                }, on: self)
+            default:
+                NotificationsManager.shared.askForNewNotificationPermissionsIfNecessary { granted in
+                    DispatchQueue.main.async { [self] in
+                        if !granted {
+                            noNotificationsButtonPressed()
+                        } else {
+                            rerender()
+                        }
+                    }
                 }
             }
         }

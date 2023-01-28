@@ -1137,7 +1137,7 @@ connection again.</string>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <string key="text">we're still a young app and are rolling out access in phases.
 
-hold tight and we'll send you an email as soon as you can signup!</string>
+hold tight and we'll send you an email once you can signup!</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" name="customWhite"/>
                                         <nil key="highlightedColor"/>

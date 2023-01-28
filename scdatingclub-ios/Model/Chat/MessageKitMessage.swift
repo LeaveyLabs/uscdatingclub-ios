@@ -5,7 +5,7 @@
 //  Created by Adam Novak on 2022/05/16.
 //
 
-import Foundation
+import UIKit
 import MessageKit
 
 struct MessageKitMessage: MessageType {
@@ -32,7 +32,7 @@ struct MessageKitMessage: MessageType {
     }
     
     init(message: Message, conversation: Conversation) {
-        let attributedMessage = NSAttributedString(string: message.body, attributes: [.font: Message.normalDisplayAttributes[.font]])
+        let attributedMessage = NSAttributedString(string: message.body, attributes: [.font: Message.normalDisplayAttributes[.font] as! UIFont])
         
         self.kind = .attributedText(attributedMessage)
         self.sender = message.senderId == UserService.singleton.getId() ? UserService.singleton.getUserAsReadOnlyUser() : conversation.sangdaebang

@@ -170,7 +170,7 @@ we don't save any location data and use new Apple APIs for minimal battery usage
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hpG-cj-tUU">
-                                                <rect key="frame" x="293" y="27.000000000000004" width="53" height="51.333333333333329"/>
+                                                <rect key="frame" x="293" y="22.000000000000004" width="53" height="51.333333333333329"/>
                                                 <color key="tintColor" name="customGreen"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="hpG-cj-tUU" secondAttribute="height" id="XRT-Sg-uUQ"/>
@@ -188,7 +188,7 @@ we don't save any location data and use new Apple APIs for minimal battery usage
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="hpG-cj-tUU" secondAttribute="trailing" constant="7" id="9Qm-rP-frC"/>
                                             <constraint firstAttribute="trailing" secondItem="JO1-xb-lIr" secondAttribute="trailing" constant="10" id="L2s-vO-hpL"/>
-                                            <constraint firstItem="hpG-cj-tUU" firstAttribute="centerY" secondItem="C6v-33-zp7" secondAttribute="centerY" constant="-30" id="Mru-0H-bkS"/>
+                                            <constraint firstItem="hpG-cj-tUU" firstAttribute="centerY" secondItem="C6v-33-zp7" secondAttribute="centerY" constant="-35" id="Mru-0H-bkS"/>
                                             <constraint firstItem="JO1-xb-lIr" firstAttribute="top" secondItem="C6v-33-zp7" secondAttribute="bottom" constant="10" id="Xot-41-faj"/>
                                             <constraint firstItem="JO1-xb-lIr" firstAttribute="leading" secondItem="eiO-re-qkU" secondAttribute="leading" constant="10" id="eic-Bd-CZK"/>
                                             <constraint firstItem="C6v-33-zp7" firstAttribute="leading" secondItem="eiO-re-qkU" secondAttribute="leading" id="etS-oC-aUq"/>
@@ -214,7 +214,7 @@ we don't save any location data and use new Apple APIs for minimal battery usage
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OFT-0F-IuS">
-                                                <rect key="frame" x="293" y="57" width="53" height="51.333333333333329"/>
+                                                <rect key="frame" x="293" y="52" width="53" height="51.333333333333329"/>
                                                 <color key="tintColor" name="customGreen"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="OFT-0F-IuS" secondAttribute="height" id="OPd-mE-Qc2"/>
@@ -232,7 +232,7 @@ we don't save any location data and use new Apple APIs for minimal battery usage
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="OFT-0F-IuS" secondAttribute="trailing" constant="7" id="IUv-G9-VZH"/>
                                             <constraint firstAttribute="trailing" secondItem="fIt-5U-R37" secondAttribute="trailing" constant="10" id="UyC-t0-9E2"/>
-                                            <constraint firstItem="OFT-0F-IuS" firstAttribute="centerY" secondItem="qNn-gA-sjH" secondAttribute="centerY" constant="-30" id="ZCb-UQ-5gZ"/>
+                                            <constraint firstItem="OFT-0F-IuS" firstAttribute="centerY" secondItem="qNn-gA-sjH" secondAttribute="centerY" constant="-35" id="ZCb-UQ-5gZ"/>
                                             <constraint firstItem="qNn-gA-sjH" firstAttribute="leading" secondItem="N19-qf-wdD" secondAttribute="leading" id="bBV-6H-zqN"/>
                                             <constraint firstItem="OFT-0F-IuS" firstAttribute="width" secondItem="qNn-gA-sjH" secondAttribute="width" multiplier="0.15" id="bbW-Ty-rQy"/>
                                             <constraint firstAttribute="trailing" secondItem="qNn-gA-sjH" secondAttribute="trailing" id="lVD-8v-oq1"/>
@@ -258,7 +258,7 @@ we don't save any location data and use new Apple APIs for minimal battery usage
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i4e-on-Dhb">
-                                                <rect key="frame" x="293" y="17.000000000000004" width="53" height="51.333333333333329"/>
+                                                <rect key="frame" x="293" y="11.999999999999996" width="53" height="51.333333333333314"/>
                                                 <color key="tintColor" name="customGreen"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="i4e-on-Dhb" secondAttribute="height" id="aoM-NO-nSA"/>
@@ -282,7 +282,7 @@ we don't save any location data and use new Apple APIs for minimal battery usage
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="i4e-on-Dhb" firstAttribute="centerY" secondItem="Hnf-PW-fEK" secondAttribute="centerY" constant="-30" id="KNX-W8-0Ah"/>
+                                            <constraint firstItem="i4e-on-Dhb" firstAttribute="centerY" secondItem="Hnf-PW-fEK" secondAttribute="centerY" constant="-35" id="KNX-W8-0Ah"/>
                                             <constraint firstItem="Hnf-PW-fEK" firstAttribute="leading" secondItem="aTU-pI-bhl" secondAttribute="leading" id="Nrq-xk-VqT"/>
                                             <constraint firstItem="i4e-on-Dhb" firstAttribute="width" secondItem="Hnf-PW-fEK" secondAttribute="width" multiplier="0.15" id="Nw9-Iv-b1R"/>
                                             <constraint firstItem="9n7-fm-D2C" firstAttribute="top" secondItem="Hnf-PW-fEK" secondAttribute="bottom" constant="10" id="QIH-mP-ELh"/>

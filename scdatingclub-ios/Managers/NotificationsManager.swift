@@ -57,7 +57,7 @@ class NotificationsManager: NSObject {
     
     //MARK: - Permission and Status
     
-    func getNotificationStatus()async -> UNAuthorizationStatus {
+    func getNotificationStatus() async -> UNAuthorizationStatus {
         return await center.notificationSettings().authorizationStatus
     }
     
@@ -88,7 +88,7 @@ class NotificationsManager: NSObject {
                             UIApplication.shared.registerForRemoteNotifications()
                         }
                     }
-                    closure(true)
+                    closure(granted)
                 }
             default:
                 closure(true)
