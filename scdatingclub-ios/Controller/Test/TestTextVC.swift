@@ -84,7 +84,7 @@ class TestTextVC: UIViewController {
             primaryButton.alpha = 0
         case .finished:
             if isFirstTest {
-                secondaryLabel.text = "welcome to\nsc dating club."
+                secondaryLabel.text = "welcome to\n\(Constants.appDisplayName)."
                 UIView.animate(withDuration: 1) { [self] in
                     activityIndicatorView.stopAnimating()
                     primaryLabel.text = "responses submitted"

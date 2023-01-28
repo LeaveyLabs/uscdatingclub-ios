@@ -19,6 +19,9 @@ class AuthStartPageVC: UIPageViewController {
             pageControl.currentPage = currentIndex
         }
     }
+    var isDisplayedInAuth: Bool {
+        navigationController != nil
+    }
     
     
     //MARK: - Initialization
@@ -40,19 +43,15 @@ class AuthStartPageVC: UIPageViewController {
     
     var authStartVC: AuthStartVC!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        authStartVC.agreementTextView.isHidden = navigationController == nil
-    }
-    
     //MARK: - Setup
     
     func setupPageVC() {
-        authStartVC = AuthStartVC.create()
-        vcs = [authStartVC,
-               ScreenDemoVC.create(type: .notif),
+        vcs = [ScreenDemoVC.create(type: .notif),
                ScreenDemoVC.create(type: .match),
                ScreenDemoVC.create(type: .connect)]
+        if isDisplayedInAuth {
+            vcs.insert(AuthStartVC.create(), at: 0)
+        }
         
         self.dataSource = self
         self.delegate = self
@@ -69,7 +68,7 @@ class AuthStartPageVC: UIPageViewController {
         continueButton = SimpleButton()
         view.addSubview(continueButton)
         continueButton.backgroundColor = .customWhite
-        continueButton.configure(title: "join the club", systemImage: "")
+        continueButton.configure(title: isDisplayedInAuth ? "join the club" : "got it", systemImage: "")
         continueButton.internalButton.addTarget(self, action: #selector(continueButtonDidPressed), for: .touchUpInside)
         continueButton.translatesAutoresizingMaskIntoConstraints = false
         continueButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
@@ -77,7 +76,6 @@ class AuthStartPageVC: UIPageViewController {
         continueButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         continueButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         continueButton.alpha = 0
-        continueButton.isHidden = navigationController == nil
     }
     
     func setupPageControl() {
@@ -106,7 +104,11 @@ class AuthStartPageVC: UIPageViewController {
     }
     
     @objc func continueButtonDidPressed() {
-        navigationController?.pushViewController(EnterNumberVC.create(), animated: true)
+        if isDisplayedInAuth {
+            navigationController?.pushViewController(EnterNumberVC.create(), animated: true)
+        } else {
+            dismiss(animated: true)
+        }
     }
     
     //MARK: - Helper

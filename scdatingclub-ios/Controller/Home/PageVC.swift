@@ -54,7 +54,7 @@ class PageVC: UIPageViewController {
         asdf.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         
         let radarHeader = UILabel()
-        radarHeader.text = "sc dating club"
+        radarHeader.text = "\(Constants.appDisplayName)"
         radarHeader.textColor = .white
         asdf.addSubview(radarHeader)
         

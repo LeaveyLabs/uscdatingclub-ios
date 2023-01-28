@@ -38,15 +38,15 @@ class ScreenDemoVC: UIViewController {
         switch screenDemoType {
         case .match:
             screenImageView.image = UIImage(named: "matchscreen")
-            subtitleLabel.text = "get matched based on"
-            titleLabel.text = "shared interests & values"
+            subtitleLabel.text = "see your compatibility and get"
+            titleLabel.text = "5 minutes to respond"
         case .notif:
             screenImageView.image = UIImage(named: "notificationscreen")
             subtitleLabel.text = "find out when your next match"
             titleLabel.text = "walks into your life"
         case .connect:
             screenImageView.image = UIImage(named: "connectscreen")
-            subtitleLabel.text = "5 minutes to"
+            subtitleLabel.text = "spontaneously"
             titleLabel.text = "meet up and say hi"
         default:
             break
@@ -54,7 +54,7 @@ class ScreenDemoVC: UIViewController {
     }
     
     func setupLabels() {
-        subtitleLabel.font = AppFont.medium.size(18)
+        subtitleLabel.font = AppFont.medium.size(17)
         titleLabel.font = AppFont.semibold.size(25)
     }
 }

@@ -153,7 +153,7 @@ class AlertManager {
     @MainActor
     static func showLocationDemoController(on controller: UIViewController) {
         DispatchQueue.main.async {
-            let alertController = UIAlertController(title: "sc dating club requires \"always, precise\" location to work properly", message: "", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "\(Constants.appDisplayName) requires \"always, precise\" location to work properly", message: "", preferredStyle: .alert)
             let okAction = UIAlertAction(title: NSLocalizedString("sounds good", comment: ""), style: .default) { (UIAlertAction) in
                 do {
                     try LocationManager.shared.requestPermissionServices()
