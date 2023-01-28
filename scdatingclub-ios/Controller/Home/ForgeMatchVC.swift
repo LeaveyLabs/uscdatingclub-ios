@@ -89,7 +89,10 @@ class ForgeMatchVC: UIViewController {
         guard
             let firstId = selectedIds.first,
             let secondId = selectedIds.last
-        else { return }
+        else {
+            AlertManager.showInfoCentered("select exactly two users", "", on: self)
+            return
+        }
         Task {
             do {
                 try await MatchAPI.forceCreateMatch(user1Id: firstId, user2Id: secondId)

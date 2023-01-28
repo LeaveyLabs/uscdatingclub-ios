@@ -198,7 +198,7 @@ class UserService: NSObject {
             try await UserAPI.deleteUser(email: authedUser.email)
             try await logOutFromDevice()
         } catch {
-            print(error)
+            print("error message !", error)
             throw(error)
         }
     }

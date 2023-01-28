@@ -14,7 +14,7 @@
         <!--Auth StartVC-->
         <scene sceneID="O0K-jo-Zkd">
             <objects>
-                <viewController storyboardIdentifier="afff" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HpL-iT-8ZP" customClass="AuthStartVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="afff" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HpL-iT-8ZP" customClass="AuthStartVC" customModule="scdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g07-uP-5a9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,7 +30,7 @@
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="10"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZSG-G0-9OX" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZSG-G0-9OX" customClass="SimpleButton" customModule="scdatingclub_ios" customModuleProvider="target">
                                 <rect key="frame" x="20" y="649" width="335" height="60"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -74,7 +74,7 @@ connection again.</string>
         <!--ScreenDemoVC-->
         <scene sceneID="B4l-Qj-AhP">
             <objects>
-                <viewController storyboardIdentifier="ScreenDemoVC" title="ScreenDemoVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0cK-h2-1yK" customClass="ScreenDemoVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScreenDemoVC" title="ScreenDemoVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0cK-h2-1yK" customClass="ScreenDemoVC" customModule="scdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rgA-QL-z1x">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -123,7 +123,7 @@ connection again.</string>
         <!--Auth Start PageVC-->
         <scene sceneID="ojk-GV-qVN">
             <objects>
-                <pageViewController storyboardIdentifier="AuthStartPageVC" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="JHw-OX-fts" customClass="AuthStartPageVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController storyboardIdentifier="AuthStartPageVC" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="JHw-OX-fts" customClass="AuthStartPageVC" customModule="scdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="aHD-9b-F5m"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hCx-Dr-hgX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -133,7 +133,7 @@ connection again.</string>
         <!--EnterEmailVC-->
         <scene sceneID="vf0-ZZ-RoJ">
             <objects>
-                <viewController storyboardIdentifier="EnterEmailVC" title="EnterEmailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2yy-YR-CED" customClass="EnterEmailVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnterEmailVC" title="EnterEmailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2yy-YR-CED" customClass="EnterEmailVC" customModule="scdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fKd-2M-HSw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="755"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -166,14 +166,14 @@ connection again.</string>
                                         <color key="textColor" name="mist-black"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="we'll verify you're a student" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="a5m-Nu-Zt9">
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="we'll verify that you're a student" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="a5m-Nu-Zt9">
                                         <rect key="frame" x="25" y="107" width="325" height="20"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" name="customWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="baa-iv-jT2" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="baa-iv-jT2" customClass="SimpleButton" customModule="scdatingclub_ios" customModuleProvider="target">
                                         <rect key="frame" x="20" y="643" width="335" height="50"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -251,7 +251,7 @@ connection again.</string>
         <!--ConfirmCodeViewController-->
         <scene sceneID="hmB-I6-6oq">
             <objects>
-                <viewController storyboardIdentifier="ConfirmCodeVC" title="ConfirmCodeVC" id="UyC-fl-2SL" userLabel="ConfirmCodeViewController" customClass="ConfirmCodeVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConfirmCodeVC" title="ConfirmCodeVC" id="UyC-fl-2SL" userLabel="ConfirmCodeViewController" customClass="ConfirmCodeVC" customModule="scdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Lt-5I-lsT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="755"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -298,14 +298,14 @@ connection again.</string>
                                             <action selector="didPressedResendButton:" destination="UyC-fl-2SL" eventType="touchUpInside" id="hUK-98-a5j"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2An-cd-KXL" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2An-cd-KXL" customClass="SimpleButton" customModule="scdatingclub_ios" customModuleProvider="target">
                                         <rect key="frame" x="20" y="643" width="335" height="50"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="KPh-7h-lC0"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Gy-Jo-jwp" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Gy-Jo-jwp" customClass="SimpleButton" customModule="scdatingclub_ios" customModuleProvider="target">
                                         <rect key="frame" x="20" y="578" width="335" height="50"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -371,7 +371,7 @@ connection again.</string>
         <!--ChooseUsernameViewController-->
         <scene sceneID="4dW-t4-rG8">
             <objects>
-                <viewController storyboardIdentifier="RequestResetNumberViewController" title="ResetPasswordViewController" id="eTa-hF-UwB" userLabel="ChooseUsernameViewController" customClass="RequestResetNumberViewController" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RequestResetNumberViewController" title="ResetPasswordViewController" id="eTa-hF-UwB" userLabel="ChooseUsernameViewController" customClass="RequestResetNumberViewController" customModule="scdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L9Z-9K-Y5c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="755"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -461,7 +461,7 @@ connection again.</string>
         <!--CreatePasswordViewController-->
         <scene sceneID="IvI-m3-3xq">
             <objects>
-                <viewController storyboardIdentifier="ResetNumberViewController" title="EnterEmailViewController" id="A2t-w6-2pC" userLabel="CreatePasswordViewController" customClass="ResetNumberViewController" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResetNumberViewController" title="EnterEmailViewController" id="A2t-w6-2pC" userLabel="CreatePasswordViewController" customClass="ResetNumberViewController" customModule="scdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JgE-lR-ysF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="755"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -578,7 +578,7 @@ connection again.</string>
         <!--EnterNumberViewController-->
         <scene sceneID="ZgP-jo-7DU">
             <objects>
-                <viewController storyboardIdentifier="EnterNumberVC" title="EnterNumberVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gJj-BM-Q35" userLabel="EnterNumberViewController" customClass="EnterNumberVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnterNumberVC" title="EnterNumberVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gJj-BM-Q35" userLabel="EnterNumberViewController" customClass="EnterNumberVC" customModule="scdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NJS-BK-ZPf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="755"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -638,7 +638,7 @@ connection again.</string>
                                         <color key="textColor" name="customWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ndm-Z8-f9K" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ndm-Z8-f9K" customClass="SimpleButton" customModule="scdatingclub_ios" customModuleProvider="target">
                                         <rect key="frame" x="20" y="643" width="335" height="50"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -694,7 +694,7 @@ connection again.</string>
         <!--CreateProfileVC-->
         <scene sceneID="cgm-Pz-lOI">
             <objects>
-                <viewController storyboardIdentifier="CreateProfileVC" title="CreateProfileVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AOZ-sr-0WT" customClass="CreateProfileVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateProfileVC" title="CreateProfileVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AOZ-sr-0WT" customClass="CreateProfileVC" customModule="scdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hsh-G4-onJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="755"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -702,7 +702,7 @@ connection again.</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tQp-Gl-L1J">
                                 <rect key="frame" x="0.0" y="47" width="375" height="708"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sdw-o0-c9k" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sdw-o0-c9k" customClass="SimpleButton" customModule="scdatingclub_ios" customModuleProvider="target">
                                         <rect key="frame" x="20" y="643" width="335" height="50"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -931,7 +931,7 @@ connection again.</string>
         <!--PermissionsViewController-->
         <scene sceneID="Yti-mE-G9E">
             <objects>
-                <viewController storyboardIdentifier="HowItWorksVC" title="HowItWorksVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hO4-Gb-5OM" userLabel="PermissionsViewController" customClass="HowItWorksVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HowItWorksVC" title="HowItWorksVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hO4-Gb-5OM" userLabel="PermissionsViewController" customClass="HowItWorksVC" customModule="scdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f0d-39-HlL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -949,7 +949,7 @@ connection again.</string>
                                 <rect key="frame" x="0.0" y="135" width="375" height="573"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aap-Mf-mrf" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aap-Mf-mrf" customClass="SimpleButton" customModule="scdatingclub_ios" customModuleProvider="target">
                                 <rect key="frame" x="20" y="708" width="335" height="55"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -984,7 +984,7 @@ connection again.</string>
         <!--EnterNameViewController-->
         <scene sceneID="cfY-bq-A10">
             <objects>
-                <viewController storyboardIdentifier="EnterBiosVC" title="EnterBiosVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nhc-Zl-MuL" userLabel="EnterNameViewController" customClass="EnterBiosVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnterBiosVC" title="EnterBiosVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nhc-Zl-MuL" userLabel="EnterNameViewController" customClass="EnterBiosVC" customModule="scdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DDH-O0-6tm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="755"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -1037,14 +1037,14 @@ connection again.</string>
                                             <action selector="textFieldEditingChanged:" destination="nhc-Zl-MuL" eventType="editingChanged" id="MPh-IW-IAd"/>
                                         </connections>
                                     </textField>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FP0-rY-adH" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FP0-rY-adH" customClass="SimpleButton" customModule="scdatingclub_ios" customModuleProvider="target">
                                         <rect key="frame" x="20" y="643" width="335" height="50"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="bx2-Lr-BRT"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sexual identity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7m2-TO-Szv" customClass="InsetLabel" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sexual identity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7m2-TO-Szv" customClass="InsetLabel" customModule="scdatingclub_ios" customModuleProvider="target">
                                         <rect key="frame" x="24.999999999999993" y="86" width="109.33333333333331" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -1054,7 +1054,7 @@ connection again.</string>
                                         <color key="textColor" name="customWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sexual preference" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWg-br-xyG" customClass="InsetLabel" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sexual preference" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWg-br-xyG" customClass="InsetLabel" customModule="scdatingclub_ios" customModuleProvider="target">
                                         <rect key="frame" x="25" y="169" width="135.33333333333334" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -1118,7 +1118,7 @@ connection again.</string>
         <!--WaitListVC-->
         <scene sceneID="tHR-gF-Wky">
             <objects>
-                <viewController storyboardIdentifier="WaitListVC" title="WaitListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5bg-ML-SDB" customClass="WaitListVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WaitListVC" title="WaitListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5bg-ML-SDB" customClass="WaitListVC" customModule="scdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="k2L-wK-qC0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -1178,7 +1178,7 @@ hold tight and we'll send you an email as soon as you can signup!</string>
         <!--Auth StartVC-->
         <scene sceneID="zpP-w7-2O3">
             <objects>
-                <viewController storyboardIdentifier="AuthStartVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Aag-r5-Ide" customClass="AuthStartVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthStartVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Aag-r5-Ide" customClass="AuthStartVC" customModule="scdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tON-0s-fSJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1241,7 +1241,7 @@ hold tight and we'll send you an email as soon as you can signup!</string>
         <image name="notificationscreen" width="860" height="1421"/>
         <image name="questionmark.circle" catalog="system" width="128" height="123"/>
         <namedColor name="AccentColor">
-            <color red="0.83529411764705885" green="0.30588235294117649" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="customBlack">
             <color red="0.067000001668930054" green="0.067000001668930054" blue="0.067000001668930054" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

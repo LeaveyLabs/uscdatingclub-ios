@@ -190,8 +190,7 @@ extension MatchFoundTableVC: UITableViewDataSource {
         case 0:
             let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.ConnectHeaderCell, for: indexPath) as! ConnectHeaderCell
             cell.configure(timeLeft: matchInfo.timeLeftToRespondString,
-                           distanceAway: prettyDistance(meters: Double(matchInfo.distance),
-                                                        shortened: true),
+                           distanceAway: matchInfo.distance,
                            isWaiting: isWaiting,
                            matchName: matchInfo.partnerName)
             self.timeLeftLabel = cell.timeLeftLabel
