@@ -113,7 +113,7 @@ class AuthStartPageVC: UIPageViewController {
     
     //MARK: - Helper
     
-    func recalculateCurrentIndex() {
+    func recalculateCurrentIndex(animateButton: Bool = true) {
         currentIndex = vcs.firstIndex(of: viewControllers!.first!)!
         if currentIndex == vcs.count-1 && continueButton.alpha==0 {
             UIView.animate(withDuration: 0.3) {
@@ -159,6 +159,7 @@ extension AuthStartPageVC: UIPageViewControllerDelegate, UIScrollViewDelegate {
         //prevent going beyond edge
         if (currentIndex == 0 && scrollView.contentOffset.x < scrollView.bounds.size.width) || (currentIndex == vcs.count - 1 && scrollView.contentOffset.x > scrollView.bounds.size.width) {
           scrollView.contentOffset = CGPoint(x: scrollView.bounds.size.width, y: 0)
+            recalculateCurrentIndex(animateButton: false) //ensure button remains visible
         }
     }
     
@@ -166,6 +167,7 @@ extension AuthStartPageVC: UIPageViewControllerDelegate, UIScrollViewDelegate {
     public func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         if (currentIndex == 0 && scrollView.contentOffset.x <= scrollView.bounds.size.width) || (currentIndex == vcs.count - 1 && scrollView.contentOffset.x >= scrollView.bounds.size.width) {
           targetContentOffset.pointee = CGPoint(x: scrollView.bounds.size.width, y: 0)
+            recalculateCurrentIndex(animateButton: false) //ensure button remains visible
         }
       }
         
