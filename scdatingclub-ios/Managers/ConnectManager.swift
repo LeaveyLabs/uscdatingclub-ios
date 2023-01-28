@@ -129,7 +129,7 @@ class ConnectManager: NSObject {
             return
         }
         
-        let fixedMatchCoordinate = CLLocationCoordinate2D(latitude: 34.02172249062856, longitude: -118.2830645563657) //right in front of leavey library
+//        let fixedMatchCoordinate = CLLocationCoordinate2D(latitude: 34.02172249062856, longitude: -118.2830645563657) //right in front of leavey library
         let matchCoordinate = locationSocket?.partnerLocation ?? matchInfo.location
         let matchLocation = CLLocation(latitude: matchCoordinate.latitude, longitude: matchCoordinate.longitude)
         let distance = currentLocation.distance(from: matchLocation)

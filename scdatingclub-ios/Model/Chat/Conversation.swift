@@ -40,7 +40,7 @@ class Conversation {
     //MARK: - Getters
         
     func getRenderedChatObjects() -> [MessageType] {
-        var allChatObjects = Array(chatObjects.suffix(renderedIndex))
+        let allChatObjects = Array(chatObjects.suffix(renderedIndex))
         return allChatObjects
     }
     

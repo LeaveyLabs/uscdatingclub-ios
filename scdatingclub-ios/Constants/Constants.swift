@@ -30,7 +30,10 @@ enum Constants {
         static let MostRecentNotifiationStorageKey: String = "mostRecentNotification"
         static let MostRecentMeetUpButtonPressDate: String = "mostRecentMeetUpBuyttonPressDate"
     }
-    
+
+    static let appDisplayName = Bundle.main.infoDictionary!["CFBundleDisplayName"] as! String
+    static let appTechnicalName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
+
     static let defaultMailLink = URL(string: "mailto://")!
     static let gmailLink = URL(string: "googlegmail://")!
     static let faqLink = URL(string: "https://scdatingclub.com/faq")!

@@ -38,7 +38,7 @@ class AuthStartVC: UIViewController, UITextViewDelegate {
         titleLabel.font = AppFont.bold.size(30)
         subtitleLabel.font = AppFont.medium.size(18)
         headerLabel.font = AppFont2.regular.size(12)
-        headerLabel.text = "sc dating club is an iOS app from Leavey Labs. It is not affiliated with any external organizations or institutions."
+        headerLabel.text = "\(Constants.appDisplayName) is an iOS app from Leavey Labs. It is not affiliated with any external organizations or institutions."
     }
     
     override func viewDidAppear(_ animated: Bool) {
