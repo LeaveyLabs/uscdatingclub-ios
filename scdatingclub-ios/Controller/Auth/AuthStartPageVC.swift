@@ -135,8 +135,9 @@ extension AuthStartPageVC: UIPageViewControllerDelegate, UIScrollViewDelegate {
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        if continueButton.alpha>0 {
-            UIView.animate(withDuration: 0.3) {
+        let isScrollingToLeft = scrollView.panGestureRecognizer.velocity(in: view).x > 0
+        if continueButton.alpha>0 && isScrollingToLeft {
+            UIView.animate(withDuration: 0.2) {
                 self.continueButton.alpha = 0
             }
         }
@@ -144,7 +145,7 @@ extension AuthStartPageVC: UIPageViewControllerDelegate, UIScrollViewDelegate {
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if currentIndex == vcs.count-1 && continueButton.alpha==0 {
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.2) {
                 self.continueButton.alpha = 1
             }
         }
