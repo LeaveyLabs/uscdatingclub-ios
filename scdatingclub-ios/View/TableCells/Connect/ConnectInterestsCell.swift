@@ -49,7 +49,7 @@ class ConnectInterestsCell: UITableViewCell {
             let similarity = textSimilarities[x]
             let interestUi = interestUis[x]
             interestUi.0.text = similarity.sharedResponse
-            interestUi.1.text = similarity.trait
+            interestUi.1.text = similarity.emoji
         }
         
         for x in textSimilarities.count..<3 {

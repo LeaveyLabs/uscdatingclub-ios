@@ -60,6 +60,7 @@ struct NumericalSimilarity: Codable {
 }
 
 struct TextSimilarity: Codable {
+    let emoji: String
     let trait: String
     let sharedResponse: String
 }

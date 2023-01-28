@@ -19,11 +19,29 @@ struct PermissionsManager {
         }
     }
     
+    static func areAllNecessaryPermissionsGranted(closure: @escaping (Bool) -> Void) {
+        Task {
+            DispatchQueue.main.async { //UIApplication properties must be accessed on main thread
+                let areAllGranted = LocationManager.shared.isLocationServicesProperlyAuthorized() && (UIApplication.shared.backgroundRefreshStatus == .available || ProcessInfo.processInfo.isLowPowerModeEnabled)
+                closure(areAllGranted)
+            }
+        }
+    }
+    
     static func ensurePermissionsAreGranted() {
         areAllPermissionsGranted { granted in
             if !granted {
                 LocationManager.shared.stopLocationServices()
                 NotificationCenter.default.post(name: .permissionsWereRevoked, object: nil)
+            }
+        }
+    }
+    
+    static func ensureNecessaryPermissionsAreGranted() {
+        areAllNecessaryPermissionsGranted() { granted in
+            if !granted {
+                LocationManager.shared.stopLocationServices()
+                NotificationCenter.default.post(name: .necessaryPermissionsWereRevoked, object: nil)
             }
         }
     }

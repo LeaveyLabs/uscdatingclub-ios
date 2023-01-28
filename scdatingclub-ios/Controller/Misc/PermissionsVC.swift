@@ -13,7 +13,7 @@ class PermissionsVC: UIViewController {
     @IBOutlet var locationButton: SimpleButton!
     @IBOutlet var backgroundRefreshButton: SimpleButton!
     @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var learnMoreButton: UIButton!
+    @IBOutlet var noNotificationsButton: SimpleButton!
     @IBOutlet var label1: UILabel!
     @IBOutlet var label2: UILabel!
     @IBOutlet var label3: UILabel!
@@ -24,8 +24,10 @@ class PermissionsVC: UIViewController {
     let NOTALLOWED_ALPHA = 0.5
 
     var goodToGo: Bool {
-        checkmarkImageView1.alpha == 1 && checkmarkImageView2.alpha == 1 && checkmarkImageView3.alpha == 1
+        checkmarkImageView1.alpha == 1 && checkmarkImageView2.alpha == 1 && (checkmarkImageView3.alpha == 1 || declinedNotifications)
     }
+    
+    var declinedNotifications: Bool = false
 
     //MARK: - Initialization
     
@@ -70,8 +72,10 @@ class PermissionsVC: UIViewController {
         locationButton.internalButton.addTarget(self, action: #selector(locationButtonDidTapped), for: .touchUpInside)
         notificationsButton.internalButton.addTarget(self, action: #selector(notificationsButtonDidTapped), for: .touchUpInside)
         backgroundRefreshButton.internalButton.addTarget(self, action: #selector(backgroundRefreshButtonDidTapped), for: .touchUpInside)
-        learnMoreButton.addTarget(self, action: #selector(learnMoreButtonPressed), for: .touchUpInside)
-        learnMoreButton.setTitleColor(.customWhite.withAlphaComponent(0.7), for: .normal)
+        noNotificationsButton.internalButton.addTarget(self, action: #selector(noNotificationsButtonPressed), for: .touchUpInside)
+        noNotificationsButton.internalButton.titleLabel?.font = AppFont.medium.size(12)
+        noNotificationsButton.configure(title: "continue without notifications", systemImage: "")
+        noNotificationsButton.alpha = NOTALLOWED_ALPHA
     }
     
     @objc func onResignActive() {
@@ -176,11 +180,13 @@ class PermissionsVC: UIViewController {
         Task {
             let isEnabled = await NotificationsManager.shared.isNotificationsEnabled()
             DispatchQueue.main.async { [self] in
-                if isEnabled {
+                if isEnabled || declinedNotifications {
                     notificationsButton.alpha = 1
-                    notificationsButton.layer.removeAllAnimations()
+                    noNotificationsButton.alpha = 0
                     checkmarkImageView3.alpha = 1
-                    notificationsButton.configure(title: "notifications enabled", systemImage: "bell")
+                    notificationsButton.layer.removeAllAnimations()
+                    checkmarkImageView3.image = UIImage(systemName: "checkmark.circle.fill", withConfiguration: UIImage.SymbolConfiguration(paletteColors: isEnabled ? [.customWhite, .customGreen, .customGreen] : [.customWhite, .gray, .gray]))
+                    notificationsButton.configure(title: isEnabled ? "notifications enabled" : "notifications disabled", systemImage: "bell")
                 } else {
                     notificationsButton.alpha = NOTALLOWED_ALPHA
                     checkmarkImageView3.alpha = 0
@@ -192,8 +198,21 @@ class PermissionsVC: UIViewController {
     
     //MARK: - Interaction
     
-    @objc func learnMoreButtonPressed() {
-        openURL(Constants.faqLink)
+    @MainActor
+    @objc func noNotificationsButtonPressed() {
+        AlertManager.showAlert(
+            title: "are you sure?",
+            subtitle: "you only get \(Constants.minutesToRespond) minutes to respond to your match.\n\nwithout notifications, you'll probably miss your chance each time.",
+            primaryActionTitle: "continue without notifications",
+            primaryActionHandler: {
+            DispatchQueue.main.async { [self] in
+                declinedNotifications = true
+                rerender()
+                delayedRerender()
+            }
+        }, secondaryActionTitle: "go back", secondaryActionHandler: {
+            //do nothing
+        }, on: self)
     }
     
     @objc func locationButtonDidTapped() {
@@ -212,7 +231,7 @@ class PermissionsVC: UIViewController {
         NotificationsManager.shared.askForNewNotificationPermissionsIfNecessary { granted in
             DispatchQueue.main.async { [self] in
                 if !granted {
-                    AlertManager.showSettingsAlertController(title: "open settings to turn on notifications", message: "", settingsType: .notifications, on: self)
+                    AlertManager.showSettingsAlertController(title: "turn on notifications in settings", message: "", settingsType: .notifications, on: self)
                 } else {
                     rerender()
                 }

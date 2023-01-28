@@ -14,7 +14,7 @@
         <!--LoadingVC-->
         <scene sceneID="EHf-IW-A2E">
             <objects>
-                <viewController storyboardIdentifier="LoadingVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="01J-lp-oVM" customClass="LoadingVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoadingVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="01J-lp-oVM" customClass="LoadingVC" customModule="scdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -52,7 +52,7 @@
         <!--UpdateAvailableViewController-->
         <scene sceneID="c1F-No-ZKl">
             <objects>
-                <viewController storyboardIdentifier="UpdateAvailableVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Odb-AZ-97F" userLabel="UpdateAvailableViewController" customClass="UpdateAvailableVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UpdateAvailableVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Odb-AZ-97F" userLabel="UpdateAvailableViewController" customClass="UpdateAvailableVC" customModule="scdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Fh-ha-xgD">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -69,15 +69,15 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="76g-kd-uqR">
                                 <rect key="frame" x="20" y="144" width="353" height="604"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3vx-gv-vbj" customClass="FeatureView" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3vx-gv-vbj" customClass="FeatureView" customModule="scdatingclub_ios" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="353" height="201.33333333333334"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="POs-kf-NCu" customClass="FeatureView" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="POs-kf-NCu" customClass="FeatureView" customModule="scdatingclub_ios" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="201.33333333333331" width="353" height="201.33333333333331"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FNZ-z4-4ae" customClass="FeatureView" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FNZ-z4-4ae" customClass="FeatureView" customModule="scdatingclub_ios" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="402.66666666666663" width="353" height="201.33333333333337"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
@@ -86,11 +86,11 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="nzm-F8-nhh">
                                 <rect key="frame" x="20" y="748" width="353" height="50"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2X2-ER-YBT" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2X2-ER-YBT" customClass="SimpleButton" customModule="scdatingclub_ios" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="166.66666666666666" height="50"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NcV-g1-LA0" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NcV-g1-LA0" customClass="SimpleButton" customModule="scdatingclub_ios" customModuleProvider="target">
                                         <rect key="frame" x="186.66666666666663" y="0.0" width="166.33333333333337" height="50"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
@@ -132,7 +132,7 @@
         <!--PermissionsViewController-->
         <scene sceneID="DlO-3Q-Xch">
             <objects>
-                <viewController storyboardIdentifier="PermissionsVC" title="PermissionsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rB2-b9-5MR" userLabel="PermissionsViewController" customClass="PermissionsVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PermissionsVC" title="PermissionsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rB2-b9-5MR" userLabel="PermissionsViewController" customClass="PermissionsVC" customModule="scdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g2U-wW-e2P">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -152,7 +152,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiO-re-qkU">
                                         <rect key="frame" x="0.0" y="0.0" width="353" height="224.66666666666666"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C6v-33-zp7" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C6v-33-zp7" customClass="SimpleButton" customModule="scdatingclub_ios" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="47.333333333333343" width="353" height="70"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -199,7 +199,7 @@ we don't save any location data and use new Apple APIs for minimal battery usage
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N19-qf-wdD">
                                         <rect key="frame" x="0.0" y="224.66666666666669" width="353" height="224.66666666666669"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qNn-gA-sjH" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qNn-gA-sjH" customClass="SimpleButton" customModule="scdatingclub_ios" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="77.333333333333314" width="353" height="70"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -243,7 +243,7 @@ we don't save any location data and use new Apple APIs for minimal battery usage
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aTU-pI-bhl">
                                         <rect key="frame" x="0.0" y="449.33333333333343" width="353" height="224.66666666666669"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hnf-PW-fEK" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hnf-PW-fEK" customClass="SimpleButton" customModule="scdatingclub_ios" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="42.333333333333258" width="353" height="60"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -270,6 +270,14 @@ we don't save any location data and use new Apple APIs for minimal battery usage
                                                     </hierarchicalColors>
                                                 </imageReference>
                                             </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a2M-xg-JCy" customClass="SimpleButton" customModule="scdatingclub_ios" customModuleProvider="target">
+                                                <rect key="frame" x="51.666666666666686" y="162" width="250" height="35"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="250" id="5nL-B3-rQ4"/>
+                                                    <constraint firstAttribute="height" constant="35" id="m3b-nB-wo2"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -280,29 +288,23 @@ we don't save any location data and use new Apple APIs for minimal battery usage
                                             <constraint firstItem="Hnf-PW-fEK" firstAttribute="centerY" secondItem="aTU-pI-bhl" secondAttribute="centerY" constant="-40" id="V6e-lU-yN5"/>
                                             <constraint firstAttribute="trailing" secondItem="9n7-fm-D2C" secondAttribute="trailing" constant="10" id="hGa-Oj-3Bs"/>
                                             <constraint firstAttribute="trailing" secondItem="Hnf-PW-fEK" secondAttribute="trailing" id="j3e-wB-EZ2"/>
+                                            <constraint firstItem="a2M-xg-JCy" firstAttribute="centerX" secondItem="aTU-pI-bhl" secondAttribute="centerX" id="osy-FB-ZUc"/>
                                             <constraint firstAttribute="trailing" secondItem="i4e-on-Dhb" secondAttribute="trailing" constant="7" id="wPg-oO-E1Z"/>
                                             <constraint firstItem="9n7-fm-D2C" firstAttribute="leading" secondItem="aTU-pI-bhl" secondAttribute="leading" constant="10" id="yim-QY-4C3"/>
+                                            <constraint firstItem="a2M-xg-JCy" firstAttribute="top" secondItem="9n7-fm-D2C" secondAttribute="bottom" constant="10" id="zBt-SX-gjL"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zPu-8n-23B">
-                                <rect key="frame" x="159.66666666666666" y="788" width="74" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="learn more"/>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="IPS-Vg-Md6"/>
                         <color key="backgroundColor" name="AccentColor"/>
                         <constraints>
                             <constraint firstItem="gSF-0u-J85" firstAttribute="top" secondItem="IPS-Vg-Md6" secondAttribute="top" constant="25" id="5cg-eW-gfD"/>
-                            <constraint firstItem="zPu-8n-23B" firstAttribute="centerX" secondItem="g2U-wW-e2P" secondAttribute="centerX" id="8qY-40-M6F"/>
                             <constraint firstItem="81Q-Lx-ULr" firstAttribute="top" secondItem="gSF-0u-J85" secondAttribute="bottom" id="BGB-dI-RGC"/>
                             <constraint firstItem="IPS-Vg-Md6" firstAttribute="trailing" secondItem="81Q-Lx-ULr" secondAttribute="trailing" constant="20" id="Cbv-gp-BZC"/>
                             <constraint firstItem="IPS-Vg-Md6" firstAttribute="bottom" secondItem="81Q-Lx-ULr" secondAttribute="bottom" id="IXX-G8-MtT"/>
                             <constraint firstItem="gSF-0u-J85" firstAttribute="centerX" secondItem="g2U-wW-e2P" secondAttribute="centerX" id="j9w-ea-lBq"/>
-                            <constraint firstItem="IPS-Vg-Md6" firstAttribute="bottom" secondItem="zPu-8n-23B" secondAttribute="bottom" id="jud-yi-s1G"/>
                             <constraint firstItem="81Q-Lx-ULr" firstAttribute="leading" secondItem="IPS-Vg-Md6" secondAttribute="leading" constant="20" id="y0T-DP-EIV"/>
                         </constraints>
                     </view>
@@ -314,8 +316,8 @@ we don't save any location data and use new Apple APIs for minimal battery usage
                         <outlet property="label1" destination="JO1-xb-lIr" id="w14-9U-sFa"/>
                         <outlet property="label2" destination="fIt-5U-R37" id="2YC-3S-gch"/>
                         <outlet property="label3" destination="9n7-fm-D2C" id="X3P-As-t73"/>
-                        <outlet property="learnMoreButton" destination="zPu-8n-23B" id="EEy-tg-Z9h"/>
                         <outlet property="locationButton" destination="C6v-33-zp7" id="qhY-Jb-V2d"/>
+                        <outlet property="noNotificationsButton" destination="a2M-xg-JCy" id="PIH-c3-wgf"/>
                         <outlet property="notificationsButton" destination="Hnf-PW-fEK" id="Weh-tn-LT8"/>
                         <outlet property="titleLabel" destination="gSF-0u-J85" id="HuY-zY-p5F"/>
                     </connections>
@@ -327,7 +329,7 @@ we don't save any location data and use new Apple APIs for minimal battery usage
         <!--SheetVC-->
         <scene sceneID="Q31-XU-KxQ">
             <objects>
-                <viewController storyboardIdentifier="SheetVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="v0o-UR-4vC" customClass="SheetVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SheetVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="v0o-UR-4vC" customClass="SheetVC" customModule="scdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eaZ-tU-Gav">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -338,7 +340,7 @@ we don't save any location data and use new Apple APIs for minimal battery usage
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YyB-42-wTx">
                                         <rect key="frame" x="10" y="15" width="373" height="50"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kqw-7D-4Bi" customClass="SimpleButton" customModule="uscdatingclub_ios" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kqw-7D-4Bi" customClass="SimpleButton" customModule="scdatingclub_ios" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="373" height="50"/>
                                                 <color key="backgroundColor" name="customGreen"/>
                                                 <constraints>
@@ -377,7 +379,7 @@ we don't save any location data and use new Apple APIs for minimal battery usage
         <!--PermissionsViewController-->
         <scene sceneID="Mko-x7-TKY">
             <objects>
-                <viewController storyboardIdentifier="PermissionsTableVC" title="PermissionsTableVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uTn-ap-VKf" userLabel="PermissionsViewController" customClass="PermissionsTableVC" customModule="uscdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PermissionsTableVC" title="PermissionsTableVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uTn-ap-VKf" userLabel="PermissionsViewController" customClass="PermissionsTableVC" customModule="scdatingclub_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CYL-1Y-859">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -430,7 +432,7 @@ we don't save any location data and use new Apple APIs for minimal battery usage
         <image name="checkmark.circle.fill" catalog="system" width="128" height="123"/>
         <image name="titlethreelines" width="779" height="642"/>
         <namedColor name="AccentColor">
-            <color red="0.83529411764705885" green="0.30588235294117649" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="customGreen">
             <color red="0.41176470588235292" green="0.77647058823529413" blue="0.45098039215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

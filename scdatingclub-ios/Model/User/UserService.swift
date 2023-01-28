@@ -104,8 +104,7 @@ class UserService: NSObject {
                                        sexIdentity: sexIdentity,
                                        sexPreference: sexPreference)
         setGlobalAuthToken(token: newCompleteUser.token)
-        frontendCompleteUser = FrontendCompleteUser(completeUser: newCompleteUser)
-        authedUser = frontendCompleteUser!
+        authedUser = FrontendCompleteUser(completeUser: newCompleteUser)
         await self.saveUserToFilesystem()
         Task { await waitAndRegisterDeviceToken(id: authedUser.id) }
         Task {
@@ -132,6 +131,7 @@ class UserService: NSObject {
     }
     
     func updateMatchableStatus(active: Bool) async throws {
+        
         let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: active, surveyResponses: authedUser.surveyResponses, token: authedUser.token, isSuperuser: authedUser.isSuperuser)
         try await UserAPI.updateMatchableStatus(matchableStatus: active, email: authedUser.email)
         //LocationManager start/stop updating location is handled in RadarVC on rerender right now
@@ -194,13 +194,12 @@ class UserService: NSObject {
     }
 
     func deleteMyAccount() async throws {
-        do {
-            try await UserAPI.deleteUser(email: authedUser.email)
-            try await logOutFromDevice()
-        } catch {
-            print("error message !", error)
-            throw(error)
-        }
+        try await UserAPI.deleteUser(email: authedUser.email)
+        guard isLoggedIntoAnAccount else { return } //prevents infinite loop on authedUser didSet
+        LocationManager.shared.stopLocationServices()
+        eraseUserFromFilesystem()
+        frontendCompleteUser = nil
+        isLoggedIntoApp = false
     }
 //
 //    //MARK: - Firebase
@@ -230,9 +229,8 @@ class UserService: NSObject {
 
     func saveUserToFilesystem() async {
         do {
-            guard let frontendCompleteUser = frontendCompleteUser else { return }
             let encoder = JSONEncoder()
-            let data: Data = try encoder.encode(frontendCompleteUser)
+            let data: Data = try encoder.encode(authedUser)
             let jsonString = String(data: data, encoding: .utf8)!
             try jsonString.write(to: UserService.LOCAL_FILE_LOCATION, atomically: true, encoding: .utf8)
         } catch {
@@ -243,10 +241,9 @@ class UserService: NSObject {
     func loadUserFromFilesystem() {
         do {
             let data = try Data(contentsOf: UserService.LOCAL_FILE_LOCATION)
-            frontendCompleteUser = try JSONDecoder().decode(FrontendCompleteUser.self, from: data)
-            guard let frontendCompleteUser = frontendCompleteUser else { return }
-            setGlobalAuthToken(token: frontendCompleteUser.token) //this shouldn't be necessary, but to be safe
-            Task { await waitAndRegisterDeviceToken(id: frontendCompleteUser.id) }
+            authedUser = try JSONDecoder().decode(FrontendCompleteUser.self, from: data)
+            setGlobalAuthToken(token: authedUser.token) //this shouldn't be necessary, but to be safe
+            Task { await waitAndRegisterDeviceToken(id: authedUser.id) }
         } catch {
             print("COULD NOT LOAD: \(error)")
         }

@@ -16,7 +16,8 @@ class AuthStartVC: UIViewController, UITextViewDelegate {
 //    @IBOutlet var continueButton: SimpleButton!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
-    
+    @IBOutlet var headerLabel: UILabel!
+
     //MARK: - Initialization
     
     class func create() -> AuthStartVC {
@@ -36,6 +37,8 @@ class AuthStartVC: UIViewController, UITextViewDelegate {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         titleLabel.font = AppFont.bold.size(30)
         subtitleLabel.font = AppFont.medium.size(18)
+        headerLabel.font = AppFont2.regular.size(12)
+        headerLabel.text = "sc dating club is an iOS app from Leavey Labs. It is not affiliated with any external organizations or institutions."
     }
     
     override func viewDidAppear(_ animated: Bool) {

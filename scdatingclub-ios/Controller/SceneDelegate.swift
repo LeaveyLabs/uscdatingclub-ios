@@ -98,7 +98,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to undo the changes made on entering the background.
         
         NotificationsManager.shared.checkPreviouslyReceivedMatchNotification()
-        PermissionsManager.ensurePermissionsAreGranted()
+        PermissionsManager.ensureNecessaryPermissionsAreGranted()
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {

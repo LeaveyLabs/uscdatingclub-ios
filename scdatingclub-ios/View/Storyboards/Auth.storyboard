@@ -1206,6 +1206,12 @@ hold tight and we'll send you an email as soon as you can signup!</string>
                                 <color key="textColor" name="customWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxc-o5-G6F">
+                                <rect key="frame" x="20" y="61.000000000000007" width="335" height="19.333333333333336"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" name="customWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2WV-F3-OcG"/>
                         <color key="backgroundColor" name="primaryColor"/>
@@ -1214,16 +1220,20 @@ hold tight and we'll send you an email as soon as you can signup!</string>
                             <constraint firstItem="WLp-Hy-ia2" firstAttribute="top" secondItem="JfN-z1-UuP" secondAttribute="bottom" constant="10" id="Ikc-BZ-AHS"/>
                             <constraint firstItem="WLp-Hy-ia2" firstAttribute="centerY" secondItem="tON-0s-fSJ" secondAttribute="centerY" constant="-30" id="O60-e1-dUY"/>
                             <constraint firstItem="WLp-Hy-ia2" firstAttribute="top" secondItem="JfN-z1-UuP" secondAttribute="bottom" constant="10" id="Oa4-Zp-dJC"/>
+                            <constraint firstItem="fxc-o5-G6F" firstAttribute="top" secondItem="2WV-F3-OcG" secondAttribute="top" constant="14" id="WSS-Zx-802"/>
                             <constraint firstItem="WLp-Hy-ia2" firstAttribute="centerX" secondItem="tON-0s-fSJ" secondAttribute="centerX" id="ct0-Rr-dyE"/>
                             <constraint firstItem="2WV-F3-OcG" firstAttribute="bottom" secondItem="aHp-Bi-SMf" secondAttribute="bottom" constant="4" id="gqO-mj-n8O"/>
                             <constraint firstItem="WLp-Hy-ia2" firstAttribute="leading" secondItem="2WV-F3-OcG" secondAttribute="leading" constant="20" id="hM9-xf-PTw"/>
                             <constraint firstItem="2WV-F3-OcG" firstAttribute="trailing" secondItem="WLp-Hy-ia2" secondAttribute="trailing" constant="20" id="ku6-Oi-atn"/>
+                            <constraint firstItem="2WV-F3-OcG" firstAttribute="trailing" secondItem="fxc-o5-G6F" secondAttribute="trailing" constant="20" id="leg-RR-qBg"/>
+                            <constraint firstItem="fxc-o5-G6F" firstAttribute="leading" secondItem="2WV-F3-OcG" secondAttribute="leading" constant="20" id="qxu-PS-qLX"/>
                             <constraint firstItem="JfN-z1-UuP" firstAttribute="centerX" secondItem="tON-0s-fSJ" secondAttribute="centerX" id="xpO-aP-djc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="yAZ-IK-FGy"/>
                     <connections>
                         <outlet property="agreementTextView" destination="aHp-Bi-SMf" id="nv3-94-Ur1"/>
+                        <outlet property="headerLabel" destination="fxc-o5-G6F" id="BHc-Ai-a7g"/>
                         <outlet property="subtitleLabel" destination="JfN-z1-UuP" id="b0R-gt-eXq"/>
                         <outlet property="titleLabel" destination="WLp-Hy-ia2" id="RdO-b4-J3U"/>
                     </connections>

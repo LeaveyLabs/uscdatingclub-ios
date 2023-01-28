@@ -22,6 +22,11 @@ class RadarVC: UIViewController, PageVCChild {
         didSet {
             Task {
                 try await UserService.singleton.updateMatchableStatus(active: isLocationServicesEnabled)
+                if isLocationServicesEnabled {
+                    LocationManager.shared.startLocationServices()
+                } else {
+                    LocationManager.shared.stopLocationServices()
+                }
             }
         }
     }
@@ -69,7 +74,7 @@ class RadarVC: UIViewController, PageVCChild {
     }
     
     func setupPermissions() {
-        PermissionsManager.areAllPermissionsGranted(closure: { enabled in
+        PermissionsManager.areAllNecessaryPermissionsGranted(closure: { enabled in
             if !enabled {
                 DispatchQueue.main.async { [self] in
                     isLocationServicesEnabled = false
@@ -78,7 +83,15 @@ class RadarVC: UIViewController, PageVCChild {
             }
         })
         
-        NotificationCenter.default.addObserver(forName: .permissionsWereRevoked, object: nil, queue: .main) { [self] notification in
+        PermissionsManager.areAllPermissionsGranted { enabled in
+            if !enabled {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    self.presentPermissionsScreen()
+                }
+            }
+        }
+        
+        NotificationCenter.default.addObserver(forName: .necessaryPermissionsWereRevoked, object: nil, queue: .main) { [self] notification in
             isLocationServicesEnabled = false
             renderUI()
         }
@@ -163,17 +176,12 @@ class RadarVC: UIViewController, PageVCChild {
             primaryButton.configure(title: "active", systemImage: "")
             primaryButton.internalButton.backgroundColor = .customGreen
             primaryButton.internalButton.setTitleColor(.black, for: .normal)
-            
-            //if already loaded?
             startPulsing()
-            LocationManager.shared.startLocationServices()
         } else {
             primaryButton.configure(title: "inactive", systemImage: "")
             primaryButton.internalButton.backgroundColor = .customRed
             primaryButton.internalButton.setTitleColor(.white, for: .normal)
-            
             stopPulsing()
-            LocationManager.shared.stopLocationServices()
         }
     }
     
@@ -282,9 +290,7 @@ class RadarVC: UIViewController, PageVCChild {
                             isLocationServicesEnabled = true
                             renderIsActive()
                         } else {
-                            let permissionsVC = PermissionsVC.create()
-                            permissionsVC.modalPresentationStyle = .fullScreen
-                            present(permissionsVC, animated: true)
+                            presentPermissionsScreen()
                         }
                     }
                 }
@@ -292,6 +298,19 @@ class RadarVC: UIViewController, PageVCChild {
         case .arrow:
             presentTest()
         }
+    }
+    
+    func presentPermissionsScreen() {
+        let permissionsVC = PermissionsVC.create()
+        permissionsVC.modalPresentationStyle = .fullScreen
+        present(permissionsVC, animated: true, completion: {
+            PermissionsManager.areAllNecessaryPermissionsGranted { areAllGranted in
+                self.isLocationServicesEnabled = areAllGranted
+                DispatchQueue.main.async {
+                    self.renderIsActive()
+                }
+            }
+        })
     }
     
     func cupidButtonPressed() {
