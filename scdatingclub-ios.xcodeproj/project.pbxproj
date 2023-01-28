@@ -289,6 +289,7 @@
 		4731F52B295CE0B40013F626 /* AboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
 		4731F52D295CE0C10013F626 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
 		4731F52F295CF7DB0013F626 /* UIPageViewController+GoTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPageViewController+GoTo.swift"; sourceTree = "<group>"; };
+		4736DCC92984F687000F1156 /* scdatingclub-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "scdatingclub-ios.entitlements"; sourceTree = "<group>"; };
 		474FFCBB29770B79000BE9E0 /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
 		474FFCBC29770B79000BE9E0 /* SelectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionTableViewCell.xib; sourceTree = "<group>"; };
 		4756882A29738C9E00D6DBB1 /* InsetLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetLabel.swift; sourceTree = "<group>"; };
@@ -712,6 +713,7 @@
 		47C40EE5295CB930007C27F0 /* scdatingclub-ios */ = {
 			isa = PBXGroup;
 			children = (
+				4736DCC92984F687000F1156 /* scdatingclub-ios.entitlements */,
 				4729B235296E297B00971351 /* Fonts */,
 				47C40EF4295CB931007C27F0 /* Info.plist */,
 				47A8279E29833B0E00854706 /* GoogleService-Info.plist */,
@@ -1158,7 +1160,7 @@
 				47C40EDF295CB930007C27F0 /* Sources */,
 				47C40EE0295CB930007C27F0 /* Frameworks */,
 				47C40EE1295CB930007C27F0 /* Resources */,
-				47BBF9E3296A372000802573 /* ShellScript */,
+				47BBF9E3296A372000802573 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -1327,7 +1329,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		47BBF9E3296A372000802573 /* ShellScript */ = {
+		47BBF9E3296A372000802573 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -1339,6 +1341,7 @@
 				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
 				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -1701,6 +1704,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "scdatingclub-ios/scdatingclub-ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1740,6 +1744,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "scdatingclub-ios/scdatingclub-ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
