@@ -57,6 +57,7 @@ class MatchFoundTableVC: UIViewController {
     //MARK: - Setup
     
     func setupTableView() {
+        tableView.delaysContentTouches = false //responsive button highlight
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .clear
