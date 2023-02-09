@@ -115,7 +115,7 @@ class LoadingVC: UIViewController {
                 //TODO: post to crashlytics
             }
             let matchInfo = MatchInfo(matchAcceptance: acceptance)
-            let coordinateVC = CoordinateVC.create(matchInfo: matchInfo)
+            let coordinateVC = CoordinateChatVC.create(matchInfo: matchInfo)
             transitionToViewController(coordinateVC, duration: 0) { _ in }
         default:
             break

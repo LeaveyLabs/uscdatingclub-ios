@@ -113,7 +113,7 @@ class MatchFoundTableVC: UIViewController {
     
     @MainActor
     func goToCoordinateVC() {
-        transitionToViewController(CoordinateVC.create(matchInfo: matchInfo), duration: 1)
+        transitionToViewController(CoordinateChatVC.create(matchInfo: matchInfo), duration: 1)
     }
 
 //    @objc func passButtonDidPressed() {

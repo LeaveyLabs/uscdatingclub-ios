@@ -167,7 +167,6 @@
 		47C41078295CC0AB007C27F0 /* MKPlacemark+Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41071295CC0AA007C27F0 /* MKPlacemark+Address.swift */; };
 		47C41079295CC0AB007C27F0 /* CLLocationCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41075295CC0AB007C27F0 /* CLLocationCoordinate.swift */; };
 		47C4107A295CC0AB007C27F0 /* MKPointOfInterestCategory+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41070295CC0AA007C27F0 /* MKPointOfInterestCategory+Extension.swift */; };
-		47D901BB296C7C6B00F9AB18 /* MatchFoundVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D901BA296C7C6B00F9AB18 /* MatchFoundVC.swift */; };
 		47D901BD296C7C7B00F9AB18 /* CoordinateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D901BC296C7C7B00F9AB18 /* CoordinateVC.swift */; };
 		47DC97AA296E002700A374B5 /* ConnectHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DC97A8296E002700A374B5 /* ConnectHeaderCell.swift */; };
 		47DC97AB296E002700A374B5 /* ConnectHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47DC97A9296E002700A374B5 /* ConnectHeaderCell.xib */; };
@@ -413,7 +412,6 @@
 		47C41094295CC0BF007C27F0 /* UITableView+SectionShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+SectionShadow.swift"; sourceTree = "<group>"; };
 		47C41096295CC0BF007C27F0 /* UINavigationItem+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+UIButton.swift"; sourceTree = "<group>"; };
 		47C41097295CC0C0007C27F0 /* UINavigationController+Completion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Completion.swift"; sourceTree = "<group>"; };
-		47D901BA296C7C6B00F9AB18 /* MatchFoundVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchFoundVC.swift; sourceTree = "<group>"; };
 		47D901BC296C7C7B00F9AB18 /* CoordinateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateVC.swift; sourceTree = "<group>"; };
 		47DC97A8296E002700A374B5 /* ConnectHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectHeaderCell.swift; sourceTree = "<group>"; };
 		47DC97A9296E002700A374B5 /* ConnectHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectHeaderCell.xib; sourceTree = "<group>"; };
@@ -665,7 +663,6 @@
 			isa = PBXGroup;
 			children = (
 				476FD86A295E46E30014DD42 /* HowItWorksVC.swift */,
-				47D901BA296C7C6B00F9AB18 /* MatchFoundVC.swift */,
 			);
 			path = Decomissioned;
 			sourceTree = "<group>";
@@ -1482,7 +1479,6 @@
 				4731F507295CD4770013F626 /* UIView+ParentVC.swift in Sources */,
 				4731F50B295CD4770013F626 /* UIView+RoundedIndividualCorners.swift in Sources */,
 				470221E7295CCE3E00119FA8 /* UIColor+Custom.swift in Sources */,
-				47D901BB296C7C6B00F9AB18 /* MatchFoundVC.swift in Sources */,
 				47BBF9E12969DFE400802573 /* PermissionsManager.swift in Sources */,
 				47DE3248295CC7C40063C55A /* UIImageView+Inspectable.swift in Sources */,
 				4731F52E295CE0C10013F626 /* AccountVC.swift in Sources */,
