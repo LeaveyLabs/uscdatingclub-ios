@@ -141,14 +141,14 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func startLocationServices() {
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
-        locationManager.startMonitoringLocationPushes { data, error in
-            if let data {
-                let token = data.reduce("", {$0 + String(format: "%02X", $1)})
-                print("location pushes good to go. APNs token for location pushes:", token)
-            } else if let error {
-                print("error with location pushes", error)
-            }
-        }
+//        locationManager.startMonitoringLocationPushes { data, error in
+//            if let data {
+//                let token = data.reduce("", {$0 + String(format: "%02X", $1)})
+//                print("location pushes good to go. APNs token for location pushes:", token)
+//            } else if let error {
+//                print("error with location pushes", error)
+//            }
+//        }
     }
     
     func stopLocationServices() {

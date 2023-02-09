@@ -176,7 +176,7 @@ extension MatchFoundTableVC: UITableViewDataSource {
         case 1:
             return 1
         case 2:
-            return hasTextSimilarities ? matchInfo.textSimilarities.count : matchInfo.numericalSimilarities.count
+            return hasTextSimilarities ? 1 : matchInfo.numericalSimilarities.count
         case 3:
             return hasTextSimilarities ? matchInfo.numericalSimilarities.count : 1
         case 4:
