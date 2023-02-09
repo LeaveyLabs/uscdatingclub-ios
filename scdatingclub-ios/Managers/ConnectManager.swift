@@ -12,7 +12,7 @@ import CoreMotion
 protocol ConnectManagerDelegate {
     func newSecondElapsed()
     func timeRanOut()
-    func newRelativePositioning(heading: CGFloat, distance: Double)
+    func newRelativePositioning(_ relativePositioning: RelativePositioning)
 }
 
 class ConnectManager: NSObject {
@@ -137,7 +137,7 @@ class ConnectManager: NSObject {
         let locationHeading = currentLocation.coordinate.heading(to: matchLocation.coordinate)
         let relativeHeading = -(deviceHeading - locationHeading).degreesToRadians
         
-        delegate.newRelativePositioning(heading: relativeHeading, distance: distance)
+        delegate.newRelativePositioning(RelativePositioning(heading: relativeHeading, distance: distance))
     }
 
 }

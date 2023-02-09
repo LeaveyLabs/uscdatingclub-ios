@@ -83,6 +83,8 @@
 		47773DF0298101BC00DDF3A5 /* CustomMessagesFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47773DEF298101BC00DDF3A5 /* CustomMessagesFlowLayout.swift */; };
 		47773DF2298102D900DDF3A5 /* InputBarAccessoryView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47773DF1298102D900DDF3A5 /* InputBarAccessoryView+.swift */; };
 		47773DF42981067600DDF3A5 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 47773DF32981067600DDF3A5 /* MessageKit */; };
+		478114142995A98200D5F8B8 /* CoordinateChatTableVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478114112995A98200D5F8B8 /* CoordinateChatTableVC+Keyboard.swift */; };
+		478114152995A98200D5F8B8 /* CoordinateChatTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478114122995A98200D5F8B8 /* CoordinateChatTableVC.swift */; };
 		4788155D2974800300671618 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4788155C2974800300671618 /* Question.swift */; };
 		478815602974826900671618 /* TestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4788155F2974826900671618 /* TestService.swift */; };
 		478BECBB2963463300930DAF /* GenericAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECBA2963463300930DAF /* GenericAPI.swift */; };
@@ -222,6 +224,11 @@
 		47E38FF3295F72B9007CB77F /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E38FF2295F72B9007CB77F /* FeatureView.swift */; };
 		47E38FF5295F7368007CB77F /* FeatureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47E38FF4295F7368007CB77F /* FeatureView.xib */; };
 		47E38FF7295F75AD007CB77F /* Misc.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47E38FF6295F75AD007CB77F /* Misc.storyboard */; };
+		47E57C9729958E8F00F077CD /* ConnectionCountdownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47E57C9529958E8F00F077CD /* ConnectionCountdownCell.xib */; };
+		47E57C9829958E8F00F077CD /* ConnectionCountdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E57C9629958E8F00F077CD /* ConnectionCountdownCell.swift */; };
+		47E57C9A2995935700F077CD /* RelativePositioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E57C992995935700F077CD /* RelativePositioning.swift */; };
+		47E57C9D2995967300F077CD /* CountdownCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E57C9B2995967300F077CD /* CountdownCollectionReusableView.swift */; };
+		47E57C9E2995967300F077CD /* CountdownCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47E57C9C2995967300F077CD /* CountdownCollectionReusableView.xib */; };
 		47EA74AC2980AB5400265DF3 /* Dict+RemoveNullEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EA74AB2980AB5400265DF3 /* Dict+RemoveNullEntries.swift */; };
 		47EA74AF2980AB9900265DF3 /* ConnectInterestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EA74AD2980AB9900265DF3 /* ConnectInterestsCell.swift */; };
 		47EA74B02980AB9900265DF3 /* ConnectInterestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47EA74AE2980AB9900265DF3 /* ConnectInterestsCell.xib */; };
@@ -311,6 +318,8 @@
 		47773DE62980FE5000DDF3A5 /* MessageKitMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageKitMessage.swift; sourceTree = "<group>"; };
 		47773DEF298101BC00DDF3A5 /* CustomMessagesFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMessagesFlowLayout.swift; sourceTree = "<group>"; };
 		47773DF1298102D900DDF3A5 /* InputBarAccessoryView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InputBarAccessoryView+.swift"; sourceTree = "<group>"; };
+		478114112995A98200D5F8B8 /* CoordinateChatTableVC+Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoordinateChatTableVC+Keyboard.swift"; sourceTree = "<group>"; };
+		478114122995A98200D5F8B8 /* CoordinateChatTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinateChatTableVC.swift; sourceTree = "<group>"; };
 		4788155C2974800300671618 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		4788155F2974826900671618 /* TestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestService.swift; sourceTree = "<group>"; };
 		478BECBA2963463300930DAF /* GenericAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAPI.swift; sourceTree = "<group>"; };
@@ -465,6 +474,11 @@
 		47E38FF2295F72B9007CB77F /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
 		47E38FF4295F7368007CB77F /* FeatureView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeatureView.xib; sourceTree = "<group>"; };
 		47E38FF6295F75AD007CB77F /* Misc.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Misc.storyboard; sourceTree = "<group>"; };
+		47E57C9529958E8F00F077CD /* ConnectionCountdownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectionCountdownCell.xib; sourceTree = "<group>"; };
+		47E57C9629958E8F00F077CD /* ConnectionCountdownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionCountdownCell.swift; sourceTree = "<group>"; };
+		47E57C992995935700F077CD /* RelativePositioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativePositioning.swift; sourceTree = "<group>"; };
+		47E57C9B2995967300F077CD /* CountdownCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownCollectionReusableView.swift; sourceTree = "<group>"; };
+		47E57C9C2995967300F077CD /* CountdownCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountdownCollectionReusableView.xib; sourceTree = "<group>"; };
 		47EA74AB2980AB5400265DF3 /* Dict+RemoveNullEntries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dict+RemoveNullEntries.swift"; sourceTree = "<group>"; };
 		47EA74AD2980AB9900265DF3 /* ConnectInterestsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectInterestsCell.swift; sourceTree = "<group>"; };
 		47EA74AE2980AB9900265DF3 /* ConnectInterestsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectInterestsCell.xib; sourceTree = "<group>"; };
@@ -594,6 +608,15 @@
 				47773DEF298101BC00DDF3A5 /* CustomMessagesFlowLayout.swift */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		478114172995A99600D5F8B8 /* PostMethod */ = {
+			isa = PBXGroup;
+			children = (
+				478114122995A98200D5F8B8 /* CoordinateChatTableVC.swift */,
+				478114112995A98200D5F8B8 /* CoordinateChatTableVC+Keyboard.swift */,
+			);
+			path = PostMethod;
 			sourceTree = "<group>";
 		};
 		4788155E2974800E00671618 /* Test */ = {
@@ -761,6 +784,7 @@
 				47C40F5C295CBAF0007C27F0 /* Feature.swift */,
 				47A1C8EC296E414600F8B4D6 /* Match.swift */,
 				47A24A312970E5FE0077AB11 /* UncertainValue.swift */,
+				47E57C992995935700F077CD /* RelativePositioning.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -822,6 +846,7 @@
 		47C40F97295CBD49007C27F0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				47E57C9429958E7700F077CD /* CollectionCells */,
 				47DE3226295CC5A00063C55A /* TableCells */,
 				47DE3228295CC5AD0063C55A /* CustomViews */,
 				47DE3227295CC5A80063C55A /* Storyboards */,
@@ -984,6 +1009,7 @@
 		47D901B9296C7B5B00F9AB18 /* Connect */ = {
 			isa = PBXGroup;
 			children = (
+				478114172995A99600D5F8B8 /* PostMethod */,
 				4729B22D296E096400971351 /* MatchFoundTableVC.swift */,
 				47D901BC296C7C7B00F9AB18 /* CoordinateVC.swift */,
 				47773DDC2980FD1800DDF3A5 /* CoordinateChatVC.swift */,
@@ -1150,6 +1176,17 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		47E57C9429958E7700F077CD /* CollectionCells */ = {
+			isa = PBXGroup;
+			children = (
+				47E57C9629958E8F00F077CD /* ConnectionCountdownCell.swift */,
+				47E57C9529958E8F00F077CD /* ConnectionCountdownCell.xib */,
+				47E57C9B2995967300F077CD /* CountdownCollectionReusableView.swift */,
+				47E57C9C2995967300F077CD /* CountdownCollectionReusableView.xib */,
+			);
+			path = CollectionCells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1306,6 +1343,8 @@
 				474FFCBE29770B79000BE9E0 /* SelectionTableViewCell.xib in Resources */,
 				476FD865295DF89A0014DD42 /* SimpleButton.xib in Resources */,
 				476FD86F295E4A1F0014DD42 /* HowItWorksCell.xib in Resources */,
+				47E57C9E2995967300F077CD /* CountdownCollectionReusableView.xib in Resources */,
+				47E57C9729958E8F00F077CD /* ConnectionCountdownCell.xib in Resources */,
 				47B6B4C3296B99E600539353 /* SimpleButtonCell.xib in Resources */,
 				4715490F2970F0AF00756BE1 /* SF-Pro.ttf in Resources */,
 				47E38FF5295F7368007CB77F /* FeatureView.xib in Resources */,
@@ -1369,7 +1408,9 @@
 				47C41078295CC0AB007C27F0 /* MKPlacemark+Address.swift in Sources */,
 				4731F510295CD4820013F626 /* UITableView+DeselectAll.swift in Sources */,
 				47B60B0A296C834600657C1D /* ConnectManager.swift in Sources */,
+				478114152995A98200D5F8B8 /* CoordinateChatTableVC.swift in Sources */,
 				47773DE92980FE5100DDF3A5 /* Conversation.swift in Sources */,
+				47E57C9A2995935700F077CD /* RelativePositioning.swift in Sources */,
 				47C4105D295CC065007C27F0 /* CNContact+Number.swift in Sources */,
 				47C4107A295CC0AB007C27F0 /* MKPointOfInterestCategory+Extension.swift in Sources */,
 				476FD86B295E46E30014DD42 /* HowItWorksVC.swift in Sources */,
@@ -1425,7 +1466,9 @@
 				47A24A29297088FF0077AB11 /* SurveyResponse.swift in Sources */,
 				47ABA6E82976241500F0FDFE /* ScreenDemoVC.swift in Sources */,
 				4731F503295CD45F0013F626 /* UIScrollView+ToTop.swift in Sources */,
+				47E57C9D2995967300F077CD /* CountdownCollectionReusableView.swift in Sources */,
 				47DE3264295CC94F0063C55A /* UIButton+LoadingIndicator.swift in Sources */,
+				478114142995A98200D5F8B8 /* CoordinateChatTableVC+Keyboard.swift in Sources */,
 				47DE3207295CC4B40063C55A /* CreateProfileVC.swift in Sources */,
 				47002FB72973AD51007EDFBC /* WaitListVC.swift in Sources */,
 				4731F50F295CD4820013F626 /* UITableView+SectionShadow.swift in Sources */,
@@ -1524,6 +1567,7 @@
 				434A0532295E1F1300C15945 /* UserAPI.swift in Sources */,
 				47DE3268295CCA5C0063C55A /* UIView+BecomeRound.swift in Sources */,
 				47DE3250295CC7C40063C55A /* UIImage+FromColor.swift in Sources */,
+				47E57C9829958E8F00F077CD /* ConnectionCountdownCell.swift in Sources */,
 				433B9D192970A71A0088445B /* QuestionAPI.swift in Sources */,
 				47B6B4C5296BABFB00539353 /* Sex.swift in Sources */,
 				47DE3247295CC7C40063C55A /* UIImageView+ProfilePic.swift in Sources */,

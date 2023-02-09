@@ -152,10 +152,10 @@ extension CoordinateVC: ConnectManagerDelegate {
         }, on: self)
     }
     
-    func newRelativePositioning(heading: CGFloat, distance: Double) {        
+    func newRelativePositioning(_ relativePositioning: RelativePositioning) {
         DispatchQueue.main.async { [self] in
-            locationLabel.text = prettyDistance(meters: distance, shortened: false)
-            locationImageView.transform = CGAffineTransform.identity.rotated(by: heading)
+            locationLabel.text = prettyDistance(meters: relativePositioning.distance, shortened: false)
+            locationImageView.transform = CGAffineTransform.identity.rotated(by: relativePositioning.heading)
         }
     }
     

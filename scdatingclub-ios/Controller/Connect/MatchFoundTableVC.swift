@@ -297,7 +297,7 @@ extension MatchFoundTableVC: ConnectManagerDelegate {
         }, on: self)
     }
     
-    func newRelativePositioning(heading: CGFloat, distance: Double) {
+    func newRelativePositioning(_ relativePositioning: RelativePositioning) {
         //do nothing
     }
     

@@ -71,15 +71,13 @@ class CoordinateChatVC: MessagesViewController {
     }()
     
     //UI
+    @IBOutlet var navView: UIView!
     @IBOutlet var closeButton: UIButton!
     @IBOutlet var moreButton: UIButton!
     @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var timeLabel: UILabel!
-    @IBOutlet var timeSublabel: UILabel!
-    @IBOutlet var locationImageView: UIImageView!
-    @IBOutlet var locationLabel: UILabel!
         
     //Data
+    var relativePositioning: RelativePositioning = .init(heading: 0, distance: 0)
     var matchInfo: MatchInfo!
     var connectManager: ConnectManager!
     var conversation: Conversation!
@@ -106,11 +104,12 @@ class CoordinateChatVC: MessagesViewController {
         conversation = Conversation(sangdaebang: partner,
                                     messageThread: connectManager.locationSocket!)
     }
-    
+        
     override func viewDidLoad() {
         updateAdditionalBottomInsetForDismissedKeyboard()
         messagesCollectionView = MessagesCollectionView(frame: .zero, collectionViewLayout: CustomMessagesFlowLayout()) //for registering custom MessageSizeCalculator for MessageKitMatch
         super.viewDidLoad()
+        view.tintColor = .tintColor
         setupMessagesCollectionView()
         setupNavBar()
         setupKeyboard()
@@ -237,17 +236,7 @@ class CoordinateChatVC: MessagesViewController {
     
     func setupLabels() {
         nameLabel.text = matchInfo.partnerName
-        timeLabel.text = matchInfo.timeLeftToConnectString
-        timeSublabel.text = "left to connect"
-        
         nameLabel.font = AppFont.bold.size(22)
-        timeLabel.font = AppFont.bold.size(40)
-        timeSublabel.font = AppFont.light.size(16)
-        locationLabel.font = AppFont.bold.size(40)
-        
-        let minsLeft = 4
-        let secsLeft = 59
-        timeLabel.text = String(minsLeft) + "m " + String(secsLeft) + "s"
     }
         
     func setupMessagesCollectionView() {
@@ -256,9 +245,20 @@ class CoordinateChatVC: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messagesCollectionView.delegate = self
-                
-        messagesCollectionView.register(FixedInsetTextMessageCell.self)
         
+        //UI
+        messagesCollectionView.backgroundColor = .clear
+        view.backgroundColor = .tintColor
+        
+        //Nibs
+        messagesCollectionView.register(FixedInsetTextMessageCell.self)
+//        let countdownCell = UINib(nibName: String(describing: ConnectionCountdownCell.self), bundle: nil)
+//        messagesCollectionView.register(countdownCell, forCellWithReuseIdentifier: String(describing: ConnectionCountdownCell.self))
+        
+//        messagesCollectionView.register(CountdownCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: CountdownCollectionReusableView.self))
+//        messagesCollectionView.messagesCollectionViewFlowLayout.headerReferenceSize = CGSize(width: view.bounds.width, height: 500)
+
+        //Misc
         messagesCollectionView.refreshControl = refreshControl
         if conversation.hasRenderedAllChatObjects() { refreshControl.removeFromSuperview() }
         
@@ -272,8 +272,8 @@ class CoordinateChatVC: MessagesViewController {
         view.sendSubviewToBack(messagesCollectionView)
         
         //Remove top constraint which was set in super's super, MessagesViewController. Then, add a new one.
-//        view.constraints.first { $0.firstAnchor == messagesCollectionView.topAnchor }!.isActive = false
-//        messagesCollectionView.topAnchor.constraint(equalTo: customNavigationBar.bottomAnchor, constant: 5).isActive = true
+        view.constraints.first { $0.firstAnchor == messagesCollectionView.topAnchor }!.isActive = false
+        messagesCollectionView.topAnchor.constraint(equalTo: navView.bottomAnchor, constant: 5).isActive = true
     }
     
     func setupMessageInputBarForChatting() {
@@ -302,10 +302,20 @@ class CoordinateChatVC: MessagesViewController {
     }
     
     func moreButtonDidPressed() {
-        let moreVC = SheetVC.create(sheetButtons: [SheetButton(title: "report", systemImageName: "exclamationmark.triangle", handler: {
-            self.presentReportAlert()
-        })])
+        let moreVC = SheetVC.create(
+            sheetButtons: [
+                SheetButton(title: "view compatibility", systemImageName: "testtube.2", handler: {
+                    self.presentCompatibility()
+                }),
+                SheetButton(title: "report", systemImageName: "exclamationmark.triangle", handler: {
+                    self.presentReportAlert()
+                }),
+            ])
         present(moreVC, animated: true)
+    }
+    
+    func presentCompatibility() {
+        
     }
     
     func presentReportAlert() {
@@ -334,6 +344,28 @@ class CoordinateChatVC: MessagesViewController {
     }
     
     // MARK: - UICollectionViewDataSource
+    
+//    func headerViewSize(for section: Int, in messagesCollectionView: MessagesCollectionView) -> CGSize {
+//        return CGSize(width: view.bounds.width, height: 300)
+//    }
+//
+//    func messageHeaderView(for indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageReusableView {
+//        let headerView = messagesCollectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: CountdownCollectionReusableView.self), for: indexPath) as! CountdownCollectionReusableView
+//        headerView.frame.size.height = CountdownCollectionReusableView.HEIGHT
+//        return headerView
+//    }
+    
+//    override func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+//        <#code#>
+//    }
+        
+//    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+//        (view as? CountdownCollectionReusableView)?.configure(with: matchInfo, relativePositioning: relativePositioning)
+//    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+//        (view as? CountdownCollectionReusableView)?.configure(with: matchInfo, relativePositioning: relativePositioning)
+    }
     
     public override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -373,24 +405,7 @@ extension CoordinateChatVC: ConnectManagerDelegate {
     
     func newSecondElapsed() {
         DispatchQueue.main.async { [self] in
-            switch matchInfo.elapsedTime.minutes {
-            case 0:
-                UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            case 1:
-                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-            case 2:
-                UIImpactFeedbackGenerator(style: matchInfo.elapsedTime.seconds >= 50 ? .rigid : .heavy).impactOccurred()
-            default:
-                break
-            }
-            timeLabel.text = matchInfo.timeLeftToConnectString
-//            self.timeLeftLabel.alpha = 0.5
-//            self.timeLeftLabel.textColor = .customWhite
-//            UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear) {
-//                self.timeLeftLabel.alpha = 1
-//                self.timeLeftLabel.textColor = .blue
-//            } completion: { completed in
-//            }
+            messagesCollectionView.reloadDataAndKeepOffset()
         }
     }
     
@@ -405,10 +420,10 @@ extension CoordinateChatVC: ConnectManagerDelegate {
         }, on: self)
     }
     
-    func newRelativePositioning(heading: CGFloat, distance: Double) {
+    func newRelativePositioning(_ relativePositioning: RelativePositioning) {
+        self.relativePositioning = relativePositioning
         DispatchQueue.main.async { [self] in
-            locationLabel.text = prettyDistance(meters: distance, shortened: false)
-            locationImageView.transform = CGAffineTransform.identity.rotated(by: heading)
+            messagesCollectionView.reloadDataAndKeepOffset()
         }
     }
     
@@ -491,13 +506,19 @@ extension CoordinateChatVC: InputBarAccessoryViewDelegate {
     @MainActor
     func handleNewMessage() {
 //        ConversationService.singleton.updateLastMessageReadTime(withUserId: conversation.sangdaebang.id)
-        messagesCollectionView.performBatchUpdates({
-            messagesCollectionView.insertSections([numberOfSections(in: messagesCollectionView) - 1])
-            if numberOfSections(in: messagesCollectionView) >= 2 {
-                messagesCollectionView.reloadSections([numberOfSections(in: messagesCollectionView) - 2])
-            }
-        })
-        messagesCollectionView.scrollToLastItem(animated: true)
+//        messagesCollectionView.performBatchUpdates({
+//            messagesCollectionView.numberOfItems(inSection: 0) //prevents an occassional crash?
+////            messagesCollectionView.insertSections([numberOfSections(in: messagesCollectionView) - 1])
+//            if numberOfSections(in: messagesCollectionView) == 1 {
+//                messagesCollectionView.reloadDataAndKeepOffset()
+//            } else {
+//                messagesCollectionView.insertSections([numberOfSections(in: messagesCollectionView)-1])
+//                messagesCollectionView.reloadSections([numberOfSections(in: messagesCollectionView) - 2])
+//            }
+//
+//        })
+        messagesCollectionView.reloadDataAndKeepOffset()
+//        messagesCollectionView.scrollToLastItem(animated: true)
     }
     
 }
