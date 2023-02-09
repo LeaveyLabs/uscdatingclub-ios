@@ -91,7 +91,7 @@ extension TestQuestionsVC: UITableViewDataSource {
         guard section < testPage.questions.count else { return 1 }
         let question = testPage.questions[section]
         if !question.isNumerical {
-            if TestService.shared.firstNonAnsweredQuestion(on: testPage) == section {
+            if TestService.shared.firstNonAnsweredQuestion(on: testPage) >= section {
                 return 2 //header and tableViewCell
             } else if let manuallyOpenedSelectionQuestionIndex, manuallyOpenedSelectionQuestionIndex == section {
                 return 2 //header and tableViewCell
@@ -118,7 +118,7 @@ extension TestQuestionsVC: UITableViewDataSource {
             cell.configure(testQuestion: question,
                            response: currentResponse != nil ? Int(currentResponse!.answer) : nil,
                            delegate: self,
-                           shouldBeHighlighted: TestService.shared.firstNonAnsweredQuestion(on: testPage) == indexPath.section,
+                           shouldBeHighlighted: TestService.shared.firstNonAnsweredQuestion(on: testPage) >= indexPath.section,
                            isLastCell: indexPath.section == testPage.questions.count - 1,
                            isFirstCell: indexPath.section == 0)
             return cell
@@ -127,7 +127,7 @@ extension TestQuestionsVC: UITableViewDataSource {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.SBID.Cell.SelectionHeaderCell, for: indexPath) as! SelectionHeaderTestCell
                 cell.configure(testQuestion: question,
                                delegate: self,
-                               shouldBeOpened: TestService.shared.firstNonAnsweredQuestion(on: testPage) == indexPath.section || manuallyOpenedSelectionQuestionIndex == indexPath.section,
+                               shouldBeOpened: TestService.shared.firstNonAnsweredQuestion(on: testPage) >= indexPath.section || manuallyOpenedSelectionQuestionIndex == indexPath.section,
                                isAnswered: TestService.shared.hasAnswered(question),
                                isLastCell: indexPath.section == testPage.questions.count - 1,
                                isFirstCell: indexPath.section == 0)
@@ -243,10 +243,10 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
         
 
         //when a selection question is appearing or disappearing, need a slight delay so that expanded UI's constraints can update
-        let beforeQ = testPage.questions[questionIndex]
-        let selectionQ = testPage.questions[questionIndex]
-        if (beforeQ.isMultipleAnswer || selectionQ.isMultipleAnswer) && !redo {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        let prevQ = testPage.questions[questionIndex]
+        let nextQ = testPage.questions[questionIndex]
+        if (!prevQ.isNumerical || !nextQ.isNumerical) && !redo {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 self.scrollDownIfNecessary(prevQuestionId: prevQuestionId, redo: true)
             }
             return
@@ -257,7 +257,7 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
 
         let totalHeight = view.bounds.height + view.safeAreaInsets.top + view.safeAreaInsets.bottom
         let desiredOffset: CGFloat
-        if (selectionQ.isMultipleAnswer) {
+        if (!nextQ.isNumerical) {
             desiredOffset = questionBottomY - totalHeight/2.2
         } else {
             desiredOffset = questionBottomY - totalHeight/1.5
@@ -267,11 +267,15 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
         if desiredOffset < 50 { return } //don't go in wrong direction, and don't scroll if a small amount
         
         let willWeBeAtBottom = desiredOffset + tableView.contentOffset.y > tableView.verticalOffsetForBottom
-        if willWeBeAtBottom {
-            tableView.setContentOffset(CGPoint(x: tableView.contentOffset.x, y: tableView.verticalOffsetForBottom), animated: true)
-        } else {
+        
+        
+        //this code doesnt actually seem necessary in my iPhone14 tests
+//        if willWeBeAtBottom {
+//            tableView.setContentOffset(CGPoint(x: tableView.contentOffset.x, y: tableView.verticalOffsetForBottom), animated: true)
+//        } else {
             tableView.setContentOffset(tableView.contentOffset.applying(.init(translationX: 0, y: desiredOffset)), animated: true)
-        }
+//        }
+        
     }
     
 }

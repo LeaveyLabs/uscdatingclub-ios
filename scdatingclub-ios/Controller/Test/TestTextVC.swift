@@ -101,7 +101,7 @@ class TestTextVC: UIViewController {
             } else {
                 activityIndicatorView.stopAnimating()
                 primaryLabel.text = "responses submitted"
-                secondaryLabel.text = "your future matches will be found based on your new responses"
+                secondaryLabel.text = "your next match will be found based on your new responses"
                 secondaryLabel.alpha = 1
                 self.primaryButton.internalButton.isEnabled = true
                 UIView.animate(withDuration: 1) { [self] in

@@ -37,6 +37,8 @@ class SelectionHeaderTestCell: UITableViewCell {
                    isFirstCell: Bool = false) {
         selectionStyle = .none
         backgroundColor = .clear
+        titleButton.titleLabel?.font = AppFont2.medium.size(22)
+
         self.isOpen = shouldBeOpened
         cellDelegate = delegate
         self.testQuestion = testQuestion
