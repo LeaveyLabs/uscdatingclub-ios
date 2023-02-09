@@ -158,7 +158,9 @@ class NotificationsManager: NSObject {
             
             DispatchQueue.main.async {
                 let loadingVC = LoadingVC.create(notificationResponseHandler: activeHandler)
-                transitionToViewController(loadingVC, duration: 0)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    transitionToViewController(loadingVC, duration: 0)
+                }
                 UIApplication.shared.applicationIconBadgeNumber = 0
             }
             UNUserNotificationCenter.current().removeAllDeliveredNotifications()

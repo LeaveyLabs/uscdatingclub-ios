@@ -1715,7 +1715,7 @@
 				DEVELOPMENT_TEAM = SHD3A2G97F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "scdatingclub-ios/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "sc club";
+				INFOPLIST_KEY_CFBundleDisplayName = "sc dating club";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your phone will look for nearby matches in the background. This feature is required for the app to work.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your phone will scan your immediate area for your next match.";
@@ -1755,7 +1755,7 @@
 				DEVELOPMENT_TEAM = SHD3A2G97F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "scdatingclub-ios/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "sc club";
+				INFOPLIST_KEY_CFBundleDisplayName = "sc dating club";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your phone will look for nearby matches in the background. This feature is required for the app to work.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your phone will scan your immediate area for your next match.";
