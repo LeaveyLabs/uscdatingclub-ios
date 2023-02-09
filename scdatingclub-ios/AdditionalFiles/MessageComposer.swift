@@ -17,6 +17,7 @@ class MessageComposer: NSObject, MFMessageComposeViewControllerDelegate {
     // Configures and returns a MFMessageComposeViewController instance
     func configuredMessageComposeViewController(recipients: [String], body: String) -> MFMessageComposeViewController {
         let messageComposeVC = MFMessageComposeViewController()
+        messageComposeVC.view.tintColor = .systemBlue
         messageComposeVC.messageComposeDelegate = self  //  Make sure to set this property to self, so that the controller can be dismissed!
         messageComposeVC.recipients = recipients
         messageComposeVC.body = body

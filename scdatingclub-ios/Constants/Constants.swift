@@ -37,7 +37,7 @@ enum Constants {
     static let defaultMailLink = URL(string: "mailto://")!
     static let gmailLink = URL(string: "googlegmail://")!
     static let faqLink = URL(string: "https://scdatingclub.com/faq")!
-    static let appStoreLink = URL(string: "https://apps.apple.com/app/apple-store/id1661018857")!
+    static let appStoreLink = URL(string: "https://apps.apple.com/app/apple-store/id1668220280")!
     static let landingPageLink = URL(string: "https://scdatingclub.com")!
     static let privacyPageLink = URL(string: "https://scdatingclub.com/privacy")!
     static let termsLink = URL(string: "https://scdatingclub.com/terms")!
