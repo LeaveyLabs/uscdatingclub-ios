@@ -182,6 +182,8 @@ class CoordinateChatVC: MessagesViewController {
         inputBar.delegate = self
         inputBar.inputTextView.delegate = self
         
+        additionalBottomInset = 5
+        
         //Keyboard manager from InputBarAccessoryView
         view.addSubview(messageInputBar)
         keyboardManager.shouldApplyAdditionBottomSpaceToInteractiveDismissal = true
@@ -205,11 +207,10 @@ class CoordinateChatVC: MessagesViewController {
     
     @objc func keyboardWillShow(sender: NSNotification) {
         setCountdownDirection(to: .horizontal, animated: true)
-        additionalBottomInset = 52
     }
     
     @objc func keyboardWillHide(sender: NSNotification) {
-        updateAdditionalBottomInsetForDismissedKeyboard()
+//        updateAdditionalBottomInsetForDismissedKeyboard()
     }
     
     var keyboardHeight: CGFloat = 0
@@ -228,7 +229,7 @@ class CoordinateChatVC: MessagesViewController {
     
     func updateAdditionalBottomInsetForDismissedKeyboard() {
         //can't use view's safe area insets because they're 0 on viewdidload
-        additionalBottomInset = 52 + (window?.safeAreaInsets.bottom ?? 0)
+//        additionalBottomInset = 52 + (window?.safeAreaInsets.bottom ?? 0)
     }
     
     //i had to add this code because scrollstolastitemonkeyboardbeginsediting doesnt work
@@ -533,11 +534,33 @@ extension CoordinateChatVC: InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didChangeIntrinsicContentTo size: CGSize) {
         //TODO later: when going onto a new line of text, recalculate inputBar like we do within the postVC
 //        additionalBottomInset = 52
-//        messagesCollectionView.scrollToLastItem()
+        messagesCollectionView.scrollToLastItem()
     }
         
     @MainActor
     func handleNewMessage() {
+        
+        
+//        let range = Range(uncheckedBounds: (0, max(0, messagesCollectionView.numberOfSections - 1)))
+//        let indexSet = IndexSet(integersIn: range)
+//        messagesCollectionView.reloadSections(indexSet)
+//     Reload last section to update header/footer labels and insert a new one
+//        UIView.animate(withDuration: <#T##TimeInterval#>, delay: <#T##TimeInterval#>, animations: <#T##() -> Void#>)
+//        messagesCollectionView.reloadDataAndKeepOffset()
+
+//        messagesCollectionView.numberOfItems(inSection: 0) //prevents an occassional crash?
+
+        messagesCollectionView.performBatchUpdates({
+            messagesCollectionView.insertSections([numberOfSections(in: messagesCollectionView) - 1])
+            if numberOfSections(in: messagesCollectionView) >= 2 {
+                messagesCollectionView.reloadSections([numberOfSections(in: messagesCollectionView) - 2])
+            }
+        }) {_ in
+            
+        }
+//        messagesCollectionView.reloadData()
+        
+        
 //        ConversationService.singleton.updateLastMessageReadTime(withUserId: conversation.sangdaebang.id)
 //        messagesCollectionView.performBatchUpdates({
 //            messagesCollectionView.numberOfItems(inSection: 0) //prevents an occassional crash?
@@ -548,9 +571,8 @@ extension CoordinateChatVC: InputBarAccessoryViewDelegate {
 //                messagesCollectionView.insertSections([numberOfSections(in: messagesCollectionView)-1])
 //                messagesCollectionView.reloadSections([numberOfSections(in: messagesCollectionView) - 2])
 //            }
-//
 //        })
-        messagesCollectionView.reloadDataAndKeepOffset()
+//        messagesCollectionView.reloadDataAndKeepOffset()
 //        messagesCollectionView.scrollToLastItem(animated: true)
     }
     
@@ -583,20 +605,15 @@ extension CoordinateChatVC: MessagesDisplayDelegate {
     }
         
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        return isFromCurrentSender(message: message) ? .clear : .customWhite
+        return isFromCurrentSender(message: message) ? .customWhite.withAlphaComponent(0.2) : .customWhite
     }
     
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
-        return isFromCurrentSender(message: message) ? .bubbleOutline(.customWhite.withAlphaComponent(0.7)) : .bubble
+        return isFromCurrentSender(message: message) ? .bubble : .bubble
     }
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         return
-        //do nothing
-//        let nextIndexPath = IndexPath(item: 0, section: indexPath.section+1)
-//        avatarView.isHidden = isNextMessageSameSender(at: indexPath) && !isTimeLabelVisible(at: nextIndexPath)
-//        let theirPic = isSangdaebangProfileHidden ? conversation.sangdaebang.silhouette : conversation.sangdaebang.profilePic
-//        avatarView.set(avatar: Avatar(image: theirPic, initials: ""))
     }
 
 }

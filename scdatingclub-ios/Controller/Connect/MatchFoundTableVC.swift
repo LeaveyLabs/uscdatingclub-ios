@@ -272,16 +272,16 @@ extension MatchFoundTableVC: ConnectManagerDelegate {
     
     func newSecondElapsed() {
         DispatchQueue.main.async { [self] in
-            switch matchInfo.elapsedTime.minutes {
-            case 0:
-                UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            case 1:
-                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-            case 2:
-                UIImpactFeedbackGenerator(style: matchInfo.elapsedTime.seconds >= 50 ? .rigid : .heavy).impactOccurred()
-            default:
-                break
-            }
+//            switch matchInfo.elapsedTime.minutes {
+//            case 0:
+//                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+//            case 1:
+//                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+//            case 2:
+//                UIImpactFeedbackGenerator(style: matchInfo.elapsedTime.seconds >= 50 ? .rigid : .heavy).impactOccurred()
+//            default:
+//                break
+//            }
             self.tableView.reloadData()
         }
     }
