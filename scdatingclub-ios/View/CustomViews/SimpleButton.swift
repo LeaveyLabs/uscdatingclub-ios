@@ -67,8 +67,9 @@ extension SimpleButton {
     
     // Note: the constraints for the PostView should already be set-up when this is called.
     // Otherwise you'll get loads of constraint errors in the console
-    func configure(title: String, subtitle: String? = nil, systemImage: String, imageSize: CGFloat? = nil) {
+    func configure(title: String, subtitle: String? = nil, systemImage: String, imageSize: CGFloat? = nil, backgroundColor: UIColor = .customWhite) {
         internalButton.setTitle(title, for: .normal)
+        internalButton.backgroundColor = backgroundColor
         
         if let subtitle {
             let fullText = title + "\n" + subtitle
