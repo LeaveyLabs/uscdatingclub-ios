@@ -16,6 +16,7 @@ class SimpleTitleCell: UITableViewCell {
         theLabel.font = AppFont.bold.size(40)
         contentView.backgroundColor = .clear
         theLabel.textColor = .customWhite
+        selectionStyle = .none
     }
     
 }

@@ -16,4 +16,5 @@ extension UIColor {
     static let customRed = UIColor(named: "customRed")!
     static let testGreen = UIColor(named: "testGreen")!
     static let testPurple = UIColor(named: "testPurple")!
+    static let lightGray = UIColor(named: "lightGray")!
 }

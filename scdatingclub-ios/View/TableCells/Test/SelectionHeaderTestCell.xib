@@ -6,13 +6,12 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="SelectionHeaderTestCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectionHeaderTestCell" rowHeight="86" id="KGk-i7-Jjw" customClass="SelectionHeaderTestCell" customModule="uscdatingclub_ios" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="SelectionHeaderTestCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectionHeaderTestCell" rowHeight="86" id="KGk-i7-Jjw" customClass="SelectionHeaderTestCell" customModule="scdatingclub_ios" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="331" height="86"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -21,7 +20,7 @@
                 <subviews>
                     <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubA-iJ-FAP">
                         <rect key="frame" x="0.0" y="0.0" width="331" height="0.66666666666666663"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="customWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="0.5" id="GJu-pA-g20"/>
                         </constraints>
@@ -71,8 +70,5 @@
         <namedColor name="primaryColor">
             <color red="0.83529411764705885" green="0.30588235294117649" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
