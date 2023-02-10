@@ -85,6 +85,7 @@
 		47773DF42981067600DDF3A5 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 47773DF32981067600DDF3A5 /* MessageKit */; };
 		478114142995A98200D5F8B8 /* CoordinateChatTableVC+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478114112995A98200D5F8B8 /* CoordinateChatTableVC+Keyboard.swift */; };
 		478114152995A98200D5F8B8 /* CoordinateChatTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478114122995A98200D5F8B8 /* CoordinateChatTableVC.swift */; };
+		478114192995C7FA00D5F8B8 /* UIImageView+AnimateChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478114182995C7FA00D5F8B8 /* UIImageView+AnimateChange.swift */; };
 		4788155D2974800300671618 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4788155C2974800300671618 /* Question.swift */; };
 		478815602974826900671618 /* TestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4788155F2974826900671618 /* TestService.swift */; };
 		478BECBB2963463300930DAF /* GenericAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECBA2963463300930DAF /* GenericAPI.swift */; };
@@ -320,6 +321,7 @@
 		47773DF1298102D900DDF3A5 /* InputBarAccessoryView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InputBarAccessoryView+.swift"; sourceTree = "<group>"; };
 		478114112995A98200D5F8B8 /* CoordinateChatTableVC+Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoordinateChatTableVC+Keyboard.swift"; sourceTree = "<group>"; };
 		478114122995A98200D5F8B8 /* CoordinateChatTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinateChatTableVC.swift; sourceTree = "<group>"; };
+		478114182995C7FA00D5F8B8 /* UIImageView+AnimateChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+AnimateChange.swift"; sourceTree = "<group>"; };
 		4788155C2974800300671618 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		4788155F2974826900671618 /* TestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestService.swift; sourceTree = "<group>"; };
 		478BECBA2963463300930DAF /* GenericAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAPI.swift; sourceTree = "<group>"; };
@@ -1106,6 +1108,7 @@
 				47DE322A295CC7C30063C55A /* UIImageView+ProfilePic.swift */,
 				47DE322B295CC7C30063C55A /* UIImageView+Inspectable.swift */,
 				47DE322C295CC7C30063C55A /* UIImageView+Initials.swift */,
+				478114182995C7FA00D5F8B8 /* UIImageView+AnimateChange.swift */,
 			);
 			path = UIImageView;
 			sourceTree = "<group>";
@@ -1458,6 +1461,7 @@
 				4731F511295CD4870013F626 /* UITextField+Padding.swift in Sources */,
 				434A052C295E1E9700C15945 /* DeviceAPI.swift in Sources */,
 				471549172970FCB900756BE1 /* PermissionsCell.swift in Sources */,
+				478114192995C7FA00D5F8B8 /* UIImageView+AnimateChange.swift in Sources */,
 				47B6B4BC296B959C00539353 /* SimpleEntryCell.swift in Sources */,
 				47E38FF3295F72B9007CB77F /* FeatureView.swift in Sources */,
 				4731F508295CD4770013F626 /* UIView+PostBubble.swift in Sources */,

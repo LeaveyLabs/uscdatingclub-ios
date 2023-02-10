@@ -71,11 +71,20 @@ class CoordinateChatVC: MessagesViewController {
     }()
     
     //UI
-    @IBOutlet var navView: UIView!
+    @IBOutlet var countdownStackView: UIStackView!
     @IBOutlet var closeButton: UIButton!
     @IBOutlet var moreButton: UIButton!
     @IBOutlet var nameLabel: UILabel!
-        
+    
+    @IBOutlet var timeLabel: UILabel!
+    @IBOutlet var timeSublabel: UILabel!
+    @IBOutlet var locationImageView: UIImageView!
+    @IBOutlet var locationImageViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var bottomStackVerticalConstraint: NSLayoutConstraint!
+    @IBOutlet var locationLabel: UILabel!
+    @IBOutlet var countdownToggleButton: UIButton!
+    @IBOutlet var locationStackView: UIStackView!
+    
     //Data
     var relativePositioning: RelativePositioning = .init(heading: 0, distance: 0)
     var matchInfo: MatchInfo!
@@ -117,7 +126,8 @@ class CoordinateChatVC: MessagesViewController {
         
         setupButtons()
         setupLabels() //must come after connect manager created
-        
+        setCountdownDirection(to: .vertical, animated: false)
+
         DispatchQueue.main.async { //scroll on the next cycle so that collectionView's data is loaded in beforehand
             self.messagesCollectionView.scrollToLastItem(at: .bottom, animated: false)
         }
@@ -192,6 +202,7 @@ class CoordinateChatVC: MessagesViewController {
     }
     
     @objc func keyboardWillShow(sender: NSNotification) {
+        setCountdownDirection(to: .horizontal, animated: true)
         additionalBottomInset = 52
     }
     
@@ -237,6 +248,14 @@ class CoordinateChatVC: MessagesViewController {
     func setupLabels() {
         nameLabel.text = matchInfo.partnerName
         nameLabel.font = AppFont.bold.size(22)
+        timeLabel.font = AppFont.bold.size(25)
+        timeSublabel.font = AppFont.light.size(16)
+        locationLabel.font = AppFont.light.size(16)
+        
+        timeLabel.text = matchInfo.timeLeftToConnectString
+        timeSublabel.text = "left to connect"
+        locationLabel.text = prettyDistance(meters: relativePositioning.distance, shortened: true)
+        locationImageView.transform = CGAffineTransform.identity.rotated(by: relativePositioning.heading)
     }
         
     func setupMessagesCollectionView() {
@@ -252,11 +271,6 @@ class CoordinateChatVC: MessagesViewController {
         
         //Nibs
         messagesCollectionView.register(FixedInsetTextMessageCell.self)
-//        let countdownCell = UINib(nibName: String(describing: ConnectionCountdownCell.self), bundle: nil)
-//        messagesCollectionView.register(countdownCell, forCellWithReuseIdentifier: String(describing: ConnectionCountdownCell.self))
-        
-//        messagesCollectionView.register(CountdownCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: CountdownCollectionReusableView.self))
-//        messagesCollectionView.messagesCollectionViewFlowLayout.headerReferenceSize = CGSize(width: view.bounds.width, height: 500)
 
         //Misc
         messagesCollectionView.refreshControl = refreshControl
@@ -273,7 +287,10 @@ class CoordinateChatVC: MessagesViewController {
         
         //Remove top constraint which was set in super's super, MessagesViewController. Then, add a new one.
         view.constraints.first { $0.firstAnchor == messagesCollectionView.topAnchor }!.isActive = false
-        messagesCollectionView.topAnchor.constraint(equalTo: navView.bottomAnchor, constant: 5).isActive = true
+        messagesCollectionView.topAnchor.constraint(equalTo: countdownStackView.bottomAnchor, constant: 5).isActive = true
+        
+        countdownStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(toggleCountdownDirection)))
+        countdownStackView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleNavPan)))
     }
     
     func setupMessageInputBarForChatting() {
@@ -284,6 +301,10 @@ class CoordinateChatVC: MessagesViewController {
     }
     
     //MARK: - User Interaction
+    
+    @objc func handleNavPan(recognizer: UIPanGestureRecognizer) {
+        setCountdownDirection(to: recognizer.velocity(in: view).y < 0 ? .horizontal : .vertical, animated: true)
+    }
     
     func closeButtonDidPressed() {
         AlertManager.showAlert(title: "stop sharing your location with \(matchInfo.partnerName)?",
@@ -335,6 +356,10 @@ class CoordinateChatVC: MessagesViewController {
         }, on: SceneDelegate.visibleViewController!)
     }
     
+    @IBAction func toggleCountdownViewPressed() {
+        toggleCountdownDirection()
+    }
+    
     //MARK: - Helpers
 
     @MainActor
@@ -343,29 +368,39 @@ class CoordinateChatVC: MessagesViewController {
         transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
     }
     
-    // MARK: - UICollectionViewDataSource
-    
-//    func headerViewSize(for section: Int, in messagesCollectionView: MessagesCollectionView) -> CGSize {
-//        return CGSize(width: view.bounds.width, height: 300)
-//    }
-//
-//    func messageHeaderView(for indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageReusableView {
-//        let headerView = messagesCollectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: CountdownCollectionReusableView.self), for: indexPath) as! CountdownCollectionReusableView
-//        headerView.frame.size.height = CountdownCollectionReusableView.HEIGHT
-//        return headerView
-//    }
-    
-//    override func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-//        <#code#>
-//    }
-        
-//    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-//        (view as? CountdownCollectionReusableView)?.configure(with: matchInfo, relativePositioning: relativePositioning)
-//    }
-    
-    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
-//        (view as? CountdownCollectionReusableView)?.configure(with: matchInfo, relativePositioning: relativePositioning)
+    @MainActor
+    @objc func toggleCountdownDirection() {
+        setCountdownDirection(to: countdownStackView.axis == .horizontal ? .vertical : .horizontal, animated: true)
     }
+    
+    @MainActor
+    func setCountdownDirection(to axis: NSLayoutConstraint.Axis, animated: Bool) {
+        view.layoutIfNeeded()
+        locationLabel.font = axis == .horizontal ? AppFont.light.size(16) : AppFont.bold.size(16)
+        if axis == .vertical {
+            locationImageView.setImage(UIImage(systemName: "location.north", withConfiguration: UIImage.SymbolConfiguration(weight: .regular)), animated: false)
+        }
+        
+        UIView.animate(withDuration: animated ? 0.3 : 0,
+                       delay: 0,
+                       options: .curveLinear) { [self] in
+            countdownToggleButton.transform = CGAffineTransform.identity.rotated(by: axis == .vertical ? .pi : 0)
+            countdownStackView.axis = axis
+            bottomStackVerticalConstraint.constant = axis == .horizontal ? 18 : 35
+            locationImageViewWidthConstraint.constant = axis == .horizontal ? 40 : view.frame.width * 0.5
+            locationStackView.spacing = axis == .horizontal ? 4 : 25
+            locationLabel.alpha = axis == .horizontal ? 0.7 : 1
+            countdownStackView.spacing = axis == .horizontal ? -40 : 20
+            locationLabel.transform = axis == .horizontal ? CGAffineTransform(scaleX: 1, y: 1) : CGAffineTransform(scaleX: 2, y: 2)
+            view.layoutIfNeeded()
+        } completion: { [self] finished in
+            if axis == .horizontal {
+                locationImageView.setImage(UIImage(systemName: "location.north", withConfiguration: UIImage.SymbolConfiguration(weight: .bold)), animated: false)
+            }
+        }
+    }
+    
+    // MARK: - UICollectionViewDataSource
     
     public override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -391,12 +426,6 @@ class CoordinateChatVC: MessagesViewController {
 //        return super.collectionView(collectionView, cellForItemAt: indexPath) //this returned the old TextMessageCell with incorrect insets
     }
     
-//    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        if let cell = cell as? TextMessageCell {
-//            cell.messageLabel.textInsets = .init(top: 8, left: 16, bottom: 8, right: 15)
-//        }
-//    }
-    
 }
 
 //MARK: - ConnectManagerDelegate
@@ -405,7 +434,7 @@ extension CoordinateChatVC: ConnectManagerDelegate {
     
     func newSecondElapsed() {
         DispatchQueue.main.async { [self] in
-            messagesCollectionView.reloadDataAndKeepOffset()
+            timeLabel.text = matchInfo.timeLeftToConnectString
         }
     }
     
@@ -423,7 +452,8 @@ extension CoordinateChatVC: ConnectManagerDelegate {
     func newRelativePositioning(_ relativePositioning: RelativePositioning) {
         self.relativePositioning = relativePositioning
         DispatchQueue.main.async { [self] in
-            messagesCollectionView.reloadDataAndKeepOffset()
+            locationLabel.text = prettyDistance(meters: relativePositioning.distance, shortened: false)
+            locationImageView.transform = CGAffineTransform.identity.rotated(by: relativePositioning.heading)
         }
     }
     
