@@ -55,6 +55,10 @@ class NotificationsManager: NSObject {
         super.init()
     }
     
+    //MARK: - Local Notifications
+    
+    
+    
     //MARK: - Permission and Status
     
     func getNotificationStatus() async -> UNAuthorizationStatus {

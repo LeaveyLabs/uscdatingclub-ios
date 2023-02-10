@@ -339,7 +339,7 @@ class CoordinateChatVC: MessagesViewController {
     }
     
     func presentCompatibility() {
-        
+        present(ViewCompatibilityVC.create(matchInfo: matchInfo), animated: true)
     }
     
     func presentReportAlert() {
@@ -360,6 +360,7 @@ class CoordinateChatVC: MessagesViewController {
     }
     
     @IBAction func toggleCountdownViewPressed() {
+        view.endEditing(true)
         toggleCountdownDirection()
     }
     

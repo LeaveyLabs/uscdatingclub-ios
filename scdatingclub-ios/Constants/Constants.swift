@@ -94,6 +94,7 @@ enum Constants {
             static let MatchFound = "MatchFoundVC"
             static let Coordinate = "CoordinateVC"
             static let CoordinateChat = "CoordinateChatVC"
+            static let ViewCompatibility = "ViewCompatibilityVC"
             //TabBar
             static let TabBarController = "TabBarController"
             //Misc
