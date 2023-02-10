@@ -41,7 +41,7 @@ class MatchFoundTableVC: UIViewController {
                 self.goToCoordinateVC()
             }
         }
-
+        handleFirstOpen()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -81,6 +81,13 @@ class MatchFoundTableVC: UIViewController {
         if let recentPressDate = UserDefaults.standard.object(forKey: Constants.UserDefaultsKeys.MostRecentMeetUpButtonPressDate) as? Date,
            recentPressDate.isMoreRecentThan(Calendar.current.date(byAdding: .minute, value: -1 * Constants.minutesToRespond, to: Date())!) {
             isWaiting = true
+        }
+    }
+    
+    func handleFirstOpen() {
+        if !DeviceService.shared.hasReceivedFeedbackNotification() {
+            NotificationsManager.shared.scheduleRequestFeedbackNotification(minutesFromNow: 30)
+            DeviceService.shared.didScheduleFeedbackNotification()
         }
     }
     

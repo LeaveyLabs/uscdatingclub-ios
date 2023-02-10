@@ -33,6 +33,7 @@ class DeviceService: NSObject {
     
     func hasRatedApp() -> Bool { return device.hasRatedApp }
     func hasSeenTutorial() -> Bool { return device.hasSeenTutorial }
+    func hasReceivedFeedbackNotification() -> Bool { return device.hasSeenTutorial }
     
     func getLastReceivedNewUpdateAlertVersion() -> String {
         return device.lastReceivedNewUpdateAlertVersion
@@ -47,6 +48,11 @@ class DeviceService: NSObject {
     
     func didRateApp() {
         device.hasRatedApp = true
+        Task { await saveToFilesystem() }
+    }
+    
+    func didScheduleFeedbackNotification() {
+        device.hasReceivedFeedbackNotification = true
         Task { await saveToFilesystem() }
     }
     

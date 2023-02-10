@@ -60,10 +60,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
             let loadingVC = LoadingVC.create()
                         
-            if let notification = connectionOptions.notificationResponse?.notification,
-               let notificationResponseHandler = NotificationsManager.shared.generateNotificationResponseHandler(notification) {
-                loadingVC.notificationResponseHandler = notificationResponseHandler
-            }
+//            if let notification = connectionOptions.notificationResponse?.notification,
+//               let notificationResponseHandler = NotificationsManager.shared.generateNotificationResponseHandler(notification) {
+//                loadingVC.notificationResponseHandler = notificationResponseHandler
+//            }
             window.rootViewController = loadingVC
         }
 
