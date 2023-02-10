@@ -11,7 +11,7 @@ import FirebaseRemoteConfigSwift
 
 enum RemoteConfigKeys: String, CaseIterable {
     case updateAvailableVersion, updateAvailableFeatures, updateMandatoryVersion
-    case minutesToRespond, minutesToConnect
+    case minutesToRespond, minutesToConnect, minutesUntilFeedbackNotification
     case onlyStudents, emailWhitelist
     case appStoreLink, landingPageLink, privacyPageLink, feedbackLink
 }
@@ -27,6 +27,7 @@ extension Constants {
 
     static let minutesToRespond: Int = remoteConfig.configValue(forKey: RemoteConfigKeys.minutesToRespond.rawValue).numberValue as? Int ?? 5
     static let minutesToConnect: Int = remoteConfig.configValue(forKey: RemoteConfigKeys.minutesToConnect.rawValue).numberValue as? Int ?? 5
+    static let minutesUntilFeedbackNotification: Int = remoteConfig.configValue(forKey: RemoteConfigKeys.minutesUntilFeedbackNotification.rawValue).numberValue as? Int ?? 30
     static let onlyStudents: Bool = remoteConfig.configValue(forKey: RemoteConfigKeys.onlyStudents.rawValue).boolValue
     
     //why is the below approach giving me errors?

@@ -86,7 +86,7 @@ class MatchFoundTableVC: UIViewController {
     
     func handleFirstOpen() {
         if !DeviceService.shared.hasReceivedFeedbackNotification() {
-            NotificationsManager.shared.scheduleRequestFeedbackNotification(minutesFromNow: 30)
+            NotificationsManager.shared.scheduleRequestFeedbackNotification(minutesFromNow: Constants.minutesUntilFeedbackNotification)
             DeviceService.shared.didScheduleFeedbackNotification()
         }
     }
