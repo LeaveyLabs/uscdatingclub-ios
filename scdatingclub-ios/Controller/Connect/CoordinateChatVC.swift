@@ -268,6 +268,8 @@ class CoordinateChatVC: MessagesViewController {
         messagesCollectionView.messagesDisplayDelegate = self
         messagesCollectionView.delegate = self
         
+        messagesCollectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
+        
         //UI
         messagesCollectionView.backgroundColor = .clear
         view.backgroundColor = .tintColor

@@ -25,8 +25,8 @@ extension Double {
 
 func prettyDistance(meters: Double, shortened: Bool) -> String {
     let feet = meters.metersToFeet()
-    if feet <= 10 {
-        return shortened ? "<10ft" : "<10 feet"
+    if feet <= 30 {
+        return shortened ? "<30ft" : "<30 feet"
     }
     if feet >= 500 {
         let roundedMiles = Double(Int(feet.feetToMiles() * 10)) / 10
