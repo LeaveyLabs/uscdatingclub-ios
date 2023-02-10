@@ -16,6 +16,6 @@ struct Message {
     
     static let normalDisplayAttributes: [NSAttributedString.Key : Any] = [
         .font: AppFont2.regular.size(15),
-        .foregroundColor: UIColor.customBlack,
+//        .foregroundColor: UIColor.customWhite,
     ]
 }

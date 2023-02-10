@@ -71,7 +71,6 @@ class CoordinateChatVC: MessagesViewController {
     }()
     
     //UI
-    @IBOutlet var countdownStackView: UIStackView!
     @IBOutlet var closeButton: UIButton!
     @IBOutlet var moreButton: UIButton!
     @IBOutlet var nameLabel: UILabel!
@@ -82,6 +81,9 @@ class CoordinateChatVC: MessagesViewController {
     @IBOutlet var locationImageViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet var bottomStackVerticalConstraint: NSLayoutConstraint!
     @IBOutlet var locationLabel: UILabel!
+    
+    @IBOutlet var countdownBgView: UIView!
+    @IBOutlet var countdownStackView: UIStackView!
     @IBOutlet var countdownToggleButton: UIButton!
     @IBOutlet var locationStackView: UIStackView!
     
@@ -287,7 +289,7 @@ class CoordinateChatVC: MessagesViewController {
         
         //Remove top constraint which was set in super's super, MessagesViewController. Then, add a new one.
         view.constraints.first { $0.firstAnchor == messagesCollectionView.topAnchor }!.isActive = false
-        messagesCollectionView.topAnchor.constraint(equalTo: countdownStackView.bottomAnchor, constant: 5).isActive = true
+        messagesCollectionView.topAnchor.constraint(equalTo: countdownBgView.bottomAnchor, constant: -10).isActive = true
         
         countdownStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(toggleCountdownDirection)))
         countdownStackView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleNavPan)))
@@ -478,21 +480,22 @@ extension CoordinateChatVC: MessagesDataSource {
 
     func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         if isMostRecentMessageFromSender(message: message, at: indexPath) {
-            return NSAttributedString(string: "sent", attributes: [NSAttributedString.Key.font: UIFont(name: Constants.Font.Medium, size: 11)!, NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+            return NSAttributedString(string: "sent", attributes: [NSAttributedString.Key.font: UIFont(name: Constants.Font.Medium, size: 11)!, NSAttributedString.Key.foregroundColor: UIColor.customWhite.withAlphaComponent(0.5)])
         }
         return nil
     }
 
     func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         if isTimeLabelVisible(at: indexPath) {
-            return NSAttributedString(string: getFormattedTimeStringForChat(timestamp: message.sentDate.timeIntervalSince1970).lowercased(), attributes: [NSAttributedString.Key.font: UIFont(name: Constants.Font.Medium, size: 12)!, NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+            return NSAttributedString(string: getFormattedTimeStringForChat(timestamp: message.sentDate.timeIntervalSince1970).lowercased(), attributes: [NSAttributedString.Key.font: UIFont(name: Constants.Font.Medium, size: 12)!, NSAttributedString.Key.foregroundColor: UIColor.customWhite.withAlphaComponent(0.5)])
         }
         return nil
     }
     
     func messageTimestampLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-        return NSAttributedString(string: getFormattedTimeStringForChat(timestamp: message.sentDate.timeIntervalSince1970).lowercased(), attributes: [NSAttributedString.Key.font: UIFont(name: Constants.Font.Medium, size: 12)!, NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        return NSAttributedString(string: getFormattedTimeStringForChat(timestamp: message.sentDate.timeIntervalSince1970).lowercased(), attributes: [NSAttributedString.Key.font: UIFont(name: Constants.Font.Medium, size: 12)!, NSAttributedString.Key.foregroundColor: UIColor.customWhite.withAlphaComponent(0.5)])
     }
+    
 }
 
 extension InputBarAccessoryViewDelegate {
@@ -566,8 +569,9 @@ extension CoordinateChatVC: UITextViewDelegate {
 
 extension CoordinateChatVC: MessagesDisplayDelegate {
     
+    //Note: i don't think this function actually gets called
     func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        return .customBlack
+        return isFromCurrentSender(message: message) ? .customWhite : .customBlack
     }
         
     func detectorAttributes(for detector: DetectorType, and message: MessageType, at indexPath: IndexPath) -> [NSAttributedString.Key: Any] {
@@ -579,11 +583,11 @@ extension CoordinateChatVC: MessagesDisplayDelegate {
     }
         
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        return isFromCurrentSender(message: message) ? .lightGray.withAlphaComponent(0.2) : .white
+        return isFromCurrentSender(message: message) ? .clear : .customWhite
     }
     
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
-        return isFromCurrentSender(message: message) ? .bubble : .bubbleOutline(.darkGray.withAlphaComponent(0.23))
+        return isFromCurrentSender(message: message) ? .bubbleOutline(.customWhite.withAlphaComponent(0.7)) : .bubble
     }
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {

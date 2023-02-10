@@ -19,7 +19,7 @@ struct MessageKitMessage: MessageType {
     var message: Message
     
     init(text: NSAttributedString, sender: SenderType, receiver: SenderType, messageId: String, date: Date) {
-        self.kind = .attributedText(text)
+        self.kind = .text(text.string)
         self.sender = sender
         self.messageId = messageId
         self.sentDate = date
@@ -32,11 +32,16 @@ struct MessageKitMessage: MessageType {
     }
     
     init(message: Message, conversation: Conversation) {
-        let attributedMessage = NSAttributedString(string: message.body, attributes: [.font: Message.normalDisplayAttributes[.font] as! UIFont])
-        
-        self.kind = .attributedText(attributedMessage)
         self.sender = message.senderId == UserService.singleton.getId() ? UserService.singleton.getUserAsReadOnlyUser() : conversation.sangdaebang
         self.messageId = String(message.id)
+        
+//        let foregroundColor: UIColor = message.id == UserService.singleton.getId() ? .customWhite : .customBlack
+//        let attributedMessage = NSAttributedString(
+//            string: message.body,
+//            attributes: [.font: Message.normalDisplayAttributes[.font] as! UIFont,
+//                         .foregroundColor: foregroundColor])
+        self.kind = .text(message.body) //.text respects the color from chatVC, but .attributedText doesnt
+        
         self.sentDate = Date(timeIntervalSince1970: message.timestamp)
         
         self.message = message
