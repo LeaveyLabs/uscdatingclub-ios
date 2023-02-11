@@ -4,7 +4,6 @@
 //
 //  Created by Kevin Sun on 12/29/22.
 //
-
 import Foundation
 import UIKit
 
@@ -32,6 +31,14 @@ struct UserError: Codable {
     let detail: String?
 }
 
+func encryptCoordinate(coordinate:Double) -> Double {
+    return coordinate + Env.LOCATION_KEY
+}
+
+func decryptCoordinate(coordinate:Double) -> Double {
+    return coordinate - Env.LOCATION_KEY
+}
+
 class UserAPI {
     // Paths to API endpoints
     enum Endpoints: String {
@@ -56,6 +63,7 @@ class UserAPI {
         case longitude = "longitude"
         case responses = "responses"
         case isMatchable = "is_matchable"
+        case isEncrypted = "is_encrypted"
     }
     
     static let USER_RECOVERY_MESSAGE = "try again later"
@@ -158,6 +166,19 @@ class UserAPI {
         ]
         let json = try JSONEncoder().encode(params)
         let (data, response) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: json, method: HTTPMethods.PATCH.rawValue)
+        try filterUserErrors(data: data, response: response)
+    }
+    
+    static func updateLocationEncrypted(latitude:Double, longitude:Double, email:String) async throws {
+        let url =  "\(Env.BASE_URL)\(Endpoints.updateLocation.rawValue)"
+        let params:[String:String] = [
+            ParameterKeys.email.rawValue: email,
+            ParameterKeys.latitude.rawValue: String(encryptCoordinate(coordinate: latitude)),
+            ParameterKeys.longitude.rawValue: String(encryptCoordinate(coordinate: longitude)),
+            ParameterKeys.isEncrypted.rawValue: String(true),
+        ]
+        let json = try JSONEncoder().encode(params)
+        let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.PATCH.rawValue)
         try filterUserErrors(data: data, response: response)
     }
     

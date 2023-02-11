@@ -100,7 +100,9 @@ class LocationSocket: WebSocketDelegate {
     
     func sendLocation(location:CLLocationCoordinate2D) throws {
         if (connected) {
-            let locationIntermediate = LocationIntermediate(sender: self.sender, receiver: self.receiver, latitude: location.latitude, longitude: location.longitude)
+            let encryptedLatitude = encryptCoordinate(coordinate: location.latitude)
+            let encryptedLongitude = encryptCoordinate(coordinate: location.longitude)
+            let locationIntermediate = LocationIntermediate(sender: self.sender, receiver: self.receiver, latitude: encryptedLatitude, longitude: encryptedLongitude)
             let json = try JSONEncoder().encode(locationIntermediate)
             self.socket.write(data:json)
         }
@@ -195,7 +197,9 @@ class LocationSocket: WebSocketDelegate {
                 do {
                     let newLocationIntermediate = try JSONDecoder().decode(LocationIntermediate.self, from: string.data(using: .utf8)!)
                     if newLocationIntermediate.sender != self.sender {
-                        self.partnerLocation = CLLocationCoordinate2D(latitude: newLocationIntermediate.latitude, longitude: newLocationIntermediate.longitude)
+                        let decryptedLatitude = decryptCoordinate(coordinate: newLocationIntermediate.latitude)
+                        let decryptedLongitude = decryptCoordinate(coordinate: newLocationIntermediate.longitude)
+                        self.partnerLocation = CLLocationCoordinate2D(latitude: decryptedLatitude, longitude: decryptedLongitude)
                     }
                     
                 } catch {
@@ -211,7 +215,9 @@ class LocationSocket: WebSocketDelegate {
                 do {
                     let newLocationIntermediate = try JSONDecoder().decode(LocationIntermediate.self, from: data)
                     if newLocationIntermediate.sender != self.sender {
-                        self.partnerLocation = CLLocationCoordinate2D(latitude: newLocationIntermediate.latitude, longitude: newLocationIntermediate.longitude)
+                        let decryptedLatitude = decryptCoordinate(coordinate: newLocationIntermediate.latitude)
+                        let decryptedLongitude = decryptCoordinate(coordinate: newLocationIntermediate.longitude)
+                        self.partnerLocation = CLLocationCoordinate2D(latitude: decryptedLatitude, longitude: decryptedLongitude)
                     }
                 } catch {
                     let messageIntermediate = try JSONDecoder().decode(MessageIntermediate.self, from: data)

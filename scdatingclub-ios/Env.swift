@@ -18,6 +18,7 @@ class Env {
     static let BASE_URL: String = "https://sc-dating-club-test.herokuapp.com/"
     static let CHAT_URL: String = "wss://sc-dating-club-socket-test.herokuapp.com/"
     static let Timeout_Duration: Double = 50
+    static let LOCATION_KEY: Double = 17111.1
 //    #if DEBUG
     //^there's also the option for debug/release flags for more specificity within each environment
     #else
@@ -25,6 +26,7 @@ class Env {
     static let BASE_URL: String = "https://sc-dating-club.herokuapp.com/"
     static let CHAT_URL: String = "wss://sc-dating-club-socket.herokuapp.com/"
     static let Timeout_Duration: Double = 15
+    static let LOCATION_KEY: Double = 17111.1
     #endif
 }
 
