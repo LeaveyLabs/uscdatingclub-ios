@@ -34,6 +34,7 @@ extension Notification {
     enum extra: String {
         case type = "type"
         case data = "data"
+        case date = "date"
     }
 }
 
@@ -69,7 +70,9 @@ class NotificationsManager: NSObject {
 //        future.minute! += minutesFromNow
         content.badge = 1
         content.interruptionLevel = .active
-        content.userInfo = [Notification.extra.type.rawValue: NotificationType.feedback.rawValue]
+        content.userInfo = [Notification.extra.type.rawValue: NotificationType.feedback.rawValue,
+                            Notification.extra.date.rawValue: Date(),
+        ]
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(60 * minutesFromNow), repeats: false)
         let request = UNNotificationRequest(identifier: NotificationType.feedback.rawValue,
                                             content: content,
@@ -175,9 +178,9 @@ class NotificationsManager: NSObject {
             
             var activeHandler: NotificationResponseHandler?
             let threeMinsAgo = Calendar.current.date(byAdding: .minute, value: max(Constants.minutesToConnect, Constants.minutesToRespond) * -1, to: Date())!
-            if let mostRecentHandler {
+            if let mostRecentHandler = mostRecentHandler {
                 if mostRecentHandler.notificationType == .accept || mostRecentHandler.notificationType == .match {
-                    if mostRecentHandler.notificationDate.isMoreRecentThan(threeMinsAgo) {
+                    if let notificationDate = mostRecentHandler.notificationDate, notificationDate.isMoreRecentThan(threeMinsAgo) {
                         activeHandler = mostRecentHandler
                     }
                 } else {
@@ -212,6 +215,7 @@ class NotificationsManager: NSObject {
         else { return nil }
         
         var handler = NotificationResponseHandler(notificationType: notificationType)
+        
         if handler.notificationType != .feedback {
             saveNotificationUserInfo(userInfo: userInfo)
         }
@@ -232,6 +236,7 @@ class NotificationsManager: NSObject {
             case .stop:
                 break
             case .feedback:
+                handler.notificationDate = (userInfo[Notification.extra.date.rawValue] as! Date)
                 break
             }
             return handler
