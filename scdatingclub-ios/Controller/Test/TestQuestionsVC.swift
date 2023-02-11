@@ -266,9 +266,7 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
 
         if desiredOffset < 50 { return } //don't go in wrong direction, and don't scroll if a small amount
         
-        let willWeBeAtBottom = desiredOffset + tableView.contentOffset.y > tableView.verticalOffsetForBottom
-        
-        
+//        let willWeBeAtBottom = desiredOffset + tableView.contentOffset.y > tableView.verticalOffsetForBottom
         //this code doesnt actually seem necessary in my iPhone14 tests
 //        if willWeBeAtBottom {
 //            tableView.setContentOffset(CGPoint(x: tableView.contentOffset.x, y: tableView.verticalOffsetForBottom), animated: true)

@@ -26,6 +26,7 @@ import UIKit
 import MessageKit
 import InputBarAccessoryView
 import MessageUI
+import Mixpanel
 
 class FixedInsetTextMessageCell: TextMessageCell {
     
@@ -133,6 +134,12 @@ class CoordinateChatVC: MessagesViewController {
         DispatchQueue.main.async { //scroll on the next cycle so that collectionView's data is loaded in beforehand
             self.messagesCollectionView.scrollToLastItem(at: .bottom, animated: false)
         }
+        
+        Mixpanel.mainInstance().track(
+            event: Constants.MP.CoordinateOpen.EventName,
+            properties: [Constants.MP.MatchOpen.match_id:matchInfo.matchId,
+                         Constants.MP.MatchOpen.time_remaining:matchInfo.timeLeftToConnectString])
+        Mixpanel.mainInstance().track(event: Constants.MP.CoordinateOpen.EventName)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -148,7 +155,10 @@ class CoordinateChatVC: MessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewHasAppeared = true
-        
+        AlertManager.showInfoCentered(
+            "you guys have 5 minutes to chat & meet up!",
+            "note: location sharing doesn't work well underground",
+            on: self)
 //        ConversationService.singleton.updateLastMessageReadTime(withUserId: conversation.sangdaebang.id)
     }
 

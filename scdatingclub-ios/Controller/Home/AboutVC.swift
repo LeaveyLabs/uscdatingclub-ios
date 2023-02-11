@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Mixpanel
 
 class AboutVC: UIViewController, PageVCChild {
     
@@ -77,6 +78,7 @@ class AboutVC: UIViewController, PageVCChild {
     }
     
     @objc func shareButtonPressed() {
+        Mixpanel.mainInstance().track(event: Constants.MP.OpenShareAppButtonTapped.EventName)
         presentShareAppActivity()
     }
     
@@ -85,6 +87,7 @@ class AboutVC: UIViewController, PageVCChild {
     }
     
     @objc func feedbackButtonPressed() {
+        Mixpanel.mainInstance().track(event: Constants.MP.OpenTextUsButtonTapped.EventName)
         openURL(Constants.feedbackLink)
     }
         

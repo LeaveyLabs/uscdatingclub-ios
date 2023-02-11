@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Mixpanel
 
 class WaitListVC: UIViewController {
 
@@ -27,6 +28,9 @@ class WaitListVC: UIViewController {
         super.viewDidLoad()
         titleLabel.font = AppFont.bold.size(30)
         subtitleLabel.font = AppFont2.regular.size(17)
+        Mixpanel.mainInstance().track(
+            event: Constants.MP.AuthProcess.EventName,
+            properties: [Constants.MP.AuthProcess.Kind:Constants.MP.AuthProcess.Waitlist])
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
 }

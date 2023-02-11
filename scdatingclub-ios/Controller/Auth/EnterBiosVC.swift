@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Mixpanel
 
 class EnterBiosVC: KUIViewController, UITextFieldDelegate {
     
@@ -195,6 +196,9 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
                     sexIdentity: String(sexIdentity),
                     sexPreference: String(sexPreference))
                 AuthContext.reset()
+                Mixpanel.mainInstance().track(
+                    event: Constants.MP.AuthProcess.EventName,
+                    properties: [Constants.MP.AuthProcess.Kind:Constants.MP.AuthProcess.Signup])
                 DispatchQueue.main.async { [self] in
                     transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.3) { [weak self] finished in
                         self?.isSubmitting = false

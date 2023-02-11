@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import FirebaseCore
+import Mixpanel
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Version.checkForNewUpdate()
         }
         FirebaseApp.configure()
+        Mixpanel.initialize(token: Constants.mixpanelToken, trackAutomaticEvents: true)
+        Mixpanel.mainInstance().loggingEnabled = false
         Constants.fetchRemoteConfig()
         TestService.shared.initialize()
                 

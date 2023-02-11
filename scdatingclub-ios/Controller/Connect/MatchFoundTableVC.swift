@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Mixpanel
 
 class MatchFoundTableVC: UIViewController {
         
@@ -42,6 +43,11 @@ class MatchFoundTableVC: UIViewController {
             }
         }
         handleFirstOpen()
+        Mixpanel.mainInstance().track(
+            event: Constants.MP.MatchOpen.EventName,
+            properties: [Constants.MP.MatchOpen.match_id:matchInfo.matchId,
+                         Constants.MP.MatchOpen.time_remaining:matchInfo.timeLeftToRespondString])
+        Mixpanel.mainInstance().track(event: Constants.MP.MatchOpen.EventName)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -100,6 +106,12 @@ class MatchFoundTableVC: UIViewController {
             do {
                 try await MatchAPI.acceptMatch(userId: UserService.singleton.getId(),
                                                partnerId: matchInfo.partnerId)
+                Mixpanel.mainInstance().people.increment(
+                    property: Constants.MP.Profile.MatchAccept, by: 1)
+                Mixpanel.mainInstance().track(
+                    event: Constants.MP.MatchAccept.EventName,
+                    properties: [Constants.MP.MatchOpen.match_id:matchInfo.matchId,
+                                 Constants.MP.MatchOpen.time_remaining:matchInfo.timeLeftToRespondString])
                 UserDefaults.standard.set(Date(), forKey: Constants.UserDefaultsKeys.MostRecentMeetUpButtonPressDate)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) { //[weak self] in
                     AppStoreReviewManager.requestReviewIfAppropriate()

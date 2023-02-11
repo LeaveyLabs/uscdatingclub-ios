@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Mixpanel
 
 class AuthStartVC: UIViewController, UITextViewDelegate {
     
@@ -39,6 +40,7 @@ class AuthStartVC: UIViewController, UITextViewDelegate {
         subtitleLabel.font = AppFont.medium.size(18)
         headerLabel.font = AppFont2.regular.size(12)
         headerLabel.text = "\(Constants.appDisplayName) is an iOS app from Leavey Labs. It is not affiliated with any external organizations or institutions."
+        Mixpanel.mainInstance().time(event: Constants.MP.AuthProcess.EventName)
     }
     
     override func viewDidAppear(_ animated: Bool) {

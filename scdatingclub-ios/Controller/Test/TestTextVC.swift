@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Mixpanel
 
 class TestTextVC: UIViewController {
     
@@ -44,7 +45,12 @@ class TestTextVC: UIViewController {
         switch testTextType {
         case .welcome:
             TestService.shared.resetResponseContext()
+            Mixpanel.mainInstance().time(event: Constants.MP.TakeTest.EventName)
         case .submitting, .finished:
+            Mixpanel.mainInstance().track(
+                event: Constants.MP.TakeTest.EventName,
+                properties: [Constants.MP.TakeTest.IsFirstTest:isFirstTest])
+            Mixpanel.mainInstance().people.increment(property: Constants.MP.Profile.TakeTest, by: 1)
             navigationController?.interactivePopGestureRecognizer?.isEnabled = false
             Task {
                 do {

@@ -13,6 +13,7 @@ import MessageKit
 
 protocol ReadOnlyUserType {
     var id: Int { get }
+    var firstLastName: String { get }
     var firstName: String { get }
     var lastName: String { get }
 //    var picture: String { get }
@@ -23,6 +24,7 @@ protocol CompleteUserType: ReadOnlyUserType {
     var email: String { get }
     var sexIdentity: String { get }
     var sexPreference: String { get }
+    var school: String? { get }
     var isMatchable: Bool { get }
     var surveyResponses: [SurveyResponse] { get }
     var token: String { get }
@@ -36,6 +38,7 @@ struct ReadOnlyUser: ReadOnlyUserType, SenderType, Codable, Hashable {
     let id: Int
     let firstName: String
     let lastName: String
+    var firstLastName: String { firstName + " " + lastName }
 //    let picture: String
     
     //MessageKit's SenderType
@@ -54,6 +57,8 @@ struct CompleteUser: Codable, CompleteUserType, SenderType {
     let id: Int
     let firstName: String
     let lastName: String
+    var firstLastName: String { firstName + " " + lastName }
+    var school: String? { email.slice(from: "@", to: "." )}
 //    let picture: String
     let email: String
     let sexIdentity: String
@@ -81,6 +86,8 @@ struct FrontendCompleteUser: Codable, CompleteUserType, ReadOnlyUserType {
     let phoneNumber: String
     let firstName: String
     let lastName: String
+    var firstLastName: String { firstName + " " + lastName }
+    var school: String? { email.slice(from: "@", to: "." )}
     //    var picture: String
     let sexIdentity: String
     let sexPreference: String

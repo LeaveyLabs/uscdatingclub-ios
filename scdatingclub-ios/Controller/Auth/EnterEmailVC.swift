@@ -49,6 +49,7 @@ class EnterEmailVC: KUIViewController, UITextFieldDelegate {
         setupBackButton()
         titleLabel.font = AppFont.bold.size(30)
         subtitleLabel.font = AppFont2.medium.size(17)
+        subtitleLabel.text = "we'll verify that you're a \(Constants.onlyUscStudents ? "usc " : "")student"
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Mixpanel
 
 class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
     
@@ -132,6 +133,7 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
     //MARK: - User Interaction
     
     @objc func openEmailButtonTapped() {
+        Mixpanel.mainInstance().track(event: Constants.MP.OpenEmailButtonTapped.EventName)
         presentOpenMailAppAlert()
     }
     
@@ -259,6 +261,9 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
         switch confirmMethod {
         case .text:
             if UserService.singleton.isLoggedIntoAnAccount {
+                Mixpanel.mainInstance().track(
+                    event: Constants.MP.AuthProcess.EventName,
+                    properties: [Constants.MP.AuthProcess.Kind:Constants.MP.AuthProcess.Login])
                 transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5, completion: { completed in
                 })
             } else {

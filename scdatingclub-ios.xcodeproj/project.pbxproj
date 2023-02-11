@@ -95,6 +95,10 @@
 		478BECC62964C4D000930DAF /* TestQuestionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECC52964C4D000930DAF /* TestQuestionsVC.swift */; };
 		478BECC92964C60900930DAF /* TestTextVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECC82964C60900930DAF /* TestTextVC.swift */; };
 		478BECD52966249300930DAF /* SpectrumTestQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECD42966249300930DAF /* SpectrumTestQuestion.swift */; };
+		4791C0DF2996EF80005BE410 /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 4791C0DE2996EF80005BE410 /* Mixpanel */; };
+		4791C0E2299810BA005BE410 /* Internet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791C0E1299810BA005BE410 /* Internet.swift */; };
+		4791C0E429981123005BE410 /* Constants+Mixpanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791C0E329981123005BE410 /* Constants+Mixpanel.swift */; };
+		4791C0E629981FA5005BE410 /* String+Slice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791C0E529981FA5005BE410 /* String+Slice.swift */; };
 		47A011402995F2D00099BEA8 /* ViewCompatibilityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A0113F2995F2D00099BEA8 /* ViewCompatibilityVC.swift */; };
 		47A1C8EB296E2AD900F8B4D6 /* UIFont+Override.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A1C8EA296E2AD900F8B4D6 /* UIFont+Override.swift */; };
 		47A1C8ED296E414600F8B4D6 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A1C8EC296E414600F8B4D6 /* Match.swift */; };
@@ -143,7 +147,7 @@
 		47C40F7B295CBB42007C27F0 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 47C40F7A295CBB42007C27F0 /* FirebaseRemoteConfig */; };
 		47C40F7D295CBB42007C27F0 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 47C40F7C295CBB42007C27F0 /* FirebaseRemoteConfigSwift */; };
 		47C40F8E295CBBBD007C27F0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40F83295CBBBD007C27F0 /* Constants.swift */; };
-		47C40F8F295CBBBD007C27F0 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40F84295CBBBD007C27F0 /* RemoteConfig.swift */; };
+		47C40F8F295CBBBD007C27F0 /* Constants+RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40F84295CBBBD007C27F0 /* Constants+RemoteConfig.swift */; };
 		47C40F91295CBBBD007C27F0 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40F87295CBBBD007C27F0 /* Color+Hex.swift */; };
 		47C40F94295CBBBD007C27F0 /* Encodable+Dict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40F8A295CBBBD007C27F0 /* Encodable+Dict.swift */; };
 		47C40F95295CBBBD007C27F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C40F8B295CBBBD007C27F0 /* AppDelegate.swift */; };
@@ -329,6 +333,9 @@
 		478BECC52964C4D000930DAF /* TestQuestionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestQuestionsVC.swift; sourceTree = "<group>"; };
 		478BECC82964C60900930DAF /* TestTextVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTextVC.swift; sourceTree = "<group>"; };
 		478BECD42966249300930DAF /* SpectrumTestQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumTestQuestion.swift; sourceTree = "<group>"; };
+		4791C0E1299810BA005BE410 /* Internet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Internet.swift; sourceTree = "<group>"; };
+		4791C0E329981123005BE410 /* Constants+Mixpanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Mixpanel.swift"; sourceTree = "<group>"; };
+		4791C0E529981FA5005BE410 /* String+Slice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Slice.swift"; sourceTree = "<group>"; };
 		47A0113F2995F2D00099BEA8 /* ViewCompatibilityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewCompatibilityVC.swift; path = "scdatingclub-ios/Controller/Connect/ViewCompatibilityVC.swift"; sourceTree = SOURCE_ROOT; };
 		47A1C8EA296E2AD900F8B4D6 /* UIFont+Override.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Override.swift"; sourceTree = "<group>"; };
 		47A1C8EC296E414600F8B4D6 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
@@ -371,7 +378,7 @@
 		47C40F5D295CBAF0007C27F0 /* DeviceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceService.swift; sourceTree = "<group>"; };
 		47C40F5E295CBAF0007C27F0 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		47C40F83295CBBBD007C27F0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		47C40F84295CBBBD007C27F0 /* RemoteConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
+		47C40F84295CBBBD007C27F0 /* Constants+RemoteConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Constants+RemoteConfig.swift"; sourceTree = "<group>"; };
 		47C40F87295CBBBD007C27F0 /* Color+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		47C40F8A295CBBBD007C27F0 /* Encodable+Dict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encodable+Dict.swift"; sourceTree = "<group>"; };
 		47C40F8B295CBBBD007C27F0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -496,6 +503,7 @@
 				47773DF42981067600DDF3A5 /* MessageKit in Frameworks */,
 				47C40F6F295CBB41007C27F0 /* FirebaseAppCheck in Frameworks */,
 				47C40F77295CBB42007C27F0 /* FirebaseFirestoreSwift in Frameworks */,
+				4791C0DF2996EF80005BE410 /* Mixpanel in Frameworks */,
 				47C40F6B295CBB41007C27F0 /* FirebaseAnalytics in Frameworks */,
 				47C40F73295CBB41007C27F0 /* FirebaseDynamicLinks in Frameworks */,
 				47C40F7D295CBB42007C27F0 /* FirebaseRemoteConfigSwift in Frameworks */,
@@ -793,7 +801,8 @@
 			isa = PBXGroup;
 			children = (
 				47C40F83295CBBBD007C27F0 /* Constants.swift */,
-				47C40F84295CBBBD007C27F0 /* RemoteConfig.swift */,
+				4791C0E329981123005BE410 /* Constants+Mixpanel.swift */,
+				47C40F84295CBBBD007C27F0 /* Constants+RemoteConfig.swift */,
 				476FD860295DEDCF0014DD42 /* UIFont+Custom.swift */,
 				47C4107D295CC0BE007C27F0 /* UIColor+Custom.swift */,
 				47A1C8EA296E2AD900F8B4D6 /* UIFont+Override.swift */,
@@ -871,6 +880,7 @@
 				470221E8295CCFA200119FA8 /* Version.swift */,
 				47C4104D295CBFFC007C27F0 /* Validate.swift */,
 				47C4104F295CBFFC007C27F0 /* CustomAttributedString.swift */,
+				4791C0E1299810BA005BE410 /* Internet.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -885,6 +895,7 @@
 				47C41063295CC095007C27F0 /* String+Capitalization.swift */,
 				47C41064295CC095007C27F0 /* String+Condensed.swift */,
 				47C41062295CC095007C27F0 /* String+Indexing.swift */,
+				4791C0E529981FA5005BE410 /* String+Slice.swift */,
 			);
 			path = String;
 			sourceTree = "<group>";
@@ -1211,6 +1222,7 @@
 				47DE31CF295CC2790063C55A /* SwiftMessages */,
 				434A053F2963C92B00C15945 /* Starscream */,
 				47773DF32981067600DDF3A5 /* MessageKit */,
+				4791C0DE2996EF80005BE410 /* Mixpanel */,
 			);
 			productName = "uscdatingclub-ios";
 			productReference = 47C40EE3295CB930007C27F0 /* scdatingclub-ios.app */;
@@ -1294,6 +1306,7 @@
 				47DE31CE295CC2790063C55A /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 				434A053E2963C92B00C15945 /* XCRemoteSwiftPackageReference "Starscream" */,
 				47773DDF2980FDEB00DDF3A5 /* XCRemoteSwiftPackageReference "MessageKit" */,
+				4791C0DD2996EF80005BE410 /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
 			);
 			productRefGroup = 47C40EE4295CB930007C27F0 /* Products */;
 			projectDirPath = "";
@@ -1400,6 +1413,7 @@
 				47C41078295CC0AB007C27F0 /* MKPlacemark+Address.swift in Sources */,
 				47A011402995F2D00099BEA8 /* ViewCompatibilityVC.swift in Sources */,
 				4731F510295CD4820013F626 /* UITableView+DeselectAll.swift in Sources */,
+				4791C0E2299810BA005BE410 /* Internet.swift in Sources */,
 				47B60B0A296C834600657C1D /* ConnectManager.swift in Sources */,
 				47773DE92980FE5100DDF3A5 /* Conversation.swift in Sources */,
 				47E57C9A2995935700F077CD /* RelativePositioning.swift in Sources */,
@@ -1416,7 +1430,7 @@
 				4711A1F32975BF8F00B07577 /* UIViewController+OpenMailApp.swift in Sources */,
 				47DE3206295CC4B40063C55A /* EnterEmailVC.swift in Sources */,
 				47C40F95295CBBBD007C27F0 /* AppDelegate.swift in Sources */,
-				47C40F8F295CBBBD007C27F0 /* RemoteConfig.swift in Sources */,
+				47C40F8F295CBBBD007C27F0 /* Constants+RemoteConfig.swift in Sources */,
 				47DE3208295CC4B40063C55A /* EnterNumberVC.swift in Sources */,
 				47DE3204295CC4B40063C55A /* CarouselCollectionView.swift in Sources */,
 				47DE3265295CC94F0063C55A /* UIButton+RightSideImage.swift in Sources */,
@@ -1427,12 +1441,14 @@
 				4731F512295CD4870013F626 /* UITextField+MaxLength.swift in Sources */,
 				4731F515295CD48F0013F626 /* UISegmentedControl+Twitter.swift in Sources */,
 				47ABA6EA2976405900F0FDFE /* MessageComposer.swift in Sources */,
+				4791C0E429981123005BE410 /* Constants+Mixpanel.swift in Sources */,
 				47EA74AF2980AB9900265DF3 /* ConnectInterestsCell.swift in Sources */,
 				47EA74AC2980AB5400265DF3 /* Dict+RemoveNullEntries.swift in Sources */,
 				478BECC92964C60900930DAF /* TestTextVC.swift in Sources */,
 				47DE3254295CC7C40063C55A /* UIViewController+OpenURL.swift in Sources */,
 				47C40F91295CBBBD007C27F0 /* Color+Hex.swift in Sources */,
 				47C40F61295CBAF0007C27F0 /* Device.swift in Sources */,
+				4791C0E629981FA5005BE410 /* String+Slice.swift in Sources */,
 				47DE324F295CC7C40063C55A /* UIImage+Resize.swift in Sources */,
 				47ABA6E62976221000F0FDFE /* AuthStartPageVC.swift in Sources */,
 				47DE3259295CC7C40063C55A /* UIViewController+MistShareActivity.swift in Sources */,
@@ -1961,6 +1977,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		4791C0DD2996EF80005BE410 /* XCRemoteSwiftPackageReference "mixpanel-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mixpanel/mixpanel-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		47C40F69295CBB41007C27F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -2002,6 +2026,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 47773DDF2980FDEB00DDF3A5 /* XCRemoteSwiftPackageReference "MessageKit" */;
 			productName = MessageKit;
+		};
+		4791C0DE2996EF80005BE410 /* Mixpanel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4791C0DD2996EF80005BE410 /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
+			productName = Mixpanel;
 		};
 		47C40F6A295CBB41007C27F0 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

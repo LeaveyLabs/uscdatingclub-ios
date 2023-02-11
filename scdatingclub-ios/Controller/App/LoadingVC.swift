@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAnalytics
+import Mixpanel
 
 func loadEverything() async throws {
     try await withThrowingTaskGroup(of: Void.self) { group in
@@ -32,7 +33,6 @@ class LoadingVC: UIViewController {
     
     class func create(notificationResponseHandler: NotificationResponseHandler? = nil) -> LoadingVC {
         let vc = UIStoryboard(name: Constants.SBID.SB.Misc, bundle: nil).instantiateViewController(withIdentifier: Constants.SBID.VC.Loading) as! LoadingVC
-        print("HANDLER:", notificationResponseHandler)
         vc.notificationResponseHandler = notificationResponseHandler
         return vc
     }
@@ -120,7 +120,7 @@ class LoadingVC: UIViewController {
         case .stop:
             break
         case .feedback:
-            //TODO: post to somewhere that this user took a survey just 
+            Mixpanel.mainInstance().track(event: Constants.MP.OpenFeedbackSurvey.EventName)
             transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0) { completed in
                 SceneDelegate.visibleViewController?.openURL(Constants.feedbackLink)
             }

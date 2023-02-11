@@ -15,6 +15,8 @@ struct Match: Codable {
 }
 
 struct MatchPartner: Codable {
+    let matchId: Int
+    
     //Vitals
     let id: Int
     let firstName: String
@@ -33,6 +35,8 @@ struct MatchPartner: Codable {
 }
 
 struct MatchAcceptance: Codable {
+    let matchId: Int
+
     //Vitals
     let id: Int
     let firstName: String
@@ -66,6 +70,7 @@ struct TextSimilarity: Codable {
 }
 
 struct MatchInfo: Codable {
+    let matchId: Int
     let partnerId: Int
     let partnerName: String
     let compatibility: Int
@@ -85,9 +90,7 @@ struct MatchInfo: Codable {
     var elapsedTime: ElapsedTime {
         return Date.init().timeIntervalSince1970.getElapsedTime(since: date.timeIntervalSince1970)
     }
-    
-    //TODO: make the below code minimum 0:00
-    
+        
     var timeLeftToRespondString: String {
         let minsLeft = Constants.minutesToRespond - 1 - elapsedTime.minutes
         let secsLeft = 59 - elapsedTime.seconds
@@ -107,6 +110,7 @@ struct MatchInfo: Codable {
     }
     
     init(matchPartner: MatchPartner) {
+        matchId = matchPartner.matchId
         partnerId = matchPartner.id
         partnerName = matchPartner.firstName
         compatibility = matchPartner.compatibility
@@ -121,6 +125,7 @@ struct MatchInfo: Codable {
     }
     
     init(matchAcceptance: MatchAcceptance) {
+        matchId = matchAcceptance.matchId
         partnerId = matchAcceptance.id
         partnerName = matchAcceptance.firstName
         compatibility = matchAcceptance.compatibility

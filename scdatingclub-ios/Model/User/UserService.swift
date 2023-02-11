@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseAnalytics
+import Mixpanel
 
 class UserService: NSObject {
     
@@ -46,7 +47,6 @@ class UserService: NSObject {
     
     //MARK: - Initializer
     
-    //private initializer because there will only ever be one instance of UserService, the singleton
     private override init() {
         super.init()
 //        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -54,7 +54,6 @@ class UserService: NSObject {
         
         if FileManager.default.fileExists(atPath: UserService.LOCAL_FILE_LOCATION.path) {
             self.loadUserFromFilesystem()
-            setupFirebaseAnalyticsProperties()
             isLoggedIntoApp = true
         }
     }
@@ -95,8 +94,6 @@ class UserService: NSObject {
                     email: String,
                     sexIdentity: String,
                     sexPreference: String) async throws {
-//        let newProfilePicWrapper = ProfilePicWrapper(image: profilePic, withCompresssion: true)
-//        let compressedProfilePic = newProfilePicWrapper.image
         let newCompleteUser = try await UserAPI.registerUser(email: email,
                                        phoneNumber: phoneNumber,
                                        firstName: firstName,
@@ -105,18 +102,20 @@ class UserService: NSObject {
                                        sexPreference: sexPreference)
         setGlobalAuthToken(token: newCompleteUser.token)
         authedUser = FrontendCompleteUser(completeUser: newCompleteUser)
+        Mixpanel.mainInstance().identify(distinctId: String(authedUser.id))
+        updateAnalyticsProperties()
+//        Mixpanel.mainInstance().createAlias(newCompleteUser.firstLastName,
+//                                            distinctId: Mixpanel.mainInstance().distinctId)
         await self.saveUserToFilesystem()
         Task { await waitAndRegisterDeviceToken(id: authedUser.id) }
-        Task {
-            setupFirebaseAnalyticsProperties() //must come later at the end of this process so that we dont access authedUser while it's null and kick the user to the home screen
-        }
         isLoggedIntoApp = true
     }
 
     func logInWith(completeUser: CompleteUser) async throws {
         Task { await waitAndRegisterDeviceToken(id: completeUser.id) }
         authedUser = FrontendCompleteUser(completeUser: completeUser)
-        setupFirebaseAnalyticsProperties()
+        Mixpanel.mainInstance().identify(distinctId: String(authedUser.id))
+        updateAnalyticsProperties()
         await self.saveUserToFilesystem()
         isLoggedIntoApp = true
     }
@@ -127,6 +126,7 @@ class UserService: NSObject {
         let updatedUser = CompleteUser(id: authedUser.id, firstName: firstName, lastName: lastName, email:authedUser.email, sexIdentity: sexIdentity, sexPreference: sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: authedUser.surveyResponses, token: authedUser.token, isSuperuser: authedUser.isSuperuser)
         try await UserAPI.updateUser(id:updatedUser.id, user:updatedUser)
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
+        updateAnalyticsProperties()
         Task { await self.saveUserToFilesystem() }
     }
     
@@ -135,6 +135,7 @@ class UserService: NSObject {
         try await UserAPI.updateMatchableStatus(matchableStatus: active, email: authedUser.email)
         //LocationManager start/stop updating location is handled in RadarVC on rerender right now
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
+        updateAnalyticsProperties()
         Task { await self.saveUserToFilesystem() }
     }
     
@@ -142,45 +143,12 @@ class UserService: NSObject {
         let updatedUser = CompleteUser(id: authedUser.id, firstName: authedUser.firstName, lastName: authedUser.lastName, email:authedUser.email, sexIdentity: authedUser.sexIdentity, sexPreference: authedUser.sexPreference, phoneNumber: authedUser.phoneNumber, isMatchable: authedUser.isMatchable, surveyResponses: newResponses, token: authedUser.token, isSuperuser: authedUser.isSuperuser)
         try await UserAPI.postSurveyAnswers(email: authedUser.email, surveyResponses: newResponses)
         authedUser = FrontendCompleteUser(completeUser: updatedUser)
+        updateAnalyticsProperties()
         Task { await self.saveUserToFilesystem() }
     }
-
-    // No need to return new profilePic bc it is updated globally
-//    func updateProfilePic(to newProfilePic: UIImage) async throws {
-//        guard let frontendCompleteUser = frontendCompleteUser else { return }
-//
-//        let newProfilePicWrapper = ProfilePicWrapper(image: newProfilePic, withCompresssion: true)
-//        let compressedNewProfilePic = newProfilePicWrapper.image
-//        let updatedCompleteUser = try await UserAPI.patchProfilePic(image: compressedNewProfilePic,
-//                                                                    id: frontendCompleteUser.id,
-//                                                                    username: frontendCompleteUser.username)
-//        self.authedUser.profilePicWrapper = newProfilePicWrapper
-//        self.authedUser.picture = updatedCompleteUser.picture
-//
-//        Task {
-//            await self.saveUserToFilesystem()
-//            await UsersService.singleton.updateCachedUser(updatedUser: self.getUserAsFrontendReadOnlyUser())
-//        }
-//    }
     
 //
 //    //MARK: - Logout and delete user
-//
-    private func logOutFromDevice() async throws {
-        try await UserAPI.updateMatchableStatus(matchableStatus: false, email: UserService.singleton.getEmail())
-        guard isLoggedIntoAnAccount else { return } //prevents infinite loop on authedUser didSet
-//        if getGlobalDeviceToken() != "" {
-//            Task {
-//                try await DeviceAPI.disableCurrentDeviceNotificationsForUser(user: authedUser.id)
-//            }
-//        }
-        //reset any caches
-//        setGlobalAuthToken(token: "")
-        LocationManager.shared.stopLocationServices()
-        eraseUserFromFilesystem()
-        frontendCompleteUser = nil
-        isLoggedIntoApp = false
-    }
 
     func kickUserToHomeScreenAndLogOut() async throws {
         //they might already be logged out, so don't try and logout again. this will cause an infinite loop for checkingAuthedUser :(
@@ -195,35 +163,41 @@ class UserService: NSObject {
     func deleteMyAccount() async throws {
         guard isLoggedIntoAnAccount else { return } //prevents infinite loop on authedUser didSet
         try await UserAPI.deleteUser(email: authedUser.email)
+        removeLocalUser()
+    }
+    
+    private func logOutFromDevice() async throws {
+        try await UserAPI.updateMatchableStatus(matchableStatus: false, email: UserService.singleton.getEmail())
+        guard isLoggedIntoAnAccount else { return } //prevents infinite loop on authedUser didSet
+        if getGlobalDeviceToken() != "" {
+            Task { try await DeviceAPI.disableCurrentDeviceNotificationsForUser(user: authedUser.id) }
+        }
+        removeLocalUser()
+    }
+    
+    private func removeLocalUser() {
+        //reset any caches
+        setGlobalAuthToken(token: "")
+        Mixpanel.mainInstance().reset()
+        Mixpanel.mainInstance().identify(distinctId: UUID().uuidString)
+        Mixpanel.mainInstance().flush()
         LocationManager.shared.stopLocationServices()
         eraseUserFromFilesystem()
         frontendCompleteUser = nil
         isLoggedIntoApp = false
     }
-//
+
 //    //MARK: - Firebase
-//
-    func setupFirebaseAnalyticsProperties() {
-        //if we decide to use firebase ad support framework in the future, gender, age, and interest will automatically be set
-//        guard let age = frontendCompleteUser?.age else { return }
-//        var ageBracket = ""
-//        if age < 25 {
-//            ageBracket = "18-24"
-//        } else if age < 35 {
-//            ageBracket = "25-35"
-//        } else if age < 45 {
-//            ageBracket = "35-45"
-//        } else if age < 55 {
-//            ageBracket = "45-55"
-//        } else if age < 65 {
-//            ageBracket = "55-65"
-//        } else {
-//            ageBracket = "65+"
-//        }
-//        Analytics.setUserProperty(authedUser.sex, forName: "sex")
+
+    func updateAnalyticsProperties() {
+        Mixpanel.mainInstance().people.set(
+            properties:[Constants.MP.Profile.SexualIdentity:authedUser.sexIdentity,
+                        Constants.MP.Profile.SexualPreference:authedUser.sexPreference,
+                        Constants.MP.Profile.School:authedUser.school ?? ""])
+        //Firebase
 //        Analytics.setUserProperty(ageBracket, forName: "age")
     }
-//
+
 //    //MARK: - Filesystem
 
     func saveUserToFilesystem() async {
