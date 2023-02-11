@@ -121,7 +121,7 @@ struct MatchInfo: Codable {
         longitude = matchPartner.longitude
         
         numericalSimilarities = matchPartner.numericalSimilarities
-        numericalSimilarities = adjustLastNumericalSimilarity(matchPartner.firstName.count, existingNumericalSimilarities: numericalSimilarities)
+        numericalSimilarities = adjustLastNumericalSimilarities(matchPartner.firstName.count, existingNumericalSimilarities: numericalSimilarities)
     }
     
     init(matchAcceptance: MatchAcceptance) {
@@ -136,40 +136,44 @@ struct MatchInfo: Codable {
         distance = matchAcceptance.distance
         
         numericalSimilarities = matchAcceptance.numericalSimilarities
-        numericalSimilarities = adjustLastNumericalSimilarity(matchAcceptance.firstName.count, existingNumericalSimilarities: numericalSimilarities)
+        numericalSimilarities = adjustLastNumericalSimilarities(matchAcceptance.firstName.count, existingNumericalSimilarities: numericalSimilarities)
     }
     
-    func adjustLastNumericalSimilarity(_ partnerNameLength: Int, existingNumericalSimilarities: [NumericalSimilarity]) -> [NumericalSimilarity] {
+    func adjustLastNumericalSimilarities(_ partnerNameLength: Int, existingNumericalSimilarities: [NumericalSimilarity]) -> [NumericalSimilarity] {
         guard let lastSimilarity = existingNumericalSimilarities.last else { return existingNumericalSimilarities }
         
-        var adjustedPartnerPercent = lastSimilarity.partnerPercent
-        var adjustedYouPercent = lastSimilarity.youPercent
+        var adjustedNumericalSimilarities: [NumericalSimilarity] = []
+        existingNumericalSimilarities.forEach { similarity in
+            var adjustedPartnerPercent = similarity.partnerPercent
+            var adjustedYouPercent = similarity.youPercent
 
-        //Don't let matchLabel hang off right end
-        let matchNameLength = CGFloat(partnerNameLength)
-        adjustedPartnerPercent = min(100 - matchNameLength / 2, adjustedPartnerPercent)
+            //Don't let matchLabel hang off right end
+            let matchNameLength = CGFloat(partnerNameLength)
+            adjustedPartnerPercent = min(100 - matchNameLength / 2, adjustedPartnerPercent)
 
-        //Don't let matchLabel and youLabel crossover
-        let distanceBetween = abs(adjustedPartnerPercent - adjustedYouPercent)
-        let correction = matchNameLength - distanceBetween
-        if correction > 0 {
-            if adjustedPartnerPercent + correction <= 100 {
-                adjustedPartnerPercent += correction
-            } else if adjustedYouPercent + correction <= 100 {
-                adjustedYouPercent += correction
-            } else {
-                if adjustedPartnerPercent > adjustedYouPercent {
-                    adjustedYouPercent -= correction
+            //Don't let matchLabel and youLabel crossover
+            let distanceBetween = abs(adjustedPartnerPercent - adjustedYouPercent)
+            let correction = matchNameLength - distanceBetween
+            if correction > 0 {
+                if adjustedPartnerPercent + correction <= 100 {
+                    adjustedPartnerPercent += correction
+                } else if adjustedYouPercent + correction <= 100 {
+                    adjustedYouPercent += correction
                 } else {
-                    adjustedPartnerPercent -= correction
+                    if adjustedPartnerPercent > adjustedYouPercent {
+                        adjustedYouPercent -= correction
+                    } else {
+                        adjustedPartnerPercent -= correction
+                    }
                 }
             }
+            adjustedNumericalSimilarities.append(
+                NumericalSimilarity(trait: lastSimilarity.trait,
+                                    avgPercent: lastSimilarity.avgPercent,
+                                    youPercent: adjustedYouPercent,
+                                    partnerPercent: adjustedPartnerPercent))
         }
-
-        var adjustedNumericalSimilarities: [NumericalSimilarity] = existingNumericalSimilarities
-        adjustedNumericalSimilarities.removeLast()
-        adjustedNumericalSimilarities.append(NumericalSimilarity(trait: lastSimilarity.trait, avgPercent: lastSimilarity.avgPercent, youPercent: adjustedYouPercent, partnerPercent: adjustedPartnerPercent))
-        
+                
         return adjustedNumericalSimilarities
     }
 }
