@@ -27,6 +27,7 @@ enum NotificationType: String, CaseIterable {
     case match = "match"
     case accept = "accept"
     case stop = "stop"
+    case feedback = "feedback"
 }
 
 extension Notification {
@@ -53,6 +54,27 @@ class NotificationsManager: NSObject {
     
     private override init() {
         super.init()
+    }
+    
+    //MARK: - Local Notifications
+    
+    func scheduleRequestFeedbackNotification(minutesFromNow: Int) {
+        let content = UNMutableNotificationContent()
+        content.title = "how was your match?"
+        content.body = "we'd love to hear how it went"
+        content.sound = nil
+        
+//        let rightNow = Calendar.current.dateComponents([.hour, .minute, .second], from: .now)
+//        var future = rightNow
+//        future.minute! += minutesFromNow
+        content.badge = 1
+        content.interruptionLevel = .active
+        content.userInfo = [Notification.extra.type.rawValue: NotificationType.feedback.rawValue]
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(60 * minutesFromNow), repeats: false)
+        let request = UNNotificationRequest(identifier: NotificationType.feedback.rawValue,
+                                            content: content,
+                                            trigger: trigger)
+        UNUserNotificationCenter.current().add(request)
     }
     
     //MARK: - Permission and Status
@@ -108,7 +130,7 @@ class NotificationsManager: NSObject {
             if deliveredNotifications.count > 0 {
                 print("opened app with delivered notifications:", deliveredNotifications)
             }
-
+            
             //THREE CHECKS: received, saved, opened notifications
             //1 saved notification (saved into the app through a previous phone unlock)
             //2 received notification (sitting in notification center)
@@ -121,7 +143,9 @@ class NotificationsManager: NSObject {
             if let mostRecentSavedUserInfo = mostRecentSavedNotificationUserInfo(),
                let savedHandler = generateNotificationResponseHandler(userInfo: mostRecentSavedUserInfo)
             {
-                mostRecentHandler = savedHandler
+                if savedHandler.notificationType != .feedback {
+                    mostRecentHandler = savedHandler
+                }
             }
             
             //Received notification
@@ -135,7 +159,7 @@ class NotificationsManager: NSObject {
                     }
                 }
             }
-                        
+            
             //Opened notification
             if let currentlyLaunchedAppNotification,
                let openedHandler = generateNotificationResponseHandler(currentlyLaunchedAppNotification) {
@@ -147,13 +171,20 @@ class NotificationsManager: NSObject {
                     }
                 }
             }
+            currentlyLaunchedAppNotification = nil
             
             var activeHandler: NotificationResponseHandler?
             let threeMinsAgo = Calendar.current.date(byAdding: .minute, value: max(Constants.minutesToConnect, Constants.minutesToRespond) * -1, to: Date())!
-            if let mostRecentHandler,
-                  mostRecentHandler.notificationDate.isMoreRecentThan(threeMinsAgo) {
-                activeHandler = mostRecentHandler
+            if let mostRecentHandler {
+                if mostRecentHandler.notificationType == .accept || mostRecentHandler.notificationType == .match {
+                    if mostRecentHandler.notificationDate.isMoreRecentThan(threeMinsAgo) {
+                        activeHandler = mostRecentHandler
+                    }
+                } else {
+                    activeHandler = mostRecentHandler
+                }
             }
+                  
             guard let activeHandler else { return }
             
             DispatchQueue.main.async {
@@ -175,40 +206,37 @@ class NotificationsManager: NSObject {
     }
     
     func generateNotificationResponseHandler(userInfo: [String:AnyObject]) -> NotificationResponseHandler? {
-        
         guard
             let notificationTypeString = userInfo[Notification.extra.type.rawValue] as? String,
             let notificationType = NotificationType.init(rawValue: notificationTypeString)
         else { return nil }
         
-        saveNotificationUserInfo(userInfo: userInfo)
-                
+        var handler = NotificationResponseHandler(notificationType: notificationType)
+        if handler.notificationType != .feedback {
+            saveNotificationUserInfo(userInfo: userInfo)
+        }
+    
         do {
-            guard let json = userInfo[Notification.extra.data.rawValue] else { return nil }
+            guard let json = userInfo[Notification.extra.data.rawValue] else { return handler }
             let data = try JSONSerialization.data(withJSONObject: json as Any, options: .prettyPrinted)
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             
-            var handler = NotificationResponseHandler(notificationType: notificationType)
             switch notificationType {
-                case .match:
-                    handler.newMatchPartner = try decoder.decode(MatchPartner.self, from: data)
-                    handler.notificationDate = Date(timeIntervalSince1970: handler.newMatchPartner!.time)
-                case .accept:
-                    handler.newMatchAcceptance = try decoder.decode(MatchAcceptance.self, from: data)
-                    handler.notificationDate = Date(timeIntervalSince1970: handler.newMatchAcceptance!.time)
-                case .stop:
-                    break
+            case .match:
+                handler.newMatchPartner = try decoder.decode(MatchPartner.self, from: data)
+                handler.notificationDate = Date(timeIntervalSince1970: handler.newMatchPartner!.time)
+            case .accept:
+                handler.newMatchAcceptance = try decoder.decode(MatchAcceptance.self, from: data)
+                handler.notificationDate = Date(timeIntervalSince1970: handler.newMatchAcceptance!.time)
+            case .stop:
+                break
+            case .feedback:
+                break
             }
             return handler
         } catch {
-            let analyticsId = "notiifcation"
-            let analyticsTitle = "displayingVCafterRemoteNotificationFailed"
-            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-              AnalyticsParameterItemID: "id-\(analyticsId)",
-              AnalyticsParameterItemName: analyticsTitle,
-            ])
-            return nil
+            return handler
         }
     }
     

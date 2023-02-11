@@ -16,8 +16,6 @@ class AccountVC: UIViewController, PageVCChild {
     @IBOutlet var radarButton: UIButton!
     var pageVCDelegate: PageVCDelegate!
     
-
-
     //MARK: - Initialization
     
     class func create(delegate: PageVCDelegate) -> AccountVC {

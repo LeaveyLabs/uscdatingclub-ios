@@ -41,7 +41,7 @@ class MatchFoundTableVC: UIViewController {
                 self.goToCoordinateVC()
             }
         }
-
+        handleFirstOpen()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,6 +84,13 @@ class MatchFoundTableVC: UIViewController {
         }
     }
     
+    func handleFirstOpen() {
+        if !DeviceService.shared.hasReceivedFeedbackNotification() {
+            NotificationsManager.shared.scheduleRequestFeedbackNotification(minutesFromNow: Constants.minutesUntilFeedbackNotification)
+            DeviceService.shared.didScheduleFeedbackNotification()
+        }
+    }
+    
     //MARK: - Interaction
     
     @objc func meetupButtonDidPressed() {
@@ -113,7 +120,7 @@ class MatchFoundTableVC: UIViewController {
     
     @MainActor
     func goToCoordinateVC() {
-        transitionToViewController(CoordinateVC.create(matchInfo: matchInfo), duration: 1)
+        transitionToViewController(CoordinateChatVC.create(matchInfo: matchInfo), duration: 1)
     }
 
 //    @objc func passButtonDidPressed() {
@@ -272,16 +279,16 @@ extension MatchFoundTableVC: ConnectManagerDelegate {
     
     func newSecondElapsed() {
         DispatchQueue.main.async { [self] in
-            switch matchInfo.elapsedTime.minutes {
-            case 0:
-                UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            case 1:
-                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-            case 2:
-                UIImpactFeedbackGenerator(style: matchInfo.elapsedTime.seconds >= 50 ? .rigid : .heavy).impactOccurred()
-            default:
-                break
-            }
+//            switch matchInfo.elapsedTime.minutes {
+//            case 0:
+//                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+//            case 1:
+//                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+//            case 2:
+//                UIImpactFeedbackGenerator(style: matchInfo.elapsedTime.seconds >= 50 ? .rigid : .heavy).impactOccurred()
+//            default:
+//                break
+//            }
             self.tableView.reloadData()
         }
     }
@@ -297,7 +304,7 @@ extension MatchFoundTableVC: ConnectManagerDelegate {
         }, on: self)
     }
     
-    func newRelativePositioning(heading: CGFloat, distance: Double) {
+    func newRelativePositioning(_ relativePositioning: RelativePositioning) {
         //do nothing
     }
     

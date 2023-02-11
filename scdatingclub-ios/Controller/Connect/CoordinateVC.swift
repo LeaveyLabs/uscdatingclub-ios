@@ -120,16 +120,16 @@ extension CoordinateVC: ConnectManagerDelegate {
     
     func newSecondElapsed() {
         DispatchQueue.main.async { [self] in
-            switch matchInfo.elapsedTime.minutes {
-            case 0:
-                UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            case 1:
-                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-            case 2:
-                UIImpactFeedbackGenerator(style: matchInfo.elapsedTime.seconds >= 50 ? .rigid : .heavy).impactOccurred()
-            default:
-                break
-            }
+//            switch matchInfo.elapsedTime.minutes {
+//            case 0:
+//                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+//            case 1:
+//                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+//            case 2:
+//                UIImpactFeedbackGenerator(style: matchInfo.elapsedTime.seconds >= 50 ? .rigid : .heavy).impactOccurred()
+//            default:
+//                break
+//            }
             timeLabel.text = matchInfo.timeLeftToConnectString
 //            self.timeLeftLabel.alpha = 0.5
 //            self.timeLeftLabel.textColor = .customWhite
@@ -152,10 +152,10 @@ extension CoordinateVC: ConnectManagerDelegate {
         }, on: self)
     }
     
-    func newRelativePositioning(heading: CGFloat, distance: Double) {        
+    func newRelativePositioning(_ relativePositioning: RelativePositioning) {
         DispatchQueue.main.async { [self] in
-            locationLabel.text = prettyDistance(meters: distance, shortened: false)
-            locationImageView.transform = CGAffineTransform.identity.rotated(by: heading)
+            locationLabel.text = prettyDistance(meters: relativePositioning.distance, shortened: false)
+            locationImageView.transform = CGAffineTransform.identity.rotated(by: relativePositioning.heading)
         }
     }
     

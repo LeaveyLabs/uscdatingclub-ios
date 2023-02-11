@@ -78,7 +78,7 @@ class KUIViewController: UIViewController {
         let t = UITapGestureRecognizer(target: self, action: #selector(clearKeyboard))
         view.addGestureRecognizer(t)
         
-        //in PostViewController, this line below prevents the submit button tap from being registered while keyboard is up. do not uncomment it, because we want other touches in the view to be registered
+        //in CoordinateChatTableVC, this line below prevents the submit button tap from being registered while keyboard is up. do not uncomment it, because we want other touches in the view to be registered
 //        t.cancelsTouchesInView = false
     }
     

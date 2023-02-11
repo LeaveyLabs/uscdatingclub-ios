@@ -39,8 +39,8 @@ class ConnectInterestsCell: UITableViewCell {
         for interestUi in interestUis {
             interestUi.0.isHidden = false
             interestUi.1.isHidden = false
-            interestUi.0.font = AppFont.medium.size(17)
-            interestUi.1.font = AppFont.medium.size(70)
+            interestUi.0.font = AppFont.medium.size(16)
+            interestUi.1.font = AppFont.medium.size(60)
         }
         
         innerStackViews.forEach { stackview in stackview.isHidden = false }

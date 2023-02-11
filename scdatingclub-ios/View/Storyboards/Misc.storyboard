@@ -338,7 +338,7 @@ we don't save any location data and use new Apple APIs for minimal battery usage
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DuG-H2-0uR">
                                 <rect key="frame" x="0.0" y="738" width="393" height="114"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YyB-42-wTx">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="YyB-42-wTx">
                                         <rect key="frame" x="10" y="15" width="373" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kqw-7D-4Bi" customClass="SimpleButton" customModule="scdatingclub_ios" customModuleProvider="target">

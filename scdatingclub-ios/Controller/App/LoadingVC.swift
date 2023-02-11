@@ -115,10 +115,15 @@ class LoadingVC: UIViewController {
                 //TODO: post to crashlytics
             }
             let matchInfo = MatchInfo(matchAcceptance: acceptance)
-            let coordinateVC = CoordinateVC.create(matchInfo: matchInfo)
+            let coordinateVC = CoordinateChatVC.create(matchInfo: matchInfo)
             transitionToViewController(coordinateVC, duration: 0) { _ in }
-        default:
+        case .stop:
             break
+        case .feedback:
+            //TODO: post to somewhere that this user took a survey just 
+            transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0) { completed in
+                SceneDelegate.visibleViewController?.openURL(Constants.feedbackLink)
+            }
         }
     }
     

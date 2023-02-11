@@ -22,6 +22,10 @@ open class CustomMessagesFlowLayout: MessagesCollectionViewFlowLayout {
         setMessageOutgoingCellTopLabelAlignment(.init(textAlignment: .center, textInsets: .init(top: 20, left: 0, bottom: 0, right: 0)))
         setMessageIncomingCellTopLabelAlignment(.init(textAlignment: .center, textInsets: .init(top: 20, left: 0, bottom: 0, right: 0)))
         setAvatarLeadingTrailingPadding(5)
+        
+        headerReferenceSize = CGSize(
+            width: UIScreen.main.bounds.width,
+            height: CountdownCollectionReusableView.HEIGHT)
     }
     
     required public init?(coder aDecoder: NSCoder) {

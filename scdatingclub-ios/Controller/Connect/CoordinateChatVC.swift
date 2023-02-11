@@ -74,12 +74,21 @@ class CoordinateChatVC: MessagesViewController {
     @IBOutlet var closeButton: UIButton!
     @IBOutlet var moreButton: UIButton!
     @IBOutlet var nameLabel: UILabel!
+    
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var timeSublabel: UILabel!
     @IBOutlet var locationImageView: UIImageView!
+    @IBOutlet var locationImageViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var bottomStackVerticalConstraint: NSLayoutConstraint!
     @IBOutlet var locationLabel: UILabel!
-        
+    
+    @IBOutlet var countdownBgView: UIView!
+    @IBOutlet var countdownStackView: UIStackView!
+    @IBOutlet var countdownToggleButton: UIButton!
+    @IBOutlet var locationStackView: UIStackView!
+    
     //Data
+    var relativePositioning: RelativePositioning = .init(heading: 0, distance: 0)
     var matchInfo: MatchInfo!
     var connectManager: ConnectManager!
     var conversation: Conversation!
@@ -106,11 +115,12 @@ class CoordinateChatVC: MessagesViewController {
         conversation = Conversation(sangdaebang: partner,
                                     messageThread: connectManager.locationSocket!)
     }
-    
+        
     override func viewDidLoad() {
         updateAdditionalBottomInsetForDismissedKeyboard()
         messagesCollectionView = MessagesCollectionView(frame: .zero, collectionViewLayout: CustomMessagesFlowLayout()) //for registering custom MessageSizeCalculator for MessageKitMatch
         super.viewDidLoad()
+        view.tintColor = .tintColor
         setupMessagesCollectionView()
         setupNavBar()
         setupKeyboard()
@@ -118,7 +128,8 @@ class CoordinateChatVC: MessagesViewController {
         
         setupButtons()
         setupLabels() //must come after connect manager created
-        
+        setCountdownDirection(to: .vertical, animated: false)
+
         DispatchQueue.main.async { //scroll on the next cycle so that collectionView's data is loaded in beforehand
             self.messagesCollectionView.scrollToLastItem(at: .bottom, animated: false)
         }
@@ -171,6 +182,8 @@ class CoordinateChatVC: MessagesViewController {
         inputBar.delegate = self
         inputBar.inputTextView.delegate = self
         
+        additionalBottomInset = 5
+        
         //Keyboard manager from InputBarAccessoryView
         view.addSubview(messageInputBar)
         keyboardManager.shouldApplyAdditionBottomSpaceToInteractiveDismissal = true
@@ -193,11 +206,11 @@ class CoordinateChatVC: MessagesViewController {
     }
     
     @objc func keyboardWillShow(sender: NSNotification) {
-        additionalBottomInset = 52
+        setCountdownDirection(to: .horizontal, animated: true)
     }
     
     @objc func keyboardWillHide(sender: NSNotification) {
-        updateAdditionalBottomInsetForDismissedKeyboard()
+//        updateAdditionalBottomInsetForDismissedKeyboard()
     }
     
     var keyboardHeight: CGFloat = 0
@@ -216,7 +229,7 @@ class CoordinateChatVC: MessagesViewController {
     
     func updateAdditionalBottomInsetForDismissedKeyboard() {
         //can't use view's safe area insets because they're 0 on viewdidload
-        additionalBottomInset = 52 + (window?.safeAreaInsets.bottom ?? 0)
+//        additionalBottomInset = 52 + (window?.safeAreaInsets.bottom ?? 0)
     }
     
     //i had to add this code because scrollstolastitemonkeyboardbeginsediting doesnt work
@@ -237,17 +250,15 @@ class CoordinateChatVC: MessagesViewController {
     
     func setupLabels() {
         nameLabel.text = matchInfo.partnerName
+        nameLabel.font = AppFont.bold.size(22)
+        timeLabel.font = AppFont.bold.size(25)
+        timeSublabel.font = AppFont.light.size(16)
+        locationLabel.font = AppFont.light.size(16)
+        
         timeLabel.text = matchInfo.timeLeftToConnectString
         timeSublabel.text = "left to connect"
-        
-        nameLabel.font = AppFont.bold.size(22)
-        timeLabel.font = AppFont.bold.size(40)
-        timeSublabel.font = AppFont.light.size(16)
-        locationLabel.font = AppFont.bold.size(40)
-        
-        let minsLeft = 4
-        let secsLeft = 59
-        timeLabel.text = String(minsLeft) + "m " + String(secsLeft) + "s"
+        locationLabel.text = prettyDistance(meters: relativePositioning.distance, shortened: true)
+        locationImageView.transform = CGAffineTransform.identity.rotated(by: relativePositioning.heading)
     }
         
     func setupMessagesCollectionView() {
@@ -256,9 +267,17 @@ class CoordinateChatVC: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messagesCollectionView.delegate = self
-                
-        messagesCollectionView.register(FixedInsetTextMessageCell.self)
         
+        messagesCollectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
+        
+        //UI
+        messagesCollectionView.backgroundColor = .clear
+        view.backgroundColor = .tintColor
+        
+        //Nibs
+        messagesCollectionView.register(FixedInsetTextMessageCell.self)
+
+        //Misc
         messagesCollectionView.refreshControl = refreshControl
         if conversation.hasRenderedAllChatObjects() { refreshControl.removeFromSuperview() }
         
@@ -272,8 +291,11 @@ class CoordinateChatVC: MessagesViewController {
         view.sendSubviewToBack(messagesCollectionView)
         
         //Remove top constraint which was set in super's super, MessagesViewController. Then, add a new one.
-//        view.constraints.first { $0.firstAnchor == messagesCollectionView.topAnchor }!.isActive = false
-//        messagesCollectionView.topAnchor.constraint(equalTo: customNavigationBar.bottomAnchor, constant: 5).isActive = true
+        view.constraints.first { $0.firstAnchor == messagesCollectionView.topAnchor }!.isActive = false
+        messagesCollectionView.topAnchor.constraint(equalTo: countdownBgView.bottomAnchor, constant: -10).isActive = true
+        
+        countdownStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(toggleCountdownDirection)))
+        countdownStackView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleNavPan)))
     }
     
     func setupMessageInputBarForChatting() {
@@ -284,6 +306,10 @@ class CoordinateChatVC: MessagesViewController {
     }
     
     //MARK: - User Interaction
+    
+    @objc func handleNavPan(recognizer: UIPanGestureRecognizer) {
+        setCountdownDirection(to: recognizer.velocity(in: view).y < 0 ? .horizontal : .vertical, animated: true)
+    }
     
     func closeButtonDidPressed() {
         AlertManager.showAlert(title: "stop sharing your location with \(matchInfo.partnerName)?",
@@ -302,10 +328,20 @@ class CoordinateChatVC: MessagesViewController {
     }
     
     func moreButtonDidPressed() {
-        let moreVC = SheetVC.create(sheetButtons: [SheetButton(title: "report", systemImageName: "exclamationmark.triangle", handler: {
-            self.presentReportAlert()
-        })])
+        let moreVC = SheetVC.create(
+            sheetButtons: [
+                SheetButton(title: "view compatibility", systemImageName: "testtube.2", handler: {
+                    self.presentCompatibility()
+                }),
+                SheetButton(title: "report", systemImageName: "exclamationmark.triangle", handler: {
+                    self.presentReportAlert()
+                }),
+            ])
         present(moreVC, animated: true)
+    }
+    
+    func presentCompatibility() {
+        present(ViewCompatibilityVC.create(matchInfo: matchInfo), animated: true)
     }
     
     func presentReportAlert() {
@@ -325,12 +361,49 @@ class CoordinateChatVC: MessagesViewController {
         }, on: SceneDelegate.visibleViewController!)
     }
     
+    @IBAction func toggleCountdownViewPressed() {
+        view.endEditing(true)
+        toggleCountdownDirection()
+    }
+    
     //MARK: - Helpers
 
     @MainActor
     func finish() {
         connectManager.endConnection()
         transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
+    }
+    
+    @MainActor
+    @objc func toggleCountdownDirection() {
+        setCountdownDirection(to: countdownStackView.axis == .horizontal ? .vertical : .horizontal, animated: true)
+    }
+    
+    @MainActor
+    func setCountdownDirection(to axis: NSLayoutConstraint.Axis, animated: Bool) {
+        view.layoutIfNeeded()
+        locationLabel.font = axis == .horizontal ? AppFont.light.size(16) : AppFont.bold.size(16)
+        if axis == .vertical {
+            locationImageView.setImage(UIImage(systemName: "location.north", withConfiguration: UIImage.SymbolConfiguration(weight: .regular)), animated: false)
+        }
+        
+        UIView.animate(withDuration: animated ? 0.3 : 0,
+                       delay: 0,
+                       options: .curveLinear) { [self] in
+            countdownToggleButton.transform = CGAffineTransform.identity.rotated(by: axis == .vertical ? .pi : 0)
+            countdownStackView.axis = axis
+            bottomStackVerticalConstraint.constant = axis == .horizontal ? 18 : 35
+            locationImageViewWidthConstraint.constant = axis == .horizontal ? 40 : view.frame.width * 0.5
+            locationStackView.spacing = axis == .horizontal ? 4 : 25
+            locationLabel.alpha = axis == .horizontal ? 0.7 : 1
+            countdownStackView.spacing = axis == .horizontal ? -40 : 20
+            locationLabel.transform = axis == .horizontal ? CGAffineTransform(scaleX: 1, y: 1) : CGAffineTransform(scaleX: 2, y: 2)
+            view.layoutIfNeeded()
+        } completion: { [self] finished in
+            if axis == .horizontal {
+                locationImageView.setImage(UIImage(systemName: "location.north", withConfiguration: UIImage.SymbolConfiguration(weight: .bold)), animated: false)
+            }
+        }
     }
     
     // MARK: - UICollectionViewDataSource
@@ -359,12 +432,6 @@ class CoordinateChatVC: MessagesViewController {
 //        return super.collectionView(collectionView, cellForItemAt: indexPath) //this returned the old TextMessageCell with incorrect insets
     }
     
-//    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        if let cell = cell as? TextMessageCell {
-//            cell.messageLabel.textInsets = .init(top: 8, left: 16, bottom: 8, right: 15)
-//        }
-//    }
-    
 }
 
 //MARK: - ConnectManagerDelegate
@@ -373,24 +440,7 @@ extension CoordinateChatVC: ConnectManagerDelegate {
     
     func newSecondElapsed() {
         DispatchQueue.main.async { [self] in
-            switch matchInfo.elapsedTime.minutes {
-            case 0:
-                UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            case 1:
-                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-            case 2:
-                UIImpactFeedbackGenerator(style: matchInfo.elapsedTime.seconds >= 50 ? .rigid : .heavy).impactOccurred()
-            default:
-                break
-            }
             timeLabel.text = matchInfo.timeLeftToConnectString
-//            self.timeLeftLabel.alpha = 0.5
-//            self.timeLeftLabel.textColor = .customWhite
-//            UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear) {
-//                self.timeLeftLabel.alpha = 1
-//                self.timeLeftLabel.textColor = .blue
-//            } completion: { completed in
-//            }
         }
     }
     
@@ -405,10 +455,11 @@ extension CoordinateChatVC: ConnectManagerDelegate {
         }, on: self)
     }
     
-    func newRelativePositioning(heading: CGFloat, distance: Double) {
+    func newRelativePositioning(_ relativePositioning: RelativePositioning) {
+        self.relativePositioning = relativePositioning
         DispatchQueue.main.async { [self] in
-            locationLabel.text = prettyDistance(meters: distance, shortened: false)
-            locationImageView.transform = CGAffineTransform.identity.rotated(by: heading)
+            locationLabel.text = prettyDistance(meters: relativePositioning.distance, shortened: false)
+            locationImageView.transform = CGAffineTransform.identity.rotated(by: relativePositioning.heading)
         }
     }
     
@@ -433,21 +484,22 @@ extension CoordinateChatVC: MessagesDataSource {
 
     func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         if isMostRecentMessageFromSender(message: message, at: indexPath) {
-            return NSAttributedString(string: "sent", attributes: [NSAttributedString.Key.font: UIFont(name: Constants.Font.Medium, size: 11)!, NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+            return NSAttributedString(string: "sent", attributes: [NSAttributedString.Key.font: UIFont(name: Constants.Font.Medium, size: 11)!, NSAttributedString.Key.foregroundColor: UIColor.customWhite.withAlphaComponent(0.5)])
         }
         return nil
     }
 
     func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         if isTimeLabelVisible(at: indexPath) {
-            return NSAttributedString(string: getFormattedTimeStringForChat(timestamp: message.sentDate.timeIntervalSince1970).lowercased(), attributes: [NSAttributedString.Key.font: UIFont(name: Constants.Font.Medium, size: 12)!, NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+            return NSAttributedString(string: getFormattedTimeStringForChat(timestamp: message.sentDate.timeIntervalSince1970).lowercased(), attributes: [NSAttributedString.Key.font: UIFont(name: Constants.Font.Medium, size: 12)!, NSAttributedString.Key.foregroundColor: UIColor.customWhite.withAlphaComponent(0.5)])
         }
         return nil
     }
     
     func messageTimestampLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-        return NSAttributedString(string: getFormattedTimeStringForChat(timestamp: message.sentDate.timeIntervalSince1970).lowercased(), attributes: [NSAttributedString.Key.font: UIFont(name: Constants.Font.Medium, size: 12)!, NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        return NSAttributedString(string: getFormattedTimeStringForChat(timestamp: message.sentDate.timeIntervalSince1970).lowercased(), attributes: [NSAttributedString.Key.font: UIFont(name: Constants.Font.Medium, size: 12)!, NSAttributedString.Key.foregroundColor: UIColor.customWhite.withAlphaComponent(0.5)])
     }
+    
 }
 
 extension InputBarAccessoryViewDelegate {
@@ -485,19 +537,46 @@ extension CoordinateChatVC: InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didChangeIntrinsicContentTo size: CGSize) {
         //TODO later: when going onto a new line of text, recalculate inputBar like we do within the postVC
 //        additionalBottomInset = 52
-//        messagesCollectionView.scrollToLastItem()
+        messagesCollectionView.scrollToLastItem()
     }
         
     @MainActor
     func handleNewMessage() {
-//        ConversationService.singleton.updateLastMessageReadTime(withUserId: conversation.sangdaebang.id)
+        
+        
+//        let range = Range(uncheckedBounds: (0, max(0, messagesCollectionView.numberOfSections - 1)))
+//        let indexSet = IndexSet(integersIn: range)
+//        messagesCollectionView.reloadSections(indexSet)
+//     Reload last section to update header/footer labels and insert a new one
+//        UIView.animate(withDuration: <#T##TimeInterval#>, delay: <#T##TimeInterval#>, animations: <#T##() -> Void#>)
+//        messagesCollectionView.reloadDataAndKeepOffset()
+
+//        messagesCollectionView.numberOfItems(inSection: 0) //prevents an occassional crash?
+
         messagesCollectionView.performBatchUpdates({
             messagesCollectionView.insertSections([numberOfSections(in: messagesCollectionView) - 1])
             if numberOfSections(in: messagesCollectionView) >= 2 {
                 messagesCollectionView.reloadSections([numberOfSections(in: messagesCollectionView) - 2])
             }
-        })
-        messagesCollectionView.scrollToLastItem(animated: true)
+        }) {_ in
+            
+        }
+//        messagesCollectionView.reloadData()
+        
+        
+//        ConversationService.singleton.updateLastMessageReadTime(withUserId: conversation.sangdaebang.id)
+//        messagesCollectionView.performBatchUpdates({
+//            messagesCollectionView.numberOfItems(inSection: 0) //prevents an occassional crash?
+////            messagesCollectionView.insertSections([numberOfSections(in: messagesCollectionView) - 1])
+//            if numberOfSections(in: messagesCollectionView) == 1 {
+//                messagesCollectionView.reloadDataAndKeepOffset()
+//            } else {
+//                messagesCollectionView.insertSections([numberOfSections(in: messagesCollectionView)-1])
+//                messagesCollectionView.reloadSections([numberOfSections(in: messagesCollectionView) - 2])
+//            }
+//        })
+//        messagesCollectionView.reloadDataAndKeepOffset()
+//        messagesCollectionView.scrollToLastItem(animated: true)
     }
     
 }
@@ -515,8 +594,9 @@ extension CoordinateChatVC: UITextViewDelegate {
 
 extension CoordinateChatVC: MessagesDisplayDelegate {
     
+    //Note: i don't think this function actually gets called
     func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        return .customBlack
+        return isFromCurrentSender(message: message) ? .customWhite : .customBlack
     }
         
     func detectorAttributes(for detector: DetectorType, and message: MessageType, at indexPath: IndexPath) -> [NSAttributedString.Key: Any] {
@@ -528,20 +608,15 @@ extension CoordinateChatVC: MessagesDisplayDelegate {
     }
         
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        return isFromCurrentSender(message: message) ? .lightGray.withAlphaComponent(0.2) : .white
+        return isFromCurrentSender(message: message) ? .customWhite.withAlphaComponent(0.2) : .customWhite
     }
     
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
-        return isFromCurrentSender(message: message) ? .bubble : .bubbleOutline(.darkGray.withAlphaComponent(0.23))
+        return isFromCurrentSender(message: message) ? .bubble : .bubble
     }
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         return
-        //do nothing
-//        let nextIndexPath = IndexPath(item: 0, section: indexPath.section+1)
-//        avatarView.isHidden = isNextMessageSameSender(at: indexPath) && !isTimeLabelVisible(at: nextIndexPath)
-//        let theirPic = isSangdaebangProfileHidden ? conversation.sangdaebang.silhouette : conversation.sangdaebang.profilePic
-//        avatarView.set(avatar: Avatar(image: theirPic, initials: ""))
     }
 
 }

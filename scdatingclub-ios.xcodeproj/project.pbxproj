@@ -86,6 +86,7 @@
 		47773DF0298101BC00DDF3A5 /* CustomMessagesFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47773DEF298101BC00DDF3A5 /* CustomMessagesFlowLayout.swift */; };
 		47773DF2298102D900DDF3A5 /* InputBarAccessoryView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47773DF1298102D900DDF3A5 /* InputBarAccessoryView+.swift */; };
 		47773DF42981067600DDF3A5 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 47773DF32981067600DDF3A5 /* MessageKit */; };
+		478114192995C7FA00D5F8B8 /* UIImageView+AnimateChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478114182995C7FA00D5F8B8 /* UIImageView+AnimateChange.swift */; };
 		4788155D2974800300671618 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4788155C2974800300671618 /* Question.swift */; };
 		478815602974826900671618 /* TestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4788155F2974826900671618 /* TestService.swift */; };
 		478BECBB2963463300930DAF /* GenericAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECBA2963463300930DAF /* GenericAPI.swift */; };
@@ -97,6 +98,7 @@
 		478BECC62964C4D000930DAF /* TestQuestionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECC52964C4D000930DAF /* TestQuestionsVC.swift */; };
 		478BECC92964C60900930DAF /* TestTextVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECC82964C60900930DAF /* TestTextVC.swift */; };
 		478BECD52966249300930DAF /* SpectrumTestQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478BECD42966249300930DAF /* SpectrumTestQuestion.swift */; };
+		47A011402995F2D00099BEA8 /* ViewCompatibilityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A0113F2995F2D00099BEA8 /* ViewCompatibilityVC.swift */; };
 		47A1C8EB296E2AD900F8B4D6 /* UIFont+Override.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A1C8EA296E2AD900F8B4D6 /* UIFont+Override.swift */; };
 		47A1C8ED296E414600F8B4D6 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A1C8EC296E414600F8B4D6 /* Match.swift */; };
 		47A24A25296F71250077AB11 /* SimpleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A24A23296F71250077AB11 /* SimpleTitleCell.swift */; };
@@ -170,7 +172,6 @@
 		47C41078295CC0AB007C27F0 /* MKPlacemark+Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41071295CC0AA007C27F0 /* MKPlacemark+Address.swift */; };
 		47C41079295CC0AB007C27F0 /* CLLocationCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41075295CC0AB007C27F0 /* CLLocationCoordinate.swift */; };
 		47C4107A295CC0AB007C27F0 /* MKPointOfInterestCategory+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C41070295CC0AA007C27F0 /* MKPointOfInterestCategory+Extension.swift */; };
-		47D901BB296C7C6B00F9AB18 /* MatchFoundVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D901BA296C7C6B00F9AB18 /* MatchFoundVC.swift */; };
 		47D901BD296C7C7B00F9AB18 /* CoordinateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D901BC296C7C7B00F9AB18 /* CoordinateVC.swift */; };
 		47DC97AA296E002700A374B5 /* ConnectHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DC97A8296E002700A374B5 /* ConnectHeaderCell.swift */; };
 		47DC97AB296E002700A374B5 /* ConnectHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47DC97A9296E002700A374B5 /* ConnectHeaderCell.xib */; };
@@ -226,6 +227,11 @@
 		47E38FF3295F72B9007CB77F /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E38FF2295F72B9007CB77F /* FeatureView.swift */; };
 		47E38FF5295F7368007CB77F /* FeatureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47E38FF4295F7368007CB77F /* FeatureView.xib */; };
 		47E38FF7295F75AD007CB77F /* Misc.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47E38FF6295F75AD007CB77F /* Misc.storyboard */; };
+		47E57C9729958E8F00F077CD /* ConnectionCountdownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47E57C9529958E8F00F077CD /* ConnectionCountdownCell.xib */; };
+		47E57C9829958E8F00F077CD /* ConnectionCountdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E57C9629958E8F00F077CD /* ConnectionCountdownCell.swift */; };
+		47E57C9A2995935700F077CD /* RelativePositioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E57C992995935700F077CD /* RelativePositioning.swift */; };
+		47E57C9D2995967300F077CD /* CountdownCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E57C9B2995967300F077CD /* CountdownCollectionReusableView.swift */; };
+		47E57C9E2995967300F077CD /* CountdownCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47E57C9C2995967300F077CD /* CountdownCollectionReusableView.xib */; };
 		47EA74AC2980AB5400265DF3 /* Dict+RemoveNullEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EA74AB2980AB5400265DF3 /* Dict+RemoveNullEntries.swift */; };
 		47EA74AF2980AB9900265DF3 /* ConnectInterestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EA74AD2980AB9900265DF3 /* ConnectInterestsCell.swift */; };
 		47EA74B02980AB9900265DF3 /* ConnectInterestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47EA74AE2980AB9900265DF3 /* ConnectInterestsCell.xib */; };
@@ -315,6 +321,7 @@
 		47773DE62980FE5000DDF3A5 /* MessageKitMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageKitMessage.swift; sourceTree = "<group>"; };
 		47773DEF298101BC00DDF3A5 /* CustomMessagesFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMessagesFlowLayout.swift; sourceTree = "<group>"; };
 		47773DF1298102D900DDF3A5 /* InputBarAccessoryView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InputBarAccessoryView+.swift"; sourceTree = "<group>"; };
+		478114182995C7FA00D5F8B8 /* UIImageView+AnimateChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+AnimateChange.swift"; sourceTree = "<group>"; };
 		4788155C2974800300671618 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		4788155F2974826900671618 /* TestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestService.swift; sourceTree = "<group>"; };
 		478BECBA2963463300930DAF /* GenericAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAPI.swift; sourceTree = "<group>"; };
@@ -325,6 +332,7 @@
 		478BECC52964C4D000930DAF /* TestQuestionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestQuestionsVC.swift; sourceTree = "<group>"; };
 		478BECC82964C60900930DAF /* TestTextVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTextVC.swift; sourceTree = "<group>"; };
 		478BECD42966249300930DAF /* SpectrumTestQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumTestQuestion.swift; sourceTree = "<group>"; };
+		47A0113F2995F2D00099BEA8 /* ViewCompatibilityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewCompatibilityVC.swift; path = "scdatingclub-ios/Controller/Connect/ViewCompatibilityVC.swift"; sourceTree = SOURCE_ROOT; };
 		47A1C8EA296E2AD900F8B4D6 /* UIFont+Override.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Override.swift"; sourceTree = "<group>"; };
 		47A1C8EC296E414600F8B4D6 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		47A24A23296F71250077AB11 /* SimpleTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTitleCell.swift; sourceTree = "<group>"; };
@@ -416,7 +424,6 @@
 		47C41094295CC0BF007C27F0 /* UITableView+SectionShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+SectionShadow.swift"; sourceTree = "<group>"; };
 		47C41096295CC0BF007C27F0 /* UINavigationItem+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+UIButton.swift"; sourceTree = "<group>"; };
 		47C41097295CC0C0007C27F0 /* UINavigationController+Completion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Completion.swift"; sourceTree = "<group>"; };
-		47D901BA296C7C6B00F9AB18 /* MatchFoundVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchFoundVC.swift; sourceTree = "<group>"; };
 		47D901BC296C7C7B00F9AB18 /* CoordinateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateVC.swift; sourceTree = "<group>"; };
 		47DC97A8296E002700A374B5 /* ConnectHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectHeaderCell.swift; sourceTree = "<group>"; };
 		47DC97A9296E002700A374B5 /* ConnectHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectHeaderCell.xib; sourceTree = "<group>"; };
@@ -470,6 +477,11 @@
 		47E38FF2295F72B9007CB77F /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
 		47E38FF4295F7368007CB77F /* FeatureView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeatureView.xib; sourceTree = "<group>"; };
 		47E38FF6295F75AD007CB77F /* Misc.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Misc.storyboard; sourceTree = "<group>"; };
+		47E57C9529958E8F00F077CD /* ConnectionCountdownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectionCountdownCell.xib; sourceTree = "<group>"; };
+		47E57C9629958E8F00F077CD /* ConnectionCountdownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionCountdownCell.swift; sourceTree = "<group>"; };
+		47E57C992995935700F077CD /* RelativePositioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativePositioning.swift; sourceTree = "<group>"; };
+		47E57C9B2995967300F077CD /* CountdownCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownCollectionReusableView.swift; sourceTree = "<group>"; };
+		47E57C9C2995967300F077CD /* CountdownCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountdownCollectionReusableView.xib; sourceTree = "<group>"; };
 		47EA74AB2980AB5400265DF3 /* Dict+RemoveNullEntries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dict+RemoveNullEntries.swift"; sourceTree = "<group>"; };
 		47EA74AD2980AB9900265DF3 /* ConnectInterestsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectInterestsCell.swift; sourceTree = "<group>"; };
 		47EA74AE2980AB9900265DF3 /* ConnectInterestsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectInterestsCell.xib; sourceTree = "<group>"; };
@@ -671,7 +683,6 @@
 			isa = PBXGroup;
 			children = (
 				476FD86A295E46E30014DD42 /* HowItWorksVC.swift */,
-				47D901BA296C7C6B00F9AB18 /* MatchFoundVC.swift */,
 			);
 			path = Decomissioned;
 			sourceTree = "<group>";
@@ -770,6 +781,7 @@
 				47C40F5C295CBAF0007C27F0 /* Feature.swift */,
 				47A1C8EC296E414600F8B4D6 /* Match.swift */,
 				47A24A312970E5FE0077AB11 /* UncertainValue.swift */,
+				47E57C992995935700F077CD /* RelativePositioning.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -831,6 +843,7 @@
 		47C40F97295CBD49007C27F0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				47E57C9429958E7700F077CD /* CollectionCells */,
 				47DE3226295CC5A00063C55A /* TableCells */,
 				47DE3228295CC5AD0063C55A /* CustomViews */,
 				47DE3227295CC5A80063C55A /* Storyboards */,
@@ -993,6 +1006,7 @@
 		47D901B9296C7B5B00F9AB18 /* Connect */ = {
 			isa = PBXGroup;
 			children = (
+				47A0113F2995F2D00099BEA8 /* ViewCompatibilityVC.swift */,
 				4729B22D296E096400971351 /* MatchFoundTableVC.swift */,
 				47D901BC296C7C7B00F9AB18 /* CoordinateVC.swift */,
 				47773DDC2980FD1800DDF3A5 /* CoordinateChatVC.swift */,
@@ -1089,6 +1103,7 @@
 				47DE322A295CC7C30063C55A /* UIImageView+ProfilePic.swift */,
 				47DE322B295CC7C30063C55A /* UIImageView+Inspectable.swift */,
 				47DE322C295CC7C30063C55A /* UIImageView+Initials.swift */,
+				478114182995C7FA00D5F8B8 /* UIImageView+AnimateChange.swift */,
 			);
 			path = UIImageView;
 			sourceTree = "<group>";
@@ -1157,6 +1172,17 @@
 				47BBF9E02969DFE400802573 /* PermissionsManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		47E57C9429958E7700F077CD /* CollectionCells */ = {
+			isa = PBXGroup;
+			children = (
+				47E57C9629958E8F00F077CD /* ConnectionCountdownCell.swift */,
+				47E57C9529958E8F00F077CD /* ConnectionCountdownCell.xib */,
+				47E57C9B2995967300F077CD /* CountdownCollectionReusableView.swift */,
+				47E57C9C2995967300F077CD /* CountdownCollectionReusableView.xib */,
+			);
+			path = CollectionCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1319,6 +1345,8 @@
 				474FFCBE29770B79000BE9E0 /* SelectionTableViewCell.xib in Resources */,
 				476FD865295DF89A0014DD42 /* SimpleButton.xib in Resources */,
 				476FD86F295E4A1F0014DD42 /* HowItWorksCell.xib in Resources */,
+				47E57C9E2995967300F077CD /* CountdownCollectionReusableView.xib in Resources */,
+				47E57C9729958E8F00F077CD /* ConnectionCountdownCell.xib in Resources */,
 				47B6B4C3296B99E600539353 /* SimpleButtonCell.xib in Resources */,
 				4715490F2970F0AF00756BE1 /* SF-Pro.ttf in Resources */,
 				47E38FF5295F7368007CB77F /* FeatureView.xib in Resources */,
@@ -1380,9 +1408,11 @@
 				478815602974826900671618 /* TestService.swift in Sources */,
 				47E38FEA295F69DC007CB77F /* AppStoreReviewManager.swift in Sources */,
 				47C41078295CC0AB007C27F0 /* MKPlacemark+Address.swift in Sources */,
+				47A011402995F2D00099BEA8 /* ViewCompatibilityVC.swift in Sources */,
 				4731F510295CD4820013F626 /* UITableView+DeselectAll.swift in Sources */,
 				47B60B0A296C834600657C1D /* ConnectManager.swift in Sources */,
 				47773DE92980FE5100DDF3A5 /* Conversation.swift in Sources */,
+				47E57C9A2995935700F077CD /* RelativePositioning.swift in Sources */,
 				47C4105D295CC065007C27F0 /* CNContact+Number.swift in Sources */,
 				47C4107A295CC0AB007C27F0 /* MKPointOfInterestCategory+Extension.swift in Sources */,
 				476FD86B295E46E30014DD42 /* HowItWorksVC.swift in Sources */,
@@ -1430,6 +1460,7 @@
 				4731F511295CD4870013F626 /* UITextField+Padding.swift in Sources */,
 				434A052C295E1E9700C15945 /* DeviceAPI.swift in Sources */,
 				471549172970FCB900756BE1 /* PermissionsCell.swift in Sources */,
+				478114192995C7FA00D5F8B8 /* UIImageView+AnimateChange.swift in Sources */,
 				47B6B4BC296B959C00539353 /* SimpleEntryCell.swift in Sources */,
 				47E38FF3295F72B9007CB77F /* FeatureView.swift in Sources */,
 				4731F508295CD4770013F626 /* UIView+PostBubble.swift in Sources */,
@@ -1438,6 +1469,7 @@
 				47A24A29297088FF0077AB11 /* SurveyResponse.swift in Sources */,
 				47ABA6E82976241500F0FDFE /* ScreenDemoVC.swift in Sources */,
 				4731F503295CD45F0013F626 /* UIScrollView+ToTop.swift in Sources */,
+				47E57C9D2995967300F077CD /* CountdownCollectionReusableView.swift in Sources */,
 				47DE3264295CC94F0063C55A /* UIButton+LoadingIndicator.swift in Sources */,
 				47DE3207295CC4B40063C55A /* CreateProfileVC.swift in Sources */,
 				47002FB72973AD51007EDFBC /* WaitListVC.swift in Sources */,
@@ -1492,7 +1524,6 @@
 				4731F507295CD4770013F626 /* UIView+ParentVC.swift in Sources */,
 				4731F50B295CD4770013F626 /* UIView+RoundedIndividualCorners.swift in Sources */,
 				470221E7295CCE3E00119FA8 /* UIColor+Custom.swift in Sources */,
-				47D901BB296C7C6B00F9AB18 /* MatchFoundVC.swift in Sources */,
 				47BBF9E12969DFE400802573 /* PermissionsManager.swift in Sources */,
 				47DE3248295CC7C40063C55A /* UIImageView+Inspectable.swift in Sources */,
 				4731F52E295CE0C10013F626 /* AccountVC.swift in Sources */,
@@ -1538,6 +1569,7 @@
 				434A0532295E1F1300C15945 /* UserAPI.swift in Sources */,
 				47DE3268295CCA5C0063C55A /* UIView+BecomeRound.swift in Sources */,
 				47DE3250295CC7C40063C55A /* UIImage+FromColor.swift in Sources */,
+				47E57C9829958E8F00F077CD /* ConnectionCountdownCell.swift in Sources */,
 				433B9D192970A71A0088445B /* QuestionAPI.swift in Sources */,
 				47B6B4C5296BABFB00539353 /* Sex.swift in Sources */,
 				47DE3247295CC7C40063C55A /* UIImageView+ProfilePic.swift in Sources */,
@@ -1735,7 +1767,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1775,7 +1807,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

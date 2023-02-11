@@ -56,7 +56,9 @@ class SheetVC: UIViewController {
             let button = SimpleButton()
             button.configure(title: sheetButton.title, systemImage: sheetButton.systemImageName)
             button.internalButton.addAction(UIAction(handler: { action in
-                sheetButton.handler()
+                self.dismiss(animated: true) {
+                    sheetButton.handler()
+                }
             }), for: .touchUpInside)
             
             button.translatesAutoresizingMaskIntoConstraints = false

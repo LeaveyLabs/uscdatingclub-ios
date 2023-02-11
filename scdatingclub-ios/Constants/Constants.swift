@@ -41,7 +41,7 @@ enum Constants {
     static let landingPageLink = URL(string: "https://scdatingclub.com")!
     static let privacyPageLink = URL(string: "https://scdatingclub.com/privacy")!
     static let termsLink = URL(string: "https://scdatingclub.com/terms")!
-    static let feedbackLink = URL(string: "https://forms.gle/151vRvEa11Tnn3CC7")!
+    static let feedbackLink = URL(string: "https://tally.so/r/m6DbDO")!
     static let contactLink = URL(string: "mailto:leaveylabs@gmail.com")!
 
     // Note: all nib names should be the same ss their storyboard ID
@@ -72,6 +72,8 @@ enum Constants {
             static let ConnectTitleCell = "ConnectTitleCell"
             static let ConnectSpectrumCell = "ConnectSpectrumCell"
             static let ConnectInterestsCell = "ConnectInterestsCell"
+            //Connect
+            static let ConnectionCountdownCell = "ConnectionCountdownCell"
         }
         struct VC {
             //Home
@@ -92,6 +94,7 @@ enum Constants {
             static let MatchFound = "MatchFoundVC"
             static let Coordinate = "CoordinateVC"
             static let CoordinateChat = "CoordinateChatVC"
+            static let ViewCompatibility = "ViewCompatibilityVC"
             //TabBar
             static let TabBarController = "TabBarController"
             //Misc
