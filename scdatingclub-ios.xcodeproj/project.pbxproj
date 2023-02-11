@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		433B9D17296F8BA10088445B /* MatchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433B9D16296F8BA10088445B /* MatchAPI.swift */; };
 		433B9D192970A71A0088445B /* QuestionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433B9D182970A71A0088445B /* QuestionAPI.swift */; };
+		4349B0BC2995AD1E005F3A63 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4349B0BB2995AD1E005F3A63 /* CryptoSwift */; };
+		4349B0C02995BB91005F3A63 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4349B0BF2995BB91005F3A63 /* FirebaseAnalytics */; };
+		4349B0C22995BB91005F3A63 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 4349B0C12995BB91005F3A63 /* FirebaseRemoteConfig */; };
 		434A052A295E1E6700C15945 /* BasicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A0529295E1E6700C15945 /* BasicAPI.swift */; };
 		434A052C295E1E9700C15945 /* DeviceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A052B295E1E9700C15945 /* DeviceAPI.swift */; };
 		434A052E295E1EB600C15945 /* PhoneNumberAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A052D295E1EB600C15945 /* PhoneNumberAPI.swift */; };
@@ -506,6 +509,7 @@
 				4791C0DF2996EF80005BE410 /* Mixpanel in Frameworks */,
 				47C40F6B295CBB41007C27F0 /* FirebaseAnalytics in Frameworks */,
 				47C40F73295CBB41007C27F0 /* FirebaseDynamicLinks in Frameworks */,
+				4349B0BC2995AD1E005F3A63 /* CryptoSwift in Frameworks */,
 				47C40F7D295CBB42007C27F0 /* FirebaseRemoteConfigSwift in Frameworks */,
 				47C40F79295CBB42007C27F0 /* FirebasePerformance in Frameworks */,
 				47C40F75295CBB42007C27F0 /* FirebaseFirestore in Frameworks */,
@@ -519,6 +523,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4349B0C22995BB91005F3A63 /* FirebaseRemoteConfig in Frameworks */,
+				4349B0C02995BB91005F3A63 /* FirebaseAnalytics in Frameworks */,
 				478BECC229647FFB00930DAF /* PhoneNumberKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1223,6 +1229,7 @@
 				434A053F2963C92B00C15945 /* Starscream */,
 				47773DF32981067600DDF3A5 /* MessageKit */,
 				4791C0DE2996EF80005BE410 /* Mixpanel */,
+				4349B0BB2995AD1E005F3A63 /* CryptoSwift */,
 			);
 			productName = "uscdatingclub-ios";
 			productReference = 47C40EE3295CB930007C27F0 /* scdatingclub-ios.app */;
@@ -1245,6 +1252,8 @@
 			name = "scdatingclub-iosTests";
 			packageProductDependencies = (
 				434A057C2963D3AB00C15945 /* PhoneNumberKit-Dynamic */,
+				4349B0BF2995BB91005F3A63 /* FirebaseAnalytics */,
+				4349B0C12995BB91005F3A63 /* FirebaseRemoteConfig */,
 			);
 			productName = "uscdatingclub-iosTests";
 			productReference = 47C40EF9295CB931007C27F0 /* scdatingclub-iosTests.xctest */;
@@ -1307,6 +1316,7 @@
 				434A053E2963C92B00C15945 /* XCRemoteSwiftPackageReference "Starscream" */,
 				47773DDF2980FDEB00DDF3A5 /* XCRemoteSwiftPackageReference "MessageKit" */,
 				4791C0DD2996EF80005BE410 /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
+				4349B0BA2995AD1E005F3A63 /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 			);
 			productRefGroup = 47C40EE4295CB930007C27F0 /* Products */;
 			projectDirPath = "";
@@ -1961,6 +1971,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4349B0BA2995AD1E005F3A63 /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		434A053E2963C92B00C15945 /* XCRemoteSwiftPackageReference "Starscream" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/daltoniam/Starscream.git";
@@ -2012,6 +2030,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4349B0BB2995AD1E005F3A63 /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4349B0BA2995AD1E005F3A63 /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
+		};
+		4349B0BF2995BB91005F3A63 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47C40F69295CBB41007C27F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		4349B0C12995BB91005F3A63 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47C40F69295CBB41007C27F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
 		434A053F2963C92B00C15945 /* Starscream */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 434A053E2963C92B00C15945 /* XCRemoteSwiftPackageReference "Starscream" */;
