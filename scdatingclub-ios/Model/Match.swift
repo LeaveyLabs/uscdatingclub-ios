@@ -74,7 +74,7 @@ struct MatchInfo: Codable {
     let partnerId: Int
     let partnerName: String
     let compatibility: Int
-    let date: Date
+    var date: Date //we update the date to right now when they move from MatchFoundVC to CoordinateChatVC
     let distance: Double //meters
     
     var numericalSimilarities: [NumericalSimilarity] //var because of xcode compiler quirk which won't let us use a function call

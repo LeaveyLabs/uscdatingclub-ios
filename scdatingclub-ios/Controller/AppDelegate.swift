@@ -111,8 +111,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             AlertManager.showAlert(title: "you've been matched with \(partner.firstName)!", subtitle: "you have \(Constants.minutesToRespond) minutes to respond", primaryActionTitle: "see your compatibility", primaryActionHandler: {
                 transitionToViewController(MatchFoundTableVC.create(matchInfo: MatchInfo(matchPartner: partner)), duration: 0.5)
             }, on: SceneDelegate.visibleViewController!)
-        } else if let _ = notificationResponseHandler.newMatchAcceptance {
-            NotificationCenter.default.post(name: .matchAccepted, object: nil)
+        } else if let acceptance = notificationResponseHandler.newMatchAcceptance {
+            NotificationCenter.default.post(name: .matchAccepted, object: nil, userInfo: acceptance.dictionary)
         }
     }
     

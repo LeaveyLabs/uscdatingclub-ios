@@ -37,9 +37,10 @@ class MatchFoundTableVC: UIViewController {
         connectManager.startRespondSession() //must come first
         setupTableView() //must come after setting up connectManager
         handlePreviousButtonPress()
-        NotificationCenter.default.addObserver(forName: .matchAccepted, object: nil, queue: .main) { notification in
+        NotificationCenter.default.addObserver(forName: .matchAccepted, object: nil, queue: .main) { [self] notification in
+            matchInfo.date = Date()
             DispatchQueue.main.async {
-                self.goToCoordinateVC()
+                self.goToCoordinateVC(newMatchInfo: self.matchInfo)
             }
         }
         handleFirstOpen()
@@ -139,8 +140,8 @@ class MatchFoundTableVC: UIViewController {
     }
     
     @MainActor
-    func goToCoordinateVC() {
-        transitionToViewController(CoordinateChatVC.create(matchInfo: matchInfo), duration: 1)
+    func goToCoordinateVC(newMatchInfo: MatchInfo) {
+        transitionToViewController(CoordinateChatVC.create(matchInfo: newMatchInfo), duration: 1)
     }
 
 //    @objc func passButtonDidPressed() {
