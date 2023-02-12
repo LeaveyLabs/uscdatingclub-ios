@@ -45,6 +45,7 @@ class Conversation {
                 let messages = try await MessageAPI.fetchMessages(user1Id: UserService.singleton.getId(),
                                                                    user2Id: sangdaebang.id)
                 self.chatObjects = messages.map { MessageKitMessage(message: $0, conversation: self) }
+                self.chatObjects.sort { $0.sentDate < $1.sentDate }
                 renderedIndex = min(50, chatObjects.count)
                 DispatchQueue.main.async {
                     self.rerenderChatScreen()

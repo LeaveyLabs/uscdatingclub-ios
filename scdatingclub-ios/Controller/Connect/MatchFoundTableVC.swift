@@ -40,7 +40,7 @@ class MatchFoundTableVC: UIViewController {
         handlePreviousButtonPress()
         NotificationCenter.default.addObserver(forName: .matchAccepted, object: nil, queue: .main) { [self] notification in
             matchInfo.date = Date()
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                 self.goToCoordinateVC(newMatchInfo: self.matchInfo)
             }
         }
@@ -129,7 +129,7 @@ class MatchFoundTableVC: UIViewController {
                     Constants.MP.MatchOpen.match_id:matchInfo.matchId,
                     Constants.MP.MatchOpen.time_remaining:matchInfo.timeLeftToRespondString])
                 UserDefaults.standard.set(Date(), forKey: Constants.UserDefaultsKeys.MostRecentMeetUpButtonPressDate)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) { //[weak self] in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { //[weak self] in
                     AppStoreReviewManager.requestReviewIfAppropriate()
                 }
             } catch {

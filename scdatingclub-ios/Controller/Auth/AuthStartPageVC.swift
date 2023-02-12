@@ -58,7 +58,6 @@ class AuthStartPageVC: UIPageViewController {
                ScreenDemoVC.create(type: .notif),
                ScreenDemoVC.create(type: .match),
                ScreenDemoVC.create(type: .connect),]
-        
         self.dataSource = self
         self.delegate = self
         for view in view.subviews {
