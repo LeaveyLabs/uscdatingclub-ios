@@ -7,6 +7,7 @@
 
 import UIKit
 import Mixpanel
+import FirebaseAnalytics
 
 class AboutVC: UIViewController, PageVCChild {
     
@@ -87,6 +88,7 @@ class AboutVC: UIViewController, PageVCChild {
     }
     
     @objc func feedbackButtonPressed() {
+        Analytics.logEvent("feedbackButtonPressed", parameters: nil)
         Mixpanel.mainInstance().track(event: Constants.MP.OpenTextUsButtonTapped.EventName)
         openURL(Constants.feedbackLink)
     }

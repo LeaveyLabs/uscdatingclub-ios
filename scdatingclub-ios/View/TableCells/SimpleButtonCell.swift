@@ -12,6 +12,7 @@ class SimpleButtonCell: UITableViewCell {
     @IBOutlet weak var simpleButton: SimpleButton!
     @IBOutlet weak var footerLabel: UILabel!
     @IBOutlet weak var buttonHeightAnchor: NSLayoutConstraint!
+    var hasBeenConfiguredOnce = false
     
     func configure(title: String, systemImage: String, footerText: String? = nil, buttonHeight: CGFloat? = nil, onButtonPress: @escaping () -> Void) {
         if title.rangeOfCharacter(from: .newlines) != nil {
@@ -30,9 +31,11 @@ class SimpleButtonCell: UITableViewCell {
         simpleButton.configure(title: title, systemImage: systemImage)
         selectionStyle = .none
         
+        guard !hasBeenConfiguredOnce else { return }
         simpleButton.internalButton.addAction(UIAction(handler: { _ in
             onButtonPress()
         }), for: .touchUpInside)
+        hasBeenConfiguredOnce = true
     }
     
 }
