@@ -224,16 +224,17 @@ class NotificationsManager: NSObject {
         }
     
         do {
-            guard let json = userInfo[Notification.extra.data.rawValue] else { return handler }
-            let data = try JSONSerialization.data(withJSONObject: json as Any, options: .prettyPrinted)
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            
             switch notificationType {
             case .match:
+                guard let json = userInfo[Notification.extra.data.rawValue] else { return handler }
+                let data = try JSONSerialization.data(withJSONObject: json as Any, options: .prettyPrinted)
                 handler.newMatchPartner = try decoder.decode(MatchPartner.self, from: data)
                 handler.notificationDate = Date(timeIntervalSince1970: handler.newMatchPartner!.time)
             case .accept:
+                guard let json = userInfo[Notification.extra.data.rawValue] else { return handler }
+                let data = try JSONSerialization.data(withJSONObject: json as Any, options: .prettyPrinted)
                 handler.newMatchAcceptance = try decoder.decode(MatchAcceptance.self, from: data)
                 handler.notificationDate = Date(timeIntervalSince1970: handler.newMatchAcceptance!.time)
             case .stop:

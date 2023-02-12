@@ -59,11 +59,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = UIStoryboard(name: Constants.SBID.SB.Auth, bundle: nil).instantiateInitialViewController()
         } else {
             let loadingVC = LoadingVC.create()
-                        
-//            if let notification = connectionOptions.notificationResponse?.notification,
-//               let notificationResponseHandler = NotificationsManager.shared.generateNotificationResponseHandler(notification) {
-//                loadingVC.notificationResponseHandler = notificationResponseHandler
-//            }
+            if let notification = connectionOptions.notificationResponse?.notification,
+               let notificationResponseHandler = NotificationsManager.shared.generateNotificationResponseHandler(notification) {
+                loadingVC.notificationResponseHandler = notificationResponseHandler
+            }
             window.rootViewController = loadingVC
         }
 
