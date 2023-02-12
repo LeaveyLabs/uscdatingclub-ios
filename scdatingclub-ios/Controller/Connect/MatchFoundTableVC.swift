@@ -43,11 +43,6 @@ class MatchFoundTableVC: UIViewController {
             }
         }
         handleFirstOpen()
-        Mixpanel.mainInstance().track(
-            event: Constants.MP.MatchOpen.EventName,
-            properties: [Constants.MP.MatchOpen.match_id:matchInfo.matchId,
-                         Constants.MP.MatchOpen.time_remaining:matchInfo.timeLeftToRespondString])
-        Mixpanel.mainInstance().track(event: Constants.MP.MatchOpen.EventName)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -92,6 +87,18 @@ class MatchFoundTableVC: UIViewController {
     }
     
     func handleFirstOpen() {
+        if let recentMatchFoundDate = UserDefaults.standard.object(forKey: Constants.UserDefaultsKeys.mostRecentMatchFoundDate) as? Date,
+           recentMatchFoundDate.isMoreRecentThan(Calendar.current.date(byAdding: .minute, value: -1 * Constants.minutesToRespond, to: Date())!) {
+            //not the first open during this match
+        } else {
+            UserDefaults.standard.set(Date(), forKey: Constants.UserDefaultsKeys.mostRecentMatchFoundDate)
+            Mixpanel.mainInstance().track(
+                event: Constants.MP.MatchOpen.EventName,
+                properties: [Constants.MP.MatchOpen.match_id:matchInfo.matchId,
+                             Constants.MP.MatchOpen.time_remaining:matchInfo.timeLeftToRespondString])
+            Mixpanel.mainInstance().track(event: Constants.MP.MatchOpen.EventName)
+        }
+        
         if !DeviceService.shared.hasReceivedFeedbackNotification() {
             NotificationsManager.shared.scheduleRequestFeedbackNotification(minutesFromNow: Constants.minutesUntilFeedbackNotification)
             DeviceService.shared.didScheduleFeedbackNotification()

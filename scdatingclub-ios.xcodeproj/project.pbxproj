@@ -692,6 +692,7 @@
 		47A24A2C29709E690077AB11 /* Decomissioned */ = {
 			isa = PBXGroup;
 			children = (
+				47D901BC296C7C7B00F9AB18 /* CoordinateVC.swift */,
 				476FD86A295E46E30014DD42 /* HowItWorksVC.swift */,
 			);
 			path = Decomissioned;
@@ -1021,9 +1022,7 @@
 			children = (
 				47A0113F2995F2D00099BEA8 /* ViewCompatibilityVC.swift */,
 				4729B22D296E096400971351 /* MatchFoundTableVC.swift */,
-				47D901BC296C7C7B00F9AB18 /* CoordinateVC.swift */,
 				47773DDC2980FD1800DDF3A5 /* CoordinateChatVC.swift */,
-				47773DF1298102D900DDF3A5 /* InputBarAccessoryView+.swift */,
 			);
 			path = Connect;
 			sourceTree = "<group>";
@@ -1101,6 +1100,7 @@
 		47DE3228295CC5AD0063C55A /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				47773DF1298102D900DDF3A5 /* InputBarAccessoryView+.swift */,
 				47DE31EA295CC4B40063C55A /* CarouselCollectionView.swift */,
 				476FD862295DF89A0014DD42 /* SimpleButton.swift */,
 				476FD863295DF89A0014DD42 /* SimpleButton.xib */,

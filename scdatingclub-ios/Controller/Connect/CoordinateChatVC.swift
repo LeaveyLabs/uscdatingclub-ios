@@ -135,12 +135,6 @@ class CoordinateChatVC: MessagesViewController {
         DispatchQueue.main.async { //scroll on the next cycle so that collectionView's data is loaded in beforehand
             self.messagesCollectionView.scrollToLastItem(at: .bottom, animated: false)
         }
-        
-        Mixpanel.mainInstance().track(
-            event: Constants.MP.CoordinateOpen.EventName,
-            properties: [Constants.MP.MatchOpen.match_id:matchInfo.matchId,
-                         Constants.MP.MatchOpen.time_remaining:matchInfo.timeLeftToConnectString])
-        Mixpanel.mainInstance().track(event: Constants.MP.CoordinateOpen.EventName)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -156,10 +150,7 @@ class CoordinateChatVC: MessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewHasAppeared = true
-        AlertManager.showInfoCentered(
-            "you guys have 5 minutes to chat & meet up!",
-            "\nnote: location sharing doesn't work well underground",
-            on: self)
+        handleFirstLoad()
 //        ConversationService.singleton.updateLastMessageReadTime(withUserId: conversation.sangdaebang.id)
     }
 
@@ -185,36 +176,7 @@ class CoordinateChatVC: MessagesViewController {
         viewHasAppeared = false
     }
     
-    //MARK: - Setup
-    
-    func setupKeyboard() {
-        messagesCollectionView.contentInsetAdjustmentBehavior = .never //dont think this does anything
-        messageInputBar = inputBar
-        inputBar.delegate = self
-        inputBar.inputTextView.delegate = self
-        
-        additionalBottomInset = 5
-        
-        //Keyboard manager from InputBarAccessoryView
-        view.addSubview(messageInputBar)
-        keyboardManager.shouldApplyAdditionBottomSpaceToInteractiveDismissal = true
-        keyboardManager.bind(inputAccessoryView: messageInputBar) //properly positions inputAccessoryView
-        keyboardManager.bind(to: messagesCollectionView) //enables interactive dismissal
-                
-        NotificationCenter.default.addObserver(self,
-            selector: #selector(keyboardWillShow(sender:)),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil)
-        
-        NotificationCenter.default.addObserver(self,
-            selector: #selector(keyboardWillHide(sender:)),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil)
-        NotificationCenter.default.addObserver(self,
-            selector: #selector(keyboardWillChangeFrame(sender:)),
-            name: UIResponder.keyboardWillChangeFrameNotification,
-            object: nil)
-    }
+    //MARK: - Keybaord
     
     @objc func keyboardWillShow(sender: NSNotification) {
         setCountdownDirection(to: .horizontal, animated: true)
@@ -247,6 +209,55 @@ class CoordinateChatVC: MessagesViewController {
     func textViewDidBeginEditing(_ textView: UITextView) {
         DispatchQueue.main.async {
             self.messagesCollectionView.scrollToLastItem(animated: true)
+        }
+    }
+    
+    func setupKeyboard() {
+        messagesCollectionView.contentInsetAdjustmentBehavior = .never //dont think this does anything
+        messageInputBar = inputBar
+        inputBar.delegate = self
+        inputBar.inputTextView.delegate = self
+        
+        additionalBottomInset = 5
+        
+        //Keyboard manager from InputBarAccessoryView
+        view.addSubview(messageInputBar)
+        keyboardManager.shouldApplyAdditionBottomSpaceToInteractiveDismissal = true
+        keyboardManager.bind(inputAccessoryView: messageInputBar) //properly positions inputAccessoryView
+        keyboardManager.bind(to: messagesCollectionView) //enables interactive dismissal
+                
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(keyboardWillShow(sender:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(keyboardWillHide(sender:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(keyboardWillChangeFrame(sender:)),
+            name: UIResponder.keyboardWillChangeFrameNotification,
+            object: nil)
+    }
+    
+    //MARK: - Setup
+    
+    func handleFirstLoad() {
+        if let recentCoordinateDate = UserDefaults.standard.object(forKey: Constants.UserDefaultsKeys.mostRecentCoordinateDate) as? Date,
+           recentCoordinateDate.isMoreRecentThan(Calendar.current.date(byAdding: .minute, value: -1 * Constants.minutesToConnect, to: Date())!) {
+            //is it's not the first load of this view controller during this session
+        } else {
+            UserDefaults.standard.set(Date(), forKey: Constants.UserDefaultsKeys.mostRecentCoordinateDate)
+            AlertManager.showInfoCentered(
+                "you guys have 5 minutes to chat & meet up!",
+                "\nnote: location sharing doesn't work well underground",
+                on: self)
+            Mixpanel.mainInstance().track(
+                event: Constants.MP.CoordinateOpen.EventName,
+                properties: [Constants.MP.MatchOpen.match_id:matchInfo.matchId,
+                             Constants.MP.MatchOpen.time_remaining:matchInfo.timeLeftToConnectString])
+            Mixpanel.mainInstance().track(event: Constants.MP.CoordinateOpen.EventName)
         }
     }
     
