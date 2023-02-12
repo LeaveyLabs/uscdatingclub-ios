@@ -54,6 +54,11 @@ extension Constants {
             static let VisibleScreen = "VisibleScreen"
         }
         
+        enum Permissions {
+            static let EventName = "Permissions"
+            static let NotificationsEnabled = "NotificationsEnabled"
+        }
+        
         enum TakeTest {
             static let EventName = "TakeTest"
             static let IsFirstTest = "IsFirstTest"

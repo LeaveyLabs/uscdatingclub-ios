@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Mixpanel
 
 class PermissionsVC: UIViewController {
     
@@ -49,6 +50,8 @@ class PermissionsVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(onResignActive), name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(delayedRerender), name: .locationStatusDidUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(delayedRerender), name: UIApplication.backgroundRefreshStatusDidChangeNotification, object: nil)
+        
+        Mixpanel.mainInstance().time(event: Constants.MP.Permissions.EventName)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -111,6 +114,9 @@ class PermissionsVC: UIViewController {
         Task {
             do {
                 try await UserService.singleton.updateMatchableStatus(active:true)
+                Mixpanel.mainInstance().track(event: nil, properties: nil)
+                Mixpanel.mainInstance().track(event: Constants.MP.Permissions.EventName,
+                                              properties: [Constants.MP.Permissions.NotificationsEnabled:!declinedNotifications])
             } catch {
                 //TODO: log to firebase
             }
