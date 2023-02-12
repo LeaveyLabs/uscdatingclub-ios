@@ -83,9 +83,11 @@ class CoordinateChatVC: MessagesViewController {
     @IBOutlet var bottomStackVerticalConstraint: NSLayoutConstraint!
     @IBOutlet var locationLabel: UILabel!
     var locationImage: UIImage {
-        let systemImageName = locationLabel.text!.contains("<") ? "figure.stand.line.dotted.figure.stand" : "location.north"
-//        let imageConfiguration = UIImage.SymbolConfiguration //depending on axis
-        return UIImage(systemName: systemImageName)!
+        if !locationLabel.text!.contains("<") {
+            return UIImage(systemName: "location.north", withConfiguration: UIImage.SymbolConfiguration(weight: countdownStackView.axis == .horizontal ? .bold : .light))!
+        } else {
+            return UIImage(systemName: "figure.stand.line.dotted.figure.stand")!
+        }
     }
     
     @IBOutlet var countdownBgView: UIView!
@@ -94,7 +96,7 @@ class CoordinateChatVC: MessagesViewController {
     @IBOutlet var locationStackView: UIStackView!
     
     //Data
-    var relativePositioning: RelativePositioning = .init(heading: 0, distance: 0)
+    var relativePositioning: RelativePositioning = .init(heading: 0, distance: 100)
     var matchInfo: MatchInfo!
     var connectManager: ConnectManager!
     var conversation: Conversation!
@@ -132,10 +134,10 @@ class CoordinateChatVC: MessagesViewController {
         setupNavBar()
         setupKeyboard()
         setupMessageInputBarForChatting()
-        
         setupButtons()
         setupLabels() //must come after connect manager created
         setCountdownDirection(to: .vertical, animated: false)
+        locationImageView.setImage(locationImage)
 
         DispatchQueue.main.async { //scroll on the next cycle so that collectionView's data is loaded in beforehand
             self.messagesCollectionView.scrollToLastItem(at: .bottom, animated: false)
@@ -254,7 +256,7 @@ class CoordinateChatVC: MessagesViewController {
         } else {
             UserDefaults.standard.set(Date(), forKey: Constants.UserDefaultsKeys.mostRecentCoordinateDate)
             AlertManager.showInfoCentered(
-                "you guys have 5 minutes to chat & meet up!",
+                "you have 5 minutes to chat & meet up!",
                 "\nnote: location sharing doesn't work well underground",
                 on: self)
             Mixpanel.mainInstance().track(
@@ -424,29 +426,29 @@ class CoordinateChatVC: MessagesViewController {
     }
     
     @MainActor
-    func setCountdownDirection(to axis: NSLayoutConstraint.Axis, animated: Bool) {
+    func setCountdownDirection(to newAxis: NSLayoutConstraint.Axis, animated: Bool) {
         view.layoutIfNeeded()
-        locationLabel.font = axis == .horizontal ? AppFont.light.size(16) : AppFont.bold.size(16)
-//        if axis == .vertical {
-//            locationImageView.setImage(UIImage(systemName: "location.north", withConfiguration: UIImage.SymbolConfiguration(weight: .regular)), animated: false)
-//        }
+        locationLabel.font = newAxis == .horizontal ? AppFont.light.size(16) : AppFont.bold.size(16)
+        if newAxis == .vertical {
+            locationImageView.setImage(locationImage)
+        }
         
         UIView.animate(withDuration: animated ? 0.3 : 0,
                        delay: 0,
                        options: .curveLinear) { [self] in
-            countdownToggleButton.transform = CGAffineTransform.identity.rotated(by: axis == .vertical ? .pi : 0)
-            countdownStackView.axis = axis
-            bottomStackVerticalConstraint.constant = axis == .horizontal ? 18 : 35
-            locationImageViewWidthConstraint.constant = axis == .horizontal ? 40 : view.frame.width * 0.5
-            locationStackView.spacing = axis == .horizontal ? 4 : 25
-            locationLabel.alpha = axis == .horizontal ? 0.7 : 1
-            countdownStackView.spacing = axis == .horizontal ? -40 : 20
-            locationLabel.transform = axis == .horizontal ? CGAffineTransform(scaleX: 1, y: 1) : CGAffineTransform(scaleX: 2, y: 2)
+            countdownToggleButton.transform = CGAffineTransform.identity.rotated(by: newAxis == .vertical ? .pi : 0)
+            countdownStackView.axis = newAxis
+            bottomStackVerticalConstraint.constant = newAxis == .horizontal ? 18 : 43
+            locationImageViewWidthConstraint.constant = newAxis == .horizontal ? 40 : view.frame.width * 0.5
+            locationStackView.spacing = newAxis == .horizontal ? 4 : 25
+            locationLabel.alpha = newAxis == .horizontal ? 0.7 : 1
+            countdownStackView.spacing = newAxis == .horizontal ? -40 : 20
+            locationLabel.transform = newAxis == .horizontal ? CGAffineTransform(scaleX: 1, y: 1) : CGAffineTransform(scaleX: 2, y: 2)
             view.layoutIfNeeded()
-        } completion: { finished in
-//            if axis == .horizontal {
-//                locationImageView.setImage(UIImage(systemName: "location.north", withConfiguration: UIImage.SymbolConfiguration(weight: .bold)), animated: false)
-//            }
+        } completion: { [self] finished in
+            if newAxis == .horizontal && finished {
+                locationImageView.setImage(locationImage)
+            }
         }
     }
     
@@ -506,8 +508,15 @@ extension CoordinateChatVC: ConnectManagerDelegate {
         self.relativePositioning = relativePositioning
         DispatchQueue.main.async { [self] in
             locationLabel.text = prettyDistance(meters: relativePositioning.distance, shortened: false)
-            locationImageView.setImage(locationImage)
             locationImageView.transform = CGAffineTransform.identity.rotated(by: locationLabel.text!.contains("<") ? 0 : relativePositioning.heading)
+            if locationLabel.text!.contains("<") {
+                if locationImageView.transform != CGAffineTransform.identity.rotated(by: 0) {
+                    locationImageView.setImage(locationImage) //update the image to "figures nearby"
+                }
+                locationImageView.transform = CGAffineTransform.identity.rotated(by: 0)
+            } else {
+                locationImageView.transform = CGAffineTransform.identity.rotated(by: relativePositioning.heading)
+            }
         }
     }
     

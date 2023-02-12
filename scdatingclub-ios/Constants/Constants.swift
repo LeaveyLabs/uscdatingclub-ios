@@ -38,7 +38,8 @@ enum Constants {
     static let appTechnicalName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
 
     static let mixpanelToken = "ad00385a4c6c80d631fca8d0e6c80fe0"
-    
+    static let mixpanelDevToken = "310c196d5cfbfb411bd845c7e4058454"
+
     static let defaultMailLink = URL(string: "mailto://")!
     static let gmailLink = URL(string: "googlegmail://")!
     static let faqLink = URL(string: "https://scdatingclub.com/faq")!
