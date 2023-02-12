@@ -30,7 +30,6 @@ class SimpleButtonCell: UITableViewCell {
         simpleButton.configure(title: title, systemImage: systemImage)
         selectionStyle = .none
         
-        simpleButton.internalButton.removeTarget(nil, action: nil, for: .allEvents)
         simpleButton.internalButton.addAction(UIAction(handler: { _ in
             onButtonPress()
         }), for: .touchUpInside)
