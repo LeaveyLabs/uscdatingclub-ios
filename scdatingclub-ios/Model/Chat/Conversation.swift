@@ -81,6 +81,10 @@ class Conversation {
     
     //MARK: - Receiving things
     
+    var isInsertionScheduled = false
+    var tempReceivedMessages: [MessageKitMessage] = []
+    var lock = NSLock()
+    
     func handleReceivedMessage(_ message: Message) {
         let attributedMessage = NSAttributedString(
             string: message.body,
@@ -91,15 +95,40 @@ class Conversation {
             receiver: UserService.singleton.getUserAsReadOnlyUser(),
             messageId: String(message.id),
             date: Date(timeIntervalSince1970: message.timestamp))
+        
+        lock.lock()
         chatObjects.append(messageKitMessage)
         renderedIndex += 1
+        lock.unlock()
         
         DispatchQueue.main.async {
             let visibleVC = SceneDelegate.visibleViewController
             if let chatVC = visibleVC as? CoordinateChatVC,
                chatVC.matchInfo.partnerId == self.sangdaebang.id {
-                chatVC.handleNewMessage()
+                chatVC.rerenderMessages()
             }
+        }
+        
+//        tempReceivedMessages.append(messageKitMessage)
+//        guard !isInsertionScheduled else { return }
+//        isInsertionScheduled = true
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+//            handleMessagesThrottled()
+//            isInsertionScheduled = false
+//        }
+        
+    }
+    
+    @MainActor
+    func handleMessagesThrottled() {
+        chatObjects.append(contentsOf: tempReceivedMessages)
+        renderedIndex += tempReceivedMessages.count
+        tempReceivedMessages = []
+        
+        let visibleVC = SceneDelegate.visibleViewController
+        if let chatVC = visibleVC as? CoordinateChatVC,
+           chatVC.matchInfo.partnerId == self.sangdaebang.id {
+            chatVC.rerenderMessages()
         }
     }
     

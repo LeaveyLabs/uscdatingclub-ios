@@ -557,7 +557,7 @@ extension CoordinateChatVC: InputBarAccessoryViewDelegate {
             do {
                 try await conversation.sendMessage(messageText: messageString)
                 DispatchQueue.main.async { [self] in
-                    handleNewMessage()
+                    rerenderMessages()
                 }
             } catch {
                 AlertManager.displayError(error)
@@ -572,42 +572,22 @@ extension CoordinateChatVC: InputBarAccessoryViewDelegate {
     }
         
     @MainActor
-    func handleNewMessage() {
-        
-        
-//        let range = Range(uncheckedBounds: (0, max(0, messagesCollectionView.numberOfSections - 1)))
-//        let indexSet = IndexSet(integersIn: range)
-//        messagesCollectionView.reloadSections(indexSet)
-//     Reload last section to update header/footer labels and insert a new one
-//        UIView.animate(withDuration: <#T##TimeInterval#>, delay: <#T##TimeInterval#>, animations: <#T##() -> Void#>)
-//        messagesCollectionView.reloadDataAndKeepOffset()
-
-//        messagesCollectionView.numberOfItems(inSection: 0) //prevents an occassional crash?
-
-        messagesCollectionView.performBatchUpdates({
-            messagesCollectionView.insertSections([numberOfSections(in: messagesCollectionView) - 1])
-            if numberOfSections(in: messagesCollectionView) >= 2 {
-                messagesCollectionView.reloadSections([numberOfSections(in: messagesCollectionView) - 2])
-            }
-        }) {_ in
-            
+    func rerenderMessages() {
+        if numberOfSections(in: messagesCollectionView) > 15 {
+            messagesCollectionView.reloadDataAndKeepOffset()
+        } else {
+            messagesCollectionView.reloadData()
         }
-//        messagesCollectionView.reloadData()
         
-        
-//        ConversationService.singleton.updateLastMessageReadTime(withUserId: conversation.sangdaebang.id)
+        //More ideal UI, but still some issues crashing upon rapid message receiving / hitting 50 messages received
 //        messagesCollectionView.performBatchUpdates({
-//            messagesCollectionView.numberOfItems(inSection: 0) //prevents an occassional crash?
-////            messagesCollectionView.insertSections([numberOfSections(in: messagesCollectionView) - 1])
-//            if numberOfSections(in: messagesCollectionView) == 1 {
-//                messagesCollectionView.reloadDataAndKeepOffset()
-//            } else {
-//                messagesCollectionView.insertSections([numberOfSections(in: messagesCollectionView)-1])
+//            messagesCollectionView.insertSections([numberOfSections(in: messagesCollectionView) - 1])
+//            if numberOfSections(in: messagesCollectionView) >= 2 {
 //                messagesCollectionView.reloadSections([numberOfSections(in: messagesCollectionView) - 2])
 //            }
-//        })
-//        messagesCollectionView.reloadDataAndKeepOffset()
-//        messagesCollectionView.scrollToLastItem(animated: true)
+//        }) {_ in
+//            self.messagesCollectionView.scrollToLastItem(animated: true)
+//        }
     }
     
 }
@@ -797,3 +777,27 @@ extension CoordinateChatVC {
         return thisItem.sender.senderId == nextItem.sender.senderId
     }
 }
+
+
+//Unused message rerender code:
+//        let range = Range(uncheckedBounds: (0, max(0, messagesCollectionView.numberOfSections - 1)))
+//        let indexSet = IndexSet(integersIn: range)
+//        messagesCollectionView.reloadSections(indexSet)
+//     Reload last section to update header/footer labels and insert a new one
+//        UIView.animate(withDuration: <#T##TimeInterval#>, delay: <#T##TimeInterval#>, animations: <#T##() -> Void#>)
+//        messagesCollectionView.reloadDataAndKeepOffset()
+
+//        messagesCollectionView.numberOfItems(inSection: 0) //prevents an occassional crash?
+
+//        ConversationService.singleton.updateLastMessageReadTime(withUserId: conversation.sangdaebang.id)
+//        messagesCollectionView.performBatchUpdates({
+//            messagesCollectionView.numberOfItems(inSection: 0) //prevents an occassional crash?
+////            messagesCollectionView.insertSections([numberOfSections(in: messagesCollectionView) - 1])
+//            if numberOfSections(in: messagesCollectionView) == 1 {
+//                messagesCollectionView.reloadDataAndKeepOffset()
+//            } else {
+//                messagesCollectionView.insertSections([numberOfSections(in: messagesCollectionView)-1])
+//                messagesCollectionView.reloadSections([numberOfSections(in: messagesCollectionView) - 2])
+//            }
+//        })
+//        messagesCollectionView.reloadDataAndKeepOffset()
