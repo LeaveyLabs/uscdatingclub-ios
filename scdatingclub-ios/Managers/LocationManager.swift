@@ -98,15 +98,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                 resetDistanceFilter()
             }
         }
-
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("didFailWithError", error.localizedDescription)
-        let analyticsId = "location"
-        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-          AnalyticsParameterItemID: "id-\(analyticsId)",
-        ])
     }
     
     //MARK: - Public API
@@ -164,13 +159,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     //MARK: - Helpers
     
     func postToDatabase(lat: Double, long: Double) {
-        //TODO: why is the analytics not posting?
-        Analytics.logEvent("updateLocationSuccess", parameters: nil)
         Task {
             do {
                 try await UserAPI.updateLocationEncrypted(latitude: lat, longitude: long, email: UserService.singleton.getEmail())
             } catch {
-                Analytics.logEvent("updateLocationSuccess", parameters: nil)
+                Analytics.logEvent("updateLocationFail", parameters: nil)
             }
         }
     }

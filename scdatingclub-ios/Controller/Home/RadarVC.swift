@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Mixpanel
 
 class RadarVC: UIViewController, PageVCChild {
     
@@ -196,30 +197,24 @@ class RadarVC: UIViewController, PageVCChild {
         isPulsing = true
         firstCircleView.layer.removeAllAnimations()
         secondCircleView.layer.removeAllAnimations()
-        pulse(pulseView: firstCircleView, repeating: true, duration: RadarVC.PULSE_DURATION)
-        DispatchQueue.main.asyncAfter(deadline: .now() + RadarVC.PULSE_DURATION / 2) { [weak self] in
-            guard let self else { return }
-            self.pulse(pulseView: self.secondCircleView, repeating: true, duration: RadarVC.PULSE_DURATION)
-        }
+        let percentCompleted = Double.random(in: 0.5...1)
+        pulse(startingPercent: percentCompleted, pulseView: firstCircleView, repeating: true, duration: RadarVC.PULSE_DURATION)
+        pulse(startingPercent: percentCompleted-0.5, pulseView: secondCircleView, repeating: true, duration: RadarVC.PULSE_DURATION)
     }
     
-//    func resumePulsing() {
-//        firstCircleView.layer.removeAllAnimations()
-//        secondCircleView.layer.removeAllAnimations()
-//
-//        firstCircleView.transform = CGAffineTransform(scaleX: 100, y: 100)
-//        secondCircleView.transform = .identity
-//
-//        pulse(pulseView: firstCircleView, repeating: true, duration: RadarVC.PULSE_DURATION/2)
-//        pulse(pulseView: secondCircleView, repeating: true, duration: RadarVC.PULSE_DURATION)
-//    }
-    
-    func pulse(pulseView: UIView, repeating: Bool, duration: Double) {
+    func pulse(startingPercent: Double, pulseView: UIView, repeating: Bool, duration: Double) {
         guard isPulsing else { return }
         if isCurrentlyVisible {
             UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
         }
-        UIView.animate(withDuration: duration, delay: 0, options: [.curveLinear, .allowUserInteraction]) { [weak self] in
+        
+        pulseView.alpha = (1-startingPercent)
+        pulseView.layer.borderWidth = 2 * (1-startingPercent)
+        let startingTransform = 1 + RadarVC.PULSE_DURATION * startingPercent
+        pulseView.transform = CGAffineTransform(scaleX: startingTransform,
+                                                y: startingTransform)
+        
+        UIView.animate(withDuration: duration - (startingPercent*duration), delay: 0, options: [.curveLinear, .allowUserInteraction]) { [weak self] in
             guard self != nil else { return }
             pulseView.transform = CGAffineTransform(scaleX: 1 / RadarVC.CIRCLE_WIDTH_RATIO, y: 1 / RadarVC.CIRCLE_WIDTH_RATIO)
             pulseView.alpha = 0
@@ -230,7 +225,7 @@ class RadarVC: UIViewController, PageVCChild {
             pulseView.alpha = 1
             pulseView.layer.borderWidth = 2
             if repeating && completed {
-                self.pulse(pulseView: pulseView, repeating: true, duration: duration)
+                self.pulse(startingPercent: 0, pulseView: pulseView, repeating: true, duration: duration)
             }
         }
     }
@@ -293,7 +288,7 @@ class RadarVC: UIViewController, PageVCChild {
         newCircleView.layer.borderWidth = 2
         newCircleView.layer.borderColor = UIColor.white.cgColor
         newCircleView.roundCornersViaCornerRadius(radius: firstCircleView.bounds.width / 2)
-        pulse(pulseView: newCircleView, repeating: false, duration: RadarVC.PULSE_DURATION)
+        pulse(startingPercent: 0, pulseView: newCircleView, repeating: false, duration: RadarVC.PULSE_DURATION)
         DispatchQueue.main.asyncAfter(deadline: .now() + RadarVC.PULSE_DURATION) {
             newCircleView.removeFromSuperview()
         }
@@ -310,6 +305,7 @@ class RadarVC: UIViewController, PageVCChild {
     @objc func didTapActiveButton() {
         switch uiState {
         case .radar:
+            Mixpanel.mainInstance().track(event: isLocationServicesEnabled ? "BecomeInactive" : "BecomeActive")
             if isLocationServicesEnabled {
                 isLocationServicesEnabled = false
                 renderIsActive()
