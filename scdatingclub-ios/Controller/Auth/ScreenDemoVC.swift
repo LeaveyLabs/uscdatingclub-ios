@@ -42,8 +42,8 @@ class ScreenDemoVC: UIViewController {
             titleLabel.text = "5 minutes to respond"
         case .notif:
             screenImageView.image = UIImage(named: "notificationscreen")
-            subtitleLabel.text = "find out when your next match"
-            titleLabel.text = "walks into your life"
+            subtitleLabel.text = ""
+            titleLabel.text = "find out who it is 👀"
         case .connect:
             screenImageView.image = UIImage(named: "connectscreen")
             subtitleLabel.text = "spontaneously"

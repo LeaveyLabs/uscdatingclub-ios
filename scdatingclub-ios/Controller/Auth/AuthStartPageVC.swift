@@ -14,6 +14,7 @@ class AuthStartPageVC: UIPageViewController {
     var vcs: [UIViewController]!
     var pageControl: UIPageControl!
     var continueButton: SimpleButton!
+    var authStartVC: AuthStartVC!
     var currentIndex: Int = 0 {
         didSet {
             pageControl.currentPage = currentIndex
@@ -41,17 +42,22 @@ class AuthStartPageVC: UIPageViewController {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundDidTapped)))
     }
     
-    var authStartVC: AuthStartVC!
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !isDisplayedInAuth {
+            authStartVC.agreementTextView.isHidden = true
+            authStartVC.headerLabel.isHidden = true
+        }
+    }
+        
     //MARK: - Setup
     
     func setupPageVC() {
-        vcs = [ScreenDemoVC.create(type: .notif),
+        authStartVC = AuthStartVC.create()
+        vcs = [authStartVC,
+               ScreenDemoVC.create(type: .notif),
                ScreenDemoVC.create(type: .match),
-               ScreenDemoVC.create(type: .connect)]
-        if isDisplayedInAuth {
-            vcs.insert(AuthStartVC.create(), at: 0)
-        }
+               ScreenDemoVC.create(type: .connect),]
         
         self.dataSource = self
         self.delegate = self

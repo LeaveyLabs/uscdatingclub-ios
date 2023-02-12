@@ -14,9 +14,6 @@ class AuthStartVC: UIViewController, UITextViewDelegate {
     
     //UI
     @IBOutlet weak var agreementTextView: UITextView!
-//    @IBOutlet var continueButton: SimpleButton!
-    @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var subtitleLabel: UILabel!
     @IBOutlet var headerLabel: UILabel!
 
     //MARK: - Initialization
@@ -36,8 +33,8 @@ class AuthStartVC: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        titleLabel.font = AppFont.bold.size(30)
-        subtitleLabel.font = AppFont.medium.size(18)
+//        titleLabel.font = AppFont.bold.size(30)
+//        subtitleLabel.font = AppFont.medium.size(18)
         headerLabel.font = AppFont2.regular.size(12)
         headerLabel.text = "\(Constants.appDisplayName) is an iOS app from Leavey Labs. It is not affiliated with any external organizations or institutions."
         Mixpanel.mainInstance().time(event: Constants.MP.AuthProcess.EventName)

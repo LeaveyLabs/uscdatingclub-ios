@@ -150,6 +150,7 @@ class CoordinateChatVC: MessagesViewController {
     }
     
     @objc func handleDidBecomeActive() {
+        loadingIndicatorView.startAnimating()
         conversation.loadServerMessagesAndOverwriteLocalCopy()
     }
     
@@ -361,10 +362,6 @@ class CoordinateChatVC: MessagesViewController {
     
     //MARK: - User Interaction
     
-    @objc func handleNavPan(recognizer: UIPanGestureRecognizer) {
-        setCountdownDirection(to: recognizer.velocity(in: view).y < 0 ? .horizontal : .vertical, animated: true)
-    }
-    
     func closeButtonDidPressed() {
         AlertManager.showAlert(title: "stop sharing your location with \(matchInfo.partnerName)?",
                                subtitle: "you won't be able to restart it afterwards",
@@ -413,6 +410,15 @@ class CoordinateChatVC: MessagesViewController {
         toggleCountdownDirection()
     }
     
+    @objc func handleNavPan(recognizer: UIPanGestureRecognizer) {
+        setCountdownDirection(to: recognizer.velocity(in: view).y < 0 ? .horizontal : .vertical, animated: true)
+    }
+    
+    @MainActor
+    @objc func toggleCountdownDirection() {
+        setCountdownDirection(to: countdownStackView.axis == .horizontal ? .vertical : .horizontal, animated: true)
+    }
+    
     //MARK: - Helpers
     
     func handlePartnerStoppedSharing() {
@@ -444,11 +450,6 @@ class CoordinateChatVC: MessagesViewController {
     func finish() {
         connectManager.endConnection()
         transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
-    }
-    
-    @MainActor
-    @objc func toggleCountdownDirection() {
-        setCountdownDirection(to: countdownStackView.axis == .horizontal ? .vertical : .horizontal, animated: true)
     }
     
     @MainActor
@@ -630,6 +631,9 @@ extension CoordinateChatVC: InputBarAccessoryViewDelegate {
         } else {
             messagesCollectionView.reloadData()
         }
+//        messagesCollectionView.scrollToLastItem()
+        messagesCollectionView.scrollToLastItem(at: .bottom, animated: false)
+
         loadingIndicatorView.stopAnimating()
         
         //More ideal UI, but still some issues crashing upon rapid message receiving / hitting 50 messages received
