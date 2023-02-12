@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Message {
+struct Message: Codable {
     let id: Int
     let senderId: Int
     let receiverId: Int

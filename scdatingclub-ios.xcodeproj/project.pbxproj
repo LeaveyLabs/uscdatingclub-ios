@@ -12,6 +12,7 @@
 		4349B0BC2995AD1E005F3A63 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4349B0BB2995AD1E005F3A63 /* CryptoSwift */; };
 		4349B0C02995BB91005F3A63 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4349B0BF2995BB91005F3A63 /* FirebaseAnalytics */; };
 		4349B0C22995BB91005F3A63 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 4349B0C12995BB91005F3A63 /* FirebaseRemoteConfig */; };
+		4349B0C82999804C005F3A63 /* MessageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4349B0C72999804C005F3A63 /* MessageAPI.swift */; };
 		434A052A295E1E6700C15945 /* BasicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A0529295E1E6700C15945 /* BasicAPI.swift */; };
 		434A052C295E1E9700C15945 /* DeviceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A052B295E1E9700C15945 /* DeviceAPI.swift */; };
 		434A052E295E1EB600C15945 /* PhoneNumberAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A052D295E1EB600C15945 /* PhoneNumberAPI.swift */; };
@@ -277,6 +278,7 @@
 /* Begin PBXFileReference section */
 		433B9D16296F8BA10088445B /* MatchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchAPI.swift; sourceTree = "<group>"; };
 		433B9D182970A71A0088445B /* QuestionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAPI.swift; sourceTree = "<group>"; };
+		4349B0C72999804C005F3A63 /* MessageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAPI.swift; sourceTree = "<group>"; };
 		434A0529295E1E6700C15945 /* BasicAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAPI.swift; sourceTree = "<group>"; };
 		434A052B295E1E9700C15945 /* DeviceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAPI.swift; sourceTree = "<group>"; };
 		434A052D295E1EB600C15945 /* PhoneNumberAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberAPI.swift; sourceTree = "<group>"; };
@@ -552,6 +554,7 @@
 				478BECBA2963463300930DAF /* GenericAPI.swift */,
 				433B9D16296F8BA10088445B /* MatchAPI.swift */,
 				433B9D182970A71A0088445B /* QuestionAPI.swift */,
+				4349B0C72999804C005F3A63 /* MessageAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1494,6 +1497,7 @@
 				47DE3207295CC4B40063C55A /* CreateProfileVC.swift in Sources */,
 				47002FB72973AD51007EDFBC /* WaitListVC.swift in Sources */,
 				4731F50F295CD4820013F626 /* UITableView+SectionShadow.swift in Sources */,
+				4349B0C82999804C005F3A63 /* MessageAPI.swift in Sources */,
 				4731F514295CD48F0013F626 /* UISearchBar+CenterText.swift in Sources */,
 				47C40F94295CBBBD007C27F0 /* Encodable+Dict.swift in Sources */,
 				47DE3221295CC52F0063C55A /* ProfilePicWrapper.swift in Sources */,
