@@ -110,7 +110,12 @@ class LocationSocket: WebSocketDelegate {
     
     func sendMessage(message:Message) throws {
         if (connected) {
-            let messageIntermediate = MessageIntermediate(id: message.id, sender: message.senderId, receiver: message.receiverId, body: message.body, timestamp: currentTimeMillis())
+            let messageIntermediate = MessageIntermediate(
+                id: message.id,
+                sender: message.senderId,
+                receiver: message.receiverId,
+                body: message.body,
+                timestamp: currentTimeMillis())
             let json = try JSONEncoder().encode(messageIntermediate)
             self.socket.write(data:json)
         }

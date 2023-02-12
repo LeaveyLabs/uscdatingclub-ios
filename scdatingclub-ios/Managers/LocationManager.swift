@@ -167,7 +167,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         //TODO: why is the analytics not posting?
         Analytics.logEvent("updateLocationSuccess", parameters: nil)
         Task {
-            try await UserAPI.updateLocation(latitude: lat, longitude: long, email: UserService.singleton.getEmail())
+            do {
+                try await UserAPI.updateLocationEncrypted(latitude: lat, longitude: long, email: UserService.singleton.getEmail())
+            } catch {
+                Analytics.logEvent("updateLocationSuccess", parameters: nil)
+            }
         }
     }
     

@@ -1020,9 +1020,9 @@
 		47D901B9296C7B5B00F9AB18 /* Connect */ = {
 			isa = PBXGroup;
 			children = (
-				47A0113F2995F2D00099BEA8 /* ViewCompatibilityVC.swift */,
 				4729B22D296E096400971351 /* MatchFoundTableVC.swift */,
 				47773DDC2980FD1800DDF3A5 /* CoordinateChatVC.swift */,
+				47A0113F2995F2D00099BEA8 /* ViewCompatibilityVC.swift */,
 			);
 			path = Connect;
 			sourceTree = "<group>";

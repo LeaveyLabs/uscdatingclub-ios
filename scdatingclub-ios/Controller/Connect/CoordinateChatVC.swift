@@ -82,6 +82,11 @@ class CoordinateChatVC: MessagesViewController {
     @IBOutlet var locationImageViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet var bottomStackVerticalConstraint: NSLayoutConstraint!
     @IBOutlet var locationLabel: UILabel!
+    var locationImage: UIImage {
+        let systemImageName = locationLabel.text!.contains("<") ? "figure.stand.line.dotted.figure.stand" : "location.north"
+//        let imageConfiguration = UIImage.SymbolConfiguration //depending on axis
+        return UIImage(systemName: systemImageName)!
+    }
     
     @IBOutlet var countdownBgView: UIView!
     @IBOutlet var countdownStackView: UIStackView!
@@ -405,9 +410,9 @@ class CoordinateChatVC: MessagesViewController {
     func setCountdownDirection(to axis: NSLayoutConstraint.Axis, animated: Bool) {
         view.layoutIfNeeded()
         locationLabel.font = axis == .horizontal ? AppFont.light.size(16) : AppFont.bold.size(16)
-        if axis == .vertical {
-            locationImageView.setImage(UIImage(systemName: "location.north", withConfiguration: UIImage.SymbolConfiguration(weight: .regular)), animated: false)
-        }
+//        if axis == .vertical {
+//            locationImageView.setImage(UIImage(systemName: "location.north", withConfiguration: UIImage.SymbolConfiguration(weight: .regular)), animated: false)
+//        }
         
         UIView.animate(withDuration: animated ? 0.3 : 0,
                        delay: 0,
@@ -422,9 +427,9 @@ class CoordinateChatVC: MessagesViewController {
             locationLabel.transform = axis == .horizontal ? CGAffineTransform(scaleX: 1, y: 1) : CGAffineTransform(scaleX: 2, y: 2)
             view.layoutIfNeeded()
         } completion: { [self] finished in
-            if axis == .horizontal {
-                locationImageView.setImage(UIImage(systemName: "location.north", withConfiguration: UIImage.SymbolConfiguration(weight: .bold)), animated: false)
-            }
+//            if axis == .horizontal {
+//                locationImageView.setImage(UIImage(systemName: "location.north", withConfiguration: UIImage.SymbolConfiguration(weight: .bold)), animated: false)
+//            }
         }
     }
     
@@ -467,22 +472,25 @@ extension CoordinateChatVC: ConnectManagerDelegate {
     }
     
     func timeRanOut() {
-        self.view.tintAdjustmentMode = .dimmed
-        AlertManager.showAlert(title: "your time to connect with " + matchInfo.partnerName + " has run out",
-                               subtitle: "",
-                               primaryActionTitle: "return home",
-                               primaryActionHandler: {
-            DispatchQueue.main.async {
-                self.finish()
-            }
-        }, on: self)
+        DispatchQueue.main.async { [self] in
+            view.tintAdjustmentMode = .dimmed
+            AlertManager.showAlert(title: "your time to connect with " + matchInfo.partnerName + " has run out",
+                                   subtitle: "",
+                                   primaryActionTitle: "return home",
+                                   primaryActionHandler: {
+                DispatchQueue.main.async {
+                    self.finish()
+                }
+            }, on: self)
+        }
     }
     
     func newRelativePositioning(_ relativePositioning: RelativePositioning) {
         self.relativePositioning = relativePositioning
         DispatchQueue.main.async { [self] in
             locationLabel.text = prettyDistance(meters: relativePositioning.distance, shortened: false)
-            locationImageView.transform = CGAffineTransform.identity.rotated(by: relativePositioning.heading)
+            locationImageView.setImage(locationImage)
+            locationImageView.transform = CGAffineTransform.identity.rotated(by: locationLabel.text!.contains("<") ? 0 : relativePositioning.heading)
         }
     }
     
