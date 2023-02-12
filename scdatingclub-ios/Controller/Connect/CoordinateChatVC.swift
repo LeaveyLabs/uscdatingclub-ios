@@ -235,7 +235,6 @@ class CoordinateChatVC: MessagesViewController {
             selector: #selector(keyboardWillShow(sender:)),
             name: UIResponder.keyboardWillShowNotification,
             object: nil)
-        
         NotificationCenter.default.addObserver(self,
             selector: #selector(keyboardWillHide(sender:)),
             name: UIResponder.keyboardWillHideNotification,
@@ -262,7 +261,7 @@ class CoordinateChatVC: MessagesViewController {
                 event: Constants.MP.CoordinateOpen.EventName,
                 properties: [Constants.MP.MatchOpen.match_id:matchInfo.matchId,
                              Constants.MP.MatchOpen.time_remaining:matchInfo.timeLeftToConnectString])
-            Mixpanel.mainInstance().track(event: Constants.MP.CoordinateOpen.EventName)
+            Mixpanel.mainInstance().people.increment(property: Constants.MP.Profile.CoordinateOpen, by: 1)
         }
     }
     
@@ -388,12 +387,23 @@ class CoordinateChatVC: MessagesViewController {
     
     //MARK: - Helpers
     
+    func handlePartnerStoppedSharing() {
+        AlertManager.showAlert(title: "your match ended the connection",
+                               subtitle: "",
+                               primaryActionTitle: ":(",
+                               primaryActionHandler: {
+            self.stopSharingLocationAndFinish()
+        }, on: self)
+    }
+    
     func stopSharingLocationAndFinish() {
         Task {
             do {
                 try await MatchAPI.stopSharingLocation(selfId: UserService.singleton.getId(),
                                                        partnerId: matchInfo.partnerId)
+                UserDefaults.standard.set(Date(), forKey: Constants.UserDefaultsKeys.mostRecentStopConnectionDate)
             } catch {
+                print("FAILL")
                 //post to firebase analytics
             }
             DispatchQueue.main.async {
@@ -433,7 +443,7 @@ class CoordinateChatVC: MessagesViewController {
             countdownStackView.spacing = axis == .horizontal ? -40 : 20
             locationLabel.transform = axis == .horizontal ? CGAffineTransform(scaleX: 1, y: 1) : CGAffineTransform(scaleX: 2, y: 2)
             view.layoutIfNeeded()
-        } completion: { finished
+        } completion: { finished in
 //            if axis == .horizontal {
 //                locationImageView.setImage(UIImage(systemName: "location.north", withConfiguration: UIImage.SymbolConfiguration(weight: .bold)), animated: false)
 //            }

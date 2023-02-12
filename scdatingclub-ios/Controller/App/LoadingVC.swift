@@ -114,6 +114,7 @@ class LoadingVC: UIViewController {
                 fatalError()
                 //TODO: post to crashlytics
             }
+            guard !wasCurrentMatchStopped() else { return }
             let matchInfo = MatchInfo(matchAcceptance: acceptance)
             let coordinateVC = CoordinateChatVC.create(matchInfo: matchInfo)
             transitionToViewController(coordinateVC, duration: 0) { _ in }
@@ -125,6 +126,14 @@ class LoadingVC: UIViewController {
                 SceneDelegate.visibleViewController?.openURL(Constants.feedbackLink)
             }
         }
+    }
+    
+    func wasCurrentMatchStopped() -> Bool {
+        if let recentStopDate = UserDefaults.standard.object(forKey: Constants.UserDefaultsKeys.mostRecentStopConnectionDate) as? Date,
+           recentStopDate.isMoreRecentThan(Calendar.current.date(byAdding: .minute, value: -1 * Constants.minutesToConnect, to: Date())!) {
+            return true
+        }
+        return false
     }
     
     func loadNotificationData() async throws {

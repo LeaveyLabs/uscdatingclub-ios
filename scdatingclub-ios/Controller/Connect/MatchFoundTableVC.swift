@@ -97,7 +97,7 @@ class MatchFoundTableVC: UIViewController {
                 event: Constants.MP.MatchOpen.EventName,
                 properties: [Constants.MP.MatchOpen.match_id:matchInfo.matchId,
                              Constants.MP.MatchOpen.time_remaining:matchInfo.timeLeftToRespondString])
-            Mixpanel.mainInstance().track(event: Constants.MP.MatchOpen.EventName)
+            Mixpanel.mainInstance().people.increment(property: Constants.MP.Profile.MatchOpen, by: 1)
         }
         
         if !DeviceService.shared.hasReceivedFeedbackNotification() {
