@@ -30,7 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Mixpanel.mainInstance().track(event: Constants.MP.TakeScreenshot.EventName, properties: [Constants.MP.TakeScreenshot.VisibleScreen:SceneDelegate.visibleViewController?.className])
         }
         
-        FirebaseApp.configure()
+//        FirebaseApp.configure()
+        let filePath = Bundle.main.path(forResource: "GoogleService-Info\(Env.environment == .dev ? "-Dev" : "")", ofType: "plist")!
+        let options = FirebaseOptions(contentsOfFile: filePath)
+        FirebaseApp.configure(options: options!)
+
         Mixpanel.initialize(token: Env.environment == .prod ? Constants.mixpanelToken : Constants.mixpanelDevToken, trackAutomaticEvents: true)
         Mixpanel.mainInstance().loggingEnabled = false
 

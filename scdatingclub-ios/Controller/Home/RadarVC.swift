@@ -317,7 +317,7 @@ class RadarVC: UIViewController, PageVCChild {
         switch uiState {
         case .radar:
             Mixpanel.mainInstance().track(event: isLocationServicesEnabled ? "BecomeInactive" : "BecomeActive")
-            Analytics.logEvent(isLocationServicesEnabled ? "BecomeInactive" : "BecomeActive")
+            Analytics.logEvent(isLocationServicesEnabled ? "BecomeInactive" : "BecomeActive", parameters: nil)
             if isLocationServicesEnabled {
                 isLocationServicesEnabled = false
                 renderIsActive()
