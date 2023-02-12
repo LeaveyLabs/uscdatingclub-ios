@@ -70,7 +70,7 @@ extension Constants {
                 return
             }
             remoteConfig.activate()
-            print("Retrieved remote config debug")
+            print("Retrieved remote config debug", minutesUntilFeedbackNotification, minutesToConnect, minutesToRespond)
             NotificationCenter.default.post(name: .remoteConfigDidActivate, object: nil)
         }
     }

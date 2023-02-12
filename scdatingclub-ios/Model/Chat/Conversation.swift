@@ -38,6 +38,23 @@ class Conversation {
         renderedIndex = min(50, chatObjects.count)
     }
     
+    @objc func loadServerMessagesAndOverwriteLocalCopy() {
+        print("loading server messages")
+        Task {
+            do {
+                let messages = try await MessageAPI.fetchMessages(user1Id: UserService.singleton.getId(),
+                                                                   user2Id: sangdaebang.id)
+                self.chatObjects = messages.map { MessageKitMessage(message: $0, conversation: self) }
+                renderedIndex = min(50, chatObjects.count)
+                DispatchQueue.main.async {
+                    self.rerenderChatScreen()
+                }
+            } catch {
+                AlertManager.displayError(error)
+            }
+        }
+    }
+    
     //MARK: - Getters
         
     func getRenderedChatObjects() -> [MessageType] {
@@ -100,13 +117,8 @@ class Conversation {
         chatObjects.append(messageKitMessage)
         renderedIndex += 1
         lock.unlock()
-        
         DispatchQueue.main.async {
-            let visibleVC = SceneDelegate.visibleViewController
-            if let chatVC = visibleVC as? CoordinateChatVC,
-               chatVC.matchInfo.partnerId == self.sangdaebang.id {
-                chatVC.rerenderMessages()
-            }
+            self.rerenderChatScreen()
         }
         
 //        tempReceivedMessages.append(messageKitMessage)
@@ -117,6 +129,14 @@ class Conversation {
 //            isInsertionScheduled = false
 //        }
         
+    }
+    @MainActor
+    func rerenderChatScreen() {
+        let visibleVC = SceneDelegate.visibleViewController
+        if let chatVC = visibleVC as? CoordinateChatVC,
+           chatVC.matchInfo.partnerId == self.sangdaebang.id {
+            chatVC.rerenderMessages()
+        }
     }
     
     @MainActor

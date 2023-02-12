@@ -91,6 +91,7 @@ class CoordinateChatVC: MessagesViewController {
         }
     }
     
+    var loadingIndicatorView: UIActivityIndicatorView!
     @IBOutlet var countdownBgView: UIView!
     @IBOutlet var countdownStackView: UIStackView!
     @IBOutlet var countdownToggleButton: UIButton!
@@ -143,6 +144,13 @@ class CoordinateChatVC: MessagesViewController {
         DispatchQueue.main.async { //scroll on the next cycle so that collectionView's data is loaded in beforehand
             self.messagesCollectionView.scrollToLastItem(at: .bottom, animated: false)
         }
+        setupLoadingIndicator()
+        conversation.loadServerMessagesAndOverwriteLocalCopy()
+        NotificationCenter.default.addObserver(self, selector: #selector(handleDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+    
+    @objc func handleDidBecomeActive() {
+        conversation.loadServerMessagesAndOverwriteLocalCopy()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -249,6 +257,20 @@ class CoordinateChatVC: MessagesViewController {
     }
     
     //MARK: - Setup
+    
+    func setupLoadingIndicator() {
+        loadingIndicatorView = UIActivityIndicatorView(style: .medium)
+        loadingIndicatorView.hidesWhenStopped = true
+        loadingIndicatorView.color = .customWhite
+        loadingIndicatorView.startAnimating()
+        loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loadingIndicatorView)
+        NSLayoutConstraint.activate([
+            loadingIndicatorView.bottomAnchor.constraint(equalTo: inputBar.topAnchor, constant: -30),
+//            loadingIndicatorView.centerYAnchor.constraint(equalTo: messagesCollectionView.centerYAnchor),
+            loadingIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ])
+    }
     
     func handleFirstLoad() {
         if let recentCoordinateDate = UserDefaults.standard.object(forKey: Constants.UserDefaultsKeys.mostRecentCoordinateDate) as? Date,
@@ -608,6 +630,7 @@ extension CoordinateChatVC: InputBarAccessoryViewDelegate {
         } else {
             messagesCollectionView.reloadData()
         }
+        loadingIndicatorView.stopAnimating()
         
         //More ideal UI, but still some issues crashing upon rapid message receiving / hitting 50 messages received
 //        messagesCollectionView.performBatchUpdates({
