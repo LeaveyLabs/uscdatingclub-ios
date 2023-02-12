@@ -124,6 +124,12 @@ class BasicAPI {
                                         "Content-Type": "application/json",
                                         "Authorization": "Token \(getGlobalAuthToken())",
                                        ])
+        do {
+            try await runRequest(request: request)
+        }
+        catch APIError.CouldNotConnect {
+            print("hello")
+        }
         let (data, response) = try await runRequest(request: request)
         try filterBasicErrors(data: data, response: response)
         return (data, response)

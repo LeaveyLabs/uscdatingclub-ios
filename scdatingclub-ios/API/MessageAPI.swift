@@ -20,12 +20,11 @@ class MessageAPI {
     
     static func fetchMessages(user1Id: Int, user2Id: Int) async throws -> [Message] {
         let url =  "\(Env.BASE_URL)\(Endpoints.messages.rawValue)"
-        let params:[String:Int] = [
-            ParameterKeys.user1Id.rawValue: user1Id,
-            ParameterKeys.user2Id.rawValue: user2Id,
-        ]
-        let json = try JSONEncoder().encode(params)
-        let (data, _) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: json, method: HTTPMethods.GET.rawValue)
-        return try JSONDecoder().decode([Message].self, from: data)
+        var params = "\(ParameterKeys.user1Id.rawValue)=\(user1Id)&\(ParameterKeys.user2Id.rawValue)=\(user2Id)"
+        let queryUrl = "\(url)?\(params)"
+        let (data, _) = try await BasicAPI.basicHTTPCallWithoutToken(url: queryUrl, jsonData: Data(), method: HTTPMethods.GET.rawValue)
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return try decoder.decode([Message].self, from: data)
     }
 }
