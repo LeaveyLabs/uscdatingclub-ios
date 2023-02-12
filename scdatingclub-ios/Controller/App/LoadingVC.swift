@@ -122,6 +122,7 @@ class LoadingVC: UIViewController {
             break
         case .feedback:
             Mixpanel.mainInstance().track(event: Constants.MP.OpenFeedbackSurvey.EventName)
+            Analytics.logEvent(Constants.MP.OpenFeedbackSurvey.EventName, parameters: nil)
             transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0) { completed in
                 SceneDelegate.visibleViewController?.openURL(Constants.feedbackLink)
             }

@@ -112,7 +112,7 @@ struct MatchInfo: Codable {
     init(matchPartner: MatchPartner) {
         matchId = matchPartner.matchId
         partnerId = matchPartner.id
-        partnerName = matchPartner.firstName
+        partnerName = matchPartner.firstName.capitalizeFirstLetter()
         compatibility = matchPartner.compatibility
         date = Date(timeIntervalSince1970: matchPartner.time)
         distance = matchPartner.distance
@@ -127,7 +127,7 @@ struct MatchInfo: Codable {
     init(matchAcceptance: MatchAcceptance) {
         matchId = matchAcceptance.matchId
         partnerId = matchAcceptance.id
-        partnerName = matchAcceptance.firstName
+        partnerName = matchAcceptance.firstName.capitalizeFirstLetter()
         compatibility = matchAcceptance.compatibility
         date = Date(timeIntervalSince1970: matchAcceptance.time)
         textSimilarities = matchAcceptance.textSimilarities

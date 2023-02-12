@@ -27,6 +27,7 @@ import MessageKit
 import InputBarAccessoryView
 import MessageUI
 import Mixpanel
+import FirebaseAnalytics
 
 class FixedInsetTextMessageCell: TextMessageCell {
     
@@ -263,6 +264,9 @@ class CoordinateChatVC: MessagesViewController {
                 event: Constants.MP.CoordinateOpen.EventName,
                 properties: [Constants.MP.MatchOpen.match_id:matchInfo.matchId,
                              Constants.MP.MatchOpen.time_remaining:matchInfo.timeLeftToConnectString])
+            Analytics.logEvent(Constants.MP.CoordinateOpen.EventName, parameters: [
+                Constants.MP.MatchOpen.match_id:matchInfo.matchId,
+                Constants.MP.MatchOpen.time_remaining:matchInfo.timeLeftToRespondString])
             Mixpanel.mainInstance().people.increment(property: Constants.MP.Profile.CoordinateOpen, by: 1)
         }
     }
