@@ -140,7 +140,6 @@ struct MatchInfo: Codable {
     }
     
     func adjustLastNumericalSimilarities(_ partnerNameLength: Int, existingNumericalSimilarities: [NumericalSimilarity]) -> [NumericalSimilarity] {
-        guard let lastSimilarity = existingNumericalSimilarities.last else { return existingNumericalSimilarities }
         
         var adjustedNumericalSimilarities: [NumericalSimilarity] = []
         existingNumericalSimilarities.forEach { similarity in
@@ -168,8 +167,8 @@ struct MatchInfo: Codable {
                 }
             }
             adjustedNumericalSimilarities.append(
-                NumericalSimilarity(trait: lastSimilarity.trait,
-                                    avgPercent: lastSimilarity.avgPercent,
+                NumericalSimilarity(trait: similarity.trait,
+                                    avgPercent: similarity.avgPercent,
                                     youPercent: adjustedYouPercent,
                                     partnerPercent: adjustedPartnerPercent))
         }

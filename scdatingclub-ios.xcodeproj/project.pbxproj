@@ -102,6 +102,7 @@
 		4791C0E2299810BA005BE410 /* Internet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791C0E1299810BA005BE410 /* Internet.swift */; };
 		4791C0E429981123005BE410 /* Constants+Mixpanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791C0E329981123005BE410 /* Constants+Mixpanel.swift */; };
 		4791C0E629981FA5005BE410 /* String+Slice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791C0E529981FA5005BE410 /* String+Slice.swift */; };
+		4791C0E829987A58005BE410 /* UIViewController+ClassName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791C0E729987A58005BE410 /* UIViewController+ClassName.swift */; };
 		47A011402995F2D00099BEA8 /* ViewCompatibilityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A0113F2995F2D00099BEA8 /* ViewCompatibilityVC.swift */; };
 		47A1C8EB296E2AD900F8B4D6 /* UIFont+Override.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A1C8EA296E2AD900F8B4D6 /* UIFont+Override.swift */; };
 		47A1C8ED296E414600F8B4D6 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A1C8EC296E414600F8B4D6 /* Match.swift */; };
@@ -339,6 +340,7 @@
 		4791C0E1299810BA005BE410 /* Internet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Internet.swift; sourceTree = "<group>"; };
 		4791C0E329981123005BE410 /* Constants+Mixpanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Mixpanel.swift"; sourceTree = "<group>"; };
 		4791C0E529981FA5005BE410 /* String+Slice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Slice.swift"; sourceTree = "<group>"; };
+		4791C0E729987A58005BE410 /* UIViewController+ClassName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ClassName.swift"; sourceTree = "<group>"; };
 		47A0113F2995F2D00099BEA8 /* ViewCompatibilityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewCompatibilityVC.swift; path = "scdatingclub-ios/Controller/Connect/ViewCompatibilityVC.swift"; sourceTree = SOURCE_ROOT; };
 		47A1C8EA296E2AD900F8B4D6 /* UIFont+Override.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Override.swift"; sourceTree = "<group>"; };
 		47A1C8EC296E414600F8B4D6 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
@@ -1158,6 +1160,7 @@
 				47DE3243295CC7C40063C55A /* UIViewController+ShareImage.swift */,
 				4711A1F22975BF8F00B07577 /* UIViewController+OpenMailApp.swift */,
 				47B005F32985DF9800241B7D /* UIViewController+TopLoading.swift */,
+				4791C0E729987A58005BE410 /* UIViewController+ClassName.swift */,
 			);
 			path = UIViewController;
 			sourceTree = "<group>";
@@ -1485,6 +1488,7 @@
 				47A24A29297088FF0077AB11 /* SurveyResponse.swift in Sources */,
 				47ABA6E82976241500F0FDFE /* ScreenDemoVC.swift in Sources */,
 				4731F503295CD45F0013F626 /* UIScrollView+ToTop.swift in Sources */,
+				4791C0E829987A58005BE410 /* UIViewController+ClassName.swift in Sources */,
 				47E57C9D2995967300F077CD /* CountdownCollectionReusableView.swift in Sources */,
 				47DE3264295CC94F0063C55A /* UIButton+LoadingIndicator.swift in Sources */,
 				47DE3207295CC4B40063C55A /* CreateProfileVC.swift in Sources */,

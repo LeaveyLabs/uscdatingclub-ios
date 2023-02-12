@@ -176,28 +176,31 @@ class NotificationsManager: NSObject {
             }
             currentlyLaunchedAppNotification = nil
             
-            var activeHandler: NotificationResponseHandler?
+            let activeHandler: NotificationResponseHandler?
             let threeMinsAgo = Calendar.current.date(byAdding: .minute, value: max(Constants.minutesToConnect, Constants.minutesToRespond) * -1, to: Date())!
             if let mostRecentHandler = mostRecentHandler {
                 if mostRecentHandler.notificationType == .accept || mostRecentHandler.notificationType == .match {
                     if let notificationDate = mostRecentHandler.notificationDate, notificationDate.isMoreRecentThan(threeMinsAgo) {
                         activeHandler = mostRecentHandler
-                    }
+                    } else { activeHandler = nil }
                 } else {
                     activeHandler = mostRecentHandler
                 }
+            } else {
+                activeHandler = nil
             }
-                  
-            guard let activeHandler else { return }
             
             DispatchQueue.main.async {
+                UIApplication.shared.applicationIconBadgeNumber = 0
+                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                
+                guard let activeHandler else { return }
+                
                 let loadingVC = LoadingVC.create(notificationResponseHandler: activeHandler)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     transitionToViewController(loadingVC, duration: 0)
                 }
-                UIApplication.shared.applicationIconBadgeNumber = 0
             }
-            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         }
     }
     

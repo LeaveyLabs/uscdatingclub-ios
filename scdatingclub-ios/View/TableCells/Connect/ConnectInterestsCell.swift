@@ -42,7 +42,6 @@ class ConnectInterestsCell: UITableViewCell {
             interestUi.0.font = AppFont.medium.size(16)
             interestUi.1.font = AppFont.medium.size(60)
         }
-        
         innerStackViews.forEach { stackview in stackview.isHidden = false }
         
         for x in 0..<textSimilarities.count {

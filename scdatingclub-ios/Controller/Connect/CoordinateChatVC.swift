@@ -122,6 +122,7 @@ class CoordinateChatVC: MessagesViewController {
         messagesCollectionView = MessagesCollectionView(frame: .zero, collectionViewLayout: CustomMessagesFlowLayout()) //for registering custom MessageSizeCalculator for MessageKitMatch
         super.viewDidLoad()
         view.tintColor = .tintColor
+        view.tintAdjustmentMode = .normal
         setupMessagesCollectionView()
         setupNavBar()
         setupKeyboard()
@@ -157,7 +158,7 @@ class CoordinateChatVC: MessagesViewController {
         viewHasAppeared = true
         AlertManager.showInfoCentered(
             "you guys have 5 minutes to chat & meet up!",
-            "note: location sharing doesn't work well underground",
+            "\nnote: location sharing doesn't work well underground",
             on: self)
 //        ConversationService.singleton.updateLastMessageReadTime(withUserId: conversation.sangdaebang.id)
     }
@@ -333,7 +334,7 @@ class CoordinateChatVC: MessagesViewController {
         },
                                secondaryActionTitle: "nevermind",
                                secondaryActionHandler: {
-            //do nothing
+
         }, on: self)
     }
     
@@ -367,7 +368,7 @@ class CoordinateChatVC: MessagesViewController {
         },
                                secondaryActionTitle: "nevermind",
                                secondaryActionHandler: {
-            //do nothing
+
         }, on: SceneDelegate.visibleViewController!)
     }
     
@@ -455,6 +456,7 @@ extension CoordinateChatVC: ConnectManagerDelegate {
     }
     
     func timeRanOut() {
+        self.view.tintAdjustmentMode = .dimmed
         AlertManager.showAlert(title: "your time to connect with " + matchInfo.partnerName + " has run out",
                                subtitle: "",
                                primaryActionTitle: "return home",

@@ -49,6 +49,10 @@ extension Constants {
         enum OpenFeedbackSurvey {
             static let EventName = "OpenFeedbackSurvey"
         }
+        enum TakeScreenshot {
+            static let EventName = "TakeScreenshot"
+            static let VisibleScreen = "VisibleScreen"
+        }
         
         enum TakeTest {
             static let EventName = "TakeTest"

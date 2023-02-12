@@ -26,6 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.addObserver(forName: .remoteConfigDidActivate, object: nil, queue: .main) { notification in
             Version.checkForNewUpdate()
         }
+        NotificationCenter.default.addObserver(forName: UIApplication.userDidTakeScreenshotNotification, object: nil, queue: OperationQueue.main) { notification in
+            Mixpanel.mainInstance().track(event: Constants.MP.TakeScreenshot.EventName, properties: [Constants.MP.TakeScreenshot.VisibleScreen:SceneDelegate.visibleViewController?.className])
+        }
+
         FirebaseApp.configure()
         Mixpanel.initialize(token: Constants.mixpanelToken, trackAutomaticEvents: true)
         Mixpanel.mainInstance().loggingEnabled = false
