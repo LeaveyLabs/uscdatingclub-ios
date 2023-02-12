@@ -7,6 +7,7 @@
 
 import UIKit
 import Mixpanel
+import FirebaseAnalytics
 
 class WaitListVC: UIViewController {
 
@@ -31,6 +32,7 @@ class WaitListVC: UIViewController {
         Mixpanel.mainInstance().track(
             event: Constants.MP.AuthProcess.EventName,
             properties: [Constants.MP.AuthProcess.Kind:Constants.MP.AuthProcess.Waitlist])
+        Analytics.logEvent(Constants.MP.AuthProcess.EventName, parameters: [Constants.MP.AuthProcess.Kind:Constants.MP.AuthProcess.Waitlist])
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
 }

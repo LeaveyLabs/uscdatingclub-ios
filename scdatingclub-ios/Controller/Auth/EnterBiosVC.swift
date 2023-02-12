@@ -7,6 +7,7 @@
 
 import UIKit
 import Mixpanel
+import FirebaseAnalytics
 
 class EnterBiosVC: KUIViewController, UITextFieldDelegate {
     
@@ -199,6 +200,7 @@ class EnterBiosVC: KUIViewController, UITextFieldDelegate {
                 Mixpanel.mainInstance().track(
                     event: Constants.MP.AuthProcess.EventName,
                     properties: [Constants.MP.AuthProcess.Kind:Constants.MP.AuthProcess.Signup])
+                Analytics.logEvent(Constants.MP.AuthProcess.EventName, parameters: [Constants.MP.AuthProcess.Kind:Constants.MP.AuthProcess.Signup])
                 DispatchQueue.main.async { [self] in
                     transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.3) { [weak self] finished in
                         self?.isSubmitting = false

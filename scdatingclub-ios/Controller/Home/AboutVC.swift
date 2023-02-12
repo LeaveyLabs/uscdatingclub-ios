@@ -79,6 +79,7 @@ class AboutVC: UIViewController, PageVCChild {
     }
     
     @objc func shareButtonPressed() {
+        Analytics.logEvent(Constants.MP.OpenShareAppButtonTapped.EventName, parameters: nil)
         Mixpanel.mainInstance().track(event: Constants.MP.OpenShareAppButtonTapped.EventName)
         presentShareAppActivity()
     }
@@ -88,12 +89,13 @@ class AboutVC: UIViewController, PageVCChild {
     }
     
     @objc func feedbackButtonPressed() {
-        Analytics.logEvent("feedbackButtonPressed", parameters: nil)
-        Mixpanel.mainInstance().track(event: Constants.MP.OpenTextUsButtonTapped.EventName)
         openURL(Constants.feedbackLink)
     }
         
     @objc func contactButtonPressed() {
+        Analytics.logEvent(Constants.MP.OpenTextUsButtonTapped.EventName, parameters: nil)
+        Mixpanel.mainInstance().track(event: Constants.MP.OpenTextUsButtonTapped.EventName)
+
         let who = Int.random(in: 0...1)
         let adamsNumber = "6159754270"
         let kevinsNumber = "3108741292"

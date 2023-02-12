@@ -24,6 +24,7 @@
 		434A057F2963D3AB00C15945 /* PhoneNumberKit-Dynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 434A057C2963D3AB00C15945 /* PhoneNumberKit-Dynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4373C6512980FDB0005FB2B9 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373C6502980FDB0005FB2B9 /* Message.swift */; };
 		47002FB72973AD51007EDFBC /* WaitListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47002FB62973AD51007EDFBC /* WaitListVC.swift */; };
+		470169CA299989F800DCBD85 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 470169C9299989F700DCBD85 /* GoogleService-Info.plist */; };
 		470221E7295CCE3E00119FA8 /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4107D295CC0BE007C27F0 /* UIColor+Custom.swift */; };
 		470221E9295CCFA200119FA8 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470221E8295CCFA200119FA8 /* Version.swift */; };
 		4711A1F32975BF8F00B07577 /* UIViewController+OpenMailApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711A1F22975BF8F00B07577 /* UIViewController+OpenMailApp.swift */; };
@@ -113,7 +114,7 @@
 		47A24A302970B6160077AB11 /* Connect.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47A24A2F2970B6160077AB11 /* Connect.storyboard */; };
 		47A24A322970E5FE0077AB11 /* UncertainValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A24A312970E5FE0077AB11 /* UncertainValue.swift */; };
 		47A80615295F8D23001DEE64 /* EnterBiosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A80614295F8D23001DEE64 /* EnterBiosVC.swift */; };
-		47A8279F29833B0E00854706 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47A8279E29833B0E00854706 /* GoogleService-Info.plist */; };
+		47A8279F29833B0E00854706 /* GoogleService-Info-Dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47A8279E29833B0E00854706 /* GoogleService-Info-Dev.plist */; };
 		47ABA6E62976221000F0FDFE /* AuthStartPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ABA6E52976221000F0FDFE /* AuthStartPageVC.swift */; };
 		47ABA6E82976241500F0FDFE /* ScreenDemoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ABA6E72976241500F0FDFE /* ScreenDemoVC.swift */; };
 		47ABA6EA2976405900F0FDFE /* MessageComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47ABA6E92976405900F0FDFE /* MessageComposer.swift */; };
@@ -287,6 +288,7 @@
 		434A053C2963A77200C15945 /* LocationSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSocket.swift; sourceTree = "<group>"; };
 		4373C6502980FDB0005FB2B9 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		47002FB62973AD51007EDFBC /* WaitListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitListVC.swift; sourceTree = "<group>"; };
+		470169C9299989F700DCBD85 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		470221E8295CCFA200119FA8 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		4711A1F22975BF8F00B07577 /* UIViewController+OpenMailApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+OpenMailApp.swift"; sourceTree = "<group>"; };
 		4715490D2970F0AF00756BE1 /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
@@ -352,7 +354,7 @@
 		47A24A2F2970B6160077AB11 /* Connect.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Connect.storyboard; sourceTree = "<group>"; };
 		47A24A312970E5FE0077AB11 /* UncertainValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UncertainValue.swift; sourceTree = "<group>"; };
 		47A80614295F8D23001DEE64 /* EnterBiosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterBiosVC.swift; sourceTree = "<group>"; };
-		47A8279E29833B0E00854706 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		47A8279E29833B0E00854706 /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
 		47ABA6E52976221000F0FDFE /* AuthStartPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStartPageVC.swift; sourceTree = "<group>"; };
 		47ABA6E72976241500F0FDFE /* ScreenDemoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDemoVC.swift; sourceTree = "<group>"; };
 		47ABA6E92976405900F0FDFE /* MessageComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageComposer.swift; sourceTree = "<group>"; };
@@ -749,7 +751,8 @@
 				4736DCC92984F687000F1156 /* scdatingclub-ios.entitlements */,
 				4729B235296E297B00971351 /* Fonts */,
 				47C40EF4295CB931007C27F0 /* Info.plist */,
-				47A8279E29833B0E00854706 /* GoogleService-Info.plist */,
+				47A8279E29833B0E00854706 /* GoogleService-Info-Dev.plist */,
+				470169C9299989F700DCBD85 /* GoogleService-Info.plist */,
 				47DE320A295CC4F90063C55A /* Env.swift */,
 				47C40EEF295CB931007C27F0 /* Assets.xcassets */,
 				434A0528295E1E3A00C15945 /* API */,
@@ -1351,12 +1354,13 @@
 				471549102970F0AF00756BE1 /* SF-Pro-Italic.ttf in Resources */,
 				47B6B4BD296B959C00539353 /* SimpleEntryCell.xib in Resources */,
 				478BECBF2963755000930DAF /* SpectrumTestCell.xib in Resources */,
-				47A8279F29833B0E00854706 /* GoogleService-Info.plist in Resources */,
+				47A8279F29833B0E00854706 /* GoogleService-Info-Dev.plist in Resources */,
 				4758289C296A82D900F10415 /* SelectionTestCell.xib in Resources */,
 				47DE3225295CC57C0063C55A /* Auth.storyboard in Resources */,
 				47DC97AF296E023B00A374B5 /* ConnectTitleCell.xib in Resources */,
 				47DC97B3296E040800A374B5 /* ConnectSpectrumCell.xib in Resources */,
 				47C40EF0295CB931007C27F0 /* Assets.xcassets in Resources */,
+				470169CA299989F800DCBD85 /* GoogleService-Info.plist in Resources */,
 				47DC97AB296E002700A374B5 /* ConnectHeaderCell.xib in Resources */,
 				47582898296A82C800F10415 /* SelectionHeaderTestCell.xib in Resources */,
 				47C40EEE295CB930007C27F0 /* Main.storyboard in Resources */,

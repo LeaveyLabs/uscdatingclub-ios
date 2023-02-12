@@ -3,32 +3,32 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>522269862410-0q69n2osuskc12fg86nt787nhigfhl07.apps.googleusercontent.com</string>
+	<string>917478276722-2n0fj4b0cgrrr38lnu1nfbhacr7afvd1.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.522269862410-0q69n2osuskc12fg86nt787nhigfhl07</string>
+	<string>com.googleusercontent.apps.917478276722-2n0fj4b0cgrrr38lnu1nfbhacr7afvd1</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAjd6ErKiYex6FYOq4TWO7Y-v_x6jYHg3U</string>
+	<string>AIzaSyD6zKUY5xY0CfluVLyhi9d_6bz6lMwS8KY</string>
 	<key>GCM_SENDER_ID</key>
-	<string>522269862410</string>
+	<string>917478276722</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>leaveylabs.scdatingclub-ios</string>
 	<key>PROJECT_ID</key>
-	<string>scdatingclub-prod</string>
+	<string>uscdatingclub</string>
 	<key>STORAGE_BUCKET</key>
-	<string>scdatingclub-prod.appspot.com</string>
+	<string>uscdatingclub.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:522269862410:ios:35130117991ce141d0cdf3</string>
+	<string>1:917478276722:ios:dd991c6f92a6e8e2b20ceb</string>
 </dict>
 </plist>

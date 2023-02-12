@@ -7,6 +7,7 @@
 
 import UIKit
 import Mixpanel
+import FirebaseAnalytics
 
 class TestTextVC: UIViewController {
     
@@ -40,16 +41,18 @@ class TestTextVC: UIViewController {
         super.viewDidLoad()
         setupUI()
         primaryButton.internalButton.addTarget(self, action: #selector(didTapPrimaryButton), for: .touchUpInside)
-        
         navigationController?.setNavigationBarHidden(true, animated: false)
         switch testTextType {
         case .welcome:
             TestService.shared.resetResponseContext()
             Mixpanel.mainInstance().time(event: Constants.MP.TakeTest.EventName)
+            Analytics.logEvent("TakeTestBegin", parameters: nil)
         case .submitting, .finished:
             Mixpanel.mainInstance().track(
                 event: Constants.MP.TakeTest.EventName,
                 properties: [Constants.MP.TakeTest.IsFirstTest:isFirstTest])
+            Analytics.logEvent("TakeTestEnd", parameters:
+                                [Constants.MP.TakeTest.IsFirstTest:isFirstTest])
             Mixpanel.mainInstance().people.increment(property: Constants.MP.Profile.TakeTest, by: 1)
             navigationController?.interactivePopGestureRecognizer?.isEnabled = false
             Task {

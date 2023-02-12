@@ -7,6 +7,7 @@
 
 import UIKit
 import Mixpanel
+import FirebaseAnalytics
 
 class MatchFoundTableVC: UIViewController {
         
@@ -97,6 +98,9 @@ class MatchFoundTableVC: UIViewController {
                 event: Constants.MP.MatchOpen.EventName,
                 properties: [Constants.MP.MatchOpen.match_id:matchInfo.matchId,
                              Constants.MP.MatchOpen.time_remaining:matchInfo.timeLeftToRespondString])
+            Analytics.logEvent(Constants.MP.MatchOpen.EventName, parameters: [
+                Constants.MP.MatchOpen.match_id:matchInfo.matchId,
+                Constants.MP.MatchOpen.time_remaining:matchInfo.timeLeftToRespondString])
             Mixpanel.mainInstance().people.increment(property: Constants.MP.Profile.MatchOpen, by: 1)
         }
         
@@ -121,6 +125,9 @@ class MatchFoundTableVC: UIViewController {
                     event: Constants.MP.MatchAccept.EventName,
                     properties: [Constants.MP.MatchOpen.match_id:matchInfo.matchId,
                                  Constants.MP.MatchOpen.time_remaining:matchInfo.timeLeftToRespondString])
+                Analytics.logEvent(Constants.MP.MatchAccept.EventName, parameters: [
+                    Constants.MP.MatchOpen.match_id:matchInfo.matchId,
+                    Constants.MP.MatchOpen.time_remaining:matchInfo.timeLeftToRespondString])
                 UserDefaults.standard.set(Date(), forKey: Constants.UserDefaultsKeys.MostRecentMeetUpButtonPressDate)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) { //[weak self] in
                     AppStoreReviewManager.requestReviewIfAppropriate()

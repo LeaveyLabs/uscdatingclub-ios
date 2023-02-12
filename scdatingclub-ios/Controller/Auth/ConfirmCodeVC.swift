@@ -7,6 +7,7 @@
 
 import UIKit
 import Mixpanel
+import FirebaseAnalytics
 
 class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
     
@@ -133,6 +134,7 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
     //MARK: - User Interaction
     
     @objc func openEmailButtonTapped() {
+        Analytics.logEvent(Constants.MP.OpenEmailButtonTapped.EventName, parameters: nil)
         Mixpanel.mainInstance().track(event: Constants.MP.OpenEmailButtonTapped.EventName)
         presentOpenMailAppAlert()
     }
@@ -264,6 +266,7 @@ class ConfirmCodeVC: KUIViewController, UITextFieldDelegate {
                 Mixpanel.mainInstance().track(
                     event: Constants.MP.AuthProcess.EventName,
                     properties: [Constants.MP.AuthProcess.Kind:Constants.MP.AuthProcess.Login])
+                Analytics.logEvent(Constants.MP.AuthProcess.EventName, parameters: [Constants.MP.AuthProcess.Kind:Constants.MP.AuthProcess.Login])
                 transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5, completion: { completed in
                 })
             } else {

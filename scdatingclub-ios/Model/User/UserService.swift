@@ -70,9 +70,9 @@ class UserService: NSObject {
     
     //Properties
     func getId() -> Int { return authedUser.id }
-    func getFirstName() -> String { return authedUser.firstName }
-    func getLastName() -> String { return authedUser.lastName }
-    func getFirstLastName() -> String { return authedUser.firstName + " " + authedUser.lastName }
+    func getFirstName() -> String { return authedUser.firstName.capitalizeFirstLetter() }
+    func getLastName() -> String { return authedUser.lastName.capitalizeFirstLetter() }
+    func getFirstLastName() -> String { return authedUser.firstName.capitalizeFirstLetter() + " " + authedUser.lastName.capitalizeFirstLetter() }
     func getPhoneNumber() -> String? { return authedUser.phoneNumber }
     func getEmail() -> String { return authedUser.email }
     func getSexPreference() -> String { return authedUser.sexPreference }
@@ -181,6 +181,7 @@ class UserService: NSObject {
         Mixpanel.mainInstance().reset()
         Mixpanel.mainInstance().identify(distinctId: UUID().uuidString)
         Mixpanel.mainInstance().flush()
+        Analytics.resetAnalyticsData()
         LocationManager.shared.stopLocationServices()
         eraseUserFromFilesystem()
         frontendCompleteUser = nil
@@ -195,7 +196,10 @@ class UserService: NSObject {
                         Constants.MP.Profile.SexualPreference:authedUser.sexPreference,
                         Constants.MP.Profile.School:authedUser.school ?? ""])
         //Firebase
-//        Analytics.setUserProperty(ageBracket, forName: "age")
+        Analytics.setUserID(String(authedUser.id))
+        Analytics.setUserProperty(authedUser.sexIdentity, forName: Constants.MP.Profile.SexualIdentity)
+        Analytics.setUserProperty(authedUser.sexPreference, forName: Constants.MP.Profile.SexualPreference)
+        Analytics.setUserProperty(authedUser.school ?? "", forName: Constants.MP.Profile.School)
     }
 
 //    //MARK: - Filesystem
