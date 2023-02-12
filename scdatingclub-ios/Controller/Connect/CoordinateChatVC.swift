@@ -343,10 +343,7 @@ class CoordinateChatVC: MessagesViewController {
                                subtitle: "you won't be able to restart it afterwards",
                                primaryActionTitle: "stop sharing location",
                                primaryActionHandler: {
-            //end the match
-            DispatchQueue.main.async {
-                self.finish()
-            }
+            self.stopSharingLocationAndFinish()
         },
                                secondaryActionTitle: "nevermind",
                                secondaryActionHandler: {
@@ -376,11 +373,7 @@ class CoordinateChatVC: MessagesViewController {
                                subtitle: "your location will stop sharing immediately",
                                primaryActionTitle: "report",
                                primaryActionHandler: {
-            //block user
-            
-            DispatchQueue.main.async {
-                self.finish()
-            }
+            self.stopSharingLocationAndFinish()
         },
                                secondaryActionTitle: "nevermind",
                                secondaryActionHandler: {
@@ -394,6 +387,20 @@ class CoordinateChatVC: MessagesViewController {
     }
     
     //MARK: - Helpers
+    
+    func stopSharingLocationAndFinish() {
+        Task {
+            do {
+                try await MatchAPI.stopSharingLocation(selfId: UserService.singleton.getId(),
+                                                       partnerId: matchInfo.partnerId)
+            } catch {
+                //post to firebase analytics
+            }
+            DispatchQueue.main.async {
+                self.finish()
+            }
+        }
+    }
 
     @MainActor
     func finish() {
@@ -426,7 +433,7 @@ class CoordinateChatVC: MessagesViewController {
             countdownStackView.spacing = axis == .horizontal ? -40 : 20
             locationLabel.transform = axis == .horizontal ? CGAffineTransform(scaleX: 1, y: 1) : CGAffineTransform(scaleX: 2, y: 2)
             view.layoutIfNeeded()
-        } completion: { [self] finished in
+        } completion: { finished
 //            if axis == .horizontal {
 //                locationImageView.setImage(UIImage(systemName: "location.north", withConfiguration: UIImage.SymbolConfiguration(weight: .bold)), animated: false)
 //            }

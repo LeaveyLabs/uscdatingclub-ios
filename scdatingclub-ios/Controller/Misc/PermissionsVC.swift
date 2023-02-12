@@ -127,6 +127,7 @@ class PermissionsVC: UIViewController {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         AlertManager.showInfoCentered("you're all set", "\nwhile active, your phone will scan for matches in your immediate area.\n\njust live your life and wait for a notification!", on: SceneDelegate.visibleViewController!)
                     }
+                    
                 } else {
                     dismiss(animated: true)
                 }
