@@ -72,6 +72,7 @@ class RadarVC: UIViewController, PageVCChild {
         setupButtons()
         titleLabel.font = AppFont.bold.size(20)
         setupPermissions()
+        NotificationCenter.default.addObserver(self, selector: #selector(startPulsing), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     func setupPermissions() {
@@ -170,6 +171,7 @@ class RadarVC: UIViewController, PageVCChild {
             primaryButton.internalButton.imageView?.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 16)
             primaryButtonHeightConstraint.constant = 60
             renderIsActive()
+            startPulsing(fromZero: false)
         }
     }
     
@@ -178,7 +180,7 @@ class RadarVC: UIViewController, PageVCChild {
             primaryButton.configure(title: "active", systemImage: "")
             primaryButton.internalButton.backgroundColor = .customGreen
             primaryButton.internalButton.setTitleColor(.black, for: .normal)
-            startPulsing()
+            //start pulsing is called elsewhere
         } else {
             primaryButton.configure(title: "inactive", systemImage: "")
             primaryButton.internalButton.backgroundColor = .customRed
@@ -193,19 +195,27 @@ class RadarVC: UIViewController, PageVCChild {
         isPulsing = false
     }
 
-    func startPulsing() {
+    @objc func startPulsing(fromZero: Bool = false) {
         isPulsing = true
         firstCircleView.layer.removeAllAnimations()
         secondCircleView.layer.removeAllAnimations()
-        let percentCompleted = Double.random(in: 0.5...1)
-        pulse(startingPercent: percentCompleted, pulseView: firstCircleView, repeating: true, duration: RadarVC.PULSE_DURATION)
-        pulse(startingPercent: percentCompleted-0.5, pulseView: secondCircleView, repeating: true, duration: RadarVC.PULSE_DURATION)
+        if fromZero {
+            pulse(startingPercent: 0, pulseView: firstCircleView, repeating: true, duration: RadarVC.PULSE_DURATION)
+            DispatchQueue.main.asyncAfter(deadline: .now() + RadarVC.PULSE_DURATION / 2) { [weak self] in
+                guard let self else { return }
+                self.pulse(startingPercent: 0, pulseView: self.secondCircleView, repeating: true, duration: RadarVC.PULSE_DURATION)
+            }
+        } else {
+            let percentCompleted = Double.random(in: 0.5...1)
+            pulse(startingPercent: percentCompleted, pulseView: firstCircleView, repeating: true, duration: RadarVC.PULSE_DURATION)
+            pulse(startingPercent: percentCompleted-0.5, pulseView: secondCircleView, repeating: true, duration: RadarVC.PULSE_DURATION)
+        }
     }
     
     func pulse(startingPercent: Double, pulseView: UIView, repeating: Bool, duration: Double) {
         guard isPulsing else { return }
         if isCurrentlyVisible {
-            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
         }
         
         pulseView.alpha = (1-startingPercent)
@@ -315,6 +325,7 @@ class RadarVC: UIViewController, PageVCChild {
                         if areAllGranted {
                             isLocationServicesEnabled = true
                             renderIsActive()
+                            startPulsing(fromZero: true)
                         } else {
                             presentPermissionsScreen()
                         }

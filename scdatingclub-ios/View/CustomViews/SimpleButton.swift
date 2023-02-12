@@ -43,6 +43,7 @@ class SimpleButton: UIView {
     //MARK: - User Interaction
     
     @IBAction func internalButtonTouchUpInside(_ sender: UIButton) {
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         UIView.animate(withDuration: 0.2, delay: 0) {
             self.transform = .identity
         }
