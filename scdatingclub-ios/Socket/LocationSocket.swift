@@ -62,12 +62,12 @@ class LocationSocket: WebSocketDelegate {
     var connectionInProgress: Bool = true;
     var messages: [Message] {
         didSet {
-            messagesDidChange?(messages)
+            guard let newMessage = messages.last else { return }
+            messagesDidChange?(newMessage)
         }
     }
-    
-    var messagesDidChange: (([Message]) -> (Void))? = nil
-    
+    var messagesDidChange: ((Message) -> (Void))? = nil
+
     init(sender: Int, receiver: Int) throws {
         self.sender = sender
         self.receiver = receiver
@@ -210,7 +210,12 @@ class LocationSocket: WebSocketDelegate {
                 } catch {
                     let messageIntermediate = try JSONDecoder().decode(MessageIntermediate.self, from: string.data(using: .utf8)!)
                     if messageIntermediate.sender != self.sender {
-                        self.messages.append(Message(id: messageIntermediate.id, senderId: messageIntermediate.sender, receiverId: self.sender,  body: messageIntermediate.body, timestamp: messageIntermediate.timestamp))
+                        self.messages.append(Message(id: messageIntermediate.id,
+                                                     senderId: messageIntermediate.sender,
+                                                     receiverId: self.sender,
+                                                     body: messageIntermediate.body,
+                                                     timestamp: messageIntermediate.timestamp))
+                        
                     }
                 }
             }

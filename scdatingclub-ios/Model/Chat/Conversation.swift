@@ -26,6 +26,7 @@ class Conversation {
     init(sangdaebang: ReadOnlyUser, messageThread: LocationSocket) {
         self.sangdaebang = sangdaebang
         self.messageThread = messageThread
+        self.messageThread.messagesDidChange = handleReceivedMessage
         self.chatObjects = messageThread.messages.map { MessageKitMessage(message: $0, conversation: self) }
         self.chatObjects.sort { $0.sentDate < $1.sentDate }
         renderedIndex = min(50, chatObjects.count)
