@@ -198,6 +198,13 @@ class NotificationsManager: NSObject {
                 
                 guard let activeHandler else { return }
                 
+                if let _ = SceneDelegate.visibleViewController as? MatchFoundTableVC, activeHandler.notificationType == .match {
+                    return
+                }
+                if let _ = SceneDelegate.visibleViewController as? CoordinateChatVC, activeHandler.notificationType == .accept {
+                    return
+                }
+                
                 let loadingVC = LoadingVC.create(notificationResponseHandler: activeHandler)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     transitionToViewController(loadingVC, duration: 0)

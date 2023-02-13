@@ -138,7 +138,7 @@ class CoordinateChatVC: MessagesViewController {
         }
         setupLoadingIndicator()
         conversation.loadServerMessagesAndOverwriteLocalCopy()
-        NotificationCenter.default.addObserver(self, selector: #selector(handleDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(handleDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handlePartnerStoppedSharing), name: .connectionEnded, object: nil)
     }
     
@@ -608,15 +608,10 @@ extension CoordinateChatVC: InputBarAccessoryViewDelegate {
         inputBar.inputTextView.text = String()
         inputBar.sendButton.isEnabled = false
         inputBar.inputTextView.placeholder = INPUTBAR_PLACEHOLDER
-        Task {
-            do {
-                try await conversation.sendMessage(messageText: messageString)
-                DispatchQueue.main.async { [self] in
-                    rerenderMessages()
-                }
-            } catch {
-                AlertManager.displayError(error)
-            }
+        do {
+            try conversation.sendMessage(messageText: messageString)
+        } catch {
+            AlertManager.displayError(error)
         }
     }
     
@@ -628,6 +623,11 @@ extension CoordinateChatVC: InputBarAccessoryViewDelegate {
         
     @MainActor
     func rerenderMessages() {
+        
+        //we really should never be altering the "chatObjectsCount" while the below code is running
+        //it's not about doing this rerender only once every 1 second
+        //it's about, never changing "chatObjects" while we are doing this reload
+        
         if numberOfSections(in: messagesCollectionView) > 15 {
             messagesCollectionView.reloadDataAndKeepOffset()
         } else {

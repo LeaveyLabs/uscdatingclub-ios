@@ -40,6 +40,7 @@ class Conversation {
     
     @objc func loadServerMessagesAndOverwriteLocalCopy() {
         print("loading server messages")
+        lock.lock()
         Task {
             do {
                 let messages = try await MessageAPI.fetchMessages(user1Id: UserService.singleton.getId(),
@@ -73,7 +74,7 @@ class Conversation {
         
     //MARK: - Sending things
     
-    func sendMessage(messageText: String) async throws {
+    func sendMessage(messageText: String) throws {
         do {
             let newMessage = Message(id: Int.random(in: 0..<Int.max),
                                      senderId: UserService.singleton.getId(),
@@ -90,8 +91,12 @@ class Conversation {
                 receiver: sangdaebang,
                 messageId: String(newMessage.id),
                 date: Date())
+            lock.lock()
             chatObjects.append(messageKitMessage)
             renderedIndex += 1
+            DispatchQueue.main.async {
+                self.rerenderChatScreen()
+            }
         } catch {
             //TODO: delete match request on the server and remove the most recent chatObject
         }
@@ -117,7 +122,6 @@ class Conversation {
         lock.lock()
         chatObjects.append(messageKitMessage)
         renderedIndex += 1
-        lock.unlock()
         DispatchQueue.main.async {
             self.rerenderChatScreen()
         }
@@ -136,6 +140,7 @@ class Conversation {
         if let chatVC = SceneDelegate.visibleViewController as? CoordinateChatVC,
            chatVC.matchInfo.partnerId == self.sangdaebang.id {
             chatVC.rerenderMessages()
+            lock.unlock()
         }
     }
     
