@@ -426,6 +426,7 @@ class CoordinateChatVC: MessagesViewController {
     }
     
     func stopSharingLocationAndFinish() {
+        NotificationCenter.default.removeObserver(self)
         Task {
             do {
                 try await MatchAPI.stopSharingLocation(selfId: UserService.singleton.getId(),
