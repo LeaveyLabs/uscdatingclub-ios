@@ -114,12 +114,15 @@ class LoadingVC: UIViewController {
                 fatalError()
                 //TODO: post to crashlytics
             }
-            guard !wasCurrentMatchStopped() else { return }
+            guard !wasCurrentMatchStopped() else {
+                transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0)
+                return
+            }
             let matchInfo = MatchInfo(matchAcceptance: acceptance)
             let coordinateVC = CoordinateChatVC.create(matchInfo: matchInfo)
             transitionToViewController(coordinateVC, duration: 0) { _ in }
         case .stop:
-            break
+            transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0)
         case .feedback:
             Mixpanel.mainInstance().track(event: Constants.MP.OpenFeedbackSurvey.EventName)
             Analytics.logEvent(Constants.MP.OpenFeedbackSurvey.EventName, parameters: nil)

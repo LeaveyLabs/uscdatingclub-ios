@@ -20,6 +20,7 @@ extension Notification.Name {
     static let necessaryPermissionsWereRevoked = Notification.Name("necessaryPermissionsWereRevoked")
     static let matchAccepted = Notification.Name("matchAccepted")
     static let matchReceived = Notification.Name("matchReceived")
+    static let connectionEnded = Notification.Name("connectionEnded")
 }
 
 //Remote Notifications
@@ -43,6 +44,7 @@ struct NotificationResponseHandler {
     var notificationDate: Date!
     var newMatchPartner: MatchPartner?
     var newMatchAcceptance: MatchAcceptance?
+    var newConnectionEnd: ConnectionEnd?
 }
 
 //MARK: - NotificationsManager
@@ -238,10 +240,12 @@ class NotificationsManager: NSObject {
                 handler.newMatchAcceptance = try decoder.decode(MatchAcceptance.self, from: data)
                 handler.notificationDate = Date(timeIntervalSince1970: handler.newMatchAcceptance!.time)
             case .stop:
-                break
+                guard let json = userInfo[Notification.extra.data.rawValue] else { return handler }
+                let data = try JSONSerialization.data(withJSONObject: json as Any, options: .prettyPrinted)
+                handler.newConnectionEnd = try decoder.decode(ConnectionEnd.self, from: data)
+                handler.notificationDate = Date(timeIntervalSince1970: handler.newConnectionEnd!.time)
             case .feedback:
                 handler.notificationDate = (userInfo[Notification.extra.date.rawValue] as! Date)
-                break
             }
             return handler
         } catch {

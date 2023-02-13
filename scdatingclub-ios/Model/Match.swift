@@ -14,6 +14,10 @@ struct Match: Codable {
     let user2Id: Int
 }
 
+struct ConnectionEnd: Codable {
+    let time: Double
+}
+
 struct MatchPartner: Codable {
     let matchId: Int
     

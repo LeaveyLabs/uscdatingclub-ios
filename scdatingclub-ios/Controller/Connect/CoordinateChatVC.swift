@@ -147,6 +147,7 @@ class CoordinateChatVC: MessagesViewController {
         setupLoadingIndicator()
         conversation.loadServerMessagesAndOverwriteLocalCopy()
         NotificationCenter.default.addObserver(self, selector: #selector(handleDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePartnerStoppedSharing), name: .connectionEnded, object: nil)
     }
     
     @objc func handleDidBecomeActive() {
@@ -167,7 +168,6 @@ class CoordinateChatVC: MessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewHasAppeared = true
-        handleFirstLoad()
 //        ConversationService.singleton.updateLastMessageReadTime(withUserId: conversation.sangdaebang.id)
     }
 
@@ -280,7 +280,7 @@ class CoordinateChatVC: MessagesViewController {
         } else {
             UserDefaults.standard.set(Date(), forKey: Constants.UserDefaultsKeys.mostRecentCoordinateDate)
             AlertManager.showInfoCentered(
-                "you have 5 minutes to chat & meet up!",
+                "you have \(Constants.minutesToConnect) minutes to chat & meet up!",
                 "\nnote: location sharing doesn't work well underground",
                 on: self)
             Mixpanel.mainInstance().track(
@@ -421,11 +421,12 @@ class CoordinateChatVC: MessagesViewController {
     
     //MARK: - Helpers
     
-    func handlePartnerStoppedSharing() {
+    @objc func handlePartnerStoppedSharing() {
         AlertManager.showAlert(title: "your match ended the connection",
                                subtitle: "",
                                primaryActionTitle: ":(",
                                primaryActionHandler: {
+            UserDefaults.standard.set(Date(), forKey: Constants.UserDefaultsKeys.mostRecentStopConnectionDate)
             self.stopSharingLocationAndFinish()
         }, on: self)
     }
@@ -437,7 +438,6 @@ class CoordinateChatVC: MessagesViewController {
                                                        partnerId: matchInfo.partnerId)
                 UserDefaults.standard.set(Date(), forKey: Constants.UserDefaultsKeys.mostRecentStopConnectionDate)
             } catch {
-                print("FAILL")
                 //post to firebase analytics
             }
             DispatchQueue.main.async {
@@ -457,6 +457,8 @@ class CoordinateChatVC: MessagesViewController {
         view.layoutIfNeeded()
         locationLabel.font = newAxis == .horizontal ? AppFont.light.size(16) : AppFont.bold.size(16)
         if newAxis == .vertical {
+            //NOTE: this is why it's not working. it's trying to use the existing axis, not the new axis.
+            //we have to reference the new axis...
             locationImageView.setImage(locationImage)
         }
         
@@ -633,8 +635,9 @@ extension CoordinateChatVC: InputBarAccessoryViewDelegate {
         }
 //        messagesCollectionView.scrollToLastItem()
         messagesCollectionView.scrollToLastItem(at: .bottom, animated: false)
-
         loadingIndicatorView.stopAnimating()
+        Task { handleFirstLoad() }
+        
         
         //More ideal UI, but still some issues crashing upon rapid message receiving / hitting 50 messages received
 //        messagesCollectionView.performBatchUpdates({

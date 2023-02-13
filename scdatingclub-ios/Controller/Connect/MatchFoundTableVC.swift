@@ -40,7 +40,7 @@ class MatchFoundTableVC: UIViewController {
         handlePreviousButtonPress()
         NotificationCenter.default.addObserver(forName: .matchAccepted, object: nil, queue: .main) { [self] notification in
             matchInfo.date = Date()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + (Env.environment == .dev ? 0 : 5)) {
                 self.goToCoordinateVC(newMatchInfo: self.matchInfo)
             }
         }

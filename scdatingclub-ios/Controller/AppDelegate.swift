@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import FirebaseCore
+import FirebaseAnalytics
 import Mixpanel
 
 @main
@@ -113,7 +114,28 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             print("failed generated notification response handler")
             return
         }
-
+        
+        if notificationResponseHandler.notificationType == .stop {
+            NotificationCenter.default.post(name: .connectionEnded, object: nil)
+        }
+        if notificationResponseHandler.notificationType == .feedback {
+            guard let visibleVC = SceneDelegate.visibleViewController else { return }
+            AlertManager.showAlert(title: "we'd love to hear how it went",
+                                   subtitle: "would you like to share your feedback about you recent match?",
+                                   primaryActionTitle: "sure!",
+                                   primaryActionHandler: {
+                Mixpanel.mainInstance().track(event: Constants.MP.OpenFeedbackSurvey.EventName)
+                Analytics.logEvent(Constants.MP.OpenFeedbackSurvey.EventName, parameters: nil)
+                transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0) { completed in
+                    SceneDelegate.visibleViewController?.openURL(Constants.feedbackLink)
+                }
+            },
+                                   secondaryActionTitle: "no thanks",
+                                   secondaryActionHandler: {
+                //nothing
+            },
+                                   on: visibleVC)
+        }
         if let partner = notificationResponseHandler.newMatchPartner {
             AlertManager.showAlert(title: "you've been matched with \(partner.firstName)!", subtitle: "you have \(Constants.minutesToRespond) minutes to respond", primaryActionTitle: "see your compatibility", primaryActionHandler: {
                 transitionToViewController(MatchFoundTableVC.create(matchInfo: MatchInfo(matchPartner: partner)), duration: 0.5)

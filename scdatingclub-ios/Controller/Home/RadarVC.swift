@@ -172,7 +172,9 @@ class RadarVC: UIViewController, PageVCChild {
             primaryButton.internalButton.imageView?.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 16)
             primaryButtonHeightConstraint.constant = 60
             renderIsActive()
-            startPulsing(fromZero: false)
+            if isLocationServicesEnabled {
+                startPulsing(fromZero: false)
+            }
         }
     }
     

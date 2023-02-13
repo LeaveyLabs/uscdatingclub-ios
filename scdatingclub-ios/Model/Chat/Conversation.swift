@@ -133,8 +133,7 @@ class Conversation {
     }
     @MainActor
     func rerenderChatScreen() {
-        let visibleVC = SceneDelegate.visibleViewController
-        if let chatVC = visibleVC as? CoordinateChatVC,
+        if let chatVC = SceneDelegate.visibleViewController as? CoordinateChatVC,
            chatVC.matchInfo.partnerId == self.sangdaebang.id {
             chatVC.rerenderMessages()
         }
