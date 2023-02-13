@@ -204,7 +204,6 @@ class LocationSocket: WebSocketDelegate {
                     if newLocationIntermediate.sender != self.sender {
                         let decryptedLatitude = decryptCoordinate(coordinate: newLocationIntermediate.latitude)
                         let decryptedLongitude = decryptCoordinate(coordinate: newLocationIntermediate.longitude)
-                        print(decryptedLatitude, decryptedLongitude)
                         self.partnerLocation = CLLocationCoordinate2D(latitude: decryptedLatitude, longitude: decryptedLongitude)
                     }
                     
