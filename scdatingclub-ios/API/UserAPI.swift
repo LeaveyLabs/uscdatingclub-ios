@@ -195,7 +195,15 @@ class UserAPI {
     
     static func updateUser(id:Int, user:CompleteUser) async throws {
         let url = "\(Env.BASE_URL)\(Endpoints.users.rawValue)\(id)/"
-        let json = try JSONEncoder().encode(user)
+        let params:[String:String] = [
+            ParameterKeys.email.rawValue: user.email,
+            ParameterKeys.firstName.rawValue: user.firstName,
+            ParameterKeys.lastName.rawValue: user.lastName,
+            ParameterKeys.sexIdentity.rawValue: user.sexIdentity,
+            ParameterKeys.sexPreference.rawValue: user.sexPreference,
+            ParameterKeys.isMatchable.rawValue: String(user.isMatchable),
+        ]
+        let json = try JSONEncoder().encode(params)
         let (data, response) = try await BasicAPI.basicHTTPCallWithToken(url: url, jsonData: json, method: HTTPMethods.PATCH.rawValue)
         try filterUserErrors(data: data, response: response)
     }
