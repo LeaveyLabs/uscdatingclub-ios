@@ -71,6 +71,20 @@ struct TextSimilarity: Codable {
     let emoji: String
     let trait: String
     let sharedResponse: String
+    var sharedResponseAdjusted: String {
+        switch sharedResponse {
+        case "still awake":
+            return "night owl"
+        case "on tiktok":
+            return "degenerate"
+        case "at the gym":
+            return "gym rat"
+        case "hitting snooze":
+            return "would hit snooze"
+        default:
+            return sharedResponse
+        }
+    }
 }
 
 struct MatchInfo: Codable {

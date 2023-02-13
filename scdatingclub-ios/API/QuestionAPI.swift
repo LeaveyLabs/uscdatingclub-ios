@@ -32,7 +32,7 @@ class QuestionAPI {
         case answer = "answer"
     }
     
-    static let QUESTION_RECOVERY_MESSAGE = "try again later"
+    static let QUESTION_RECOVERY_MESSAGE = "try reloading the app"
     
     static func throwAPIError(error: QuestionError) throws {
         if let questionErrors = error.question_id,

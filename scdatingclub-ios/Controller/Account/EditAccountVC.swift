@@ -156,7 +156,7 @@ class EditAccountVC: UIViewController {
               sexPreferenceText != "",
               let sexPreference = sexPreferenceText.first
         else {
-            AlertManager.displayError("error updating account", "please try again later")
+            AlertManager.displayError("error updating account", "please try reloading the app")
             //TODO: post to firebase crashlytics
             return
         }

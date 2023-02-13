@@ -39,7 +39,7 @@ class MatchAPI {
         case user2Id = "user2_id"
     }
     
-    static let MATCH_RECOVERY_MESSAGE = "try again later"
+    static let MATCH_RECOVERY_MESSAGE = "try reloading the app"
     
     static func throwAPIError(error: MatchError) throws {
         if let userErrors = error.user_id,

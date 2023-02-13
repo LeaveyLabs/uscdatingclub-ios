@@ -57,7 +57,7 @@ class TestService: NSObject {
         return pageHeaders.count
     }
     
-    private func pageIndex(for testPage: TestPage) -> Int? {
+    func pageIndex(for testPage: TestPage) -> Int? {
         return pageHeaders.firstIndex(of: testPage.header)
     }
     

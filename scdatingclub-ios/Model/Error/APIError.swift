@@ -50,25 +50,25 @@ enum APIError: Error, Equatable {
     public var recoverySuggestion: String? {
         switch self {
         case .CouldNotConnect:
-            return NSLocalizedString("try again later", comment: "")
+            return NSLocalizedString("try reloading the app", comment: "")
         case .ServerError:
-            return NSLocalizedString("try again later", comment: "")
+            return NSLocalizedString("try reloading the app", comment: "")
         case .ClientError(_, let recoverySuggession):
             return NSLocalizedString(recoverySuggession.lowercased(), comment: "")
         case .Unauthorized:
-            return NSLocalizedString("try again later", comment: "")
+            return NSLocalizedString("try reloading the app", comment: "")
         case .Forbidden:
-            return NSLocalizedString("try again later", comment: "")
+            return NSLocalizedString("try reloading the app", comment: "")
         case .NotFound:
-            return NSLocalizedString("try again later", comment: "")
+            return NSLocalizedString("try reloading the app", comment: "")
         case .Timeout:
-            return NSLocalizedString("try again later", comment: "")
+            return NSLocalizedString("try reloading the app", comment: "")
         case .Throttled:
             return NSLocalizedString("yo chill out", comment: "")
         case .NoResponse:
-            return NSLocalizedString("try again later", comment: "")
+            return NSLocalizedString("try reloading the app", comment: "")
         case .Unknown:
-            return NSLocalizedString("try again later", comment: "")
+            return NSLocalizedString("try reloading the app", comment: "")
         }
     }
 }

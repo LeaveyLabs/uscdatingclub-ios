@@ -27,12 +27,12 @@ class AlertManager {
             createAndShowError(title: apiError.errorDescription!, body: apiError.recoverySuggestion!, emoji: "😔")
         } else if let mkError = error as? MKError {
             if mkError.errorCode == 4 {
-                createAndShowError(title: "something went wrong", body: "try again later", emoji: "😔")
+                createAndShowError(title: "something went wrong", body: "try reloading the app", emoji: "😔")
             } else {
                 print(error.localizedDescription)
             }
         } else {
-            createAndShowError(title: "something went wrong", body: "try again later", emoji: "😔")
+            createAndShowError(title: "something went wrong", body: "try reloading the app", emoji: "😔")
         }
     }
     

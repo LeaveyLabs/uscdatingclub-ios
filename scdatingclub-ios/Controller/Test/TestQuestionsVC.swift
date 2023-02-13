@@ -13,6 +13,7 @@ class TestQuestionsVC: UIViewController {
     //UI
     @IBOutlet var tableView: UITableView!
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var topRightLabel: UILabel!
     
     var manuallyOpenedSelectionQuestionIndex: Int? = nil
     var testPage: TestPage!
@@ -38,6 +39,10 @@ class TestQuestionsVC: UIViewController {
     func setupHeaderFooter() {
         titleLabel.text = testPage.header
         titleLabel.font = AppFont.bold.size(20)
+        topRightLabel.font = AppFont2.regular.size(16)
+        topRightLabel.alpha = 0.7
+        let pageNumber = TestService.shared.pageIndex(for: testPage)
+        topRightLabel.text = "\(pageNumber == nil ? "" : String(pageNumber!+1))/\(TestService.shared.pageCount())"
     }
     
     func setupTableView() {
@@ -266,13 +271,13 @@ extension TestQuestionsVC: SpectrumTestCellDelegate {
 
         if desiredOffset < 50 { return } //don't go in wrong direction, and don't scroll if a small amount
         
-//        let willWeBeAtBottom = desiredOffset + tableView.contentOffset.y > tableView.verticalOffsetForBottom
-        //this code doesnt actually seem necessary in my iPhone14 tests
-//        if willWeBeAtBottom {
-//            tableView.setContentOffset(CGPoint(x: tableView.contentOffset.x, y: tableView.verticalOffsetForBottom), animated: true)
-//        } else {
+        let willWeBeAtBottom = desiredOffset + tableView.contentOffset.y > tableView.verticalOffsetForBottom
+//        this code doesnt actually seem necessary in my iPhone14 tests
+        if willWeBeAtBottom {
+            tableView.setContentOffset(CGPoint(x: tableView.contentOffset.x, y: tableView.verticalOffsetForBottom), animated: true)
+        } else {
             tableView.setContentOffset(tableView.contentOffset.applying(.init(translationX: 0, y: desiredOffset)), animated: true)
-//        }
+        }
         
     }
     

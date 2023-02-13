@@ -20,7 +20,7 @@ class MessageAPI {
     
     static func fetchMessages(user1Id: Int, user2Id: Int) async throws -> [Message] {
         let url =  "\(Env.BASE_URL)\(Endpoints.messages.rawValue)"
-        var params = "\(ParameterKeys.user1Id.rawValue)=\(user1Id)&\(ParameterKeys.user2Id.rawValue)=\(user2Id)"
+        let params = "\(ParameterKeys.user1Id.rawValue)=\(user1Id)&\(ParameterKeys.user2Id.rawValue)=\(user2Id)"
         let queryUrl = "\(url)?\(params)"
         let (data, _) = try await BasicAPI.basicHTTPCallWithoutToken(url: queryUrl, jsonData: Data(), method: HTTPMethods.GET.rawValue)
         let decoder = JSONDecoder()
