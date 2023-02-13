@@ -76,9 +76,9 @@ class ForgeMatchVC: UIViewController {
     }
     
     func setupUI() {
-        titleLabel.text = "play cupid"
+        titleLabel.text = "forge match"
         titleLabel.font = AppFont.bold.size(15)
-        forgeButton.configure(title: "shoot", systemImage: "")
+        forgeButton.configure(title: "forge", systemImage: "")
         forgeButton.internalButton.addTarget(self, action: #selector(sendButtonPressed), for: .touchUpInside)
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
     }

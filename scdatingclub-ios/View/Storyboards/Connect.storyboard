@@ -518,7 +518,6 @@
                         <outlet property="bottomStackVerticalConstraint" destination="HPi-uK-Vrj" id="E5h-wy-lnx"/>
                         <outlet property="closeButton" destination="Sep-8g-rGI" id="5mZ-6y-wja"/>
                         <outlet property="countdownBgView" destination="B6p-oo-MaS" id="ZFF-Zw-6ur"/>
-                        <outlet property="countdownStackView" destination="sHp-cE-nH4" id="dqy-zY-cGs"/>
                         <outlet property="countdownToggleButton" destination="ZZc-Cw-qLI" id="lgB-n2-2ne"/>
                         <outlet property="locationImageView" destination="Qha-Qc-tSh" id="Nlw-Hu-9PK"/>
                         <outlet property="locationImageViewWidthConstraint" destination="sMt-5u-1Ea" id="n2N-pE-Vom"/>
@@ -526,6 +525,7 @@
                         <outlet property="locationStackView" destination="TLa-Xl-CQ6" id="dbB-MH-Guw"/>
                         <outlet property="moreButton" destination="UQB-Ib-GMi" id="UkL-cZ-vEM"/>
                         <outlet property="nameLabel" destination="9cf-gf-Auj" id="XQ4-AP-CLQ"/>
+                        <outlet property="outerStackView" destination="sHp-cE-nH4" id="dqy-zY-cGs"/>
                         <outlet property="timeLabel" destination="Uoy-JU-ChU" id="Uka-a7-lhe"/>
                         <outlet property="timeSublabel" destination="3vX-tU-3tV" id="Tbh-Xa-Ay3"/>
                     </connections>

@@ -25,6 +25,7 @@
 		4373C6512980FDB0005FB2B9 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373C6502980FDB0005FB2B9 /* Message.swift */; };
 		47002FB72973AD51007EDFBC /* WaitListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47002FB62973AD51007EDFBC /* WaitListVC.swift */; };
 		470169CA299989F800DCBD85 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 470169C9299989F700DCBD85 /* GoogleService-Info.plist */; };
+		470169CC2999E03200DCBD85 /* UIView+AreAnimationsInProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470169CB2999E03200DCBD85 /* UIView+AreAnimationsInProgress.swift */; };
 		470221E7295CCE3E00119FA8 /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4107D295CC0BE007C27F0 /* UIColor+Custom.swift */; };
 		470221E9295CCFA200119FA8 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470221E8295CCFA200119FA8 /* Version.swift */; };
 		4711A1F32975BF8F00B07577 /* UIViewController+OpenMailApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711A1F22975BF8F00B07577 /* UIViewController+OpenMailApp.swift */; };
@@ -289,6 +290,7 @@
 		4373C6502980FDB0005FB2B9 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		47002FB62973AD51007EDFBC /* WaitListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitListVC.swift; sourceTree = "<group>"; };
 		470169C9299989F700DCBD85 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		470169CB2999E03200DCBD85 /* UIView+AreAnimationsInProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AreAnimationsInProgress.swift"; sourceTree = "<group>"; };
 		470221E8295CCFA200119FA8 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		4711A1F22975BF8F00B07577 /* UIViewController+OpenMailApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+OpenMailApp.swift"; sourceTree = "<group>"; };
 		4715490D2970F0AF00756BE1 /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
@@ -973,6 +975,7 @@
 				47C41083295CC0BE007C27F0 /* UIView+Shadow.swift */,
 				47C41088295CC0BF007C27F0 /* UIView+AddBorders.swift */,
 				47DE3267295CCA5C0063C55A /* UIView+BecomeRound.swift */,
+				470169CB2999E03200DCBD85 /* UIView+AreAnimationsInProgress.swift */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -1461,6 +1464,7 @@
 				4731F512295CD4870013F626 /* UITextField+MaxLength.swift in Sources */,
 				4731F515295CD48F0013F626 /* UISegmentedControl+Twitter.swift in Sources */,
 				47ABA6EA2976405900F0FDFE /* MessageComposer.swift in Sources */,
+				470169CC2999E03200DCBD85 /* UIView+AreAnimationsInProgress.swift in Sources */,
 				4791C0E429981123005BE410 /* Constants+Mixpanel.swift in Sources */,
 				47EA74AF2980AB9900265DF3 /* ConnectInterestsCell.swift in Sources */,
 				47EA74AC2980AB5400265DF3 /* Dict+RemoveNullEntries.swift in Sources */,
