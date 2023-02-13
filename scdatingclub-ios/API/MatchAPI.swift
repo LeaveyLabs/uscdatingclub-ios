@@ -99,8 +99,8 @@ class MatchAPI {
     static func stopSharingLocation(selfId:Int, partnerId:Int) async throws {
         let url = "\(Env.BASE_URL)\(Endpoints.stopSharingLocation.rawValue)"
         let params:[String:String] = [
-            ParameterKeys.user1Id.rawValue: String(selfId),
-            ParameterKeys.user2Id.rawValue: String(partnerId)
+            ParameterKeys.userId.rawValue: String(selfId),
+            ParameterKeys.partnerId.rawValue: String(partnerId)
         ]
         let json = try JSONEncoder().encode(params)
         let (data, response) = try await BasicAPI.basicHTTPCallWithoutToken(url: url, jsonData: json, method: HTTPMethods.POST.rawValue)
