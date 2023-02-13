@@ -83,17 +83,10 @@ class CoordinateChatVC: MessagesViewController {
     @IBOutlet var locationImageViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet var bottomStackVerticalConstraint: NSLayoutConstraint!
     @IBOutlet var locationLabel: UILabel!
-    var locationImage: UIImage {
-        if !locationLabel.text!.contains("<") {
-            return UIImage(systemName: "location.north", withConfiguration: UIImage.SymbolConfiguration(weight: countdownStackView.axis == .horizontal ? .bold : .light))!
-        } else {
-            return UIImage(systemName: "figure.stand.line.dotted.figure.stand")!
-        }
-    }
     
     var loadingIndicatorView: UIActivityIndicatorView!
     @IBOutlet var countdownBgView: UIView!
-    @IBOutlet var countdownStackView: UIStackView!
+    @IBOutlet var outerStackView: UIStackView!
     @IBOutlet var countdownToggleButton: UIButton!
     @IBOutlet var locationStackView: UIStackView!
     
@@ -139,7 +132,6 @@ class CoordinateChatVC: MessagesViewController {
         setupButtons()
         setupLabels() //must come after connect manager created
         setCountdownDirection(to: .vertical, animated: false)
-        locationImageView.setImage(locationImage)
 
         DispatchQueue.main.async { //scroll on the next cycle so that collectionView's data is loaded in beforehand
             self.messagesCollectionView.scrollToLastItem(at: .bottom, animated: false)
@@ -281,7 +273,7 @@ class CoordinateChatVC: MessagesViewController {
             UserDefaults.standard.set(Date(), forKey: Constants.UserDefaultsKeys.mostRecentCoordinateDate)
             AlertManager.showInfoCentered(
                 "you have \(Constants.minutesToConnect) minutes to chat & meet up!",
-                "\nnote: location sharing doesn't work well underground",
+                "\nNOTE: location sharing doesn't work indoors",
                 on: self)
             Mixpanel.mainInstance().track(
                 event: Constants.MP.CoordinateOpen.EventName,
@@ -313,7 +305,9 @@ class CoordinateChatVC: MessagesViewController {
         timeLabel.text = matchInfo.timeLeftToConnectString
         timeSublabel.text = "left to connect"
         locationLabel.text = prettyDistance(meters: relativePositioning.distance, shortened: true)
+        
         locationImageView.transform = CGAffineTransform.identity.rotated(by: relativePositioning.heading)
+        locationImageView.setImage(locationImage(forAxis: .vertical))
     }
         
     func setupMessagesCollectionView() {
@@ -349,8 +343,8 @@ class CoordinateChatVC: MessagesViewController {
         view.constraints.first { $0.firstAnchor == messagesCollectionView.topAnchor }!.isActive = false
         messagesCollectionView.topAnchor.constraint(equalTo: countdownBgView.bottomAnchor, constant: -10).isActive = true
         
-        countdownStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(toggleCountdownDirection)))
-        countdownStackView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleNavPan)))
+        outerStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(toggleCountdownDirection)))
+        outerStackView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleNavPan)))
     }
     
     func setupMessageInputBarForChatting() {
@@ -416,7 +410,7 @@ class CoordinateChatVC: MessagesViewController {
     
     @MainActor
     @objc func toggleCountdownDirection() {
-        setCountdownDirection(to: countdownStackView.axis == .horizontal ? .vertical : .horizontal, animated: true)
+        setCountdownDirection(to: outerStackView.axis == .horizontal ? .vertical : .horizontal, animated: true)
     }
     
     //MARK: - Helpers
@@ -452,31 +446,37 @@ class CoordinateChatVC: MessagesViewController {
         transitionToStoryboard(storyboardID: Constants.SBID.SB.Main, duration: 0.5)
     }
     
+    func locationImage(forAxis axis: NSLayoutConstraint.Axis) -> UIImage {
+        if locationLabel.text!.contains("<") {
+            return UIImage(systemName: "figure.wave")!
+        } else {
+            return UIImage(systemName: "location.north", withConfiguration: UIImage.SymbolConfiguration(weight: axis == .horizontal ? .bold : .light))!
+        }
+    }
+    
     @MainActor
     func setCountdownDirection(to newAxis: NSLayoutConstraint.Axis, animated: Bool) {
         view.layoutIfNeeded()
         locationLabel.font = newAxis == .horizontal ? AppFont.light.size(16) : AppFont.bold.size(16)
         if newAxis == .vertical {
-            //NOTE: this is why it's not working. it's trying to use the existing axis, not the new axis.
-            //we have to reference the new axis...
-            locationImageView.setImage(locationImage)
+            locationImageView.setImage(locationImage(forAxis: newAxis))
         }
         
         UIView.animate(withDuration: animated ? 0.3 : 0,
                        delay: 0,
                        options: .curveLinear) { [self] in
             countdownToggleButton.transform = CGAffineTransform.identity.rotated(by: newAxis == .vertical ? .pi : 0)
-            countdownStackView.axis = newAxis
+            outerStackView.axis = newAxis
             bottomStackVerticalConstraint.constant = newAxis == .horizontal ? 18 : 43
             locationImageViewWidthConstraint.constant = newAxis == .horizontal ? 40 : view.frame.width * 0.5
             locationStackView.spacing = newAxis == .horizontal ? 4 : 25
             locationLabel.alpha = newAxis == .horizontal ? 0.7 : 1
-            countdownStackView.spacing = newAxis == .horizontal ? -40 : 20
+            outerStackView.spacing = newAxis == .horizontal ? -40 : 20
             locationLabel.transform = newAxis == .horizontal ? CGAffineTransform(scaleX: 1, y: 1) : CGAffineTransform(scaleX: 2, y: 2)
             view.layoutIfNeeded()
         } completion: { [self] finished in
             if newAxis == .horizontal && finished {
-                locationImageView.setImage(locationImage)
+                locationImageView.setImage(locationImage(forAxis: newAxis))
             }
         }
     }
@@ -537,11 +537,10 @@ extension CoordinateChatVC: ConnectManagerDelegate {
         self.relativePositioning = relativePositioning
         DispatchQueue.main.async { [self] in
             locationLabel.text = prettyDistance(meters: relativePositioning.distance, shortened: false)
-            locationImageView.transform = CGAffineTransform.identity.rotated(by: locationLabel.text!.contains("<") ? 0 : relativePositioning.heading)
+            if !UIView.areAnimationsInProgress {
+                locationImageView.setImage(locationImage(forAxis: outerStackView.axis))
+            }
             if locationLabel.text!.contains("<") {
-                if locationImageView.transform != CGAffineTransform.identity.rotated(by: 0) {
-                    locationImageView.setImage(locationImage) //update the image to "figures nearby"
-                }
                 locationImageView.transform = CGAffineTransform.identity.rotated(by: 0)
             } else {
                 locationImageView.transform = CGAffineTransform.identity.rotated(by: relativePositioning.heading)
