@@ -1195,12 +1195,12 @@ hold tight and we'll send you an email once you can signup!</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="by continuing, you agree to our terms of use and privacy policy" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="aHp-Bi-SMf" userLabel="AgreementTextView">
-                                <rect key="frame" x="92.666666666666686" y="734" width="190" height="40"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="by continuing, you agree to our  terms of use and privacy policy" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="aHp-Bi-SMf" userLabel="AgreementTextView">
+                                <rect key="frame" x="77.666666666666686" y="734" width="220" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Lk8-DK-LN2"/>
-                                    <constraint firstAttribute="width" constant="190" id="o5z-dg-uvG"/>
+                                    <constraint firstAttribute="width" constant="220" id="o5z-dg-uvG"/>
                                 </constraints>
                                 <color key="textColor" name="customWhite"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="10"/>

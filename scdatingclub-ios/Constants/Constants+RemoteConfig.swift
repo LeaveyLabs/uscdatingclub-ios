@@ -12,8 +12,8 @@ import FirebaseRemoteConfigSwift
 enum RemoteConfigKeys: String, CaseIterable {
     case updateAvailableVersion, updateAvailableFeatures, updateMandatoryVersion
     case minutesToRespond, minutesToConnect, minutesUntilFeedbackNotification
-    case onlyUscStudents, emailWhitelist
-    case appStoreLink, landingPageLink, privacyPageLink, feedbackLink
+    case onlyUscStudents
+    case shareFeedbackButtonTitle
 }
 
 //MARK: = Variables
@@ -28,8 +28,10 @@ extension Constants {
     static let minutesToRespond: Int = remoteConfig.configValue(forKey: RemoteConfigKeys.minutesToRespond.rawValue).numberValue as? Int ?? 5
     static let minutesToConnect: Int = remoteConfig.configValue(forKey: RemoteConfigKeys.minutesToConnect.rawValue).numberValue as? Int ?? 5
     static let minutesUntilFeedbackNotification: Int = remoteConfig.configValue(forKey: RemoteConfigKeys.minutesUntilFeedbackNotification.rawValue).numberValue as? Int ?? 30
-    static let onlyUscStudents: Bool = remoteConfig.configValue(forKey: RemoteConfigKeys.onlyUscStudents.rawValue).boolValue
     
+    static let onlyUscStudents: Bool = remoteConfig.configValue(forKey: RemoteConfigKeys.onlyUscStudents.rawValue).boolValue
+    static let shareFeedbackButtonTitle: String = remoteConfig.configValue(forKey: RemoteConfigKeys.shareFeedbackButtonTitle.rawValue).stringValue ?? "text us"
+
     //why is the below approach giving me errors?
 //    static let faqLink = URL(string: remoteConfig.configValue(forKey: RemoteConfigKeys.appStoreLink.rawValue).stringValue ?? "https://scdatingclub.com/faq")!
 
@@ -47,7 +49,7 @@ extension Constants {
             return
         }
 
-//        setupRemoteConfigDefaults()
+        setupRemoteConfigDefaults()
         remoteConfig.fetchAndActivate { fetchStatus, error in
             guard error == nil else {
                 print(error!)
@@ -64,27 +66,29 @@ extension Constants {
         debugSettings.minimumFetchInterval = 0
         remoteConfig.configSettings = debugSettings
         
+//        setupRemoteConfigDefaults()
         remoteConfig.fetch(withExpirationDuration: 0) { fetchStatus, error in
             guard error == nil else {
                 print(error!)
                 return
             }
             remoteConfig.activate()
-            print("Retrieved remote config debug", minutesUntilFeedbackNotification, minutesToConnect, minutesToRespond)
+            print("Retrieved remote config debug", shareFeedbackButtonTitle, updateAvailableVersion)
             NotificationCenter.default.post(name: .remoteConfigDidActivate, object: nil)
         }
     }
     
+    static var remoteConfigDefaults: [String: NSObject] = [
+        RemoteConfigKeys.shareFeedbackButtonTitle.rawValue: "text us" as NSObject,
+        RemoteConfigKeys.onlyUscStudents.rawValue: true as NSObject,
+
+        RemoteConfigKeys.minutesToRespond.rawValue: 5 as NSObject,
+        RemoteConfigKeys.minutesToConnect.rawValue: 5 as NSObject,
+        RemoteConfigKeys.minutesUntilFeedbackNotification.rawValue: 30 as NSObject,
+    ]
+    
+    private static func setupRemoteConfigDefaults() {
+        remoteConfig.setDefaults(remoteConfigDefaults)
+    }
+    
 }
-    
-    
-    //This isn't really needed, since we can just do ?? 15 below
-//    static var remoteConfigDefaults: [String: NSObject] = [
-//        RemoteConfigKeys.minContinuousScreenTime.rawValue: 15 as NSObject,
-//        RemoteConfigKeys.maxContinuousScreenTime.rawValue: 40 as NSObject,
-//    ]
-    
-//    private static func setupRemoteConfigDefaults() {
-//        remoteConfig.setDefaults(remoteConfigDefaults)
-//    }
-    

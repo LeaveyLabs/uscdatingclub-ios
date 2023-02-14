@@ -173,7 +173,7 @@ extension AboutVC: UITableViewDataSource {
                 self.shareButtonPressed()
             }
         case 3:
-            cell.configure(title: "text us", systemImage: "message") {
+            cell.configure(title: Constants.shareFeedbackButtonTitle, systemImage: "message") {
                 self.contactButtonPressed()
             }
         case 4:
