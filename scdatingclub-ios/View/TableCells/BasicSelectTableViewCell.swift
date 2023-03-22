@@ -31,7 +31,12 @@ class BasicSelectTableViewCell: UITableViewCell {
     
     //MARK: - Initializer
     
-    func configure(title: String, description: String? = nil, emoji: String? = nil, sysImageName: String? = nil, delegate: BasicSelectTableViewCellDelegate) {
+    func configure(title: String,
+                   description: String? = nil,
+                   emoji: String? = nil,
+                   showSpeakerImage: Bool = false,
+                   isSomeonePlayingAudio: Bool = false,
+                   isPlayingAudio: Bool = false, delegate: BasicSelectTableViewCellDelegate) {
         selectionStyle = .none
         backgroundColor = .clear
         
@@ -43,11 +48,12 @@ class BasicSelectTableViewCell: UITableViewCell {
         descriptionLabel.text = description
         
         descriptionLabel.isHidden = description == nil
-        labelButton.isHidden = sysImageName == nil
-        imageIconView.isHidden = sysImageName == nil
+        labelButton.isHidden = !showSpeakerImage
+        imageIconView.isHidden = !showSpeakerImage
         
         emojiIconLabel.text = emoji
-        imageIconView.image = UIImage(systemName: sysImageName ?? "")
+        imageIconView.image = UIImage(systemName: isPlayingAudio ? "speaker.wave.3.fill": "speaker.wave.3" )
+        imageIconView.alpha = (isSomeonePlayingAudio && !isPlayingAudio) ? 0.7 : 1
     }
     
     @IBAction func didTapBg() {
