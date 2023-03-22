@@ -26,7 +26,7 @@ class BasicSelectTableViewCell: UITableViewCell {
     @IBOutlet weak var labelButton: UIButton!
     
     //Data
-    var title: String
+    var title: String!
     var delegate: BasicSelectTableViewCellDelegate!
     
     //MARK: - Initializer
